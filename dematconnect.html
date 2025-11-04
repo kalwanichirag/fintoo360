@@ -388,9 +388,12 @@
     </div>
 
     <div class="text-center">
-      <a href="/Dashboard.html" class="gradient-bg text-white font-semibold py-4 px-12 rounded-xl hover:shadow-lg transition-all">
+      <button
+        onclick="localStorage.setItem('hasStockData', true); window.location.href='/Dashboard.html';"
+
+      class="gradient-bg text-white font-semibold py-4 px-12 rounded-xl hover:shadow-lg transition-all">
         Continue to dashboard
-      </a>
+      </button>
     </div>
   </section>
 
