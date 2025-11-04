@@ -1,36 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Welcome | Fintoo</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    * { font-family: 'Inter', sans-serif; }
-    ::-webkit-scrollbar { display: none; }
-    body { background: #f9fafb; }
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    body {
+      background: #f9fafb;
+    }
 
     .gradient-bg {
       background: linear-gradient(135deg, #0047AB 0%, #002E6E 100%);
     }
+
     .orange-gradient {
       background: linear-gradient(135deg, #DD7300 0%, #B85C00 100%);
     }
+
     .card-hover {
       transition: all 0.3s ease;
     }
+
     .card-hover:hover {
       transform: translateY(-6px);
       box-shadow: 0 20px 40px rgba(0, 71, 171, 0.15);
     }
+
     .fade-in {
       animation: fade 1s ease forwards;
     }
+
     @keyframes fade {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   </style>
 </head>
@@ -43,7 +65,7 @@
   <div class="absolute w-72 h-72 bg-blue-400/20 rounded-full blur-3xl top-10 right-10 animate-pulse"></div>
   <div class="absolute w-96 h-96 bg-orange-300/20 rounded-full blur-3xl bottom-20 left-10 animate-pulse"></div>
 
-  <section class="relative z-10 text-center text-gray-800 px-6 max-w-2xl mx-auto fade-in">
+  <section class="relative z-10 text-center text-gray-800 px-6 max-w-4xl mx-auto fade-in">
     <!-- Logo row -->
     <div class="flex items-center justify-center space-x-6 mb-10">
       <div class="flex items-center space-x-3 bg-white rounded-2xl px-6 py-4 shadow-lg">
@@ -56,51 +78,63 @@
     </div>
 
     <!-- Main Card -->
-    <div class="bg-white/90 backdrop-blur-md rounded-3xl p-8 shadow-xl card-hover">
-      <h1 class="text-3xl font-bold text-gray-900 mb-4">Welcome to Fintoo360</h1>
-      <p class="text-lg text-gray-600 mb-6 leading-relaxed">
-        Congratulations on taking the first step toward achieving your financial goals.  
-        Our AI-powered Robo-Advisory platform simplifies money management — from tracking assets and liabilities  
-        to building smart, personalized investment strategies.
-      </p>
+    <div
+      class="relative overflow-hidden rounded-3xl bg-white/80 backdrop-blur-lg shadow-2xl border border-white/40 p-10 transition-transform hover:scale-[1.02] hover:shadow-[0_0_40px_rgba(255,136,0,0.2)]">
+      <!-- Subtle glowing ring -->
+      <div
+        class="absolute inset-0 bg-gradient-to-tr from-orange-100/30 via-transparent to-amber-50/20 pointer-events-none">
+      </div>
 
-      <!-- <div class="bg-orange-50 border border-orange-200 rounded-2xl p-4 mb-6 flex items-center justify-between">
-        <div class="flex items-center space-x-3">
-          <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center text-white text-2xl">
-            🎉
-          </div>
-          <div class="text-left">
-            <p class="text-sm text-gray-700 font-medium">You’ve earned</p>
-            <p class="text-xl font-bold text-orange-600">100 Bonus Points</p>
-          </div>
+      <div class="relative z-10">
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-5 tracking-tight">
+          Welcome to <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-600">Fintoo360</span>
+        </h1>
+
+        <p class="text-lg text-gray-700 leading-relaxed mb-6">
+          Congratulations on taking your first step toward smarter wealth management.
+          Our AI-driven Robo-Advisory platform empowers you to monitor assets, manage liabilities,
+          and craft investment strategies tailored to your financial goals.
+        </p>
+
+        <div class="border-l-4 border-orange-500 pl-4 mb-6">
+          <p class="text-gray-800 text-base">
+            Your trust is our highest priority. As a SEBI-registered advisory platform,
+            we ensure your data stays <span class="font-semibold text-orange-600">secure, private, and fully in your
+              control</span>
+            through advanced encryption and compliance standards.
+          </p>
         </div>
-        <span class="text-xs text-gray-500">Use them for exclusive insights</span>
-      </div> -->
 
-      <p class="text-gray-700 mb-8 text-base">
-        Let’s begin your journey toward smarter, automated, and goal-based financial planning.
-      </p>
+        <div class="text-gray-700 mb-8 text-base">
+          Let’s begin your journey toward automated, intelligent, and goal-based financial planning.
+        </div>
 
-      <a href="/Dashboard.html" class="block orange-gradient text-white font-semibold text-lg py-4 rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-        Start My Journey <i class="fa-solid fa-arrow-right ml-2"></i>
-      </a>
+        <a href="/Dashboard.html"
+          class="inline-flex items-center justify-center gap-2 px-6 py-4 text-lg font-semibold text-white rounded-xl bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 transition-all duration-300 shadow-md hover:shadow-lg">
+          Start My Journey
+          <i class="fa-solid fa-arrow-right text-white text-base"></i>
+        </a>
+      </div>
     </div>
+
 
     <!-- Security Highlights -->
     <div class="flex items-center justify-center space-x-6 text-sm text-gray-100 mt-10">
       <div class="flex items-center space-x-2">
         <i class="fa-solid fa-shield-halved text-green-400"></i>
-        <span>Bank-grade encryption</span>
+        <span>Data Privacy Assured</span>
       </div>
       <div class="flex items-center space-x-2">
         <i class="fa-solid fa-certificate text-blue-400"></i>
-        <span>IRDAI Compliant</span>
+        <span>Secured Platform</span>
       </div>
       <div class="flex items-center space-x-2">
         <i class="fa-solid fa-landmark text-orange-400"></i>
-        <span>RBI-Approved Partner</span>
+        <span>SEBI Registered Investment Advisor</span>
       </div>
     </div>
   </section>
 </body>
+
 </html>

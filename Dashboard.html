@@ -116,9 +116,9 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-       
 
-      
+
+
 
         .floating-element {
             animation: float 6s ease-in-out infinite;
@@ -153,6 +153,13 @@
                 opacity: 0;
             }
         }
+         @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .animate-fadeIn {
+    animation: fadeIn 0.25s ease-out;
+  }
 
         .sidebar-active {
             background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
@@ -380,153 +387,299 @@
         <main id="main-dashboard" class="p-8">
 
             <!-- Top Metrics Row -->
-            <section id="quick-info-cards" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-8">
-                <div id="net-worth-card" class="glass-card rounded-2xl p-6 ">
-                    <div class="flex items-center justify-between mb-4">
-                        <div
-                            class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
-                            <i class="fa-solid fa-wallet text-white text-xl"></i>
-                        </div>
-                        <div class="flex items-center text-slate-400">
-                            <button class="hover:text-blue-600 mr-2">
-                                <i class="fa-solid fa-refresh text-sm"></i>
-                            </button>
-                            <span class="text-xs">3m ago</span>
-                        </div>
-                    </div>
+            <section id="quick-info-cards" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 mb-8">
+                <div id="net-worth-card"
+                    class="glass-card rounded-2xl p-6 flex flex-col justify-between h-full relative">
+                    <!-- Top Content -->
                     <div>
-                        <p class="text-slate-500 text-sm mb-1">Total Net Worth</p>
-                        <p class="text-3xl font-bold text-blue-600">₹24,89,640</p>
+                        <!-- Header -->
+                        <div class="flex items-center justify-between mb-4">
+                              <div class="flex items-center space-x-3">
+                                <div
+                                    class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                                    <i class="fa-solid fa-wallet text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-base font-semibold text-slate-800">Total Networth</h2>
+                                    <p class="text-xs text-slate-500">Summary</p>
+                                </div>
+                            </div>
+                           
+                            <!-- <div class="flex items-center text-slate-400">
+        <button class="hover:text-blue-600 mr-2">
+          <i class="fa-solid fa-rotate-right text-sm"></i>
+        </button>
+        <span class="text-xs">3m ago</span>
+      </div> -->
+                        </div>
+
+                        <!-- Net Worth Summary -->
+                                                 <p class="text-xs text-slate-500 mb-1">Current Value</p>
+
+                        <p class="text-3xl font-bold text-black-600">₹24,89,640</p>
                         <div class="flex justify-between text-xs mt-2">
                             <span class="text-slate-600">Assets: ₹28.9L</span>
-                            <span class="text-slate-600">Debt: ₹4.0L</span>
+                            <span class="text-slate-600">Liabilities: ₹4.0L</span>
+                        </div>
+
+                        <!-- Insight Line -->
+                       
+
+                        <!-- AI Premium Suggestion -->
+                        <div
+                            class="mt-4 bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-3 flex items-start space-x-3">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-crown text-orange-500 text-lg mt-0.5"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-slate-800">
+                                    A shortfall has been observed in the goal realization.
+                                </p>
+                                <a href="/plan.html"
+                                    class="inline-flex items-center text-orange-600 text-xs font-semibold mt-2 hover:text-orange-700 transition-colors">
+                                    Ask me how to achieve
+                                </a>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Bottom Buttons (Always aligned at bottom) -->
+                   <!-- Card Buttons -->
+<div class="mt-6 pt-4 border-t border-slate-200 flex flex-wrap gap-3">
+  <button onclick="openModal('networthModal')"
+    class="bg-orange-400 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-500 transition-colors flex-1 text-center">
+    <i class="fa-solid fa-chart-line mr-1"></i> Net Worth Trend
+  </button>
+
+  <button onclick="openModal('portfolioModal')"
+    class="bg-blue-600 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex-1 text-center">
+    <i class="fa-solid fa-layer-group mr-1"></i> Portfolio Insight
+  </button>
+</div>
+
+
+
+<!-- MODAL SCRIPT -->
+<script>
+  function openModal(id) {
+    document.getElementById(id).classList.remove("hidden");
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.add("hidden");
+  }
+</script>
+
+<!-- ANIMATION -->
+<style>
+ 
+</style>
+
                 </div>
+
                 <!-- Financial Health Score -->
 
 
                 <!-- Mutual Fund Overview -->
                 <!-- Mutual Fund Overview -->
-                <div id="mutual-fund-card" class="glass-card rounded-2xl p-6  relative">
-                    <div class="flex items-center justify-between mb-4">
-                        <div
-                            class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
-                            <i class="fa-solid fa-chart-pie text-white text-xl"></i>
-                        </div>
-                        <div class="flex items-center text-slate-400">
-                            <button class="hover:text-blue-600 mr-2">
-                                <i class="fa-solid fa-refresh text-sm"></i>
-                            </button>
-                            <span class="text-xs">5m ago</span>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <p class="text-slate-500 text-sm mb-1">Mutual Funds</p>
-                        <p class="text-2xl font-bold text-slate-800">₹0</p>
-                        <div class="flex items-center mt-1">
-                            <i class="fa-solid fa-arrow-up text-green-600 mr-1"></i>
-                            <span class="text-green-600 font-medium text-sm">+₹0 (0%)</span>
-                        </div>
-                    </div>
-
-                    <div class="flex space-x-1 text-xs mb-3 justify-between">
-                        <div>
-                            <button class="bg-blue-100 text-blue-600 px-2 py-1 rounded">1M</button>
-                            <button class="text-slate-500 px-2 py-1">1W</button>
-                            <button class="text-slate-500 px-2 py-1">1D</button>
-                            <button class="text-slate-500 px-2 py-1">1Y</button>
+                <div id="mutual-fund-card" class="glass-card rounded-2xl p-6 relative grid items-strech">
+                    <!-- Header -->
+                     <div class="">
+                    <div class="flex items-center justify-between mb-5">
+                        <div class="flex items-center space-x-3">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                                <i class="fa-solid fa-chart-pie text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-base font-semibold text-slate-800">Mutual Funds</h2>
+                                <p class="text-xs text-slate-500">Portfolio Summary</p>
+                            </div>
                         </div>
                         <a href="/mutualfund.html"
                             class="bg-orange-400 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-500 transition-colors">
-                            <i class="fa-solid fa-download mr-1"></i> Import Mutual Funds
+                            <i class="fa-solid fa-download mr-1"></i> Import
                         </a>
                     </div>
 
-
-                </div>
-
-
-                <!-- Stocks Overview -->
-                <div id="stocks-card" class="glass-card rounded-2xl p-6 ">
-                    <div class="flex items-center justify-between mb-4">
-                        <div
-                            class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
-                            <i class="fa-solid fa-chart-line text-white text-xl"></i>
-                        </div>
-                        <div class="flex items-center text-slate-400">
-                            <button class="hover:text-blue-600 mr-2">
-                                <i class="fa-solid fa-refresh text-sm"></i>
-                            </button>
-                            <span class="text-xs">1m ago</span>
+                    <!-- Current Value & Overall Gain -->
+                    <div class="mb-6">
+                        <p class="text-xs text-slate-500 mb-1">Current Value</p>
+                        <div class="flex items-baseline space-x-2">
+                            <p class="text-3xl font-bold text-slate-900">₹1,24,500</p>
+                            <span class="text-green-600 font-semibold text-sm">+₹4,500 (3.75%)</span>
+                            <i class="fa-solid fa-arrow-trend-up text-green-600 text-xs"></i>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <p class="text-slate-500 text-sm mb-1">Stocks</p>
-                        <p class="text-2xl font-bold text-slate-800">₹0</p>
-                        <div class="flex items-center mt-1">
-                            <i class="fa-solid fa-arrow-down text-red-600 mr-1"></i>
-                            <span class="text-red-600 font-medium text-sm">-₹0 (0%)</span>
-                        </div>
-                    </div>
-                    <div class="flex space-x-1 text-xs mb-3 justify-between">
+
+                    <!-- Divider -->
+                    <div class="border-t border-slate-200/70 my-4"></div>
+
+                    <!-- Investment Summary -->
+                    <div class="grid grid-cols-2 gap-4 text-sm">
                         <div>
-                            <button class="bg-blue-100 text-blue-600 px-2 py-1 rounded">1M</button>
-                            <button class="text-slate-500 px-2 py-1">1W</button>
-                            <button class="text-slate-500 px-2 py-1">1D</button>
-                            <button class="text-slate-500 px-2 py-1">1Y</button>
+                            <p class="text-slate-500 text-xs mb-1">Invested Value</p>
+                            <p class="font-semibold text-slate-700">₹1,20,000</p>
                         </div>
-                        <a href="/dematconnect.html" 
-                            class="bg-orange-400 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-500 transition-colors">
-                            <i class="fa-solid fa-download mr-1"></i> Connect Demat
-                    </a>
+                        <div class="text-right">
+                            <p class="text-slate-500 text-xs mb-1">1 Day Return</p>
+                            <p class="font-semibold text-green-600">+₹320 (0.26%)</p>
+                        </div>
                     </div>
+
+                    <!-- Divider -->
+                    <div class="border-t border-slate-200/70 my-3"></div>
+</div>
+                    <div class="grid items-end">
+                    <!-- Time Filter -->
+                    <div
+                        class="mt-4 bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-3 flex items-start space-x-3">
+                        <div class="flex-shrink-0">
+                            <i class="fa-solid fa-crown text-orange-500 text-lg mt-0.5"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm text-slate-800">
+                                Your MF portfolio is underperforming.
+                            </p>
+                            <a href="/plan.html"
+                                class="inline-flex items-center text-orange-600 text-xs font-semibold mt-2 hover:text-orange-700 transition-colors">
+                                Ask me how to boost your returns
+                            </a>
+                        </div>
+                    </div>
+                    </div>
+
                 </div>
-                <div id="health-score-card" class="glass-card rounded-2xl p-6 ">
-                    <div class="flex items-center justify-between mb-4">
-                        <div
-                            class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
-                            <i class="fa-solid fa-heart-pulse text-white text-xl"></i>
-                        </div>
-                        <div class="flex items-center text-slate-400">
-                            <button class="hover:text-blue-600 mr-2">
-                                <i class="fa-solid fa-refresh text-sm"></i>
-                            </button>
-                            <span class="text-xs">2m ago</span>
-                        </div>
-                    </div>
+                <div id="stock-card" class="glass-card rounded-2xl p-6 relative grid items-strech">
+                    <!-- Header -->
                     <div>
-                        <p class="text-slate-500 text-sm mb-1">Financial Health Score</p>
-                        <p class="text-3xl font-bold text-blue-600">782</p>
-                        <p class="text-slate-600 text-xs mt-1">Excellent • Top 15%</p>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                                    <i class="fa-solid fa-chart-line text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-base font-semibold text-slate-800">Stocks</h2>
+                                    <p class="text-xs text-slate-500">Portfolio Summary</p>
+                                </div>
+                            </div>
+                            <a href="/mutualfund.html"
+                                class="bg-orange-400 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-500 transition-colors">
+                                <i class="fa-solid fa-download mr-1"></i> Import
+                            </a>
+                        </div>
+
+                        <!-- Current Value & Overall Gain -->
+                        <div class="mb-6">
+                            <p class="text-xs text-slate-500 mb-1">Current Value</p>
+                            <div class="flex items-center space-x-2 justify-between">
+                                <p class="text-3xl font-bold text-slate-900">₹1,24,500</p>
+
+                            </div>
+                        </div>
+                        <div class="border-t border-slate-200/70 my-3"></div>
+
+                        <div class="text-left py-0">
+                            <p class="text-slate-500 text-xs mb-1">1 Day Return</p>
+                            <p class="font-semibold text-green-600">+₹320 (0.26%)</p>
+                        </div>
+                        <div class="border-t border-slate-200/70 my-3"></div>
+
+                    </div>
+
+                    <!-- Time Filter -->
+                    <div class="grid items-end">
+                        <div
+                            class="mt-4 bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-3 flex items-start space-x-3">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-crown text-orange-500 text-lg mt-0.5"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-slate-800">
+                                    Your portfolio has outperformed. </p>
+                                <a href="/plan.html"
+                                    class="inline-flex items-center text-orange-600 text-xs font-semibold mt-2 hover:text-orange-700 transition-colors">
+                                    Ask me how to optimize
+                                </a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+
+
+
+           <div id="health-score-card" class="glass-card rounded-2xl p-6 flex flex-col justify-between h-full">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-4">
+    <div class="flex items-center space-x-3">
+      <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+        <i class="fa-solid fa-heart-pulse text-white text-xl"></i>
+      </div>
+      <div>
+        <h2 class="text-base font-semibold text-slate-800">Financial Wellness Score</h2>
+        <p class="text-xs text-slate-500">Your overall financial health</p>
+      </div>
+    </div>
+    <!-- <button class="hover:text-blue-600 text-slate-400">
+      <i class="fa-solid fa-rotate-right text-sm"></i>
+    </button> -->
+  </div>
+
+  <!-- Score Display -->
+  <div class="text-center my-4">
+    <p class="text-5xl font-extrabold text-blue-600">782</p>
+    <p class="text-sm text-slate-600 mt-1">Excellent • Top 15%</p>
+    <div class="mt-2 w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+      <div class="h-2 bg-blue-500 w-[78%] rounded-full"></div>
+    </div>
+  </div>
+
+  <!-- Metrics Breakdown -->
+ 
+
+  <!-- AI Suggestion -->
+  <div class="mt-6 bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-3 flex items-start space-x-3">
+    <div class="flex-shrink-0">
+      <i class="fa-solid fa-crown text-orange-500 text-lg mt-0.5"></i>
+    </div>
+    <div class="flex-1">
+      <p class="text-sm text-slate-800">
+        AI suggests improving your <span class="font-semibold text-orange-600">investment diversity</span> to balance portfolio risk.
+      </p>
+      <a href="/plan.html"
+         class="inline-flex items-center text-orange-600 text-xs font-semibold mt-2 hover:text-orange-700 transition-colors">
+        Get Personalized Plan <i class="fa-solid fa-arrow-right ml-1 text-[10px]"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
 
                 <!-- Net Worth Portfolio Snapshot -->
 
             </section>
 
 
-              <section id="networth-breakdown" class=" my-8">
+            <section id="networth-breakdown" class=" my-8">
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                    <div class=" bg-white rounded-xl shadow-sm border border-gray-100">
+                    <!-- <div class=" bg-white rounded-xl shadow-sm border border-gray-100">
                         <div class="p-6 border-b border-gray-100">
                             <h2 class="text-xl font-bold text-navy font-display mb-1">Net Worth Trend</h2>
                             <p class="text-sm text-gray-600">Your wealth growth over the last 12 months</p>
                         </div>
                         <div class="p-6">
-                                                <div id="portfolio-chart-one" class="h-64"></div>
+                            <div id="portfolio-chart-one" class="h-64"></div>
 
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="bg-white rounded-xl shadow-sm border border-gray-100">
                         <div class="p-6 border-b border-gray-100">
-                            <h3 class="text-lg font-semibold text-navy font-display">Asset Allocation</h3>
+                            <h3 class="text-xl font-bold text-slate-800 flex items-center">Asset Allocation</h3>
                         </div>
                         <div class="p-6">
-                           <div id="expense-chart" class="h-64"></div>
+                            <div id="expense-chart" class="h-64"></div>
 
                             <div class="space-y-3">
                                 <div class="flex items-center justify-between">
@@ -561,370 +714,377 @@
                         </div>
                     </div>
                     <div id="insurance-card" class="glass-card rounded-2xl p-6  relative">
-  
 
-  <div class="flex items-center justify-between mb-4 space-x-2">
-    <p class="text-2xl font-bold text-slate-800">Insurance Overview </p>  
-     <p class="text-slate-500 text-sm ">3 Active Policies</p>
+
+                        <div class="flex items-center justify-between mb-4 space-x-2">
+                            <div>
+                            <p class="text-xl font-bold text-slate-800 flex items-center">Insurance Overview </p>
+                            <p class="text-slate-500 text-sm ">3 Active Policies</p>
+                            </div>
+<button
+                                class="bg-orange-400 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-500 transition-colors">
+                                <i class="fa-solid fa-upload mr-1"></i> Import 
+                            </button>
+                        </div>
+
+                        <!-- Policy List -->
+                        <div class="space-y-4 mb-5">
+                            <!-- Life Insurance -->
+                            <div class="bg-white/60 p-3 rounded-xl">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800">Life Insurance – Term Plan</p>
+                                        <p class="text-xs text-slate-500">HDFC Life • Policy No: LI12345678</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-lg font-bold text-green-700">₹1,00,00,000</p>
+                                        <p class="text-xs text-slate-500">Sum Assured</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Health Insurance -->
+                            <div class="bg-white/60 p-3 rounded-xl">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800">Health Insurance – Family</p>
+                                        <p class="text-xs text-slate-500">Star Health • Policy No: HI98765432</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-lg font-bold text-green-700">₹10,00,000</p>
+                                        <p class="text-xs text-slate-500">Sum Assured</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Motor Insurance -->
+                            <div class="bg-white/60 p-3 rounded-xl">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800">Motor Insurance</p>
+                                        <p class="text-xs text-slate-500">ICICI Lombard • Policy No: MI11223344</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-lg font-bold text-green-700">₹8,50,000</p>
+                                        <p class="text-xs text-slate-500">IDV</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Insight -->
+                        <div
+                            class="bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-xl p-4">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-orange-400 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fa-solid fa-robot text-white text-lg"></i>
+                                </div>
+                                <div>
+                                    <p class="text-slate-700 text-sm font-medium mb-0">
+                                        You have adequate life cover, but your motor policy expires soon — renew to stay
+                                        protected.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Import / Add Insurance Button -->
+                      
+                    </div>
+                    <div id="investment-insights" class="glass-card rounded-2xl p-6 relative overflow-hidden">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h2 class="text-xl font-bold text-slate-800 flex items-center">
+        AI Investment Insights
+        <span
+          class="ml-2 text-xs bg-gradient-to-r from-orange-400 to-orange-600 text-white px-2 py-0.5 rounded-md font-semibold">
+          Premium
+        </span>
+      </h2>
+      <p class="text-slate-500 text-sm">Smarter, data-driven guidance for your wealth journey</p>
+    </div>
+    <div class="ai-glow bg-blue-100 p-2 rounded-lg">
+      <i class="fa-solid fa-robot text-blue-600"></i>
+    </div>
   </div>
 
-  <!-- Policy List -->
-  <div class="space-y-4 mb-5">
-    <!-- Life Insurance -->
-    <div class="bg-white/60 p-3 rounded-xl">
-      <div class="flex justify-between items-center">
-        <div>
-          <p class="text-sm font-semibold text-slate-800">Life Insurance – Term Plan</p>
-          <p class="text-xs text-slate-500">HDFC Life • Policy No: LI12345678</p>
-        </div>
-        <div class="text-right">
-          <p class="text-lg font-bold text-green-700">₹1,00,00,000</p>
-          <p class="text-xs text-slate-500">Sum Assured</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Health Insurance -->
-    <div class="bg-white/60 p-3 rounded-xl">
-      <div class="flex justify-between items-center">
-        <div>
-          <p class="text-sm font-semibold text-slate-800">Health Insurance – Family</p>
-          <p class="text-xs text-slate-500">Star Health • Policy No: HI98765432</p>
-        </div>
-        <div class="text-right">
-          <p class="text-lg font-bold text-green-700">₹10,00,000</p>
-          <p class="text-xs text-slate-500">Sum Assured</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Motor Insurance -->
-    <div class="bg-white/60 p-3 rounded-xl">
-      <div class="flex justify-between items-center">
-        <div>
-          <p class="text-sm font-semibold text-slate-800">Motor Insurance</p>
-          <p class="text-xs text-slate-500">ICICI Lombard • Policy No: MI11223344</p>
-        </div>
-        <div class="text-right">
-          <p class="text-lg font-bold text-green-700">₹8,50,000</p>
-          <p class="text-xs text-slate-500">IDV</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- AI Insight -->
-  <div class="bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-xl p-4">
+  <!-- Free Insight (Visible) -->
+  <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-5">
     <div class="flex items-start">
-      <div class="w-10 h-10 bg-orange-400 rounded-lg flex items-center justify-center mr-3">
-        <i class="fa-solid fa-robot text-white text-lg"></i>
+      <div class="w-9 h-9 text-blue-500 rounded-full flex items-center justify-center mr-3 mt-1">
+        <i class="fa-solid fa-lightbulb text-blue-500 text-sm"></i>
       </div>
       <div>
-        <p class="text-slate-700 text-sm font-medium mb-0" >
-          You have adequate life cover, but your motor policy expires soon — renew to stay protected.
+        <h3 class="font-semibold text-blue-800 mb-1">Rebalancing Suggestion</h3>
+        <p class="text-blue-700 text-sm">
+          Your equity exposure is slightly high at <strong>78%</strong>. Shifting 8% to debt may reduce volatility.
         </p>
       </div>
     </div>
   </div>
 
-  <!-- Import / Add Insurance Button -->
-  <div class="flex justify-end mt-4">
-    <button class="bg-orange-400 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-500 transition-colors">
-      <i class="fa-solid fa-upload mr-1"></i> Import Insurance
-    </button>
+  <!-- Locked Insights (Condensed + Premium Style) -->
+  <div
+    class="relative bg-white/40 backdrop-blur-sm border border-slate-200 rounded-xl p-5 overflow-hidden">
+    <!-- Lock Overlay -->
+    <div
+      class="absolute inset-0 bg-white/70 backdrop-blur-md flex flex-col items-center justify-center z-10 rounded-xl text-center px-4">
+      <i class="fa-solid fa-lock text-slate-500 text-lg mb-2"></i>
+      <p class="text-sm text-slate-600 font-medium mb-2">3 premium insights waiting for you</p>
+      <a href="/plan.html"
+        class="text-orange-600 font-semibold text-xs underline hover:text-orange-700">Unlock Now</a>
+    </div>
+
+    <!-- Blurred Preview List -->
+    <div class="opacity-50 pointer-events-none">
+      <ul class="space-y-3 text-sm text-slate-600">
+        <li class="flex items-center">
+          <i class="fa-solid fa-star text-purple-500 mr-2 text-xs"></i>
+          <span>Top Performer Alert: Axis Bluechip Fund outperformed peers</span>
+        </li>
+        <li class="flex items-center">
+          <i class="fa-solid fa-chart-line text-blue-500 mr-2 text-xs"></i>
+          <span>Tax-Saving Opportunity: Optimize ELSS contributions</span>
+        </li>
+        <li class="flex items-center">
+          <i class="fa-solid fa-triangle-exclamation text-orange-500 mr-2 text-xs"></i>
+          <span>Underperforming Asset: IT Fund showing -12% returns</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Premium CTA -->
+  <div
+    class="text-center mt-6 bg-gradient-to-r from-orange-400 to-orange-600 rounded-xl p-5 text-white shadow-md">
+    <h3 class="font-semibold text-lg mb-1">Unlock Personalized AI Insights 🔓</h3>
+    <p class="text-sm text-orange-50 mb-3">Access real-time portfolio intelligence & smart investment moves.</p>
+    <a href="/plan.html"
+      class="inline-flex items-center bg-white text-orange-600 font-semibold px-5 py-2 rounded-lg hover:bg-orange-50 transition-all">
+      Upgrade to Premium <i class="fa-solid fa-crown ml-2 text-sm"></i>
+    </a>
   </div>
 </div>
+
                 </div>
             </section>
             <!-- Middle Row - Portfolio & Liabilities -->
-            <section id="portfolio-liabilities" class="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-8">
-
-                <!-- Portfolio Performance Chart -->
-                <div id="portfolio-performance" class="glass-card rounded-2xl p-6">
-                    <div class="flex items-center justify-between mb-6">
-                        <div>
-                            <h2 class="text-xl font-bold text-slate-800">Portfolio Performance</h2>
-                            <p class="text-slate-500 text-sm">Last 6 months growth</p>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <select class="bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm">
-                                <option>6 Months</option>
-                                <option>1 Year</option>
-                                <option>3 Years</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div id="portfolio-chart" class="h-64"></div>
-                    <div class="grid grid-cols-3 gap-4 mt-4">
-                        <div class="text-center p-3 bg-blue-50 rounded-lg">
-                            <p class="text-blue-600  font-bold">+24.5%</p>
-                            <p class="text-slate-500 text-xs">Equity Returns</p>
-                        </div>
-                        <div class="text-center p-3 bg-blue-50 rounded-lg">
-                            <p class="text-blue-600 font-bold">+8.2%</p>
-                            <p class="text-slate-500 text-xs">Debt Returns</p>
-                        </div>
-                        <div class="text-center p-3 bg-purple-50 rounded-lg">
-                            <p class="text-purple-600 font-bold">+12.1%</p>
-                            <p class="text-slate-500 text-xs">Gold Returns</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Liability Overview -->
-              <div id="liability-overview" class="bg-white/70 backdrop-blur-xl border border-slate-200 rounded-2xl p-6 shadow-md">
-    <div class="flex items-center justify-between mb-6">
-        <div>
-            <h2 class="text-xl font-bold text-slate-800">Liability Overview</h2>
-            <p class="text-slate-500 text-sm">Your active loans, EMIs & credit dues</p>
-        </div>
-        <a href="/liability.html"
-            class="bg-gradient-to-r from-orange-400 to-orange-500 text-white text-xs font-semibold py-2 px-4 rounded-lg -all">
-            <i class="fa-solid fa-download mr-2"></i> Import Loans
-        </a>
-    </div>
-
-    <div class="space-y-4">
-
-        <!-- Credit Card -->
-        <div class="border border-slate-200 rounded-xl p-4 hover:shadow-sm transition-all">
-            <div class="flex items-center justify-between mb-2">
-                <h3 class="font-semibold text-slate-800">Credit Card</h3>
-                <span class="text-slate-900 font-bold">₹45,680</span>
-            </div>
-
-            <div class="relative w-full bg-slate-200 rounded-full h-2 mb-2 overflow-hidden">
-                <div class="absolute top-0 left-0 h-2 bg-gradient-to-r from-orange-400 to-orange-500 rounded-full" style="width: 76%"></div>
-            </div>
-
-            <div class="flex justify-between text-sm text-slate-600">
-                <span>Due: 15th Dec</span>
-                <span>18% APR</span>
-            </div>
-
-            <div class="mt-3 bg-orange-50 border border-orange-100 rounded-lg p-3">
-                <div class="flex items-start">
-                    <i class="fa-solid fa-lightbulb text-orange-500 mr-2 mt-1"></i>
-                    <div>
-                        <p class="text-orange-800 font-medium text-sm">AI Suggestion</p>
-                        <p class="text-orange-700 text-xs">Pay ₹12,000 extra to avoid 18% APR charges</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Home Loan -->
-        <div class="border border-slate-200 rounded-xl p-4 hover:shadow-sm transition-all">
-            <div class="flex items-center justify-between mb-2">
-                <h3 class="font-semibold text-slate-800">Home Loan</h3>
-                <span class="text-slate-900 font-bold">₹28,45,000</span>
-            </div>
-
-            <div class="relative w-full bg-slate-200 rounded-full h-2 mb-2 overflow-hidden">
-                <div class="absolute top-0 left-0 h-2 bg-gradient-to-r from-blue-400 to-blue-500 rounded-full" style="width: 34%"></div>
-            </div>
-
-            <div class="flex justify-between text-sm text-slate-600">
-                <span>EMI: ₹35,420</span>
-                <span>7.5% Interest</span>
-            </div>
-        </div>
-
-        <!-- Car Loan -->
-        <div class="border border-slate-200 rounded-xl p-4 hover:shadow-sm transition-all">
-            <div class="flex items-center justify-between mb-2">
-                <h3 class="font-semibold text-slate-800">Car Loan</h3>
-                <span class="text-slate-900 font-bold">₹2,85,430</span>
-            </div>
-
-            <div class="relative w-full bg-slate-200 rounded-full h-2 mb-2 overflow-hidden">
-                <div class="absolute top-0 left-0 h-2 bg-gradient-to-r from-green-400 to-green-500 rounded-full" style="width: 68%"></div>
-            </div>
-
-            <div class="flex justify-between text-sm text-slate-600">
-                <span>EMI: ₹12,890</span>
-                <span>8.9% Interest</span>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-
-            </section>
+            
             <!-- Insurance Overview -->
 
 
-          
+
 
             <!-- Expense Tracker & Savings Goals -->
-<section id="expense-savings" class="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-8">
+            <section id="expense-savings" class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+ <div id="liability-overview"
+                    class="glass-card relative rounded-2xl p-6 bg-white/60 backdrop-blur-md border border-slate-200 shadow-sm">
 
-    <!-- Expense Tracker -->
-    <div id="expense-tracker" class="xl:col-span-2 glass-card rounded-2xl p-6">
-        <div class="flex items-center justify-between mb-6">
-            <div>
-                <h2 class="text-xl font-bold text-slate-800">Monthly Expense Insights</h2>
-                <p class="text-slate-500 text-sm">December 2024 • Smart breakdown</p>
-            </div>
-            <div class="flex items-center space-x-2">
-                <button class="bg-blue-100 text-blue-600 px-3 py-1 rounded-lg text-sm font-medium">This Month</button>
-                <button class="text-slate-500 px-3 py-1 rounded-lg text-sm">Last Month</button>
-                <button class="text-slate-600 hover:text-blue-600" title="Refresh data">
-                    <i class="fa-solid fa-rotate-right"></i>
-                </button>
-                <a href="/bankselection.html"
-                    class="bg-orange-500 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-600 transition-colors">
-                    <i class="fa-solid fa-link mr-1"></i> Link Bank
-                </a>
-            </div>
-        </div>
+                    <!-- Header -->
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-800">Liability Overview</h2>
+                            <p class="text-slate-500 text-sm">Outstanding debts & EMIs</p>
+                        </div>
+                        <!-- <button id="connectLiabilitiesBtn"
+                            class="bg-orange-500 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-600 transition-colors flex items-center">
+                            <i class="fa-solid fa-link mr-2"></i> Connect Liabilities
+                        </button> -->
+                    </div>
 
-        <!-- Summary Row -->
-        <div class="flex flex-wrap items-center justify-between mb-6">
-            <div class="flex flex-col">
-                <span class="text-slate-500 text-sm">Total Spent</span>
-                <span class="text-2xl font-bold text-slate-800">₹54,200</span>
-            </div>
-            <div class="text-green-600 text-sm font-semibold">
-                <i class="fa-solid fa-arrow-up mr-1"></i> 8% higher than last month
-            </div>
-        </div>
+                    <!-- Locked Placeholder -->
+                    <div
+                        class="relative rounded-xl border border-dashed border-slate-300 bg-slate-50 flex flex-col items-center justify-center py-12 text-center">
+                        <div class="bg-orange-100 w-16 h-16 flex items-center justify-center rounded-full mb-4">
+                            <i class="fa-solid fa-lock text-orange-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-800 mb-2">Liability Overview Locked</h3>
+                        <p class="text-slate-600 text-sm max-w-xs mx-auto mb-6">Connect your credit cards, loans, and
+                            EMIs to unlock real-time insights and smart repayment suggestions.</p>
+                        <button onclick="connectLiabilities()"
+                            class="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition flex items-center">
+                            <i class="fa-solid fa-plug mr-2"></i> Connect Now
+                        </button>
+                    </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Chart Placeholder -->
-            <div id="expense-chart-one" class="h-64 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl flex items-center justify-center text-slate-400 text-sm italic">
-                Chart: Category Breakdown
-            </div>
+                    <!-- Overlay Loader (when connecting) -->
+                    <div id="loadingOverlay"
+                        class="hidden absolute inset-0 bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl">
+                        <div class="animate-spin mb-4 text-orange-600">
+                            <i class="fa-solid fa-spinner text-2xl"></i>
+                        </div>
+                        <p class="text-slate-700 font-medium">Connecting your liabilities...</p>
+                    </div>
 
-            <!-- Category Breakdown -->
-            <div class="space-y-3">
-                <div class="flex items-center justify-between p-3 bg-red-50 rounded-lg ">
-                    <div class="flex items-center">
-                        <div class="w-3.5 h-3.5 bg-red-500 rounded-full mr-3"></div>
-                        <span class="text-slate-700 font-medium">Food & Dining</span>
+                    <!-- Hidden Active State (after connection) -->
+                    <div id="liabilityContent" class="hidden space-y-4 mt-6">
+
+                        <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-semibold text-slate-800">Credit Card</h3>
+                                <span class="text-red-600 font-bold">₹45,680</span>
+                            </div>
+                            <div class="w-full bg-red-200 rounded-full h-2 mb-2">
+                                <div class="bg-red-500 h-2 rounded-full" style="width: 76%"></div>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-600">Due: 15th Dec</span>
+                                <span class="text-red-600">18% APR</span>
+                            </div>
+                            <div class="mt-3 bg-orange-100 border border-orange-200 rounded-lg p-3">
+                                <div class="flex items-start">
+                                    <i class="fa-solid fa-lightbulb text-orange-600 mr-2 mt-1"></i>
+                                    <div>
+                                        <p class="text-orange-800 font-medium text-sm">AI Suggestion</p>
+                                        <p class="text-orange-700 text-xs">Pay ₹12,000 extra to avoid 18% APR charges
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-semibold text-slate-800">Home Loan</h3>
+                                <span class="text-blue-600 font-bold">₹28,45,000</span>
+                            </div>
+                            <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
+                                <div class="bg-blue-500 h-2 rounded-full" style="width: 34%"></div>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-600">EMI: ₹35,420</span>
+                                <span class="text-blue-600">7.5% Interest</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-green-50 border border-green-200 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-semibold text-slate-800">Car Loan</h3>
+                                <span class="text-green-600 font-bold">₹2,85,430</span>
+                            </div>
+                            <div class="w-full bg-green-200 rounded-full h-2 mb-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 68%"></div>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-600">EMI: ₹12,890</span>
+                                <span class="text-green-600">8.9% Interest</span>
+                            </div>
+                        </div>
+
                     </div>
-                    <span class="text-slate-800 font-semibold">₹18,000 <span class="text-xs text-slate-500">(33%)</span></span>
                 </div>
-                <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg ">
-                    <div class="flex items-center">
-                        <div class="w-3.5 h-3.5 bg-blue-500 rounded-full mr-3"></div>
-                        <span class="text-slate-700 font-medium">Transportation</span>
-                    </div>
-                    <span class="text-slate-800 font-semibold">₹7,800 <span class="text-xs text-slate-500">(14%)</span></span>
-                </div>
-                <div class="flex items-center justify-between p-3 bg-yellow-50 rounded-lg ">
-                    <div class="flex items-center">
-                        <div class="w-3.5 h-3.5 bg-yellow-400 rounded-full mr-3"></div>
-                        <span class="text-slate-700 font-medium">Entertainment</span>
-                    </div>
-                    <span class="text-slate-800 font-semibold">₹6,400 <span class="text-xs text-slate-500">(12%)</span></span>
-                </div>
-                <div class="flex items-center justify-between p-3 bg-purple-50 rounded-lg ">
-                    <div class="flex items-center">
-                        <div class="w-3.5 h-3.5 bg-purple-500 rounded-full mr-3"></div>
-                        <span class="text-slate-700 font-medium">Shopping</span>
-                    </div>
-                    <span class="text-slate-800 font-semibold">₹12,000 <span class="text-xs text-slate-500">(22%)</span></span>
-                </div>
-                <div class="flex items-center justify-between p-3 bg-orange-50 rounded-lg ">
-                    <div class="flex items-center">
-                        <div class="w-3.5 h-3.5 bg-orange-500 rounded-full mr-3"></div>
-                        <span class="text-slate-700 font-medium">Utilities</span>
-                    </div>
-                    <span class="text-slate-800 font-semibold">₹10,000 <span class="text-xs text-slate-500">(19%)</span></span>
-                </div>
-            </div>
-        </div>
+                <!-- Expense Tracker -->
+               <div id="expense-tracker" class="lg:col-span-2 glass-card rounded-2xl p-6">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h2 class="text-xl font-bold text-slate-800">Financial Overview</h2>
+      <p class="text-slate-500 text-sm">December 2024 • Smart money snapshot</p>
+    </div>
+    <div class="flex items-center space-x-2">
+      <button class="bg-blue-100 text-blue-600 px-3 py-1 rounded-lg text-sm font-medium">This Month</button>
+      <button class="text-slate-500 px-3 py-1 rounded-lg text-sm hover:text-blue-600">Last Month</button>
+      <button class="text-slate-600 hover:text-blue-600" title="Refresh data">
+        <i class="fa-solid fa-rotate-right"></i>
+      </button>
+      <a href="/bankselection.html"
+        class="bg-orange-500 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-600 transition-colors">
+        <i class="fa-solid fa-link mr-1"></i> Link Accounts
+      </a>
+    </div>
+  </div>
+
+  <!-- Summary Stats -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+    <div class="p-4 rounded-xl bg-green-50 border border-green-100">
+      <p class="text-xs text-slate-500">Total Income</p>
+      <h3 class="text-lg font-bold text-slate-800">₹1,10,000</h3>
+      <p class="text-green-600 text-xs font-semibold mt-1"><i class="fa-solid fa-arrow-up mr-1"></i> +5% from last month</p>
+    </div>
+    <div class="p-4 rounded-xl bg-red-50 border border-red-100">
+      <p class="text-xs text-slate-500">Total Expenses</p>
+      <h3 class="text-lg font-bold text-slate-800">₹54,200</h3>
+      <p class="text-red-600 text-xs font-semibold mt-1"><i class="fa-solid fa-arrow-up mr-1"></i> +8% higher than last month</p>
+    </div>
+    <div class="p-4 rounded-xl bg-blue-50 border border-blue-100">
+      <p class="text-xs text-slate-500">Investments</p>
+      <h3 class="text-lg font-bold text-slate-800">₹25,000</h3>
+      <p class="text-blue-600 text-xs font-semibold mt-1"><i class="fa-solid fa-arrow-up mr-1"></i> +12% this month</p>
+    </div>
+    <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-100">
+      <p class="text-xs text-slate-500">Savings</p>
+      <h3 class="text-lg font-bold text-slate-800">₹30,800</h3>
+      <p class="text-emerald-600 text-xs font-semibold mt-1"><i class="fa-solid fa-arrow-up mr-1"></i> +6% growth</p>
+    </div>
+  </div>
+
+  <!-- Main Insights -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Chart -->
+    <div id="expense-chart-one"
+      class="h-64 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl flex items-center justify-center text-slate-400 text-sm italic">
+      Chart: Income vs Expenses Breakdown
     </div>
 
-    <!-- Savings Goals -->
-    <div id="savings-goals" class="glass-card rounded-2xl p-6">
-        <div class="flex items-center justify-between mb-6">
-            <div>
-                <h2 class="text-lg font-bold text-slate-800">Savings Goals</h2>
-                <p class="text-slate-500 text-sm">Track and set new goals</p>
-            </div>
-            <button id="openGoalForm" class="text-blue-600 hover:text-blue-700">
-                <i class="fa-solid fa-plus text-lg"></i>
-            </button>
+    <!-- Category Breakdown -->
+    <div class="space-y-3">
+      <div class="flex items-center justify-between p-3 bg-red-50 rounded-lg">
+        <div class="flex items-center">
+          <div class="w-3.5 h-3.5 bg-red-500 rounded-full mr-3"></div>
+          <span class="text-slate-700 font-medium">Food & Dining</span>
         </div>
+        <span class="text-slate-800 font-semibold">₹18,000 <span class="text-xs text-slate-500">(33%)</span></span>
+      </div>
 
-        <div class="space-y-4">
-            <!-- Example Goal Card -->
-            <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
-                <div class="flex items-center justify-between mb-2">
-                    <h3 class="font-semibold text-slate-800 text-sm">House Down Payment</h3>
-                    <span class="text-blue-600 text-xs font-medium">85%</span>
-                </div>
-                <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
-                    <div class="bg-blue-500 h-2 rounded-full transition-all" style="width: 85%"></div>
-                </div>
-                <div class="flex justify-between text-xs">
-                    <span class="text-slate-600">₹8,50,000</span>
-                    <span class="text-slate-400">₹10,00,000</span>
-                </div>
-                <p class="text-[11px] text-slate-500 mt-1">~2 months remaining</p>
-            </div>
-
-            <!-- Repeat for other goals... -->
+      <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+        <div class="flex items-center">
+          <div class="w-3.5 h-3.5 bg-blue-500 rounded-full mr-3"></div>
+          <span class="text-slate-700 font-medium">Transportation</span>
         </div>
+        <span class="text-slate-800 font-semibold">₹7,800 <span class="text-xs text-slate-500">(14%)</span></span>
+      </div>
+
+      <div class="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
+        <div class="flex items-center">
+          <div class="w-3.5 h-3.5 bg-yellow-400 rounded-full mr-3"></div>
+          <span class="text-slate-700 font-medium">Entertainment</span>
+        </div>
+        <span class="text-slate-800 font-semibold">₹6,400 <span class="text-xs text-slate-500">(12%)</span></span>
+      </div>
+
+      <div class="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+        <div class="flex items-center">
+          <div class="w-3.5 h-3.5 bg-purple-500 rounded-full mr-3"></div>
+          <span class="text-slate-700 font-medium">Shopping</span>
+        </div>
+        <span class="text-slate-800 font-semibold">₹12,000 <span class="text-xs text-slate-500">(22%)</span></span>
+      </div>
+
+      <div class="flex items-center justify-between p-3 bg-orange-50 rounded-lg">
+        <div class="flex items-center">
+          <div class="w-3.5 h-3.5 bg-orange-500 rounded-full mr-3"></div>
+          <span class="text-slate-700 font-medium">Utilities</span>
+        </div>
+        <span class="text-slate-800 font-semibold">₹10,000 <span class="text-xs text-slate-500">(19%)</span></span>
+      </div>
     </div>
-</section>
+  </div>
 
-<!-- Goal Creation Popup -->
-<div id="goalFormModal"
-    class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-    <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-xl">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-lg font-bold text-slate-800">Set New Savings Goal</h2>
-            <button id="closeGoalForm" class="text-slate-500 hover:text-slate-700">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-        </div>
+  <!-- Smart Tip / CTA -->
 
-        <form id="goalForm" class="space-y-4">
-            <div>
-                <label class="block text-sm text-slate-600 mb-1">Goal Name</label>
-                <input type="text" placeholder="e.g. Dream Car" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400" required>
-            </div>
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-sm text-slate-600 mb-1">Target Amount</label>
-                    <input type="number" placeholder="₹ amount" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400" required>
-                </div>
-                <div>
-                    <label class="block text-sm text-slate-600 mb-1">Current Saved</label>
-                    <input type="number" placeholder="₹ amount" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400" required>
-                </div>
-            </div>
-            <div>
-                <label class="block text-sm text-slate-600 mb-1">Target Date</label>
-                <input type="date" class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400" required>
-            </div>
-            <button type="submit"
-                class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 font-medium">
-                Save Goal
-            </button>
-        </form>
-    </div>
 </div>
 
-<script>
-    const openBtn = document.getElementById('openGoalForm');
-    const closeBtn = document.getElementById('closeGoalForm');
-    const modal = document.getElementById('goalFormModal');
 
-    openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
-    closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.classList.add('hidden');
-    });
-</script>
+                <!-- Savings Goals -->
+             
+            </section>
 
+            <!-- Goal Creation Popup -->
+         
 
             <!-- Recent Transactions & Investment Insights -->
-               <section id="transactions-insights" class="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-8">
+            <section id="transactions-insights" class="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-8">
 
                 <!-- Recent Transactions -->
                 <div id="financial-news" class="glass-card rounded-2xl p-6">
@@ -995,231 +1155,169 @@
                         </article>
                     </div>
                 </div>
-                <!-- Investment Insights -->
-              <!-- Investment Insights v2.0 -->
-<div id="investment-insights" class="glass-card rounded-2xl p-6 relative overflow-hidden">
+<div id="savings-goals" class="glass-card rounded-2xl p-6">
   <div class="flex items-center justify-between mb-6">
     <div>
-      <h2 class="text-xl font-bold text-slate-800 flex items-center">
-        AI Investment Insights 
-        <span class="ml-2 text-xs bg-gradient-to-r from-orange-400 to-orange-600 text-white px-2 py-0.5 rounded-md font-semibold">Premium</span>
-      </h2>
-      <p class="text-slate-500 text-sm">Personalized intelligence for smarter wealth growth</p>
+      <h2 class="text-lg font-bold text-slate-800">Savings Goals</h2>
+      <p class="text-slate-500 text-sm">Track and set new goals</p>
     </div>
-    <div class="ai-glow bg-blue-100 p-2 rounded-lg">
-      <i class="fa-solid fa-robot text-blue-600"></i>
-    </div>
+    <button id="openGoalForm" class="text-blue-600 hover:text-blue-700">
+      <i class="fa-solid fa-plus text-lg"></i>
+    </button>
   </div>
 
-  <!-- Free Insight (Visible) -->
-  <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-4">
-    <div class="flex items-start">
-      <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3 mt-1">
-        <i class="fa-solid fa-lightbulb text-white text-sm"></i>
+  <!-- Goals Container -->
+  <div id="goalsContainer" class="space-y-4">
+    <!-- Default Example Goal -->
+    <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="font-semibold text-slate-800 text-sm">Retirement Goal</h3>
+        <span class="text-blue-600 text-xs font-medium">50%</span>
       </div>
-      <div>
-        <h3 class="font-semibold text-blue-800 mb-1">Portfolio Rebalancing Suggestion</h3>
-        <p class="text-blue-700 text-sm mb-2">
-          Your equity exposure is slightly high at <strong>78%</strong>. Consider moving 8% to debt for stability.
-        </p>
-        <button class="text-blue-600 text-xs font-medium hover:text-blue-700">Learn More →</button>
+      <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
+        <div class="bg-blue-500 h-2 rounded-full transition-all" style="width: 50%"></div>
       </div>
+      <div class="flex justify-between text-xs">
+        <span class="text-slate-600">₹50,00,000</span>
+        <span class="text-slate-400">₹1,00,00,000</span>
+      </div>
+      <p class="text-[11px] text-slate-500 mt-1">~20 years remaining</p>
     </div>
-  </div>
-
-  <!-- Locked Insights (Blurred) -->
-  <div class="relative bg-white/30 backdrop-blur-sm border border-slate-200 rounded-xl p-4 mb-4 overflow-hidden group">
-    <div class="absolute inset-0 bg-white/60 backdrop-blur-md flex flex-col items-center justify-center z-10 rounded-xl text-center">
-      <i class="fa-solid fa-lock text-slate-500 text-lg mb-2"></i>
-      <p class="text-sm text-slate-600 font-medium">Unlock to view this premium insight</p>
-    </div>
-    <div class="flex items-start opacity-50 pointer-events-none">
-      <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-3 mt-1">
-        <i class="fa-solid fa-star text-white text-sm"></i>
+    <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="font-semibold text-slate-800 text-sm">Contingency Goal</h3>
+        <span class="text-blue-600 text-xs font-medium">85%</span>
       </div>
-      <div>
-        <h3 class="font-semibold text-purple-800 mb-1">Top Performer Alert</h3>
-        <p class="text-purple-700 text-sm mb-2">Your Axis Bluechip Fund generated 28.4% returns this year.</p>
+      <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
+        <div class="bg-blue-500 h-2 rounded-full transition-all" style="width: 85%"></div>
       </div>
-    </div>
-  </div>
-
-  <div class="relative bg-white/30 backdrop-blur-sm border border-slate-200 rounded-xl p-4 mb-4 overflow-hidden">
-    <div class="absolute inset-0 bg-white/60 backdrop-blur-md flex flex-col items-center justify-center z-10 rounded-xl text-center">
-      <i class="fa-solid fa-lock text-slate-500 text-lg mb-2"></i>
-      <p class="text-sm text-slate-600 font-medium">Unlock to view this premium insight</p>
-    </div>
-    <div class="flex items-start opacity-50 pointer-events-none">
-      <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3 mt-1">
-        <i class="fa-solid fa-chart-line text-white text-sm"></i>
+      <div class="flex justify-between text-xs">
+        <span class="text-slate-600">₹8,50,000</span>
+        <span class="text-slate-400">₹10,00,000</span>
       </div>
-      <div>
-        <h3 class="font-semibold text-blue-800 mb-1">Tax Saving Opportunity</h3>
-        <p class="text-blue-700 text-sm mb-2">Save ₹46,800 in taxes by investing ₹1,56,000 more in ELSS this year.</p>
-      </div>
+      <p class="text-[11px] text-slate-500 mt-1">~1 year remaining</p>
     </div>
-  </div>
-
-  <div class="relative bg-white/30 backdrop-blur-sm border border-slate-200 rounded-xl p-4 mb-4 overflow-hidden">
-    <div class="absolute inset-0 bg-white/60 backdrop-blur-md flex flex-col items-center justify-center z-10 rounded-xl text-center">
-      <i class="fa-solid fa-lock text-slate-500 text-lg mb-2"></i>
-      <p class="text-sm text-slate-600 font-medium">Unlock to view this premium insight</p>
-    </div>
-    <div class="flex items-start opacity-50 pointer-events-none">
-      <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center mr-3 mt-1">
-        <i class="fa-solid fa-exclamation-triangle text-white text-sm"></i>
+    <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="font-semibold text-slate-800 text-sm">House Down Payment</h3>
+        <span class="text-blue-600 text-xs font-medium">85%</span>
       </div>
-      <div>
-        <h3 class="font-semibold text-orange-800 mb-1">Underperforming Asset</h3>
-        <p class="text-orange-700 text-sm mb-2">ICICI Prudential IT Fund down 12% this quarter.</p>
+      <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
+        <div class="bg-blue-500 h-2 rounded-full transition-all" style="width: 85%"></div>
       </div>
+      <div class="flex justify-between text-xs">
+        <span class="text-slate-600">₹8,50,000</span>
+        <span class="text-slate-400">₹10,00,000</span>
+      </div>
+      <p class="text-[11px] text-slate-500 mt-1">~2 months remaining</p>
     </div>
-  </div>
-
-  <!-- Premium CTA -->
-  <div class="text-center mt-6 bg-gradient-to-r from-orange-400 to-orange-600 rounded-xl p-4 text-white shadow-md">
-    <h3 class="font-semibold text-lg mb-1">Unlock 3 More Smart Insights 🔓</h3>
-    <p class="text-sm text-orange-50 mb-3">Get real-time AI investment guidance, tax tips, and fund optimization suggestions.</p>
-    <a href="/plan.html" class="w-fit bg-white text-orange-600 font-semibold px-6 py-2 rounded-lg hover:bg-orange-50 transition-all">
-      Upgrade to Premium
-      <i class="fa-solid fa-crown ml-2"></i>
-    </a>
   </div>
 </div>
 
+<!-- Modal -->
+<div id="goalFormModal"
+  class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+  <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-xl">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-lg font-bold text-slate-800">Set New Savings Goal</h2>
+      <button id="closeGoalForm" class="text-slate-500 hover:text-slate-700">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <form id="goalForm" class="space-y-4">
+      <div>
+        <label class="block text-sm text-slate-600 mb-1">Goal Name</label>
+        <input id="goalName" type="text" placeholder="e.g. Dream Car"
+          class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400" required>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm text-slate-600 mb-1">Target Amount</label>
+          <input id="goalTarget" type="number" placeholder="₹ amount"
+            class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400" required>
+        </div>
+        <div>
+          <label class="block text-sm text-slate-600 mb-1">Current Saved</label>
+          <input id="goalSaved" type="number" placeholder="₹ amount"
+            class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400" required>
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm text-slate-600 mb-1">Target Date</label>
+        <input id="goalDate" type="date"
+          class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400" required>
+      </div>
+      <button type="submit"
+        class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 font-medium">
+        Save Goal
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+  const openBtn = document.getElementById('openGoalForm');
+  const closeBtn = document.getElementById('closeGoalForm');
+  const modal = document.getElementById('goalFormModal');
+  const goalForm = document.getElementById('goalForm');
+  const goalsContainer = document.getElementById('goalsContainer');
+
+  // Modal open/close
+  openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
+  closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.add('hidden');
+  });
+
+  // Handle goal submission
+  goalForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('goalName').value.trim();
+    const target = parseFloat(document.getElementById('goalTarget').value);
+    const saved = parseFloat(document.getElementById('goalSaved').value);
+    const date = new Date(document.getElementById('goalDate').value);
+
+    if (!name || !target || !saved || saved > target) return alert("Please enter valid goal details.");
+
+    const progress = Math.min((saved / target) * 100, 100).toFixed(1);
+
+    // Calculate remaining time
+    const today = new Date();
+    const monthsLeft = Math.max(0, (date.getFullYear() - today.getFullYear()) * 12 + (date.getMonth() - today.getMonth()));
+
+    // Create goal card
+    const goalCard = document.createElement('div');
+    goalCard.className = "bg-blue-50 border border-blue-200 rounded-xl p-4";
+    goalCard.innerHTML = `
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="font-semibold text-slate-800 text-sm">${name}</h3>
+        <span class="text-blue-600 text-xs font-medium">${progress}%</span>
+      </div>
+      <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
+        <div class="bg-blue-500 h-2 rounded-full transition-all" style="width: ${progress}%"></div>
+      </div>
+      <div class="flex justify-between text-xs">
+        <span class="text-slate-600">₹${saved.toLocaleString()}</span>
+        <span class="text-slate-400">₹${target.toLocaleString()}</span>
+      </div>
+      <p class="text-[11px] text-slate-500 mt-1">~${monthsLeft || '0'} months remaining</p>
+    `;
+
+    goalsContainer.appendChild(goalCard);
+
+    // Reset form + close modal
+    goalForm.reset();
+    modal.classList.add('hidden');
+  });
+</script>
+
+
             </section>
 
 
-            <!-- Financial Health Score & Quick Actions -->
-            <section id="health-actions" class="grid grid-cols-1 xl:grid-cols-3 gap-8 mb-8">
-
-                <!-- Financial Health Score -->
-                <div id="health-score" class="glass-card rounded-2xl p-6">
-                    <div class="text-center mb-6">
-                        <h2 class="text-lg font-bold text-slate-800 mb-5">Financial Health Score</h2>
- <div class="relative w-40 h-40 mx-auto mb-4">
-            <svg class="absolute inset-0 w-full h-full transform -rotate-90">
-                <circle cx="80" cy="80" r="70" stroke="#e2e8f0" stroke-width="12" fill="none" />
-                <circle id="gauge-circle" cx="80" cy="80" r="70"
-                    stroke="url(#grad1)" stroke-width="12" fill="none"
-                    stroke-linecap="round" stroke-dasharray="440" stroke-dashoffset="88"
-                    class="transition-all duration-700"></circle>
-                <defs>
-                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" style="stop-color:#22c55e; stop-opacity:1" />
-                        <stop offset="100%" style="stop-color:#3b82f6; stop-opacity:1" />
-                    </linearGradient>
-                </defs>
-            </svg>
-            <div class="absolute inset-0 flex flex-col items-center justify-center">
-                <p id="health-score-number" class="text-3xl font-bold text-blue-600">782</p>
-                <p class="text-slate-500 text-xs font-medium">Excellent</p>
-            </div>
-        </div>                        <div class="flex items-center justify-center space-x-4">
-                           
-                        </div>
-                    </div>
-
-                    <div class="space-y-3">
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-600 text-sm">Debt-to-Income</span>
-                            <span class="text-blue-600  font-medium text-sm">Good</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-600 text-sm">Emergency Fund</span>
-                            <span class="text-blue-600  font-medium text-sm">Strong</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-600 text-sm">Investment Diversity</span>
-                            <span class="text-orange-600 font-medium text-sm">Average</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-600 text-sm">Savings Rate</span>
-                            <span class="text-blue-600  font-medium text-sm">Excellent</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quick Actions -->
-                <div id="quick-actions" class="xl:col-span-2 glass-card rounded-2xl p-6">
-                    <div class="flex items-center justify-between mb-6">
-                        <div>
-                            <h2 class="text-xl font-bold text-slate-800">Quick Actions</h2>
-                            <p class="text-slate-500 text-sm">Manage your finances efficiently</p>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <button
-                            class="bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-xl p-4 text-center transition-all ">
-                            <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mx-auto mb-3">
-                                <i class="fa-solid fa-plus text-white text-xl"></i>
-                            </div>
-                            <p class="text-slate-800 font-medium text-sm">Add Investment</p>
-                        </button>
-
-                        <button
-                            class="bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-xl p-4 text-center transition-all ">
-                            <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mx-auto mb-3">
-                                <i class="fa-solid fa-exchange-alt text-white text-xl"></i>
-                            </div>
-                            <p class="text-slate-800 font-medium text-sm">Transfer Funds</p>
-                        </button>
-
-                        <button
-                            class="bg-purple-50 hover:bg-purple-100 border border-purple-200 rounded-xl p-4 text-center transition-all ">
-                            <div
-                                class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center mx-auto mb-3">
-                                <i class="fa-solid fa-file-invoice text-white text-xl"></i>
-                            </div>
-                            <p class="text-slate-800 font-medium text-sm">Pay Bills</p>
-                        </button>
-
-                        <button
-                            class="bg-orange-50 hover:bg-orange-100 border border-orange-200 rounded-xl p-4 text-center transition-all ">
-                            <div
-                                class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center mx-auto mb-3">
-                                <i class="fa-solid fa-chart-pie text-white text-xl"></i>
-                            </div>
-                            <p class="text-slate-800 font-medium text-sm">View Reports</p>
-                        </button>
-
-                        <button
-                            class="bg-red-50 hover:bg-red-100 border border-red-200 rounded-xl p-4 text-center transition-all ">
-                            <div class="w-12 h-12 bg-red-500 rounded-xl flex items-center justify-center mx-auto mb-3">
-                                <i class="fa-solid fa-credit-card text-white text-xl"></i>
-                            </div>
-                            <p class="text-slate-800 font-medium text-sm">Manage Cards</p>
-                        </button>
-
-                        <button
-                            class="bg-orange-50 hover:bg-orange-100 border border-orange-200 rounded-xl p-4 text-center transition-all ">
-                            <div
-                                class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center mx-auto mb-3">
-                                <i class="fa-solid fa-bullseye text-white text-xl"></i>
-                            </div>
-                            <p class="text-slate-800 font-medium text-sm">Set Goals</p>
-                        </button>
-
-                        <button
-                            class="bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 rounded-xl p-4 text-center transition-all ">
-                            <div
-                                class="w-12 h-12 bg-indigo-500 rounded-xl flex items-center justify-center mx-auto mb-3">
-                                <i class="fa-solid fa-calculator text-white text-xl"></i>
-                            </div>
-                            <p class="text-slate-800 font-medium text-sm">Calculators</p>
-                        </button>
-
-                        <button
-                            class="bg-teal-50 hover:bg-teal-100 border border-teal-200 rounded-xl p-4 text-center transition-all ">
-                            <div class="w-12 h-12 bg-teal-500 rounded-xl flex items-center justify-center mx-auto mb-3">
-                                <i class="fa-solid fa-robot text-white text-xl"></i>
-                            </div>
-                            <p class="text-slate-800 font-medium text-sm">AI Advisor</p>
-                        </button>
-                    </div>
-                </div>
-            </section>
+        
             <section id="calculators-preview" class=" mb-8">
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100">
                     <div class="p-6 pb-0">
@@ -1287,165 +1385,25 @@
 
 
             <!-- Achievements & Milestones -->
-            <section id="achievements" class="glass-card rounded-2xl p-6 mb-8">
-                <div class="flex items-center justify-between mb-6">
-                    <div>
-                        <h2 class="text-xl font-bold text-slate-800">Recent Achievements</h2>
-                        <p class="text-slate-500 text-sm">Celebrate your financial milestones</p>
-                    </div>
-                    <button class="text-blue-600  hover:text-blue-700 font-medium text-sm">View All</button>
-                </div>
+          
 
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 text-center">
-                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <i class="fa-solid fa-trophy text-white text-xl"></i>
-                        </div>
-                        <h3 class="font-semibold text-blue-800 mb-1">Portfolio Milestone</h3>
-                        <p class="text-blue-700 text-sm">Reached ₹25L net worth</p>
-                        <span class="text-blue-600  text-xs">2 days ago</span>
-                    </div>
+            <script>
+                function connectLiabilities() {
+                    const loader = document.getElementById('loadingOverlay');
+                    const content = document.getElementById('liabilityContent');
 
-                    <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 text-center">
-                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <i class="fa-solid fa-star text-white text-xl"></i>
-                        </div>
-                        <h3 class="font-semibold text-blue-800 mb-1">Savings Goal</h3>
-                        <p class="text-blue-700 text-sm">Emergency fund 75% complete</p>
-                        <span class="text-blue-600 text-xs">1 week ago</span>
-                    </div>
+                    loader.classList.remove('hidden');
 
-                    <div class="bg-purple-50 border border-purple-200 rounded-xl p-4 text-center">
-                        <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <i class="fa-solid fa-medal text-white text-xl"></i>
-                        </div>
-                        <h3 class="font-semibold text-purple-800 mb-1">Consistency</h3>
-                        <p class="text-purple-700 text-sm">12 months of regular SIPs</p>
-                        <span class="text-purple-600 text-xs">2 weeks ago</span>
-                    </div>
+                    // Simulate API connection
+                    setTimeout(() => {
+                        loader.classList.add('hidden');
+                        content.classList.remove('hidden');
 
-                    <div class="bg-orange-50 border border-orange-200 rounded-xl p-4 text-center">
-                        <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <i class="fa-solid fa-chart-line text-white text-xl"></i>
-                        </div>
-                        <h3 class="font-semibold text-orange-800 mb-1">Investment Returns</h3>
-                        <p class="text-orange-700 text-sm">Beat market by 8.2%</p>
-                        <span class="text-orange-600 text-xs">1 month ago</span>
-                    </div>
-                </div>
-            </section>
-            <section class="grid grid-cols-3">
-            <!-- Liability Overview (Locked State - Version 2.0) -->
-<div id="liability-overview" class="glass-card relative rounded-2xl p-6 bg-white/60 backdrop-blur-md border border-slate-200 shadow-sm">
-
-  <!-- Header -->
-  <div class="flex items-center justify-between mb-6">
-    <div>
-      <h2 class="text-xl font-bold text-slate-800">Liability Overview</h2>
-      <p class="text-slate-500 text-sm">Outstanding debts & EMIs</p>
-    </div>
-    <button id="connectLiabilitiesBtn"
-      class="bg-orange-500 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-600 transition-colors flex items-center">
-      <i class="fa-solid fa-link mr-2"></i> Connect Liabilities
-    </button>
-  </div>
-
-  <!-- Locked Placeholder -->
-  <div class="relative rounded-xl border border-dashed border-slate-300 bg-slate-50 flex flex-col items-center justify-center py-12 text-center">
-    <div class="bg-orange-100 w-16 h-16 flex items-center justify-center rounded-full mb-4">
-      <i class="fa-solid fa-lock text-orange-600 text-2xl"></i>
-    </div>
-    <h3 class="text-lg font-semibold text-slate-800 mb-2">Liability Overview Locked</h3>
-    <p class="text-slate-600 text-sm max-w-xs mx-auto mb-6">Connect your credit cards, loans, and EMIs to unlock real-time insights and smart repayment suggestions.</p>
-    <button onclick="connectLiabilities()"
-      class="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition flex items-center">
-      <i class="fa-solid fa-plug mr-2"></i> Connect Now
-    </button>
-  </div>
-
-  <!-- Overlay Loader (when connecting) -->
-  <div id="loadingOverlay" class="hidden absolute inset-0 bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl">
-    <div class="animate-spin mb-4 text-orange-600">
-      <i class="fa-solid fa-spinner text-2xl"></i>
-    </div>
-    <p class="text-slate-700 font-medium">Connecting your liabilities...</p>
-  </div>
-
-  <!-- Hidden Active State (after connection) -->
-  <div id="liabilityContent" class="hidden space-y-4 mt-6">
-
-    <div class="bg-red-50 border border-red-200 rounded-xl p-4">
-      <div class="flex items-center justify-between mb-2">
-        <h3 class="font-semibold text-slate-800">Credit Card</h3>
-        <span class="text-red-600 font-bold">₹45,680</span>
-      </div>
-      <div class="w-full bg-red-200 rounded-full h-2 mb-2">
-        <div class="bg-red-500 h-2 rounded-full" style="width: 76%"></div>
-      </div>
-      <div class="flex justify-between text-sm">
-        <span class="text-slate-600">Due: 15th Dec</span>
-        <span class="text-red-600">18% APR</span>
-      </div>
-      <div class="mt-3 bg-orange-100 border border-orange-200 rounded-lg p-3">
-        <div class="flex items-start">
-          <i class="fa-solid fa-lightbulb text-orange-600 mr-2 mt-1"></i>
-          <div>
-            <p class="text-orange-800 font-medium text-sm">AI Suggestion</p>
-            <p class="text-orange-700 text-xs">Pay ₹12,000 extra to avoid 18% APR charges</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
-      <div class="flex items-center justify-between mb-2">
-        <h3 class="font-semibold text-slate-800">Home Loan</h3>
-        <span class="text-blue-600 font-bold">₹28,45,000</span>
-      </div>
-      <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
-        <div class="bg-blue-500 h-2 rounded-full" style="width: 34%"></div>
-      </div>
-      <div class="flex justify-between text-sm">
-        <span class="text-slate-600">EMI: ₹35,420</span>
-        <span class="text-blue-600">7.5% Interest</span>
-      </div>
-    </div>
-
-    <div class="bg-green-50 border border-green-200 rounded-xl p-4">
-      <div class="flex items-center justify-between mb-2">
-        <h3 class="font-semibold text-slate-800">Car Loan</h3>
-        <span class="text-green-600 font-bold">₹2,85,430</span>
-      </div>
-      <div class="w-full bg-green-200 rounded-full h-2 mb-2">
-        <div class="bg-green-500 h-2 rounded-full" style="width: 68%"></div>
-      </div>
-      <div class="flex justify-between text-sm">
-        <span class="text-slate-600">EMI: ₹12,890</span>
-        <span class="text-green-600">8.9% Interest</span>
-      </div>
-    </div>
-
-  </div>
-</div>
-</section>
-
-<script>
-  function connectLiabilities() {
-    const loader = document.getElementById('loadingOverlay');
-    const content = document.getElementById('liabilityContent');
-
-    loader.classList.remove('hidden');
-
-    // Simulate API connection
-    setTimeout(() => {
-      loader.classList.add('hidden');
-      content.classList.remove('hidden');
-
-      // Hide the locked placeholder
-      document.querySelector('#liability-overview > div.relative').classList.add('hidden');
-    }, 2500);
-  }
-</script>
+                        // Hide the locked placeholder
+                        document.querySelector('#liability-overview > div.relative').classList.add('hidden');
+                    }, 2500);
+                }
+            </script>
 
         </main>
     </div>
@@ -1517,6 +1475,69 @@
         </div>
     </div>
 
+    <!-- NETWORTH MODAL -->
+<div id="networthModal"
+  class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+  <div class="bg-white rounded-2xl shadow-xl border border-gray-100 w-full max-w-2xl relative animate-fadeIn">
+    <!-- Header -->
+    <div class="p-6 border-b border-gray-100 flex justify-between items-start">
+      <div>
+        <h2 class="text-xl font-bold text-navy font-display mb-1">Net Worth Trend</h2>
+        <p class="text-sm text-gray-600">Your wealth growth over the last 12 months</p>
+      </div>
+      <button onclick="closeModal('networthModal')" class="text-slate-400 hover:text-slate-600 text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <!-- Content -->
+    <div class="p-6">
+      <div id="portfolio-chart-one" class="h-64"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PORTFOLIO INSIGHT MODAL -->
+<div id="portfolioModal"
+  class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+  <div class="glass-card rounded-2xl p-6 w-full max-w-3xl relative animate-fadeIn">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h2 class="text-xl font-bold text-slate-800">Portfolio Performance</h2>
+        <p class="text-slate-500 text-sm">Last 6 months growth</p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <select class="bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm">
+          <option>6 Months</option>
+          <option>1 Year</option>
+          <option>3 Years</option>
+        </select>
+        <button onclick="closeModal('portfolioModal')" class="text-slate-400 hover:text-slate-600 text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Chart -->
+    <div id="portfolio-chart" class="h-64"></div>
+
+    <!-- Stats -->
+    <div class="grid grid-cols-3 gap-4 mt-4">
+      <div class="text-center p-3 bg-blue-50 rounded-lg">
+        <p class="text-blue-600 font-bold">+24.5%</p>
+        <p class="text-slate-500 text-xs">Equity Returns</p>
+      </div>
+      <div class="text-center p-3 bg-blue-50 rounded-lg">
+        <p class="text-blue-600 font-bold">+8.2%</p>
+        <p class="text-slate-500 text-xs">Debt Returns</p>
+      </div>
+      <div class="text-center p-3 bg-purple-50 rounded-lg">
+        <p class="text-purple-600 font-bold">+12.1%</p>
+        <p class="text-slate-500 text-xs">Gold Returns</p>
+      </div>
+    </div>
+  </div>
+</div>
     <!-- Smart Notifications -->
     <div id="notification-container" class="fixed top-20 right-6 z-50 space-y-3">
         <div class="notification-slide bg-white rounded-xl shadow-lg border border-slate-200 p-4 max-w-sm">
@@ -1682,7 +1703,7 @@
                     }
                 }
             });
-             Highcharts.chart('expense-chart', {
+            Highcharts.chart('expense-chart', {
                 chart: {
                     type: 'pie',
                     backgroundColor: 'transparent',
@@ -1780,7 +1801,7 @@
                 }]
             });
         });
-        
+
 
         // AI Chat Toggle
         document.getElementById('ai-chat-toggle').addEventListener('click', function () {
