@@ -507,9 +507,13 @@
                                     <p class="text-xs text-slate-500">Portfolio Summary</p>
                                 </div>
                             </div>
-                            <button title="Refresh Data" class="text-slate-500 hover:text-blue-600">
-                                <i class="fa-solid fa-rotate-right"></i>
-                            </button>
+                            <div class="flex items-center space-x-2 text-sm text-slate-500">
+    <button title="Refresh Data" class="text-slate-500 hover:text-blue-600">
+      <i class="fa-solid fa-rotate-right"></i>
+    </button>
+    <span class="text-xs text-slate-400">3m ago</span>
+  </div>
+
                         </div>
 
                         <!-- Current Value & Overall Gain -->
@@ -627,9 +631,12 @@
                                     <p class="text-xs text-slate-500">Portfolio Summary</p>
                                 </div>
                             </div>
-                            <button title="Refresh Data" class="text-slate-500 hover:text-blue-600">
-                                <i class="fa-solid fa-rotate-right"></i>
-                            </button>
+                            <div class="flex items-center space-x-2 text-sm text-slate-500">
+    <button title="Refresh Data" class="text-slate-500 hover:text-blue-600">
+      <i class="fa-solid fa-rotate-right"></i>
+    </button>
+    <span class="text-xs text-slate-400">3m ago</span>
+  </div>
                         </div>
 
                         <!-- Current Value & Overall Gain -->
@@ -783,10 +790,6 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const hasMF = localStorage.getItem("hasMFData") === "true";
-    const hasStock = localStorage.getItem("hasStockData") === "true";
-    const hasLiability = localStorage.getItem("liabilitiesConnected") === "true";
-
     const scoreSection = document.getElementById("score-section");
     const scoreEmpty = document.getElementById("score-empty");
     const aiSuggestion = document.getElementById("ai-suggestion");
@@ -795,39 +798,68 @@
     const scoreBar = document.getElementById("score-bar");
     const scoreStatus = document.getElementById("score-status");
 
-    if (hasMF && hasStock && hasLiability) {
+    function getConnectionsCount() {
+      const hasMF = localStorage.getItem("hasMFData") === "true";
+      const hasStock = localStorage.getItem("hasStockData") === "true";
+      const hasLiability = localStorage.getItem("liabilitiesConnected") === "true";
+      return [hasMF, hasStock, hasLiability].filter(Boolean).length;
+    }
+
+    function updateScoreVisibility() {
+      const count = getConnectionsCount();
+
+      if (count === 0) {
+        // No data connected
+        scoreEmpty.classList.remove("hidden");
+        scoreSection.classList.add("hidden");
+        aiSuggestion.classList.add("hidden");
+        calculateBtnWrapper.classList.add("hidden");
+        return;
+      }
+
+      // At least one connection made → show score
       scoreEmpty.classList.add("hidden");
       scoreSection.classList.remove("hidden");
       aiSuggestion.classList.remove("hidden");
       calculateBtnWrapper.classList.remove("hidden");
-    } else {
-      scoreEmpty.classList.remove("hidden");
-      scoreSection.classList.add("hidden");
-      aiSuggestion.classList.add("hidden");
-      calculateBtnWrapper.classList.add("hidden");
-    }
 
-    // Handle Calculate Button
-    document.getElementById("calculate-btn").addEventListener("click", function () {
-      // Simulate dynamic score generation
-      const randomScore = Math.floor(Math.random() * (850 - 550 + 1)) + 550;
+      // Generate score based on connections
+      let minScore = 550;
+      let maxScore = 850;
+
+      // Boost score as more connections are made
+      if (count === 1) {
+        maxScore = 680;
+      } else if (count === 2) {
+        maxScore = 750;
+      }
+
+      const randomScore = Math.floor(Math.random() * (maxScore - minScore + 1)) + minScore;
       scoreValue.textContent = randomScore;
 
-      let status = "Good • Top 30%";
-      let width = "60%";
+      let status = "Good • Growing Data";
+      let width = "50%";
       if (randomScore > 750) {
-        status = "Excellent • Top 15%";
+        status = "Excellent • Strong Insights";
         width = "80%";
       } else if (randomScore < 650) {
-        status = "Needs Improvement • Bottom 40%";
-        width = "45%";
+        status = "Needs More Data • Add More Sources";
+        width = "35%";
       }
 
       scoreStatus.textContent = status;
       scoreBar.style.width = width;
+    }
 
-      // Optional AI feedback refresh
-      aiSuggestion.classList.remove("hidden");
+    // Re-run whenever localStorage changes (e.g., after user connects something)
+    window.addEventListener("storage", updateScoreVisibility);
+
+    // Call once on load
+    updateScoreVisibility();
+
+    // Calculate button → manually recalc score
+    document.getElementById("calculate-btn").addEventListener("click", function () {
+      updateScoreVisibility();
     });
   });
 </script>
@@ -1989,6 +2021,8 @@
 
       // ✅ Update Networth immediately
       updateNetworthState();
+          window.dispatchEvent(new Event("storage"));
+
     }, 2000);
   }
 
