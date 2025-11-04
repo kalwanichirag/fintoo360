@@ -477,18 +477,10 @@
       <i class="fa-solid fa-wallet text-blue-500 text-xl"></i>
     </div>
     <p class="text-slate-700 font-medium">No net worth data available</p>
-    <p class="text-slate-500 text-sm max-w-sm">Connect your <strong>Mutual Fund</strong> and
-      <strong>Liability</strong> accounts to calculate your net worth accurately.</p>
-    <div class="flex flex-wrap gap-3 mt-3 justify-center">
-      <a href="/mutualfund.html"
-        class="inline-flex items-center bg-blue-600 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition">
-        <i class="fa-solid fa-download mr-2"></i> Connect Mutual Funds
-      </a>
-      <button onclick="connectLiabilities()"
-        class="inline-flex items-center bg-amber-500 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-amber-600 transition">
-        <i class="fa-solid fa-link mr-2"></i> Connect Liabilities
-      </button>
-    </div>
+    <p class="text-slate-500 text-sm max-w-sm">
+        Import your <b>portfoli holdings and liabilities</b> to calculate your networth accurately.
+    </p>
+   
   </div>
 
   <!-- SCRIPT -->
@@ -761,20 +753,7 @@
     <p class="text-sm text-slate-600 mb-4">
       Connect all your accounts to calculate your Financial Wellness Score.
     </p>
-    <div class="flex flex-wrap justify-center gap-3">
-      <a href="/mutualfund.html"
-        class="inline-flex items-center bg-blue-600 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition">
-        <i class="fa-solid fa-download mr-2"></i> Connect Mutual Funds
-      </a>
-      <a href="/stocks.html"
-        class="inline-flex items-center bg-green-600 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition">
-        <i class="fa-solid fa-chart-line mr-2"></i> Connect Stocks
-      </a>
-      <a href="/liabilities.html"
-        class="inline-flex items-center bg-amber-500 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-amber-600 transition">
-        <i class="fa-solid fa-link mr-2"></i> Connect Liabilities
-      </a>
-    </div>
+    
   </div>
 
   <!-- AI Suggestion -->
@@ -956,10 +935,10 @@
       </div>
       <p class="text-slate-700 font-medium">No asset allocation data available yet.</p>
       <p class="text-slate-500 text-sm">Import your portfolio to view detailed equity & debt distribution insights.</p>
-      <a href="/mutualfund.html"
+      <!-- <a href="/mutualfund.html"
         class="mt-4 inline-flex items-center bg-orange-400 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-orange-500 transition-colors">
         <i class="fa-solid fa-download mr-2"></i> Import Portfolio
-      </a>
+      </a> -->
     </div>
   </div>
 </div>
@@ -1090,10 +1069,10 @@
     <p class="text-slate-600 text-sm mb-4">
       No insurance data found. Import your policies to get a full overview.
     </p>
-    <button id="connect-insurance-btn"
+    <!-- <button id="connect-insurance-btn"
       class="bg-blue-600 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition">
       <i class="fa-solid fa-download mr-1"></i> Connect Insurance
-    </button>
+    </button> -->
   </div>
 </div>
 
@@ -1958,7 +1937,7 @@
     const liabilityEl = filled.querySelector("span.text-slate-600:last-child");
 
     // Logic for visibility
-    if (hasMFData && liabilitiesConnected) {
+    if (hasMFData ) {
       // ✅ Full data available
       filled.classList.remove("hidden");
       valueEl.textContent = formatINR(netWorth);
