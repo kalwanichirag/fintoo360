@@ -397,93 +397,104 @@
 
             <!-- Top Metrics Row -->
             <section id="quick-info-cards" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 mb-8">
-                <div id="net-worth-card"
-                    class="glass-card rounded-2xl p-6 flex flex-col justify-between h-full relative">
-                    <!-- Top Content -->
-                    <div>
-                        <!-- Header -->
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center space-x-3">
-                                <div
-                                    class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
-                                    <i class="fa-solid fa-wallet text-white text-xl"></i>
-                                </div>
-                                <div>
-                                    <h2 class="text-base font-semibold text-slate-800">Total Networth</h2>
-                                    <p class="text-xs text-slate-500">Summary</p>
-                                </div>
-                            </div>
+            <div id="net-worth-card"
+  class="glass-card rounded-2xl p-6 flex flex-col justify-between h-full relative">
 
-                            <!-- <div class="flex items-center text-slate-400">
-        <button class="hover:text-blue-600 mr-2">
-          <i class="fa-solid fa-rotate-right text-sm"></i>
-        </button>
-        <span class="text-xs">3m ago</span>
-      </div> -->
-                        </div>
+  <!-- FILLED STATE -->
+  <div id="networth-filled" class="hidden">
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center space-x-3">
+        <div
+          class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+          <i class="fa-solid fa-wallet text-white text-xl"></i>
+        </div>
+        <div>
+          <h2 class="text-base font-semibold text-slate-800">Total Net Worth</h2>
+          <p class="text-xs text-slate-500">Summary</p>
+        </div>
+      </div>
+    </div>
 
-                        <!-- Net Worth Summary -->
-                        <p class="text-xs text-slate-500 mb-1">Current Value</p>
+    <!-- Net Worth Summary -->
+    <p class="text-xs text-slate-500 mb-1">Current Value</p>
+    <p class="text-3xl font-bold text-black-600">₹12,40,000</p>
 
-                        <p class="text-3xl font-bold text-black-600">₹24,89,640</p>
-                        <div class="flex justify-between text-xs mt-2">
-                            <span class="text-slate-600">Assets: ₹28.9L</span>
-                            <span class="text-slate-600">Liabilities: ₹4.0L</span>
-                        </div>
+    <div class="flex justify-between text-xs mt-2">
+      <span class="text-slate-600">Assets: ₹12.40L</span>
+      <span class="text-slate-600">Liabilities: ₹4.70L</span>
+    </div>
 
-                        <!-- Insight Line -->
+    <!-- AI Premium Suggestion -->
+    <div
+      class="mt-4 bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-3 flex items-start space-x-3">
+      <div class="flex-shrink-0">
+        <i class="fa-solid fa-crown text-orange-500 text-lg mt-0.5"></i>
+      </div>
+      <div class="flex-1">
+        <p class="text-sm text-slate-800">
+          A shortfall has been observed in your goal realization.
+        </p>
+        <a href="/plan.html"
+          class="inline-flex items-center text-orange-600 text-xs font-semibold mt-2 hover:text-orange-700 transition-colors">
+          Ask me how to achieve <i class="fa-solid fa-arrow-right ml-1 text-[10px]"></i>
+        </a>
+      </div>
+    </div>
 
+    <!-- Card Buttons -->
+    <div class="mt-6 pt-4 border-t border-slate-200 flex flex-wrap gap-3">
+      <button onclick="openModal('networthModal')"
+        class="bg-orange-400 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-500 transition-colors flex-1 text-center">
+        <i class="fa-solid fa-chart-line mr-1"></i> Net Worth Trend
+      </button>
 
-                        <!-- AI Premium Suggestion -->
-                        <div
-                            class="mt-4 bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-3 flex items-start space-x-3">
-                            <div class="flex-shrink-0">
-                                <i class="fa-solid fa-crown text-orange-500 text-lg mt-0.5"></i>
-                            </div>
-                            <div class="flex-1">
-                                <p class="text-sm text-slate-800">
-                                    A shortfall has been observed in the goal realization.
-                                </p>
-                                <a href="/plan.html"
-                                    class="inline-flex items-center text-orange-600 text-xs font-semibold mt-2 hover:text-orange-700 transition-colors">
-                                    Ask me how to achieve
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+      <button onclick="openModal('portfolioModal')"
+        class="bg-blue-600 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex-1 text-center">
+        <i class="fa-solid fa-layer-group mr-1"></i> Portfolio Insight
+      </button>
+    </div>
+  </div>
 
-                    <!-- Bottom Buttons (Always aligned at bottom) -->
-                    <!-- Card Buttons -->
-                    <div class="mt-6 pt-4 border-t border-slate-200 flex flex-wrap gap-3">
-                        <button onclick="openModal('networthModal')"
-                            class="bg-orange-400 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-500 transition-colors flex-1 text-center">
-                            <i class="fa-solid fa-chart-line mr-1"></i> Net Worth Trend
-                        </button>
+  <!-- PARTIAL STATE (MF connected, no liability) -->
+  <div id="networth-partial" class="hidden flex flex-col items-center justify-center text-center py-10 space-y-4">
+    <div
+      class="w-14 h-14 bg-gradient-to-br from-amber-50 to-amber-100 rounded-full flex items-center justify-center shadow-inner">
+      <i class="fa-solid fa-link text-amber-500 text-xl"></i>
+    </div>
+    <p class="text-slate-700 font-medium">Liabilities not connected</p>
+    <p class="text-slate-500 text-sm max-w-sm">Connect your <strong>Liability</strong> accounts to get your complete
+      Net Worth insights powered by AI.</p>
+    <button onclick="connectLiabilities()"
+      class="inline-flex items-center bg-amber-500 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-amber-600 transition">
+      <i class="fa-solid fa-link mr-2"></i> Connect Liabilities
+    </button>
+  </div>
 
-                        <button onclick="openModal('portfolioModal')"
-                            class="bg-blue-600 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex-1 text-center">
-                            <i class="fa-solid fa-layer-group mr-1"></i> Portfolio Insight
-                        </button>
-                    </div>
+  <!-- EMPTY STATE (No MF or Liabilities) -->
+  <div id="networth-empty" class="hidden flex flex-col items-center justify-center text-center py-10 space-y-4">
+    <div
+      class="w-14 h-14 bg-gradient-to-br from-blue-50 to-blue-100 rounded-full flex items-center justify-center shadow-inner">
+      <i class="fa-solid fa-wallet text-blue-500 text-xl"></i>
+    </div>
+    <p class="text-slate-700 font-medium">No net worth data available</p>
+    <p class="text-slate-500 text-sm max-w-sm">Connect your <strong>Mutual Fund</strong> and
+      <strong>Liability</strong> accounts to calculate your net worth accurately.</p>
+    <div class="flex flex-wrap gap-3 mt-3 justify-center">
+      <a href="/mutualfund.html"
+        class="inline-flex items-center bg-blue-600 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+        <i class="fa-solid fa-upload mr-2"></i> Connect Mutual Funds
+      </a>
+      <button onclick="connectLiabilities()"
+        class="inline-flex items-center bg-amber-500 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-amber-600 transition">
+        <i class="fa-solid fa-link mr-2"></i> Connect Liabilities
+      </button>
+    </div>
+  </div>
 
+  <!-- SCRIPT -->
 
+</div>
 
-                    <!-- MODAL SCRIPT -->
-                    <script>
-                        function openModal(id) {
-                            document.getElementById(id).classList.remove("hidden");
-                        }
-                        function closeModal(id) {
-                            document.getElementById(id).classList.add("hidden");
-                        }
-                    </script>
-
-                    <!-- ANIMATION -->
-                    <style>
-
-                    </style>
-
-                </div>
 
                 <!-- Financial Health Score -->
 
@@ -513,8 +524,8 @@
                         <div class="mb-6">
                             <p class="text-xs text-slate-500 mb-1">Current Value</p>
                             <div class="flex items-baseline space-x-2">
-                                <p class="text-3xl font-bold text-slate-900">₹1,24,500</p>
-                                <span class="text-green-600 font-semibold text-sm">+₹4,500 (3.75%)</span>
+                                <p class="text-3xl font-bold text-slate-900">₹8,45,000</p>
+                                <span class="text-green-600 font-semibold text-sm">+₹93,221 (12.4%)</span>
                                 <i class="fa-solid fa-arrow-trend-up text-green-600 text-xs"></i>
                             </div>
                         </div>
@@ -526,11 +537,11 @@
                         <div class="grid grid-cols-2 gap-4 text-sm">
                             <div>
                                 <p class="text-slate-500 text-xs mb-1">Invested Value</p>
-                                <p class="font-semibold text-slate-700">₹1,20,000</p>
+                                <p class="font-semibold text-slate-700">₹7,51,779</p>
                             </div>
                             <div class="text-right">
                                 <p class="text-slate-500 text-xs mb-1">1 Day Return</p>
-                                <p class="font-semibold text-green-600">+₹320 (0.26%)</p>
+                                <p class="font-semibold text-green-600">+₹9,021.34 (1.2%)</p>
                             </div>
                         </div>
 
@@ -603,7 +614,7 @@
                                 </p>
                                 <a href="/mutualfund.html"
                                     class="inline-flex items-center text-blue-600 text-xs font-semibold mt-2 hover:text-blue-700 transition-colors">
-                                    <i class="fa-solid fa-upload mr-1"></i> Import Mutual Fund Portfolio
+                                    <i class="fa-solid fa-download mr-1"></i> Import Mutual Fund Portfolio
                                 </a>
                             </div>
                         </div>
@@ -633,7 +644,7 @@
                         <div class="mb-6">
                             <p class="text-xs text-slate-500 mb-1">Current Value</p>
                             <div class="flex items-center space-x-2 justify-between">
-                                <p class="text-3xl font-bold text-slate-900">₹1,24,500</p>
+                                <p class="text-3xl font-bold text-slate-900">₹3,95,000</p>
 
                             </div>
                         </div>
@@ -641,7 +652,7 @@
 
                         <div class="text-left py-0">
                             <p class="text-slate-500 text-xs mb-1">1 Day Return</p>
-                            <p class="font-semibold text-green-600">+₹320 (0.26%)</p>
+                            <p class="font-semibold text-green-600">+₹3,950 (1.0%)</p>
                         </div>
                         <div class="border-t border-slate-200/70 my-3"></div>
 
@@ -714,7 +725,7 @@
                                 </p>
                                 <a href="/dematconnect.html"
                                     class="inline-flex items-center text-blue-600 text-xs font-semibold mt-2 hover:text-blue-700 transition-colors">
-                                    <i class="fa-solid fa-upload mr-1"></i> Import Stock Portfolio
+                                    <i class="fa-solid fa-download mr-1"></i> Import Stock Portfolio
                                 </a>
                             </div>
                         </div>
@@ -789,81 +800,96 @@
                         </div>
                     </div> -->
 
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100">
-                        <div class="p-6 border-b border-gray-100 flex items-center justify-between">
-                            <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
-                                <i class="fa-solid fa-chart-pie text-blue-600"></i>
-                                Asset Allocation Overview
-                            </h3>
-                            <!-- <button title="Refresh Data" class="text-slate-500 hover:text-blue-600">
-      <i class="fa-solid fa-rotate-right"></i>
-    </button> -->
-                        </div>
+                  <!-- FILLED: Asset Allocation Overview -->
+<div id="asset-allocation-filled" class="bg-white rounded-2xl shadow-sm border border-gray-100" style="display:none;">
+  <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+    <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">Asset Allocation Overview</h3>
+  </div>
 
-                        <div class="p-6">
-                            <div id="asset-allocation-chart" class="h-72 mb-6"></div>
+  <div class="p-6">
+    <div id="asset-allocation-chart" class="h-72 mb-6"></div>
 
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <!-- Equity Breakdown -->
-                                <div>
-                                    <h4 class="text-sm font-semibold text-slate-700 mb-3 uppercase tracking-wide">Equity
-                                        Allocation</h4>
-                                    <div class="space-y-2">
-                                        <div class="flex items-center justify-between text-sm">
-                                            <div class="flex items-center">
-                                                <div class="w-3 h-3 rounded-full bg-blue-600 mr-2"></div>
-                                                <span>Large Cap</span>
-                                            </div>
-                                            <span class="font-medium text-slate-800">₹6,00,000</span>
-                                        </div>
-                                        <div class="flex items-center justify-between text-sm">
-                                            <div class="flex items-center">
-                                                <div class="w-3 h-3 rounded-full bg-blue-400 mr-2"></div>
-                                                <span>Mid Cap</span>
-                                            </div>
-                                            <span class="font-medium text-slate-800">₹3,00,000</span>
-                                        </div>
-                                        <div class="flex items-center justify-between text-sm">
-                                            <div class="flex items-center">
-                                                <div class="w-3 h-3 rounded-full bg-blue-300 mr-2"></div>
-                                                <span>Small Cap</span>
-                                            </div>
-                                            <span class="font-medium text-slate-800">₹1,50,000</span>
-                                        </div>
-                                    </div>
-                                </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Equity Breakdown -->
+      <div>
+        <h4 class="text-sm font-semibold text-slate-700 mb-3 uppercase tracking-wide">Equity Allocation</h4>
+        <div class="space-y-2">
+          <div class="flex items-center justify-between text-sm">
+            <div class="flex items-center">
+              <div class="w-3 h-3 rounded-full bg-blue-600 mr-2"></div>
+              <span>Large Cap</span>
+            </div>
+            <span class="font-medium text-slate-800">₹6,00,000</span>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <div class="flex items-center">
+              <div class="w-3 h-3 rounded-full bg-blue-400 mr-2"></div>
+              <span>Mid Cap</span>
+            </div>
+            <span class="font-medium text-slate-800">₹3,00,000</span>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <div class="flex items-center">
+              <div class="w-3 h-3 rounded-full bg-blue-300 mr-2"></div>
+              <span>Small Cap</span>
+            </div>
+            <span class="font-medium text-slate-800">₹1,50,000</span>
+          </div>
+        </div>
+      </div>
 
-                                <!-- Debt Breakdown -->
-                                <div>
-                                    <h4 class="text-sm font-semibold text-slate-700 mb-3 uppercase tracking-wide">Debt
-                                        Allocation</h4>
-                                    <div class="space-y-2">
-                                        <div class="flex items-center justify-between text-sm">
-                                            <div class="flex items-center">
-                                                <div class="w-3 h-3 rounded-full bg-amber-500 mr-2"></div>
-                                                <span>Credit AAA</span>
-                                            </div>
-                                            <span class="font-medium text-slate-800">₹2,00,000</span>
-                                        </div>
-                                        <div class="flex items-center justify-between text-sm">
-                                            <div class="flex items-center">
-                                                <div class="w-3 h-3 rounded-full bg-amber-400 mr-2"></div>
-                                                <span>Credit AA</span>
-                                            </div>
-                                            <span class="font-medium text-slate-800">₹1,20,000</span>
-                                        </div>
-                                        <div class="flex items-center justify-between text-sm">
-                                            <div class="flex items-center">
-                                                <div class="w-3 h-3 rounded-full bg-amber-300 mr-2"></div>
-                                                <span>Credit A</span>
-                                            </div>
-                                            <span class="font-medium text-slate-800">₹80,000</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+      <!-- Debt Breakdown -->
+      <div>
+        <h4 class="text-sm font-semibold text-slate-700 mb-3 uppercase tracking-wide">Debt Allocation</h4>
+        <div class="space-y-2">
+          <div class="flex items-center justify-between text-sm">
+            <div class="flex items-center">
+              <div class="w-3 h-3 rounded-full bg-amber-500 mr-2"></div>
+              <span>Credit AAA</span>
+            </div>
+            <span class="font-medium text-slate-800">₹2,00,000</span>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <div class="flex items-center">
+              <div class="w-3 h-3 rounded-full bg-amber-400 mr-2"></div>
+              <span>Credit AA</span>
+            </div>
+            <span class="font-medium text-slate-800">₹1,20,000</span>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <div class="flex items-center">
+              <div class="w-3 h-3 rounded-full bg-amber-300 mr-2"></div>
+              <span>Credit A</span>
+            </div>
+            <span class="font-medium text-slate-800">₹80,000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EMPTY: Asset Allocation Overview -->
+<div id="asset-allocation-empty" class="bg-white rounded-2xl shadow-sm border border-gray-100">
+  <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+    <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">Asset Allocation Overview</h3>
+  </div>
+
+  <div class="p-8 text-center">
+    <div class="flex flex-col items-center space-y-4">
+      <div
+        class="w-16 h-16 rounded-full bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center shadow-inner">
+        <i class="fa-solid fa-chart-pie text-blue-500 text-2xl"></i>
+      </div>
+      <p class="text-slate-700 font-medium">No asset allocation data available yet.</p>
+      <p class="text-slate-500 text-sm">Import your portfolio to view detailed equity & debt distribution insights.</p>
+      <a href="/mutualfund.html"
+        class="mt-4 inline-flex items-center bg-orange-400 text-white text-sm font-semibold py-2 px-4 rounded-lg hover:bg-orange-500 transition-colors">
+        <i class="fa-solid fa-download mr-2"></i> Import Portfolio
+      </a>
+    </div>
+  </div>
+</div>
 
                     <!-- Highcharts Script -->
                     <script>
@@ -1108,7 +1134,7 @@
     </p>
     <button onclick="connectLiabilities()"
       class="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition flex items-center">
-      <i class="fa-solid fa-plug mr-2"></i> Connect Now
+      <i class="fa-solid fa-link mr-2"></i> Connect Now
     </button>
   </div>
 
@@ -1127,7 +1153,7 @@
     <div class="bg-red-50 border border-red-200 rounded-xl p-4">
       <div class="flex items-center justify-between mb-2">
         <h3 class="font-semibold text-slate-800">Credit Card</h3>
-        <span class="text-red-600 font-bold">₹45,680</span>
+        <span class="text-red-600 font-bold">70,000</span>
       </div>
       <div class="w-full bg-red-200 rounded-full h-2 mb-2">
         <div class="bg-red-500 h-2 rounded-full" style="width: 76%"></div>
@@ -1141,7 +1167,7 @@
           <i class="fa-solid fa-lightbulb text-orange-600 mr-2 mt-1"></i>
           <div>
             <p class="text-orange-800 font-medium text-sm">AI Suggestion</p>
-            <p class="text-orange-700 text-xs">Pay ₹12,000 extra to avoid 18% APR charges</p>
+            <p class="text-orange-700 text-xs">Pay ₹5,000 extra to avoid 18% APR charges</p>
           </div>
         </div>
       </div>
@@ -1150,13 +1176,13 @@
     <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
       <div class="flex items-center justify-between mb-2">
         <h3 class="font-semibold text-slate-800">Home Loan</h3>
-        <span class="text-blue-600 font-bold">₹28,45,000</span>
+        <span class="text-blue-600 font-bold">1,45,000</span>
       </div>
       <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
         <div class="bg-blue-500 h-2 rounded-full" style="width: 34%"></div>
       </div>
       <div class="flex justify-between text-sm">
-        <span class="text-slate-600">EMI: ₹35,420</span>
+        <span class="text-slate-600">EMI: ₹5,420</span>
         <span class="text-blue-600">7.5% Interest</span>
       </div>
     </div>
@@ -1164,7 +1190,7 @@
     <div class="bg-green-50 border border-green-200 rounded-xl p-4">
       <div class="flex items-center justify-between mb-2">
         <h3 class="font-semibold text-slate-800">Car Loan</h3>
-        <span class="text-green-600 font-bold">₹2,85,430</span>
+        <span class="text-green-600 font-bold">₹2,55,000</span>
       </div>
       <div class="w-full bg-green-200 rounded-full h-2 mb-2">
         <div class="bg-green-500 h-2 rounded-full" style="width: 68%"></div>
@@ -1757,24 +1783,96 @@
     </div>
 
     <script>
-function connectLiabilities() {
-  const locked = document.getElementById("liabilityLocked");
-  const loader = document.getElementById("loadingOverlay");
-  const content = document.getElementById("liabilityContent");
+         const assetEmpty = document.getElementById("asset-allocation-empty");
+  const assetFilled = document.getElementById("asset-allocation-filled");
 
-  // Show loader
-  locked.classList.add("hidden");
-  loader.classList.remove("hidden");
+  const hasAssetData = localStorage.getItem("hasMFData") === "true";
 
-  // Simulate connection delay
-  setTimeout(() => {
-    loader.classList.add("hidden");
-    content.classList.remove("hidden");
+  assetEmpty.style.display = hasAssetData ? "none" : "block";
+  assetFilled.style.display = hasAssetData ? "block" : "none";
+ 
+  // ✅ Function to update net worth card dynamically
+  function openModal(id) {
+    document.getElementById(id).classList.remove("hidden");
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.add("hidden");
+  }
 
-    // Save state
-    localStorage.setItem("liabilitiesConnected", "true");
-  }, 2000);
-}
+  // Dynamic net worth calculation and UI refresh
+  function updateNetworthState() {
+    const filled = document.getElementById("networth-filled");
+    const partial = document.getElementById("networth-partial");
+    const empty = document.getElementById("networth-empty");
+
+    const hasMFData = localStorage.getItem("hasMFData") === "true";
+    const hasStockData = localStorage.getItem("hasStockData") === "true";
+    const liabilitiesConnected = localStorage.getItem("liabilitiesConnected") === "true";
+
+    // Reset all first
+    filled.classList.add("hidden");
+    partial.classList.add("hidden");
+    empty.classList.add("hidden");
+
+    // Calculate dynamic values
+    let mfValue = hasMFData ? 845000 : 0;  // ₹8.45L
+    let stockValue = hasStockData ? 395000 : 0;  // ₹3.95L
+    let debtValue = liabilitiesConnected ? 470000 : 0;  // ₹4.7L
+
+    let totalAssets = mfValue + stockValue;
+    let netWorth = totalAssets - debtValue;
+
+    // Format numbers nicely
+    function formatINR(num) {
+      return "₹" + num.toLocaleString("en-IN");
+    }
+
+    // Update UI fields dynamically
+    const valueEl = filled.querySelector("p.text-3xl");
+    const assetEl = filled.querySelector("span.text-slate-600:first-child");
+    const liabilityEl = filled.querySelector("span.text-slate-600:last-child");
+
+    // Logic for visibility
+    if (hasMFData && liabilitiesConnected) {
+      // ✅ Full data available
+      filled.classList.remove("hidden");
+      valueEl.textContent = formatINR(netWorth);
+      assetEl.textContent = `Assets: ${formatINR(totalAssets)}`;
+      liabilityEl.textContent = `Liabilities: ${formatINR(debtValue)}`;
+    } 
+    else if (hasMFData && !liabilitiesConnected) {
+      // ⚠️ MF connected but no liabilities
+      partial.classList.remove("hidden");
+    } 
+    else {
+      // ❌ Nothing connected
+      empty.classList.remove("hidden");
+    }
+  }
+
+  // Run on load
+  document.addEventListener("DOMContentLoaded", updateNetworthState);
+
+  // Update when connecting liabilities
+  function connectLiabilities() {
+    const locked = document.getElementById("liabilityLocked");
+    const loader = document.getElementById("loadingOverlay");
+    const content = document.getElementById("liabilityContent");
+
+    locked.classList.add("hidden");
+    loader.classList.remove("hidden");
+
+    setTimeout(() => {
+      loader.classList.add("hidden");
+      content.classList.remove("hidden");
+
+      // Save state
+      localStorage.setItem("liabilitiesConnected", "true");
+
+      // ✅ Update Networth immediately
+      updateNetworthState();
+    }, 2000);
+  }
 
 document.addEventListener("DOMContentLoaded", () => {
   const isConnected = localStorage.getItem("liabilitiesConnected") === "true";

@@ -15,6 +15,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <style>
+        @layer base {
+  html { font-size: 16px; } /* default for very large screens (≥1500px) */
+
+
+
+  @media (max-width: 1279px) { /* 1080–1279 range (medium screens) */
+    html { font-size: 14px; }
+  }
+
+  @media (max-width: 1079px) { /* tablets / smaller laptops */
+    html { font-size: 13.5px; }
+  }
+
+  @media (max-width: 767px) { /* mobile landscape */
+    html { font-size: 13px; }
+  }
+
+  @media (max-width: 479px) { /* small phones */
+    html { font-size: 12.5px; }
+  }
+}
+
+@layer base {
+  /* fluid root size: min 12.5px, preferred scales with viewport, max 16px */
+  html {
+    font-size: clamp(12.5px, 0.9vw + 11px, 16px);
+  }
+}
+
         ::-webkit-scrollbar {
             display: none;
         }
