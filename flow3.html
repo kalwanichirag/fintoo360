@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        ::-webkit-scrollbar { display: none;}
+        * { font-family: 'Inter', sans-serif; }
+        .blob-1 { animation: float 6s ease-in-out infinite; }
+        .blob-2 { animation: float 8s ease-in-out infinite reverse; }
+        .blob-3 { animation: float 10s ease-in-out infinite; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #0047AB 0%, #002E6E 100%);
+        }
+        .orange-gradient {
+            background: linear-gradient(135deg, #DD7300 0%, #B85C00 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 71, 171, 0.15);
+        }
+        .glow-border:hover {
+            box-shadow: 0 0 20px rgba(0, 71, 171, 0.3);
+            border-color: #0047AB;
+        }
+        .progress-step {
+            transition: all 0.3s ease;
+        }
+        .progress-step.active {
+            background: #0047AB;
+            color: white;
+        }
+        .progress-step.completed {
+            background: #10B981;
+            color: white;
+        }
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: #0047AB;
+            top: -50px;
+            right: -50px;
+            animation: float 15s infinite;
+        }
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: #DD7300;
+            bottom: 100px;
+            left: -100px;
+            animation: float 20s infinite reverse;
+        }
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            background: #8B5CF6;
+            top: 50%;
+            left: 80%;
+            animation: float 12s infinite;
+        }
+        .otp-input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .otp-input:focus {
+            outline: none;
+            border-color: #DD7300;
+            box-shadow: 0 0 0 3px rgba(221, 115, 0, 0.1);
+        }
+        .wave-animation {
+            background: linear-gradient(-45deg, #0047AB, #002E6E, #0B2E68, #1E40AF);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .loading-dots {
+            display: inline-block;
+        }
+        .loading-dots::after {
+            content: '';
+            animation: dots 2s infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+        .success-checkmark {
+            animation: checkmark 0.6s ease-in-out;
+        }
+        @keyframes checkmark {
+            0% { transform: scale(0) rotate(45deg); }
+            50% { transform: scale(1.2) rotate(45deg); }
+            100% { transform: scale(1) rotate(45deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+<!-- Floating Background Shapes -->
+<div class="floating-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+</div>
+
+<!-- Progress Bar Header -->
+<div id="progress-header" class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+    <div class="max-w-4xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                    <i class="fa-solid fa-chart-line text-white text-sm"></i>
+                </div>
+                <span class="text-lg font-semibold text-gray-800">Fintoo</span>
+                <span class="text-gray-400">×</span>
+                <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
+                    <i class="fa-solid fa-building-columns text-white text-sm"></i>
+                </div>
+                <span class="text-lg font-semibold text-gray-800">India Post Payments Bank</span>
+            </div>
+            <div class="text-sm text-gray-500">
+                <span id="current-step">Step 1</span> of <span id="total-steps">11</span>
+            </div>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2">
+            <div id="progress-fill" class="gradient-bg h-2 rounded-full transition-all duration-500" style="width: 9%"></div>
+        </div>
+        <div class="flex justify-between mt-2 text-xs text-gray-500">
+            <span>Welcome</span>
+            <span>Service</span>
+            <span>Bank</span>
+            <span>OTP</span>
+            <span>Data</span>
+            <span>Success</span>
+            <span>Assets</span>
+            <span>Liabilities</span>
+            <span>Insurance</span>
+            <span>Review</span>
+            <span>Complete</span>
+        </div>
+    </div>
+</div>
+
+<!-- Welcome Screen - Step 0 -->
+<section id="welcome-screen" class="min-h-screen flex items-center justify-center relative pt-24">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <div class="mb-8">
+            <div class="flex items-center justify-center space-x-6 mb-6">
+                <div class="flex items-center space-x-3 bg-white rounded-2xl px-6 py-4 shadow-lg">
+                    <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-chart-line text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold text-gray-800">Fintoo</span>
+                </div>
+                <div class="text-3xl text-gray-300">+</div>
+                <div class="flex items-center space-x-3 bg-white rounded-2xl px-6 py-4 shadow-lg">
+                    <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center">
+                        <i class="fa-solid fa-building-columns text-white text-lg"></i>
+                    </div>
+                    <span class="text-xl font-bold text-gray-800">India Post</span>
+                </div>
+            </div>
+            <p class="text-lg text-gray-600 mb-2">Your trusted partner in financial planning and tax optimization</p>
+        </div>
+        
+        <div class="bg-white rounded-3xl p-8 shadow-xl mb-8 max-w-2xl mx-auto">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">Welcome to Your Financial Journey</h1>
+            <p class="text-lg text-gray-600 mb-8">Let's securely connect your financial world for smarter insights and personalized wealth management</p>
+            
+            <div class="space-y-4">
+                <button onclick="startOnboarding()" class="w-full gradient-bg text-white py-4 px-8 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                    Connect My Accounts
+                    <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+                <button class="w-full text-orange-600 py-4 px-8 rounded-xl font-semibold text-lg border-2 border-orange-200 hover:bg-orange-50 transition-all duration-300">
+                    Learn More
+                </button>
+            </div>
+        </div>
+        
+        <div class="flex items-center justify-center space-x-8 text-sm text-gray-500">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-shield-halved text-green-500"></i>
+                <span>Bank-grade encryption</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-certificate text-blue-500"></i>
+                <span>IRDAI Compliant</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-landmark text-orange-500"></i>
+                <span>RBI-Approved Partner</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Service Selection - Step 1 -->
+<section id="service-selection" class="min-h-screen flex items-center justify-center pt-24 hidden">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Choose Your Service Type</h2>
+            <p class="text-lg text-gray-600">Select the service that best matches your financial goals</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            <div class="service-card bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-100 cursor-pointer card-hover glow-border transition-all duration-300" onclick="selectService('financial')">
+                <div class="w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                    <i class="fa-solid fa-chart-pie text-white text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Financial Planning</h3>
+                <p class="text-gray-600 text-center mb-6">Comprehensive wealth management, investment tracking, and retirement planning</p>
+                <div class="space-y-2 text-sm text-gray-500">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-check text-green-500"></i>
+                        <span>Portfolio analysis & optimization</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-check text-green-500"></i>
+                        <span>Goal-based financial planning</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-check text-green-500"></i>
+                        <span>Risk assessment & management</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="service-card bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-100 cursor-pointer card-hover glow-border transition-all duration-300" onclick="selectService('tax')">
+                <div class="w-16 h-16 orange-gradient rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                    <i class="fa-solid fa-calculator text-white text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Tax Planning</h3>
+                <p class="text-gray-600 text-center mb-6">Strategic tax optimization, compliance management, and savings maximization</p>
+                <div class="space-y-2 text-sm text-gray-500">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-check text-green-500"></i>
+                        <span>Tax-saving investment strategies</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-check text-green-500"></i>
+                        <span>Compliance & filing assistance</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-check text-green-500"></i>
+                        <span>Deduction optimization</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-8">
+            <button id="proceed-service" class="orange-gradient text-white py-3 px-8 rounded-xl font-semibold opacity-50 cursor-not-allowed transition-all duration-300" disabled>
+                Proceed <i class="fa-solid fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Bank Connection Permission - Step 2 -->
+<section id="bank-permission" class="min-h-screen flex items-center justify-center pt-24 hidden">
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Connect Your Bank Account</h2>
+            <p class="text-lg text-gray-600">We'll securely access your financial data to provide personalized insights</p>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-8 shadow-xl">
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-6">Data Access Permissions</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4 p-4 bg-blue-50 rounded-xl">
+                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i class="fa-solid fa-user text-blue-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-800">Profile Details</h4>
+                            <p class="text-sm text-gray-600">Name, contact information, and basic demographics</p>
+                        </div>
+                        <i class="fa-solid fa-check text-green-500 text-xl"></i>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4 p-4 bg-blue-50 rounded-xl">
+                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i class="fa-solid fa-building-columns text-blue-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-800">Account Summary</h4>
+                            <p class="text-sm text-gray-600">Account balances, types, and basic information</p>
+                        </div>
+                        <i class="fa-solid fa-check text-green-500 text-xl"></i>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4 p-4 bg-blue-50 rounded-xl">
+                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i class="fa-solid fa-list text-blue-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-800">Transaction History</h4>
+                            <p class="text-sm text-gray-600">Recent transactions for spending analysis and insights</p>
+                        </div>
+                        <i class="fa-solid fa-check text-green-500 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 rounded-xl p-6 mb-8">
+                <div class="flex items-center space-x-3 mb-3">
+                    <i class="fa-solid fa-shield-halved text-green-500 text-xl"></i>
+                    <h4 class="font-semibold text-gray-800">Security & Compliance</h4>
+                </div>
+                <div class="grid md:grid-cols-3 gap-4 text-sm text-gray-600">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-lock text-green-500"></i>
+                        <span>256-bit encryption</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-certificate text-blue-500"></i>
+                        <span>RBI compliant</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-user-shield text-orange-500"></i>
+                        <span>Data privacy assured</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button onclick="proceedToBankSelection()" class="gradient-bg text-white py-4 px-8 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                    I Understand, Continue
+                    <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bank Selection - Step 3 -->
+<section id="bank-selection" class="min-h-screen flex items-center justify-center pt-24 hidden">
+    <div class="max-w-5xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Choose Your Bank</h2>
+            <p class="text-lg text-gray-600">Select your bank to securely connect your account</p>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-8 shadow-xl">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <div class="bank-card p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300" onclick="selectBank('sbi')">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <i class="fa-solid fa-building-columns text-blue-600 text-lg"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-800 text-center">State Bank of India</p>
+                </div>
+                
+                <div class="bank-card p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300" onclick="selectBank('hdfc')">
+                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <i class="fa-solid fa-university text-red-600 text-lg"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-800 text-center">HDFC Bank</p>
+                </div>
+                
+                <div class="bank-card p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300" onclick="selectBank('icici')">
+                    <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <i class="fa-solid fa-landmark text-orange-600 text-lg"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-800 text-center">ICICI Bank</p>
+                </div>
+                
+                <div class="bank-card p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300" onclick="selectBank('axis')">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <i class="fa-solid fa-building text-purple-600 text-lg"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-800 text-center">Axis Bank</p>
+                </div>
+                
+                <div class="bank-card p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300" onclick="selectBank('kotak')">
+                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <i class="fa-solid fa-piggy-bank text-red-600 text-lg"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-800 text-center">Kotak Mahindra</p>
+                </div>
+                
+                <div class="bank-card p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300" onclick="selectBank('yes')">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <i class="fa-solid fa-coins text-blue-600 text-lg"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-800 text-center">Yes Bank</p>
+                </div>
+                
+                <div class="bank-card p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300" onclick="selectBank('pnb')">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <i class="fa-solid fa-vault text-green-600 text-lg"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-800 text-center">Punjab National Bank</p>
+                </div>
+                
+                <div class="bank-card p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300" onclick="selectBank('canara')">
+                    <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <i class="fa-solid fa-money-bill text-yellow-600 text-lg"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-800 text-center">Canara Bank</p>
+                </div>
+                
+                <div class="bank-card p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300" onclick="selectBank('bob')">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <i class="fa-solid fa-chart-line text-indigo-600 text-lg"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-800 text-center">Bank of Baroda</p>
+                </div>
+                
+                <div class="bank-card p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300" onclick="selectBank('union')">
+                    <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <i class="fa-solid fa-handshake text-teal-600 text-lg"></i>
+                    </div>
+                    <p class="text-sm font-semibold text-gray-800 text-center">Union Bank</p>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <button id="proceed-bank" class="orange-gradient text-white py-3 px-8 rounded-xl font-semibold opacity-50 cursor-not-allowed transition-all duration-300" disabled>
+                    Connect to Bank <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- OTP Verification - Step 4 -->
+<section id="otp-verification" class="min-h-screen flex items-center justify-center pt-24 hidden">
+    <div class="max-w-2xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <i class="fa-solid fa-mobile-screen-button text-orange-600 text-2xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Verify Your Identity</h2>
+            <p class="text-lg text-gray-600">Enter the OTP sent to your registered mobile number ending in <span class="font-semibold">****1234</span></p>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-8 shadow-xl">
+            <div class="flex justify-center space-x-3 mb-8">
+                <input type="text" class="otp-input" maxlength="1" id="otp1">
+                <input type="text" class="otp-input" maxlength="1" id="otp2">
+                <input type="text" class="otp-input" maxlength="1" id="otp3">
+                <input type="text" class="otp-input" maxlength="1" id="otp4">
+                <input type="text" class="otp-input" maxlength="1" id="otp5">
+                <input type="text" class="otp-input" maxlength="1" id="otp6">
+            </div>
+            
+            <div class="text-center mb-8">
+                <p class="text-sm text-gray-500 mb-4">Didn't receive the code?</p>
+                <button class="text-orange-600 font-semibold hover:underline">Resend OTP</button>
+            </div>
+            
+            <div class="text-center">
+                <button onclick="verifyOTP()" class="gradient-bg text-white py-4 px-8 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                    <span class="loading-dots">Verify and Connect</span>
+                </button>
+            </div>
+            
+            <div class="mt-6 text-center">
+                <div class="flex items-center justify-center space-x-4 text-sm text-gray-500">
+                    <div class="flex items-center space-x-1">
+                        <i class="fa-solid fa-shield-halved text-green-500"></i>
+                        <span>Secure verification</span>
+                    </div>
+                    <div class="flex items-center space-x-1">
+                        <i class="fa-solid fa-clock text-blue-500"></i>
+                        <span>Valid for 5 minutes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Data Fetching - Step 5 -->
+<section id="data-fetching" class="min-h-screen flex items-center justify-center pt-24 hidden">
+    <div class="wave-animation w-full h-full fixed inset-0"></div>
+    <div class="relative z-10 text-center text-white max-w-2xl mx-auto px-6">
+        <div class="mb-8">
+            <div class="w-20 h-20 border-4 border-white border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+            <h2 class="text-3xl font-bold mb-4">Analyzing Your Financial Data</h2>
+            <div id="loading-text" class="text-lg opacity-90">
+                <p class="loading-message">Fetching data securely from your bank...</p>
+            </div>
+        </div>
+        
+        <div class="bg-white bg-opacity-10 rounded-2xl p-6 backdrop-blur-sm">
+            <div class="space-y-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                    <span class="text-sm">Establishing secure connection</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-2 h-2 bg-white rounded-full animate-pulse" style="animation-delay: 0.5s"></div>
+                    <span class="text-sm">Retrieving account information</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-2 h-2 bg-white rounded-full animate-pulse" style="animation-delay: 1s"></div>
+                    <span class="text-sm">Processing transaction history</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-2 h-2 bg-white rounded-full animate-pulse" style="animation-delay: 1.5s"></div>
+                    <span class="text-sm">Generating personalized insights</span>
+                </div>
+            </div>
+        </div>
+        
+        <p class="text-sm opacity-75 mt-6">This might take a few moments. Please don't close this window.</p>
+    </div>
+</section>
+
+<!-- Bank Connection Success - Step 6 -->
+<section id="bank-success" class="min-h-screen flex items-center justify-center pt-24 hidden">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 success-checkmark">
+                <i class="fa-solid fa-check text-green-600 text-3xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Bank Account Successfully Connected! 🎉</h2>
+            <p class="text-lg text-gray-600">Your financial data has been securely imported and analyzed</p>
+        </div>
+        
+        <div class="grid md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-arrow-trend-up text-green-600 text-lg"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">₹78,000</h3>
+                <p class="text-sm text-gray-600">Total Income</p>
+            </div>
+            
+            <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-arrow-trend-down text-red-600 text-lg"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">₹52,000</h3>
+                <p class="text-sm text-gray-600">Total Expenses</p>
+            </div>
+            
+            <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-piggy-bank text-blue-600 text-lg"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">₹26,000</h3>
+                <p class="text-sm text-gray-600">Net Savings</p>
+            </div>
+            
+            <div class="bg-white rounded-xl p-6 shadow-lg text-center">
+                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-chart-pie text-purple-600 text-lg"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">₹10,000</h3>
+                <p class="text-sm text-gray-600">Investments</p>
+            </div>
+        </div>
+        
+        <div class="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-2xl p-6 mb-8 border border-orange-200">
+            <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <i class="fa-solid fa-lightbulb text-orange-600 text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-gray-800 mb-2">💡 AI-Powered Insight</h4>
+                    <p class="text-gray-700 mb-3">You spent ₹3,200 on dining last month. Cutting 20% could boost your SIP goals by ₹640 monthly!</p>
+                    <button class="text-orange-600 font-semibold text-sm hover:underline">View Detailed Analysis →</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <button onclick="proceedToAssets()" class="gradient-bg text-white py-4 px-8 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                Continue to Assets <i class="fa-solid fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Assets Connection - Step 7 -->
+<section id="assets-connection" class="min-h-screen flex items-center justify-center pt-24 hidden">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Connect Your Investment Accounts</h2>
+            <p class="text-lg text-gray-600">Link your investment portfolio for comprehensive wealth tracking</p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+            <div class="asset-card bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-100 cursor-pointer card-hover glow-border transition-all duration-300" onclick="connectAsset('mutual-funds')">
+                <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                    <i class="fa-solid fa-chart-line text-blue-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">Mutual Funds</h3>
+                <p class="text-gray-600 text-center mb-4">SIP tracking, performance analysis, and portfolio optimization</p>
+                <div class="text-center">
+                    <span class="inline-block bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-1 rounded-full">Auto-fetch via PAN</span>
+                </div>
+            </div>
+            
+            <div class="asset-card bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-100 cursor-pointer card-hover glow-border transition-all duration-300" onclick="connectAsset('stocks')">
+                <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                    <i class="fa-solid fa-chart-candlestick text-green-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">Stocks & Equity</h3>
+                <p class="text-gray-600 text-center mb-4">Demat account linking, portfolio tracking, and market insights</p>
+                <div class="text-center">
+                    <span class="inline-block bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Demat integration</span>
+                </div>
+            </div>
+            
+            <div class="asset-card bg-white rounded-2xl p-8 shadow-lg border-2 border-gray-100 cursor-pointer card-hover glow-border transition-all duration-300" onclick="connectAsset('epf')">
+                <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mb-6 mx-auto">
+                    <i class="fa-solid fa-shield-halved text-orange-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-4 text-center">EPF & PPF</h3>
+                <p class="text-gray-600 text-center mb-4">Retirement fund tracking and tax-saving investments</p>
+                <div class="text-center">
+                    <span class="inline-block bg-orange-100 text-orange-800 text-xs font-semibold px-3 py-1 rounded-full">UAN linking</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-8 shadow-xl">
+            <h3 class="text-xl font-semibold text-gray-800 mb-6 text-center">Secure Asset Connection</h3>
+            <p class="text-gray-600 text-center mb-6">We'll fetch your portfolio directly from registered PAN and mobile number</p>
+            
+            <div class="max-w-md mx-auto space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">PAN Number</label>
+                    <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="ABCDE1234F" value="ABCDE1234F" readonly>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Mobile Number</label>
+                    <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="+91 98765 43210" value="+91 98765 43210" readonly>
+                </div>
+                
+                <div class="flex items-center space-x-2 p-4 bg-green-50 rounded-lg">
+                    <input type="checkbox" class="w-4 h-4 text-green-600" checked>
+                    <label class="text-sm text-gray-700">I authorize Fintoo to access my investment portfolio data</label>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <button onclick="fetchAssets()" class="orange-gradient text-white py-4 px-8 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                    Proceed Securely <i class="fa-solid fa-shield-halved ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Liabilities Connection - Step 8 -->
+<section id="liabilities-connection" class="min-h-screen flex items-center justify-center pt-24 hidden">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Connect Your Credit Profile</h2>
+            <p class="text-lg text-gray-600">Let's understand your liabilities and credit history for complete financial analysis</p>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-8 shadow-xl mb-8">
+            <div class="max-w-2xl mx-auto">
+                <h3 class="text-xl font-semibold text-gray-800 mb-6 text-center">Credit Bureau Authorization</h3>
+                
+                <div class="space-y-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" value="Rajesh Kumar" readonly>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Date of Birth</label>
+                        <input type="date" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" value="1985-03-15">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">PAN Number</label>
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" value="ABCDE1234F" readonly>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Mobile Number</label>
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" value="+91 98765 43210" readonly>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 rounded-xl p-4 mb-6">
+                    <div class="flex items-center space-x-2 mb-3">
+                        <input type="checkbox" class="w-4 h-4 text-blue-600" id="credit-consent">
+                        <label for="credit-consent" class="text-sm font-semibold text-gray-800">I authorize Fintoo to access my credit report</label>
+                    </div>
+                    <p class="text-xs text-gray-600 ml-6">This will help us provide better financial advice and loan recommendations</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    <div class="text-center p-3 bg-gray-50 rounded-lg">
+                        <i class="fa-solid fa-shield-halved text-blue-500 text-lg mb-2"></i>
+                        <p class="text-xs font-semibold text-gray-700">CIBIL</p>
+                    </div>
+                    <div class="text-center p-3 bg-gray-50 rounded-lg">
+                        <i class="fa-solid fa-chart-bar text-green-500 text-lg mb-2"></i>
+                        <p class="text-xs font-semibold text-gray-700">Experian</p>
+                    </div>
+                    <div class="text-center p-3 bg-gray-50 rounded-lg">
+                        <i class="fa-solid fa-certificate text-orange-500 text-lg mb-2"></i>
+                        <p class="text-xs font-semibold text-gray-700">RBI Compliant</p>
+                    </div>
+                    <div class="text-center p-3 bg-gray-50 rounded-lg">
+                        <i class="fa-solid fa-lock text-purple-500 text-lg mb-2"></i>
+                        <p class="text-xs font-semibold text-gray-700">AES-256 Encrypted</p>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button onclick="fetchCreditProfile()" class="gradient-bg text-white py-4 px-8 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                        Connect Now <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Insurance Connection - Step 9 -->
+<section id="insurance-connection" class="min-h-screen flex items-center justify-center pt-24 hidden">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Connect Your Insurance Policies</h2>
+            <p class="text-lg text-gray-600">Auto-fetch all your policies linked with PAN and Aadhaar for complete protection analysis</p>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-8 shadow-xl mb-8">
+            <div class="max-w-2xl mx-auto">
+                <h3 class="text-xl font-semibold text-gray-800 mb-6 text-center">Insurance Policy Discovery</h3>
+                
+                <div class="space-y-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">PAN Number</label>
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" value="ABCDE1234F" readonly>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Mobile Number</label>
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" value="+91 98765 43210" readonly>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Aadhaar Number (Optional)</label>
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="XXXX XXXX XXXX">
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="text-center p-4 bg-blue-50 rounded-lg">
+                        <i class="fa-solid fa-shield-halved text-blue-600 text-2xl mb-2"></i>
+                        <p class="text-sm font-semibold text-gray-800">Bank-grade Encryption</p>
+                    </div>
+                    <div class="text-center p-4 bg-green-50 rounded-lg">
+                        <i class="fa-solid fa-certificate text-green-600 text-2xl mb-2"></i>
+                        <p class="text-sm font-semibold text-gray-800">IRDAI Approved</p>
+                    </div>
+                    <div class="text-center p-4 bg-purple-50 rounded-lg">
+                        <i class="fa-solid fa-award text-purple-600 text-2xl mb-2"></i>
+                        <p class="text-sm font-semibold text-gray-800">ISO 27001 Certified</p>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button onclick="fetchInsurancePolicies()" class="orange-gradient text-white py-4 px-8 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                        Fetch My Policies <i class="fa-solid fa-search ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Review Profile Summary - Step 10 -->
+<section id="profile-review" class="min-h-screen flex items-center justify-center pt-24 hidden">
+    <div class="max-w-6xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <div class="w-20 h-20 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fa-solid fa-globe text-blue-600 text-3xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Here's Your Financial Universe 🌏</h2>
+            <p class="text-lg text-gray-600">Complete overview of your connected financial accounts and data</p>
+        </div>
+        
+        <div class="grid lg:grid-cols-2 gap-8 mb-8">
+            <div class="bg-white rounded-2xl p-8 shadow-xl">
+                <h3 class="text-xl font-semibold text-gray-800 mb-6">Personal Profile</h3>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                        <span class="text-gray-600">Full Name</span>
+                        <span class="font-semibold text-gray-800">Rajesh Kumar</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                        <span class="text-gray-600">Age</span>
+                        <span class="font-semibold text-gray-800">38 years</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                        <span class="text-gray-600">Date of Birth</span>
+                        <span class="font-semibold text-gray-800">March 15, 1985</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                        <span class="text-gray-600">Retirement Age</span>
+                        <span class="font-semibold text-gray-800">60 years</span>
+                    </div>
+                    <div class="flex justify-between items-center py-2">
+                        <span class="text-gray-600">Family Members</span>
+                        <button class="text-orange-600 font-semibold hover:underline">Add/Edit</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-xl">
+                <h3 class="text-xl font-semibold text-gray-800 mb-6">Financial Snapshot</h3>
+                <div class="space-y-6">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-arrow-trend-up text-green-600"></i>
+                            </div>
+                            <span class="text-gray-600">Monthly Income</span>
+                        </div>
+                        <span class="text-xl font-bold text-green-600">₹78,000</span>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-arrow-trend-down text-red-600"></i>
+                            </div>
+                            <span class="text-gray-600">Monthly Expenses</span>
+                        </div>
+                        <span class="text-xl font-bold text-red-600">₹52,000</span>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-chart-pie text-blue-600"></i>
+                            </div>
+                            <span class="text-gray-600">Total Assets</span>
+                        </div>
+                        <span class="text-xl font-bold text-blue-600">₹12,40,000</span>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-credit-card text-orange-600"></i>
+                            </div>
+                            <span class="text-gray-600">Total Liabilities</span>
+                        </div>
+                        <span class="text-xl font-bold text-orange-600">₹8,45,000</span>
+                    </div>
+                    
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                                <i class="fa-solid fa-shield-halved text-purple-600"></i>
+                            </div>
+                            <span class="text-gray-600">Insurance Coverage</span>
+                        </div>
+                        <span class="text-xl font-bold text-purple-600">₹2,10,000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-6 text-white text-center">
+                <i class="fa-solid fa-building-columns text-3xl mb-3 opacity-80"></i>
+                <h4 class="font-semibold mb-1">Bank Accounts</h4>
+                <p class="text-2xl font-bold">3</p>
+                <p class="text-sm opacity-80">Connected</p>
+            </div>
+            
+            <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-6 text-white text-center">
+                <i class="fa-solid fa-chart-line text-3xl mb-3 opacity-80"></i>
+                <h4 class="font-semibold mb-1">Investments</h4>
+                <p class="text-2xl font-bold">21</p>
+                <p class="text-sm opacity-80">Holdings</p>
+            </div>
+            
+            <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl p-6 text-white text-center">
+                <i class="fa-solid fa-credit-card text-3xl mb-3 opacity-80"></i>
+                <h4 class="font-semibold mb-1">Credit Score</h4>
+                <p class="text-2xl font-bold">782</p>
+                <p class="text-sm opacity-80">Excellent</p>
+            </div>
+            
+            <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-6 text-white text-center">
+                <i class="fa-solid fa-shield-halved text-3xl mb-3 opacity-80"></i>
+                <h4 class="font-semibold mb-1">Insurance</h4>
+                <p class="text-2xl font-bold">5</p>
+                <p class="text-sm opacity-80">Policies</p>
+            </div>
+        </div>
+        
+        <div class="bg-gray-50 rounded-2xl p-6 mb-8 text-center">
+            <div class="flex items-center justify-center space-x-2 mb-2">
+                <i class="fa-solid fa-lock text-green-500"></i>
+                <span class="text-sm text-gray-600">Your data is secure and encrypted with bank-grade security</span>
+            </div>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button onclick="proceedToDashboard()" class="gradient-bg text-white py-4 px-8 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                Continue to Dashboard <i class="fa-solid fa-arrow-right ml-2"></i>
+            </button>
+            <button class="text-gray-600 py-4 px-8 rounded-xl font-semibold text-lg border-2 border-gray-200 hover:bg-gray-50 transition-all duration-300">
+                Edit any section <i class="fa-solid fa-edit ml-2"></i>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- Final Transition - Step 11 -->
+<section id="final-transition" class="min-h-screen flex items-center justify-center pt-24 hidden">
+    <div class="text-center">
+        <div class="mb-8">
+            <div class="relative">
+                <div class="w-32 h-32 mx-auto mb-6">
+                    <div class="absolute inset-0 border-4 border-blue-200 rounded-full animate-spin"></div>
+                    <div class="absolute inset-2 border-4 border-orange-200 rounded-full animate-spin" style="animation-direction: reverse;"></div>
+                    <div class="absolute inset-4 border-4 border-purple-200 rounded-full animate-spin"></div>
+                    <div class="absolute inset-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-globe text-white text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Welcome to Your Fintoo360 Wealth Universe</h2>
+            <p class="text-xl text-gray-600 mb-8">Your comprehensive financial dashboard is ready with personalized insights and recommendations</p>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-8 shadow-xl max-w-md mx-auto mb-8">
+            <div class="space-y-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span class="text-sm text-gray-700">All accounts successfully connected</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span class="text-sm text-gray-700">Financial insights generated</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span class="text-sm text-gray-700">Personalized recommendations ready</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span class="text-sm text-gray-700">Dashboard configured</span>
+                </div>
+            </div>
+        </div>
+        
+        <button onclick="goToDashboard()" class="gradient-bg text-white py-4 px-12 rounded-xl font-semibold text-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+            Go to My Dashboard <i class="fa-solid fa-rocket ml-2"></i>
+        </button>
+        
+        <div class="mt-8 text-sm text-gray-500">
+            Powered by <span class="font-semibold text-blue-600">Fintoo</span> • In partnership with <span class="font-semibold text-orange-600">India Post Payments Bank</span>
+        </div>
+    </div>
+</section>
+
+<script>
+let currentStep = 0;
+const totalSteps = 11;
+
+function updateProgress(step) {
+    currentStep = step;
+    const progressPercent = (step / totalSteps) * 100;
+    document.getElementById('progress-fill').style.width = progressPercent + '%';
+    document.getElementById('current-step').textContent = 'Step ' + (step + 1);
+}
+
+function startOnboarding() {
+    document.getElementById('welcome-screen').classList.add('hidden');
+    document.getElementById('service-selection').classList.remove('hidden');
+    updateProgress(1);
+}
+
+function selectService(type) {
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.classList.remove('border-blue-500', 'shadow-lg');
+        card.classList.add('border-gray-100');
+    });
+    
+    event.target.closest('.service-card').classList.add('border-blue-500', 'shadow-lg');
+    event.target.closest('.service-card').classList.remove('border-gray-100');
+    
+    const proceedBtn = document.getElementById('proceed-service');
+    proceedBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    proceedBtn.disabled = false;
+    proceedBtn.onclick = proceedToBankPermission;
+}
+
+function proceedToBankPermission() {
+    document.getElementById('service-selection').classList.add('hidden');
+    document.getElementById('bank-permission').classList.remove('hidden');
+    updateProgress(2);
+}
+
+function proceedToBankSelection() {
+    document.getElementById('bank-permission').classList.add('hidden');
+    document.getElementById('bank-selection').classList.remove('hidden');
+    updateProgress(3);
+}
+
+function selectBank(bank) {
+    document.querySelectorAll('.bank-card').forEach(card => {
+        card.classList.remove('border-blue-500', 'shadow-lg');
+        card.classList.add('border-gray-200');
+    });
+    
+    event.target.closest('.bank-card').classList.add('border-blue-500', 'shadow-lg');
+    event.target.closest('.bank-card').classList.remove('border-gray-200');
+    
+    const proceedBtn = document.getElementById('proceed-bank');
+    proceedBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    proceedBtn.disabled = false;
+    proceedBtn.onclick = proceedToOTP;
+}
+
+function proceedToOTP() {
+    document.getElementById('bank-selection').classList.add('hidden');
+    document.getElementById('otp-verification').classList.remove('hidden');
+    updateProgress(4);
+    
+    // Auto-focus first OTP input
+    document.getElementById('otp1').focus();
+    
+    // Handle OTP input navigation
+    const otpInputs = document.querySelectorAll('.otp-input');
+    otpInputs.forEach((input, index) => {
+        input.addEventListener('input', function() {
+            if (this.value.length === 1 && index < otpInputs.length - 1) {
+                otpInputs[index + 1].focus();
+            }
+        });
+        
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Backspace' && this.value === '' && index > 0) {
+                otpInputs[index - 1].focus();
+            }
+        });
+    });
+}
+
+function verifyOTP() {
+    // Simulate OTP verification
+    setTimeout(() => {
+        document.getElementById('otp-verification').classList.add('hidden');
+        document.getElementById('data-fetching').classList.remove('hidden');
+        updateProgress(5);
+        
+        // Simulate data fetching process
+        const messages = [
+            "Fetching data securely from your bank...",
+            "Analyzing spending patterns and transactions...",
+            "Processing account information...",
+            "Generating your personalized insights..."
+        ];
+        
+        let messageIndex = 0;
+        const messageInterval = setInterval(() => {
+            if (messageIndex < messages.length) {
+                document.querySelector('.loading-message').textContent = messages[messageIndex];
+                messageIndex++;
+            } else {
+                clearInterval(messageInterval);
+                setTimeout(() => {
+                    document.getElementById('data-fetching').classList.add('hidden');
+                    document.getElementById('bank-success').classList.remove('hidden');
+                    updateProgress(6);
+                }, 1000);
+            }
+        }, 2000);
+    }, 1000);
+}
+
+function proceedToAssets() {
+    document.getElementById('bank-success').classList.add('hidden');
+    document.getElementById('assets-connection').classList.remove('hidden');
+    updateProgress(7);
+}
+
+function connectAsset(type) {
+    document.querySelectorAll('.asset-card').forEach(card => {
+        card.classList.remove('border-blue-500', 'shadow-lg');
+        card.classList.add('border-gray-100');
+    });
+    
+    event.target.closest('.asset-card').classList.add('border-blue-500', 'shadow-lg');
+    event.target.closest('.asset-card').classList.remove('border-gray-100');
+}
+
+function fetchAssets() {
+    // Simulate asset fetching
+    setTimeout(() => {
+        document.getElementById('assets-connection').classList.add('hidden');
+        document.getElementById('liabilities-connection').classList.remove('hidden');
+        updateProgress(8);
+    }, 1500);
+}
+
+function fetchCreditProfile() {
+    // Simulate credit profile fetching
+    setTimeout(() => {
+        document.getElementById('liabilities-connection').classList.add('hidden');
+        document.getElementById('insurance-connection').classList.remove('hidden');
+        updateProgress(9);
+    }, 2000);
+}
+
+function fetchInsurancePolicies() {
+    // Simulate insurance policy fetching
+    setTimeout(() => {
+        document.getElementById('insurance-connection').classList.add('hidden');
+        document.getElementById('profile-review').classList.remove('hidden');
+        updateProgress(10);
+    }, 1500);
+}
+
+function proceedToDashboard() {
+    document.getElementById('profile-review').classList.add('hidden');
+    document.getElementById('final-transition').classList.remove('hidden');
+    updateProgress(11);
+}
+
+function goToDashboard() {
+    // Redirect to dashboard or show completion message
+    alert('Onboarding completed! Redirecting to your dashboard...');
+    // window.location.href = '/dashboard';
+}
+
+// Initialize the onboarding flow
+document.addEventListener('DOMContentLoaded', function() {
+    updateProgress(0);
+});
+</script>
+
+</body>
+</html>

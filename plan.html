@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Choose Your Plan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+        <style>
+              * {
+            font-family: 'Inter', sans-serif;
+        }
+        </style>
+</head>
+<body class="bg-gray-50 font-Inter">
+
+  <!-- Pricing Section -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold text-gray-900 mb-12">Choose Your Plan</h2>
+
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <!-- Freemium Plan -->
+        <div class="bg-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-lg transition p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-semibold text-gray-900">Freemium</h3>
+              <i class="fa-solid fa-gift text-green-600 text-xl"></i>
+            </div>
+            <p class="text-gray-600 mb-6">Perfect for individuals exploring their finances.</p>
+            <ul class="text-left space-y-3">
+              <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Link 1 bank account (3-month data fetch)</li>
+              <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Basic inflow/outflow & top 3 expenses</li>
+              <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Basic wealth profile & net worth</li>
+              <li><i class="fa-solid fa-check text-green-500 mr-2"></i>Static goal tracking</li>
+              <li><i class="fa-solid fa-check text-green-500 mr-2"></i>One-time auto-fetch of assets, liabilities & income</li>
+            </ul>
+          </div>
+          <div class="mt-8">
+            <h4 class="text-2xl font-bold mb-4">Free</h4>
+            <button class="w-full border border-gray-300 py-3 rounded-lg hover:bg-gray-100 font-medium transition">Select Plan</button>
+          </div>
+        </div>
+
+        <!-- Pro Plan -->
+        <div class="relative bg-white border border-gray-300 rounded-2xl p-8 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-semibold text-gray-900">Pro</h3>
+              <i class="fa-solid fa-rocket text-blue-600 text-xl"></i>
+            </div>
+            <p class="text-gray-600 mb-6">For users ready to take control of their money.</p>
+            <ul class="text-left space-y-3">
+              <li><i class="fa-solid fa-check text-blue-600 mr-2"></i>Unlimited bank linking & auto transaction sync</li>
+              <li><i class="fa-solid fa-check text-blue-600 mr-2"></i>Actual vs. ideal expense analysis</li>
+              <li><i class="fa-solid fa-check text-blue-600 mr-2"></i>All alerts: SIP, EMI, Tax reminders</li>
+              <li><i class="fa-solid fa-check text-blue-600 mr-2"></i>Full portfolio analysis & investment insights</li>
+              <li><i class="fa-solid fa-check text-blue-600 mr-2"></i>Retirement, risk & tax planning (basic)</li>
+              <li><i class="fa-solid fa-check text-blue-600 mr-2"></i>Email support & quarterly RM review</li>
+            </ul>
+          </div>
+          <div class="mt-8">
+            <h4 class="text-2xl font-bold mb-4 text-blue-600">₹999/mo</h4>
+            <button class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 font-medium transition">Select Plan</button>
+          </div>
+        </div>
+
+        <!-- Personalised Plan -->
+        <div class="bg-white border border-purple-400 border-2 border-blue-600  rounded-2xl shadow-sm hover:shadow-lg transition p-8 flex flex-col justify-between relative">
+                      <span class="absolute top-0 right-4 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-b-lg">Popular</span>
+
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-semibold text-gray-900">Personalised</h3>
+              <i class="fa-solid fa-user-tie text-purple-600 text-xl"></i>
+            </div>
+            <p class="text-gray-600 mb-6">For serious planners & investors.</p>
+            <ul class="text-left space-y-3">
+              <li><i class="fa-solid fa-check text-purple-500 mr-2"></i>All Standard features + advanced AI tools</li>
+              <li><i class="fa-solid fa-check text-purple-500 mr-2"></i>Predictive budgeting & smart cashflow planning</li>
+              <li><i class="fa-solid fa-check text-purple-500 mr-2"></i>AI-based MF screening & rebalancing</li>
+              <li><i class="fa-solid fa-check text-purple-500 mr-2"></i>Smart goal adjustments & corpus strategy</li>
+              <li><i class="fa-solid fa-check text-purple-500 mr-2"></i>Monthly RM reviews + custom reports</li>
+              <li><i class="fa-solid fa-check text-purple-500 mr-2"></i>Portfolio stress testing & recommendations</li>
+            </ul>
+          </div>
+          <div class="mt-8">
+            <h4 class="text-2xl font-bold mb-4 text-purple-600">₹2499/mo</h4>
+            <button class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 font-medium transition">Select Plan</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-12">
+        <a href="/Dashboard.html" class="bg-gray-900 text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition">
+          Continue to Dashboard →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Help Section -->
+  <section class="bg-white py-12 border-t border-gray-100">
+    <div class="max-w-4xl mx-auto text-center">
+      <h3 class="text-xl font-semibold text-gray-800 mb-2">Need Help Choosing the Right Plan?</h3>
+      <p class="text-gray-600 mb-6">Our financial experts are here to guide you — request a callback or chat with us.</p>
+      <button onclick="openPopup()" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition">
+        <i class="fa-solid fa-phone-volume mr-2"></i> Request a Call Back
+      </button>
+    </div>
+  </section>
+
+  <!-- Popup Modal -->
+  <div id="callbackModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full relative">
+      <button onclick="closePopup()" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+      <h3 class="text-xl font-bold text-gray-900 mb-4 text-center">Request a Call Back</h3>
+      <p class="text-gray-600 text-center mb-6">Enter your details and our expert will reach out shortly.</p>
+
+      <form class="space-y-4">
+        <input type="text" placeholder="Your Name" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none">
+        <input type="tel" placeholder="Phone Number" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none">
+        <button type="button" onclick="closePopup()" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+          Submit Request
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function openPopup() {
+      document.getElementById('callbackModal').classList.remove('hidden');
+    }
+    function closePopup() {
+      document.getElementById('callbackModal').classList.add('hidden');
+    }
+  </script>
+
+</body>
+</html>

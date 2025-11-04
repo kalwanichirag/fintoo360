@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        ::-webkit-scrollbar { display: none;}
+        * { font-family: 'Inter', sans-serif; }
+        .blob-1 { animation: float 6s ease-in-out infinite; }
+        .blob-2 { animation: float 8s ease-in-out infinite reverse; }
+        .blob-3 { animation: float 10s ease-in-out infinite; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #0047AB 0%, #002E6E 100%);
+        }
+        .orange-gradient {
+            background: linear-gradient(135deg, #DD7300 0%, #B85C00 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 71, 171, 0.15);
+        }
+        .glow-border:hover {
+            box-shadow: 0 0 20px rgba(0, 71, 171, 0.3);
+            border-color: #0047AB;
+        }
+        .progress-step {
+            transition: all 0.3s ease;
+        }
+        .progress-step.active {
+            background: #0047AB;
+            color: white;
+        }
+        .progress-step.completed {
+            background: #10B981;
+            color: white;
+        }
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: #0047AB;
+            top: -50px;
+            right: -50px;
+            animation: float 15s infinite;
+        }
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: #DD7300;
+            bottom: 100px;
+            left: -100px;
+            animation: float 20s infinite reverse;
+        }
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            background: #8B5CF6;
+            top: 50%;
+            left: 80%;
+            animation: float 12s infinite;
+        }
+        .otp-input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .otp-input:focus {
+            outline: none;
+            border-color: #DD7300;
+            box-shadow: 0 0 0 3px rgba(221, 115, 0, 0.1);
+        }
+        .wave-animation {
+            background: linear-gradient(-45deg, #0047AB, #002E6E, #0B2E68, #1E40AF);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .loading-dots {
+            display: inline-block;
+        }
+        .loading-dots::after {
+            content: '';
+            animation: dots 2s infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+        .success-checkmark {
+            animation: checkmark 0.6s ease-in-out;
+        }
+        @keyframes checkmark {
+            0% { transform: scale(0) rotate(45deg); }
+            50% { transform: scale(1.2) rotate(45deg); }
+            100% { transform: scale(1) rotate(45deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+<!-- Floating Background Shapes -->
+<div class="floating-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+</div>
+
+<!-- Progress Bar Header -->
+<!-- <div id="progress-header" class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+    <div class="max-w-4xl mx-auto px-6 py-4">
+        <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center space-x-3">
+                
+                <span class="text-lg font-semibold text-gray-800 w-20">
+                </span>
+                <span class="text-gray-400">×</span>
+                <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
+                    <i class="fa-solid fa-building-columns text-white text-sm"></i>
+                </div>
+                <span class="text-lg font-semibold text-gray-800">India Post Payments Bank</span>
+            </div>
+         
+        </div>
+           <div class="text-sm text-gray-500 mb-3">
+                <span id="current-step">Step 1</span> of <span id="total-steps">11</span>
+            </div>
+        <div class="w-full bg-gray-200 rounded-full h-2">
+            <div id="progress-fill" class="gradient-bg h-2 rounded-full transition-all duration-500" style="width: 9%"></div>
+        </div>
+        <div class="flex justify-between mt-2 text-xs text-gray-500">
+            <span>Welcome</span>
+            <span>Service</span>
+            <span>Bank</span>
+            <span>Mutual Fund</span>
+            <span>Stocks</span>
+            <span>Liabilities</span>
+            <span>Insurance</span>
+            <span>Review</span>
+        </div>
+    </div>
+</div> -->
+
+<!-- Welcome Screen - Step 0 -->
+<section id="welcome-screen" class="min-h-screen flex items-center justify-center relative pt-24 hidden">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+        <div class="mb-8">
+            <div class="flex items-center justify-center space-x-6 mb-6">
+                <div class="flex items-center space-x-3 bg-white rounded-2xl px-6 py-4 shadow-lg">
+                    
+                    <span class=""><img src="https://www.fintoo.in/web/static/media/wp/Fintoologo_.svg" alt=""></span>
+                </div>
+                <div class="text-3xl text-gray-300">+</div>
+                <div class="flex items-center space-x-3 bg-white rounded-2xl px-6 py-3 shadow-lg">
+                    
+                    <span class="w-20 ">
+                        <img src="https://static.mygov.in/media/blog/2017/06/pic3.jpg" alt="">
+                    </span>
+                </div>
+            </div>
+            <p class="text-lg text-gray-600 mb-2">Your trusted partner in financial planning and tax optimization</p>
+        </div>
+        
+        <div class="bg-white rounded-3xl p-8 shadow-xl mb-8 max-w-2xl mx-auto">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">Welcome to Your Financial Journey</h1>
+            <p class="text-lg text-gray-600 mb-8">Let's securely connect your financial world for smarter insights and personalized wealth management</p>
+            
+            <div class="space-y-4">
+                <button onclick="startOnboarding()" class="w-full gradient-bg text-white py-4 px-8 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                    Connect My Accounts
+                    <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+                <button class="w-full text-orange-600 py-4 px-8 rounded-xl font-semibold text-lg border-2 border-orange-200 hover:bg-orange-50 transition-all duration-300">
+                    Learn More
+                </button>
+            </div>
+        </div>
+        
+        <div class="flex items-center justify-center space-x-8 text-sm text-gray-500">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-shield-halved text-green-500"></i>
+                <span>Bank-grade encryption</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-certificate text-blue-500"></i>
+                <span>IRDAI Compliant</span>
+            </div>
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-landmark text-orange-500"></i>
+                <span>RBI-Approved Partner</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Bank Connection Permission - Step 2 -->
+<section id="bank-permission" class="min-h-screen flex items-center justify-center  ">
+    <div class="max-w-3xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Connect Your Bank Account</h2>
+            <p class="text-lg text-gray-600">We'll securely access your financial data to provide personalized insights</p>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-8 shadow-xl">
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-gray-800 mb-6">Data Access Permissions</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4 p-4 bg-blue-50 rounded-xl">
+                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i class="fa-solid fa-user text-blue-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-800">Profile Details</h4>
+                            <p class="text-sm text-gray-600">Name, contact information, and basic demographics</p>
+                        </div>
+                        <i class="fa-solid fa-check text-green-500 text-xl"></i>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4 p-4 bg-blue-50 rounded-xl">
+                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i class="fa-solid fa-building-columns text-blue-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-800">Account Summary</h4>
+                            <p class="text-sm text-gray-600">Account balances, types, and basic information</p>
+                        </div>
+                        <i class="fa-solid fa-check text-green-500 text-xl"></i>
+                    </div>
+                    
+                    <div class="flex items-center space-x-4 p-4 bg-blue-50 rounded-xl">
+                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <i class="fa-solid fa-list text-blue-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h4 class="font-semibold text-gray-800">Transaction History</h4>
+                            <p class="text-sm text-gray-600">Recent transactions for spending analysis and insights</p>
+                        </div>
+                        <i class="fa-solid fa-check text-green-500 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 rounded-xl p-6 mb-8">
+                <div class="flex items-center space-x-3 mb-3">
+                    <i class="fa-solid fa-shield-halved text-green-500 text-xl"></i>
+                    <h4 class="font-semibold text-gray-800">Security & Compliance</h4>
+                </div>
+                <div class="grid md:grid-cols-3 gap-4 text-sm text-gray-600">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-lock text-green-500"></i>
+                        <span>256-bit encryption</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-certificate text-blue-500"></i>
+                        <span>RBI compliant</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-user-shield text-orange-500"></i>
+                        <span>Data privacy assured</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button onclick="proceedToBankSelection()" class="gradient-bg text-white py-4 px-8 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                    I Understand, Continue
+                    <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bank Selection - Step 3 -->
+ <section id="bank-selection" class="min-h-screen w-full pt-24 pb-16 hidden">
+    <div class="max-w-6xl mx-auto px-6">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-3">Select Your Bank</h2>
+        <p class="text-gray-600 text-lg">Connect your bank account securely to fetch and analyze your transactions</p>
+      </div>
+
+      <!-- Search -->
+      <div class="relative mb-10 max-w-lg mx-auto">
+        <input 
+          type="text" 
+          id="bankSearch" 
+          placeholder="Search for your bank..." 
+          class="w-full py-3 pl-12 pr-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+        >
+        <i class="fa-solid fa-magnifying-glass text-gray-400 absolute left-4 top-3.5"></i>
+      </div>
+
+      <!-- Popular Banks -->
+      <h3 class="text-lg font-semibold text-gray-800 mb-4">Popular Banks</h3>
+      <div id="popularBanks" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-10">
+        <!-- Example Bank Card -->
+        <div class="bank-card group p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300" onclick="selectBank('sbi')">
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-3 group-hover:bg-blue-200 transition">
+            <i class="fa-solid fa-building-columns text-blue-600 text-lg"></i>
+          </div>
+          <p class="text-sm font-semibold text-gray-800 text-center">India Post Payments Banks</p>
+        </div>
+
+        <div class="bank-card group p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300" onclick="selectBank('hdfc')">
+          <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-3 group-hover:bg-red-200 transition">
+            <i class="fa-solid fa-university text-red-600 text-lg"></i>
+          </div>
+          <p class="text-sm font-semibold text-gray-800 text-center">HDFC Bank</p>
+        </div>
+
+        <div class="bank-card group p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300" onclick="selectBank('icici')">
+          <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mx-auto mb-3 group-hover:bg-orange-200 transition">
+            <i class="fa-solid fa-landmark text-orange-600 text-lg"></i>
+          </div>
+          <p class="text-sm font-semibold text-gray-800 text-center">ICICI Bank</p>
+        </div>
+
+        <div class="bank-card group p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300" onclick="selectBank('axis')">
+          <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-3 group-hover:bg-purple-200 transition">
+            <i class="fa-solid fa-building text-purple-600 text-lg"></i>
+          </div>
+          <p class="text-sm font-semibold text-gray-800 text-center">Axis Bank</p>
+        </div>
+
+        <div class="bank-card group p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300" onclick="selectBank('kotak')">
+          <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-3 group-hover:bg-red-200 transition">
+            <i class="fa-solid fa-piggy-bank text-red-600 text-lg"></i>
+          </div>
+          <p class="text-sm font-semibold text-gray-800 text-center">Kotak Mahindra</p>
+        </div>
+      </div>
+
+      <!-- All Banks -->
+      <h3 class="text-lg font-semibold text-gray-800 mb-4">All Supported Banks</h3>
+      <div id="allBanks" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 max-h-[300px] overflow-y-auto pr-2">
+        <!-- Will clone cards dynamically -->
+      </div>
+
+      <!-- Proceed Button -->
+      <div class="mt-10 text-center">
+        <button id="proceed-bank" class="gradient-bg text-white py-3 px-8 rounded-xl font-semibold opacity-50 cursor-not-allowed transition-all duration-300">
+          Connect to Bank <i class="fa-solid fa-arrow-right ml-2"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const banks = [
+      "State Bank of India", "HDFC Bank", "ICICI Bank", "Axis Bank", "Kotak Mahindra",
+      "Yes Bank", "Punjab National Bank", "Canara Bank", "Bank of Baroda", "Union Bank",
+      "IDFC First Bank", "IndusInd Bank", "Federal Bank", "IDBI Bank", "RBL Bank",
+      "South Indian Bank", "Indian Overseas Bank", "Central Bank of India", "UCO Bank", "Bank of India"
+    ];
+
+    const allBanksContainer = document.getElementById('allBanks');
+    const searchInput = document.getElementById('bankSearch');
+    const proceedBtn = document.getElementById('proceed-bank');
+
+    let selectedBank = null;
+
+    // Render all banks dynamically
+    function renderBanks(filter = "") {
+      allBanksContainer.innerHTML = "";
+      banks.filter(b => b.toLowerCase().includes(filter.toLowerCase()))
+        .forEach(bank => {
+          const el = document.createElement('div');
+          el.className = "bank-card p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300";
+          el.innerHTML = `
+            <div class="w-12 h-12 bg-blue-50 rounded-lg flex items-center justify-center mx-auto mb-3">
+              <i class="fa-solid fa-building-columns text-blue-600 text-lg"></i>
+            </div>
+            <p class="text-sm font-semibold text-gray-800 text-center">${bank}</p>
+          `;
+          el.onclick = () => selectBank(bank);
+          allBanksContainer.appendChild(el);
+        });
+    }
+
+    renderBanks();
+
+    searchInput.addEventListener('input', (e) => {
+      renderBanks(e.target.value);
+    });
+
+    function selectBank(bank) {
+      selectedBank = bank;
+      document.querySelectorAll('.bank-card').forEach(card => card.classList.remove('border-blue-500', 'bg-blue-50'));
+      event.currentTarget.classList.add('border-blue-500', 'bg-blue-50');
+      proceedBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      proceedBtn.classList.add('hover:shadow-lg');
+      proceedBtn.disabled = false;
+    }
+  </script>
+
+
+<!-- OTP Verification - Step 4 -->
+<section id="otp-verification" class="min-h-screen flex items-center justify-center  hidden">
+    <div class="max-w-2xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <i class="fa-solid fa-mobile-screen-button text-orange-600 text-2xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Verify Your Identity</h2>
+            <p class="text-lg text-gray-600">Enter the OTP sent to your registered mobile number ending in <span class="font-semibold">****1234</span></p>
+        </div>
+        
+        <div class="bg-white rounded-2xl p-8 shadow-xl">
+            <div class="flex justify-center space-x-3 mb-8">
+                <input type="text" class="otp-input" maxlength="1" id="otp1">
+                <input type="text" class="otp-input" maxlength="1" id="otp2">
+                <input type="text" class="otp-input" maxlength="1" id="otp3">
+                <input type="text" class="otp-input" maxlength="1" id="otp4">
+                <input type="text" class="otp-input" maxlength="1" id="otp5">
+                <input type="text" class="otp-input" maxlength="1" id="otp6">
+            </div>
+            
+            <div class="text-center mb-8">
+                <p class="text-sm text-gray-500 mb-4">Didn't receive the code?</p>
+                <button class="text-orange-600 font-semibold hover:underline">Resend OTP</button>
+            </div>
+            
+            <div class="text-center">
+                <button onclick="verifyOTP()" class="gradient-bg text-white py-4 px-8 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                    <span class="loading-dots">Verify and Connect</span>
+                </button>
+            </div>
+            
+            <div class="mt-6 text-center">
+                <div class="flex items-center justify-center space-x-4 text-sm text-gray-500">
+                    <div class="flex items-center space-x-1">
+                        <i class="fa-solid fa-shield-halved text-green-500"></i>
+                        <span>Secure verification</span>
+                    </div>
+                    <div class="flex items-center space-x-1">
+                        <i class="fa-solid fa-clock text-blue-500"></i>
+                        <span>Valid for 5 minutes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Data Fetching - Step 5 -->
+ <section id="data-fetching" class="py-20 pt-0 bg-gradient-to-br from-blue-900 to-blue-800 text-white hidden  h-[100vh] flex items-center">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+        <div class="mb-12">
+            <div class="relative w-32 h-32 mx-auto mb-8">
+                <div class="absolute inset-4 border-4 border-blue-400 border-t-blue-100 rounded-full animate-spin" style="animation-direction: reverse; animation-duration: 1.5s;"></div>
+                <div class="absolute inset-8 bg-white rounded-full flex items-center justify-center">
+                    <i class="fas fa-database text-blue-600 text-2xl"></i>
+                </div>
+            </div>
+            
+            <h2 class="text-3xl font-bold mb-4">Securely Fetching Your Data</h2>
+            <p class="text-blue-100 text-lg mb-8">Please wait while we analyze your financial information</p>
+        </div>
+        
+        <div class="bg-white bg-opacity-10 rounded-2xl p-8 backdrop-blur-sm">
+            <div class="space-y-6">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                            <i class="fas fa-check text-white text-sm"></i>
+                        </div>
+                        <span>Connecting to your bank securely...</span>
+                    </div>
+                    <div class="text-green-400 font-semibold">Complete</div>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                            <div class="w-3 h-3 bg-white rounded-full animate-pulse"></div>
+                        </div>
+                        <span>Analyzing spending patterns and transactions...</span>
+                    </div>
+                    <div class="text-blue-300 font-semibold">In Progress</div>
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-8 h-8 bg-gray-400 rounded-full flex items-center justify-center">
+                            <div class="w-2 h-2 bg-white rounded-full"></div>
+                        </div>
+                        <span>Generating your personalized insights...</span>
+                    </div>
+                    <div class="text-gray-400 font-semibold">Pending</div>
+                </div>
+            </div>
+        </div>
+        
+        <p class="text-blue-200 mt-8">This might take a few moments. Please don't close this window.</p>
+    </div>
+</section>
+
+
+<!-- Bank Connection Success - Step 6 -->
+<section id="bank-success" class="min-h-screen flex items-center justify-center pt-24 hidden">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 success-checkmark">
+                <i class="fa-solid fa-check text-green-600 text-3xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Bank Account Successfully Connected! 🎉</h2>
+            <p class="text-lg text-gray-600">Your financial data has been securely imported and analyzed</p>
+        </div>
+        
+         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center">
+                        <i class="fas fa-rupee-sign text-white"></i>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900">₹78,000</h3>
+                <p class="text-gray-600">Total Monthly Income</p>
+            </div>
+            
+            <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-red-600 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-credit-card text-white"></i>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900">₹52,000</h3>
+                <p class="text-gray-600">Total Monthly Expenses</p>
+            </div>
+            
+            <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-piggy-bank text-white"></i>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900">₹26,000</h3>
+                <p class="text-gray-600">Net Monthly Savings</p>
+            </div>
+            
+            <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-chart-line text-white"></i>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900">₹10,000</h3>
+                <p class="text-gray-600">Monthly Investments</p>
+            </div>
+        </div>
+        
+        
+        <div class="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-2xl p-4 mb-8 border border-orange-200">
+            <div class="flex items-start space-x-4">
+                <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <i class="fa-solid fa-lightbulb text-orange-600 text-lg"></i>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold text-gray-800 mb-2">💡 AI-Powered Insight</h4>
+                    <p class="text-gray-700 mb-3">You spent ₹3,200 on dining last month. Cutting 20% could boost your SIP goals by ₹640 monthly!</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <a href="/Dashboard.html" class="gradient-bg text-white py-4 px-8 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+                Continue to Dashboard <i class="fa-solid fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Assets Connection - Step 7 -->
+
+
+
+<section id="mutual-funds-connection" class="py-20 pt-24 bg-gray-50 hidden min-h-screen flex items-center">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <span class="text-3xl">🪙</span>
+            </div>
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">Connect Assets — Mutual Funds</h2>
+            <p class="text-xl text-gray-600">Link your mutual fund portfolios for comprehensive wealth tracking</p>
+        </div>
+        
+       <div id="form-step"  class="bg-white rounded-2xl shadow-lg p-8">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-6">Secure Portfolio Access</h3>
+            <p class="text-gray-600 mb-6">We'll fetch your portfolio data directly using your registered PAN and mobile number</p>
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">PAN Number</label>
+                    <input type="text" placeholder="ABCDE1234F" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Mobile Number</label>
+                    <input type="text" placeholder="+91 98765 43210" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-3 mb-8">
+                <input type="checkbox" id="portfolio-consent" class="w-5 h-5 text-blue-600 rounded">
+                <label for="portfolio-consent" class="text-gray-700">I authorize Fintoo to securely access my investment portfolio data</label>
+            </div>
+            
+            <div class="flex items-center justify-center space-x-6 text-sm text-gray-500 mb-8">
+                <div class="flex items-center">
+                    <i class="fas fa-shield-alt mr-2"></i>
+                    Bank-grade Security
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-lock mr-2"></i>
+                    256-bit Encryption
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-certificate mr-2"></i>
+                    SEBI Compliant
+                </div>
+            </div>
+            
+            <div class="text-center  ">
+                <button  id="proceed-btn" class="gradient-bg text-white font-semibold py-4 px-12 rounded-xl hover:shadow-lg transition-all">
+                    Proceed Securely
+                </button>
+                
+            </div>
+            <div class="text-center">
+                 <button
+        onclick="proceedToDemat()"
+        class="border-b border-gray-400 text-gray-600 text-sm mt-4 hover:bg-gray-100 transition"
+      >
+        Skip this step
+      </button>
+            </div>
+        </div>
+        
+        <!-- Fetching Screen -->
+        <div id="fetching-step"  class=" hidden bg-gradient-to-br from-blue-900 to-blue-800 text-white rounded-2xl p-8">
+            <div class="text-center mb-8">
+                <div class="relative w-24 h-24 mx-auto mb-6">
+                    <div class="absolute inset-0 border-4 border-blue-300 border-t-white rounded-full animate-spin"></div>
+                    <div class="absolute inset-2 bg-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-chart-pie text-blue-600 text-xl"></i>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Fetching Your Mutual Fund Data</h3>
+                <p class="text-blue-200">Fetching your mutual fund data securely… this may take a few seconds.</p>
+            </div>
+            
+            <div class="bg-white bg-opacity-10 rounded-xl p-6 backdrop-blur-sm">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span>Verifying PAN</span>
+                        </div>
+                        <span class="text-green-400 text-sm">✅</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span>Fetching mutual fund holdings</span>
+                        </div>
+                        <span class="text-green-400 text-sm">✅</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span>Analyzing portfolio performance</span>
+                        </div>
+                        <span class="text-green-400 text-sm">✅</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                                <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                            </div>
+                            <span>Generating investment insights</span>
+                        </div>
+                        <span class="text-blue-300 text-sm">🔄</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Success Screen -->
+        <div id="success-step"  class=" hidden bg-white rounded-2xl shadow-lg p-8 mt-8">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check-circle text-green-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">✅ Mutual Funds Connected Successfully</h3>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-blue-50 rounded-xl p-6 text-center">
+                    <div class="text-2xl font-bold text-blue-600 mb-2">₹8,45,000</div>
+                    <p class="text-gray-600">Total Investment Value</p>
+                </div>
+                <div class="bg-green-50 rounded-xl p-6 text-center">
+                    <div class="text-2xl font-bold text-green-600 mb-2">7</div>
+                    <p class="text-gray-600">Active Schemes</p>
+                </div>
+                <div class="bg-purple-50 rounded-xl p-6 text-center">
+                    <div class="text-2xl font-bold text-purple-600 mb-2">+12.4%</div>
+                    <p class="text-gray-600">Overall Returns</p>
+                </div>
+            </div>
+            
+            <div class="bg-orange-50 rounded-xl p-6 mb-8">
+                <div class="flex items-start space-x-4">
+                    <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-lightbulb text-white"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">AI Investment Insight</h4>
+                        <p class="text-gray-700">You're invested in 5 schemes — 2 of them have overlapping exposure. I can help you optimize this later.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button onclick="proceedToDemat()" class="gradient-bg text-white font-semibold py-4 px-12 rounded-xl hover:shadow-lg transition-all">
+                    Continue to Connect Demat Account
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: Demat/Stock Connection -->
+<section id="demat-connection" class="py-20 bg-white hidden min-h-screen flex items-center">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <div class="w-16 h-16 bg-gradient-to-r from-green-600 to-green-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <span class="text-3xl">📈</span>
+            </div>
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">Connect Demat / Stock Account</h2>
+            <p class="text-xl text-gray-600">Link your stock portfolio for complete equity analysis</p>
+        </div>
+        
+        <div  id="demat-form-step" class="bg-white rounded-2xl shadow-lg border p-8 mb-8">
+            <h3 class="text-xl font-semibold text-gray-900 mb-6">Select Your Broker</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="border-2 border-gray-200 rounded-xl p-4 text-center cursor-pointer hover:border-blue-500 transition-colors">
+                    <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <span class="text-white font-bold text-sm">Z</span>
+                    </div>
+                    <p class="text-sm font-medium">Zerodha</p>
+                </div>
+                <div class="border-2 border-gray-200 rounded-xl p-4 text-center cursor-pointer hover:border-blue-500 transition-colors">
+                    <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <span class="text-white font-bold text-sm">G</span>
+                    </div>
+                    <p class="text-sm font-medium">Groww</p>
+                </div>
+                <div class="border-2 border-gray-200 rounded-xl p-4 text-center cursor-pointer hover:border-blue-500 transition-colors">
+                    <div class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <span class="text-white font-bold text-sm">A</span>
+                    </div>
+                    <p class="text-sm font-medium">Angel One</p>
+                </div>
+                <div class="border-2 border-gray-200 rounded-xl p-4 text-center cursor-pointer hover:border-blue-500 transition-colors">
+                    <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <span class="text-white font-bold text-sm">U</span>
+                    </div>
+                    <p class="text-sm font-medium">Upstox</p>
+                </div>
+            </div>
+            
+            <div class="text-center grid justify-center">
+                <button  id="demat-proceed-btn"  class="gradient-bg text-white font-semibold py-4 px-12 rounded-xl hover:shadow-lg transition-all">
+                    Verify with OTP
+                </button>
+                
+            </div>
+            <div class="text-center">
+                 <button
+        onclick="proceedToCredit()"
+        class="border-b border-gray-400 text-gray-600 text-sm mt-4 hover:bg-gray-100 transition"
+      >
+        Skip this step
+      </button>
+            </div>
+        </div>
+        
+        <!-- Fetching Screen -->
+        <div  id="demat-fetching-step" class="hidden bg-gradient-to-br from-green-900 to-green-800 text-white rounded-2xl p-8">
+            <div class="text-center mb-8">
+                <div class="relative w-24 h-24 mx-auto mb-6">
+                    <div class="absolute inset-0 border-4 border-green-300 border-t-white rounded-full animate-spin"></div>
+                    <div class="absolute inset-2 bg-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-chart-line text-green-600 text-xl"></i>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Analyzing Your Portfolio Performance</h3>
+                <p class="text-green-200">Aggregating live market data…</p>
+            </div>
+            
+            <div class="bg-white bg-opacity-10 rounded-xl p-6 backdrop-blur-sm">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span>Connecting to depository</span>
+                        </div>
+                        <span class="text-green-400 text-sm">✅</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span>Fetching stock holdings</span>
+                        </div>
+                        <span class="text-green-400 text-sm">✅</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span>Calculating portfolio diversification</span>
+                        </div>
+                        <span class="text-green-400 text-sm">✅</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                                <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                            </div>
+                            <span>Building equity insights</span>
+                        </div>
+                        <span class="text-blue-300 text-sm">🔄</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Success Screen -->
+        <div id="demat-success-step" class="hidden bg-white rounded-2xl shadow-lg p-8 mt-8">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check-circle text-green-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">✅ Demat Account Connected</h3>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-green-50 rounded-xl p-6 text-center">
+                    <div class="text-2xl font-bold text-green-600 mb-2">₹3,95,000</div>
+                    <p class="text-gray-600">Total Stock Value</p>
+                </div>
+                <div class="bg-blue-50 rounded-xl p-6 text-center">
+                    <div class="text-2xl font-bold text-blue-600 mb-2">14</div>
+                    <p class="text-gray-600">Stock Holdings</p>
+                </div>
+                <div class="bg-purple-50 rounded-xl p-6 text-center">
+                    <div class="text-2xl font-bold text-purple-600 mb-2">35%</div>
+                    <p class="text-gray-600">IT Sector Weight</p>
+                </div>
+            </div>
+            
+            <div class="mb-8">
+                <h4 class="font-semibold text-gray-900 mb-4">Top 3 Holdings</h4>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <span class="font-medium">Reliance Industries</span>
+                        <span class="text-green-600 font-semibold">₹85,000</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <span class="font-medium">TCS</span>
+                        <span class="text-green-600 font-semibold">₹62,000</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <span class="font-medium">HDFC Bank</span>
+                        <span class="text-green-600 font-semibold">₹48,000</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-orange-50 rounded-xl p-6 mb-8">
+                <div class="flex items-start space-x-4">
+                    <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-lightbulb text-white"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">AI Portfolio Insight</h4>
+                        <p class="text-gray-700">Your portfolio is 35% IT heavy — consider diversifying for better stability.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button  onclick="proceedToCredit()" class="gradient-bg text-white font-semibold py-4 px-12 rounded-xl hover:shadow-lg transition-all">
+                    Continue to Link Liabilities
+                </button>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: Enhanced Liability Connection -->
+<section id="enhanced-liability-connection" class="py-20 bg-gray-50  min-h-screen flex items-center hidden">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <div class="w-16 h-16 bg-gradient-to-r from-red-600 to-red-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <span class="text-3xl">💳</span>
+            </div>
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">Link Liabilities</h2>
+            <p class="text-xl text-gray-600">Complete credit profile analysis for better financial planning</p>
+        </div>
+        
+<div id="liability-form-step" class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                    <input type="text" value="Rajesh Kumar" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50" readonly>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth</label>
+                    <input type="date" value="1991-03-15" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50" readonly>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">PAN Number</label>
+                    <input type="text" value="ABCDE1234F" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50" readonly>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Mobile Number</label>
+                    <input type="text" value="+91 98765 43210" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50" readonly>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-3 mb-8">
+                <input type="checkbox" id="liability-consent" class="w-5 h-5 text-blue-600 rounded">
+                <label for="liability-consent" class="text-gray-700">I authorize Fintoo to access my credit report and liability information</label>
+            </div>
+            
+            <div class="text-center">
+                <button  id="liability-proceed-btn"  class="gradient-bg text-white font-semibold py-4 px-12 rounded-xl hover:shadow-lg transition-all">
+                    Fetch Credit Profile
+                </button>
+                
+            </div>
+            <div class="text-center ">
+             <button
+        onclick="proceedToInsurance()"
+        class="border-b  border-gray-400 text-gray-600 text-sm mt-4 hover:bg-gray-100 transition"
+      >
+        Skip this step
+      </button>
+        </div>
+        </div>
+        
+        <!-- Fetching Screen -->
+        <div id="liability-fetching-step" class="hidden bg-gradient-to-br from-red-900 to-red-800 text-white rounded-2xl p-8">
+            <div class="text-center mb-8">
+                <div class="relative w-24 h-24 mx-auto mb-6">
+                    <div class="absolute inset-0 border-4 border-red-300 border-t-white rounded-full animate-spin"></div>
+                    <div class="absolute inset-2 bg-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-balance-scale text-red-600 text-xl"></i>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Gathering Your Financial Obligations</h3>
+                <p class="text-red-200">Gathering your financial obligations securely…</p>
+            </div>
+            
+            <div class="bg-white bg-opacity-10 rounded-xl p-6 backdrop-blur-sm">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span>Verifying identity</span>
+                        </div>
+                        <span class="text-green-400 text-sm">✅</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span>Connecting to credit bureaus</span>
+                        </div>
+                        <span class="text-green-400 text-sm">✅</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span>Fetching loan and credit data</span>
+                        </div>
+                        <span class="text-green-400 text-sm">✅</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                                <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                            </div>
+                            <span>Analyzing liabilities</span>
+                        </div>
+                        <span class="text-blue-300 text-sm">🔄</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Success Screen -->
+        <div id="liability-success-step" class="hidden bg-white rounded-2xl shadow-lg p-8 mt-8">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check-circle text-green-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">✅ Liabilities Linked Successfully</h3>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-green-50 rounded-xl p-6 text-center">
+                    <div class="text-3xl font-bold text-green-600 mb-2">782</div>
+                    <p class="text-gray-600">Credit Score</p>
+                    <p class="text-sm text-green-600 mt-1">Excellent</p>
+                </div>
+                <div class="bg-blue-50 rounded-xl p-6 text-center">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">3</div>
+                    <p class="text-gray-600">Active Loans</p>
+                    <p class="text-sm text-blue-600 mt-1">Well Managed</p>
+                </div>
+                <div class="bg-orange-50 rounded-xl p-6 text-center">
+                    <div class="text-3xl font-bold text-orange-600 mb-2">₹25,400</div>
+                    <p class="text-gray-600">Total Monthly EMI</p>
+                    <p class="text-sm text-orange-600 mt-1">32% of Income</p>
+                </div>
+            </div>
+            
+            <div class="bg-orange-50 rounded-xl p-6 mb-8">
+                <div class="flex items-start space-x-4">
+                    <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-lightbulb text-white"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">AI Credit Insight</h4>
+                        <p class="text-gray-700">Your credit utilization is 28% — that's within a healthy range.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button onclick="proceedToInsurance()" class="gradient-bg text-white font-semibold py-4 px-12 rounded-xl hover:shadow-lg transition-all">
+                    Continue to Connect Insurance
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: Enhanced Insurance Connection -->
+<section id="enhanced-insurance-connection" class="py-20 bg-white hidden min-h-screen flex items-center pt-24">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-purple-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <span class="text-3xl">🛡️</span>
+            </div>
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">Connect Insurance Accounts</h2>
+            <p class="text-xl text-gray-600">Auto-fetch all your policies linked with PAN / Aadhaar</p>
+        </div>
+        
+        <div id="insurance-form-step" class="bg-white rounded-2xl shadow-lg border p-8 mb-8">
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">PAN Number</label>
+                    <input type="text" value="ABCDE1234F" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50" readonly>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Mobile Number</label>
+                    <input type="text" value="+91 98765 43210" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50" readonly>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Aadhaar Number</label>
+                    <input type="text" placeholder="XXXX XXXX 1234" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+            </div>
+            
+            <div class="text-center  grid justify-center">
+                <button  id="insurance-proceed-btn" class="gradient-bg text-white font-semibold py-4 px-12 rounded-xl hover:shadow-lg transition-all">
+                    Verify with OTP
+                </button>
+                
+            </div>
+            
+            <div class="text-center">
+                 <button
+        onclick="proceedToProfileSummary()"
+        class="border-b border-gray-400 text-gray-600 text-sm mt-4  hover:bg-gray-100 transition"
+      >
+        Skip this step
+      </button>
+            </div>
+        </div>
+        
+        <!-- Fetching Screen -->
+        <div id="insurance-fetching-step" class=" hidden bg-gradient-to-br from-purple-900 to-purple-800 text-white rounded-2xl p-8">
+            <div class="text-center mb-8">
+                <div class="relative w-24 h-24 mx-auto mb-6">
+                    <div class="absolute inset-0 border-4 border-purple-300 border-t-white rounded-full animate-spin"></div>
+                    <div class="absolute inset-2 bg-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-purple-600 text-xl"></i>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Fetching Your Insurance Policies</h3>
+                <p class="text-purple-200">Fetching your policies securely using IRDAI-approved APIs.</p>
+            </div>
+            
+            <div class="bg-white bg-opacity-10 rounded-xl p-6 backdrop-blur-sm">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span>Connecting to insurer networks</span>
+                        </div>
+                        <span class="text-green-400 text-sm">✅</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span>Fetching policy details</span>
+                        </div>
+                        <span class="text-green-400 text-sm">✅</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span>Verifying active coverage</span>
+                        </div>
+                        <span class="text-green-400 text-sm">✅</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                                <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                            </div>
+                            <span>Generating insurance overview</span>
+                        </div>
+                        <span class="text-blue-300 text-sm">🔄</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Success Screen -->
+        <div id="insurance-success-step" class="hidden bg-white rounded-2xl shadow-lg p-8 mt-8">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check-circle text-green-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">✅ Insurance Accounts Connected</h3>
+            </div>
+            
+            <div class="space-y-4 mb-8">
+                <div class="flex items-center justify-between p-4 bg-blue-50 rounded-xl">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-heart text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Life Insurance - Term Plan</h4>
+                            <p class="text-sm text-gray-600">HDFC Life • Policy No: LI12345678</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-semibold text-blue-600">₹1,00,00,000</div>
+                        <div class="text-sm text-gray-500">Sum Assured</div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-between p-4 bg-green-50 rounded-xl">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-user-md text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Health Insurance - Family</h4>
+                            <p class="text-sm text-gray-600">Star Health • Policy No: HI98765432</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-semibold text-green-600">₹10,00,000</div>
+                        <div class="text-sm text-gray-500">Sum Assured</div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-between p-4 bg-purple-50 rounded-xl">
+                    <div class="flex items-center space-x-4">
+                        <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-car text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Motor Insurance</h4>
+                            <p class="text-sm text-gray-600">ICICI Lombard • Policy No: MI11223344</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="font-semibold text-purple-600">₹8,50,000</div>
+                        <div class="text-sm text-gray-500">IDV</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-orange-50 rounded-xl p-6 mb-8">
+                <div class="flex items-start space-x-4">
+                    <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-lightbulb text-white"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">AI Insurance Insight</h4>
+                        <p class="text-gray-700">You have adequate life cover, but your motor policy expires soon — renew to stay protected.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button onclick="proceedToProfileSummary()"
+                 class="gradient-bg text-white font-semibold py-4 px-12 rounded-xl hover:shadow-lg transition-all">
+                    Continue to Review Summary
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SECTION: Enhanced Profile Review -->
+<section id="enhanced-profile-review" class="py-20 bg-gray-50 pt-24 hidden min-h-screen flex items-center">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">Welcome, Rajesh — Here's Your Complete Financial Profile</h2>
+            <p class="text-xl text-gray-600">Your entire financial ecosystem in one comprehensive view</p>
+        </div>
+        
+        <div class="grid lg:grid-cols-2 xl:grid-cols-4 gap-8 mb-12">
+            <!-- Bank Summary -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-semibold text-gray-900">Bank Summary</h3>
+                    <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-university text-blue-600"></i>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Monthly Income</span>
+                        <span class="font-semibold text-green-600">₹78,000</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Monthly Expenses</span>
+                        <span class="font-semibold text-red-600">₹52,000</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Net Savings</span>
+                        <span class="font-semibold text-blue-600">₹26,000</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Assets Summary -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-semibold text-gray-900">Assets</h3>
+                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-chart-line text-green-600"></i>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Mutual Funds</span>
+                        <span class="font-semibold">₹8,45,000</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Stocks</span>
+                        <span class="font-semibold">₹3,95,000</span>
+                    </div>
+                    <div class="flex justify-between border-t pt-4">
+                        <span class="text-gray-900 font-semibold">Total Assets</span>
+                        <span class="font-bold text-green-600">₹12,40,000</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Liabilities Summary -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-semibold text-gray-900">Liabilities</h3>
+                    <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-balance-scale text-orange-600"></i>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Credit Score</span>
+                        <span class="font-semibold text-green-600">782</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Active Loans</span>
+                        <span class="font-semibold">3</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Monthly EMI</span>
+                        <span class="font-semibold text-orange-600">₹25,400</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Insurance Summary -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-semibold text-gray-900">Insurance</h3>
+                    <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-purple-600"></i>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Active Policies</span>
+                        <span class="font-semibold">5</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Life Coverage</span>
+                        <span class="font-semibold">₹1.0 Cr</span>
+                    </div>
+                    <div class="flex justify-between border-t pt-4">
+                        <span class="text-gray-900 font-semibold">Total Coverage</span>
+                        <span class="font-bold text-purple-600">₹2.1 Cr</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Net Worth Summary -->
+        <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 text-white text-center mb-12">
+            <h3 class="text-2xl font-bold mb-4">Your Net Worth Snapshot</h3>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="text-3xl font-bold mb-2">₹12,40,000</div>
+                    <p class="text-blue-100">Total Assets</p>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold mb-2">₹8,45,000</div>
+                    <p class="text-blue-100">Total Liabilities</p>
+                </div>
+                <div>
+                    <div class="text-4xl font-bold mb-2 text-yellow-300">₹3,95,000</div>
+                    <p class="text-blue-100">Net Worth</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <div class="bg-green-50 rounded-2xl p-6 mb-8">
+                <div class="flex items-center justify-center space-x-2 mb-4">
+                    <i class="fas fa-lock text-green-600"></i>
+                    <span class="text-green-800 font-medium">Your data is secure and encrypted with bank-grade protection</span>
+                </div>
+            </div>
+            
+            <button class="gradient-bg text-white font-semibold py-4 px-12 rounded-xl hover:shadow-lg transition-all">
+          <a href="Dashboard.html">  Continue to Dashboard</a>    
+            </button>
+        </div>
+    </div>
+</section>
+
+
+
+
+<script>
+let currentStep = 0;
+const totalSteps = 11;
+
+
+
+function startOnboarding() {
+    document.getElementById('welcome-screen').classList.add('hidden');
+    document.getElementById('service-selection').classList.remove('hidden');
+    updateProgress(1);
+}
+
+function selectService(type) {
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.classList.remove('border-blue-500', 'shadow-lg');
+        card.classList.add('border-gray-100');
+    });
+    
+    event.target.closest('.service-card').classList.add('border-blue-500', 'shadow-lg');
+    event.target.closest('.service-card').classList.remove('border-gray-100');
+    
+    const proceedBtn = document.getElementById('proceed-service');
+    proceedBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    proceedBtn.disabled = false;
+    proceedBtn.onclick = proceedToBankPermission;
+}
+
+function proceedToBankPermission() {
+    document.getElementById('service-selection').classList.add('hidden');
+    document.getElementById('bank-permission').classList.remove('hidden');
+    updateProgress(2);
+}
+
+function proceedToBankSelection() {
+    document.getElementById('bank-permission').classList.add('hidden');
+    document.getElementById('bank-selection').classList.remove('hidden');
+    updateProgress(3);
+}
+
+function selectBank(bank) {
+    document.querySelectorAll('.bank-card').forEach(card => {
+        card.classList.remove('border-blue-500', 'shadow-lg');
+        card.classList.add('border-gray-200');
+    });
+    
+    event.target.closest('.bank-card').classList.add('border-blue-500', 'shadow-lg');
+    event.target.closest('.bank-card').classList.remove('border-gray-200');
+    
+    const proceedBtn = document.getElementById('proceed-bank');
+    proceedBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    proceedBtn.disabled = false;
+    proceedBtn.onclick = proceedToOTP;
+}
+
+function proceedToOTP() {
+    document.getElementById('bank-selection').classList.add('hidden');
+    document.getElementById('otp-verification').classList.remove('hidden');
+    updateProgress(4);
+    
+    // Auto-focus first OTP input
+    document.getElementById('otp1').focus();
+    
+    // Handle OTP input navigation
+    const otpInputs = document.querySelectorAll('.otp-input');
+    otpInputs.forEach((input, index) => {
+        input.addEventListener('input', function() {
+            if (this.value.length === 1 && index < otpInputs.length - 1) {
+                otpInputs[index + 1].focus();
+            }
+        });
+        
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Backspace' && this.value === '' && index > 0) {
+                otpInputs[index - 1].focus();
+            }
+        });
+    });
+}
+
+function verifyOTP() {
+    // Simulate OTP verification
+    setTimeout(() => {
+        document.getElementById('otp-verification').classList.add('hidden');
+        document.getElementById('data-fetching').classList.remove('hidden');
+        updateProgress(5);
+    }, 1000);
+     setTimeout(() => {
+                    document.getElementById('data-fetching').classList.add('hidden');
+                    document.getElementById('bank-success').classList.remove('hidden');
+  updateProgress(6);
+                }, 3000);
+}
+
+function proceedToMutualfund(){
+    document.getElementById('bank-success').classList.add('hidden');
+    document.getElementById('mutual-funds-connection').classList.remove('hidden');
+      updateProgress(7);
+}
+
+function proceedToDemat(){
+    document.getElementById('mutual-funds-connection').classList.add('hidden');
+    document.getElementById('demat-connection').classList.remove('hidden');
+      updateProgress(8);
+}
+
+function proceedToCredit(){
+     document.getElementById('demat-connection').classList.add('hidden');
+    document.getElementById('enhanced-liability-connection').classList.remove('hidden');
+    updateProgress(9);
+    
+}
+
+function proceedToCredit(){
+     document.getElementById('demat-connection').classList.add('hidden');
+    document.getElementById('enhanced-liability-connection').classList.remove('hidden');
+    
+}
+function proceedToInsurance(){
+     document.getElementById('enhanced-liability-connection').classList.add('hidden');
+    document.getElementById('enhanced-insurance-connection').classList.remove('hidden');
+  
+}
+
+function proceedToInsurance(){
+     document.getElementById('enhanced-liability-connection').classList.add('hidden');
+    document.getElementById('enhanced-insurance-connection').classList.remove('hidden');
+  
+}
+
+function proceedToProfileSummary(){
+      document.getElementById('enhanced-insurance-connection').classList.add('hidden');
+    document.getElementById('enhanced-profile-review').classList.remove('hidden');
+
+}
+document.getElementById("proceed-btn").addEventListener("click", function () {
+  
+
+    // Step transition
+    document.getElementById("form-step").classList.add("hidden");
+    document.getElementById("fetching-step").classList.remove("hidden");
+
+    // Simulate data fetching (e.g., 3 seconds)
+    setTimeout(() => {
+      document.getElementById("fetching-step").classList.add("hidden");
+      document.getElementById("success-step").classList.remove("hidden");
+    }, 3000);
+  });
+  document.getElementById("demat-proceed-btn").addEventListener("click", function () {
+    // Optional: you can check if a broker is selected
+    // For now, just simulate verification
+
+    // Hide form, show fetching
+    document.getElementById("demat-form-step").classList.add("hidden");
+    document.getElementById("demat-fetching-step").classList.remove("hidden");
+
+    // Simulate OTP verification + data fetching (3.5s)
+    setTimeout(() => {
+      document.getElementById("demat-fetching-step").classList.add("hidden");
+      document.getElementById("demat-success-step").classList.remove("hidden");
+    }, 3500);
+  });
+
+
+
+
+
+// Initialize the onboarding flow
+document.addEventListener('DOMContentLoaded', function() {
+    fetchCreditProfile(0);
+});
+</script>
+<script>
+  // ===== LIABILITY SECTION =====
+  document.getElementById("liability-proceed-btn").addEventListener("click", function () {
+    // Hide form
+    document.getElementById("liability-form-step").classList.add("hidden");
+    // Show fetching
+    document.getElementById("liability-fetching-step").classList.remove("hidden");
+
+    // Simulate data fetching
+    setTimeout(() => {
+      document.getElementById("liability-fetching-step").classList.add("hidden");
+      document.getElementById("liability-success-step").classList.remove("hidden");
+    }, 3500);
+  });
+
+
+  // ===== INSURANCE SECTION =====
+  document.getElementById("insurance-proceed-btn").addEventListener("click", function () {
+    // Hide form
+    document.getElementById("insurance-form-step").classList.add("hidden");
+    // Show fetching
+    document.getElementById("insurance-fetching-step").classList.remove("hidden");
+
+    // Simulate fetching + analysis
+    setTimeout(() => {
+      document.getElementById("insurance-fetching-step").classList.add("hidden");
+      document.getElementById("insurance-success-step").classList.remove("hidden");
+    }, 3500);
+  });
+</script>
+
+
+</body>
+</html>

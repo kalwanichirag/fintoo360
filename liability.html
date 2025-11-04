@@ -1,0 +1,488 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        ::-webkit-scrollbar { display: none;}
+        * { font-family: 'Inter', sans-serif; }
+        .blob-1 { animation: float 6s ease-in-out infinite; }
+        .blob-2 { animation: float 8s ease-in-out infinite reverse; }
+        .blob-3 { animation: float 10s ease-in-out infinite; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #0047AB 0%, #002E6E 100%);
+        }
+        .orange-gradient {
+            background: linear-gradient(135deg, #DD7300 0%, #B85C00 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 71, 171, 0.15);
+        }
+        .glow-border:hover {
+            box-shadow: 0 0 20px rgba(0, 71, 171, 0.3);
+            border-color: #0047AB;
+        }
+        .progress-step {
+            transition: all 0.3s ease;
+        }
+        .progress-step.active {
+            background: #0047AB;
+            color: white;
+        }
+        .progress-step.completed {
+            background: #10B981;
+            color: white;
+        }
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: #0047AB;
+            top: -50px;
+            right: -50px;
+            animation: float 15s infinite;
+        }
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: #DD7300;
+            bottom: 100px;
+            left: -100px;
+            animation: float 20s infinite reverse;
+        }
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            background: #8B5CF6;
+            top: 50%;
+            left: 80%;
+            animation: float 12s infinite;
+        }
+        .otp-input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .otp-input:focus {
+            outline: none;
+            border-color: #DD7300;
+            box-shadow: 0 0 0 3px rgba(221, 115, 0, 0.1);
+        }
+        .wave-animation {
+            background: linear-gradient(-45deg, #0047AB, #002E6E, #0B2E68, #1E40AF);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .loading-dots {
+            display: inline-block;
+        }
+        .loading-dots::after {
+            content: '';
+            animation: dots 2s infinite;
+        }
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+        .success-checkmark {
+            animation: checkmark 0.6s ease-in-out;
+        }
+        @keyframes checkmark {
+            0% { transform: scale(0) rotate(45deg); }
+            50% { transform: scale(1.2) rotate(45deg); }
+            100% { transform: scale(1) rotate(45deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+<section id="enhanced-liability-connection" class="py-20 bg-gray-50  min-h-screen flex items-center ">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-12">
+            <div class="w-16 h-16 bg-gradient-to-r from-red-600 to-red-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <span class="text-3xl">💳</span>
+            </div>
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">Link Liabilities</h2>
+            <p class="text-xl text-gray-600">Complete credit profile analysis for better financial planning</p>
+        </div>
+        
+<div id="liability-form-step" class="bg-white rounded-2xl shadow-lg p-8 mb-8 hidden">
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                    <input type="text" value="Rajesh Kumar" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50" readonly>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Date of Birth</label>
+                    <input type="date" value="1991-03-15" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50" readonly>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">PAN Number</label>
+                    <input type="text" value="ABCDE1234F" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50" readonly>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Mobile Number</label>
+                    <input type="text" value="+91 98765 43210" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50" readonly>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-3 mb-8">
+                <input type="checkbox" id="liability-consent" class="w-5 h-5 text-blue-600 rounded">
+                <label for="liability-consent" class="text-gray-700">I authorize Fintoo to access my credit report and liability information</label>
+            </div>
+            
+            <div class="text-center">
+                <button  id="liability-proceed-btn"  class="gradient-bg text-white font-semibold py-4 px-12 rounded-xl hover:shadow-lg transition-all">
+                    Fetch Credit Profile
+                </button>
+                
+            </div>
+            <div class="text-center ">
+          
+        </div>
+        </div>
+        
+        <!-- Fetching Screen -->
+        <div id="liability-fetching-step" class=" bg-gradient-to-br from-red-900 to-red-800 text-white rounded-2xl p-8">
+            <div class="text-center mb-8">
+                <div class="relative w-24 h-24 mx-auto mb-6">
+                    <div class="absolute inset-0 border-4 border-red-300 border-t-white rounded-full animate-spin"></div>
+                    <div class="absolute inset-2 bg-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-balance-scale text-red-600 text-xl"></i>
+                    </div>
+                </div>
+                <h3 class="text-2xl font-bold mb-4">Gathering Your Financial Obligations</h3>
+                <p class="text-red-200">Gathering your financial obligations securely…</p>
+            </div>
+            
+            <div class="bg-white bg-opacity-10 rounded-xl p-6 backdrop-blur-sm">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span>Verifying identity</span>
+                        </div>
+                        <span class="text-green-400 text-sm">✅</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span>Connecting to credit bureaus</span>
+                        </div>
+                        <span class="text-green-400 text-sm">✅</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-white text-xs"></i>
+                            </div>
+                            <span>Fetching loan and credit data</span>
+                        </div>
+                        <span class="text-green-400 text-sm">✅</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                                <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                            </div>
+                            <span>Analyzing liabilities</span>
+                        </div>
+                        <span class="text-blue-300 text-sm">🔄</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Success Screen -->
+        <div id="liability-success-step" class="hidden bg-white rounded-2xl shadow-lg p-8 mt-8">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check-circle text-green-600 text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">✅ Liabilities Linked Successfully</h3>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-green-50 rounded-xl p-6 text-center">
+                    <div class="text-3xl font-bold text-green-600 mb-2">782</div>
+                    <p class="text-gray-600">Credit Score</p>
+                    <p class="text-sm text-green-600 mt-1">Excellent</p>
+                </div>
+                <div class="bg-blue-50 rounded-xl p-6 text-center">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">3</div>
+                    <p class="text-gray-600">Active Loans</p>
+                    <p class="text-sm text-blue-600 mt-1">Well Managed</p>
+                </div>
+                <div class="bg-orange-50 rounded-xl p-6 text-center">
+                    <div class="text-3xl font-bold text-orange-600 mb-2">₹25,400</div>
+                    <p class="text-gray-600">Total Monthly EMI</p>
+                    <p class="text-sm text-orange-600 mt-1">32% of Income</p>
+                </div>
+            </div>
+            
+            <div class="bg-orange-50 rounded-xl p-6 mb-8">
+                <div class="flex items-start space-x-4">
+                    <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-lightbulb text-white"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-2">AI Credit Insight</h4>
+                        <p class="text-gray-700">Your credit utilization is 28% — that's within a healthy range.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button class="gradient-bg text-white font-semibold py-4 px-12 rounded-xl hover:shadow-lg transition-all">
+                 <a href="/Dashboard.html"   >Continue to Dashboard</a>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+let currentStep = 0;
+const totalSteps = 11;
+
+
+
+function startOnboarding() {
+    document.getElementById('welcome-screen').classList.add('hidden');
+    document.getElementById('service-selection').classList.remove('hidden');
+    updateProgress(1);
+}
+
+function selectService(type) {
+    document.querySelectorAll('.service-card').forEach(card => {
+        card.classList.remove('border-blue-500', 'shadow-lg');
+        card.classList.add('border-gray-100');
+    });
+    
+    event.target.closest('.service-card').classList.add('border-blue-500', 'shadow-lg');
+    event.target.closest('.service-card').classList.remove('border-gray-100');
+    
+    const proceedBtn = document.getElementById('proceed-service');
+    proceedBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    proceedBtn.disabled = false;
+    proceedBtn.onclick = proceedToBankPermission;
+}
+
+function proceedToBankPermission() {
+    document.getElementById('service-selection').classList.add('hidden');
+    document.getElementById('bank-permission').classList.remove('hidden');
+    updateProgress(2);
+}
+
+function proceedToBankSelection() {
+    document.getElementById('bank-permission').classList.add('hidden');
+    document.getElementById('bank-selection').classList.remove('hidden');
+    updateProgress(3);
+}
+
+function selectBank(bank) {
+    document.querySelectorAll('.bank-card').forEach(card => {
+        card.classList.remove('border-blue-500', 'shadow-lg');
+        card.classList.add('border-gray-200');
+    });
+    
+    event.target.closest('.bank-card').classList.add('border-blue-500', 'shadow-lg');
+    event.target.closest('.bank-card').classList.remove('border-gray-200');
+    
+    const proceedBtn = document.getElementById('proceed-bank');
+    proceedBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    proceedBtn.disabled = false;
+    proceedBtn.onclick = proceedToOTP;
+}
+
+function proceedToOTP() {
+    document.getElementById('bank-selection').classList.add('hidden');
+    document.getElementById('otp-verification').classList.remove('hidden');
+    updateProgress(4);
+    
+    // Auto-focus first OTP input
+    document.getElementById('otp1').focus();
+    
+    // Handle OTP input navigation
+    const otpInputs = document.querySelectorAll('.otp-input');
+    otpInputs.forEach((input, index) => {
+        input.addEventListener('input', function() {
+            if (this.value.length === 1 && index < otpInputs.length - 1) {
+                otpInputs[index + 1].focus();
+            }
+        });
+        
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Backspace' && this.value === '' && index > 0) {
+                otpInputs[index - 1].focus();
+            }
+        });
+    });
+}
+
+function verifyOTP() {
+    // Simulate OTP verification
+    setTimeout(() => {
+        document.getElementById('otp-verification').classList.add('hidden');
+        document.getElementById('data-fetching').classList.remove('hidden');
+        updateProgress(5);
+    }, 1000);
+     setTimeout(() => {
+                    document.getElementById('data-fetching').classList.add('hidden');
+                    document.getElementById('bank-success').classList.remove('hidden');
+  updateProgress(6);
+                }, 3000);
+}
+
+function proceedToMutualfund(){
+    document.getElementById('bank-success').classList.add('hidden');
+    document.getElementById('mutual-funds-connection').classList.remove('hidden');
+      updateProgress(7);
+}
+
+function proceedToDemat(){
+    document.getElementById('mutual-funds-connection').classList.add('hidden');
+    document.getElementById('demat-connection').classList.remove('hidden');
+      updateProgress(8);
+}
+
+function proceedToCredit(){
+     document.getElementById('demat-connection').classList.add('hidden');
+    document.getElementById('enhanced-liability-connection').classList.remove('hidden');
+    updateProgress(9);
+    
+}
+
+function proceedToCredit(){
+     document.getElementById('demat-connection').classList.add('hidden');
+    document.getElementById('enhanced-liability-connection').classList.remove('hidden');
+    
+}
+function proceedToInsurance(){
+     document.getElementById('enhanced-liability-connection').classList.add('hidden');
+    document.getElementById('enhanced-insurance-connection').classList.remove('hidden');
+  
+}
+
+function proceedToInsurance(){
+     document.getElementById('enhanced-liability-connection').classList.add('hidden');
+    document.getElementById('enhanced-insurance-connection').classList.remove('hidden');
+  
+}
+
+function proceedToProfileSummary(){
+      document.getElementById('enhanced-insurance-connection').classList.add('hidden');
+    document.getElementById('enhanced-profile-review').classList.remove('hidden');
+
+}
+document.getElementById("proceed-btn").addEventListener("click", function () {
+  
+
+    // Step transition
+    document.getElementById("form-step").classList.add("hidden");
+    document.getElementById("fetching-step").classList.remove("hidden");
+
+    // Simulate data fetching (e.g., 3 seconds)
+    setTimeout(() => {
+      document.getElementById("fetching-step").classList.add("hidden");
+      document.getElementById("success-step").classList.remove("hidden");
+    }, 3000);
+  });
+  document.getElementById("demat-proceed-btn").addEventListener("click", function () {
+    // Optional: you can check if a broker is selected
+    // For now, just simulate verification
+
+    // Hide form, show fetching
+    document.getElementById("demat-form-step").classList.add("hidden");
+    document.getElementById("demat-fetching-step").classList.remove("hidden");
+
+    // Simulate OTP verification + data fetching (3.5s)
+    setTimeout(() => {
+      document.getElementById("demat-fetching-step").classList.add("hidden");
+      document.getElementById("demat-success-step").classList.remove("hidden");
+    }, 3500);
+  });
+
+
+
+
+
+// Initialize the onboarding flow
+document.addEventListener('DOMContentLoaded', function() {
+    fetchCreditProfile(0);
+});
+</script>
+<script>
+  // ===== LIABILITY SECTION =====
+  document.getElementById("liability-proceed-btn").addEventListener("click", function () {
+    // Hide form
+    document.getElementById("liability-form-step").classList.add("hidden");
+    // Show fetching
+    document.getElementById("liability-fetching-step").classList.remove("hidden");
+
+    // Simulate data fetching
+   
+  });
+   setTimeout(() => {
+      document.getElementById("liability-fetching-step").classList.add("hidden");
+      document.getElementById("liability-success-step").classList.remove("hidden");
+    }, 3500);
+
+
+  // ===== INSURANCE SECTION =====
+  document.getElementById("insurance-proceed-btn").addEventListener("click", function () {
+    // Hide form
+    document.getElementById("insurance-form-step").classList.add("hidden");
+    // Show fetching
+    document.getElementById("insurance-fetching-step").classList.remove("hidden");
+
+    // Simulate fetching + analysis
+    setTimeout(() => {
+      document.getElementById("insurance-fetching-step").classList.add("hidden");
+      document.getElementById("insurance-success-step").classList.remove("hidden");
+    }, 3500);
+  });
+</script>
+
+
+</body>
+</html>
