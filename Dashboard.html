@@ -749,36 +749,11 @@
   </div>
 
   <!-- Empty State -->
-      <div id="health-score-card" class="glass-card rounded-2xl p-6 flex flex-col justify-between h-full">
-  <!-- Header -->
-  <div class="flex items-center justify-between mb-4">
-    <div class="flex items-center space-x-3">
-      <div
-        class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
-        <i class="fa-solid fa-heart-pulse text-white text-xl"></i>
-      </div>
-      <div>
-        <h2 class="text-base font-semibold text-slate-800">Financial Wellness Score</h2>
-        <p class="text-xs text-slate-500">Your overall financial health</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Score Section -->
-  <div id="score-section" class="hidden text-center my-4">
-    <p id="score-value" class="text-5xl font-extrabold text-blue-600">782</p>
-    <p id="score-status" class="text-sm text-slate-600 mt-1">Excellent • Top 15%</p>
-    <div class="mt-2 w-full h-2 bg-slate-200 rounded-full overflow-hidden">
-      <div id="score-bar" class="h-2 bg-blue-500 w-[78%] rounded-full"></div>
-    </div>
-  </div>
-
-  <!-- Empty State -->
-  <div id="score-empty" class="text-center py-8">
-    <p class="text-sm text-slate-600 mb-4">
-      Connect all your accounts to calculate your Financial Wellness Score.
+ <div id="score-empty" class="flex flex-col items-center justify-center flex-1 text-center py-8">
+    <p class="text-sm text-slate-600 max-w-xs">
+      Connect all your accounts to calculate your <br />
+      <span class="font-semibold text-blue-600">Financial Wellness Score</span>.
     </p>
-    
   </div>
 
   <!-- AI Suggestion -->
@@ -804,32 +779,6 @@
       <i class="fa-solid fa-calculator mr-2"></i> Calculate Score
     </button>
   </div>
-</div>
-
-
-  <!-- AI Suggestion -->
-  <div id="ai-suggestion" class="hidden mt-6 bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-3 flex items-start space-x-3">
-    <div class="flex-shrink-0">
-      <i class="fa-solid fa-crown text-orange-500 text-lg mt-0.5"></i>
-    </div>
-    <div class="flex-1">
-      <p class="text-sm text-slate-800">
-        AI suggests improving your <span class="font-semibold text-orange-600">investment diversity</span> to balance portfolio risk.
-      </p>
-      <a href="/plan.html"
-        class="inline-flex items-center text-orange-600 text-xs font-semibold mt-2 hover:text-orange-700 transition-colors">
-        Get Personalized Plan
-      </a> 
-    </div>
-  </div>
-
-  <!-- Calculate Button -->
-  <!-- <div id="calculate-btn-wrapper" class="hidden mt-6 flex justify-center">
-    <button id="calculate-btn"
-      class="bg-blue-600 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition">
-      <i class="fa-solid fa-calculator mr-2"></i> Calculate Score
-    </button>
-  </div> -->
 </div>
 
 <script>
