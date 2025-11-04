@@ -733,53 +733,126 @@
                 </div>
 
                 <div id="health-score-card" class="glass-card rounded-2xl p-6 flex flex-col justify-between h-full">
-                    <!-- Header -->
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center space-x-3">
-                            <div
-                                class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
-                                <i class="fa-solid fa-heart-pulse text-white text-xl"></i>
-                            </div>
-                            <div>
-                                <h2 class="text-base font-semibold text-slate-800">Financial Wellness Score</h2>
-                                <p class="text-xs text-slate-500">Your overall financial health</p>
-                            </div>
-                        </div>
-                        <!-- <button class="hover:text-blue-600 text-slate-400">
-      <i class="fa-solid fa-rotate-right text-sm"></i>
-    </button> -->
-                    </div>
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-4">
+    <div class="flex items-center space-x-3">
+      <div
+        class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+        <i class="fa-solid fa-heart-pulse text-white text-xl"></i>
+      </div>
+      <div>
+        <h2 class="text-base font-semibold text-slate-800">Financial Wellness Score</h2>
+        <p class="text-xs text-slate-500">Your overall financial health</p>
+      </div>
+    </div>
+  </div>
 
-                    <!-- Score Display -->
-                    <div class="text-center my-4">
-                        <p class="text-5xl font-extrabold text-blue-600">782</p>
-                        <p class="text-sm text-slate-600 mt-1">Excellent • Top 15%</p>
-                        <div class="mt-2 w-full h-2 bg-slate-200 rounded-full overflow-hidden">
-                            <div class="h-2 bg-blue-500 w-[78%] rounded-full"></div>
-                        </div>
-                    </div>
+  <!-- Score Section -->
+  <div id="score-section" class="hidden text-center my-4">
+    <p id="score-value" class="text-5xl font-extrabold text-blue-600">782</p>
+    <p id="score-status" class="text-sm text-slate-600 mt-1">Excellent • Top 15%</p>
+    <div class="mt-2 w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+      <div id="score-bar" class="h-2 bg-blue-500 w-[78%] rounded-full"></div>
+    </div>
+  </div>
 
-                    <!-- Metrics Breakdown -->
+  <!-- Empty State -->
+  <div id="score-empty" class="text-center py-8">
+    <p class="text-sm text-slate-600 mb-4">
+      Connect all your accounts to calculate your Financial Wellness Score.
+    </p>
+    <div class="flex flex-wrap justify-center gap-3">
+      <a href="/mutualfund.html"
+        class="inline-flex items-center bg-blue-600 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+        <i class="fa-solid fa-upload mr-2"></i> Connect Mutual Funds
+      </a>
+      <a href="/stocks.html"
+        class="inline-flex items-center bg-green-600 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition">
+        <i class="fa-solid fa-chart-line mr-2"></i> Connect Stocks
+      </a>
+      <a href="/liabilities.html"
+        class="inline-flex items-center bg-amber-500 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-amber-600 transition">
+        <i class="fa-solid fa-link mr-2"></i> Connect Liabilities
+      </a>
+    </div>
+  </div>
 
+  <!-- AI Suggestion -->
+  <div id="ai-suggestion" class="hidden mt-6 bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-3 flex items-start space-x-3">
+    <div class="flex-shrink-0">
+      <i class="fa-solid fa-crown text-orange-500 text-lg mt-0.5"></i>
+    </div>
+    <div class="flex-1">
+      <p class="text-sm text-slate-800">
+        AI suggests improving your <span class="font-semibold text-orange-600">investment diversity</span> to balance portfolio risk.
+      </p>
+      <a href="/plan.html"
+        class="inline-flex items-center text-orange-600 text-xs font-semibold mt-2 hover:text-orange-700 transition-colors">
+        Get Personalized Plan
+      </a>
+    </div>
+  </div>
 
-                    <!-- AI Suggestion -->
-                    <div
-                        class="mt-6 bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-3 flex items-start space-x-3">
-                        <div class="flex-shrink-0">
-                            <i class="fa-solid fa-crown text-orange-500 text-lg mt-0.5"></i>
-                        </div>
-                        <div class="flex-1">
-                            <p class="text-sm text-slate-800">
-                                AI suggests improving your <span class="font-semibold text-orange-600">investment
-                                    diversity</span> to balance portfolio risk.
-                            </p>
-                            <a href="/plan.html"
-                                class="inline-flex items-center text-orange-600 text-xs font-semibold mt-2 hover:text-orange-700 transition-colors">
-                                Get Personalized Plan
-                            </a>
-                        </div>
-                    </div>
-                </div>
+  <!-- Calculate Button -->
+  <div id="calculate-btn-wrapper" class="hidden mt-6 flex justify-center">
+    <button id="calculate-btn"
+      class="bg-blue-600 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+      <i class="fa-solid fa-calculator mr-2"></i> Calculate Score
+    </button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const hasMF = localStorage.getItem("hasMFData") === "true";
+    const hasStock = localStorage.getItem("hasStockData") === "true";
+    const hasLiability = localStorage.getItem("liabilitiesConnected") === "true";
+
+    const scoreSection = document.getElementById("score-section");
+    const scoreEmpty = document.getElementById("score-empty");
+    const aiSuggestion = document.getElementById("ai-suggestion");
+    const calculateBtnWrapper = document.getElementById("calculate-btn-wrapper");
+    const scoreValue = document.getElementById("score-value");
+    const scoreBar = document.getElementById("score-bar");
+    const scoreStatus = document.getElementById("score-status");
+
+    if (hasMF && hasStock && hasLiability) {
+      scoreEmpty.classList.add("hidden");
+      scoreSection.classList.remove("hidden");
+      aiSuggestion.classList.remove("hidden");
+      calculateBtnWrapper.classList.remove("hidden");
+    } else {
+      scoreEmpty.classList.remove("hidden");
+      scoreSection.classList.add("hidden");
+      aiSuggestion.classList.add("hidden");
+      calculateBtnWrapper.classList.add("hidden");
+    }
+
+    // Handle Calculate Button
+    document.getElementById("calculate-btn").addEventListener("click", function () {
+      // Simulate dynamic score generation
+      const randomScore = Math.floor(Math.random() * (850 - 550 + 1)) + 550;
+      scoreValue.textContent = randomScore;
+
+      let status = "Good • Top 30%";
+      let width = "60%";
+      if (randomScore > 750) {
+        status = "Excellent • Top 15%";
+        width = "80%";
+      } else if (randomScore < 650) {
+        status = "Needs Improvement • Bottom 40%";
+        width = "45%";
+      }
+
+      scoreStatus.textContent = status;
+      scoreBar.style.width = width;
+
+      // Optional AI feedback refresh
+      aiSuggestion.classList.remove("hidden");
+    });
+  });
+</script>
+
 
 
                 <!-- Net Worth Portfolio Snapshot -->
@@ -940,84 +1013,136 @@
                     </script>
 
 
-                    <div id="insurance-card" class="glass-card rounded-2xl p-6  relative">
+               <div id="insurance-card" class="glass-card rounded-2xl p-6 relative">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-4 space-x-2">
+    <div>
+      <p class="text-xl font-bold text-slate-800 flex items-center">Insurance Overview</p>
+      <p id="insurance-count" class="text-slate-500 text-sm">0 Active Policies</p>
+    </div>
+    <button id="import-insurance-btn"
+      class="bg-orange-400 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-500 transition-colors">
+      <i class="fa-solid fa-download mr-1"></i> Import
+    </button>
+  </div>
 
+  <!-- Policy List (hidden by default) -->
+  <div id="policy-list" class="hidden space-y-4 mb-5">
+    <!-- Life Insurance -->
+    <div class="bg-white/60 p-3 rounded-xl">
+      <div class="flex justify-between items-center">
+        <div>
+          <p class="text-sm font-semibold text-slate-800">Life Insurance – Term Plan</p>
+          <p class="text-xs text-slate-500">HDFC Life • Policy No: LI12345678</p>
+        </div>
+        <div class="text-right">
+          <p class="text-lg font-bold text-green-700">₹1,00,00,000</p>
+          <p class="text-xs text-slate-500">Sum Assured</p>
+        </div>
+      </div>
+    </div>
 
-                        <div class="flex items-center justify-between mb-4 space-x-2">
-                            <div>
-                                <p class="text-xl font-bold text-slate-800 flex items-center">Insurance Overview </p>
-                                <p class="text-slate-500 text-sm ">3 Active Policies</p>
-                            </div>
-                            <button
-                                class="bg-orange-400 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-500 transition-colors">
-                                <i class="fa-solid fa-download mr-1"></i> Import
-                            </button>
-                        </div>
+    <!-- Health Insurance -->
+    <div class="bg-white/60 p-3 rounded-xl">
+      <div class="flex justify-between items-center">
+        <div>
+          <p class="text-sm font-semibold text-slate-800">Health Insurance – Family</p>
+          <p class="text-xs text-slate-500">Star Health • Policy No: HI98765432</p>
+        </div>
+        <div class="text-right">
+          <p class="text-lg font-bold text-green-700">₹10,00,000</p>
+          <p class="text-xs text-slate-500">Sum Assured</p>
+        </div>
+      </div>
+    </div>
 
-                        <!-- Policy List -->
-                        <div class="space-y-4 mb-5">
-                            <!-- Life Insurance -->
-                            <div class="bg-white/60 p-3 rounded-xl">
-                                <div class="flex justify-between items-center">
-                                    <div>
-                                        <p class="text-sm font-semibold text-slate-800">Life Insurance – Term Plan</p>
-                                        <p class="text-xs text-slate-500">HDFC Life • Policy No: LI12345678</p>
-                                    </div>
-                                    <div class="text-right">
-                                        <p class="text-lg font-bold text-green-700">₹1,00,00,000</p>
-                                        <p class="text-xs text-slate-500">Sum Assured</p>
-                                    </div>
-                                </div>
-                            </div>
+    <!-- Motor Insurance -->
+    <div class="bg-white/60 p-3 rounded-xl">
+      <div class="flex justify-between items-center">
+        <div>
+          <p class="text-sm font-semibold text-slate-800">Motor Insurance</p>
+          <p class="text-xs text-slate-500">ICICI Lombard • Policy No: MI11223344</p>
+        </div>
+        <div class="text-right">
+          <p class="text-lg font-bold text-green-700">₹8,50,000</p>
+          <p class="text-xs text-slate-500">IDV</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-                            <!-- Health Insurance -->
-                            <div class="bg-white/60 p-3 rounded-xl">
-                                <div class="flex justify-between items-center">
-                                    <div>
-                                        <p class="text-sm font-semibold text-slate-800">Health Insurance – Family</p>
-                                        <p class="text-xs text-slate-500">Star Health • Policy No: HI98765432</p>
-                                    </div>
-                                    <div class="text-right">
-                                        <p class="text-lg font-bold text-green-700">₹10,00,000</p>
-                                        <p class="text-xs text-slate-500">Sum Assured</p>
-                                    </div>
-                                </div>
-                            </div>
+  <!-- AI Insight -->
+  <div id="insurance-ai" class="hidden bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-xl p-4">
+    <div class="flex items-start">
+      <div class="w-10 h-10 bg-orange-400 rounded-lg flex items-center justify-center mr-3">
+        <i class="fa-solid fa-robot text-white text-lg"></i>
+      </div>
+      <div>
+        <p class="text-slate-700 text-sm font-medium mb-0">
+          You have adequate life cover, but your motor policy expires soon — renew to stay protected.
+        </p>
+      </div>
+    </div>
+  </div>
 
-                            <!-- Motor Insurance -->
-                            <div class="bg-white/60 p-3 rounded-xl">
-                                <div class="flex justify-between items-center">
-                                    <div>
-                                        <p class="text-sm font-semibold text-slate-800">Motor Insurance</p>
-                                        <p class="text-xs text-slate-500">ICICI Lombard • Policy No: MI11223344</p>
-                                    </div>
-                                    <div class="text-right">
-                                        <p class="text-lg font-bold text-green-700">₹8,50,000</p>
-                                        <p class="text-xs text-slate-500">IDV</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+  <!-- Empty State -->
+  <div id="insurance-empty" class="text-center py-10">
+    <p class="text-slate-600 text-sm mb-4">
+      No insurance data found. Import your policies to get a full overview.
+    </p>
+    <button id="connect-insurance-btn"
+      class="bg-blue-600 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+      <i class="fa-solid fa-upload mr-1"></i> Connect Insurance
+    </button>
+  </div>
+</div>
 
-                        <!-- AI Insight -->
-                        <div
-                            class="bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-xl p-4">
-                            <div class="flex items-start">
-                                <div class="w-10 h-10 bg-orange-400 rounded-lg flex items-center justify-center mr-3">
-                                    <i class="fa-solid fa-robot text-white text-lg"></i>
-                                </div>
-                                <div>
-                                    <p class="text-slate-700 text-sm font-medium mb-0">
-                                        You have adequate life cover, but your motor policy expires soon — renew to stay
-                                        protected.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const hasInsurance = localStorage.getItem("hasInsuranceData") === "true";
 
-                        <!-- Import / Add Insurance Button -->
+    const policyList = document.getElementById("policy-list");
+    const aiInsight = document.getElementById("insurance-ai");
+    const insuranceEmpty = document.getElementById("insurance-empty");
+    const insuranceCount = document.getElementById("insurance-count");
 
-                    </div>
+    const importBtn = document.getElementById("import-insurance-btn");
+    const connectBtn = document.getElementById("connect-insurance-btn");
+
+    function showInsuranceData() {
+      policyList.classList.remove("hidden");
+      aiInsight.classList.remove("hidden");
+      insuranceEmpty.classList.add("hidden");
+      insuranceCount.textContent = "3 Active Policies";
+    }
+
+    function showEmptyState() {
+      policyList.classList.add("hidden");
+      aiInsight.classList.add("hidden");
+      insuranceEmpty.classList.remove("hidden");
+      insuranceCount.textContent = "0 Active Policies";
+    }
+
+    // Initial render based on localStorage
+    if (hasInsurance) {
+      showInsuranceData();
+    } else {
+      showEmptyState();
+    }
+
+    // Import button → set to true and show
+    importBtn.addEventListener("click", function () {
+      localStorage.setItem("hasInsuranceData", "true");
+      showInsuranceData();
+    });
+
+    // Connect button → set to true and show
+    connectBtn.addEventListener("click", function () {
+      localStorage.setItem("hasInsuranceData", "true");
+      showInsuranceData();
+    });
+  });
+</script>
                     <div id="investment-insights" class="glass-card rounded-2xl p-6 relative overflow-hidden">
                         <!-- Header -->
                         <div class="flex items-center justify-between mb-6">
