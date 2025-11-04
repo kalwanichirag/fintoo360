@@ -1,0 +1,2096 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest' };</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"
+        referrerpolicy="no-referrer"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #cbd5e1 75%, #94a3b8 100%);
+        }
+
+        .wealth-wave {
+            background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.3), transparent);
+            animation: wave 3s ease-in-out infinite;
+        }
+
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        .ai-glow {
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+            animation: pulse-glow 2s ease-in-out infinite alternate;
+        }
+
+        .typing-dots::after {
+            content: '';
+            animation: typing 1.5s infinite;
+        }
+
+        .wave-fill {
+            background: linear-gradient(135deg, #10b981, #059669);
+            animation: wave-fill 2s ease-out;
+        }
+
+        @keyframes wave {
+
+            0%,
+            100% {
+                transform: translateX(-100%);
+            }
+
+            50% {
+                transform: translateX(100vw);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+            }
+
+            100% {
+                box-shadow: 0 0 40px rgba(16, 185, 129, 0.4);
+            }
+        }
+
+        @keyframes typing {
+
+            0%,
+            20% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes wave-fill {
+            0% {
+                width: 0%;
+            }
+
+            100% {
+                width: 78%;
+            }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+
+
+
+
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #10b981, #059669);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .confetti {
+            animation: confetti-fall 3s ease-out forwards;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.25s ease-out;
+        }
+
+        .sidebar-active {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
+            border-right: 3px solid #10b981;
+        }
+
+        .notification-slide {
+            animation: slide-in-notification 0.5s ease-out;
+        }
+
+        @keyframes slide-in-notification {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body class="gradient-bg min-h-screen relative overflow-x-hidden">
+
+    <!-- Animated Background Elements -->
+    <div id="background-elements" class="fixed inset-0 pointer-events-none z-0">
+        <div class="wealth-wave absolute top-1/4 left-0 w-full h-1 opacity-30"></div>
+        <div class="shimmer absolute top-1/2 left-0 w-full h-px opacity-20"></div>
+        <div class="floating-element absolute top-20 right-20 w-2 h-2 bg-blue-400 rounded-full opacity-20"></div>
+        <div class="floating-element absolute bottom-40 left-20 w-1 h-1 bg-blue-300 rounded-full opacity-30"
+            style="animation-delay: 2s;"></div>
+        <div class="floating-element absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-blue-500 rounded-full opacity-15"
+            style="animation-delay: 4s;"></div>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <!-- Sidebar -->
+<div id="sidebar" class="fixed left-0 top-0 w-64 h-full bg-slate-900 flex flex-col z-30 transition-transform duration-300 -translate-x-full">
+
+    <!-- Logo + Collapse Button -->
+    <div class="flex items-center justify-between p-6 border-b border-slate-700">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center">
+                <i class="fa-solid fa-chart-line text-white text-lg"></i>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold text-white">Fintoo360</h1>
+                <p class="text-blue-400 text-xs">Plan. Grow. Prosper.</p>
+            </div>
+        </div>
+        <button id="sidebarClose" class=" text-slate-400 hover:text-white">
+            <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+    </div>
+
+    <!-- Trial Progress -->
+    <div class="px-6 py-4">
+        <div class="bg-slate-800 rounded-xl p-4">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-slate-300 text-sm">Free trial</span>
+                <span class="text-blue-400 text-xs font-medium">20 days left</span>
+            </div>
+            <div class="w-full bg-slate-700 rounded-full h-2">
+                <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full" style="width: 25%"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex-1 px-4 overflow-y-auto">
+        <ul class="space-y-1">
+            <li>
+                <a href="#" class="sidebar-active flex items-center px-4 py-3 text-blue-600 rounded-lg font-medium">
+                    <i class="fa-solid fa-home w-5 mr-3"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#"
+                    class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                    <i class="fa-solid fa-wallet w-5 mr-3"></i>
+                    <span>Accounts</span>
+                </a>
+            </li>
+            <li>
+                <a href="#"
+                    class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                    <i class="fa-solid fa-exchange-alt w-5 mr-3"></i>
+                    <span>Transactions</span>
+                </a>
+            </li>
+            <li>
+                <a href="#"
+                    class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                    <i class="fa-solid fa-chart-line w-5 mr-3"></i>
+                    <span>Investments</span>
+                </a>
+            </li>
+            <li>
+                <a href="#"
+                    class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                    <i class="fa-solid fa-file-alt w-5 mr-3"></i>
+                    <span>Reports</span>
+                    <span class="ml-auto bg-blue-600 text-white text-xs px-2 py-1 rounded">BETA</span>
+                </a>
+            </li>
+            <li>
+                <a href="#"
+                    class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                    <i class="fa-solid fa-piggy-bank w-5 mr-3"></i>
+                    <span>Savings</span>
+                </a>
+            </li>
+            <li>
+                <a href="#"
+                    class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                    <i class="fa-solid fa-credit-card w-5 mr-3"></i>
+                    <span>Liabilities</span>
+                </a>
+            </li>
+            <li>
+                <a href="#"
+                    class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                    <i class="fa-solid fa-bullseye w-5 mr-3"></i>
+                    <span>Goals</span>
+                </a>
+            </li>
+            <li>
+                <a href="#"
+                    class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                    <i class="fa-solid fa-lightbulb w-5 mr-3"></i>
+                    <span>Advice</span>
+                </a>
+            </li>
+            <li>
+                <a href="#"
+                    class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                    <i class="fa-solid fa-robot w-5 mr-3"></i>
+                    <span>AI Assistant</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Footer Section -->
+    <div class="p-4 mt-auto">
+        <div class="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-4 mb-4">
+            <div class="flex items-center">
+                <i class="fa-solid fa-gift text-orange-400 text-xl mr-3"></i>
+                <div>
+                    <p class="text-white font-medium text-sm">Get 1 Month Free</p>
+                    <p class="text-blue-200 text-xs">Upgrade to Premium</p>
+                </div>
+            </div>
+        </div>
+
+        <button class="flex items-center text-slate-400 hover:text-white py-2 mb-4 transition-colors">
+            <i class="fa-solid fa-question-circle mr-3"></i>
+            <span>Help & Support</span>
+        </button>
+
+        <!-- Avatar -->
+        <div class="flex items-center cursor-pointer">
+            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User Avatar"
+                class="w-9 h-9 rounded-full border-2 border-blue-600">
+            <div class="ml-3 flex-1">
+                <p class="text-white font-medium text-sm">Chirag Kalwani</p>
+                <p class="text-slate-400 text-xs">Premium User</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sidebar Toggle Button -->
+
+
+<!-- JS -->
+
+
+
+    <!-- Main Content Area -->
+    <div class=" relative z-10">
+
+        <!-- Header -->
+        <header id="header" class="bg-white/80 backdrop-blur-lg border-b border-white/20 px-8 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-5">
+                  <button id="sidebarToggle" class="text-slate-600 hover:text-blue-600 ">
+  <i class="fa-solid fa-bars text-xl"></i>
+</button>
+
+                    <div>
+                        <h1 class="text-2xl font-bold text-slate-800">Good evening, Chirag</h1>
+                        <p class="text-blue-600 font-medium">Your portfolio grew 4.2% this month! 📈</p>
+                    </div>
+                </div>
+
+                <!-- Market Updates in Header -->
+                <div class="flex items-center space-x-6">
+                    <div class="flex items-center space-x-4 text-sm">
+                        <div class="flex items-center">
+                            <span class="text-slate-600 mr-1">SENSEX</span>
+                            <span class="font-bold text-slate-800">72,832</span>
+                            <span class="text-green-600 ml-1">+0.34%</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-slate-600 mr-1">NIFTY</span>
+                            <span class="font-bold text-slate-800">22,097</span>
+                            <span class="text-green-600 ml-1">+0.36%</span>
+                        </div>
+                    </div>
+
+                    <!-- Fintoo Points -->
+                    <div class="flex items-center bg-orange-50 border border-orange-200 rounded-lg px-3 py-2">
+                        <i class="fa-solid fa-star text-orange-600 mr-2"></i>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-orange-800 font-medium text-sm">800</span><span>/</span><span
+                                class="text-orange-600 text-sm">1000</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-4">
+                        <button class="text-slate-600 hover:text-slate-800 transition-colors">
+                            <i class="fa-solid fa-search text-lg"></i>
+                        </button>
+                        <button class="text-slate-600 hover:text-slate-800 transition-colors relative">
+                            <i class="fa-solid fa-bell text-lg"></i>
+                            <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+        <!-- Main Dashboard Content -->
+        <main id="main-dashboard" class="p-8 Container">
+
+            <!-- Top Metrics Row -->
+            <section id="quick-info-cards" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3 mb-8">
+                <div id="net-worth-card"
+                    class="glass-card rounded-2xl p-6 flex flex-col justify-between h-full relative">
+                    <!-- Top Content -->
+                    <div>
+                        <!-- Header -->
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                                    <i class="fa-solid fa-wallet text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-base font-semibold text-slate-800">Total Networth</h2>
+                                    <p class="text-xs text-slate-500">Summary</p>
+                                </div>
+                            </div>
+
+                            <!-- <div class="flex items-center text-slate-400">
+        <button class="hover:text-blue-600 mr-2">
+          <i class="fa-solid fa-rotate-right text-sm"></i>
+        </button>
+        <span class="text-xs">3m ago</span>
+      </div> -->
+                        </div>
+
+                        <!-- Net Worth Summary -->
+                        <p class="text-xs text-slate-500 mb-1">Current Value</p>
+
+                        <p class="text-3xl font-bold text-black-600">₹24,89,640</p>
+                        <div class="flex justify-between text-xs mt-2">
+                            <span class="text-slate-600">Assets: ₹28.9L</span>
+                            <span class="text-slate-600">Liabilities: ₹4.0L</span>
+                        </div>
+
+                        <!-- Insight Line -->
+
+
+                        <!-- AI Premium Suggestion -->
+                        <div
+                            class="mt-4 bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-3 flex items-start space-x-3">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-crown text-orange-500 text-lg mt-0.5"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-slate-800">
+                                    A shortfall has been observed in the goal realization.
+                                </p>
+                                <a href="/plan.html"
+                                    class="inline-flex items-center text-orange-600 text-xs font-semibold mt-2 hover:text-orange-700 transition-colors">
+                                    Ask me how to achieve
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Buttons (Always aligned at bottom) -->
+                    <!-- Card Buttons -->
+                    <div class="mt-6 pt-4 border-t border-slate-200 flex flex-wrap gap-3">
+                        <button onclick="openModal('networthModal')"
+                            class="bg-orange-400 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-500 transition-colors flex-1 text-center">
+                            <i class="fa-solid fa-chart-line mr-1"></i> Net Worth Trend
+                        </button>
+
+                        <button onclick="openModal('portfolioModal')"
+                            class="bg-blue-600 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex-1 text-center">
+                            <i class="fa-solid fa-layer-group mr-1"></i> Portfolio Insight
+                        </button>
+                    </div>
+
+
+
+                    <!-- MODAL SCRIPT -->
+                    <script>
+                        function openModal(id) {
+                            document.getElementById(id).classList.remove("hidden");
+                        }
+                        function closeModal(id) {
+                            document.getElementById(id).classList.add("hidden");
+                        }
+                    </script>
+
+                    <!-- ANIMATION -->
+                    <style>
+
+                    </style>
+
+                </div>
+
+                <!-- Financial Health Score -->
+
+
+                <!-- Mutual Fund Overview -->
+                <!-- Mutual Fund Overview -->
+                <div id="mutual-fund-card-filled" class="glass-card rounded-2xl p-6 relative grid items-strech">
+                    <!-- Header -->
+                    <div class="">
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                                    <i class="fa-solid fa-chart-pie text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-base font-semibold text-slate-800">Mutual Funds</h2>
+                                    <p class="text-xs text-slate-500">Portfolio Summary</p>
+                                </div>
+                            </div>
+                            <button title="Refresh Data" class="text-slate-500 hover:text-blue-600">
+                                <i class="fa-solid fa-rotate-right"></i>
+                            </button>
+                        </div>
+
+                        <!-- Current Value & Overall Gain -->
+                        <div class="mb-6">
+                            <p class="text-xs text-slate-500 mb-1">Current Value</p>
+                            <div class="flex items-baseline space-x-2">
+                                <p class="text-3xl font-bold text-slate-900">₹1,24,500</p>
+                                <span class="text-green-600 font-semibold text-sm">+₹4,500 (3.75%)</span>
+                                <i class="fa-solid fa-arrow-trend-up text-green-600 text-xs"></i>
+                            </div>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="border-t border-slate-200/70 my-4"></div>
+
+                        <!-- Investment Summary -->
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                                <p class="text-slate-500 text-xs mb-1">Invested Value</p>
+                                <p class="font-semibold text-slate-700">₹1,20,000</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-slate-500 text-xs mb-1">1 Day Return</p>
+                                <p class="font-semibold text-green-600">+₹320 (0.26%)</p>
+                            </div>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="border-t border-slate-200/70 my-3"></div>
+                    </div>
+                    <div class="grid items-end">
+                        <!-- Time Filter -->
+                        <div
+                            class="mt-4 bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-3 flex items-start space-x-3">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-crown text-orange-500 text-lg mt-0.5"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-slate-800">
+                                    Your MF portfolio is underperforming.
+                                </p>
+                                <a href="/plan.html"
+                                    class="inline-flex items-center text-orange-600 text-xs font-semibold mt-2 hover:text-orange-700 transition-colors">
+                                    Ask me how to boost your returns
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="mutual-fund-card-empty" class="glass-card rounded-2xl p-6 relative grid items-stretch">
+                    <!-- Header -->
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                                    <i class="fa-solid fa-chart-pie text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-base font-semibold text-slate-800">Mutual Funds</h2>
+                                    <p class="text-xs text-slate-500">Portfolio Summary</p>
+                                </div>
+                            </div>
+                            <a href="/mutualfund.html"
+                                class="bg-orange-400 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-500 transition-colors">
+                                <i class="fa-solid fa-download mr-1"></i> Import
+                            </a>
+                        </div>
+
+                        <!-- Empty State Value Section -->
+                        <div class="mb-6 text-center">
+                            <p class="text-xs text-slate-500 mb-1">Current Value</p>
+                            <div class="flex flex-col items-center space-y-1">
+                                <p class="text-3xl font-bold text-slate-900">₹0</p>
+                                <span class="text-slate-400 font-medium text-sm">No data available</span>
+                            </div>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="border-t border-slate-200/70 my-4"></div>
+                    </div>
+
+                    <!-- AI Message / Placeholder -->
+                    <div class="grid items-end">
+                        <div
+                            class="mt-4 bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-4 flex items-start space-x-3">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-robot text-blue-500 text-lg mt-0.5"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-slate-800 leading-relaxed">
+                                    My analysis shows no active Mutual Fund data yet.
+                                </p>
+                                <a href="/mutualfund.html"
+                                    class="inline-flex items-center text-blue-600 text-xs font-semibold mt-2 hover:text-blue-700 transition-colors">
+                                    <i class="fa-solid fa-upload mr-1"></i> Import Mutual Fund Portfolio
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="stock-card-filled" class="glass-card rounded-2xl p-6 relative grid items-strech">
+                    <!-- Header -->
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                                    <i class="fa-solid fa-chart-line text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-base font-semibold text-slate-800">Stocks</h2>
+                                    <p class="text-xs text-slate-500">Portfolio Summary</p>
+                                </div>
+                            </div>
+                            <button title="Refresh Data" class="text-slate-500 hover:text-blue-600">
+                                <i class="fa-solid fa-rotate-right"></i>
+                            </button>
+                        </div>
+
+                        <!-- Current Value & Overall Gain -->
+                        <div class="mb-6">
+                            <p class="text-xs text-slate-500 mb-1">Current Value</p>
+                            <div class="flex items-center space-x-2 justify-between">
+                                <p class="text-3xl font-bold text-slate-900">₹1,24,500</p>
+
+                            </div>
+                        </div>
+                        <div class="border-t border-slate-200/70 my-3"></div>
+
+                        <div class="text-left py-0">
+                            <p class="text-slate-500 text-xs mb-1">1 Day Return</p>
+                            <p class="font-semibold text-green-600">+₹320 (0.26%)</p>
+                        </div>
+                        <div class="border-t border-slate-200/70 my-3"></div>
+
+                    </div>
+
+                    <!-- Time Filter -->
+                    <div class="grid items-end">
+                        <div
+                            class="mt-4 bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-3 flex items-start space-x-3">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-crown text-orange-500 text-lg mt-0.5"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-slate-800">
+                                    Your portfolio has outperformed. </p>
+                                <a href="/plan.html"
+                                    class="inline-flex items-center text-orange-600 text-xs font-semibold mt-2 hover:text-orange-700 transition-colors">
+                                    Ask me how to optimize
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div id="stock-card-empty" class="glass-card rounded-2xl p-6 relative grid items-stretch">
+                    <!-- Header -->
+                    <div>
+                        <div class="flex items-center justify-between mb-5">
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                                    <i class="fa-solid fa-chart-line text-white text-xl"></i>
+                                </div>
+                                <div>
+                                    <h2 class="text-base font-semibold text-slate-800">Stocks</h2>
+                                    <p class="text-xs text-slate-500">Portfolio Summary</p>
+                                </div>
+                            </div>
+                            <a href="/dematconnect.html"
+                                class="bg-orange-400 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-500 transition-colors">
+                                <i class="fa-solid fa-download mr-1"></i> Import
+                            </a>
+                        </div>
+
+                        <!-- Empty State Value Section -->
+                        <div class="mb-6 text-center">
+                            <p class="text-xs text-slate-500 mb-1">Current Value</p>
+                            <div class="flex flex-col items-center space-y-1">
+                                <p class="text-3xl font-bold text-slate-900">₹0</p>
+                                <span class="text-slate-400 font-medium text-sm">No data available</span>
+                            </div>
+                        </div>
+
+                        <!-- Divider -->
+                        <div class="border-t border-slate-200/70 my-4"></div>
+                    </div>
+
+                    <!-- AI Message / Empty Guidance -->
+                    <div class="grid items-end">
+                        <div
+                            class="mt-4 bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 rounded-lg p-4 flex items-start space-x-3">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-robot text-blue-500 text-lg mt-0.5"></i>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-slate-800 leading-relaxed">
+                                    Please import your stock data to start tracking live performance and insights.
+                                </p>
+                                <a href="/dematconnect.html"
+                                    class="inline-flex items-center text-blue-600 text-xs font-semibold mt-2 hover:text-blue-700 transition-colors">
+                                    <i class="fa-solid fa-upload mr-1"></i> Import Stock Portfolio
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="health-score-card" class="glass-card rounded-2xl p-6 flex flex-col justify-between h-full">
+                    <!-- Header -->
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-3">
+                            <div
+                                class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                                <i class="fa-solid fa-heart-pulse text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-base font-semibold text-slate-800">Financial Wellness Score</h2>
+                                <p class="text-xs text-slate-500">Your overall financial health</p>
+                            </div>
+                        </div>
+                        <!-- <button class="hover:text-blue-600 text-slate-400">
+      <i class="fa-solid fa-rotate-right text-sm"></i>
+    </button> -->
+                    </div>
+
+                    <!-- Score Display -->
+                    <div class="text-center my-4">
+                        <p class="text-5xl font-extrabold text-blue-600">782</p>
+                        <p class="text-sm text-slate-600 mt-1">Excellent • Top 15%</p>
+                        <div class="mt-2 w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+                            <div class="h-2 bg-blue-500 w-[78%] rounded-full"></div>
+                        </div>
+                    </div>
+
+                    <!-- Metrics Breakdown -->
+
+
+                    <!-- AI Suggestion -->
+                    <div
+                        class="mt-6 bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-lg p-3 flex items-start space-x-3">
+                        <div class="flex-shrink-0">
+                            <i class="fa-solid fa-crown text-orange-500 text-lg mt-0.5"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm text-slate-800">
+                                AI suggests improving your <span class="font-semibold text-orange-600">investment
+                                    diversity</span> to balance portfolio risk.
+                            </p>
+                            <a href="/plan.html"
+                                class="inline-flex items-center text-orange-600 text-xs font-semibold mt-2 hover:text-orange-700 transition-colors">
+                                Get Personalized Plan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Net Worth Portfolio Snapshot -->
+
+            </section>
+
+
+            <section id="networth-breakdown" class=" my-8">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- <div class=" bg-white rounded-xl shadow-sm border border-gray-100">
+                        <div class="p-6 border-b border-gray-100">
+                            <h2 class="text-xl font-bold text-navy font-display mb-1">Net Worth Trend</h2>
+                            <p class="text-sm text-gray-600">Your wealth growth over the last 12 months</p>
+                        </div>
+                        <div class="p-6">
+                            <div id="portfolio-chart-one" class="h-64"></div>
+
+                        </div>
+                    </div> -->
+
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100">
+                        <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+                            <h3 class="text-xl font-bold text-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-chart-pie text-blue-600"></i>
+                                Asset Allocation Overview
+                            </h3>
+                            <!-- <button title="Refresh Data" class="text-slate-500 hover:text-blue-600">
+      <i class="fa-solid fa-rotate-right"></i>
+    </button> -->
+                        </div>
+
+                        <div class="p-6">
+                            <div id="asset-allocation-chart" class="h-72 mb-6"></div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Equity Breakdown -->
+                                <div>
+                                    <h4 class="text-sm font-semibold text-slate-700 mb-3 uppercase tracking-wide">Equity
+                                        Allocation</h4>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center justify-between text-sm">
+                                            <div class="flex items-center">
+                                                <div class="w-3 h-3 rounded-full bg-blue-600 mr-2"></div>
+                                                <span>Large Cap</span>
+                                            </div>
+                                            <span class="font-medium text-slate-800">₹6,00,000</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-sm">
+                                            <div class="flex items-center">
+                                                <div class="w-3 h-3 rounded-full bg-blue-400 mr-2"></div>
+                                                <span>Mid Cap</span>
+                                            </div>
+                                            <span class="font-medium text-slate-800">₹3,00,000</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-sm">
+                                            <div class="flex items-center">
+                                                <div class="w-3 h-3 rounded-full bg-blue-300 mr-2"></div>
+                                                <span>Small Cap</span>
+                                            </div>
+                                            <span class="font-medium text-slate-800">₹1,50,000</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Debt Breakdown -->
+                                <div>
+                                    <h4 class="text-sm font-semibold text-slate-700 mb-3 uppercase tracking-wide">Debt
+                                        Allocation</h4>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center justify-between text-sm">
+                                            <div class="flex items-center">
+                                                <div class="w-3 h-3 rounded-full bg-amber-500 mr-2"></div>
+                                                <span>Credit AAA</span>
+                                            </div>
+                                            <span class="font-medium text-slate-800">₹2,00,000</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-sm">
+                                            <div class="flex items-center">
+                                                <div class="w-3 h-3 rounded-full bg-amber-400 mr-2"></div>
+                                                <span>Credit AA</span>
+                                            </div>
+                                            <span class="font-medium text-slate-800">₹1,20,000</span>
+                                        </div>
+                                        <div class="flex items-center justify-between text-sm">
+                                            <div class="flex items-center">
+                                                <div class="w-3 h-3 rounded-full bg-amber-300 mr-2"></div>
+                                                <span>Credit A</span>
+                                            </div>
+                                            <span class="font-medium text-slate-800">₹80,000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Highcharts Script -->
+                    <script>
+                        Highcharts.chart('asset-allocation-chart', {
+                            chart: {
+                                type: 'pie',
+                                backgroundColor: 'transparent',
+                                height: 300
+                            },
+                            title: { text: null },
+                            credits: { enabled: false },
+                            tooltip: {
+                                pointFormat: '<b>{point.percentage:.1f}%</b> ({point.y:,.0f} ₹)'
+                            },
+                            plotOptions: {
+                                pie: {
+                                    innerSize: '60%',
+                                    dataLabels: {
+                                        enabled: true,
+                                        format: '<b>{point.name}</b><br>{point.percentage:.1f}%',
+                                        distance: 20,
+                                        style: {
+                                            fontSize: '10px',
+                                            color: '#334155'
+                                        }
+                                    },
+                                    borderWidth: 2,
+                                    borderColor: '#fff'
+                                }
+                            },
+                            series: [{
+                                name: 'Allocation',
+                                data: [
+                                    // Equity
+                                    { name: 'Equity - Large Cap', y: 600000, color: '#2563eb' },
+                                    { name: 'Equity - Mid Cap', y: 300000, color: '#3b82f6' },
+                                    { name: 'Equity - Small Cap', y: 150000, color: '#93c5fd' },
+                                    // Debt
+                                    { name: 'Debt - Credit AAA', y: 200000, color: '#f59e0b' },
+                                    { name: 'Debt - Credit AA', y: 120000, color: '#fbbf24' },
+                                    { name: 'Debt - Credit A', y: 80000, color: '#fcd34d' }
+                                ],
+                                size: '100%',
+                                innerSize: '60%',
+                                showInLegend: false
+                            }]
+                        });
+                    </script>
+
+
+                    <div id="insurance-card" class="glass-card rounded-2xl p-6  relative">
+
+
+                        <div class="flex items-center justify-between mb-4 space-x-2">
+                            <div>
+                                <p class="text-xl font-bold text-slate-800 flex items-center">Insurance Overview </p>
+                                <p class="text-slate-500 text-sm ">3 Active Policies</p>
+                            </div>
+                            <button
+                                class="bg-orange-400 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-500 transition-colors">
+                                <i class="fa-solid fa-download mr-1"></i> Import
+                            </button>
+                        </div>
+
+                        <!-- Policy List -->
+                        <div class="space-y-4 mb-5">
+                            <!-- Life Insurance -->
+                            <div class="bg-white/60 p-3 rounded-xl">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800">Life Insurance – Term Plan</p>
+                                        <p class="text-xs text-slate-500">HDFC Life • Policy No: LI12345678</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-lg font-bold text-green-700">₹1,00,00,000</p>
+                                        <p class="text-xs text-slate-500">Sum Assured</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Health Insurance -->
+                            <div class="bg-white/60 p-3 rounded-xl">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800">Health Insurance – Family</p>
+                                        <p class="text-xs text-slate-500">Star Health • Policy No: HI98765432</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-lg font-bold text-green-700">₹10,00,000</p>
+                                        <p class="text-xs text-slate-500">Sum Assured</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Motor Insurance -->
+                            <div class="bg-white/60 p-3 rounded-xl">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-800">Motor Insurance</p>
+                                        <p class="text-xs text-slate-500">ICICI Lombard • Policy No: MI11223344</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-lg font-bold text-green-700">₹8,50,000</p>
+                                        <p class="text-xs text-slate-500">IDV</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Insight -->
+                        <div
+                            class="bg-gradient-to-r from-orange-50 to-orange-100 border border-orange-200 rounded-xl p-4">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-orange-400 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fa-solid fa-robot text-white text-lg"></i>
+                                </div>
+                                <div>
+                                    <p class="text-slate-700 text-sm font-medium mb-0">
+                                        You have adequate life cover, but your motor policy expires soon — renew to stay
+                                        protected.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Import / Add Insurance Button -->
+
+                    </div>
+                    <div id="investment-insights" class="glass-card rounded-2xl p-6 relative overflow-hidden">
+                        <!-- Header -->
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <h2 class="text-xl font-bold text-slate-800 flex items-center">
+                                    AI Investment Insights
+                                    <span
+                                        class="ml-2 text-xs bg-gradient-to-r from-orange-400 to-orange-600 text-white px-2 py-0.5 rounded-md font-semibold">
+                                        Premium
+                                    </span>
+                                </h2>
+                                <p class="text-slate-500 text-sm">Smarter, data-driven guidance for your wealth journey
+                                </p>
+                            </div>
+                            <div class="ai-glow bg-blue-100 p-2 rounded-lg">
+                                <i class="fa-solid fa-robot text-blue-600"></i>
+                            </div>
+                        </div>
+
+                        <!-- Free Insight (Visible) -->
+                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-5">
+                            <div class="flex items-start">
+                                <div
+                                    class="w-9 h-9 text-blue-500 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <i class="fa-solid fa-lightbulb text-blue-500 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-blue-800 mb-1">Rebalancing Suggestion</h3>
+                                    <p class="text-blue-700 text-sm">
+                                        Your equity exposure is slightly high at <strong>78%</strong>. Shifting 8% to
+                                        debt may reduce volatility.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Locked Insights (Condensed + Premium Style) -->
+                        <div
+                            class="relative bg-white/40 backdrop-blur-sm border border-slate-200 rounded-xl p-5 overflow-hidden">
+                            <!-- Lock Overlay -->
+                            <div
+                                class="absolute inset-0 bg-white/70 backdrop-blur-md flex flex-col items-center justify-center z-10 rounded-xl text-center px-4">
+                                <i class="fa-solid fa-lock text-slate-500 text-lg mb-2"></i>
+                                <p class="text-sm text-slate-600 font-medium mb-2">3 premium insights waiting for you
+                                </p>
+                                <a href="/plan.html"
+                                    class="text-orange-600 font-semibold text-xs underline hover:text-orange-700">Unlock
+                                    Now</a>
+                            </div>
+
+                            <!-- Blurred Preview List -->
+                            <div class="opacity-50 pointer-events-none">
+                                <ul class="space-y-3 text-sm text-slate-600">
+                                    <li class="flex items-center">
+                                        <i class="fa-solid fa-star text-purple-500 mr-2 text-xs"></i>
+                                        <span>Top Performer Alert: Axis Bluechip Fund outperformed peers</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fa-solid fa-chart-line text-blue-500 mr-2 text-xs"></i>
+                                        <span>Tax-Saving Opportunity: Optimize ELSS contributions</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fa-solid fa-triangle-exclamation text-orange-500 mr-2 text-xs"></i>
+                                        <span>Underperforming Asset: IT Fund showing -12% returns</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Premium CTA -->
+                        <div
+                            class="text-center mt-6 bg-gradient-to-r from-orange-400 to-orange-600 rounded-xl p-5 text-white shadow-md">
+                            <h3 class="font-semibold text-lg mb-1">Unlock Personalized AI Insights 🔓</h3>
+                            <p class="text-sm text-orange-50 mb-3">Access real-time portfolio intelligence & smart
+                                investment moves.</p>
+                            <a href="/plan.html"
+                                class="inline-flex items-center bg-white text-orange-600 font-semibold px-5 py-2 rounded-lg hover:bg-orange-50 transition-all">
+                                Upgrade to Premium <i class="fa-solid fa-crown ml-2 text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <!-- Middle Row - Portfolio & Liabilities -->
+
+            <!-- Insurance Overview -->
+
+
+
+
+            <!-- Expense Tracker & Savings Goals -->
+            <section id="expense-savings" class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+               <div id="liability-overview"
+  class="glass-card relative rounded-2xl p-6 bg-white/60 backdrop-blur-md border border-slate-200 shadow-sm">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h2 class="text-xl font-bold text-slate-800">Liability Overview</h2>
+      <p class="text-slate-500 text-sm">Outstanding debts & EMIs</p>
+    </div>
+  </div>
+
+  <!-- Locked Placeholder -->
+  <div id="liabilityLocked"
+    class="relative rounded-xl border border-dashed border-slate-300 bg-slate-50 flex flex-col items-center justify-center py-12 text-center">
+    <div class="bg-orange-100 w-16 h-16 flex items-center justify-center rounded-full mb-4">
+      <i class="fa-solid fa-lock text-orange-600 text-2xl"></i>
+    </div>
+    <h3 class="text-lg font-semibold text-slate-800 mb-2">Liability Overview Locked</h3>
+    <p class="text-slate-600 text-sm max-w-xs mx-auto mb-6">
+      Connect your credit cards, loans, and EMIs to unlock real-time insights and smart repayment suggestions.
+    </p>
+    <button onclick="connectLiabilities()"
+      class="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition flex items-center">
+      <i class="fa-solid fa-plug mr-2"></i> Connect Now
+    </button>
+  </div>
+
+  <!-- Overlay Loader (when connecting) -->
+  <div id="loadingOverlay"
+    class="hidden absolute inset-0 bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl">
+    <div class="animate-spin mb-4 text-orange-600">
+      <i class="fa-solid fa-spinner text-2xl"></i>
+    </div>
+    <p class="text-slate-700 font-medium">Connecting your liabilities...</p>
+  </div>
+
+  <!-- Hidden Active State (after connection) -->
+  <div id="liabilityContent" class="hidden space-y-4 mt-6">
+
+    <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="font-semibold text-slate-800">Credit Card</h3>
+        <span class="text-red-600 font-bold">₹45,680</span>
+      </div>
+      <div class="w-full bg-red-200 rounded-full h-2 mb-2">
+        <div class="bg-red-500 h-2 rounded-full" style="width: 76%"></div>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-600">Due: 15th Dec</span>
+        <span class="text-red-600">18% APR</span>
+      </div>
+      <div class="mt-3 bg-orange-100 border border-orange-200 rounded-lg p-3">
+        <div class="flex items-start">
+          <i class="fa-solid fa-lightbulb text-orange-600 mr-2 mt-1"></i>
+          <div>
+            <p class="text-orange-800 font-medium text-sm">AI Suggestion</p>
+            <p class="text-orange-700 text-xs">Pay ₹12,000 extra to avoid 18% APR charges</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="font-semibold text-slate-800">Home Loan</h3>
+        <span class="text-blue-600 font-bold">₹28,45,000</span>
+      </div>
+      <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
+        <div class="bg-blue-500 h-2 rounded-full" style="width: 34%"></div>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-600">EMI: ₹35,420</span>
+        <span class="text-blue-600">7.5% Interest</span>
+      </div>
+    </div>
+
+    <div class="bg-green-50 border border-green-200 rounded-xl p-4">
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="font-semibold text-slate-800">Car Loan</h3>
+        <span class="text-green-600 font-bold">₹2,85,430</span>
+      </div>
+      <div class="w-full bg-green-200 rounded-full h-2 mb-2">
+        <div class="bg-green-500 h-2 rounded-full" style="width: 68%"></div>
+      </div>
+      <div class="flex justify-between text-sm">
+        <span class="text-slate-600">EMI: ₹12,890</span>
+        <span class="text-green-600">8.9% Interest</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+                <!-- Expense Tracker -->
+                <div id="expense-tracker" class="lg:col-span-2 glass-card rounded-2xl p-6">
+                    <!-- Header -->
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-800">Financial Overview</h2>
+                            <p class="text-slate-500 text-sm">December 2024 • Smart money snapshot</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button class="bg-blue-100 text-blue-600 px-3 py-1 rounded-lg text-sm font-medium">This
+                                Month</button>
+                            <button class="text-slate-500 px-3 py-1 rounded-lg text-sm hover:text-blue-600">Last
+                                Month</button>
+                            <!-- <button class="text-slate-600 hover:text-blue-600" title="Refresh data">
+        <i class="fa-solid fa-rotate-right"></i>
+      </button> -->
+                            <a href="/bankselection.html"
+                                class="bg-orange-500 text-white text-xs font-semibold py-2 px-4 rounded-lg hover:bg-orange-600 transition-colors">
+                                <i class="fa-solid fa-link mr-1"></i> Link other banks </a>
+                        </div>
+                    </div>
+
+                    <!-- Summary Stats -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                        <div class="p-4 rounded-xl bg-green-50 border border-green-100">
+                            <p class="text-xs text-slate-500">Total Income</p>
+                            <h3 class="text-lg font-bold text-slate-800">₹1,10,000</h3>
+                            <p class="text-green-600 text-xs font-semibold mt-1"><i
+                                    class="fa-solid fa-arrow-up mr-1"></i> +5% from last month</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-red-50 border border-red-100">
+                            <p class="text-xs text-slate-500">Total Expenses</p>
+                            <h3 class="text-lg font-bold text-slate-800">₹54,200</h3>
+                            <p class="text-red-600 text-xs font-semibold mt-1"><i class="fa-solid fa-arrow-up mr-1"></i>
+                                +8% higher than last month</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-blue-50 border border-blue-100">
+                            <p class="text-xs text-slate-500">Investments</p>
+                            <h3 class="text-lg font-bold text-slate-800">₹25,000</h3>
+                            <p class="text-blue-600 text-xs font-semibold mt-1"><i
+                                    class="fa-solid fa-arrow-up mr-1"></i> +12% this month</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-100">
+                            <p class="text-xs text-slate-500">Savings</p>
+                            <h3 class="text-lg font-bold text-slate-800">₹30,800</h3>
+                            <p class="text-emerald-600 text-xs font-semibold mt-1"><i
+                                    class="fa-solid fa-arrow-up mr-1"></i> +6% growth</p>
+                        </div>
+                    </div>
+
+                    <!-- Main Insights -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Chart -->
+                        <div id="expense-chart-one"
+                            class="h-64 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl flex items-center justify-center text-slate-400 text-sm italic">
+                            Chart: Income vs Expenses Breakdown
+                        </div>
+
+                        <!-- Category Breakdown -->
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-red-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="w-3.5 h-3.5 bg-red-500 rounded-full mr-3"></div>
+                                    <span class="text-slate-700 font-medium">Food & Dining</span>
+                                </div>
+                                <span class="text-slate-800 font-semibold">₹18,000 <span
+                                        class="text-xs text-slate-500">(33%)</span></span>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="w-3.5 h-3.5 bg-blue-500 rounded-full mr-3"></div>
+                                    <span class="text-slate-700 font-medium">Transportation</span>
+                                </div>
+                                <span class="text-slate-800 font-semibold">₹7,800 <span
+                                        class="text-xs text-slate-500">(14%)</span></span>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="w-3.5 h-3.5 bg-yellow-400 rounded-full mr-3"></div>
+                                    <span class="text-slate-700 font-medium">Entertainment</span>
+                                </div>
+                                <span class="text-slate-800 font-semibold">₹6,400 <span
+                                        class="text-xs text-slate-500">(12%)</span></span>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="w-3.5 h-3.5 bg-purple-500 rounded-full mr-3"></div>
+                                    <span class="text-slate-700 font-medium">Shopping</span>
+                                </div>
+                                <span class="text-slate-800 font-semibold">₹12,000 <span
+                                        class="text-xs text-slate-500">(22%)</span></span>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 bg-orange-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="w-3.5 h-3.5 bg-orange-500 rounded-full mr-3"></div>
+                                    <span class="text-slate-700 font-medium">Utilities</span>
+                                </div>
+                                <span class="text-slate-800 font-semibold">₹10,000 <span
+                                        class="text-xs text-slate-500">(19%)</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Smart Tip / CTA -->
+
+                </div>
+
+
+                <!-- Savings Goals -->
+
+            </section>
+
+            <!-- Goal Creation Popup -->
+
+
+            <!-- Recent Transactions & Investment Insights -->
+            <section id="transactions-insights" class="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-8">
+
+                <!-- Recent Transactions -->
+                <div id="financial-news" class="glass-card rounded-2xl p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-800">Financial News</h2>
+                            <p class="text-slate-500 text-sm">Latest updates</p>
+                        </div>
+                        <button class="text-blue-600  hover:text-blue-700 font-medium text-sm">View All</button>
+                    </div>
+
+                    <div class="space-y-4">
+                        <article class="p-4 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer">
+                            <div class="flex items-start">
+                                <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fa-solid fa-chart-line text-blue-600  text-xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-slate-800 mb-1">RBI Announces New Digital Currency
+                                        Guidelines</h3>
+                                    <p class="text-slate-600 text-sm mb-2">The Reserve Bank of India has released
+                                        comprehensive guidelines for digital currency transactions...</p>
+                                    <div class="flex items-center text-slate-400 text-xs">
+                                        <span>Economic Times</span>
+                                        <span class="mx-2">•</span>
+                                        <span>2 hours ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="p-4 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer">
+                            <div class="flex items-start">
+                                <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fa-solid fa-building text-blue-600 text-xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-slate-800 mb-1">Top IT Stocks Rally After Strong Q3
+                                        Results</h3>
+                                    <p class="text-slate-600 text-sm mb-2">Major IT companies report
+                                        better-than-expected earnings driving sector-wide gains...</p>
+                                    <div class="flex items-center text-slate-400 text-xs">
+                                        <span>Business Standard</span>
+                                        <span class="mx-2">•</span>
+                                        <span>4 hours ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="p-4 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors cursor-pointer">
+                            <div class="flex items-start">
+                                <div class="w-16 h-16 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fa-solid fa-coins text-purple-600 text-xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-slate-800 mb-1">Mutual Fund SIP Inflows Hit Record
+                                        High</h3>
+                                    <p class="text-slate-600 text-sm mb-2">Systematic Investment Plan contributions
+                                        reach ₹18,000 crores in November...</p>
+                                    <div class="flex items-center text-slate-400 text-xs">
+                                        <span>Mint</span>
+                                        <span class="mx-2">•</span>
+                                        <span>6 hours ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div id="savings-goals" class="glass-card rounded-2xl p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-800">Savings Goals</h2>
+                            <p class="text-slate-500 text-sm">Track and set new goals</p>
+                        </div>
+                        <button id="openGoalForm" class="text-blue-600 hover:text-blue-700">
+                            <i class="fa-solid fa-plus text-lg"></i>
+                        </button>
+                    </div>
+
+                    <!-- Goals Container -->
+                    <div id="goalsContainer" class="space-y-4">
+                        <!-- Default Example Goal -->
+                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-semibold text-slate-800 text-sm">Retirement Goal</h3>
+                                <span class="text-blue-600 text-xs font-medium">50%</span>
+                            </div>
+                            <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
+                                <div class="bg-blue-500 h-2 rounded-full transition-all" style="width: 50%"></div>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-slate-600">₹50,00,000</span>
+                                <span class="text-slate-400">₹1,00,00,000</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500 mt-1">~20 years remaining</p>
+                        </div>
+                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-semibold text-slate-800 text-sm">Contingency Goal</h3>
+                                <span class="text-blue-600 text-xs font-medium">85%</span>
+                            </div>
+                            <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
+                                <div class="bg-blue-500 h-2 rounded-full transition-all" style="width: 85%"></div>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-slate-600">₹8,50,000</span>
+                                <span class="text-slate-400">₹10,00,000</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500 mt-1">~1 year remaining</p>
+                        </div>
+                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-semibold text-slate-800 text-sm">House Down Payment</h3>
+                                <span class="text-blue-600 text-xs font-medium">85%</span>
+                            </div>
+                            <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
+                                <div class="bg-blue-500 h-2 rounded-full transition-all" style="width: 85%"></div>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-slate-600">₹8,50,000</span>
+                                <span class="text-slate-400">₹10,00,000</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500 mt-1">~2 months remaining</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal -->
+                <div id="goalFormModal"
+                    class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+                    <div class="bg-white rounded-2xl p-6 w-full max-w-md shadow-xl">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-lg font-bold text-slate-800">Set New Savings Goal</h2>
+                            <button id="closeGoalForm" class="text-slate-500 hover:text-slate-700">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+
+                        <form id="goalForm" class="space-y-4">
+                            <div>
+                                <label class="block text-sm text-slate-600 mb-1">Goal Name</label>
+                                <input id="goalName" type="text" placeholder="e.g. Dream Car"
+                                    class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400" required>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-slate-600 mb-1">Target Amount</label>
+                                    <input id="goalTarget" type="number" placeholder="₹ amount"
+                                        class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-slate-600 mb-1">Current Saved</label>
+                                    <input id="goalSaved" type="number" placeholder="₹ amount"
+                                        class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400" required>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm text-slate-600 mb-1">Target Date</label>
+                                <input id="goalDate" type="date"
+                                    class="w-full border rounded-lg p-2 focus:ring-2 focus:ring-blue-400" required>
+                            </div>
+                            <button type="submit"
+                                class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 font-medium">
+                                Save Goal
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <script>
+                    const openBtn = document.getElementById('openGoalForm');
+                    const closeBtn = document.getElementById('closeGoalForm');
+                    const modal = document.getElementById('goalFormModal');
+                    const goalForm = document.getElementById('goalForm');
+                    const goalsContainer = document.getElementById('goalsContainer');
+
+                    // Modal open/close
+                    openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
+                    closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+                    modal.addEventListener('click', (e) => {
+                        if (e.target === modal) modal.classList.add('hidden');
+                    });
+
+                    // Handle goal submission
+                    goalForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+
+                        const name = document.getElementById('goalName').value.trim();
+                        const target = parseFloat(document.getElementById('goalTarget').value);
+                        const saved = parseFloat(document.getElementById('goalSaved').value);
+                        const date = new Date(document.getElementById('goalDate').value);
+
+                        if (!name || !target || !saved || saved > target) return alert("Please enter valid goal details.");
+
+                        const progress = Math.min((saved / target) * 100, 100).toFixed(1);
+
+                        // Calculate remaining time
+                        const today = new Date();
+                        const monthsLeft = Math.max(0, (date.getFullYear() - today.getFullYear()) * 12 + (date.getMonth() - today.getMonth()));
+
+                        // Create goal card
+                        const goalCard = document.createElement('div');
+                        goalCard.className = "bg-blue-50 border border-blue-200 rounded-xl p-4";
+                        goalCard.innerHTML = `
+      <div class="flex items-center justify-between mb-2">
+        <h3 class="font-semibold text-slate-800 text-sm">${name}</h3>
+        <span class="text-blue-600 text-xs font-medium">${progress}%</span>
+      </div>
+      <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
+        <div class="bg-blue-500 h-2 rounded-full transition-all" style="width: ${progress}%"></div>
+      </div>
+      <div class="flex justify-between text-xs">
+        <span class="text-slate-600">₹${saved.toLocaleString()}</span>
+        <span class="text-slate-400">₹${target.toLocaleString()}</span>
+      </div>
+      <p class="text-[11px] text-slate-500 mt-1">~${monthsLeft || '0'} months remaining</p>
+    `;
+
+                        goalsContainer.appendChild(goalCard);
+
+                        // Reset form + close modal
+                        goalForm.reset();
+                        modal.classList.add('hidden');
+                    });
+                </script>
+
+
+            </section>
+
+
+
+            <section id="calculators-preview" class=" mb-8">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100">
+                    <div class="p-6 pb-0">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-xl font-bold text-navy font-display">Smart Financial Calculators</h2>
+                        </div>
+                    </div>
+
+                    <div class="p-6 pt-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div
+                                class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 border border-blue-200 -shadow cursor-pointer">
+                                <div class="flex items-center mb-3">
+                                    <div class="p-2 bg-blue-500 rounded-lg mr-3">
+                                        <i class="fa-solid fa-calculator text-white"></i>
+                                    </div>
+                                    <h3 class="font-semibold text-navy">SIP Calculator</h3>
+                                </div>
+                                <p class="text-xs text-gray-600 mb-3">Calculate returns on systematic investments</p>
+                                <div class="text-xs text-blue-600 font-medium">Calculate Now →</div>
+                            </div>
+
+                            <div
+                                class="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-4 border border-green-200 -shadow cursor-pointer">
+                                <div class="flex items-center mb-3">
+                                    <div class="p-2 bg-green-500 rounded-lg mr-3">
+                                        <i class="fa-solid fa-percentage text-white"></i>
+                                    </div>
+                                    <h3 class="font-semibold text-navy">Tax Saver</h3>
+                                </div>
+                                <p class="text-xs text-gray-600 mb-3">Optimize tax savings with 80C investments</p>
+                                <div class="text-xs text-green-600 font-medium">Save Tax →</div>
+                            </div>
+
+                            <div
+                                class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-4 border border-purple-200 -shadow cursor-pointer">
+                                <div class="flex items-center mb-3">
+                                    <div class="p-2 bg-purple-500 rounded-lg mr-3">
+                                        <i class="fa-solid fa-home text-white"></i>
+                                    </div>
+                                    <h3 class="font-semibold text-navy">Home Loan EMI</h3>
+                                </div>
+                                <p class="text-xs text-gray-600 mb-3">Calculate monthly EMI and eligibility</p>
+                                <div class="text-xs text-purple-600 font-medium">Calculate EMI →</div>
+                            </div>
+
+                            <div
+                                class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg p-4 border border-orange-200 -shadow cursor-pointer">
+                                <div class="flex items-center mb-3">
+                                    <div class="p-2 bg-orange-500 rounded-lg mr-3">
+                                        <i class="fa-solid fa-umbrella text-white"></i>
+                                    </div>
+                                    <h3 class="font-semibold text-navy">HLV Calculator</h3>
+                                </div>
+                                <p class="text-xs text-gray-600 mb-3">Determine ideal life insurance coverage</p>
+                                <div class="text-xs text-orange-600 font-medium">Check Coverage →</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- News & Market Updates -->
+
+
+            <!-- Achievements & Milestones -->
+
+
+           
+
+        </main>
+    </div>
+
+    <!-- AI Assistant Chat Bubble -->
+    <div id="ai-assistant" class="fixed bottom-6 right-6 z-40">
+        <div class="relative">
+            <button id="ai-chat-toggle"
+                class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all ai-glow">
+                <i class="fa-solid fa-robot text-white text-xl"></i>
+            </button>
+            <div class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full flex items-center justify-center">
+                <span class="text-white text-xs font-bold">1</span>
+            </div>
+        </div>
+
+        <div id="ai-chat-bubble"
+            class="absolute bottom-20 right-0 w-80 bg-white rounded-2xl shadow-2xl border border-slate-200 notification-slide hidden">
+            <div class="p-4 border-b border-slate-200">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3">
+                        <i class="fa-solid fa-robot text-white text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-slate-800">AI Wealth Assistant</p>
+                        <p class="text-slate-500 text-xs">Online now</p>
+                    </div>
+                    <button id="close-chat" class="ml-auto text-slate-400 hover:text-slate-600">
+                        <i class="fa-solid fa-times"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-4 space-y-4">
+                <div class="bg-blue-50 border border-blue-200 rounded-xl p-3">
+                    <div class="flex items-start">
+                        <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-2 mt-1">
+                            <i class="fa-solid fa-robot text-white text-xs"></i>
+                        </div>
+                        <div>
+                            <p class="text-blue-800 font-medium text-sm mb-1">💡 Smart Suggestion</p>
+                            <p class="text-blue-700 text-sm">Want me to optimize your EMI vs SIP ratio? I noticed you
+                                could save ₹3,200/month in interest.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex space-x-2">
+                    <button
+                        class="flex-1 bg-blue-500 hover:bg-blue-600 text-white text-sm py-2 px-4 rounded-lg transition-colors">
+                        Yes, Optimize
+                    </button>
+                    <button
+                        class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm py-2 px-4 rounded-lg transition-colors">
+                        Not Now
+                    </button>
+                </div>
+
+                <div class="border-t border-slate-200 pt-3">
+                    <div class="flex items-center space-x-2">
+                        <input type="text" placeholder="Ask me anything..."
+                            class="flex-1 bg-slate-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-lg transition-colors">
+                            <i class="fa-solid fa-paper-plane text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NETWORTH MODAL -->
+    <div id="networthModal"
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 w-full max-w-2xl relative animate-fadeIn">
+            <!-- Header -->
+            <div class="p-6 border-b border-gray-100 flex justify-between items-start">
+                <div>
+                    <h2 class="text-xl font-bold text-navy font-display mb-1">Net Worth Trend</h2>
+                    <p class="text-sm text-gray-600">Your wealth growth over the last 12 months</p>
+                </div>
+                <button onclick="closeModal('networthModal')" class="text-slate-400 hover:text-slate-600 text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <!-- Content -->
+            <div class="p-6">
+                <div id="portfolio-chart-one" class="h-64"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PORTFOLIO INSIGHT MODAL -->
+    <div id="portfolioModal"
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="glass-card rounded-2xl p-6 w-full max-w-3xl relative animate-fadeIn">
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-800">Portfolio Performance</h2>
+                    <p class="text-slate-500 text-sm">Last 6 months growth</p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <select class="bg-white border border-slate-200 rounded-lg px-3 py-2 text-sm">
+                        <option>6 Months</option>
+                        <option>1 Year</option>
+                        <option>3 Years</option>
+                    </select>
+                    <button onclick="closeModal('portfolioModal')" class="text-slate-400 hover:text-slate-600 text-lg">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chart -->
+            <div id="portfolio-chart" class="h-64"></div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-3 gap-4 mt-4">
+                <div class="text-center p-3 bg-blue-50 rounded-lg">
+                    <p class="text-blue-600 font-bold">+24.5%</p>
+                    <p class="text-slate-500 text-xs">Equity Returns</p>
+                </div>
+                <div class="text-center p-3 bg-blue-50 rounded-lg">
+                    <p class="text-blue-600 font-bold">+8.2%</p>
+                    <p class="text-slate-500 text-xs">Debt Returns</p>
+                </div>
+                <div class="text-center p-3 bg-purple-50 rounded-lg">
+                    <p class="text-purple-600 font-bold">+12.1%</p>
+                    <p class="text-slate-500 text-xs">Gold Returns</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Smart Notifications -->
+    <div id="notification-container" class="fixed top-20 right-6 z-50 space-y-3">
+        <div class="notification-slide bg-white rounded-xl shadow-lg border border-slate-200 p-4 max-w-sm">
+            <div class="flex items-start">
+                <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                    <i class="fa-solid fa-info text-blue-600 text-sm"></i>
+                </div>
+                <div class="flex-1">
+                    <p class="font-medium text-slate-800 text-sm">Market Alert</p>
+                    <p class="text-slate-600 text-xs">NIFTY IT index up 3.2% - Your tech holdings are performing well!
+                    </p>
+                </div>
+                <button class="text-slate-400 hover:text-slate-600 ml-2">
+                    <i class="fa-solid fa-times text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+         const sidebar = document.getElementById('sidebar');
+    const toggle = document.getElementById('sidebarToggle');
+    const close = document.getElementById('sidebarClose');
+
+    toggle.addEventListener('click', () => sidebar.classList.toggle('-translate-x-full'));
+    close.addEventListener('click', () => sidebar.classList.add('-translate-x-full'));
+function connectLiabilities() {
+  const locked = document.getElementById("liabilityLocked");
+  const loader = document.getElementById("loadingOverlay");
+  const content = document.getElementById("liabilityContent");
+
+  // Show loader
+  locked.classList.add("hidden");
+  loader.classList.remove("hidden");
+
+  // Simulate connection delay
+  setTimeout(() => {
+    loader.classList.add("hidden");
+    content.classList.remove("hidden");
+
+    // Save state
+    localStorage.setItem("liabilitiesConnected", "true");
+  }, 2000);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const isConnected = localStorage.getItem("liabilitiesConnected") === "true";
+  const locked = document.getElementById("liabilityLocked");
+  const content = document.getElementById("liabilityContent");
+
+  if (isConnected) {
+    locked.classList.add("hidden");
+    content.classList.remove("hidden");
+  }
+});
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // DOM references
+            const mfEmpty = document.getElementById("mutual-fund-card-empty");
+            const mfFilled = document.getElementById("mutual-fund-card-filled");
+            const stockEmpty = document.getElementById("stock-card-empty");
+            const stockFilled = document.getElementById("stock-card-filled");
+
+            // Get import status from localStorage
+            const hasMFData = localStorage.getItem("hasMFData") === "true";
+            const hasStockData = localStorage.getItem("hasStockData") === "true";
+
+            // Toggle visibility based on data
+            mfEmpty.style.display = hasMFData ? "none" : "block";
+            mfFilled.style.display = hasMFData ? "block" : "none";
+
+            stockEmpty.style.display = hasStockData ? "none" : "block";
+            stockFilled.style.display = hasStockData ? "block" : "none";
+        });
+    </script>
+    <script>
+        // Initialize Charts
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Portfolio Performance Chart
+            Highcharts.chart('portfolio-chart-one', {
+                chart: {
+                    type: 'line',
+                    backgroundColor: 'transparent',
+                    height: 250
+                },
+                title: {
+                    text: null
+                },
+                credits: {
+                    enabled: false
+                },
+                xAxis: {
+                    categories: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    lineColor: '#e2e8f0',
+                    tickColor: '#e2e8f0'
+                },
+                yAxis: {
+                    title: {
+                        text: null
+                    },
+                    gridLineColor: '#f1f5f9',
+                    labels: {
+                        formatter: function () {
+                            return '₹' + (this.value / 100000) + 'L';
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Portfolio Value',
+                    data: [1420000, 1580000, 1650000, 1720000, 1780000, 1845000],
+                    color: '#10b981',
+                    lineWidth: 3,
+                    marker: {
+                        radius: 5,
+                        fillColor: '#10b981'
+                    }
+                }],
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    line: {
+                        enableMouseTracking: true,
+                        marker: {
+                            enabled: true
+                        }
+                    }
+                }
+            });
+
+            // Expense Pie Chart
+
+            // Portfolio Performance Chart
+            Highcharts.chart('portfolio-chart', {
+                chart: {
+                    type: 'line',
+                    backgroundColor: 'transparent',
+                    height: 250
+                },
+                title: {
+                    text: null
+                },
+                credits: {
+                    enabled: false
+                },
+                xAxis: {
+                    categories: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    lineColor: '#e2e8f0',
+                    tickColor: '#e2e8f0'
+                },
+                yAxis: {
+                    title: {
+                        text: null
+                    },
+                    gridLineColor: '#f1f5f9',
+                    labels: {
+                        formatter: function () {
+                            return '₹' + (this.value / 100000) + 'L';
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Portfolio Value',
+                    data: [1420000, 1580000, 1650000, 1720000, 1780000, 1845000],
+                    color: '#10b981',
+                    lineWidth: 3,
+                    marker: {
+                        radius: 5,
+                        fillColor: '#10b981'
+                    }
+                }],
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    line: {
+                        enableMouseTracking: true,
+                        marker: {
+                            enabled: true
+                        }
+                    }
+                }
+            });
+
+            // Expense Pie Chart
+            Highcharts.chart('expense-chart-one', {
+                chart: {
+                    type: 'pie',
+                    backgroundColor: 'transparent',
+                    height: 250
+                },
+                title: {
+                    text: null
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Expenses',
+                    data: [
+                        { name: 'Food & Dining', y: 18450, color: '#ef4444' },
+                        { name: 'Transportation', y: 12300, color: '#3b82f6' },
+                        { name: 'Shopping', y: 15890, color: '#8b5cf6' },
+                        { name: 'Entertainment', y: 8750, color: '#10b981' },
+                        { name: 'Utilities', y: 6240, color: '#f59e0b' }
+                    ],
+                    size: '80%',
+                    innerSize: '50%'
+                }],
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false
+                        },
+                        showInLegend: false
+                    }
+                }
+            });
+            // Financial Health Gauge
+            Highcharts.chart('health-gauge', {
+                chart: {
+                    type: 'solidgauge',
+                    backgroundColor: 'transparent',
+                    height: 120
+                },
+                title: {
+                    text: null
+                },
+                credits: {
+                    enabled: false
+                },
+                pane: {
+                    center: ['50%', '85%'],
+                    size: '120%',
+                    startAngle: -90,
+                    endAngle: 90,
+                    background: {
+                        backgroundColor: '#f1f5f9',
+                        innerRadius: '60%',
+                        outerRadius: '100%',
+                        shape: 'arc'
+                    }
+                },
+                yAxis: {
+                    min: 300,
+                    max: 850,
+                    stops: [
+                        [0.1, '#ef4444'],
+                        [0.5, '#f59e0b'],
+                        [0.9, '#10b981']
+                    ],
+                    lineWidth: 0,
+                    tickWidth: 0,
+                    minorTickInterval: null,
+                    tickAmount: 2,
+                    labels: {
+                        y: 16,
+                        style: {
+                            fontSize: '10px'
+                        }
+                    }
+                },
+                plotOptions: {
+                    solidgauge: {
+                        dataLabels: {
+                            y: 5,
+                            borderWidth: 0,
+                            useHTML: true
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Score',
+                    data: [782],
+                    dataLabels: {
+                        format: '<div style="text-align:center"><span style="font-size:20px;color:#10b981;font-weight:bold">{y}</span></div>'
+                    }
+                }]
+            });
+        });
+
+
+        // AI Chat Toggle
+        document.getElementById('ai-chat-toggle').addEventListener('click', function () {
+            const chatBubble = document.getElementById('ai-chat-bubble');
+            chatBubble.classList.toggle('hidden');
+        });
+
+        document.getElementById('close-chat').addEventListener('click', function () {
+            document.getElementById('ai-chat-bubble').classList.add('hidden');
+        });
+
+        // Auto-hide notifications after 5 seconds
+        setTimeout(function () {
+            const notifications = document.querySelectorAll('#notification-container > div');
+            notifications.forEach(notification => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => notification.remove(), 300);
+            });
+        }, 5000);
+
+        // Simulate loading animations on page load
+        window.addEventListener('load', function () {
+            // Trigger confetti for achievements
+            setTimeout(createConfetti, 1000);
+        });
+
+        function createConfetti() {
+            const colors = ['#10b981', '#059669', '#34d399', '#6ee7b7'];
+            const confettiCount = 30;
+
+            for (let i = 0; i < confettiCount; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.position = 'fixed';
+                confetti.style.width = '6px';
+                confetti.style.height = '6px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.top = '-10px';
+                confetti.style.borderRadius = '50%';
+                confetti.style.pointerEvents = 'none';
+                confetti.style.zIndex = '9999';
+
+                document.body.appendChild(confetti);
+
+                setTimeout(() => {
+                    confetti.remove();
+                }, 3000);
+            }
+        }
+
+    </script>
+
+
+</body>
+
+</html>
