@@ -326,14 +326,17 @@
             </button>
 
             <div class="flex items-center">
-                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="Profile"
-                    class="w-8 h-8 rounded-full">
-                <div class="ml-3 flex-1">
-                    <p class="text-white font-medium text-sm">Chirag Kalwani</p>
-                    <p class="text-slate-400 text-xs">Premium User</p>
-                </div>
-                <i class="fa-solid fa-chevron-down text-slate-400"></i>
-            </div>
+  <div
+    class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+    <i class="fa-solid fa-user text-white text-sm"></i>
+  </div>
+  <div class="ml-3 flex-1">
+    <p class="text-white font-medium text-sm">Chirag Kalwani</p>
+    <p class="text-slate-400 text-xs">Premium User</p>
+  </div>
+  <i class="fa-solid fa-chevron-down text-slate-400"></i>
+</div>
+
         </div>
     </div>
 
@@ -1851,25 +1854,39 @@
     </div>
 
     <!-- NETWORTH MODAL -->
-    <div id="networthModal"
-        class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
-        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 w-full max-w-2xl relative animate-fadeIn">
-            <!-- Header -->
-            <div class="p-6 border-b border-gray-100 flex justify-between items-start">
-                <div>
-                    <h2 class="text-xl font-bold text-navy font-display mb-1">Net Worth Trend</h2>
-                    <p class="text-sm text-gray-600">Your wealth growth over the last 12 months</p>
-                </div>
-                <button onclick="closeModal('networthModal')" class="text-slate-400 hover:text-slate-600 text-lg">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <!-- Content -->
-            <div class="p-6">
-                <div id="portfolio-chart-one" class="h-64"></div>
-            </div>
-        </div>
+   <div id="networthModal"
+  class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+  <div class="bg-white rounded-2xl shadow-xl border border-gray-100 w-full max-w-3xl relative animate-fadeIn">
+    <!-- Header -->
+    <div class="p-6 border-b border-gray-100 flex justify-between items-start">
+      <div>
+        <h2 class="text-xl font-bold text-navy font-display mb-1">Net Worth Growth Projection</h2>
+        <p class="text-sm text-gray-600">
+          Understand your financial journey from age 30 to 60 and how to grow faster.
+        </p>
+      </div>
+      <button onclick="closeModal('networthModal')" class="text-slate-400 hover:text-slate-600 text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
     </div>
+
+    <!-- Chart -->
+    <div class="p-6">
+      <div id="networth-chart-v2" class="h-80"></div>
+    </div>
+
+    <!-- AI Insights -->
+    <div class="bg-slate-50 p-6 rounded-b-2xl border-t border-gray-100">
+      <h3 class="text-sm font-semibold text-navy mb-2">AI Insights for You</h3>
+      <ul class="text-sm text-gray-700 space-y-2">
+        <li><i class="fa-solid fa-arrow-trend-up text-green-500 mr-2"></i>Your wealth is growing steadily at <strong>8.5% CAGR</strong>.</li>
+        <li><i class="fa-solid fa-sack-dollar text-blue-500 mr-2"></i>Increasing SIP by ₹25,000/month could add <strong>₹2.4 Cr</strong> by age 60.</li>
+        <li><i class="fa-solid fa-chart-line text-amber-500 mr-2"></i>Optimizing asset allocation can improve returns by <strong>1.8×</strong>.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
 
     <!-- PORTFOLIO INSIGHT MODAL -->
     <div id="portfolioModal"
@@ -2059,60 +2076,95 @@ document.addEventListener("DOMContentLoaded", () => {
     <script>
         // Initialize Charts
         document.addEventListener('DOMContentLoaded', function () {
+const currentAge = 35;
+const ageRange = Array.from({ length: 31 }, (_, i) => 30 + i);
+// realistic net worth (₹ Cr) — up to current age (35)
+const currentNetWorthData = [5, 7, 9, 11, 13, 15]; 
 
-            // Portfolio Performance Chart
-            Highcharts.chart('portfolio-chart-one', {
-                chart: {
-                    type: 'line',
-                    backgroundColor: 'transparent',
-                    height: 250
-                },
-                title: {
-                    text: null
-                },
-                credits: {
-                    enabled: false
-                },
-                xAxis: {
-                    categories: ['30', '31', '32', '33', '34', '35'],
-                    lineColor: '#e2e8f0',
-                    tickColor: '#e2e8f0'
-                },
-                yAxis: {
-                    title: {
-                        text: null
-                    },
-                    gridLineColor: '#f1f5f9',
-                    labels: {
-                        formatter: function () {
-                            return '₹' + (this.value / 10000000) + 'CR';
-                        }
-                    }
-                },
-                series: [{
-                    name: 'Portfolio Value',
-                    data: [14200000, 15800000, 16500000, 17200000, 17800000, 18450000],
-                    color: '#10b981',
-                    lineWidth: 3,
-                    marker: {
-                        radius: 5,
-                        fillColor: '#10b981'
-                    }
-                }],
-                legend: {
-                    enabled: false
-                },
-                plotOptions: {
-                    line: {
-                        enableMouseTracking: true,
-                        marker: {
-                            enabled: true
-                        }
-                    }
-                }
-            });
+// projected growth till age 60 (kept < 50 Cr)
+const projectedData = [
+  15, 17, 19, 21, 23, 25, 27.5, 30, 32.5, 35, 37.5,
+  40, 42, 44, 46, 47.5, 48.5, 49
+];
+Highcharts.chart('networth-chart-v2', {
+  chart: {
+    type: 'line',
+    backgroundColor: 'transparent',
+    height: 320,
+    style: {
+      fontFamily: 'Inter, sans-serif'
+    }
+  },
+  title: { text: null },
+  credits: { enabled: false },
+  xAxis: {
+    categories: ageRange,
+    title: { text: 'Age (Years)' },
+    gridLineColor: '#f1f5f9',
+    tickColor: '#e2e8f0',
+    lineColor: '#e2e8f0'
+  },
+  yAxis: {
+    title: { text: 'Net Worth (₹ Cr)' },
+    gridLineColor: '#f1f5f9',
+    labels: {
+      formatter: function () {
+        return this.value.toFixed(1) + ' Cr';
+      }
+    }
+  },
+  tooltip: {
+    shared: true,
+    backgroundColor: '#fff',
+    borderColor: '#e2e8f0',
+    borderRadius: 8,
+    shadow: false,
+    formatter: function () {
+      const age = this.x;
+      const current = this.points.find(p => p.series.name === 'Current Growth');
+      const projected = this.points.find(p => p.series.name === 'Projected Growth');
 
-            // Expense Pie Chart
+      let tooltip = `<b>Age ${age}</b><br/>`;
+      if (current) tooltip += `💰 Current: <b>₹${current.y.toFixed(2)} Cr</b><br/>`;
+      if (projected) tooltip += `📈 Projected: <b>₹${projected.y.toFixed(2)} Cr</b>`;
+      return tooltip;
+    }
+  },
+  series: [
+    {
+      name: 'Current Growth',
+      data: currentNetWorthData,
+      color: '#10b981',
+      lineWidth: 3,
+      marker: { radius: 4, fillColor: '#10b981' }
+    },
+    {
+      name: 'Projected Growth',
+      data: Array(currentNetWorthData.length - 1).fill(null).concat(projectedData),
+      color: '#3b82f6',
+      lineWidth: 2,
+      dashStyle: 'ShortDash',
+      marker: { radius: 3, fillColor: '#3b82f6' }
+    },
+    {
+      // Vertical marker for current age
+      type: 'line',
+      name: 'Current Age',
+      data: Array(ageRange.length).fill(null).map((_, i) => (i === currentAge - 30 ? 0 : null)),
+      color: '#ef4444',
+      lineWidth: 1,
+      marker: { enabled: true, radius: 6, fillColor: '#ef4444' },
+      enableMouseTracking: false
+    }
+  ],
+  legend: {
+    layout: 'horizontal',
+    align: 'center',
+    verticalAlign: 'bottom',
+    itemStyle: { fontWeight: '500', color: '#334155' }
+  }
+});
+
 
             // Portfolio Performance Chart
             Highcharts.chart('portfolio-chart', {
