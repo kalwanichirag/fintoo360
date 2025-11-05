@@ -2084,7 +2084,7 @@ const currentNetWorthData = [5, 7, 9, 11, 13, 15];
 // projected growth till age 60 (kept < 50 Cr)
 const projectedData = [
   15, 17, 19, 21, 23, 25, 27.5, 30, 32.5, 35, 37.5,
-  40, 42, 44, 46, 47.5, 48.5, 49
+  40, 42, 44, 46, 47.5, 48.5, 49, 51, 52, 55, 57, 60, 63, 65, 68
 ];
 Highcharts.chart('networth-chart-v2', {
   chart: {
@@ -2119,16 +2119,17 @@ Highcharts.chart('networth-chart-v2', {
     borderColor: '#e2e8f0',
     borderRadius: 8,
     shadow: false,
-    formatter: function () {
-      const age = this.x;
-      const current = this.points.find(p => p.series.name === 'Current Growth');
-      const projected = this.points.find(p => p.series.name === 'Projected Growth');
+  formatter: function () {
+const age = ageRange[this.points[0].point.index];
+  const current = this.points.find(p => p.series.name === 'Current Growth');
+  const projected = this.points.find(p => p.series.name === 'Projected Growth');
 
-      let tooltip = `<b>Age ${age}</b><br/>`;
-      if (current) tooltip += `💰 Current: <b>₹${current.y.toFixed(2)} Cr</b><br/>`;
-      if (projected) tooltip += `📈 Projected: <b>₹${projected.y.toFixed(2)} Cr</b>`;
-      return tooltip;
-    }
+  let tooltip = `<b>Age ${age}</b><br/>`;
+  if (current) tooltip += `💰 Current: <b>₹${current.y.toFixed(2)} Cr</b><br/>`;
+  if (projected) tooltip += `📈 Projected: <b>₹${projected.y.toFixed(2)} Cr</b>`;
+  return tooltip;
+}
+
   },
   series: [
     {
@@ -2146,16 +2147,7 @@ Highcharts.chart('networth-chart-v2', {
       dashStyle: 'ShortDash',
       marker: { radius: 3, fillColor: '#3b82f6' }
     },
-    {
-      // Vertical marker for current age
-      type: 'line',
-      name: 'Current Age',
-      data: Array(ageRange.length).fill(null).map((_, i) => (i === currentAge - 30 ? 0 : null)),
-      color: '#ef4444',
-      lineWidth: 1,
-      marker: { enabled: true, radius: 6, fillColor: '#ef4444' },
-      enableMouseTracking: false
-    }
+   
   ],
   legend: {
     layout: 'horizontal',
