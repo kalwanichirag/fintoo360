@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-3.1.1.min.js"></script>
+ <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#042B62',
+                        'accent': '#DD7300',
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @media (min-width:1080px) {
+           html{  font-size: 0.9vw;}
+            
+        }
+                ::-webkit-scrollbar { display: none; }
+ * {
+            font-family: 'Inter', sans-serif;
+        }
+       .glassmorphic-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+        .trend-up { color: #10B981; }
+        .trend-down { color: #EF4444; }
+        .bg-navy { background-color: #042B62; }
+        .text-orange { color: #DD7300; }
+        .bg-orange { background-color: #DD7300; }
+        .border-orange { border-color: #DD7300; }
+        .hover\:bg-orange-dark:hover { background-color: #c06500; }
+        .hover\:bg-navy-light:hover { background-color: #084094; }
+     
+    </style>
+</head>
+
+<body class="gradient-bg min-h-screen relative overflow-x-hidden">
+
+    <!-- Animated Background Elements -->
+    <div id="background-elements" class="fixed inset-0 pointer-events-none z-0">
+        <div class="wealth-wave absolute top-1/4 left-0 w-full h-1 opacity-30"></div>
+        <div class="shimmer absolute top-1/2 left-0 w-full h-px opacity-20"></div>
+        <div class="floating-element absolute top-20 right-20 w-2 h-2 bg-blue-400 rounded-full opacity-20"></div>
+        <div class="floating-element absolute bottom-40 left-20 w-1 h-1 bg-blue-300 rounded-full opacity-30"
+            style="animation-delay: 2s;"></div>
+        <div class="floating-element absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-blue-500 rounded-full opacity-15"
+            style="animation-delay: 4s;"></div>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar" class="fixed left-0 top-0 w-64 h-full bg-slate-900 flex flex-col z-30">
+        <div class="p-6 border-b border-slate-700">
+            <div class="flex items-center space-x-3">
+                <div
+                    class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center">
+                    <i class="fa-solid fa-chart-line text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-white">Fintoo360</h1>
+                    <p class="text-blue-400 text-xs">Plan. Grow. Prosper.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="px-6 py-4">
+            <div class="bg-slate-800 rounded-xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-slate-300 text-sm">Free trial</span>
+                    <span class="text-blue-400 text-xs font-medium">20 days left</span>
+                </div>
+                <div class="w-full bg-slate-700 rounded-full h-2">
+                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full" style="width: 25%"></div>
+                </div>
+            </div>
+        </div> -->
+
+        <nav class="flex-1 px-4">
+            <ul class="space-y-1">
+                <li>
+                    <a href="#"
+                        class="sidebar-active flex items-center px-4 py-3 text-blue-600  rounded-lg font-medium">
+                        <i class="fa-solid fa-home w-5 mr-3"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                        <i class="fa-solid fa-wallet w-5 mr-3"></i>
+                        <span>Accounts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                        <i class="fa-solid fa-exchange-alt w-5 mr-3"></i>
+                        <span>Transactions</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                        <i class="fa-solid fa-chart-line w-5 mr-3"></i>
+                        <span>Investments</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                        <i class="fa-solid fa-file-alt w-5 mr-3"></i>
+                        <span>Reports</span>
+                        <span class="ml-auto bg-blue-600 text-white text-xs px-2 py-1 rounded">BETA</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                        <i class="fa-solid fa-piggy-bank w-5 mr-3"></i>
+                        <span>Savings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                        <i class="fa-solid fa-credit-card w-5 mr-3"></i>
+                        <span>Liabilities</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                        <i class="fa-solid fa-bullseye w-5 mr-3"></i>
+                        <span>Goals</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                        <i class="fa-solid fa-lightbulb w-5 mr-3"></i>
+                        <span>Advice</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                        <i class="fa-solid fa-robot w-5 mr-3"></i>
+                        <span>AI Assistant</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="p-4 mt-auto">
+            <!-- <div class="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-4 mb-4">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-gift text-orange-400 text-xl mr-3"></i>
+                    <div>
+                        <p class="text-white font-medium text-sm">Get 1 Month Free</p>
+                        <p class="text-blue-200 text-xs">Upgrade to Premium</p>
+                    </div>
+                </div>
+            </div> -->
+
+            <button class="flex items-center text-slate-400 hover:text-white py-2 mb-4 transition-colors">
+                <i class="fa-solid fa-question-circle mr-3"></i>
+                <span>Help & Support</span>
+            </button>
+
+            <div class="flex items-center">
+  <div
+    class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+    <i class="fa-solid fa-user text-white text-sm"></i>
+  </div>
+  <div class="ml-3 flex-1">
+    <p class="text-white font-medium text-sm">Chirag Kalwani</p>
+    <p class="text-slate-400 text-xs">Premium User</p>
+  </div>
+  <i class="fa-solid fa-chevron-down text-slate-400"></i>
+</div>
+
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="ml-64 relative z-10">
+
+        <!-- Header -->
+        <header id="header" class="bg-white/80 backdrop-blur-lg border-b border-white/20 px-8 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <button class="text-slate-600 hover:text-slate-800 mr-4 lg:hidden">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                    <div>
+                        <h1 class="text-2xl font-bold text-slate-800">Good evening, Chirag</h1>
+                        <!-- <p class="text-blue-600 font-medium">Your portfolio grew 4.2% this month! 📈</p> -->
+                    </div>
+                </div>
+
+                <!-- Market Updates in Header -->
+                <div class="flex items-center space-x-6">
+                    <div class="flex items-center space-x-4 text-sm">
+                        <div class="flex items-center">
+                            <span class="text-slate-600 mr-1">SENSEX</span>
+                            <span class="font-bold text-slate-800">72,832</span>
+                            <span class="text-green-600 ml-1">+0.34%</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-slate-600 mr-1">NIFTY</span>
+                            <span class="font-bold text-slate-800">22,097</span>
+                            <span class="text-green-600 ml-1">+0.36%</span>
+                        </div>
+                    </div>
+
+                    <!-- Fintoo Points -->
+                    <!-- <div class="flex items-center bg-orange-50 border border-orange-200 rounded-lg px-3 py-2">
+                        <i class="fa-solid fa-star text-orange-600 mr-2"></i>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-orange-800 font-medium text-sm">800</span><span>/</span><span
+                                class="text-orange-600 text-sm">1000</span>
+                        </div>
+                    </div> -->
+
+                    <div class="flex items-center space-x-4">
+                        <button class="text-slate-600 hover:text-slate-800 transition-colors">
+                            <i class="fa-solid fa-search text-lg"></i>
+                        </button>
+                        <button class="text-slate-600 hover:text-slate-800 transition-colors relative">
+                            <i class="fa-solid fa-bell text-lg"></i>
+                            <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+
+ <main class="p-8">
+     <header id="header" class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-navy">Expense Tracker Dashboard</h1>
+            <div class="flex items-center space-x-6">
+                <div class="relative">
+                    <select class="appearance-none bg-white border border-gray-200 rounded-lg py-2 px-4 pr-8 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-400">
+                        <option>This Month</option>
+                        <option>Last Month</option>
+                        <option>This Year</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <i class="fa-solid fa-chevron-down text-xs"></i>
+                    </div>
+                </div>
+                      </div>
+        </header>
+
+        <section id="summary-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+  <!-- Total Income -->
+  <div class="glassmorphic-card rounded-2xl p-6 hover:scale-[1.02] transition-transform duration-300 shadow-lg hover:shadow-xl relative">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="text-base font-semibold text-navy">Total Income</h3>
+      <div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center">
+        <i class="fa-solid fa-arrow-up-right-dots text-blue-600"></i>
+      </div>
+    </div>
+    <p class="text-4xl font-bold text-navy mb-2">₹1,10,000</p>
+    <div class="flex items-center text-sm mb-2">
+      <i class="fa-solid fa-arrow-trend-up text-green-500 mr-1"></i>
+      <span class="font-medium text-green-600">+5.2%</span>
+      <span class="text-gray-500 ml-1">vs last month</span>
+    </div>
+    <!-- sparkline (income trend) -->
+    <!-- insight -->
+    <p class="text-xs text-gray-500">You're earning steadily. Set a savings target?</p>
+    <!-- action -->
+    <button class="mt-3 text-sm text-orange font-semibold hover:underline">Set Goal</button>
+  </div>
+
+  <!-- Total Expenses -->
+  <div class="glassmorphic-card rounded-2xl p-6 hover:scale-[1.02] transition-transform duration-300 shadow-lg hover:shadow-xl relative">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="text-base font-semibold text-navy">Total Expenses</h3>
+      <div class="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center">
+        <i class="fa-solid fa-chart-pie text-orange-500"></i>
+      </div>
+    </div>
+    <p class="text-4xl font-bold text-navy mb-2">₹54,200</p>
+    <div class="flex items-center text-sm mb-2">
+      <i class="fa-solid fa-arrow-trend-up text-red-500 mr-1"></i>
+      <span class="font-medium text-red-500">+8.3%</span>
+      <span class="text-gray-500 ml-1">over last month</span>
+    </div>
+    <!-- category highlight -->
+   
+    <!-- <div class="h-1.5 w-full bg-gray-200 rounded-full overflow-hidden mb-3">
+      <div class="h-full bg-orange-400 w-[70%]"></div>
+    </div> -->
+    <p class="text-xs text-gray-500">You’ve have spent 60% of your monthly expenses budget.</p>
+    <button class="mt-3 text-sm text-orange font-semibold hover:underline">View Breakdown</button>
+  </div>
+
+  <!-- Net Balance -->
+  <div class="glassmorphic-card rounded-2xl p-6 hover:scale-[1.02] transition-transform duration-300 shadow-lg hover:shadow-xl relative">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="text-base font-semibold text-navy">Net Balance</h3>
+      <div class="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center">
+        <i class="fa-solid fa-wallet text-green-500"></i>
+      </div>
+    </div>
+    <p class="text-4xl font-bold text-navy mb-2">₹55,800</p>
+    <div class="flex items-center text-sm mb-2">
+      <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">Healthy Savings</span>
+    </div>
+    <!-- <div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden mb-3">
+      <div class="h-full bg-green-400 w-[60%]"></div>
+    </div> -->
+    <p class="text-xs text-gray-500">You’ve saved 51% of income this month 🎯</p>
+    <button class="mt-3 text-sm text-orange font-semibold hover:underline">Optimize Budget</button>
+  </div>
+
+  <!-- Investments -->
+  <div class="glassmorphic-card rounded-2xl p-6 hover:scale-[1.02] transition-transform duration-300 shadow-lg hover:shadow-xl relative">
+    <div class="flex items-center justify-between mb-3">
+      <h3 class="text-base font-semibold text-navy">Investments</h3>
+      <div class="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center">
+        <i class="fa-solid fa-sack-dollar text-indigo-500"></i>
+      </div>
+    </div>
+    <p class="text-4xl font-bold text-navy mb-2">₹2,50,000</p>
+    <div class="flex items-center text-sm mb-2">
+      <i class="fa-solid fa-arrow-trend-up text-green-500 mr-1"></i>
+      <span class="font-medium text-green-600">+2.4%</span>
+      <span class="text-gray-500 ml-1">growth this month</span>
+    </div>
+    <p class="text-xs text-gray-500">Portfolio diversification score: <span class="font-semibold text-navy">7.8/10</span></p>
+    <button class="mt-3 text-sm text-orange font-semibold hover:underline">View Portfolio</button>
+  </div>
+</section>
+ <section>
+                <div class="grid grid-cols-3 gap-6 mb-8">
+    <section id="monthly-spending-limit-section">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold text-primary">Monthly Spending Limit</h2>
+                        <button class="text-accent hover:text-orange-700 text-sm font-semibold">
+                            <i class="fa-solid fa-pen mr-1"></i>Edit Budget
+                        </button>
+                    </div>
+                    
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="relative w-48 h-48">
+                            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="40" fill="transparent" stroke="#E5E7EB" stroke-width="8"></circle>
+                                <circle cx="50" cy="50" r="40" fill="transparent" stroke="#DD7300" stroke-width="8" stroke-dasharray="251.2" stroke-dashoffset="62.8" stroke-linecap="round"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <p class="text-3xl font-bold text-primary">75%</p>
+                                <p class="text-xs text-gray-500">of budget used</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Budget Set</span>
+                            <span class="text-lg font-bold text-primary">₹40,000</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Spent</span>
+                            <span class="text-lg font-bold text-accent">₹30,000</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Remaining</span>
+                            <span class="text-lg font-bold text-green-600">₹10,000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-500 rounded-lg">
+                        <div class="flex items-start">
+                            <i class="fa-solid fa-exclamation-triangle text-yellow-600 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-semibold text-primary text-sm mb-1">AI Alert: Food Budget</h4>
+                                <p class="text-xs text-gray-600">You're 10% above your monthly food budget. Consider reducing dining expenses by ₹1,200.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 space-y-3">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs text-gray-600">Food & Dining</span>
+                                <span class="text-xs font-semibold text-red-600">₹12,500 / ₹10,000</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-red-500 h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs text-gray-600">Transportation</span>
+                                <span class="text-xs font-semibold text-primary">₹5,200 / ₹8,000</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-accent h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs text-gray-600">Entertainment</span>
+                                <span class="text-xs font-semibold text-primary">₹3,800 / ₹5,000</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full" style="width: 76%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs text-gray-600">Shopping</span>
+                                <span class="text-xs font-semibold text-primary">₹8,500 / ₹12,000</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 71%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+                    <div id="investment-insights" class="glassmorphic-card rounded-2xl p-6 relative overflow-hidden">
+                        <!-- Header -->
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <h2 class="text-xl font-bold text-slate-800 flex items-center">
+                                    AI Investment Insights
+                                    <span
+                                        class="ml-2 text-xs bg-gradient-to-r from-orange-400 to-orange-600 text-white px-2 py-0.5 rounded-md font-semibold">
+                                        Premium
+                                    </span>
+                                </h2>
+                                <p class="text-slate-500 text-sm">Smarter, data-driven guidance for your wealth journey
+                                </p>
+                            </div>
+                            <div class="ai-glow bg-blue-100 p-2 rounded-lg">
+                                <i class="fa-solid fa-robot text-blue-600"></i>
+                            </div>
+                        </div>
+
+                        <!-- Free Insight (Visible) -->
+                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-5">
+                            <div class="flex items-start">
+                                <div
+                                    class="w-9 h-9 text-blue-500 rounded-full flex items-center justify-center mr-3 mt-1">
+                                    <i class="fa-solid fa-lightbulb text-blue-500 text-sm"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-blue-800 mb-1">Rebalancing Suggestion</h3>
+                                    <p class="text-blue-700 text-sm">
+                                        Your equity exposure is slightly high at <strong>78%</strong>. Shifting 8% to
+                                        debt may reduce volatility.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Locked Insights (Condensed + Premium Style) -->
+                        <div
+                            class="relative bg-white/40 backdrop-blur-sm border border-slate-200 rounded-xl p-5 overflow-hidden">
+                            <!-- Lock Overlay -->
+                            <div
+                                class="absolute inset-0 bg-white/70 backdrop-blur-md flex flex-col items-center justify-center z-10 rounded-xl text-center px-4">
+                                <i class="fa-solid fa-lock text-slate-500 text-lg mb-2"></i>
+                                <p class="text-sm text-slate-600 font-medium mb-2">3 premium insights waiting for you
+                                </p>
+                                <a href="/plan.html"
+                                    class="text-orange-600 font-semibold text-xs underline hover:text-orange-700">Unlock
+                                    Now</a>
+                            </div>
+
+                            <!-- Blurred Preview List -->
+                            <div class="opacity-50 pointer-events-none">
+                                <ul class="space-y-3 text-sm text-slate-600">
+                                    <li class="flex items-center">
+                                        <i class="fa-solid fa-star text-purple-500 mr-2 text-xs"></i>
+                                        <span>Top Performer Alert: Axis Bluechip Fund outperformed peers</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fa-solid fa-chart-line text-blue-500 mr-2 text-xs"></i>
+                                        <span>Tax-Saving Opportunity: Optimize ELSS contributions</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fa-solid fa-triangle-exclamation text-orange-500 mr-2 text-xs"></i>
+                                        <span>Underperforming Asset: IT Fund showing -12% returns</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Premium CTA -->
+                        <div
+                            class="text-center mt-6 bg-gradient-to-r from-orange-400 to-orange-600 rounded-xl p-5 text-white shadow-md">
+                            <h3 class="font-semibold text-lg mb-1">Unlock Personalized AI Insights 🔓</h3>
+                            <p class="text-sm text-orange-50 mb-3">Access real-time portfolio intelligence & smart
+                                investment moves.</p>
+                            <a href="/plan.html"
+                                class="inline-flex items-center bg-white text-orange-600 font-semibold px-5 py-2 rounded-lg hover:bg-orange-50 transition-all">
+                                Upgrade to Premium <i class="fa-solid fa-crown ml-2 text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                          <div id="savings-goals" class="glassmorphic-card rounded-2xl p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h2 class="text-lg font-bold text-slate-800">Savings Goals</h2>
+                            <p class="text-slate-500 text-sm">Track and set new goals</p>
+                        </div>
+                        <button id="openGoalForm" class="text-blue-600 hover:text-blue-700">
+                            <i class="fa-solid fa-plus text-lg"></i>
+                        </button>
+                    </div>
+
+                    <!-- Goals Container -->
+                    <div id="goalsContainer" class="space-y-4">
+                        <!-- Default Example Goal -->
+                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-semibold text-slate-800 text-sm">Retirement Goal</h3>
+                                <span class="text-blue-600 text-xs font-medium">50%</span>
+                            </div>
+                            <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
+                                <div class="bg-blue-500 h-2 rounded-full transition-all" style="width: 50%"></div>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-slate-600">₹50,00,000</span>
+                                <span class="text-slate-400">₹1,00,00,000</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500 mt-1">~20 years remaining</p>
+                        </div>
+                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-semibold text-slate-800 text-sm">Contingency Goal</h3>
+                                <span class="text-blue-600 text-xs font-medium">85%</span>
+                            </div>
+                            <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
+                                <div class="bg-blue-500 h-2 rounded-full transition-all" style="width: 85%"></div>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-slate-600">₹8,50,000</span>
+                                <span class="text-slate-400">₹10,00,000</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500 mt-1">~1 year remaining</p>
+                        </div>
+                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-semibold text-slate-800 text-sm">House Down Payment</h3>
+                                <span class="text-blue-600 text-xs font-medium">85%</span>
+                            </div>
+                            <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
+                                <div class="bg-blue-500 h-2 rounded-full transition-all" style="width: 85%"></div>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span class="text-slate-600">₹8,50,000</span>
+                                <span class="text-slate-400">₹10,00,000</span>
+                            </div>
+                            <p class="text-[11px] text-slate-500 mt-1">~2 months remaining</p>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </section>
+                <div class="grid grid-cols-3 gap-6 mb-8">
+            <section id="expense-breakdown-section" class="col-span-2">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                    <h2 class="text-xl font-bold text-primary mb-4">Expense Breakdown</h2>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div id="expense-pie-chart" style="height: 350px;"></div>
+                        <div class="flex flex-col justify-center space-y-4">
+                            <div class="bg-gradient-to-r from-red-50 to-orange-50 border-l-4 border-accent rounded-lg p-4">
+                                <div class="flex items-start">
+                                    <div class="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fa-solid fa-lightbulb text-accent"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold text-primary mb-1 text-sm">AI Alert: Dining Budget</h4>
+                                        <p class="text-xs text-gray-600 mb-2">You spent ₹1,500 on Swiggy 🍔. Limit dining out to ₹3,000 to stay on track for your vacation goal.</p>
+                                        <button class="text-xs font-semibold text-accent hover:underline">View Details →</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gradient-to-r from-green-50 to-emerald-50 border-l-4 border-green-500 rounded-lg p-4">
+                                <div class="flex items-start">
+                                    <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                        <i class="fa-solid fa-piggy-bank text-green-600"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold text-primary mb-1 text-sm">Smart Suggestion</h4>
+                                        <p class="text-xs text-gray-600 mb-3">You have ₹500 leftover this month. Invest in ELSS to save taxes?</p>
+                                        <button class="w-full bg-accent text-white text-xs font-semibold py-2 rounded-lg hover:bg-orange-700 transition-all">
+                                            Invest Now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-gray-50 rounded-lg p-3 text-center">
+                                    <p class="text-xs text-gray-500 mb-1">Food & Dining</p>
+                                    <p class="text-lg font-bold text-primary">₹18,500</p>
+                                    <p class="text-xs text-red-500">36.1%</p>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-3 text-center">
+                                    <p class="text-xs text-gray-500 mb-1">Rent</p>
+                                    <p class="text-lg font-bold text-primary">₹15,000</p>
+                                    <p class="text-xs text-gray-600">29.3%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="upcoming-bills-section">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-bold text-primary">Upcoming Bills</h2>
+                        <button class="text-accent hover:text-orange-700 transition-all">
+                            <i class="fa-solid fa-plus-circle text-xl"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-red-50 border border-red-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fa-solid fa-home text-red-600"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-semibold text-primary">Rent</p>
+                                    <p class="text-xs text-gray-500">Due in 2 days</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold text-primary">₹15,000</p>
+                                <span class="text-xs text-red-600 font-semibold">URGENT</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-gray-50 border border-gray-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fa-solid fa-bolt text-yellow-600"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-semibold text-primary">Electricity</p>
+                                    <p class="text-xs text-gray-500">Due on Dec 28</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold text-primary">₹2,400</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-gray-50 border border-gray-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fa-solid fa-wifi text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-semibold text-primary">Internet</p>
+                                    <p class="text-xs text-gray-500">Due on Dec 30</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold text-primary">₹999</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-gray-50 border border-gray-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fa-solid fa-credit-card text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-semibold text-primary">Credit Card EMI</p>
+                                    <p class="text-xs text-gray-500">Due on Jan 5</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold text-primary">₹8,500</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between p-3 bg-gray-50 border border-gray-200 rounded-lg">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fa-solid fa-shield-halved text-green-600"></i>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-semibold text-primary">Life Insurance</p>
+                                    <p class="text-xs text-gray-500">Due on Jan 10</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-sm font-bold text-primary">₹5,000</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                   
+                </div>
+            </section>
+        </div>
+
+<div class="grid grid-cols-2 gap-6 mb-8">
+        <section id="financial-performance-section" class="mb-8">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-primary mb-1">Financial Performance</h2>
+                        <p class="text-sm text-gray-500">Income vs Expense Overview</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button class="px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg transition-all">This Month</button>
+                        <button class="px-4 py-2 text-sm font-medium bg-accent text-white rounded-lg">Last Month</button>
+                        <button class="px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg transition-all">Last 3 Months</button>
+                    </div>
+                </div>
+                <div id="performance-chart" style="height: 400px;"></div>
+            </div>
+        </section>
+          <section id="annual-overview-section" class="mb-8">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-primary mb-1">Annual Overview</h2>
+                        <p class="text-sm text-gray-500">Income vs Expense Comparison (2022-2025)</p>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-primary rounded mr-2"></div>
+                            <span class="text-sm text-gray-600">Income</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-accent rounded mr-2"></div>
+                            <span class="text-sm text-gray-600">Expense</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="annual-bar-chart" style="height: 400px;"></div>
+            </div>
+        </section>
+        </div>
+
+    
+      
+
+     
+
+        
+
+      
+
+    </main>
+
+    </div>
+
+  
+  <script>
+window.addEventListener('load', function() {
+    try {
+        var performanceData = [
+            {
+                x: ['Dec 1', 'Dec 5', 'Dec 10', 'Dec 15', 'Dec 20', 'Dec 25', 'Dec 30'],
+                y: [75000, 78000, 76000, 82000, 85000, 83000, 85000],
+                type: 'scatter',
+                mode: 'lines',
+                name: 'Income',
+                line: { color: '#042B62', width: 3 }
+            },
+            {
+                x: ['Dec 1', 'Dec 5', 'Dec 10', 'Dec 15', 'Dec 20', 'Dec 25', 'Dec 30'],
+                y: [45000, 47000, 46000, 49000, 51200, 50000, 51200],
+                type: 'scatter',
+                mode: 'lines',
+                name: 'Expense',
+                line: { color: '#DD7300', width: 3 }
+            }
+        ];
+        
+        var performanceLayout = {
+            title: { text: '', font: { size: 0 } },
+            xaxis: { title: 'Date', gridcolor: '#E5E7EB' },
+            yaxis: { title: 'Amount (₹)', gridcolor: '#E5E7EB' },
+            margin: { t: 20, r: 20, b: 60, l: 80 },
+            plot_bgcolor: '#ffffff',
+            paper_bgcolor: '#ffffff',
+            showlegend: true,
+            legend: { x: 0, y: 1.1, orientation: 'h' },
+            hovermode: 'x unified'
+        };
+        
+        var performanceConfig = {
+            responsive: true,
+            displayModeBar: false,
+            displaylogo: false
+        };
+        
+        Plotly.newPlot('performance-chart', performanceData, performanceLayout, performanceConfig);
+        
+        var expenseData = [{
+            labels: ['Food & Dining', 'Rent', 'Travel', 'Bills', 'Shopping', 'Others'],
+            values: [18500, 15000, 8200, 4500, 3800, 1200],
+            type: 'pie',
+            marker: {
+                colors: ['#DD7300', '#042B62', '#3B82F6', '#10B981', '#8B5CF6', '#F59E0B']
+            },
+            textinfo: 'label+percent',
+            textposition: 'outside',
+            automargin: true
+        }];
+        
+        var expenseLayout = {
+            title: { text: '', font: { size: 0 } },
+            margin: { t: 20, r: 20, b: 20, l: 20 },
+            plot_bgcolor: '#ffffff',
+            paper_bgcolor: '#ffffff',
+            showlegend: false
+        };
+        
+        var expenseConfig = {
+            responsive: true,
+            displayModeBar: false,
+            displaylogo: false
+        };
+        
+        Plotly.newPlot('expense-pie-chart', expenseData, expenseLayout, expenseConfig);
+        
+        var annualData = [
+            {
+                x: ['2022', '2023', '2024', '2025'],
+                y: [850000, 920000, 1020000, 1050000],
+                type: 'bar',
+                name: 'Income',
+                marker: { color: '#042B62' }
+            },
+            {
+                x: ['2022', '2023', '2024', '2025'],
+                y: [580000, 620000, 650000, 620000],
+                type: 'bar',
+                name: 'Expense',
+                marker: { color: '#DD7300' }
+            }
+        ];
+        
+        var annualLayout = {
+            title: { text: '', font: { size: 0 } },
+            xaxis: { title: 'Year' },
+            yaxis: { title: 'Amount (₹)', gridcolor: '#E5E7EB' },
+            margin: { t: 20, r: 20, b: 60, l: 80 },
+            plot_bgcolor: '#ffffff',
+            paper_bgcolor: '#ffffff',
+            showlegend: true,
+            legend: { x: 0, y: 1.1, orientation: 'h' },
+            barmode: 'group'
+        };
+        
+        var annualConfig = {
+            responsive: true,
+            displayModeBar: false,
+            displaylogo: false
+        };
+        
+        Plotly.newPlot('annual-bar-chart', annualData, annualLayout, annualConfig);
+        
+    } catch(e) {
+        console.error('Chart rendering error:', e);
+        document.getElementById('performance-chart').innerHTML = '<div class="flex items-center justify-center h-full text-gray-500">Chart unavailable</div>';
+        document.getElementById('expense-pie-chart').innerHTML = '<div class="flex items-center justify-center h-full text-gray-500">Chart unavailable</div>';
+        document.getElementById('annual-bar-chart').innerHTML = '<div class="flex items-center justify-center h-full text-gray-500">Chart unavailable</div>';
+    }
+});
+</script>
+
+</body>
+
+</html>
