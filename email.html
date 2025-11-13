@@ -182,7 +182,7 @@ document.getElementById("callbackForm").addEventListener("submit", async functio
         });
 
         // Send to Google Apps Script (your link)
-        const scriptReq = fetch("https://script.google.com/a/macros/wealthtech.ai/s/AKfycbwDoOyZyTT78NtcAxP1hkHas26c7XH4TU7pNlCSIAk6y7iBlWn2LwJWiAKHirPkC8pU/exec", {
+        const scriptReq = fetch("https://script.google.com/macros/s/AKfycbwDoOyZyTT78NtcAxP1hkHas26c7XH4TU7pNlCSIAk6y7iBlWn2LwJWiAKHirPkC8pU/exec", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
