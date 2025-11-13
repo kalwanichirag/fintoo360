@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .address_details,
+        .address_details a {
+            text-decoration: none;
+            color: #606060;
+            font-size: 0.8rem;
+            line-height: 20px;
+            margin: 0px;
+            padding: 0 10px;
+        }
+
+        input:focus {
+            border-color: #dd7300;
+            box-shadow: 0 0 5px rgba(221, 115, 0, 0.4);
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #dd7300;
+            color: #fff;
+            padding: 12px 30px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-top: 0px;
+            box-shadow: 3px 4px 9px rgba(0, 0, 0, 0.7);
+            font-size: 1rem;
+        }
+
+        li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body style="font-family: Arial, sans-serif; max-width:600px; margin: auto;">
+
+    <!-- Header -->
+    <header style="padding:20px 0; text-align: center; background-color: #fff;">
+        <img src="https://www.fintoo.in/blog/wp-content/uploads/2025/08/1_Fintoo-blue-top-logo-24.png" alt="Fintoo Logo"
+            style="width: 25%; height: auto; margin: auto;">
+    </header>
+
+    <!-- Banner -->
+    <section>
+        <img src="https://www.fintoo.in/blog/wp-content/uploads/2025/10/Promotional-Email-Do-You-Know-Whats-Not-in-Your-Portfolio-We-Can-Help-You-Find-Out-Recovered-02.png"
+            alt="Banner" style="width: 100%; height: auto;">
+    </section>
+
+    <!-- Main Content -->
+    <main style="background-color: #fff;">
+        <section style="padding:0 16px;">
+            <p style="font-size:16px; line-height:1.5; padding: 20px 0 16px 0; margin: 0;"> Hey Name,</p>
+            <p style="font-size:16px; line-height:1.5; padding: 00px 0 16px 0; margin: 0;"> Even the most carefully
+                built portfolios can have gaps that silently erode wealth.</p>
+            <h3 style="margin:20px 0; color:#dd7300; text-align:center;">Our expert review will uncover:</h3>
+            <img src="https://www.fintoo.in/blog/wp-content/uploads/2025/10/Promotional-Email-Do-You-Know-Whats-Not-in-Your-Portfolio-We-Can-Help-You-Find-Out-Recovered-14.png"
+                style="max-width: 100%; height: auto;" alt="">
+            <img src="https://www.fintoo.in/blog/wp-content/uploads/2025/10/Promotional-Email-Do-You-Know-Whats-Not-in-Your-Portfolio-We-Can-Help-You-Find-Out-Recovered-15.png"
+                style="max-width: 100%; height: auto;" alt="">
+
+        </section>
+
+        <section style="padding: 0px 16px;  text-align: center;">
+            <form id="callbackForm"
+                style=" margin: 30px auto; background: #fff; padding: 30px;  border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
+                <h3 style=" line-height: 1.5; text-align: center; color:#042b62; margin-bottom: 20px; margin-top: 0;">
+                    Book your complimentry Portfolio review today.
+                </h3>
+                <div style="margin-bottom: 18px; text-align: left;">
+                    <label for="name" style="display:block; margin-bottom:6px; font-weight:bold; color:#333;">Full
+                        Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required
+                        style="    width: -webkit-fill-available;  padding: 14px; border-radius: 10px; border: 1px solid #ccc; font-size: 1rem; outline:none; transition: all 0.2s;">
+                    <small id="nameError" style="color:red; display:none;"></small>
+                </div>
+
+                <div style="margin-bottom: 18px; text-align: left;">
+                    <label for="email"
+                        style="display:block; margin-bottom:6px; font-weight:bold; color:#333;">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required
+                        style="    width: -webkit-fill-available; padding: 14px; border-radius: 10px; border: 1px solid #ccc; font-size: 1rem; outline:none; transition: all 0.2s;">
+                    <small id="emailError" style="color:red; display:none;"></small>
+                </div>
+
+                <div style="margin-bottom: 18px; text-align: left;">
+                    <label for="mobile" style="display:block; margin-bottom:6px; font-weight:bold; color:#333;">Mobile
+                        Number</label>
+                    <input type="number" id="mobile" name="mobile" placeholder="Enter your mobile number" required
+                        style="    width: -webkit-fill-available; padding: 14px; border-radius: 10px; border: 1px solid #ccc; font-size: 1rem; outline:none; transition: all 0.2s;">
+                    <small id="mobileError" style="color:red; display:none;"></small>
+                </div>
+
+                <button type="submit" class="btn"
+                    style="width: 100%; padding: 15px; font-size: 1.1rem; font-weight: bold; border-radius: 12px; background:#dd7300; border: none; color: #fff; cursor: pointer; transition: all 0.3s; margin-top: 10px;">Book
+                    Now</button>
+            </form>
+            <p id="formMessage" style="margin-top: 15px; color: green; display: none; font-weight:bold;"></p>
+        </section>
+
+       <script>
+document.getElementById("callbackForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    // Clear previous errors
+    document.getElementById("nameError").style.display = "none";
+    document.getElementById("emailError").style.display = "none";
+    document.getElementById("mobileError").style.display = "none";
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const mobile = document.getElementById("mobile").value.trim();
+
+    let isValid = true;
+
+    // Name validation
+    if (!name) {
+        const el = document.getElementById("nameError");
+        el.textContent = "Please enter your full name.";
+        el.style.display = "block";
+        isValid = false;
+    }
+
+    // Email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailPattern.test(email)) {
+        const el = document.getElementById("emailError");
+        el.textContent = "Please enter a valid email address.";
+        el.style.display = "block";
+        isValid = false;
+    }
+
+    // Mobile validation
+    const mobilePattern = /^[0-9]{10}$/;
+    if (!mobile || !mobilePattern.test(mobile)) {
+        const el = document.getElementById("mobileError");
+        el.textContent = "Please enter a valid 10-digit mobile number.";
+        el.style.display = "block";
+        isValid = false;
+    }
+
+    if (!isValid) return;
+
+    // Payload for CRM & Google Script
+    const payload = {
+        fullname: name,
+        email: email,
+        mobile: mobile,
+        comment: "",
+        servicename: "Portfolio review",
+        plan_name: "Portfolio review",
+        status: "Introductory meet",
+        tags: "Callback_mintyApp_8",
+        utm_source: "26",
+        rm_id: "96",
+        service: "98",
+        tagval: "",
+        skip_sms: ""
+    };
+
+    try {
+        // Send to Fintoo CRM
+        const fintooReq = fetch("https://www.fintoo.in/callback-services/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+        });
+
+        // Send to Google Apps Script (your link)
+        const scriptReq = fetch("https://script.google.com/a/macros/wealthtech.ai/s/AKfycbwDoOyZyTT78NtcAxP1hkHas26c7XH4TU7pNlCSIAk6y7iBlWn2LwJWiAKHirPkC8pU/exec", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+        });
+
+        // Wait for both requests in parallel
+        const [fintooRes, scriptRes] = await Promise.all([fintooReq, scriptReq]);
+
+        if (fintooRes.ok || scriptRes.ok) {
+            document.getElementById("formMessage").textContent = "Form submitted successfully!";
+            document.getElementById("formMessage").style.color = "green";
+            document.getElementById("formMessage").style.display = "block";
+            document.getElementById("callbackForm").reset();
+        } else {
+            document.getElementById("formMessage").textContent = "Something went wrong. Please try again.";
+            document.getElementById("formMessage").style.color = "red";
+            document.getElementById("formMessage").style.display = "block";
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        document.getElementById("formMessage").textContent = "Unable to submit. Please try again later.";
+        document.getElementById("formMessage").style.color = "red";
+        document.getElementById("formMessage").style.display = "block";
+    }
+});
+</script>
+
+
+        <section>
+
+            <p style="font-size: 16px; padding-left: 16px; line-height: 1.5; margin-bottom: 0; padding-bottom: 16px;">
+                Warm Regars, </br>
+                <b> Team Fintoo</b>
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%"
+            style="margin: 0 auto; padding: 0;">
+            <tr>
+                <td align="center" style="padding: 0; margin: 0;">
+                    <table class="container" role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%"
+                        style="max-width:800px; width:100%; margin:0 auto;">
+                        <tr>
+                            <td
+                                style="background: url(https://www.fintoo.in/blog/wp-content/uploads/2025/08/email-blue-footer-banner.png) #B5CFE3 center/cover no-repeat; background-size: cover; background-position: center; padding: 0;">
+                                <div style="text-align: center; padding-top: 10px;">
+                                    <!-- Logo -->
+                                    <div style="margin-top: 25px; margin-bottom: 25px;">
+                                        <img src="https://www.fintoo.in/blog/wp-content/uploads/2025/08/1_Fintoo-White-logo-1.png"
+                                            alt="Fintoo Logo" style="width: 150px; cursor: default;">
+                                    </div>
+                                    <!-- Services -->
+                                    <p
+                                        style="margin: 10px auto; font-size: 13px; font-weight: bold; line-height: 1.6; color: white; padding: 0 16px;">
+                                        Financial Planning | Tax Management | Wealth Management |<br>
+                                        Debt Investments | Offshore Investing
+                                    </p>
+                                    <!-- App Links -->
+                                    <div style="margin: 20px 0;">
+                                        <a href="https://play.google.com/store/apps/details?id=com.financialhospital.admin.finh"
+                                            style="display: inline-block; margin: 0 10px;">
+                                            <img src="https://www.fintoo.in/blog/wp-content/uploads/2025/08/1_google-play.png"
+                                                alt="Google Play" style="height: 30px;">
+                                        </a>
+                                        <a href="https://apps.apple.com/in/app/fintoo/id1339092462"
+                                            style="display: inline-block; margin: 0 10px;">
+                                            <img src="https://www.fintoo.in/blog/wp-content/uploads/2025/08/1_App-Store-IOS.png"
+                                                alt="App Store" style="height: 30px;">
+                                        </a>
+                                    </div>
+                                    <!-- Social Icons -->
+                                    <div style="margin-top: 20px; padding-bottom: 20px;">
+                                        <a href="https://www.facebook.com/fintooapp/"
+                                            style="display: inline-block; margin: 0 5px;">
+                                            <img src="https://www.fintoo.in/blog/wp-content/uploads/2025/08/1_facebook.png"
+                                                alt="Facebook" style="height: 30px; width: 30px;">
+                                        </a>
+                                        <a href="https://x.com/FintooApp" style="display: inline-block; margin: 0 5px;">
+                                            <img src="https://www.fintoo.in/blog/wp-content/uploads/2025/08/1_twitter.png"
+                                                alt="Twitter/X" style="height: 30px; width: 30px;">
+                                        </a>
+                                        <a href="https://www.linkedin.com/company/1769616/"
+                                            style="display: inline-block; margin: 0 5px;">
+                                            <img src="https://www.fintoo.in/blog/wp-content/uploads/2025/08/1_linkedin.png"
+                                                alt="LinkedIn" style="height: 30px; width: 30px;">
+                                        </a>
+                                        <a href="https://www.youtube.com/channel/UC00AMcwwfUKrV-XD5n6hWyQ/videos"
+                                            style="display: inline-block; margin: 0 5px;">
+                                            <img src="https://www.fintoo.in/blog/wp-content/uploads/2025/08/1_youtube.png"
+                                                alt="YouTube" style="height: 30px; width: 30px;">
+                                        </a>
+                                        <a href="https://www.instagram.com/fintoo.app/"
+                                            style="display: inline-block; margin: 0 5px;">
+                                            <img src="https://www.fintoo.in/blog/wp-content/uploads/2025/08/1_Instagram.png"
+                                                alt="Instagram" style="height: 30px; width: 30px;">
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <!-- Address -->
+        <section>
+            <div
+                style="width: 100%; background-color: #ffffff; overflow: hidden; padding: 20px 0px; text-align: center;">
+                <p class="address_details">
+                    <a target="_blank"
+                        href="https://www.google.com/maps/search/?api=1&query=Dynasty Business park, Opp Sangam Cinema, Andheri (East), J B Nagar, Mumbai, Maharashtra 400059">
+                        B/306, Dynasty Business park, Opp Sangam Cinema, Andheri (East), J B Nagar, Mumbai, Maharashtra
+                        400059
+                    </a>
+                    <br>
+                    <a href="tel:+919699800600">+91-9699 800 600</a> /
+                    <a href="mailto:online@fintoo.in">online@fintoo.in</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- Bottom Strip -->
+        <section>
+            <div style="width: 100%; height: 30px; background-color: #dd7301; margin-bottom: 0px;"></div>
+        </section>
+    </footer>
+
+</body>
+
+</html>
