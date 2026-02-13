@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
     <style>
-        ::-webkit-scrollbar { display: none;}
+        
         body { font-family: 'Inter', sans-serif; }
         .font-display { font-family: 'Playfair Display', serif; }
         
@@ -71,6 +71,13 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        @media (max-width: 640px) {
+            .sticky-cta {
+                bottom: 16px;
+                right: 12px;
+            }
+        }
     </style>
     <script>
         tailwind.config = {
@@ -90,11 +97,11 @@
 <body class="bg-white overflow-x-hidden">
 
 <header id="header" class="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md z-50 border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5 flex items-center justify-between gap-4">
         <div class="flex items-center space-x-3">
             <div class=" rounded-xl flex items-center justify-center">
                 <span class="text-white font-bold text-xl">
-                    <img src="https://www.fintoo.in/static/media/wp/Fintoologo_.svg" alt="">
+                    <img class="w-28 sm:w-32" src="https://www.fintoo.in/static/media/wp/Fintoologo_.svg" alt="Fintoo">
                 </span>
             </div>
             <div>
@@ -109,21 +116,21 @@
             <a href="#events" class="text-gray-700 hover:text-purple-600 font-medium transition">Past Events</a>
         </nav>
         
-        <a href="#booking-form" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-xl transition transform hover:scale-105">
+        <a href="#booking-form" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white px-4 sm:px-6 py-2.5 sm:py-3 text-sm sm:text-base rounded-full font-semibold hover:shadow-xl transition transform hover:scale-105">
             Book a Session
         </a>
     </div>
 </header>
 
-<section id="hero-banner" class="relative h-[800px] bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 overflow-hidden pt-24">
+<section id="hero-banner" class="relative min-h-[740px] md:min-h-[800px] bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 overflow-hidden pt-24">
     <div class="sparkle" style="top: 10%; left: 15%; animation-delay: 0s;"></div>
     <div class="sparkle" style="top: 20%; right: 20%; animation-delay: 0.5s;"></div>
     <div class="sparkle" style="bottom: 30%; left: 25%; animation-delay: 1s;"></div>
     <div class="sparkle" style="top: 40%; right: 15%; animation-delay: 1.5s;"></div>
     <div class="sparkle" style="bottom: 20%; right: 30%; animation-delay: 2s;"></div>
     
-    <div class="max-w-7xl mx-auto px-8 h-full flex items-center relative z-10">
-        <div class="grid grid-cols-2 gap-16 items-center w-full">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center w-full">
             <div class="space-y-8">
                 <div class="inline-block">
                     <div class="bg-gradient-to-r from-purple-600 to-pink-500 text-white px-6 py-2 rounded-full text-sm font-semibold tracking-wide">
@@ -132,26 +139,26 @@
                     </div>
                 </div>
                 
-                <h1 class="font-display text-7xl font-bold leading-tight text-gray-900">
+                <h1 class="font-display text-5xl md:text-7xl font-bold leading-tight text-gray-900">
                     Womoneya <span class="gradient-text">3.0</span>
                 </h1>
                 
                 <div class="space-y-3">
-                    <p class="text-3xl font-semibold text-purple-600">Empower Her.</p>
-                    <p class="text-3xl font-semibold text-pink-500">Strengthen Her.</p>
-                    <p class="text-3xl font-semibold text-orange-500">Secure Her.</p>
+                    <p class="text-2xl md:text-3xl font-semibold text-purple-600">Empower Her.</p>
+                    <p class="text-2xl md:text-3xl font-semibold text-pink-500">Strengthen Her.</p>
+                    <p class="text-2xl md:text-3xl font-semibold text-orange-500">Secure Her.</p>
                 </div>
                 
-                <p class="text-xl text-gray-700 leading-relaxed max-w-xl">
+                <p class="text-lg md:text-xl text-gray-700 leading-relaxed max-w-xl">
                     A national-level celebration empowering working women across India through financial independence, mental resilience, and holistic wellness.
                 </p>
                 
-                <div class="flex items-center space-x-4 pt-4">
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
                     <a href="#booking-form" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white px-10 py-4 rounded-full font-bold text-base hover:shadow-2xl transition transform hover:scale-105 flex items-center space-x-2">
                         <span>Book a Session for Your Organization</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
-                    <a href="#about" class="border-2 border-purple-600 text-purple-600 px-8 py-4 rounded-full font-semibold hover:bg-purple-50 transition">
+                    <a href="#about" class="border-2 border-purple-600 text-purple-600 px-4 sm:px-6 lg:px-8 py-4 rounded-full font-semibold hover:bg-purple-50 transition">
                         Learn More
                     </a>
                 </div>
@@ -161,7 +168,7 @@
             
             <div class="relative">
                 <div class="absolute inset-0 bg-gradient-to-br from-purple-400/30 to-pink-400/30 rounded-3xl blur-3xl"></div>
-                <img class="relative w-full h-[600px] object-cover rounded-3xl shadow-2xl animate-float" src="/womoneya/banner.jpg" alt="confident professional Indian woman in business attire standing with arms crossed, smiling, modern office background, empowering pose, natural lighting, professional photography" />
+                <img class="relative w-full h-[420px] sm:h-[500px] lg:h-[600px] object-cover rounded-3xl shadow-2xl animate-float" src="/womoneya/banner.jpg" alt="confident professional Indian woman in business attire standing with arms crossed, smiling, modern office background, empowering pose, natural lighting, professional photography" />
               
             </div>
         </div>
@@ -169,17 +176,17 @@
     
     <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
 </section>
-<section id="about" class="py-24 bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
-    <div class="max-w-7xl mx-auto px-8">
+<section id="about" class="py-16 md:py-24 bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
             
-            <h2 class="font-display text-6xl font-bold text-gray-900 mb-6">About Womoneya 3.0</h2>
-            <p class="text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed font-medium">
+            <h2 class="font-display text-4xl md:text-6xl font-bold text-gray-900 mb-6">About Womoneya 3.0</h2>
+            <p class="text-lg md:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed font-medium">
                 A purpose-led initiative designed exclusively for working women across India
             </p>
         </div>
         
-        <div class="grid grid-cols-2 gap-12 items-center mb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center mb-20">
             <div class="relative">
                 <div class="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-3xl blur-2xl"></div>
                 <img class="relative w-full h-[500px] object-cover rounded-3xl shadow-2xl" src="/womoneya/banner2.jpg" alt="diverse group of professional Indian women in corporate setting, celebrating, empowered, modern office, natural lighting, professional photography" />
@@ -236,9 +243,9 @@
             </div>
         </div>
         
-        <div class="bg-white rounded-3xl shadow-2xl p-12">
+        <div class="bg-white rounded-3xl shadow-2xl p-6 md:p-12">
             <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">What Women Will Learn</h3>
-            <div class="grid grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                 <div class="flex items-start space-x-4">
                     <div class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
                         <i class="fa-solid fa-check text-white text-sm"></i>
@@ -287,16 +294,16 @@
 
 
 
-<section id="packages" class="py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-8">
+<section id="packages" class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-            <h2 class="font-display text-5xl font-bold text-gray-900 mb-6">Choose Your Experience</h2>
+            <h2 class="font-display text-3xl md:text-5xl font-bold text-gray-900 mb-6">Choose Your Experience</h2>
             <p class="text-xl text-gray-600 max-w-3xl mx-auto">
                 Three thoughtfully curated packages designed to meet different organizational needs and budgets
             </p>
         </div>
         
-        <div class="grid grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-3xl p-8 hover:shadow-2xl transition transform hover:scale-105 border-2 border-purple-200">
                 <div class="bg-purple-600 text-white w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
                     <i class="fa-solid fa-shirt text-2xl"></i>
@@ -333,7 +340,7 @@
                     </div>
                 </div>
                 
-                <button class="w-full bg-purple-600 text-white py-4 rounded-full font-bold hover:bg-purple-700 transition">
+                <button id="openPowerDressingSpeakerModal" type="button" class="w-full bg-purple-600 text-white py-4 rounded-full font-bold hover:bg-purple-700 transition">
                    Know More
                 </button>
             </div>
@@ -390,7 +397,7 @@
                 <h3 class="text-2xl font-bold text-gray-900 mb-3">Complete Woman Wellness</h3>
                 <p class="text-gray-700 mb-6 leading-relaxed">
 This session highlights how mental resilience, physical vitality, and emotional stability drive long-term success, showing working women that sustainable achievement comes from energy and health — not just ambition.
-                
+                </p>
                 <div class="space-y-3 mb-8">
                     <div class="flex items-center space-x-3">
                         <i class="fa-solid fa-circle-check text-orange-500"></i>
@@ -427,14 +434,14 @@ This session highlights how mental resilience, physical vitality, and emotional 
         </div>
         
         <div class="mt-16 bg-gradient-to-r from-purple-100 to-pink-100 rounded-3xl p-10">
-            <div class="flex items-center justify-between">
-                <div class="flex-1">
+            <div class="flex flex-col lg:flex-row items-start lg:items-center gap-6 justify-between">
+                <div class="flex-1 w-full">
                     <h3 class="text-2xl font-bold text-gray-900 mb-3">Not sure which session to opt for?</h3>
                     <p class="text-gray-700 text-lg">
                         Schedule a consultation with our partnerships team to discuss your organization's specific needs and goals.
                     </p>
                 </div>
-                <button class="bg-white text-purple-600 px-8 py-4 rounded-full font-bold hover:shadow-xl transition flex items-center space-x-2">
+                <button class="bg-white text-purple-600 px-4 sm:px-6 lg:px-8 py-4 rounded-full font-bold hover:shadow-xl transition flex items-center space-x-2">
                     <span>Schedule Consultation</span>
                     <i class="fa-solid fa-arrow-right"></i>
                 </button>
@@ -443,16 +450,16 @@ This session highlights how mental resilience, physical vitality, and emotional 
     </div>
 </section>
 
-<section id="why-womoneya" class="py-24 bg-gradient-to-br from-gray-50 to-purple-50">
-    <div class="max-w-7xl mx-auto px-8">
+<section id="why-womoneya" class="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-purple-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-            <h2 class="font-display text-5xl font-bold text-gray-900 mb-6">Why This Matters for Your Organization</h2>
+            <h2 class="font-display text-3xl md:text-5xl font-bold text-gray-900 mb-6">Why This Matters for Your Organization</h2>
             <p class="text-xl text-gray-600 max-w-3xl mx-auto">
                 Investing in Womoneya 3.0 is more than a Women's Day celebration—it's a strategic commitment to your workforce
             </p>
         </div>
         
-        <div class="grid grid-cols-2 gap-8 mb-16">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-16">
             <div class="bg-white rounded-3xl p-10 shadow-xl hover:shadow-2xl transition">
                 <div class="flex items-start space-x-6">
                     <div class="w-20 h-20 bg-gradient-to-br from-purple-600 to-purple-400 rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -538,9 +545,9 @@ This session highlights how mental resilience, physical vitality, and emotional 
             </div>
         </div>
         
-        <div class="bg-gradient-to-r from-purple-600 to-pink-500 rounded-3xl p-12 text-white text-center">
-            <h3 class="text-4xl font-bold mb-6">This is not just a session — it is an investment in your women workforce.</h3>
-            <p class="text-xl mb-8 max-w-3xl mx-auto">
+        <div class="bg-gradient-to-r from-purple-600 to-pink-500 rounded-3xl p-6 md:p-12 text-white text-center">
+            <h3 class="text-2xl md:text-4xl font-bold mb-6">This is not just a session — it is an investment in your women workforce.</h3>
+            <p class="text-base md:text-xl mb-8 max-w-3xl mx-auto">
                 Join leading organizations across India in making Women's Day 2026 a truly transformational experience for your team.
             </p>
             <a href="#booking-form" class="bg-white text-purple-600 px-12 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition transform hover:scale-105 inline-block">
@@ -550,16 +557,16 @@ This session highlights how mental resilience, physical vitality, and emotional 
     </div>
 </section>
 
-<section id="testimonials" class="py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-8">
+<section id="testimonials" class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-            <h2 class="font-display text-5xl font-bold text-gray-900 mb-6">What Organizations Are Saying</h2>
+            <h2 class="font-display text-3xl md:text-5xl font-bold text-gray-900 mb-6">What Organizations Are Saying</h2>
             <p class="text-xl text-gray-600 max-w-3xl mx-auto">
                 Hear from HR leaders and participants who experienced Womoneya in previous editions
             </p>
         </div>
         
-        <div class="grid grid-cols-2 gap-8 mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-12">
             <div class="bg-gradient-to-br from-purple-50 to-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition">
                 <div class="flex space-x-1 mb-4">
                     <i class="fa-solid fa-star text-yellow-400"></i>
@@ -621,19 +628,16 @@ This session highlights how mental resilience, physical vitality, and emotional 
             </div>
         </div>
         
-        <div class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-3xl p-10 text-center">
-            <div class="flex items-center justify-center space-x-8 mb-6">
+        <div class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-3xl p-6 md:p-10 text-center">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mb-6">
                 <div>
                     <div class="text-5xl font-bold text-purple-600">98%</div>
                     <div class="text-gray-700 font-medium">Satisfaction Rate</div>
                 </div>
-                <div class="w-px h-16 bg-gray-300"></div>
                 <div>
                     <div class="text-5xl font-bold text-pink-500">5,000+</div>
                     <div class="text-gray-700 font-medium">Women Empowered</div>
                 </div>
-                <div class="w-px h-16 bg-gray-300"></div>
-                
                 <div>
                     <div class="text-5xl font-bold text-blue-500">150+</div>
                     <div class="text-gray-700 font-medium">Corporate Tieups</div>
@@ -646,10 +650,10 @@ This session highlights how mental resilience, physical vitality, and emotional 
     </div>
 </section>
 
-<section id="events" class="py-24 bg-gradient-to-br from-purple-50 to-pink-50">
-    <div class="max-w-7xl mx-auto px-8">
+<section id="events" class="py-16 md:py-24 bg-gradient-to-br from-purple-50 to-pink-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-            <h2 class="font-display text-5xl font-bold text-gray-900 mb-6">Past Events Gallery</h2>
+            <h2 class="font-display text-3xl md:text-5xl font-bold text-gray-900 mb-6">Past Events Gallery</h2>
             <p class="text-xl text-gray-600 max-w-3xl mx-auto">
                 Glimpses from Womoneya 1.0 and 2.0 - Celebrating women empowerment across India
             </p>
@@ -691,18 +695,18 @@ This session highlights how mental resilience, physical vitality, and emotional 
             </div>
         </div>
         
-        <div class="bg-white rounded-3xl p-12 shadow-xl">
-            <div class="flex items-center justify-between">
-                <div class="flex-1">
+        <div class="bg-white rounded-3xl p-6 md:p-12 shadow-xl">
+            <div class="flex flex-col lg:flex-row items-start lg:items-center gap-6 justify-between">
+                <div class="flex-1 w-full">
                     <h3 class="text-3xl font-bold text-gray-900 mb-4">Watch Event Highlights</h3>
                     <p class="text-gray-700 text-lg mb-6">
                         See the impact and energy of Womoneya events through our curated video highlights showcasing transformational moments.
                     </p>
                    
                 </div>
-                <div class="ml-12">
+                <div class="mt-6 lg:mt-0 lg:ml-12">
                     <iframe
-                        class="w-96 h-64 rounded-2xl shadow-lg"
+                        class="w-full max-w-full lg:w-96 h-56 sm:h-64 rounded-2xl shadow-lg"
                         src="https://www.youtube.com/embed/RBNYGHwmMDw"
                         title="Womoneya Event Highlights"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -714,19 +718,19 @@ This session highlights how mental resilience, physical vitality, and emotional 
         </div>
     </div>
 </section>
-<section id="about-fintoo" class="py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-8">
+<section id="about-fintoo" class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
             <div class="inline-block bg-purple-100 text-purple-600 px-6 py-2 rounded-full text-sm font-semibold mb-4">
                 SEBI Registered Investment Advisor
             </div>
-            <h2 class="font-display text-5xl font-bold text-gray-900 mb-6">About Fintoo</h2>
+            <h2 class="font-display text-3xl md:text-5xl font-bold text-gray-900 mb-6">About Fintoo</h2>
             <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
                 Fintoo Wealth Private Limited delivers unbiased, fee-based financial advisory services with a mission to create financially independent individuals through structured guidance and technology-driven solutions.
             </p>
         </div>
         
-        <div class="grid grid-cols-4 gap-8 mb-16">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-16">
             <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-8 text-center hover:shadow-xl transition transform hover:scale-105">
                 <div class="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
                     <i class="fa-solid fa-users text-white text-2xl"></i>
@@ -760,8 +764,8 @@ This session highlights how mental resilience, physical vitality, and emotional 
             </div>
         </div>
         
-        <div class="bg-gradient-to-r from-purple-600 to-pink-500 rounded-3xl p-12 text-white">
-            <div class="grid grid-cols-2 gap-12 items-center">
+        <div class="bg-gradient-to-r from-purple-600 to-pink-500 rounded-3xl p-6 md:p-12 text-white">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <div>
                     <h3 class="text-3xl font-bold mb-6">Our Mission</h3>
                     <p class="text-lg leading-relaxed mb-6">
@@ -769,7 +773,7 @@ This session highlights how mental resilience, physical vitality, and emotional 
                     </p>
                     
                 </div>
-                <div class="grid grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
                         <i class="fa-solid fa-shield-halved text-3xl mb-3"></i>
                         <h4 class="font-bold text-lg mb-2">Trusted</h4>
@@ -796,18 +800,18 @@ This session highlights how mental resilience, physical vitality, and emotional 
     </div>
 </section>
 
-<section id="booking-form" class="py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-8">
-        <div class="grid grid-cols-2 gap-16 items-center">
+<section id="booking-form" class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
                 <div class="inline-block bg-gradient-to-r from-purple-600 to-pink-500 text-white px-6 py-2 rounded-full text-sm font-bold mb-6">
                     <i class="fa-solid fa-calendar-check mr-2"></i>
                     LIMITED SLOTS AVAILABLE
                 </div>
-                <h2 class="font-display text-5xl font-bold text-gray-900 mb-6">
+                <h2 class="font-display text-3xl md:text-5xl font-bold text-gray-900 mb-6">
                     Empower the Women Who Power Your Organization
                 </h2>
-                <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+                <p class="text-base md:text-xl text-gray-700 mb-8 leading-relaxed">
                     Book your Womoneya 3.0 session today and make Women's Day 2026 truly memorable and impactful for your team.
                 </p>
                 
@@ -868,7 +872,7 @@ This session highlights how mental resilience, physical vitality, and emotional 
                 </div>
             </div>
             
-            <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-10 shadow-2xl">
+            <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-3xl p-6 md:p-10 shadow-2xl">
                 <h3 class="text-2xl font-bold text-gray-900 mb-6">Book an Appointment</h3>
                 
                 <form id="bookingForm" class="space-y-5">
@@ -953,15 +957,87 @@ This session highlights how mental resilience, physical vitality, and emotional 
 
 
 <section id="disclaimer" class="bg-gray-900 text-white py-5">
-    <div class="max-w-7xl mx-auto px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <p class="text-sm text-gray-300 text-center">
             Disclaimer: Womoneya sessions are for educational and awareness purposes. Fintoo Wealth Private Limited is a SEBI-registered Investment Advisor. Investment decisions should be made based on individual risk profile and consultation.
         </p>
     </div>
 </section>
 
+<div id="speakerModalBackdrop" class="fixed inset-0 bg-black/60 z-50 hidden"></div>
+<div id="speakerModal" class="fixed inset-0 z-[60] hidden overflow-y-auto">
+    <div class="min-h-full flex items-center justify-center p-3 sm:p-6">
+        <div class="w-full max-w-4xl bg-white rounded-3xl shadow-2xl border border-gray-100">
+            <div class="p-5 sm:p-8 border-b border-gray-100 flex items-start justify-between gap-4">
+                <div>
+                    <div class="inline-flex items-center bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-semibold mb-4">
+                        Speaker Spotlight: Power Dressing
+                    </div>
+                    <h3 class="text-2xl sm:text-3xl font-bold text-gray-900">Bandita Patro</h3>
+                    <p class="text-gray-600 mt-2">Perception Strategist and Executive Presence Expert</p>
+                </div>
+                <button id="closeSpeakerModalTop" type="button" class="w-10 h-10 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="p-5 sm:p-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                    <div class="md:col-span-2 space-y-5 text-gray-700 leading-relaxed">
+                        <p>
+                            Bandita Patro is a perception strategist and executive presence expert with over 18 years of experience transforming how leaders, brands, and institutions show up in the world. From beginning her journey as an engineer at 19 to becoming a director in global consulting, she has built a reputation as a trusted authority in image transformation and leadership influence.
+                        </p>
+                        <p>
+                            She has trained over 50,000 professionals, from CEOs and C-suite leaders to institutional heads, and transformed 100+ brands across luxury, retail, hospitality, and media. As Lead Trainer for Tanishq Pan India, she elevated luxury customer experience standards nationwide.
+                        </p>
+                        <p>
+                            Her work spans Bollywood and corporate impact, having styled and advised personalities such as Anup Soni, Sandhya Mridul, and Iqbal Khan. Globally certified and trained under Judith Rasband (Conselle Institute, USA), Bandita believes image is not vanity, it is influence.
+                        </p>
+                        <p>
+                            Through her Power Dressing workshop, she helps women align their presence with ambition, refine leadership impact, and confidently own every room they enter.
+                        </p>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-100">
+                        <h4 class="text-lg font-bold text-gray-900 mb-4">Session Snapshot</h4>
+                        <div class="space-y-3 text-sm text-gray-700">
+                            <div class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-check text-purple-600 mt-1"></i>
+                                <span>Executive presence through wardrobe strategy</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-check text-purple-600 mt-1"></i>
+                                <span>Role-based dressing frameworks</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-check text-purple-600 mt-1"></i>
+                                <span>Color, fit, and confidence fundamentals</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-check text-purple-600 mt-1"></i>
+                                <span>Q&A tailored for your women workforce</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#booking-form" id="speakerModalBookNow" class="inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-500 text-white px-4 sm:px-6 lg:px-8 py-4 rounded-full font-bold hover:shadow-xl transition">
+                        Book Power Dressing Session
+                    </a>
+                    <a href="/womoneya/power-dressing.html" class="inline-flex items-center justify-center border-2 border-purple-200 text-purple-700 px-4 sm:px-6 lg:px-8 py-4 rounded-full font-bold hover:bg-purple-50 transition">
+                        View Full Speaker Page
+                    </a>
+                    <button id="closeSpeakerModalBottom" type="button" class="inline-flex items-center justify-center border-2 border-gray-200 text-gray-700 px-4 sm:px-6 lg:px-8 py-4 rounded-full font-bold hover:bg-gray-50 transition">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="sticky-cta">
-    <a href="#booking-form" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white px-8 py-4 rounded-full font-bold shadow-2xl hover:shadow-3xl transition transform hover:scale-105 flex items-center space-x-2">
+    <a href="#booking-form" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white px-4 sm:px-6 lg:px-8 py-4 rounded-full font-bold shadow-2xl hover:shadow-3xl transition transform hover:scale-105 flex items-center space-x-2">
         <i class="fa-solid fa-calendar-check"></i>
         <span>Book Now</span>
     </a>
@@ -971,6 +1047,12 @@ This session highlights how mental resilience, physical vitality, and emotional 
     window.addEventListener('load', function() {
         const stickyCta = document.querySelector('.sticky-cta');
         const bookingForm = document.getElementById('bookingForm');
+        const openPowerDressingSpeakerModalBtn = document.getElementById('openPowerDressingSpeakerModal');
+        const speakerModal = document.getElementById('speakerModal');
+        const speakerModalBackdrop = document.getElementById('speakerModalBackdrop');
+        const closeSpeakerModalTop = document.getElementById('closeSpeakerModalTop');
+        const closeSpeakerModalBottom = document.getElementById('closeSpeakerModalBottom');
+        const speakerModalBookNow = document.getElementById('speakerModalBookNow');
         const modeInputs = document.querySelectorAll('input[name="mode"]');
         const offlinePincodeBlock = document.getElementById('offlinePincodeBlock');
         const pincodeDropdownBtn = document.getElementById('pincodeDropdownBtn');
@@ -999,6 +1081,39 @@ This session highlights how mental resilience, physical vitality, and emotional 
             { code: '248001', city: 'Dehradun' }, { code: '180001', city: 'Jammu' }, { code: '793001', city: 'Shillong' },
             { code: '799001', city: 'Agartala' }, { code: '834001', city: 'Ranchi' }, { code: '160017', city: 'Chandigarh' }
         ];
+
+        function openSpeakerModal() {
+            if (!speakerModal || !speakerModalBackdrop) return;
+            speakerModal.classList.remove('hidden');
+            speakerModalBackdrop.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeSpeakerModal() {
+            if (!speakerModal || !speakerModalBackdrop) return;
+            speakerModal.classList.add('hidden');
+            speakerModalBackdrop.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        if (openPowerDressingSpeakerModalBtn) {
+            openPowerDressingSpeakerModalBtn.addEventListener('click', openSpeakerModal);
+        }
+        if (closeSpeakerModalTop) {
+            closeSpeakerModalTop.addEventListener('click', closeSpeakerModal);
+        }
+        if (closeSpeakerModalBottom) {
+            closeSpeakerModalBottom.addEventListener('click', closeSpeakerModal);
+        }
+        if (speakerModalBackdrop) {
+            speakerModalBackdrop.addEventListener('click', closeSpeakerModal);
+        }
+        if (speakerModalBookNow) {
+            speakerModalBookNow.addEventListener('click', closeSpeakerModal);
+        }
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') closeSpeakerModal();
+        });
 
         function getCityByCode(code) {
             const match = pincodeCatalog.find((item) => item.code === code);
