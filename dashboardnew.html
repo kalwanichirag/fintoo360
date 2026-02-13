@@ -16,33 +16,54 @@
         rel="stylesheet">
     <style>
         @layer base {
-  html { font-size: 16px; } /* default for very large screens (≥1500px) */
+            html {
+                font-size: 16px;
+            }
+
+            /* default for very large screens (≥1500px) */
 
 
 
-  @media (max-width: 1279px) { /* 1080–1279 range (medium screens) */
-    html { font-size: 14px; }
-  }
+            @media (max-width: 1279px) {
 
-  @media (max-width: 1079px) { /* tablets / smaller laptops */
-    html { font-size: 13.5px; }
-  }
+                /* 1080–1279 range (medium screens) */
+                html {
+                    font-size: 14px;
+                }
+            }
 
-  @media (max-width: 767px) { /* mobile landscape */
-    html { font-size: 13px; }
-  }
+            @media (max-width: 1079px) {
 
-  @media (max-width: 479px) { /* small phones */
-    html { font-size: 12.5px; }
-  }
-}
+                /* tablets / smaller laptops */
+                html {
+                    font-size: 13.5px;
+                }
+            }
 
-@layer base {
-  /* fluid root size: min 12.5px, preferred scales with viewport, max 16px */
-  html {
-    font-size: clamp(12.5px, 0.9vw + 11px, 16px);
-  }
-}
+            @media (max-width: 767px) {
+
+                /* mobile landscape */
+                html {
+                    font-size: 13px;
+                }
+            }
+
+            @media (max-width: 479px) {
+
+                /* small phones */
+                html {
+                    font-size: 12.5px;
+                }
+            }
+        }
+
+        @layer base {
+
+            /* fluid root size: min 12.5px, preferred scales with viewport, max 16px */
+            html {
+                font-size: clamp(12.5px, 0.9vw + 11px, 16px);
+            }
+        }
 
         ::-webkit-scrollbar {
             display: none;
@@ -237,146 +258,148 @@
 
     <!-- Sidebar Navigation -->
     <!-- Sidebar -->
-<div id="sidebar" class="fixed left-0 top-0 w-64 h-full bg-slate-900 flex flex-col z-30 transition-transform duration-300 -translate-x-full">
+    <div id="sidebar"
+        class="fixed left-0 top-0 w-64 h-full bg-slate-900 flex flex-col z-30 transition-transform duration-300 -translate-x-full">
 
-    <!-- Logo + Collapse Button -->
-    <div class="flex items-center justify-between p-6 border-b border-slate-700">
-        <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center">
-                <i class="fa-solid fa-chart-line text-white text-lg"></i>
-            </div>
-            <div>
-                <h1 class="text-xl font-bold text-white">Fintoo360</h1>
-                <p class="text-blue-400 text-xs">Plan. Grow. Prosper.</p>
-            </div>
-        </div>
-        <button id="sidebarClose" class=" text-slate-400 hover:text-white">
-            <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-    </div>
-
-    <!-- Trial Progress -->
-    <div class="px-6 py-4">
-        <div class="bg-slate-800 rounded-xl p-4">
-            <div class="flex items-center justify-between mb-2">
-                <span class="text-slate-300 text-sm">Free trial</span>
-                <span class="text-blue-400 text-xs font-medium">20 days left</span>
-            </div>
-            <div class="w-full bg-slate-700 rounded-full h-2">
-                <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full" style="width: 25%"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Navigation -->
-    <nav class="flex-1 px-4 overflow-y-auto">
-        <ul class="space-y-1">
-            <li>
-                <a href="#" class="sidebar-active flex items-center px-4 py-3 text-blue-600 rounded-lg font-medium">
-                    <i class="fa-solid fa-home w-5 mr-3"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
-                    <i class="fa-solid fa-wallet w-5 mr-3"></i>
-                    <span>Accounts</span>
-                </a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
-                    <i class="fa-solid fa-exchange-alt w-5 mr-3"></i>
-                    <span>Transactions</span>
-                </a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
-                    <i class="fa-solid fa-chart-line w-5 mr-3"></i>
-                    <span>Investments</span>
-                </a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
-                    <i class="fa-solid fa-file-alt w-5 mr-3"></i>
-                    <span>Reports</span>
-                    <span class="ml-auto bg-blue-600 text-white text-xs px-2 py-1 rounded">BETA</span>
-                </a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
-                    <i class="fa-solid fa-piggy-bank w-5 mr-3"></i>
-                    <span>Savings</span>
-                </a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
-                    <i class="fa-solid fa-credit-card w-5 mr-3"></i>
-                    <span>Liabilities</span>
-                </a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
-                    <i class="fa-solid fa-bullseye w-5 mr-3"></i>
-                    <span>Goals</span>
-                </a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
-                    <i class="fa-solid fa-lightbulb w-5 mr-3"></i>
-                    <span>Advice</span>
-                </a>
-            </li>
-            <li>
-                <a href="#"
-                    class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
-                    <i class="fa-solid fa-robot w-5 mr-3"></i>
-                    <span>AI Assistant</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- Footer Section -->
-    <div class="p-4 mt-auto">
-        <div class="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-4 mb-4">
-            <div class="flex items-center">
-                <i class="fa-solid fa-gift text-orange-400 text-xl mr-3"></i>
+        <!-- Logo + Collapse Button -->
+        <div class="flex items-center justify-between p-6 border-b border-slate-700">
+            <div class="flex items-center space-x-3">
+                <div
+                    class="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl flex items-center justify-center">
+                    <i class="fa-solid fa-chart-line text-white text-lg"></i>
+                </div>
                 <div>
-                    <p class="text-white font-medium text-sm">Get 1 Month Free</p>
-                    <p class="text-blue-200 text-xs">Upgrade to Premium</p>
+                    <h1 class="text-xl font-bold text-white">Fintoo360</h1>
+                    <p class="text-blue-400 text-xs">Plan. Grow. Prosper.</p>
+                </div>
+            </div>
+            <button id="sidebarClose" class=" text-slate-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Trial Progress -->
+        <div class="px-6 py-4">
+            <div class="bg-slate-800 rounded-xl p-4">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-slate-300 text-sm">Free trial</span>
+                    <span class="text-blue-400 text-xs font-medium">20 days left</span>
+                </div>
+                <div class="w-full bg-slate-700 rounded-full h-2">
+                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full" style="width: 25%"></div>
                 </div>
             </div>
         </div>
 
-        <button class="flex items-center text-slate-400 hover:text-white py-2 mb-4 transition-colors">
-            <i class="fa-solid fa-question-circle mr-3"></i>
-            <span>Help & Support</span>
-        </button>
+        <!-- Navigation -->
+        <nav class="flex-1 px-4 overflow-y-auto">
+            <ul class="space-y-1">
+                <li>
+                    <a href="#" class="sidebar-active flex items-center px-4 py-3 text-blue-600 rounded-lg font-medium">
+                        <i class="fa-solid fa-home w-5 mr-3"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                        <i class="fa-solid fa-wallet w-5 mr-3"></i>
+                        <span>Accounts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                        <i class="fa-solid fa-exchange-alt w-5 mr-3"></i>
+                        <span>Transactions</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                        <i class="fa-solid fa-chart-line w-5 mr-3"></i>
+                        <span>Investments</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                        <i class="fa-solid fa-file-alt w-5 mr-3"></i>
+                        <span>Reports</span>
+                        <span class="ml-auto bg-blue-600 text-white text-xs px-2 py-1 rounded">BETA</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                        <i class="fa-solid fa-piggy-bank w-5 mr-3"></i>
+                        <span>Savings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                        <i class="fa-solid fa-credit-card w-5 mr-3"></i>
+                        <span>Liabilities</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                        <i class="fa-solid fa-bullseye w-5 mr-3"></i>
+                        <span>Goals</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                        <i class="fa-solid fa-lightbulb w-5 mr-3"></i>
+                        <span>Advice</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-all">
+                        <i class="fa-solid fa-robot w-5 mr-3"></i>
+                        <span>AI Assistant</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
 
-        <!-- Avatar -->
-        <div class="flex items-center cursor-pointer">
-            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" alt="User Avatar"
-                class="w-9 h-9 rounded-full border-2 border-blue-600">
-            <div class="ml-3 flex-1">
-                <p class="text-white font-medium text-sm">Chirag Kalwani</p>
-                <p class="text-slate-400 text-xs">Premium User</p>
+        <!-- Footer Section -->
+        <div class="p-4 mt-auto">
+            <div class="bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl p-4 mb-4">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-gift text-orange-400 text-xl mr-3"></i>
+                    <div>
+                        <p class="text-white font-medium text-sm">Get 1 Month Free</p>
+                        <p class="text-blue-200 text-xs">Upgrade to Premium</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="flex items-center text-slate-400 hover:text-white py-2 mb-4 transition-colors">
+                <i class="fa-solid fa-question-circle mr-3"></i>
+                <span>Help & Support</span>
+            </button>
+
+            <!-- Avatar -->
+            <div class="flex items-center cursor-pointer">
+                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg"
+                    alt="User Avatar" class="w-9 h-9 rounded-full border-2 border-blue-600">
+                <div class="ml-3 flex-1">
+                    <p class="text-white font-medium text-sm">Chirag Kalwani</p>
+                    <p class="text-slate-400 text-xs">Premium User</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Sidebar Toggle Button -->
+    <!-- Sidebar Toggle Button -->
 
 
-<!-- JS -->
+    <!-- JS -->
 
 
 
@@ -387,9 +410,9 @@
         <header id="header" class="bg-white/80 backdrop-blur-lg border-b border-white/20 px-8 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-5">
-                  <button id="sidebarToggle" class="text-slate-600 hover:text-blue-600 ">
-  <i class="fa-solid fa-bars text-xl"></i>
-</button>
+                    <button id="sidebarToggle" class="text-slate-600 hover:text-blue-600 ">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
 
                     <div>
                         <h1 class="text-2xl font-bold text-slate-800">Good evening, Chirag</h1>
@@ -1129,98 +1152,100 @@
 
             <!-- Expense Tracker & Savings Goals -->
             <section id="expense-savings" class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-               <div id="liability-overview"
-  class="glass-card relative rounded-2xl p-6 bg-white/60 backdrop-blur-md border border-slate-200 shadow-sm">
+                <div id="liability-overview"
+                    class="glass-card relative rounded-2xl p-6 bg-white/60 backdrop-blur-md border border-slate-200 shadow-sm">
 
-  <!-- Header -->
-  <div class="flex items-center justify-between mb-6">
-    <div>
-      <h2 class="text-xl font-bold text-slate-800">Liability Overview</h2>
-      <p class="text-slate-500 text-sm">Outstanding debts & EMIs</p>
-    </div>
-  </div>
+                    <!-- Header -->
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-800">Liability Overview</h2>
+                            <p class="text-slate-500 text-sm">Outstanding debts & EMIs</p>
+                        </div>
+                    </div>
 
-  <!-- Locked Placeholder -->
-  <div id="liabilityLocked"
-    class="relative rounded-xl border border-dashed border-slate-300 bg-slate-50 flex flex-col items-center justify-center py-12 text-center">
-    <div class="bg-orange-100 w-16 h-16 flex items-center justify-center rounded-full mb-4">
-      <i class="fa-solid fa-lock text-orange-600 text-2xl"></i>
-    </div>
-    <h3 class="text-lg font-semibold text-slate-800 mb-2">Liability Overview Locked</h3>
-    <p class="text-slate-600 text-sm max-w-xs mx-auto mb-6">
-      Connect your credit cards, loans, and EMIs to unlock real-time insights and smart repayment suggestions.
-    </p>
-    <button onclick="connectLiabilities()"
-      class="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition flex items-center">
-      <i class="fa-solid fa-plug mr-2"></i> Connect Now
-    </button>
-  </div>
+                    <!-- Locked Placeholder -->
+                    <div id="liabilityLocked"
+                        class="relative rounded-xl border border-dashed border-slate-300 bg-slate-50 flex flex-col items-center justify-center py-12 text-center">
+                        <div class="bg-orange-100 w-16 h-16 flex items-center justify-center rounded-full mb-4">
+                            <i class="fa-solid fa-lock text-orange-600 text-2xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-slate-800 mb-2">Liability Overview Locked</h3>
+                        <p class="text-slate-600 text-sm max-w-xs mx-auto mb-6">
+                            Connect your credit cards, loans, and EMIs to unlock real-time insights and smart repayment
+                            suggestions.
+                        </p>
+                        <button onclick="connectLiabilities()"
+                            class="bg-orange-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-orange-600 transition flex items-center">
+                            <i class="fa-solid fa-plug mr-2"></i> Connect Now
+                        </button>
+                    </div>
 
-  <!-- Overlay Loader (when connecting) -->
-  <div id="loadingOverlay"
-    class="hidden absolute inset-0 bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl">
-    <div class="animate-spin mb-4 text-orange-600">
-      <i class="fa-solid fa-spinner text-2xl"></i>
-    </div>
-    <p class="text-slate-700 font-medium">Connecting your liabilities...</p>
-  </div>
+                    <!-- Overlay Loader (when connecting) -->
+                    <div id="loadingOverlay"
+                        class="hidden absolute inset-0 bg-white/80 backdrop-blur-sm flex flex-col items-center justify-center rounded-2xl">
+                        <div class="animate-spin mb-4 text-orange-600">
+                            <i class="fa-solid fa-spinner text-2xl"></i>
+                        </div>
+                        <p class="text-slate-700 font-medium">Connecting your liabilities...</p>
+                    </div>
 
-  <!-- Hidden Active State (after connection) -->
-  <div id="liabilityContent" class="hidden space-y-4 mt-6">
+                    <!-- Hidden Active State (after connection) -->
+                    <div id="liabilityContent" class="hidden space-y-4 mt-6">
 
-    <div class="bg-red-50 border border-red-200 rounded-xl p-4">
-      <div class="flex items-center justify-between mb-2">
-        <h3 class="font-semibold text-slate-800">Credit Card</h3>
-        <span class="text-red-600 font-bold">₹45,680</span>
-      </div>
-      <div class="w-full bg-red-200 rounded-full h-2 mb-2">
-        <div class="bg-red-500 h-2 rounded-full" style="width: 76%"></div>
-      </div>
-      <div class="flex justify-between text-sm">
-        <span class="text-slate-600">Due: 15th Dec</span>
-        <span class="text-red-600">18% APR</span>
-      </div>
-      <div class="mt-3 bg-orange-100 border border-orange-200 rounded-lg p-3">
-        <div class="flex items-start">
-          <i class="fa-solid fa-lightbulb text-orange-600 mr-2 mt-1"></i>
-          <div>
-            <p class="text-orange-800 font-medium text-sm">AI Suggestion</p>
-            <p class="text-orange-700 text-xs">Pay ₹12,000 extra to avoid 18% APR charges</p>
-          </div>
-        </div>
-      </div>
-    </div>
+                        <div class="bg-red-50 border border-red-200 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-semibold text-slate-800">Credit Card</h3>
+                                <span class="text-red-600 font-bold">₹45,680</span>
+                            </div>
+                            <div class="w-full bg-red-200 rounded-full h-2 mb-2">
+                                <div class="bg-red-500 h-2 rounded-full" style="width: 76%"></div>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-600">Due: 15th Dec</span>
+                                <span class="text-red-600">18% APR</span>
+                            </div>
+                            <div class="mt-3 bg-orange-100 border border-orange-200 rounded-lg p-3">
+                                <div class="flex items-start">
+                                    <i class="fa-solid fa-lightbulb text-orange-600 mr-2 mt-1"></i>
+                                    <div>
+                                        <p class="text-orange-800 font-medium text-sm">AI Suggestion</p>
+                                        <p class="text-orange-700 text-xs">Pay ₹12,000 extra to avoid 18% APR charges
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-    <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
-      <div class="flex items-center justify-between mb-2">
-        <h3 class="font-semibold text-slate-800">Home Loan</h3>
-        <span class="text-blue-600 font-bold">₹28,45,000</span>
-      </div>
-      <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
-        <div class="bg-blue-500 h-2 rounded-full" style="width: 34%"></div>
-      </div>
-      <div class="flex justify-between text-sm">
-        <span class="text-slate-600">EMI: ₹35,420</span>
-        <span class="text-blue-600">7.5% Interest</span>
-      </div>
-    </div>
+                        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-semibold text-slate-800">Home Loan</h3>
+                                <span class="text-blue-600 font-bold">₹28,45,000</span>
+                            </div>
+                            <div class="w-full bg-blue-200 rounded-full h-2 mb-2">
+                                <div class="bg-blue-500 h-2 rounded-full" style="width: 34%"></div>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-600">EMI: ₹35,420</span>
+                                <span class="text-blue-600">7.5% Interest</span>
+                            </div>
+                        </div>
 
-    <div class="bg-green-50 border border-green-200 rounded-xl p-4">
-      <div class="flex items-center justify-between mb-2">
-        <h3 class="font-semibold text-slate-800">Car Loan</h3>
-        <span class="text-green-600 font-bold">₹2,85,430</span>
-      </div>
-      <div class="w-full bg-green-200 rounded-full h-2 mb-2">
-        <div class="bg-green-500 h-2 rounded-full" style="width: 68%"></div>
-      </div>
-      <div class="flex justify-between text-sm">
-        <span class="text-slate-600">EMI: ₹12,890</span>
-        <span class="text-green-600">8.9% Interest</span>
-      </div>
-    </div>
+                        <div class="bg-green-50 border border-green-200 rounded-xl p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-semibold text-slate-800">Car Loan</h3>
+                                <span class="text-green-600 font-bold">₹2,85,430</span>
+                            </div>
+                            <div class="w-full bg-green-200 rounded-full h-2 mb-2">
+                                <div class="bg-green-500 h-2 rounded-full" style="width: 68%"></div>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-slate-600">EMI: ₹12,890</span>
+                                <span class="text-green-600">8.9% Interest</span>
+                            </div>
+                        </div>
 
-  </div>
-</div>
+                    </div>
+                </div>
 
 
                 <!-- Expense Tracker -->
@@ -1646,7 +1671,7 @@
             <!-- Achievements & Milestones -->
 
 
-           
+
 
         </main>
     </div>
@@ -1801,41 +1826,41 @@
     </div>
 
     <script>
-         const sidebar = document.getElementById('sidebar');
-    const toggle = document.getElementById('sidebarToggle');
-    const close = document.getElementById('sidebarClose');
+        const sidebar = document.getElementById('sidebar');
+        const toggle = document.getElementById('sidebarToggle');
+        const close = document.getElementById('sidebarClose');
 
-    toggle.addEventListener('click', () => sidebar.classList.toggle('-translate-x-full'));
-    close.addEventListener('click', () => sidebar.classList.add('-translate-x-full'));
-function connectLiabilities() {
-  const locked = document.getElementById("liabilityLocked");
-  const loader = document.getElementById("loadingOverlay");
-  const content = document.getElementById("liabilityContent");
+        toggle.addEventListener('click', () => sidebar.classList.toggle('-translate-x-full'));
+        close.addEventListener('click', () => sidebar.classList.add('-translate-x-full'));
+        function connectLiabilities() {
+            const locked = document.getElementById("liabilityLocked");
+            const loader = document.getElementById("loadingOverlay");
+            const content = document.getElementById("liabilityContent");
 
-  // Show loader
-  locked.classList.add("hidden");
-  loader.classList.remove("hidden");
+            // Show loader
+            locked.classList.add("hidden");
+            loader.classList.remove("hidden");
 
-  // Simulate connection delay
-  setTimeout(() => {
-    loader.classList.add("hidden");
-    content.classList.remove("hidden");
+            // Simulate connection delay
+            setTimeout(() => {
+                loader.classList.add("hidden");
+                content.classList.remove("hidden");
 
-    // Save state
-    localStorage.setItem("liabilitiesConnected", "true");
-  }, 2000);
-}
+                // Save state
+                localStorage.setItem("liabilitiesConnected", "true");
+            }, 2000);
+        }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const isConnected = localStorage.getItem("liabilitiesConnected") === "true";
-  const locked = document.getElementById("liabilityLocked");
-  const content = document.getElementById("liabilityContent");
+        document.addEventListener("DOMContentLoaded", () => {
+            const isConnected = localStorage.getItem("liabilitiesConnected") === "true";
+            const locked = document.getElementById("liabilityLocked");
+            const content = document.getElementById("liabilityContent");
 
-  if (isConnected) {
-    locked.classList.add("hidden");
-    content.classList.remove("hidden");
-  }
-});
+            if (isConnected) {
+                locked.classList.add("hidden");
+                content.classList.remove("hidden");
+            }
+        });
 
         document.addEventListener("DOMContentLoaded", () => {
             // DOM references
