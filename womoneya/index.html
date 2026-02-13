@@ -102,6 +102,21 @@
             transform: translateY(0);
         }
 
+        @keyframes heroMarquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .hero-marquee-track {
+            display: flex;
+            width: max-content;
+            animation: heroMarquee 12s linear infinite;
+        }
+
         @media (max-width: 640px) {
             .sticky-cta {
                 bottom: 16px;
@@ -158,7 +173,7 @@
     </header>
 
     <section id="hero-banner"
-        class="relative min-h-[740px] md:min-h-[800px] bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 overflow-hidden pt-24">
+        class="relative min-h-[620px] md:min-h-[800px] bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50 overflow-hidden pt-20 md:pt-24">
         <div class="sparkle" style="top: 10%; left: 15%; animation-delay: 0s;"></div>
         <div class="sparkle" style="top: 20%; right: 20%; animation-delay: 0.5s;"></div>
         <div class="sparkle" style="bottom: 30%; left: 25%; animation-delay: 1s;"></div>
@@ -166,9 +181,9 @@
         <div class="sparkle" style="bottom: 20%; right: 30%; animation-delay: 2s;"></div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center w-full">
-                <div class="space-y-8">
-                    <div class="inline-block">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-16 items-center w-full">
+                <div class="space-y-5 md:space-y-8 order-2 lg:order-1">
+                    <div class="hidden md:inline-block">
                         <div
                             class="bg-gradient-to-r from-purple-600 to-pink-500 text-white px-6 py-2 rounded-full text-sm font-semibold tracking-wide">
                             <i class="fa-solid fa-sparkles mr-2"></i>
@@ -180,10 +195,20 @@
                         Womoneya <span class="gradient-text">3.0</span>
                     </h1>
 
-                    <div class="space-y-3">
+                    <div class="space-y-3 hidden md:block">
                         <p class="text-2xl md:text-3xl font-semibold text-purple-600">Empower Her.</p>
                         <p class="text-2xl md:text-3xl font-semibold text-pink-500">Strengthen Her.</p>
                         <p class="text-2xl md:text-3xl font-semibold text-orange-500">Secure Her.</p>
+                    </div>
+                    <div class="md:hidden overflow-hidden">
+                        <div class="hero-marquee-track items-center gap-8 whitespace-nowrap">
+                            <p class="text-2xl font-semibold text-purple-600">Empower Her.</p>
+                            <p class="text-2xl font-semibold text-pink-500">Strengthen Her.</p>
+                            <p class="text-2xl font-semibold text-orange-500">Secure Her.</p>
+                            <p class="text-2xl font-semibold text-purple-600">Empower Her.</p>
+                            <p class="text-2xl font-semibold text-pink-500">Strengthen Her.</p>
+                            <p class="text-2xl font-semibold text-orange-500">Secure Her.</p>
+                        </div>
                     </div>
 
                     <p class="text-lg md:text-xl text-gray-700 leading-relaxed max-w-xl">
@@ -191,7 +216,7 @@
                         independence, mental resilience, and holistic wellness.
                     </p>
 
-                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2 md:pt-4">
                         <a href="#booking-form"
                             class="bg-gradient-to-r from-purple-600 to-pink-500 text-white px-10 py-4 rounded-full font-bold text-base hover:shadow-2xl transition transform hover:scale-105 flex items-center space-x-2">
                             <span>Book a Session for Your Organization</span>
@@ -206,7 +231,7 @@
 
                 </div>
 
-                <div class="relative">
+                <div class="relative order-1 lg:order-2">
                     <div
                         class="absolute inset-0 bg-gradient-to-br from-purple-400/30 to-pink-400/30 rounded-3xl blur-3xl">
                     </div>
@@ -220,9 +245,9 @@
 
         <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
     </section>
-    <section id="about" class="py-16 md:py-24 bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
+    <section id="about" class="py-10 md:py-24 bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-10 md:mb-16">
 
                 <h2 class="font-display text-4xl md:text-6xl font-bold text-gray-900 mb-6">About Womoneya 3.0</h2>
                 <p class="text-lg md:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed font-medium">
@@ -230,7 +255,7 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center mb-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center mb-12 md:mb-20">
                 <div class="relative">
                     <div
                         class="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-3xl blur-2xl">
@@ -357,9 +382,9 @@
 
 
 
-    <section id="packages" class="py-16 md:py-24 bg-white">
+    <section id="packages" class="py-10 md:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-10 md:mb-16">
                 <h2 class="font-display text-3xl md:text-5xl font-bold text-gray-900 mb-6">Choose Your Experience</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
                     Three thoughtfully curated packages designed to meet different organizational needs and budgets
@@ -508,7 +533,7 @@
                 </div>
             </div>
 
-            <div class="mt-16 bg-gradient-to-r from-purple-100 to-pink-100 rounded-3xl p-10">
+            <div class="mt-10 md:mt-16 bg-gradient-to-r from-purple-100 to-pink-100 rounded-3xl p-6 md:p-10">
                 <div class="flex flex-col lg:flex-row items-start lg:items-center gap-6 justify-between">
                     <div class="flex-1 w-full">
                         <h3 class="text-2xl font-bold text-gray-900 mb-3">Not sure which session to opt for?</h3>
@@ -527,9 +552,9 @@
         </div>
     </section>
 
-    <section id="why-womoneya" class="py-16 md:py-24 bg-gradient-to-br from-gray-50 to-purple-50">
+    <section id="why-womoneya" class="py-10 md:py-24 bg-gradient-to-br from-gray-50 to-purple-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-10 md:mb-16">
                 <h2 class="font-display text-3xl md:text-5xl font-bold text-gray-900 mb-6">Why This Matters for Your
                     Organization</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -538,8 +563,8 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-16">
-                <div class="bg-white rounded-3xl p-10 shadow-xl hover:shadow-2xl transition">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-10 md:mb-16">
+                <div class="bg-white rounded-3xl p-6 md:p-10 shadow-xl hover:shadow-2xl transition">
                     <div class="flex items-start space-x-6">
                         <div
                             class="w-20 h-20 bg-gradient-to-br from-purple-600 to-purple-400 rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -556,7 +581,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-3xl p-10 shadow-xl hover:shadow-2xl transition">
+                <div class="bg-white rounded-3xl p-6 md:p-10 shadow-xl hover:shadow-2xl transition">
                     <div class="flex items-start space-x-6">
                         <div
                             class="w-20 h-20 bg-gradient-to-br from-pink-600 to-pink-400 rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -573,7 +598,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-3xl p-10 shadow-xl hover:shadow-2xl transition">
+                <div class="bg-white rounded-3xl p-6 md:p-10 shadow-xl hover:shadow-2xl transition">
                     <div class="flex items-start space-x-6">
                         <div
                             class="w-20 h-20 bg-gradient-to-br from-orange-600 to-orange-400 rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -590,7 +615,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-3xl p-10 shadow-xl hover:shadow-2xl transition">
+                <div class="bg-white rounded-3xl p-6 md:p-10 shadow-xl hover:shadow-2xl transition">
                     <div class="flex items-start space-x-6">
                         <div
                             class="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-400 rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -607,7 +632,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-3xl p-10 shadow-xl hover:shadow-2xl transition">
+                <div class="bg-white rounded-3xl p-6 md:p-10 shadow-xl hover:shadow-2xl transition">
                     <div class="flex items-start space-x-6">
                         <div
                             class="w-20 h-20 bg-gradient-to-br from-green-600 to-green-400 rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -624,7 +649,7 @@
                     </div>
                 </div>
 
-                <div class="bg-white rounded-3xl p-10 shadow-xl hover:shadow-2xl transition">
+                <div class="bg-white rounded-3xl p-6 md:p-10 shadow-xl hover:shadow-2xl transition">
                     <div class="flex items-start space-x-6">
                         <div
                             class="w-20 h-20 bg-gradient-to-br from-indigo-600 to-indigo-400 rounded-2xl flex items-center justify-center flex-shrink-0">
@@ -657,9 +682,9 @@
         </div>
     </section>
 
-    <section id="testimonials" class="py-16 md:py-24 bg-white">
+    <section id="testimonials" class="py-10 md:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-10 md:mb-16">
                 <h2 class="font-display text-3xl md:text-5xl font-bold text-gray-900 mb-6">What Organizations Are Saying
                 </h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -768,9 +793,9 @@
         </div>
     </section>
 
-    <section id="events" class="py-16 md:py-24 bg-gradient-to-br from-purple-50 to-pink-50">
+    <section id="events" class="py-10 md:py-24 bg-gradient-to-br from-purple-50 to-pink-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-10 md:mb-16">
                 <h2 class="font-display text-3xl md:text-5xl font-bold text-gray-900 mb-6">Past Events Gallery</h2>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
                     Glimpses from Womoneya 1.0 and 2.0 - Celebrating women empowerment across India
@@ -855,9 +880,9 @@
             </div>
         </div>
     </section>
-    <section id="about-fintoo" class="py-16 md:py-24 bg-white">
+    <section id="about-fintoo" class="py-10 md:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-10 md:mb-16">
                 <div
                     class="inline-block bg-purple-100 text-purple-600 px-6 py-2 rounded-full text-sm font-semibold mb-4">
                     SEBI Registered Investment Advisor
@@ -870,7 +895,7 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-16">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-10 md:mb-16">
                 <div
                     class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-8 text-center hover:shadow-xl transition transform hover:scale-105">
                     <div class="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -946,7 +971,7 @@
         </div>
     </section>
 
-    <section id="booking-form" class="py-16 md:py-24 bg-white">
+    <section id="booking-form" class="py-10 md:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 <div>
@@ -1081,42 +1106,29 @@
                             </div>
                         </div>
 
-                        <div id="offlinePincodeBlock" class="hidden">
-                            <label class="block text-gray-700 font-medium mb-2">Select Pincodes (Offline) *</label>
-                            <div class="relative">
-                                <button id="pincodeDropdownBtn" type="button"
-                                    class="w-full text-left px-4 py-3 rounded-xl border-2 border-gray-200 bg-white focus:border-purple-600 focus:outline-none transition">
-                                    Select pincodes
-                                </button>
-                                <div id="pincodeDropdownPanel"
-                                    class="hidden absolute left-0 right-0 mt-2 z-30 bg-white border-2 border-gray-200 rounded-xl shadow-xl p-3">
-                                    <input id="pincodeSearchInput" type="text"
-                                        class="w-full px-3 py-2 rounded-lg border-2 border-gray-200 focus:border-purple-600 focus:outline-none transition mb-3"
-                                        placeholder="Search by pincode or city">
-                                    <div class="flex gap-2 mb-3">
-                                        <button id="selectAllPincodesBtn" type="button"
-                                            class="px-3 py-2 rounded-lg bg-purple-600 text-white text-sm font-medium hover:bg-purple-700 transition">Select
-                                            All</button>
-                                        <button id="deselectAllPincodesBtn" type="button"
-                                            class="px-3 py-2 rounded-lg bg-gray-700 text-white text-sm font-medium hover:bg-gray-800 transition">Deselect
-                                            All</button>
-                                    </div>
-                                    <div class="grid grid-cols-1 md:grid-cols-5 gap-2 mb-3">
-                                        <input id="customCityInput" type="text"
-                                            class="md:col-span-2 px-3 py-2 rounded-lg border-2 border-gray-200 focus:border-purple-600 focus:outline-none transition"
-                                            placeholder="Custom city name">
-                                        <input id="customCityPincodeInput" type="text" inputmode="numeric" maxlength="6"
-                                            class="md:col-span-2 px-3 py-2 rounded-lg border-2 border-gray-200 focus:border-purple-600 focus:outline-none transition"
-                                            placeholder="Custom pincode">
-                                        <button id="addCustomCityBtn" type="button"
-                                            class="px-3 py-2 rounded-lg bg-pink-500 text-white text-sm font-medium hover:bg-pink-600 transition">Add
-                                            Custom</button>
-                                    </div>
-                                    <div id="pincodeOptionsList" class="max-h-56 overflow-y-auto space-y-2 pr-1"></div>
-                                </div>
+                        <div id="offlineCityBlock" class="hidden">
+                            <label class="block text-gray-700 font-medium mb-2">Select City (Offline) *</label>
+                            <select id="offlineCitySelect" name="offline_city"
+                                class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 bg-white focus:border-purple-600 focus:outline-none transition">
+                                <option value="">Select a city</option>
+                                <option value="Mumbai">Mumbai</option>
+                                <option value="Delhi NCR">Delhi NCR</option>
+                                <option value="Bengaluru">Bengaluru</option>
+                                <option value="Chennai">Chennai</option>
+                                <option value="Kolkata">Kolkata</option>
+                                <option value="Hyderabad">Hyderabad</option>
+                                <option value="Pune">Pune</option>
+                                <option value="Ahmedabad">Ahmedabad</option>
+                                <option value="Jaipur">Jaipur</option>
+                                <option value="Lucknow">Lucknow</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <div id="otherCityBlock" class="hidden mt-3">
+                                <label class="block text-gray-700 font-medium mb-2">Other City *</label>
+                                <input id="otherCityInput" name="offline_city_other" type="text"
+                                    class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-600 focus:outline-none transition"
+                                    placeholder="Enter city name">
                             </div>
-                            <div id="selectedPincodeTags" class="mt-3 flex flex-wrap gap-2"></div>
-                            <input id="offlinePincodesValue" name="offline_pincodes" type="hidden">
                         </div>
 
 
@@ -1246,33 +1258,10 @@
             const closeSpeakerModalTop = document.getElementById('closeSpeakerModalTop');
             const speakerModalBookNow = document.getElementById('speakerModalBookNow');
             const modeInputs = document.querySelectorAll('input[name="mode"]');
-            const offlinePincodeBlock = document.getElementById('offlinePincodeBlock');
-            const pincodeDropdownBtn = document.getElementById('pincodeDropdownBtn');
-            const pincodeDropdownPanel = document.getElementById('pincodeDropdownPanel');
-            const pincodeSearchInput = document.getElementById('pincodeSearchInput');
-            const selectAllPincodesBtn = document.getElementById('selectAllPincodesBtn');
-            const deselectAllPincodesBtn = document.getElementById('deselectAllPincodesBtn');
-            const customCityInput = document.getElementById('customCityInput');
-            const customCityPincodeInput = document.getElementById('customCityPincodeInput');
-            const addCustomCityBtn = document.getElementById('addCustomCityBtn');
-            const pincodeOptionsList = document.getElementById('pincodeOptionsList');
-            const selectedPincodeTags = document.getElementById('selectedPincodeTags');
-            const offlinePincodesValue = document.getElementById('offlinePincodesValue');
-            const pincodeSet = new Set();
-            const pincodeCatalog = [
-                { code: '110001', city: 'New Delhi' }, { code: '400001', city: 'Mumbai' }, { code: '560001', city: 'Bengaluru' },
-                { code: '600001', city: 'Chennai' }, { code: '700001', city: 'Kolkata' }, { code: '500001', city: 'Hyderabad' },
-                { code: '411001', city: 'Pune' }, { code: '380001', city: 'Ahmedabad' }, { code: '302001', city: 'Jaipur' },
-                { code: '226001', city: 'Lucknow' }, { code: '122001', city: 'Gurugram' }, { code: '201301', city: 'Noida' },
-                { code: '208001', city: 'Kanpur' }, { code: '221001', city: 'Varanasi' }, { code: '452001', city: 'Indore' },
-                { code: '462001', city: 'Bhopal' }, { code: '395003', city: 'Surat' }, { code: '390001', city: 'Vadodara' },
-                { code: '440001', city: 'Nagpur' }, { code: '800001', city: 'Patna' }, { code: '751001', city: 'Bhubaneswar' },
-                { code: '781001', city: 'Guwahati' }, { code: '682001', city: 'Kochi' }, { code: '695001', city: 'Thiruvananthapuram' },
-                { code: '641001', city: 'Coimbatore' }, { code: '625001', city: 'Madurai' }, { code: '530001', city: 'Visakhapatnam' },
-                { code: '520001', city: 'Vijayawada' }, { code: '522001', city: 'Guntur' }, { code: '342001', city: 'Jodhpur' },
-                { code: '248001', city: 'Dehradun' }, { code: '180001', city: 'Jammu' }, { code: '793001', city: 'Shillong' },
-                { code: '799001', city: 'Agartala' }, { code: '834001', city: 'Ranchi' }, { code: '160017', city: 'Chandigarh' }
-            ];
+            const offlineCityBlock = document.getElementById('offlineCityBlock');
+            const offlineCitySelect = document.getElementById('offlineCitySelect');
+            const otherCityBlock = document.getElementById('otherCityBlock');
+            const otherCityInput = document.getElementById('otherCityInput');
 
             function openSpeakerModal() {
                 if (!speakerModal || !speakerModalBackdrop) return;
@@ -1306,129 +1295,27 @@
                 if (event.key === 'Escape') closeSpeakerModal();
             });
 
-            function getCityByCode(code) {
-                const match = pincodeCatalog.find((item) => item.code === code);
-                return match ? match.city : 'Custom City';
-            }
-
             function isOfflineSelected() {
                 const selected = document.querySelector('input[name="mode"]:checked');
                 return selected && selected.value === 'offline';
             }
 
-            function syncPincodeValue() {
-                offlinePincodesValue.value = Array.from(pincodeSet).sort().join(',');
-            }
-
-            function getFilteredPincodes() {
-                const query = pincodeSearchInput.value.trim().toLowerCase();
-                return pincodeCatalog.filter((item) => {
-                    if (!query) return true;
-                    return item.code.includes(query) || item.city.toLowerCase().includes(query);
-                });
-            }
-
-            function updateDropdownButtonLabel() {
-                const count = pincodeSet.size;
-                pincodeDropdownBtn.textContent = count === 0 ? 'Select pincodes' : count + ' pincode' + (count > 1 ? 's selected' : ' selected');
-            }
-
-            function renderSelectedTags() {
-                selectedPincodeTags.innerHTML = '';
-                if (pincodeSet.size === 0) {
-                    const helper = document.createElement('span');
-                    helper.className = 'text-sm text-gray-500';
-                    helper.textContent = 'No pincodes selected.';
-                    selectedPincodeTags.appendChild(helper);
-                    return;
-                }
-
-                Array.from(pincodeSet).sort().forEach((code) => {
-                    const tag = document.createElement('span');
-                    tag.className = 'inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-100 text-purple-700 text-sm font-medium';
-                    const text = document.createElement('span');
-                    text.textContent = code + ' - ' + getCityByCode(code);
-                    const removeBtn = document.createElement('button');
-                    removeBtn.type = 'button';
-                    removeBtn.className = 'text-purple-700 hover:text-purple-900 font-bold';
-                    removeBtn.textContent = 'x';
-                    removeBtn.dataset.code = code;
-                    tag.appendChild(text);
-                    tag.appendChild(removeBtn);
-                    selectedPincodeTags.appendChild(tag);
-                });
-            }
-
-            function renderPincodeOptions() {
-                const filtered = getFilteredPincodes();
-                pincodeOptionsList.innerHTML = '';
-
-                if (filtered.length === 0) {
-                    const empty = document.createElement('div');
-                    empty.className = 'text-sm text-gray-500 py-2';
-                    empty.textContent = 'No pincodes found.';
-                    pincodeOptionsList.appendChild(empty);
-                    return;
-                }
-
-                filtered.forEach((item) => {
-                    const row = document.createElement('label');
-                    row.className = 'flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer';
-                    const checkbox = document.createElement('input');
-                    checkbox.type = 'checkbox';
-                    checkbox.className = 'w-4 h-4 text-purple-600';
-                    checkbox.checked = pincodeSet.has(item.code);
-                    checkbox.dataset.code = item.code;
-                    const text = document.createElement('span');
-                    text.className = 'text-sm text-gray-700';
-                    text.textContent = item.code + ' - ' + item.city;
-                    row.appendChild(checkbox);
-                    row.appendChild(text);
-                    pincodeOptionsList.appendChild(row);
-                });
-            }
-
-            function renderPincodeSelection() {
-                renderPincodeOptions();
-                renderSelectedTags();
-                updateDropdownButtonLabel();
-                syncPincodeValue();
-            }
-
-            function addCustomCity() {
-                const city = customCityInput.value.trim();
-                const code = customCityPincodeInput.value.trim();
-
-                if (city.length < 2) {
-                    alert('Please enter a valid city name.');
-                    return;
-                }
-
-                if (!/^\d{6}$/.test(code)) {
-                    alert('Please enter a valid 6-digit pincode.');
-                    return;
-                }
-
-                const existing = pincodeCatalog.find((item) => item.code === code);
-                if (!existing) {
-                    pincodeCatalog.push({ code: code, city: city });
-                } else {
-                    existing.city = city;
-                }
-
-                pincodeSet.add(code);
-                customCityInput.value = '';
-                customCityPincodeInput.value = '';
-                renderPincodeSelection();
-                customCityInput.focus();
-            }
-
-            function toggleOfflinePincodeBlock() {
+            function toggleOfflineCityBlock() {
                 const show = isOfflineSelected();
-                offlinePincodeBlock.classList.toggle('hidden', !show);
+                offlineCityBlock.classList.toggle('hidden', !show);
                 if (!show) {
-                    pincodeDropdownPanel.classList.add('hidden');
+                    if (offlineCitySelect) offlineCitySelect.value = '';
+                    if (otherCityInput) otherCityInput.value = '';
+                    if (otherCityBlock) otherCityBlock.classList.add('hidden');
+                    if (stickyCta) stickyCta.classList.remove('hidden');
                 }
+            }
+
+            function toggleOtherCityInput() {
+                if (!offlineCitySelect || !otherCityBlock) return;
+                const isOther = offlineCitySelect.value === 'Other';
+                otherCityBlock.classList.toggle('hidden', !isOther);
+                if (!isOther && otherCityInput) otherCityInput.value = '';
             }
 
             window.addEventListener('scroll', function () {
@@ -1457,70 +1344,35 @@
             });
 
             modeInputs.forEach((input) => {
-                input.addEventListener('change', toggleOfflinePincodeBlock);
+                input.addEventListener('change', toggleOfflineCityBlock);
             });
 
-            pincodeDropdownBtn.addEventListener('click', function () {
-                pincodeDropdownPanel.classList.toggle('hidden');
-                if (!pincodeDropdownPanel.classList.contains('hidden')) {
-                    pincodeSearchInput.focus();
-                }
-            });
-
-            pincodeSearchInput.addEventListener('input', renderPincodeOptions);
-
-            pincodeOptionsList.addEventListener('change', function (event) {
-                const checkbox = event.target;
-                if (!checkbox.dataset.code) return;
-                if (checkbox.checked) {
-                    pincodeSet.add(checkbox.dataset.code);
-                } else {
-                    pincodeSet.delete(checkbox.dataset.code);
-                }
-                renderPincodeSelection();
-            });
-
-            selectAllPincodesBtn.addEventListener('click', function () {
-                getFilteredPincodes().forEach((item) => pincodeSet.add(item.code));
-                renderPincodeSelection();
-            });
-
-            deselectAllPincodesBtn.addEventListener('click', function () {
-                getFilteredPincodes().forEach((item) => pincodeSet.delete(item.code));
-                renderPincodeSelection();
-            });
-
-            addCustomCityBtn.addEventListener('click', addCustomCity);
-            customCityPincodeInput.addEventListener('keydown', function (event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault();
-                    addCustomCity();
-                }
-            });
-
-            selectedPincodeTags.addEventListener('click', function (event) {
-                const btn = event.target;
-                if (btn.tagName !== 'BUTTON' || !btn.dataset.code) return;
-                pincodeSet.delete(btn.dataset.code);
-                renderPincodeSelection();
-            });
-
-            document.addEventListener('click', function (event) {
-                const insideBlock = offlinePincodeBlock.contains(event.target);
-                if (!insideBlock) {
-                    pincodeDropdownPanel.classList.add('hidden');
-                }
-            });
+            if (offlineCitySelect) {
+                offlineCitySelect.addEventListener('change', toggleOtherCityInput);
+                offlineCitySelect.addEventListener('focus', function () {
+                    if (stickyCta) stickyCta.classList.add('hidden');
+                });
+                offlineCitySelect.addEventListener('blur', function () {
+                    if (stickyCta && speakerModal && speakerModal.classList.contains('hidden')) {
+                        stickyCta.classList.remove('hidden');
+                    }
+                });
+            }
 
             bookingForm.addEventListener('submit', function (event) {
-                if (isOfflineSelected() && pincodeSet.size === 0) {
+                if (isOfflineSelected() && (!offlineCitySelect || !offlineCitySelect.value)) {
                     event.preventDefault();
-                    alert('Please add at least one pincode for Offline mode.');
+                    alert('Please select a city for Offline mode.');
+                    return;
+                }
+                if (isOfflineSelected() && offlineCitySelect.value === 'Other' && (!otherCityInput || !otherCityInput.value.trim())) {
+                    event.preventDefault();
+                    alert('Please enter your city name.');
                 }
             });
 
-            renderPincodeSelection();
-            toggleOfflinePincodeBlock();
+            toggleOfflineCityBlock();
+            toggleOtherCityInput();
         });
     </script>
 

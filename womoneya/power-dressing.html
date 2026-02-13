@@ -230,28 +230,26 @@
                         </div>
                     </div>
 
-                    <div id="offlinePincodeBlock" class="hidden">
-                        <label class="block text-gray-700 font-medium mb-2">Select Pincodes (Offline) *</label>
-                        <div class="relative">
-                            <button id="pincodeDropdownBtn" type="button" class="w-full text-left px-4 py-3 rounded-xl border-2 border-gray-200 bg-white focus:border-purple-600 focus:outline-none transition">
-                                Select pincodes
-                            </button>
-                            <div id="pincodeDropdownPanel" class="hidden absolute left-0 right-0 mt-2 z-30 bg-white border-2 border-gray-200 rounded-xl shadow-xl p-3">
-                                <input id="pincodeSearchInput" type="text" class="w-full px-3 py-2 rounded-lg border-2 border-gray-200 focus:border-purple-600 focus:outline-none transition mb-3" placeholder="Search by pincode or city">
-                                <div class="flex gap-2 mb-3">
-                                    <button id="selectAllPincodesBtn" type="button" class="px-3 py-2 rounded-lg bg-purple-600 text-white text-sm font-medium hover:bg-purple-700 transition">Select All</button>
-                                    <button id="deselectAllPincodesBtn" type="button" class="px-3 py-2 rounded-lg bg-gray-700 text-white text-sm font-medium hover:bg-gray-800 transition">Deselect All</button>
-                                </div>
-                                <div class="grid grid-cols-1 md:grid-cols-5 gap-2 mb-3">
-                                    <input id="customCityInput" type="text" class="md:col-span-2 px-3 py-2 rounded-lg border-2 border-gray-200 focus:border-purple-600 focus:outline-none transition" placeholder="Custom city name">
-                                    <input id="customCityPincodeInput" type="text" inputmode="numeric" maxlength="6" class="md:col-span-2 px-3 py-2 rounded-lg border-2 border-gray-200 focus:border-purple-600 focus:outline-none transition" placeholder="Custom pincode">
-                                    <button id="addCustomCityBtn" type="button" class="px-3 py-2 rounded-lg bg-pink-500 text-white text-sm font-medium hover:bg-pink-600 transition">Add Custom</button>
-                                </div>
-                                <div id="pincodeOptionsList" class="max-h-56 overflow-y-auto space-y-2 pr-1"></div>
-                            </div>
+                    <div id="offlineCityBlock" class="hidden">
+                        <label class="block text-gray-700 font-medium mb-2">Select City (Offline) *</label>
+                        <select id="offlineCitySelect" name="offline_city" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 bg-white focus:border-purple-600 focus:outline-none transition">
+                            <option value="">Select a city</option>
+                            <option value="Mumbai">Mumbai</option>
+                            <option value="Delhi NCR">Delhi NCR</option>
+                            <option value="Bengaluru">Bengaluru</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Kolkata">Kolkata</option>
+                            <option value="Hyderabad">Hyderabad</option>
+                            <option value="Pune">Pune</option>
+                            <option value="Ahmedabad">Ahmedabad</option>
+                            <option value="Jaipur">Jaipur</option>
+                            <option value="Lucknow">Lucknow</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <div id="otherCityBlock" class="hidden mt-3">
+                            <label class="block text-gray-700 font-medium mb-2">Other City *</label>
+                            <input id="otherCityInput" name="offline_city_other" type="text" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-purple-600 focus:outline-none transition" placeholder="Enter city name">
                         </div>
-                        <div id="selectedPincodeTags" class="mt-3 flex flex-wrap gap-2"></div>
-                        <input id="offlinePincodesValue" name="offline_pincodes" type="hidden">
                     </div>
 
                     <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white py-4 rounded-xl font-bold text-lg hover:shadow-xl transition">
@@ -285,154 +283,32 @@ window.addEventListener('load', function () {
     const stickyCta = document.querySelector('.sticky-cta');
     const bookingForm = document.getElementById('bookingForm');
     const modeInputs = document.querySelectorAll('input[name="mode"]');
-    const offlinePincodeBlock = document.getElementById('offlinePincodeBlock');
-    const pincodeDropdownBtn = document.getElementById('pincodeDropdownBtn');
-    const pincodeDropdownPanel = document.getElementById('pincodeDropdownPanel');
-    const pincodeSearchInput = document.getElementById('pincodeSearchInput');
-    const selectAllPincodesBtn = document.getElementById('selectAllPincodesBtn');
-    const deselectAllPincodesBtn = document.getElementById('deselectAllPincodesBtn');
-    const customCityInput = document.getElementById('customCityInput');
-    const customCityPincodeInput = document.getElementById('customCityPincodeInput');
-    const addCustomCityBtn = document.getElementById('addCustomCityBtn');
-    const pincodeOptionsList = document.getElementById('pincodeOptionsList');
-    const selectedPincodeTags = document.getElementById('selectedPincodeTags');
-    const offlinePincodesValue = document.getElementById('offlinePincodesValue');
-
-    const pincodeSet = new Set();
-    const pincodeCatalog = [
-        { code: '110001', city: 'New Delhi' }, { code: '400001', city: 'Mumbai' }, { code: '560001', city: 'Bengaluru' },
-        { code: '600001', city: 'Chennai' }, { code: '700001', city: 'Kolkata' }, { code: '500001', city: 'Hyderabad' },
-        { code: '411001', city: 'Pune' }, { code: '380001', city: 'Ahmedabad' }, { code: '302001', city: 'Jaipur' },
-        { code: '226001', city: 'Lucknow' }, { code: '122001', city: 'Gurugram' }, { code: '201301', city: 'Noida' },
-        { code: '208001', city: 'Kanpur' }, { code: '221001', city: 'Varanasi' }, { code: '452001', city: 'Indore' },
-        { code: '462001', city: 'Bhopal' }, { code: '395003', city: 'Surat' }, { code: '390001', city: 'Vadodara' },
-        { code: '440001', city: 'Nagpur' }, { code: '800001', city: 'Patna' }, { code: '751001', city: 'Bhubaneswar' },
-        { code: '781001', city: 'Guwahati' }, { code: '682001', city: 'Kochi' }, { code: '695001', city: 'Thiruvananthapuram' }
-    ];
-
-    function getCityByCode(code) {
-        const match = pincodeCatalog.find((item) => item.code === code);
-        return match ? match.city : 'Custom City';
-    }
+    const offlineCityBlock = document.getElementById('offlineCityBlock');
+    const offlineCitySelect = document.getElementById('offlineCitySelect');
+    const otherCityBlock = document.getElementById('otherCityBlock');
+    const otherCityInput = document.getElementById('otherCityInput');
 
     function isOfflineSelected() {
         const selected = document.querySelector('input[name="mode"]:checked');
         return selected && selected.value === 'offline';
     }
 
-    function syncPincodeValue() {
-        offlinePincodesValue.value = Array.from(pincodeSet).sort().join(',');
-    }
-
-    function getFilteredPincodes() {
-        const query = pincodeSearchInput.value.trim().toLowerCase();
-        return pincodeCatalog.filter((item) => {
-            if (!query) return true;
-            return item.code.includes(query) || item.city.toLowerCase().includes(query);
-        });
-    }
-
-    function updateDropdownButtonLabel() {
-        const count = pincodeSet.size;
-        pincodeDropdownBtn.textContent = count === 0 ? 'Select pincodes' : count + ' pincode' + (count > 1 ? 's selected' : ' selected');
-    }
-
-    function renderSelectedTags() {
-        selectedPincodeTags.innerHTML = '';
-        if (pincodeSet.size === 0) {
-            const helper = document.createElement('span');
-            helper.className = 'text-sm text-gray-500';
-            helper.textContent = 'No pincodes selected.';
-            selectedPincodeTags.appendChild(helper);
-            return;
-        }
-
-        Array.from(pincodeSet).sort().forEach((code) => {
-            const tag = document.createElement('span');
-            tag.className = 'inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-100 text-purple-700 text-sm font-medium';
-            const text = document.createElement('span');
-            text.textContent = code + ' - ' + getCityByCode(code);
-            const removeBtn = document.createElement('button');
-            removeBtn.type = 'button';
-            removeBtn.className = 'text-purple-700 hover:text-purple-900 font-bold';
-            removeBtn.textContent = 'x';
-            removeBtn.dataset.code = code;
-            tag.appendChild(text);
-            tag.appendChild(removeBtn);
-            selectedPincodeTags.appendChild(tag);
-        });
-    }
-
-    function renderPincodeOptions() {
-        const filtered = getFilteredPincodes();
-        pincodeOptionsList.innerHTML = '';
-
-        if (filtered.length === 0) {
-            const empty = document.createElement('div');
-            empty.className = 'text-sm text-gray-500 py-2';
-            empty.textContent = 'No pincodes found.';
-            pincodeOptionsList.appendChild(empty);
-            return;
-        }
-
-        filtered.forEach((item) => {
-            const row = document.createElement('label');
-            row.className = 'flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 cursor-pointer';
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.className = 'w-4 h-4 text-purple-600';
-            checkbox.checked = pincodeSet.has(item.code);
-            checkbox.dataset.code = item.code;
-            const text = document.createElement('span');
-            text.className = 'text-sm text-gray-700';
-            text.textContent = item.code + ' - ' + item.city;
-            row.appendChild(checkbox);
-            row.appendChild(text);
-            pincodeOptionsList.appendChild(row);
-        });
-    }
-
-    function renderPincodeSelection() {
-        renderPincodeOptions();
-        renderSelectedTags();
-        updateDropdownButtonLabel();
-        syncPincodeValue();
-    }
-
-    function addCustomCity() {
-        const city = customCityInput.value.trim();
-        const code = customCityPincodeInput.value.trim();
-
-        if (city.length < 2) {
-            alert('Please enter a valid city name.');
-            return;
-        }
-
-        if (!/^\d{6}$/.test(code)) {
-            alert('Please enter a valid 6-digit pincode.');
-            return;
-        }
-
-        const existing = pincodeCatalog.find((item) => item.code === code);
-        if (!existing) {
-            pincodeCatalog.push({ code: code, city: city });
-        } else {
-            existing.city = city;
-        }
-
-        pincodeSet.add(code);
-        customCityInput.value = '';
-        customCityPincodeInput.value = '';
-        renderPincodeSelection();
-        customCityInput.focus();
-    }
-
-    function toggleOfflinePincodeBlock() {
+    function toggleOfflineCityBlock() {
         const show = isOfflineSelected();
-        offlinePincodeBlock.classList.toggle('hidden', !show);
+        offlineCityBlock.classList.toggle('hidden', !show);
         if (!show) {
-            pincodeDropdownPanel.classList.add('hidden');
+            if (offlineCitySelect) offlineCitySelect.value = '';
+            if (otherCityInput) otherCityInput.value = '';
+            if (otherCityBlock) otherCityBlock.classList.add('hidden');
+            if (stickyCta) stickyCta.classList.remove('hidden');
         }
+    }
+
+    function toggleOtherCityInput() {
+        if (!offlineCitySelect || !otherCityBlock) return;
+        const isOther = offlineCitySelect.value === 'Other';
+        otherCityBlock.classList.toggle('hidden', !isOther);
+        if (!isOther && otherCityInput) otherCityInput.value = '';
     }
 
     window.addEventListener('scroll', function () {
@@ -440,70 +316,36 @@ window.addEventListener('load', function () {
         else stickyCta.classList.remove('visible');
     });
 
-    modeInputs.forEach((input) => input.addEventListener('change', toggleOfflinePincodeBlock));
+    modeInputs.forEach((input) => input.addEventListener('change', toggleOfflineCityBlock));
 
-    pincodeDropdownBtn.addEventListener('click', function () {
-        pincodeDropdownPanel.classList.toggle('hidden');
-        if (!pincodeDropdownPanel.classList.contains('hidden')) pincodeSearchInput.focus();
-    });
-
-    pincodeSearchInput.addEventListener('input', renderPincodeOptions);
-
-    pincodeOptionsList.addEventListener('change', function (event) {
-        const checkbox = event.target;
-        if (!checkbox.dataset.code) return;
-        if (checkbox.checked) pincodeSet.add(checkbox.dataset.code);
-        else pincodeSet.delete(checkbox.dataset.code);
-        renderPincodeSelection();
-    });
-
-    selectedPincodeTags.addEventListener('click', function (event) {
-        const btn = event.target;
-        if (!btn.dataset.code) return;
-        pincodeSet.delete(btn.dataset.code);
-        renderPincodeSelection();
-    });
-
-    selectAllPincodesBtn.addEventListener('click', function () {
-        getFilteredPincodes().forEach((item) => pincodeSet.add(item.code));
-        renderPincodeSelection();
-    });
-
-    deselectAllPincodesBtn.addEventListener('click', function () {
-        getFilteredPincodes().forEach((item) => pincodeSet.delete(item.code));
-        renderPincodeSelection();
-    });
-
-    addCustomCityBtn.addEventListener('click', addCustomCity);
-
-    customCityPincodeInput.addEventListener('keypress', function (event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            addCustomCity();
-        }
-    });
-
-    document.addEventListener('click', function (event) {
-        if (!offlinePincodeBlock.contains(event.target)) {
-            pincodeDropdownPanel.classList.add('hidden');
-        }
-    });
+    if (offlineCitySelect) {
+        offlineCitySelect.addEventListener('change', toggleOtherCityInput);
+        offlineCitySelect.addEventListener('focus', function () {
+            if (stickyCta) stickyCta.classList.add('hidden');
+        });
+        offlineCitySelect.addEventListener('blur', function () {
+            if (stickyCta) stickyCta.classList.remove('hidden');
+        });
+    }
 
     bookingForm.addEventListener('submit', function (event) {
         event.preventDefault();
-        if (isOfflineSelected() && pincodeSet.size === 0) {
-            alert('Please select at least one pincode for offline mode.');
+        if (isOfflineSelected() && (!offlineCitySelect || !offlineCitySelect.value)) {
+            alert('Please select a city for offline mode.');
+            return;
+        }
+        if (isOfflineSelected() && offlineCitySelect.value === 'Other' && (!otherCityInput || !otherCityInput.value.trim())) {
+            alert('Please enter your city name.');
             return;
         }
         alert('Thank you! Your request has been submitted successfully.');
         bookingForm.reset();
-        pincodeSet.clear();
-        renderPincodeSelection();
-        toggleOfflinePincodeBlock();
+        toggleOfflineCityBlock();
+        toggleOtherCityInput();
     });
 
-    renderPincodeSelection();
-    toggleOfflinePincodeBlock();
+    toggleOfflineCityBlock();
+    toggleOtherCityInput();
 });
 </script>
 
