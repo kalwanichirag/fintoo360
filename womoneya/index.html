@@ -117,6 +117,15 @@
             animation: heroMarquee 12s linear infinite;
         }
 
+        .about-stage-slide {
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+        }
+
+        .about-stage-slide.active {
+            opacity: 1;
+        }
+
         @media (max-width: 640px) {
             .sticky-cta {
                 bottom: 16px;
@@ -212,8 +221,7 @@
                     </div>
 
                     <p class="text-lg md:text-xl text-gray-700 leading-relaxed max-w-xl">
-                        A national-level celebration empowering working women across India through financial
-                        independence, mental resilience, and holistic wellness.
+                       A novel initiative by Fintoo to empower working women across India through meticulously curated Financial Independence, Power Dressing, and Mind & Body Wellness sessions.
                     </p>
 
                     <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2 md:pt-4">
@@ -231,12 +239,12 @@
 
                 </div>
 
-                <div class="relative order-1 lg:order-2">
+                <div class="relative order-1 lg:order-2 mt-5">
                     <div
                         class="absolute inset-0 bg-gradient-to-br from-purple-400/30 to-pink-400/30 rounded-3xl blur-3xl">
                     </div>
                     <img class="relative w-full h-[420px] sm:h-[500px] lg:h-[600px] object-cover rounded-3xl shadow-2xl animate-float"
-                        src="/womoneya/banner.jpg"
+                        src="/womoneya/logo.jpg"
                         alt="confident professional Indian woman in business attire standing with arms crossed, smiling, modern office background, empowering pose, natural lighting, professional photography" />
 
                 </div>
@@ -251,8 +259,7 @@
 
                 <h2 class="font-display text-4xl md:text-6xl font-bold text-gray-900 mb-6">About Womoneya 3.0</h2>
                 <p class="text-lg md:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed font-medium">
-                    A purpose-led initiative designed exclusively for working women across India
-                </p>
+A purpose-led complimentary initiative                </p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center mb-12 md:mb-20">
@@ -260,9 +267,49 @@
                     <div
                         class="absolute inset-0 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-3xl blur-2xl">
                     </div>
-                    <img class="relative w-full h-[500px] object-cover rounded-3xl shadow-2xl"
-                        src="/womoneya/banner2.jpg"
-                        alt="diverse group of professional Indian women in corporate setting, celebrating, empowered, modern office, natural lighting, professional photography" />
+                    <div id="aboutStageSlider" class="relative w-full h-[500px] rounded-3xl shadow-2xl overflow-hidden">
+                        <img class="about-stage-slide active absolute inset-0 w-full h-full object-cover"
+                            src="/womoneya/stage/stage-1.jpeg"
+                            alt="Womoneya stage event photo 1" />
+                        <img class="about-stage-slide absolute inset-0 w-full h-full object-cover"
+                            src="/womoneya/stage/stage-2.jpeg"
+                            alt="Womoneya stage event photo 2" />
+                        <img class="about-stage-slide absolute inset-0 w-full h-full object-cover"
+                            src="/womoneya/stage/stage-3.jpeg"
+                            alt="Womoneya stage event photo 3" />
+                        <img class="about-stage-slide absolute inset-0 w-full h-full object-cover"
+                            src="/womoneya/stage/stage-4.jpeg"
+                            alt="Womoneya stage event photo 4" />
+                        <img class="about-stage-slide absolute inset-0 w-full h-full object-cover"
+                            src="/womoneya/stage/stage-5.jpeg"
+                            alt="Womoneya stage event photo 5" />
+                        <img class="about-stage-slide absolute inset-0 w-full h-full object-cover"
+                            src="/womoneya/stage/stage-6.jpeg"
+                            alt="Womoneya stage event photo 6" />
+                        <img class="about-stage-slide absolute inset-0 w-full h-full object-cover"
+                            src="/womoneya/stage/stage-7.jpeg"
+                            alt="Womoneya stage event photo 7" />
+                        <img class="about-stage-slide absolute inset-0 w-full h-full object-cover"
+                            src="/womoneya/stage/stage-8.jpeg"
+                            alt="Womoneya stage event photo 8" />
+                        <img class="about-stage-slide absolute inset-0 w-full h-full object-cover"
+                            src="/womoneya/stage/stage-9.jpeg"
+                            alt="Womoneya stage event photo 9" />
+                        <img class="about-stage-slide absolute inset-0 w-full h-full object-cover"
+                            src="/womoneya/stage/stage-10.jpeg"
+                            alt="Womoneya stage event photo 10" />
+
+                        <button id="aboutStagePrev" type="button"
+                            class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-gray-700 shadow-md transition"
+                            aria-label="Previous slide">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button id="aboutStageNext" type="button"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-gray-700 shadow-md transition"
+                            aria-label="Next slide">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
 
                 </div>
 
@@ -285,8 +332,7 @@
                                 </div>
                                 <div>
                                     <h4 class="text-xl font-bold text-gray-900 mb-1">Financial Independence</h4>
-                                    <p class="text-gray-600">Understanding financial rights and building long-term
-                                        wealth strategies</p>
+                                    <p class="text-gray-600">Gain an understanding of finance related nuances from the experts, and learn ways to grow your wealth for complete financial independence.</p>
                                 </div>
                             </div>
                         </div>
@@ -312,7 +358,7 @@
                                     <i class="fa-solid fa-heart-pulse text-orange-500 text-xl"></i>
                                 </div>
                                 <div>
-                                    <h4 class="text-xl font-bold text-gray-900 mb-1">Peak Performance</h4>
+                                    <h4 class="text-xl font-bold text-gray-900 mb-1">Mind & Body Wellness</h4>
                                     <p class="text-gray-600">
                                         Master your mental clarity and physical vitality to succeed sustainably — not
                                         just professionally, but personally.
@@ -414,26 +460,28 @@
                         </div>
                         <div class="flex items-center space-x-3">
                             <i class="fa-solid fa-circle-check text-purple-600"></i>
-                            <span class="text-gray-700">Role-based dress code guidance</span>
+                            <span class="text-gray-700">Dress for the Role You Want — Not the Role You Have</span>
                         </div>
-                        <div class="flex items-center space-x-3">
+                         <div class="flex items-center space-x-3">
                             <i class="fa-solid fa-circle-check text-purple-600"></i>
-                            <span class="text-gray-700">Color, fit, and wardrobe essentials</span>
+                            <span class="text-gray-700">Command the Room Without Speaking</span>
                         </div>
-                        <div class="flex items-center space-x-3">
+                         <div class="flex items-center space-x-3">
                             <i class="fa-solid fa-circle-check text-purple-600"></i>
-                            <span class="text-gray-700">Interactive Q&A session</span>
+                            <span class="text-gray-700">Align Your Image with Your Ambition</span>
                         </div>
-                        <div class="flex items-center space-x-3">
+                         <div class="flex items-center space-x-3">
                             <i class="fa-solid fa-circle-check text-purple-600"></i>
-                            <span class="text-gray-700">Certificate of participation</span>
+                            <span class="text-gray-700">Build a Signature Professional Identity</span>
                         </div>
+                      
+                       
                     </div>
 
-                    <button id="openPowerDressingSpeakerModal" type="button"
-                        class="w-full bg-purple-600 text-white py-4 rounded-full font-bold hover:bg-purple-700 transition">
+                    <a href="#booking-form"
+                        class="w-full inline-flex items-center justify-center bg-purple-600 text-white py-4 rounded-full font-bold hover:bg-purple-700 transition">
                         Know More
-                    </button>
+                    </a>
                 </div>
 
                 <div
@@ -445,7 +493,7 @@
                     <div class="bg-pink-500 text-white w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
                         <i class="fa-solid fa-brain text-2xl"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Mind & Money Mastery</h3>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Financial Independence</h3>
                     <p class="text-gray-700 mb-6 leading-relaxed">
                         A powerful combination focusing on financial literacy and mental wellness. Perfect for
                         organizations looking to provide comprehensive support to their women workforce.
@@ -464,25 +512,40 @@
                             <i class="fa-solid fa-circle-check text-pink-500"></i>
                             <span class="text-gray-700">Mental resilience training</span>
                         </div>
-                        <div class="flex items-center space-x-3">
-                            <i class="fa-solid fa-circle-check text-pink-500"></i>
-                            <span class="text-gray-700">Interactive Q&A session</span>
-                        </div>
+                        
 
                         <div class="flex items-center space-x-3">
                             <i class="fa-solid fa-circle-check text-pink-500"></i>
                             <span class="text-gray-700">Action planning template</span>
                         </div>
+
                         <div class="flex items-center space-x-3">
                             <i class="fa-solid fa-circle-check text-pink-500"></i>
-                            <span class="text-gray-700">Certificate of participation</span>
+                            <span class="text-gray-700">Shift from Paycheck Thinking to Goal-Based Wealth Planning</span>
                         </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-circle-check text-pink-500"></i>
+                            <span class="text-gray-700">Build a Career Break & Single-Income Resilience Plan</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-circle-check text-pink-500"></i>
+                            <span class="text-gray-700">Optimize Your Salary for Tax Efficiency and Wealth Creation</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-circle-check text-pink-500"></i>
+                            <span class="text-gray-700">Take an Active Role in Household Financial Decisions</span>
+                        </div>
+                          <div class="flex items-center space-x-3">
+                            <i class="fa-solid fa-circle-check text-pink-500"></i>
+                            <span class="text-gray-700">Secure Your Legacy & Raise Financially Aware Families</span>
+                        </div>
+                      
                     </div>
 
-                    <button
-                        class="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white py-4 rounded-full font-bold hover:shadow-xl transition">
+                    <a href="#booking-form"
+                        class="w-full inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-500 text-white py-4 rounded-full font-bold hover:shadow-xl transition">
                         Know More
-                    </button>
+                    </a>
                 </div>
 
                 <div
@@ -517,19 +580,19 @@
                         </div>
                         <div class="flex items-center space-x-3">
                             <i class="fa-solid fa-circle-check text-orange-500"></i>
-                            <span class="text-gray-700">Interactive Q&A Session</span>
+                            <span class="text-gray-700">Practical Tools to Manage Stress and Prevent Burnout</span>
                         </div>
 
                         <div class="flex items-center space-x-3">
                             <i class="fa-solid fa-circle-check text-orange-500"></i>
-                            <span class="text-gray-700">Certificate of participation</span>
+                            <span class="text-gray-700">Sustainable Habits for Energy, Fitness, and Mental Clarity</span>
                         </div>
                     </div>
 
-                    <button
-                        class="w-full bg-orange-500 text-white py-4 rounded-full font-bold hover:bg-orange-600 transition">
+                    <a href="#booking-form"
+                        class="w-full inline-flex items-center justify-center bg-orange-500 text-white py-4 rounded-full font-bold hover:bg-orange-600 transition">
                         Know More
-                    </button>
+                    </a>
                 </div>
             </div>
 
@@ -542,11 +605,11 @@
                             needs and goals.
                         </p>
                     </div>
-                    <button
+                    <a href="http://127.0.0.1:5501/womoneya/index.html#booking-form"
                         class="bg-white text-purple-600 px-4 sm:px-6 lg:px-8 py-4 rounded-full font-bold hover:shadow-xl transition flex items-center space-x-2">
                         <span>Schedule Consultation</span>
                         <i class="fa-solid fa-arrow-right"></i>
-                    </button>
+                </a>
                 </div>
             </div>
         </div>
@@ -806,55 +869,55 @@
                 <div
                     class="relative group overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition h-80 md:col-span-4">
                     <img class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500"
-                        src="/womoneya/gal1.JPG"
-                        alt="corporate event Indian women attending financial literacy workshop, professional setting, engaged audience, modern conference room" />
+                        src="/womoneya/award/1C562528-C22D-4355-A729-5F0DF727FC41_1_105_c.jpeg"
+                        alt="Womoneya awards gallery image 1" />
 
                 </div>
 
                 <div
                     class="relative group overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition h-80 md:col-span-4">
                     <img class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500"
-                        src="/womoneya/gal2.JPG"
-                        alt="Indian professional women networking at corporate event, smiling, diverse group, modern office space, natural lighting" />
+                        src="/womoneya/award/1FE65389-F62E-4B5D-A540-743A75109225_1_105_c.jpeg"
+                        alt="Womoneya awards gallery image 2" />
 
                 </div>
 
                 <div
                     class="relative group overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition h-80 md:col-span-4">
                     <img class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500"
-                        src="/womoneya/gal3.JPG"
-                        alt="speaker presenting to audience of professional Indian women, corporate seminar, engaging presentation, modern auditorium" />
+                        src="/womoneya/award/3F7CFCE2-9A8A-4C70-9154-3AE650023639_1_105_c.jpeg"
+                        alt="Womoneya awards gallery image 3" />
 
                 </div>
 
                 <div
                     class="relative group overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition h-80 md:col-span-3">
                     <img class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500"
-                        src="https://storage.googleapis.com/uxpilot-auth.appspot.com/2fd8f49955-9d92f9169cc9796843ca.png"
-                        alt="group of Indian women doing wellness exercises in corporate setting, yoga session, professional attire, bright room" />
+                        src="/womoneya/award/3F852341-809E-4DC6-BF72-0E3A6B8C6B91_1_105_c.jpeg"
+                        alt="Womoneya awards gallery image 4" />
 
                 </div>
 
                 <div
                     class="relative group overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition h-80 md:col-span-3">
                     <img class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500"
-                        src="/womoneya/gal4.JPG"
-                        alt="Indian women professionals celebrating at corporate event, group photo, happy faces, colorful decorations, women" />
+                        src="/womoneya/award/4C051A1F-A73B-497B-A403-830FC0ECC55A_1_105_c.jpeg"
+                        alt="Womoneya awards gallery image 5" />
 
                 </div>
                 <div
                     class="relative group overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition h-80 md:col-span-3">
                     <img class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500"
-                        src="/womoneya/gal5.JPG"
-                        alt="Indian women professionals celebrating at corporate event, group photo, happy faces, colorful decorations, women" />
+                        src="/womoneya/award/5C2E6F8A-CB6C-43A6-9FAA-08B4FF35DBAC_1_105_c.jpeg"
+                        alt="Womoneya awards gallery image 6" />
 
                 </div>
 
                 <div
                     class="relative group overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition h-80 md:col-span-3">
                     <img class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500"
-                        src="https://storage.googleapis.com/uxpilot-auth.appspot.com/1634a6d9a3-21abbfdbebbd0b7883af.png"
-                        alt="panel discussion with Indian women leaders, corporate event, professional setting, engaged speakers and audience" />
+                        src="/womoneya/award/6A08D32C-D7D7-46AB-964F-B4A1CD60CB29_1_105_c.jpeg"
+                        alt="Womoneya awards gallery image 7" />
 
                 </div>
             </div>
@@ -1262,6 +1325,14 @@
             const offlineCitySelect = document.getElementById('offlineCitySelect');
             const otherCityBlock = document.getElementById('otherCityBlock');
             const otherCityInput = document.getElementById('otherCityInput');
+            const aboutStageSlider = document.getElementById('aboutStageSlider');
+            const aboutStagePrev = document.getElementById('aboutStagePrev');
+            const aboutStageNext = document.getElementById('aboutStageNext');
+            const aboutStageSlides = aboutStageSlider
+                ? Array.from(aboutStageSlider.querySelectorAll('.about-stage-slide'))
+                : [];
+            let aboutStageIndex = 0;
+            let aboutStageInterval = null;
 
             function openSpeakerModal() {
                 if (!speakerModal || !speakerModalBackdrop) return;
@@ -1316,6 +1387,41 @@
                 const isOther = offlineCitySelect.value === 'Other';
                 otherCityBlock.classList.toggle('hidden', !isOther);
                 if (!isOther && otherCityInput) otherCityInput.value = '';
+            }
+
+            function showAboutStageSlide(index) {
+                if (!aboutStageSlides.length) return;
+                aboutStageSlides.forEach((slide, i) => {
+                    slide.classList.toggle('active', i === index);
+                });
+                aboutStageIndex = index;
+            }
+
+            function goToAboutStageSlide(direction) {
+                if (!aboutStageSlides.length) return;
+                const nextIndex = (aboutStageIndex + direction + aboutStageSlides.length) % aboutStageSlides.length;
+                showAboutStageSlide(nextIndex);
+            }
+
+            function startAboutStageSlider() {
+                if (!aboutStageSlides.length) return;
+                if (aboutStageInterval) clearInterval(aboutStageInterval);
+                aboutStageInterval = setInterval(function () {
+                    goToAboutStageSlide(1);
+                }, 3500);
+            }
+
+            if (aboutStagePrev && aboutStageNext && aboutStageSlides.length) {
+                aboutStagePrev.addEventListener('click', function () {
+                    goToAboutStageSlide(-1);
+                    startAboutStageSlider();
+                });
+                aboutStageNext.addEventListener('click', function () {
+                    goToAboutStageSlide(1);
+                    startAboutStageSlider();
+                });
+                showAboutStageSlide(0);
+                startAboutStageSlider();
             }
 
             window.addEventListener('scroll', function () {
