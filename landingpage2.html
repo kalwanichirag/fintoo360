@@ -7,6 +7,7 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -77,6 +78,10 @@
       }
     </script>
 <style>
+        @media (min-width:1080px) {
+           html{  font-size: 0.9vw;}
+            
+        }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
@@ -513,8 +518,8 @@ Smart Financial System
 <!-- Dual Showcase Section -->
 <section class="py-32 bg-white overflow-hidden">
 <div class="w-full space-y-16">
-<div class="decision-reveal px-6 lg:px-8">
-<div class="w-full bg-[linear-gradient(135deg,#f7fbff_0%,#eef5ff_48%,#fff2df_100%)] text-on-surface min-h-[320px] lg:min-h-[350px] rounded-[2rem] px-8 py-10 lg:px-16 lg:py-12 shadow-[0_40px_110px_-55px_rgba(21,76,170,0.18)]">
+<div class="decision-reveal ">
+<div class="w-full bg-[linear-gradient(135deg,#f7fbff_0%,#eef5ff_48%,#fff2df_100%)] text-on-surface min-h-[320px] lg:min-h-[350px]  px-8 py-10 lg:px-16 lg:py-12 shadow-[0_40px_110px_-55px_rgba(21,76,170,0.18)]">
 <div class="mx-auto grid max-w-6xl items-center gap-8 lg:grid-cols-[0.82fr_1.18fr]">
 <div class="flex justify-center lg:justify-center lg:-my-20">
 <div class="rounded-[2rem] bg-[linear-gradient(180deg,#154caa_0%,#0f3f9d_100%)] p-[8px] shadow-[0_35px_90px_-45px_rgba(21,76,170,0.45)]">
@@ -535,17 +540,15 @@ Learn more
 </div>
 </div>
 
-<div class="text-center max-w-2xl mx-auto px-8 decision-reveal py-32">
+<div class="text-center max-w-2xl mx-auto px-8 decision-reveal py-48">
 <h3 class="text-3xl lg:text-4xl font-semibold text-on-surface">Unlock Home now.<br/>Download the app to get started.</h3>
 <p class="mt-4 text-sm leading-7 text-slate-500">We want to make buying, owning and selling easier, better and more transparent for all.</p>
 <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-<a class="inline-flex items-center gap-3 rounded-xl bg-black px-5 py-3 text-white shadow-lg" href="#">
-<span class="material-symbols-outlined">apple</span>
-<span class="text-sm font-medium">App Store</span>
+<a class="inline-flex overflow-hidden rounded-xl shadow-lg transition-transform hover:scale-[1.02]" href="#">
+<img alt="Download on the App Store" class="h-14 w-auto" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/1280px-Download_on_the_App_Store_Badge.svg.png"/>
 </a>
-<a class="inline-flex items-center gap-3 rounded-xl bg-black px-5 py-3 text-white shadow-lg" href="#">
-<span class="material-symbols-outlined">shop</span>
-<span class="text-sm font-medium">Google Play</span>
+<a class="inline-flex overflow-hidden rounded-xl shadow-lg transition-transform hover:scale-[1.02]" href="#">
+<img alt="Get it on Google Play" class="h-14 w-auto rounded-xl bg-white object-contain p-1" src="https://freelogopng.com/images/all_img/1664287128google-play-store-logo-png.png"/>
 </a>
 </div>
 </div>
@@ -593,219 +596,185 @@ Learn more
 </div>
 </div>
 <!-- Legacy Module -->
-<section class="py-32 bg-white">
-<div class="max-w-7xl mx-auto px-8">
-<div class="text-center max-w-3xl mx-auto mb-20">
-<h2 class="text-4xl font-medium text-primary mb-6">The Legacy Module</h2>
-<p class="text-slate-600">The most overlooked part of wealth management. Ensure your assets are accessible to those who matter, when they matter.</p>
-</div>
-<div class="grid md:grid-cols-3 gap-8">
-<div class="p-8 bg-surface-container-low rounded-3xl text-center">
-<span class="material-symbols-outlined text-4xl text-primary mb-6">group_add</span>
-<h4 class="text-xl font-bold mb-4 text-primary">Nominee Tracking</h4>
-<p class="text-slate-500 text-sm">Automated audit of all accounts, demats, and insurance for valid nominee status.</p>
-</div>
-<div class="p-8 bg-surface-container-high rounded-3xl text-center border-2 border-primary">
-<span class="material-symbols-outlined text-4xl text-primary mb-6">digital_out_of_home</span>
-<h4 class="text-xl font-bold mb-4 text-primary">Digital Vault</h4>
-<p class="text-slate-500 text-sm">Secure storage for wills, deeds, and keys with tiered inheritance access flows.</p>
-</div>
-<div class="p-8 bg-surface-container-low rounded-3xl text-center">
-<span class="material-symbols-outlined text-4xl text-primary mb-6">family_history</span>
-<h4 class="text-xl font-bold mb-4 text-primary">Succession Planning</h4>
-<p class="text-slate-500 text-sm">Multi-generational wealth transfer models with minimal legal friction.</p>
-</div>
-</div>
-</div>
-</section>
-<!-- AI Advisor Chat Interface -->
-<section class="py-32 bg-surface-container-low">
-<div class="max-w-4xl mx-auto px-8">
-<div class="bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-outline-variant/10">
-<div class="bg-primary p-6 flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
-<span class="material-symbols-outlined text-tertiary-fixed-dim">smart_toy</span>
-</div>
-<div>
-<p class="text-white font-bold text-sm">F360 Wealth Advisor</p>
-<p class="text-white/40 text-[10px] uppercase tracking-widest">Always Active</p>
-</div>
-</div>
-<span class="material-symbols-outlined text-white/40">more_horiz</span>
-</div>
-<div class="p-8 space-y-6 h-[400px] overflow-y-auto bg-[#fdfdfe]">
-<div class="flex justify-end">
-<div class="bg-primary text-white p-4 rounded-2xl rounded-tr-none max-w-[80%] text-sm">
-                            Can you optimize my portfolio for the upcoming tax season? I have significant capital gains this year.
-                        </div>
-</div>
-<div class="flex justify-start">
-<div class="bg-surface-container-highest p-4 rounded-2xl rounded-tl-none max-w-[80%] text-sm space-y-3">
-<p>Analyzing your current P&amp;L...</p>
-<p>You have ₹14.5L in unrealized short-term gains. I recommend:</p>
-<ul class="list-disc pl-4 space-y-1">
-<li>Harvesting ₹2.2L in losses from underperforming mid-caps.</li>
-<li>Shifting ₹10L to Tax-Exempt debt instruments before March 15.</li>
-</ul>
-<p class="font-bold text-primary">Potential Savings: ₹3.8L</p>
-</div>
-</div>
-</div>
-<div class="p-4 border-t border-outline-variant/20 flex gap-4 items-center bg-white">
-<div class="flex-1 bg-surface-container-low rounded-full px-6 py-3 text-slate-400 text-sm">
-                        Ask about your next financial move...
-                    </div>
-<button class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
-<span class="material-symbols-outlined text-sm">send</span>
-</button>
-</div>
-</div>
-</div>
-</section>
+
+
 <!-- Features Grid (Bento) -->
-<section class="py-32 bg-white">
-<div class="max-w-7xl mx-auto px-8">
-<h2 class="text-4xl font-medium text-primary text-center mb-16">The Intelligence Layer</h2>
-<div class="grid md:grid-cols-4 gap-6">
-<div class="md:col-span-2 bg-surface-container-low p-10 rounded-3xl">
-<h4 class="text-2xl font-bold text-primary mb-4">Tax Alpha</h4>
-<p class="text-slate-500 mb-8">Proprietary algorithms that scan for tax harvesting opportunities daily, not just in March.</p>
-<img class="w-full h-48 object-cover rounded-2xl" data-alt="abstract architectural close-up with geometric patterns and soft blue shadows representing structured financial data" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGBmZjw2fSgEzrQLKyxXKlhX9ZeoIq9BBcUiQ8E-sU7KFJFtP0-NGzbo8zjSsmHsJnORtzjIgen91OYQVAno42Rtxk84O8-Y6F_uswIo1KtpU5qAAH-Fzwecmc-jtchaZnAvqjNdaOr_wK-IuRJEvnZE-_boE6cY0zTWxzqqSskGa4PKM4xmeG-1hXaJJiQ7ETMhTOkvWW5JHUv7NPTZ6SsknWkXpeAi79IuDVU5svsvnf5kSlMdxzT7QnnjuLwR5MFSHkPxdBBGpF"/>
-</div>
-<div class="bg-primary text-white p-10 rounded-3xl flex flex-col justify-between">
-<span class="material-symbols-outlined text-4xl text-tertiary-fixed-dim">public</span>
-<h4 class="text-xl font-bold">Global Investing</h4>
-<p class="text-white/60 text-sm">Diversify beyond the Nifty 50 with seamless US and EU market access.</p>
-</div>
-<div class="bg-surface-container-highest p-10 rounded-3xl">
-<span class="material-symbols-outlined text-4xl text-primary mb-4">location_city</span>
-<h4 class="text-xl font-bold text-primary">Real-Estate Tracking</h4>
-<p class="text-slate-500 text-sm">Register properties for AI-driven rental yield and market valuation updates.</p>
-</div>
-</div>
-</div>
-</section>
+
 <!-- How It Works -->
-<section class="py-32 bg-surface-container-low">
-<div class="max-w-7xl mx-auto px-8">
-<div class="grid md:grid-cols-3 gap-16 relative">
-<div class="hidden md:block absolute top-12 left-0 w-full h-px bg-primary/10 -z-0"></div>
-<div class="relative z-10 space-y-6">
-<div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-bold">01</div>
-<h4 class="text-xl font-bold text-primary">Unify</h4>
-<p class="text-slate-500">Securely link your accounts via AA (Account Aggregator) for a real-time net-worth snapshot.</p>
-</div>
-<div class="relative z-10 space-y-6">
-<div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-bold">02</div>
-<h4 class="text-xl font-bold text-primary">Model</h4>
-<p class="text-slate-500">Run simulations against your life goals—from early retirement to luxury lifestyle shifts.</p>
-</div>
-<div class="relative z-10 space-y-6">
-<div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-bold">03</div>
-<h4 class="text-xl font-bold text-primary">Execute</h4>
-<p class="text-slate-500">Apply tax-optimized rebalancing with a single tap, guided by your AI private CFO.</p>
-</div>
-</div>
-</div>
-</section>
+
 <!-- Free Access Section -->
-<section class="py-32 bg-white">
-<div class="max-w-5xl mx-auto px-8">
-<div class="bg-tertiary-fixed/30 p-12 rounded-[3rem] text-center">
-<h2 class="text-4xl font-medium text-primary mb-12">Claim Your Private CFO Access</h2>
-<div class="grid md:grid-cols-2 gap-8 text-left mb-12">
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-[#dd7300]">star</span>
-<p class="text-slate-700">Complementary Portfolio Health Audit (worth ₹25k)</p>
-</div>
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-[#dd7300]">star</span>
-<p class="text-slate-700">Dedicated Wealth Concierge Support</p>
-</div>
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-[#dd7300]">star</span>
-<p class="text-slate-700">Priority Access to Alternative Assets</p>
-</div>
-<div class="flex items-start gap-4">
-<span class="material-symbols-outlined text-[#dd7300]">star</span>
-<p class="text-slate-700">Invitation to Exclusive CXO Roundtables</p>
-</div>
-</div>
-<button class="cta-gradient px-12 py-5 rounded-2xl text-xl font-bold text-white shadow-xl hover:scale-105 transition-transform">
-                    Apply for Member Access
-                </button>
-</div>
-</div>
-</section>
+
 <!-- Testimonials -->
+<!-- Testimonials Section -->
 <section class="py-32 bg-surface">
-<div class="max-w-7xl mx-auto px-8">
-<div class="grid md:grid-cols-3 gap-8">
-<div class="p-10 bg-white rounded-3xl shadow-sm">
-<div class="flex items-center gap-4 mb-6">
-<div class="w-12 h-12 rounded-full bg-slate-200">
-<img class="w-full h-full rounded-full object-cover" data-alt="professional portrait of a senior surgeon in a clean studio setting with confident expression" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAszYJjcCMUSpy8IEJREo8bss7y2blGk5gvKAF5c6givlCv0gXzF2BDLPx3VcPlfi_F6hksAA0seV1CuqqovWn663v8avcLpL8ioBL0C9kQVjj4drpM-5sS4tntnkBo8gWeiu-U4HzbfR_N0BpX8ZvBC__p6-KrnoEX1nl17Ctp7A3pOvBRVk8dHFm7tQk4hvFtLkIwuMlrTsY1XWM5njxrWyPveYgXqMg5jm8TU8Su-XsYFBbWxjSKvugkQ-AVgNqo0pILx8sCA8fN"/>
-</div>
-<div>
-<p class="font-bold">Dr. Aman Mehra</p>
-<p class="text-xs text-slate-400">Chief Surgeon</p>
-</div>
-</div>
-<p class="text-slate-600 italic">"The legacy module alone gave my family the peace of mind that years of traditional banking couldn't."</p>
-</div>
-<div class="p-10 bg-primary text-white rounded-3xl shadow-xl">
-<div class="flex items-center gap-4 mb-6">
-<div class="w-12 h-12 rounded-full bg-white/20">
-<img class="w-full h-full rounded-full object-cover" data-alt="professional portrait of a confident female CXO in modern business attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOQnBGBz1HMcqCKwzI0ydZgSdxAs7h74gtvvYR-etmJY38rV8TFWkaxns9sXTjP-_dlLI65N3xHQCtBFWU6uz5cWiHtskQ-0D0X-EQ5FmcT34OoCHM5YcVUWGk4JUtbvAVAxIxdWxrZRvNT1ITMQEO7DlvmSe1Wvd0MBh8vPIeTWoJ2sId3O21vjxAZfjLQ6bFD2OxjdyVWwUx_uRjdprpCdjVEw0afUjJm2cIYqeR4TW89_kC5M1uFo97YJIL4JwBqEVPpGNfw0bM"/>
-</div>
-<div>
-<p class="font-bold">Sara Varma</p>
-<p class="text-xs text-white/40">VP of Engineering</p>
-</div>
-</div>
-<p class="text-white/80 italic">"Modeling my early sabbatical with Fintoo360 made it a reality. The AI's tax-saving suggestions paid for the membership 5x over."</p>
-</div>
-<div class="p-10 bg-white rounded-3xl shadow-sm">
-<div class="flex items-center gap-4 mb-6">
-<div class="w-12 h-12 rounded-full bg-slate-200">
-<img class="w-full h-full rounded-full object-cover" data-alt="portrait of a successful male entrepreneur with a clean background and warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBm_oIFqmpd-KSdVEzCYLzw9mpPRZY0SaPghXvNKdWBbe5R-wU9GMhnDzcuWXpEUKTxUh7HJZWO5D2eeYAMdGbGdpGI-t0VIuWoVU6wNLDbDxNN3nmellLfFnyKXquEV4TEfK70mCgMLSXd6Dy7n1Kg-r1G9PNYgYLbrqKUtghIhHWNq9TzqF52E2UreLfFQpCG9z0Nk7oAxZAxaECj-l76Yyxek1cDylERLQordL46IDkE4b33oXWZzxr-RgXloDm-d6GErZaHY9E_"/>
-</div>
-<div>
-<p class="font-bold">Karan Shah</p>
-<p class="text-xs text-slate-400">Tech Founder</p>
-</div>
-</div>
-<p class="text-slate-600 italic">"Finally, a wealth platform that respects my time. No calls, just pure intelligence."</p>
-</div>
-</div>
-</div>
+  <div class="max-w-6xl mx-auto px-8">
+    
+    <!-- Heading -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-medium text-primary mb-4">What Early Users Are Saying</h2>
+      <p class="text-slate-500">Real decisions. Real outcomes. Powered by Fintoo360.</p>
+    </div>
+
+    <!-- Testimonials Grid -->
+    <div class="grid md:grid-cols-3 gap-8">
+
+      <!-- Testimonial 1 -->
+      <div class="p-10 bg-white rounded-3xl shadow-sm">
+        <p class="text-slate-600 italic mb-6">
+          "The Decision Centre showed me I'd run out of retirement money at 71. I'd never have figured that out on my own. Changed my SIPs that same week."
+        </p>
+        <p class="font-bold text-primary">Rohit S.</p>
+        <p class="text-xs text-slate-400">Software Engineer, Bengaluru · Age 38</p>
+      </div>
+
+      <!-- Testimonial 2 (Highlighted) -->
+      <div class="p-10 bg-primary text-white rounded-3xl shadow-xl">
+        <p class="text-white/90 italic mb-6">
+          "The Legacy Module helped me get all nominees sorted across 11 policies and 6 asset types. It took 20 minutes — not the months I'd been putting it off."
+        </p>
+        <p class="font-bold">Priya K.</p>
+        <p class="text-xs text-white/60">Business Owner, Mumbai · Age 44</p>
+      </div>
+
+      <!-- Testimonial 3 -->
+      <div class="p-10 bg-white rounded-3xl shadow-sm">
+        <p class="text-slate-600 italic mb-6">
+          "I asked the AI if I could afford a ₹15L car upgrade. It modelled the full impact on my retirement and my kids' education in seconds. I decided to wait — and I'm glad I did."
+        </p>
+        <p class="font-bold text-primary">Aditya M.</p>
+        <p class="text-xs text-slate-400">Finance Manager, Pune · Age 35</p>
+      </div>
+
+    </div>
+  </div>
 </section>
-<!-- FAQ Accordion -->
+
+<!-- FAQ Section -->
 <section class="py-32 bg-white">
-<div class="max-w-3xl mx-auto px-8">
-<h2 class="text-3xl font-medium text-primary text-center mb-16">Frequently Asked</h2>
-<div class="space-y-4">
-<div class="border-b border-outline-variant pb-4">
-<button class="flex justify-between items-center w-full text-left font-bold text-primary py-4">
-                        Is my financial data secure?
-                        <span class="material-symbols-outlined">expand_more</span>
-</button>
-</div>
-<div class="border-b border-outline-variant pb-4">
-<button class="flex justify-between items-center w-full text-left font-bold text-primary py-4">
-                        How is this different from a regular Robo-advisor?
-                        <span class="material-symbols-outlined">expand_more</span>
-</button>
-</div>
-<div class="border-b border-outline-variant pb-4">
-<button class="flex justify-between items-center w-full text-left font-bold text-primary py-4">
-                        What are the professional requirements for access?
-                        <span class="material-symbols-outlined">expand_more</span>
-</button>
-</div>
-</div>
-</div>
+  <div class="max-w-3xl mx-auto px-8" x-data="{ active: null }">
+
+    <h2 class="text-3xl font-medium text-primary text-center mb-16">
+      Frequently Asked Questions
+    </h2>
+
+    <div class="space-y-4">
+
+      <!-- FAQ Item -->
+      <div class="border-b border-outline-variant pb-2">
+        <button 
+          @click="active === 1 ? active = null : active = 1"
+          class="flex justify-between items-start w-full text-left font-bold text-primary py-4"
+        >
+          How is this different from Groww, ET Money, or CRED?
+          <span 
+            class="material-symbols-outlined transition-transform duration-300"
+            :class="active === 1 ? 'rotate-180' : ''"
+          >expand_more</span>
+        </button>
+        <div x-show="active === 1" x-transition>
+          <p class="text-slate-600 pb-4">
+            Those apps help you execute — buy SIPs, track spending, check credit scores. Fintoo360 is built to advise you — backed by a real advisory practice, with features like the Decision Centre and Legacy planning that don't exist anywhere else at this depth.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ Item -->
+      <div class="border-b border-outline-variant pb-2">
+        <button 
+          @click="active === 2 ? active = null : active = 2"
+          class="flex justify-between items-start w-full text-left font-bold text-primary py-4"
+        >
+          What makes the Decision Centre different from a financial calculator?
+          <span 
+            class="material-symbols-outlined transition-transform duration-300"
+            :class="active === 2 ? 'rotate-180' : ''"
+          >expand_more</span>
+        </button>
+        <div x-show="active === 2" x-transition>
+          <p class="text-slate-600 pb-4">
+            It's not a standalone calculator. It runs scenarios against your actual full financial profile — income, loans, goals, portfolio, insurance — and shows the downstream impact across your entire financial life, not just one number.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ Item -->
+      <div class="border-b border-outline-variant pb-2">
+        <button 
+          @click="active === 3 ? active = null : active = 3"
+          class="flex justify-between items-start w-full text-left font-bold text-primary py-4"
+        >
+          Do I need to share all my accounts and data?
+          <span 
+            class="material-symbols-outlined transition-transform duration-300"
+            :class="active === 3 ? 'rotate-180' : ''"
+          >expand_more</span>
+        </button>
+        <div x-show="active === 3" x-transition>
+          <p class="text-slate-600 pb-4">
+            No. You can start with just your income and goals. Every additional data point you share makes the AI's insights more accurate. You're always in control.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ Item -->
+      <div class="border-b border-outline-variant pb-2">
+        <button 
+          @click="active === 4 ? active = null : active = 4"
+          class="flex justify-between items-start w-full text-left font-bold text-primary py-4"
+        >
+          Is this replacing my human advisor?
+          <span 
+            class="material-symbols-outlined transition-transform duration-300"
+            :class="active === 4 ? 'rotate-180' : ''"
+          >expand_more</span>
+        </button>
+        <div x-show="active === 4" x-transition>
+          <p class="text-slate-600 pb-4">
+            No. Fintoo360 handles the 24×7 monitoring, analysis, and scenarios that no human advisor can do at this frequency. For complex, high-stakes decisions you can still engage a human advisor — and we can facilitate that connection.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ Item -->
+      <div class="border-b border-outline-variant pb-2">
+        <button 
+          @click="active === 5 ? active = null : active = 5"
+          class="flex justify-between items-start w-full text-left font-bold text-primary py-4"
+        >
+          Is my financial data safe?
+          <span 
+            class="material-symbols-outlined transition-transform duration-300"
+            :class="active === 5 ? 'rotate-180' : ''"
+          >expand_more</span>
+        </button>
+        <div x-show="active === 5" x-transition>
+          <p class="text-slate-600 pb-4">
+            Yes. Bank-grade encryption, no data sold to third parties, and full compliance with RBI and SEBI guidelines on data privacy.
+          </p>
+        </div>
+      </div>
+
+      <!-- FAQ Item -->
+      <div class="border-b border-outline-variant pb-2">
+        <button 
+          @click="active === 6 ? active = null : active = 6"
+          class="flex justify-between items-start w-full text-left font-bold text-primary py-4"
+        >
+          When do I get access?
+          <span 
+            class="material-symbols-outlined transition-transform duration-300"
+            :class="active === 6 ? 'rotate-180' : ''"
+          >expand_more</span>
+        </button>
+        <div x-show="active === 6" x-transition>
+          <p class="text-slate-600 pb-4">
+            We're rolling out in batches, starting with Mumbai and Bangalore. Waitlist members get first access — the first 1,000 get 6 months free.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
 <!-- Final CTA -->
 <section class="py-32 bg-[#00173d] text-white">
@@ -816,32 +785,46 @@ Learn more
 <p class="text-xl text-white/60 max-w-2xl mx-auto">
                 Join the inner circle of India’s top professionals managing wealth with institutional precision.
             </p>
-<div class="flex flex-col sm:flex-row justify-center gap-6 pt-6">
-<button class="cta-gradient px-12 py-5 rounded-2xl text-xl font-bold shadow-2xl hover:brightness-110 transition-all">
-                    Get Priority Access
-                </button>
-<button class="px-12 py-5 rounded-2xl border border-white/20 text-xl font-semibold hover:bg-white/10">
-                    Speak to an Advisor
-                </button>
+<form class="mx-auto max-w-4xl rounded-[2rem] border border-white/10 bg-white/5 p-6 text-left backdrop-blur-sm shadow-[0_30px_80px_-40px_rgba(0,0,0,0.65)]">
+<div class="grid gap-4 md:grid-cols-3">
+<label class="block">
+<span class="mb-2 block text-sm font-medium text-white/80">Name</span>
+<input class="w-full rounded-2xl border border-white/10 bg-white/10 px-5 py-4 text-base text-white placeholder:text-white/35 focus:border-[#ffb05d] focus:ring-2 focus:ring-[#ffb05d]/30" name="name" placeholder="Your full name" type="text"/>
+</label>
+<label class="block">
+<span class="mb-2 block text-sm font-medium text-white/80">Email</span>
+<input class="w-full rounded-2xl border border-white/10 bg-white/10 px-5 py-4 text-base text-white placeholder:text-white/35 focus:border-[#ffb05d] focus:ring-2 focus:ring-[#ffb05d]/30" name="email" placeholder="you@example.com" type="email"/>
+</label>
+<label class="block">
+<span class="mb-2 block text-sm font-medium text-white/80">Mobile</span>
+<input class="w-full rounded-2xl border border-white/10 bg-white/10 px-5 py-4 text-base text-white placeholder:text-white/35 focus:border-[#ffb05d] focus:ring-2 focus:ring-[#ffb05d]/30" name="mobile" placeholder="+91 98765 43210" type="tel"/>
+</label>
 </div>
+<div class="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+<p class="text-sm text-white/50">Share your details and we’ll reach out with priority access.</p>
+<button class="cta-gradient px-8 py-4 rounded-2xl text-lg font-bold shadow-2xl hover:brightness-110 transition-all" type="submit">
+                        Request Access
+                    </button>
+</div>
+</form>
+
 </div>
 </section>
-<!-- Footer -->
-<footer class="bg-[#f4f3f8] w-full py-16 px-8 mt-auto">
-<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-<div class="text-lg font-bold text-[#042b62]">Fintoo360</div>
-<div class="flex flex-wrap justify-center gap-8">
-<a class="font-['Inter'] text-sm font-normal text-slate-600 hover:text-[#dd7300] transition-all underline-offset-4 hover:underline" href="#">Privacy Policy</a>
-<a class="font-['Inter'] text-sm font-normal text-slate-600 hover:text-[#dd7300] transition-all underline-offset-4 hover:underline" href="#">Terms of Service</a>
-<a class="font-['Inter'] text-sm font-normal text-slate-600 hover:text-[#dd7300] transition-all underline-offset-4 hover:underline" href="#">Security</a>
-<a class="font-['Inter'] text-sm font-normal text-slate-600 hover:text-[#dd7300] transition-all underline-offset-4 hover:underline" href="#">Market Disclosure</a>
-<a class="font-['Inter'] text-sm font-normal text-slate-600 hover:text-[#dd7300] transition-all underline-offset-4 hover:underline" href="#">Contact</a>
-</div>
-<p class="font-['Inter'] text-sm font-normal text-slate-600 text-center md:text-right">
-                © 2024 Fintoo360. A Digital Private Bank Institution. All rights reserved. Member SIPC.
+<!-- Disclaimer -->
+<section class="bg-[#f7f9fc] py-12 px-8">
+<div class="max-w-7xl mx-auto space-y-5 text-sm leading-7 text-slate-500">
+<p class="uppercase tracking-[0.18em] text-[11px] text-slate-400">Disclaimer</p>
+<p>
+                Fintoo Wealth Private Limited (Brand Name - Fintoo.in, Fintoo app, Fintoo) makes no warranties or representations, express or implied, on products and services offered through the platform. It accepts no liability for any damages or losses, however, caused in connection with the use of, or on the reliance of its advisory or related services. Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs. Performance and returns of any investment portfolio can neither be predicted nor guaranteed. Investments made on advisory are subject to market risks, read all scheme related documents carefully.
+            </p>
+<p>
+                © Fintoo Wealth Private Limited [SEBI RIA Registration No: INA000020031] [BASL Membership ID: 2252] [Type of Registration: Non-Individual] [Validity of registration: March 26,2025-Perpetual] [Address: Fintoo Wealth Private Limited, B/309, Dynasty Business park, Opp Sangam Cinema, Andheri (East), J B Nagar, Mumbai, Maharashtra 400059] [CIN - U66301MH2023PTC414206] [GST No : 27AAFCF7114E1ZV] [Principal Officer details : Mr. Mihir Shah (mihir.shah@fintoo.in)] [Compliance Officer details : Mrs. Nisha Harchekar (nisha.harchekar@fintoo.in)] [Corresponding SEBI regional/local office: Plot No. C 4-A , G Block, Near Bank of India, Bandra Kurla Complex,Bandra East, Mumbai, Maharashtra 400051]
+            </p>
+<p class="text-slate-400">
+                Copyright © 2025 Fintoo. All rights reserved
             </p>
 </div>
-</footer>
+</section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
@@ -935,4 +918,5 @@ Learn more
             });
         }
     </script>
+    
 </body></html>
