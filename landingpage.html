@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <script>
+        window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest'
+        };
+      </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fintoo360 - AI-Powered Personal CFO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'fintoo-blue': '#042b62',
+                        'fintoo-orange': '#dd7300',
+                        brand: {
+                            blue: '#042b62',
+                            orange: '#dd7300',
+                            dark: '#ffffff',
+                            light: '#f8fafc',
+                            neon: '#dd7300'
+                        }
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h40v40H0V0zm1 1h38v38H1V1z' fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E\")",
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { margin: 0; padding: 0; background-color: #ffffff; color: #0f172a; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #ffffff; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+        .glass-card { background: #ffffff; backdrop-filter: blur(12px); border: 1px solid #e2e8f0; }
+        #hero .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); }
+        #hero { background-color: #0a0a0a; color: #ffffff; }
+        #hero .text-gray-400 { color: #9ca3af; }
+        #hero .text-brand-neon { color: #dd7300; }
+        .text-brand-neon { color: #dd7300 !important; }
+        .bg-brand-neon { background-color: #dd7300 !important; }
+        .border-brand-neon\/20 { border-color: rgba(221, 115, 0, 0.2) !important; }
+        .border-brand-neon\/30 { border-color: rgba(221, 115, 0, 0.3) !important; }
+        .from-brand-neon\/10 { --tw-gradient-from: rgba(221, 115, 0, 0.1) var(--tw-gradient-from-position) !important; }
+        .from-brand-neon\/5 { --tw-gradient-from: rgba(221, 115, 0, 0.05) var(--tw-gradient-from-position) !important; }
+        .from-brand-neon\/20 { --tw-gradient-from: rgba(221, 115, 0, 0.2) var(--tw-gradient-from-position) !important; }
+        .glow-text { text-shadow: 0 0 20px rgba(221, 115, 0, 0.3); }
+        .ticker-wrap { width: 100%; overflow: hidden; box-sizing: content-box; }
+        .ticker { display: inline-block; white-space: nowrap; padding-right: 100%; box-sizing: content-box; animation-iteration-count: infinite; animation-timing-function: linear; animation-name: ticker; animation-duration: 30s; }
+        @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
+    </style>
+</head>
+<body class="font-inter antialiased text-slate-900 bg-white overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 glass-card border-b-0 py-4">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-layer-group text-brand-neon text-2xl"></i>
+                <span class="text-xl font-bold tracking-tight">Fintoo<span class="text-brand-neon">360</span></span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#problem" class="hover:text-white transition-colors">Solutions</a>
+                <a href="#advisory" class="hover:text-white transition-colors">Advisory</a>
+                <a href="#features" class="hover:text-white transition-colors">AI Features</a>
+                <a href="#legacy" class="hover:text-white transition-colors">Legacy</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="#" class="hidden md:block text-sm font-medium hover:text-white transition-colors">Login</a>
+                <a href="#cta" class="bg-brand-neon text-black px-6 py-2.5 rounded-full text-sm font-bold hover:bg-white transition-colors shadow-[0_0_15px_rgba(22,247,82,0.4)]">
+                    Get Free Access
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative min-h-screen flex items-center pt-20 overflow-hidden bg-grid-pattern">
+        <!-- Background Gradients -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-brand-blue rounded-full blur-[120px] opacity-20 pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-brand-orange rounded-full blur-[150px] opacity-10 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10 w-full">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass-card text-xs font-medium text-brand-neon border border-brand-neon/20">
+                    <span class="w-2 h-2 rounded-full bg-brand-neon animate-pulse"></span>
+                    Meet your AI Personal CFO
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight">
+                    MASTER YOUR <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">FINANCIAL</span> <br>
+                    DESTINY <i class="fa-solid fa-money-bill-trend-up text-brand-neon text-5xl ml-2"></i>
+                </h1>
+                <p class="text-lg text-gray-400 max-w-xl leading-relaxed">
+                    We're supercharging Indian professionals with an AI-driven financial intelligence platform. Get accounting, P&L, projections, and unit economics—all automated.
+                </p>
+                <div class="flex flex-wrap items-center gap-4 pt-4">
+                    <a href="#cta" class="bg-brand-neon text-black px-8 py-4 rounded-full font-bold hover:bg-white transition-all shadow-[0_0_20px_rgba(22,247,82,0.3)] flex items-center gap-2">
+                        START FREE TRIAL <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="#demo" class="px-8 py-4 rounded-full font-semibold border border-gray-600 hover:border-white transition-colors flex items-center gap-2">
+                        WATCH DEMO <i class="fa-regular fa-circle-play"></i>
+                    </a>
+                </div>
+                <div class="flex items-center gap-4 pt-8 border-t border-gray-800">
+                    <div class="flex -space-x-3">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" class="w-10 h-10 rounded-full border-2 border-brand-dark" alt="User">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg" class="w-10 h-10 rounded-full border-2 border-brand-dark" alt="User">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg" class="w-10 h-10 rounded-full border-2 border-brand-dark" alt="User">
+                    </div>
+                    <div class="text-sm">
+                        <div class="flex text-brand-neon text-xs gap-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="text-gray-400">Trusted by 10,000+ Indian Professionals</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero 3D UI Mockup Area -->
+            <div class="relative h-[600px] w-full hidden lg:block perspective-1000">
+                <div class="absolute inset-0 bg-gradient-to-tr from-brand-neon/10 to-transparent rounded-[2.5rem] transform rotate-3 scale-105 border border-brand-neon/20 backdrop-blur-sm"></div>
+                
+                <!-- Main Phone/App UI Card -->
+                <div class="absolute inset-0 bg-[#0f0f0f] rounded-[2.5rem] border border-gray-800 shadow-2xl overflow-hidden flex flex-col">
+                    <!-- App Header -->
+                    <div class="p-6 flex justify-between items-center border-b border-gray-800">
+                        <div class="flex items-center gap-3">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" class="w-10 h-10 rounded-full" alt="Profile">
+                            <div>
+                                <p class="text-xs text-gray-400">Welcome back,</p>
+                                <p class="font-semibold text-sm">Rahul Sharma</p>
+                            </div>
+                        </div>
+                        <i class="fa-regular fa-bell text-gray-400"></i>
+                    </div>
+                    
+                    <!-- App Content -->
+                    <div class="p-6 flex-1 space-y-6 overflow-hidden relative">
+                        <!-- Balance Card -->
+                        <div class="bg-gradient-to-br from-brand-neon to-[#0ea5e9] p-6 rounded-2xl text-black relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                            <p class="text-sm font-medium opacity-80">Total Net Worth</p>
+                            <h3 class="text-3xl font-bold mt-1">₹ 1,42,50,000</h3>
+                            <div class="mt-6 flex justify-between items-end">
+                                <div>
+                                    <p class="text-xs opacity-80">Monthly Growth</p>
+                                    <p class="font-semibold">+ ₹ 85,000 <i class="fa-solid fa-arrow-trend-up ml-1"></i></p>
+                                </div>
+                                <i class="fa-brands fa-cc-visa text-3xl opacity-50"></i>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="grid grid-cols-3 gap-3">
+                            <div class="glass-card rounded-xl p-3 text-center cursor-pointer hover:bg-white/5 transition-colors">
+                                <i class="fa-solid fa-arrow-right-arrow-left text-brand-neon mb-2"></i>
+                                <p class="text-xs font-medium">Invest</p>
+                            </div>
+                            <div class="glass-card rounded-xl p-3 text-center cursor-pointer hover:bg-white/5 transition-colors">
+                                <i class="fa-solid fa-file-invoice-dollar text-brand-neon mb-2"></i>
+                                <p class="text-xs font-medium">Tax Plan</p>
+                            </div>
+                            <div class="glass-card rounded-xl p-3 text-center cursor-pointer hover:bg-white/5 transition-colors">
+                                <i class="fa-solid fa-chart-pie text-brand-neon mb-2"></i>
+                                <p class="text-xs font-medium">Analytics</p>
+                            </div>
+                        </div>
+
+                        <!-- Recent AI Insights -->
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <h4 class="text-sm font-semibold">AI Insights</h4>
+                                <span class="text-xs text-brand-neon cursor-pointer">View all</span>
+                            </div>
+                            
+                            <div class="glass-card p-3 rounded-xl flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center text-red-500">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium">Tax Optimization</p>
+                                    <p class="text-xs text-gray-400">Save ₹45k via Sec 80C</p>
+                                </div>
+                                <button class="text-xs bg-white/10 px-3 py-1.5 rounded-full hover:bg-white/20">Review</button>
+                            </div>
+                            
+                            <div class="glass-card p-3 rounded-xl flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center text-green-500">
+                                    <i class="fa-solid fa-arrow-trend-up"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-sm font-medium">Portfolio Rebalance</p>
+                                    <p class="text-xs text-gray-400">Equity exposure high</p>
+                                </div>
+                                <button class="text-xs bg-white/10 px-3 py-1.5 rounded-full hover:bg-white/20">Action</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Floating Elements -->
+                <div class="absolute -right-12 top-20 glass-card p-4 rounded-xl border border-brand-neon/30 shadow-xl animate-bounce" style="animation-duration: 3s;">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-brand-neon/20 flex items-center justify-center text-brand-neon">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-400">Tax Filed</p>
+                            <p class="text-sm font-bold text-white">ITR-2 Successful</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ticker Section -->
+    <div class="border-y border-slate-200 bg-white py-3">
+        <div class="ticker-wrap">
+            <div class="ticker flex gap-8 items-center text-sm font-medium text-slate-500">
+                <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span> NIFTY 50: 22,453.30 (+0.8%)</span>
+                <span class="text-slate-300">|</span>
+                <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-red-500"></span> SENSEX: 73,806.15 (-0.2%)</span>
+                <span class="text-slate-300">|</span>
+                <span class="flex items-center gap-2 text-brand-neon"><i class="fa-solid fa-bolt"></i> AI Alert: Tax deadline in 15 days</span>
+                <span class="text-slate-300">|</span>
+                <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-yellow-500"></span> Gold (10g): ₹65,230</span>
+                <span class="text-slate-300">|</span>
+                <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span> NIFTY 50: 22,453.30 (+0.8%)</span>
+                <span class="text-slate-300">|</span>
+                <span class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-red-500"></span> SENSEX: 73,806.15 (-0.2%)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Problem Statement / Advisory Credibility -->
+    <section id="problem" class="py-24 bg-brand-dark relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">WE DO YOUR <i class="fa-solid fa-money-bill-wave text-green-400 mx-2"></i> MONEY, <i class="fa-solid fa-chart-line text-brand-neon mx-2"></i> GRAPHS.</h2>
+                <p class="text-xl text-gray-400">You get accounting, P&L, Cash Flow, Financial Projections, Unit Economics, and finally, peace of mind.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card p-8 rounded-2xl hover:bg-white/5 transition-all group">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-scale-balanced text-brand-neon"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Unbiased Advisory</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">No hidden commissions. Our AI analyzes 10,000+ mutual funds and stocks to recommend what actually builds your wealth, not broker fees.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="glass-card p-8 rounded-2xl hover:bg-white/5 transition-all group border-brand-neon/20 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-brand-neon/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-neon/20 to-transparent flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-brain text-brand-neon"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">AI-Powered Precision</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Machine learning algorithms that predict market trends and optimize your tax liabilities in real-time under the Indian tax regime.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="glass-card p-8 rounded-2xl hover:bg-white/5 transition-all group">
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-shield-halved text-brand-neon"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Bank-Grade Security</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Your data is encrypted with 256-bit AES. We have read-only access to your accounts via secure Account Aggregator frameworks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Dashboard / Decision Center -->
+    <section id="dashboard" class="py-24 bg-white border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div class="max-w-2xl">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Your Financial Command Center</h2>
+                    <p class="text-gray-400">Interactive analytics mapping your net worth, liabilities, and projected growth.</p>
+                </div>
+                <div class="mt-6 md:mt-0 flex gap-2">
+                    <button class="px-4 py-2 rounded-lg bg-white/10 text-sm font-medium hover:bg-white/20">1M</button>
+                    <button class="px-4 py-2 rounded-lg bg-brand-neon text-black text-sm font-bold">1Y</button>
+                    <button class="px-4 py-2 rounded-lg bg-white/10 text-sm font-medium hover:bg-white/20">ALL</button>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-6">
+                <!-- Main Chart Area -->
+                <div class="lg:col-span-2 glass-card rounded-2xl p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <div>
+                            <p class="text-sm text-gray-400">Total Portfolio Value</p>
+                            <h3 class="text-2xl font-bold">₹ 3,24,50,000</h3>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm text-green-400">+12.4% vs last year</p>
+                            <p class="text-xs text-gray-500">Updated 2 mins ago</p>
+                        </div>
+                    </div>
+                    <div id="mainChart" class="w-full h-[300px]"></div>
+                </div>
+
+                <!-- Right Sidebar Widgets -->
+                <div class="space-y-6">
+                    <!-- Asset Allocation -->
+                    <div class="glass-card rounded-2xl p-6">
+                        <h4 class="text-sm font-semibold mb-4">Asset Allocation</h4>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-gray-300">Equity (MFs & Stocks)</span>
+                                    <span class="font-medium">65%</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-2">
+                                    <div class="bg-brand-neon h-2 rounded-full" style="width: 65%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-gray-300">Debt & EPF</span>
+                                    <span class="font-medium">25%</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-2">
+                                    <div class="bg-blue-400 h-2 rounded-full" style="width: 25%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-gray-300">Alternatives (Gold/RE)</span>
+                                    <span class="font-medium">10%</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-2">
+                                    <div class="bg-orange-400 h-2 rounded-full" style="width: 10%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tax Risk Widget -->
+                    <div class="glass-card rounded-2xl p-6 border-l-4 border-yellow-500">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center text-yellow-500 shrink-0">
+                                <i class="fa-solid fa-file-invoice-dollar"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-semibold text-white">Advance Tax Alert</h4>
+                                <p class="text-xs text-gray-400 mt-1 mb-3">Next installment due in 12 days. Estimated liability: ₹1.2L</p>
+                                <button class="text-xs font-medium text-brand-neon hover:underline">Pay Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chat UI / Features Layout -->
+    <section id="features" class="py-24 bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Feature 1: Chat -->
+            <div class="grid lg:grid-cols-2 gap-16 items-center mb-32">
+                <div class="order-2 lg:order-1 relative">
+                    <div class="absolute inset-0 bg-brand-neon/5 blur-3xl rounded-full"></div>
+                    <div class="glass-card rounded-2xl p-6 border border-gray-800 shadow-2xl relative z-10">
+                        <!-- Chat Header -->
+                        <div class="flex items-center gap-3 border-b border-gray-800 pb-4 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-brand-neon/20 flex items-center justify-center">
+                                <i class="fa-solid fa-robot text-brand-neon"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-sm">Fintoo AI Advisor</h4>
+                                <p class="text-xs text-green-400">Online</p>
+                            </div>
+                        </div>
+                        <!-- Chat Body -->
+                        <div class="space-y-4 h-[300px] overflow-y-auto pr-2">
+                            <div class="flex gap-3">
+                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" class="w-8 h-8 rounded-full" alt="User">
+                                <div class="bg-gray-800 p-3 rounded-2xl rounded-tl-none text-sm text-gray-200">
+                                    I just got a 30% hike. How should I allocate the extra ₹50k per month?
+                                </div>
+                            </div>
+                            <div class="flex gap-3 flex-row-reverse">
+                                <div class="w-8 h-8 rounded-full bg-brand-neon/20 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-robot text-brand-neon text-xs"></i>
+                                </div>
+                                <div class="bg-brand-blue/30 border border-brand-blue/50 p-4 rounded-2xl rounded-tr-none text-sm text-gray-200">
+                                    <p class="mb-2">Congratulations on the hike! Based on your current profile (Age 32, High Risk Tolerance), here is the optimal split:</p>
+                                    <ul class="space-y-2 mt-3">
+                                        <li class="flex justify-between items-center bg-black/30 p-2 rounded"><span class="text-gray-400">Index Funds (Nifty 50)</span> <span class="font-semibold text-brand-neon">₹25,000</span></li>
+                                        <li class="flex justify-between items-center bg-black/30 p-2 rounded"><span class="text-gray-400">Small Cap MF</span> <span class="font-semibold text-brand-neon">₹15,000</span></li>
+                                        <li class="flex justify-between items-center bg-black/30 p-2 rounded"><span class="text-gray-400">Emergency Fund Top-up</span> <span class="font-semibold text-brand-neon">₹10,000</span></li>
+                                    </ul>
+                                    <button class="mt-4 w-full py-2 bg-brand-neon/10 text-brand-neon rounded-lg font-medium hover:bg-brand-neon/20 transition">Execute Allocation</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Talk to your money. <br><span class="text-gray-500">Literally.</span></h2>
+                    <p class="text-lg text-gray-400 mb-8">Our conversational AI understands complex Indian financial queries. From tax harvesting to RSU taxation, get personalized advice instantly.</p>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-neon"></i> Context-aware advice based on your linked accounts</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-neon"></i> Explains complex tax laws in plain English</li>
+                        <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-brand-neon"></i> 24/7 availability for urgent financial decisions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Feature 2: Legacy / Estate -->
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Secure your family's <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-neon to-blue-400">Legacy.</span></h2>
+                    <p class="text-lg text-gray-400 mb-8">Don't leave a mess behind. Visual estate planning maps out your nominees, wills, and asset distribution automatically.</p>
+                    <a href="#" class="inline-flex items-center gap-2 text-brand-neon font-semibold hover:gap-3 transition-all">Explore Legacy Module <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+                <div class="glass-card rounded-3xl p-8 border border-gray-800">
+                    <!-- Pseudo Family Tree UI -->
+                    <div class="flex flex-col items-center">
+                        <div class="w-16 h-16 rounded-full bg-brand-blue border-2 border-brand-neon flex items-center justify-center mb-4 relative">
+                            <i class="fa-solid fa-user-tie text-2xl"></i>
+                            <div class="absolute -bottom-2 bg-black px-2 py-0.5 rounded text-[10px] border border-gray-700">You</div>
+                        </div>
+                        <div class="w-0.5 h-8 bg-gray-700"></div>
+                        <div class="w-64 h-0.5 bg-gray-700"></div>
+                        <div class="flex justify-between w-72 mt-[-1px]">
+                            <div class="w-0.5 h-8 bg-gray-700"></div>
+                            <div class="w-0.5 h-8 bg-gray-700"></div>
+                        </div>
+                        <div class="flex justify-between w-80 mt-2">
+                            <div class="text-center">
+                                <div class="w-12 h-12 mx-auto rounded-full bg-gray-800 border border-gray-600 flex items-center justify-center mb-2">
+                                    <i class="fa-solid fa-user text-gray-400"></i>
+                                </div>
+                                <p class="text-xs font-medium">Spouse</p>
+                                <p class="text-[10px] text-green-400">60% Nominee</p>
+                            </div>
+                            <div class="text-center">
+                                <div class="w-12 h-12 mx-auto rounded-full bg-gray-800 border border-gray-600 flex items-center justify-center mb-2">
+                                    <i class="fa-solid fa-child text-gray-400"></i>
+                                </div>
+                                <p class="text-xs font-medium">Child</p>
+                                <p class="text-[10px] text-green-400">40% Nominee</p>
+                            </div>
+                        </div>
+                        <div class="w-full mt-8 bg-gray-900 rounded-xl p-4 border border-red-500/30">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-triangle-exclamation text-red-500"></i>
+                                <div class="text-sm">
+                                    <p class="font-medium text-white">Missing Nomination</p>
+                                    <p class="text-gray-400 text-xs">HDFC Bank Acc ends in 4921</p>
+                                </div>
+                                <button class="ml-auto text-xs bg-white/10 px-3 py-1 rounded hover:bg-white/20">Fix</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-24 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold mb-4">FINANCIAL SUCCESS STORIES</h2>
+                <p class="text-gray-400">Join thousands of Indians who have automated their wealth creation.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Testimonial 1 -->
+                <div class="glass-card p-8 rounded-2xl">
+                    <div class="flex text-brand-neon text-sm mb-4 gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">"Fintoo's tax loss harvesting feature saved me over ₹1.2 Lakhs last financial year. It spotted opportunities I had completely missed. Essential for any high-earner."</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg" class="w-12 h-12 rounded-full" alt="User">
+                        <div>
+                            <h4 class="font-bold text-sm">Priya M.</h4>
+                            <p class="text-xs text-gray-500">Software Engineer, Bangalore</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="glass-card p-8 rounded-2xl bg-gradient-to-b from-brand-neon/5 to-transparent border-brand-neon/20">
+                    <div class="flex text-brand-neon text-sm mb-4 gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">"The AI CFO feels like having a personal wealth manager in my pocket. The real-time net worth tracking across my bank, zerodha, and PF is flawless."</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg" class="w-12 h-12 rounded-full" alt="User">
+                        <div>
+                            <h4 class="font-bold text-sm">Arjun K.</h4>
+                            <p class="text-xs text-gray-500">Startup Founder, Delhi</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 3 -->
+                <div class="glass-card p-8 rounded-2xl">
+                    <div class="flex text-brand-neon text-sm mb-4 gap-1">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-gray-300 mb-6 leading-relaxed">"I finally understand where my money goes. The unit economics breakdown helped me cut useless subscriptions and redirect funds to index investing."</p>
+                    <div class="flex items-center gap-4">
+                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg" class="w-12 h-12 rounded-full" alt="User">
+                        <div>
+                            <h4 class="font-bold text-sm">Neha S.</h4>
+                            <p class="text-xs text-gray-500">Marketing Director, Mumbai</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section id="cta" class="py-32 relative overflow-hidden bg-white">
+        <div class="absolute inset-0 bg-brand-neon/10 blur-[100px] rounded-full w-3/4 h-3/4 mx-auto top-1/2 -translate-y-1/2 pointer-events-none"></div>
+        
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10 glass-card p-12 md:p-20 rounded-[3rem] border border-brand-neon/20 shadow-[0_0_50px_rgba(22,247,82,0.1)]">
+            <h2 class="text-4xl md:text-6xl font-bold mb-6">Ready to fire your <br> spreadsheet?</h2>
+            <p class="text-xl text-gray-400 mb-10">Join 10,000+ smart Indians managing ₹5,000 Cr+ on Fintoo360. Get free early access today.</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
+                <a href="#" class="w-full sm:w-auto bg-brand-neon text-black px-10 py-5 rounded-full font-bold text-lg hover:bg-white transition-all shadow-[0_0_30px_rgba(22,247,82,0.4)] flex items-center justify-center gap-2">
+                    GET FREE ACCESS NOW <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+            
+            <div class="flex flex-col items-center gap-3">
+                <div class="w-full max-w-xs bg-gray-800 rounded-full h-1.5 mb-1">
+                    <div class="bg-brand-neon h-1.5 rounded-full w-[85%]"></div>
+                </div>
+                <p class="text-xs text-gray-400 font-medium tracking-wide uppercase"><span class="text-white">85%</span> of early access spots claimed</p>
+            </div>
+            
+            <div class="mt-8 flex justify-center gap-8 text-sm text-gray-500">
+                <span class="flex items-center gap-2"><i class="fa-solid fa-shield-halved"></i> Bank-level Security</span>
+                <span class="flex items-center gap-2"><i class="fa-solid fa-xmark"></i> No Credit Card Required</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer" class="bg-white pt-20 pb-10 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 mb-16">
+                <div class="col-span-2 lg:col-span-2">
+                    <div class="flex items-center gap-2 mb-6">
+                        <i class="fa-solid fa-layer-group text-brand-neon text-2xl"></i>
+                        <span class="text-2xl font-bold tracking-tight text-white">Fintoo<span class="text-brand-neon">360</span></span>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6 max-w-sm">
+                        We're freely supercharging everyone with the tools, products, and education to look and act like a financial rockstar.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-colors"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-colors"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-6 text-sm uppercase tracking-wider">Product</h4>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">AI CFO</a></li>
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">Tax Optimizer</a></li>
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">Portfolio Analytics</a></li>
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">Legacy Planning</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-6 text-sm uppercase tracking-wider">Company</h4>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-6 text-sm uppercase tracking-wider">Legal</h4>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">Security</a></li>
+                        <li><a href="#" class="hover:text-brand-neon transition-colors">SEBI Disclosures</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">© 2024 Fintoo360. All rights reserved.</p>
+                <div class="flex items-center gap-2 text-sm text-gray-500">
+                    <span>Made with</span> <i class="fa-solid fa-heart text-brand-neon"></i> <span>in India</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-black/80', 'shadow-lg');
+                nav.classList.remove('py-4');
+                nav.classList.add('py-2');
+            } else {
+                nav.classList.remove('bg-black/80', 'shadow-lg');
+                nav.classList.add('py-4');
+                nav.classList.remove('py-2');
+            }
+        });
+
+        // Initialize Plotly Chart
+        function initializeCharts() {
+            try {
+                const chartDiv = document.getElementById('mainChart');
+                if (!chartDiv) return;
+
+                const trace1 = {
+                    x: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    y: [150, 165, 180, 175, 200, 215, 230, 220, 250, 270, 290, 324],
+                    type: 'scatter',
+                    mode: 'lines',
+                    name: 'Portfolio Value',
+                    line: {
+                        color: '#dd7300', // fintoo-orange
+                        width: 3,
+                        shape: 'spline',
+                        smoothing: 1.3
+                    },
+                    fill: 'tozeroy',
+                    fillcolor: 'rgba(221, 115, 0, 0.12)',
+                };
+
+                const layout = {
+                    paper_bgcolor: 'transparent',
+                    plot_bgcolor: 'transparent',
+                    margin: { t: 10, r: 10, b: 30, l: 40 },
+                    xaxis: {
+                        showgrid: false,
+                        color: '#6b7280', // text-gray-500
+                        tickfont: { family: 'Inter, sans-serif' }
+                    },
+                    yaxis: {
+                        showgrid: true,
+                        gridcolor: 'rgba(255,255,255,0.05)',
+                        color: '#6b7280',
+                        tickfont: { family: 'Inter, sans-serif' },
+                        tickprefix: '₹',
+                        dtick: 50
+                    },
+                    showlegend: false,
+                    hovermode: 'x unified'
+                };
+
+                const config = {
+                    responsive: true,
+                    displayModeBar: false,
+                    displaylogo: false
+                };
+
+                Plotly.newPlot('mainChart', [trace1], layout, config);
+            } catch (e) {
+                console.error('Error initializing chart:', e);
+            }
+        }
+
+        window.addEventListener('load', initializeCharts);
+        setTimeout(initializeCharts, 1200);
+    </script>
+</body>
+</html>
