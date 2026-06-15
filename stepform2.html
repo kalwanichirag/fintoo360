@@ -1,0 +1,1273 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fintoo Advisory – Schedule Consultation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #042b62;
+    --navy-mid: #1a3a6b;
+    --navy-light: #e8edf5;
+    --orange: #dd7300;
+    --orange-light: #fff3e0;
+    --gold: #c9a84c;
+    --white: #ffffff;
+    --bg: #f0f4fa;
+    --text-primary: #0d1f3c;
+    --text-secondary: #5a6a84;
+    --text-muted: #8fa0b8;
+    --border: #d6e0ef;
+    --success: #1db954;
+    --error: #e53935;
+    --card-shadow: 0 24px 80px rgba(4,43,98,0.13), 0 4px 16px rgba(4,43,98,0.07);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --transition: 0.32s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  html, body {
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Ambient background */
+  .bg-orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .bg-orb-1 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(4,43,98,0.12) 0%, transparent 70%);
+    top: -150px; left: -150px;
+    animation: orbFloat 12s ease-in-out infinite alternate;
+  }
+  .bg-orb-2 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(221,115,0,0.08) 0%, transparent 70%);
+    bottom: -100px; right: -100px;
+    animation: orbFloat 15s ease-in-out infinite alternate-reverse;
+  }
+  @keyframes orbFloat {
+    0% { transform: translate(0,0) scale(1); }
+    100% { transform: translate(30px,20px) scale(1.05); }
+  }
+
+  /* Main card */
+  .card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 540px;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(4,43,98,0.07);
+    overflow: hidden;
+  }
+
+  /* Progress bar */
+  .progress-track {
+    height: 3px;
+    background: var(--navy-light);
+    position: relative;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--navy), var(--orange));
+    border-radius: 2px;
+    transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* Card header */
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 28px 16px;
+    border-bottom: 1px solid var(--navy-light);
+  }
+  .logo-badge {
+    width: 40px; height: 40px;
+    background: var(--navy);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .logo-badge svg { width: 22px; height: 22px; }
+  .header-text h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    letter-spacing: 0.02em;
+  }
+  .header-text p {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-top: 1px;
+  }
+  .step-label {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-feature-settings: 'tnum';
+  }
+
+  /* Chat body */
+  .chat-body {
+    padding: 28px 28px 0;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Assistant message */
+  .msg-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .avatar {
+    width: 34px; height: 34px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: 'DM Serif Display', serif;
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    box-shadow: 0 2px 8px rgba(4,43,98,0.2);
+  }
+  .bubble {
+    background: var(--navy-light);
+    border-radius: 4px 16px 16px 16px;
+    padding: 14px 18px;
+    max-width: 380px;
+    font-family: 'DM Serif Display', serif;
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: var(--navy);
+    position: relative;
+  }
+  .bubble.animate-in {
+    animation: bubbleIn 0.35s cubic-bezier(0.4,0,0.2,1) forwards;
+  }
+  @keyframes bubbleIn {
+    from { opacity: 0; transform: translateY(8px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .bubble strong { font-style: italic; color: var(--orange); }
+
+  /* Typing indicator */
+  .typing-indicator {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 14px 18px;
+    background: var(--navy-light);
+    border-radius: 4px 16px 16px 16px;
+  }
+  .typing-dot {
+    width: 6px; height: 6px;
+    background: var(--navy-mid);
+    border-radius: 50%;
+    animation: typingBounce 1.2s ease infinite;
+    opacity: 0.5;
+  }
+  .typing-dot:nth-child(2) { animation-delay: 0.15s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes typingBounce {
+    0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+    40% { transform: translateY(-5px); opacity: 1; }
+  }
+
+  /* User reply bubble */
+  .user-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+    margin-top: 8px;
+  }
+  .user-bubble {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 16px 16px 4px 16px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    max-width: 300px;
+    animation: bubbleIn 0.3s cubic-bezier(0.4,0,0.2,1) forwards;
+  }
+
+  /* Input area */
+  .input-area {
+    padding: 20px 28px 28px;
+  }
+  .input-area.hidden { display: none; }
+
+  /* Text input */
+  .fancy-input {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--text-primary);
+    background: #fafbfd;
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+    -webkit-appearance: none;
+  }
+  .fancy-input:focus {
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(4,43,98,0.08);
+    background: var(--white);
+  }
+  .fancy-input::placeholder { color: var(--text-muted); }
+  .fancy-input.error { border-color: var(--error); }
+  .input-hint {
+    font-size: 11.5px;
+    color: var(--error);
+    margin-top: 6px;
+    display: none;
+  }
+  .input-hint.visible { display: block; }
+
+  /* Phone input with prefix */
+  .phone-wrap {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .phone-prefix {
+    flex-shrink: 0;
+    background: var(--navy-light);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .flag { font-size: 16px; }
+
+  /* CTA Button */
+  .btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 15px 24px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background var(--transition), transform 0.15s, box-shadow var(--transition);
+    margin-top: 14px;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary:hover {
+    background: var(--navy-mid);
+    box-shadow: 0 8px 24px rgba(4,43,98,0.25);
+    transform: translateY(-1px);
+  }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary svg { width: 18px; height: 18px; }
+
+  /* Income cards */
+  .income-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .income-card {
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 13px 14px;
+    cursor: pointer;
+    transition: all var(--transition);
+    background: #fafbfd;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-align: center;
+    user-select: none;
+  }
+  .income-card:hover {
+    border-color: var(--navy);
+    color: var(--navy);
+    background: var(--navy-light);
+  }
+  .income-card.selected {
+    border-color: var(--orange);
+    background: var(--orange-light);
+    color: var(--orange);
+    font-weight: 600;
+    box-shadow: 0 2px 12px rgba(221,115,0,0.15);
+  }
+  .income-card .amount { display: block; font-size: 12px; margin-top: 2px; opacity: 0.7; }
+
+  /* OTP inputs */
+  .otp-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .otp-box {
+    width: 46px; height: 54px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    color: var(--navy);
+    background: #fafbfd;
+    outline: none;
+    transition: all 0.2s;
+    caret-color: var(--orange);
+  }
+  .otp-box:focus {
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(4,43,98,0.08);
+    background: var(--white);
+  }
+  .otp-box.filled { border-color: var(--orange); background: var(--orange-light); }
+  .otp-box.verified { border-color: var(--success); background: #e8f9ee; color: var(--success); }
+  .resend-link {
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .resend-link a {
+    color: var(--navy);
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .resend-link a:hover { color: var(--orange); }
+
+  /* OTP success */
+  .otp-success {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 0;
+  }
+  .otp-success.show { display: flex; }
+  .check-circle {
+    width: 48px; height: 48px;
+    background: var(--success);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  }
+  @keyframes popIn {
+    from { transform: scale(0); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .check-circle svg { width: 24px; height: 24px; stroke: white; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .otp-success p { font-size: 13px; color: var(--success); font-weight: 600; }
+
+  /* Calendar */
+  .calendar-wrap {
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: #fafbfd;
+    margin-bottom: 14px;
+  }
+  .cal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: var(--navy);
+    color: white;
+  }
+  .cal-header h3 { font-size: 14px; font-weight: 600; }
+  .cal-nav {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 16px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  .cal-nav:hover { opacity: 1; background: rgba(255,255,255,0.1); }
+  .cal-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    padding: 8px 12px 4px;
+    gap: 2px;
+  }
+  .cal-weekday {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    padding: 4px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .cal-days {
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    padding: 0 12px 12px;
+    gap: 4px;
+  }
+  .cal-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.18s;
+    color: var(--text-primary);
+    border: 1.5px solid transparent;
+  }
+  .cal-day:hover:not(.disabled):not(.empty) {
+    background: var(--navy-light);
+    color: var(--navy);
+  }
+  .cal-day.selected {
+    background: var(--navy);
+    color: white;
+    font-weight: 700;
+    border-color: var(--navy);
+  }
+  .cal-day.today {
+    border-color: var(--orange);
+    color: var(--orange);
+    font-weight: 700;
+  }
+  .cal-day.today.selected { color: white; }
+  .cal-day.disabled { color: var(--text-muted); opacity: 0.35; cursor: not-allowed; }
+  .cal-day.empty { cursor: default; }
+
+  /* Time slots */
+  .slots-label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .slots-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .slot-chip {
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 6px;
+    text-align: center;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.18s;
+    background: #fafbfd;
+    user-select: none;
+  }
+  .slot-chip:hover {
+    border-color: var(--navy);
+    color: var(--navy);
+    background: var(--navy-light);
+  }
+  .slot-chip.selected {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: white;
+    box-shadow: 0 2px 10px rgba(221,115,0,0.3);
+  }
+
+  /* Summary card */
+  .summary-card {
+    background: var(--navy-light);
+    border-radius: var(--radius-sm);
+    padding: 18px 20px;
+    margin-bottom: 4px;
+    border: 1px solid var(--border);
+  }
+  .summary-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(4,43,98,0.07);
+  }
+  .summary-row:last-child { border-bottom: none; }
+  .summary-key { font-size: 11.5px; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
+  .summary-val { font-size: 13.5px; color: var(--navy); font-weight: 600; text-align: right; max-width: 60%; }
+
+  /* Step container */
+  .step { display: none; }
+  .step.active { display: block; animation: stepIn 0.38s cubic-bezier(0.4,0,0.2,1) forwards; }
+  @keyframes stepIn {
+    from { opacity: 0; transform: translateX(16px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Thank you screen */
+  .thankyou-screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 32px;
+    text-align: center;
+    gap: 0;
+  }
+  .thankyou-screen.active { display: flex; animation: stepIn 0.38s forwards; }
+  .success-ring {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1db954, #00b341);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 32px rgba(29,185,84,0.3);
+    animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  }
+  .success-ring svg { width: 40px; height: 40px; stroke: white; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .thankyou-screen h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--navy);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .thankyou-screen p {
+    font-size: 14.5px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    max-width: 360px;
+    margin-bottom: 28px;
+  }
+  .confirm-list {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .confirm-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--navy-light);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--navy);
+    animation: bubbleIn 0.35s forwards;
+  }
+  .confirm-item:nth-child(2) { animation-delay: 0.15s; opacity: 0; }
+  .confirm-item:nth-child(3) { animation-delay: 0.3s; opacity: 0; }
+  .confirm-dot {
+    width: 22px; height: 22px;
+    background: var(--success);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .confirm-dot svg { width: 12px; height: 12px; stroke: white; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .ty-brand {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .ty-brand span { color: var(--navy); font-weight: 700; }
+
+  /* Welcome screen */
+  .welcome-screen {
+    padding: 40px 28px 36px;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+  .welcome-screen.active { display: flex; }
+  .welcome-avatar {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    box-shadow: 0 6px 20px rgba(4,43,98,0.2);
+  }
+  .welcome-avatar svg { width: 28px; height: 28px; }
+  .welcome-screen h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: var(--navy);
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .welcome-screen p {
+    font-size: 14.5px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    max-width: 400px;
+    margin-bottom: 32px;
+  }
+  .welcome-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .w-chip {
+    background: var(--navy-light);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .w-chip-dot { width: 6px; height: 6px; background: var(--orange); border-radius: 50%; }
+
+  /* Divider */
+  .divider { width: 100%; height: 1px; background: var(--navy-light); margin: 0; }
+
+  /* Loading overlay */
+  .loading-row {
+    display: none;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .loading-row.show { display: flex; }
+
+  @media (max-width: 600px) {
+    .card { border-radius: 16px; }
+    .chat-body { padding: 20px 20px 0; }
+    .input-area { padding: 16px 20px 24px; }
+    .income-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+    .slots-grid { grid-template-columns: repeat(4,1fr); gap: 6px; }
+    .bubble { font-size: 15px; }
+    .welcome-screen { padding: 28px 20px 28px; }
+    .welcome-screen h2 { font-size: 22px; }
+    .otp-box { width: 40px; height: 48px; font-size: 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  /* Disable state */
+  .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  /* Scroll within card body if needed */
+  .chat-body { max-height: 420px; overflow-y: auto; scroll-behavior: smooth; }
+  .chat-body::-webkit-scrollbar { width: 4px; }
+  .chat-body::-webkit-scrollbar-track { background: transparent; }
+  .chat-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div class="bg-orb bg-orb-1"></div>
+<div class="bg-orb bg-orb-2"></div>
+
+<div class="card" role="main" aria-label="Fintoo Advisory Consultation Form">
+
+  <!-- Progress bar -->
+  <div class="progress-track" role="progressbar" aria-label="Form progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-fill" id="progressFill" style="width:0%"></div>
+  </div>
+
+  <!-- Card header -->
+  <div class="card-header">
+    <div class="logo-badge">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 6h18M3 12h12M3 18h8" stroke="#dd7300" stroke-width="2.2" stroke-linecap="round"/>
+        <circle cx="19" cy="18" r="3" fill="#dd7300" opacity="0.3"/>
+        <circle cx="19" cy="18" r="1.5" fill="#dd7300"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>Fintoo Advisory</h1>
+      <p>SEBI Registered · REG NO: INA000015491</p>
+    </div>
+    <span class="step-label" id="stepLabel" aria-live="polite">Step 1 of 8</span>
+  </div>
+
+  <!-- WELCOME SCREEN -->
+  <div class="welcome-screen active" id="welcomeScreen" aria-label="Welcome to Fintoo">
+    <div class="welcome-avatar">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14 4C9.58 4 6 7.58 6 12s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8z" fill="#dd7300" opacity="0.2"/>
+        <path d="M14 4C9.58 4 6 7.58 6 12s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8z" stroke="#dd7300" stroke-width="1.5"/>
+        <path d="M10 23c0-2.21 1.79-4 4-4s4 1.79 4 4" stroke="#dd7300" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="14" cy="11" r="2.5" fill="#dd7300"/>
+      </svg>
+    </div>
+    <h2>Welcome to<br>Fintoo Advisory.</h2>
+    <p>Let's understand your financial goals and schedule a consultation with one of our dedicated experts.</p>
+    <div class="welcome-chips">
+      <span class="w-chip"><span class="w-chip-dot"></span>Expert Advisors</span>
+      <span class="w-chip"><span class="w-chip-dot"></span>20+ Years Experience</span>
+      <span class="w-chip"><span class="w-chip-dot"></span>₹5,000 Cr+ AUM</span>
+      <span class="w-chip"><span class="w-chip-dot"></span>25,000+ Employees Advised</span>
+    </div>
+    <button class="btn-primary" onclick="startForm()" aria-label="Begin consultation form">
+      Let's Begin
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- CHAT INTERFACE (steps 2–8) -->
+  <div id="chatInterface" style="display:none;">
+    <!-- Chat body: messages accumulate here -->
+    <div class="chat-body" id="chatBody" aria-live="polite" aria-label="Chat conversation"></div>
+    <div class="divider"></div>
+    <!-- Dynamic input area -->
+    <div class="input-area" id="inputArea"></div>
+  </div>
+
+  <!-- THANK YOU SCREEN -->
+  <div class="thankyou-screen" id="thankYouScreen" aria-label="Booking confirmed">
+    <div class="success-ring">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2>Your Consultation<br>Has Been Reserved</h2>
+    <p>Thank you, <strong id="tyName"></strong>. One of our financial experts will connect with you at your scheduled time.</p>
+    <div class="confirm-list">
+      <div class="confirm-item">
+        <div class="confirm-dot"><svg viewBox="0 0 12 12"><polyline points="10 3 5 9 2 6"/></svg></div>
+        Consultation Confirmed
+      </div>
+      <div class="confirm-item">
+        <div class="confirm-dot"><svg viewBox="0 0 12 12"><polyline points="10 3 5 9 2 6"/></svg></div>
+        Expert Assigned
+      </div>
+      <div class="confirm-item">
+        <div class="confirm-dot"><svg viewBox="0 0 12 12"><polyline points="10 3 5 9 2 6"/></svg></div>
+        Calendar Invitation Sent
+      </div>
+    </div>
+    <div class="ty-brand">Secured by <span>Fintoo</span> · SEBI Registered</div>
+  </div>
+
+</div>
+
+<script>
+  // State
+  const state = { name: '', firstName: '', email: '', income: '', phone: '', date: null, timeSlot: '' };
+  let currentStep = 0;
+  let calMonth, calYear;
+  const today = new Date();
+  calMonth = today.getMonth();
+  calYear = today.getFullYear();
+
+  const totalSteps = 8;
+  const STEPS = ['name','email','income','phone','otp','schedule','confirm'];
+
+  function setProgress(step) {
+    const pct = Math.round((step / totalSteps) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressFill').parentElement.setAttribute('aria-valuenow', pct);
+    const labels = ['','Name','Email','Income','Mobile','Verify','Schedule','Confirm','Done'];
+    document.getElementById('stepLabel').textContent = step < totalSteps ? `Step ${step} of ${totalSteps}` : 'Complete';
+  }
+
+  function startForm() {
+    document.getElementById('welcomeScreen').style.display = 'none';
+    document.getElementById('chatInterface').style.display = 'block';
+    currentStep = 1;
+    setProgress(1);
+    showStep1();
+  }
+
+  function addAvatar() {
+    return `<div class="avatar" aria-hidden="true">F</div>`;
+  }
+
+  function appendBubble(html, delay = 0) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+        const chatBody = document.getElementById('chatBody');
+        // Remove any existing typing indicator
+        const ti = chatBody.querySelector('.typing-row');
+        if (ti) ti.remove();
+
+        const row = document.createElement('div');
+        row.className = 'msg-row';
+        row.innerHTML = `${addAvatar()}<div class="bubble animate-in">${html}</div>`;
+        chatBody.appendChild(row);
+        chatBody.scrollTop = chatBody.scrollHeight;
+        resolve();
+      }, delay);
+    });
+  }
+
+  function showTyping(duration = 900) {
+    return new Promise(resolve => {
+      const chatBody = document.getElementById('chatBody');
+      const row = document.createElement('div');
+      row.className = 'msg-row typing-row';
+      row.innerHTML = `${addAvatar()}<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+      chatBody.appendChild(row);
+      chatBody.scrollTop = chatBody.scrollHeight;
+      setTimeout(resolve, duration);
+    });
+  }
+
+  function appendUserBubble(text) {
+    const chatBody = document.getElementById('chatBody');
+    const row = document.createElement('div');
+    row.className = 'user-row';
+    row.innerHTML = `<div class="user-bubble">${text}</div>`;
+    chatBody.appendChild(row);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  function setInputArea(html) {
+    const ia = document.getElementById('inputArea');
+    ia.innerHTML = html;
+    ia.classList.remove('hidden');
+    // Focus first input
+    setTimeout(() => {
+      const first = ia.querySelector('input, button');
+      if (first) first.focus();
+    }, 100);
+  }
+
+  // ── STEP 1: Name ──
+  async function showStep1() {
+    await showTyping(800);
+    await appendBubble('What should I call you?');
+    setInputArea(`
+      <input class="fancy-input" id="nameInput" type="text" placeholder="Your full name" autocomplete="given-name" aria-label="Your name" maxlength="60" />
+      <div class="input-hint" id="nameHint">Please enter your name</div>
+      <button class="btn-primary" onclick="submitName()" id="nameBtn">
+        Continue
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    `);
+    document.getElementById('nameInput').addEventListener('keydown', e => { if (e.key === 'Enter') submitName(); });
+  }
+
+  function submitName() {
+    const input = document.getElementById('nameInput');
+    const val = input.value.trim();
+    if (!val) {
+      input.classList.add('error');
+      document.getElementById('nameHint').classList.add('visible');
+      return;
+    }
+    state.name = val;
+    state.firstName = val.split(' ')[0];
+    appendUserBubble(val);
+    setProgress(2);
+    showStep2();
+  }
+
+  // ── STEP 2: Email ──
+  async function showStep2() {
+    document.getElementById('inputArea').innerHTML = '';
+    await showTyping(700);
+    await appendBubble(`Nice to meet you, <strong>${state.firstName}</strong>.`);
+    await showTyping(600);
+    await appendBubble(`${state.firstName}, what's your email address?`);
+    setInputArea(`
+      <input class="fancy-input" id="emailInput" type="email" placeholder="you@example.com" autocomplete="email" aria-label="Email address" />
+      <div class="input-hint" id="emailHint">Please enter a valid email address</div>
+      <button class="btn-primary" onclick="submitEmail()" id="emailBtn">
+        Continue
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    `);
+    const emailInput = document.getElementById('emailInput');
+    emailInput.addEventListener('keydown', e => { if (e.key === 'Enter') submitEmail(); });
+    emailInput.addEventListener('input', () => {
+      if (validateEmail(emailInput.value)) {
+        emailInput.classList.remove('error');
+        document.getElementById('emailHint').classList.remove('visible');
+      }
+    });
+  }
+
+  function validateEmail(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+  }
+
+  function submitEmail() {
+    const input = document.getElementById('emailInput');
+    const val = input.value.trim();
+    if (!validateEmail(val)) {
+      input.classList.add('error');
+      document.getElementById('emailHint').classList.add('visible');
+      return;
+    }
+    state.email = val;
+    appendUserBubble(val);
+    setProgress(3);
+    showStep3();
+  }
+
+  // ── STEP 3: Income ──
+  async function showStep3() {
+    document.getElementById('inputArea').innerHTML = '';
+    await showTyping(700);
+    await appendBubble(`To connect you with the right advisor, what's your annual income range?`);
+
+    const incomes = [
+      { label: 'Under ₹10 Lakhs', val: '<₹10L' },
+      { label: '₹10L – ₹25L', val: '₹10L–₹25L' },
+      { label: '₹25L – ₹50L', val: '₹25L–₹50L' },
+      { label: '₹50L – ₹1 Crore', val: '₹50L–₹1Cr' },
+      { label: '₹1 Crore – ₹5 Crore', val: '₹1Cr–₹5Cr' },
+      { label: 'Above ₹5 Crore', val: '>₹5Cr' },
+    ];
+
+    const cards = incomes.map((inc, i) =>
+      `<div class="income-card" tabindex="0" role="button" aria-label="${inc.label}" onclick="selectIncome(this,'${inc.label}','${inc.val}')" onkeydown="if(event.key==='Enter'||event.key===' ')selectIncome(this,'${inc.label}','${inc.val}')">${inc.label}</div>`
+    ).join('');
+
+    setInputArea(`
+      <div class="income-grid">${cards}</div>
+    `);
+  }
+
+  function selectIncome(el, label, val) {
+    document.querySelectorAll('.income-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    state.income = label;
+    setTimeout(() => {
+      appendUserBubble(label);
+      setProgress(4);
+      showStep4();
+    }, 300);
+  }
+
+  // ── STEP 4: Phone ──
+  async function showStep4() {
+    document.getElementById('inputArea').innerHTML = '';
+    await showTyping(700);
+    await appendBubble(`What's the best number for our advisor to reach you on?`);
+    setInputArea(`
+      <div class="phone-wrap">
+        <div class="phone-prefix"><span class="flag">🇮🇳</span> +91</div>
+        <input class="fancy-input" id="phoneInput" type="tel" placeholder="10-digit mobile number" inputmode="numeric" pattern="[0-9]*" maxlength="10" autocomplete="tel" aria-label="Mobile number" style="flex:1" />
+      </div>
+      <div class="input-hint" id="phoneHint">Please enter a valid 10-digit mobile number</div>
+      <button class="btn-primary" onclick="submitPhone()" style="margin-top:14px">
+        Send OTP
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    `);
+    const pi = document.getElementById('phoneInput');
+    pi.addEventListener('input', () => { pi.value = pi.value.replace(/\D/g,'').slice(0,10); });
+    pi.addEventListener('keydown', e => { if (e.key === 'Enter') submitPhone(); });
+  }
+
+  function submitPhone() {
+    const val = document.getElementById('phoneInput').value.trim();
+    if (!/^[6-9]\d{9}$/.test(val)) {
+      document.getElementById('phoneInput').classList.add('error');
+      document.getElementById('phoneHint').classList.add('visible');
+      return;
+    }
+    state.phone = val;
+    appendUserBubble(`+91 ${val}`);
+    setProgress(5);
+    showStep5();
+  }
+
+  // ── STEP 5: OTP ──
+  async function showStep5() {
+    document.getElementById('inputArea').innerHTML = '';
+    await showTyping(700);
+    await appendBubble(`Let's quickly verify your number. We've sent an OTP to <strong>+91 ${state.phone}</strong>.`);
+    setInputArea(`
+      <div class="otp-row" role="group" aria-label="OTP input">
+        ${[0,1,2,3,4,5].map(i=>`<input class="otp-box" id="otp${i}" type="tel" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="OTP digit ${i+1}" />`).join('')}
+      </div>
+      <div class="otp-success" id="otpSuccess">
+        <div class="check-circle"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <p>Number verified!</p>
+      </div>
+      <div class="resend-link">Didn't receive? <a onclick="resendOTP()" tabindex="0" role="button">Resend OTP</a></div>
+    `);
+    setupOTPInputs();
+  }
+
+  function setupOTPInputs() {
+    for (let i = 0; i < 6; i++) {
+      const box = document.getElementById(`otp${i}`);
+      box.addEventListener('input', () => {
+        box.value = box.value.replace(/\D/,'');
+        if (box.value && i < 5) document.getElementById(`otp${i+1}`).focus();
+        box.classList.toggle('filled', !!box.value);
+        checkOTPComplete();
+      });
+      box.addEventListener('keydown', e => {
+        if (e.key === 'Backspace' && !box.value && i > 0) {
+          document.getElementById(`otp${i-1}`).focus();
+        }
+      });
+      box.addEventListener('paste', e => {
+        const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g,'').slice(0,6);
+        e.preventDefault();
+        for (let j = 0; j < pasted.length && j+i < 6; j++) {
+          const t = document.getElementById(`otp${i+j}`);
+          t.value = pasted[j];
+          t.classList.add('filled');
+        }
+        if (pasted.length >= 1) document.getElementById(`otp${Math.min(i+pasted.length, 5)}`).focus();
+        checkOTPComplete();
+      });
+    }
+    document.getElementById('otp0').focus();
+  }
+
+  function checkOTPComplete() {
+    const vals = [0,1,2,3,4,5].map(i => document.getElementById(`otp${i}`).value);
+    if (vals.every(v => v)) {
+      // Simulate verification
+      setTimeout(() => {
+        for (let i = 0; i < 6; i++) {
+          const box = document.getElementById(`otp${i}`);
+          box.classList.add('verified');
+          box.disabled = true;
+        }
+        document.getElementById('otpSuccess').classList.add('show');
+        document.querySelector('.resend-link').style.display = 'none';
+        setTimeout(() => {
+          appendUserBubble('✓ Verified');
+          setProgress(6);
+          showStep6();
+        }, 1000);
+      }, 400);
+    }
+  }
+
+  function resendOTP() {
+    for (let i = 0; i < 6; i++) {
+      const box = document.getElementById(`otp${i}`);
+      box.value = '';
+      box.classList.remove('filled','verified','error');
+      box.disabled = false;
+    }
+    document.getElementById('otp0').focus();
+  }
+
+  // ── STEP 6: Schedule ──
+  async function showStep6() {
+    document.getElementById('inputArea').innerHTML = '';
+    await showTyping(700);
+    await appendBubble(`Perfect, your number has been verified.`);
+    await showTyping(500);
+    await appendBubble(`Great <strong>${state.firstName}</strong>. Let's schedule your consultation.`);
+
+    setInputArea(`
+      <div class="calendar-wrap">
+        <div class="cal-header">
+          <button class="cal-nav" onclick="changeMonth(-1)" aria-label="Previous month">&#8249;</button>
+          <h3 id="calTitle"></h3>
+          <button class="cal-nav" onclick="changeMonth(1)" aria-label="Next month">&#8250;</button>
+        </div>
+        <div class="cal-weekdays">
+          ${['S','M','T','W','T','F','S'].map(d=>`<div class="cal-weekday">${d}</div>`).join('')}
+        </div>
+        <div class="cal-days" id="calDays"></div>
+      </div>
+      <div id="slotsSection" style="display:none;">
+        <div class="slots-label">Available Time Slots</div>
+        <div class="slots-grid" id="slotsGrid"></div>
+        <button class="btn-primary" id="scheduleBtn" onclick="submitSchedule()" style="display:none;margin-top:14px">
+          Confirm Schedule
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    `);
+    renderCalendar();
+  }
+
+  function renderCalendar() {
+    const title = document.getElementById('calTitle');
+    const daysEl = document.getElementById('calDays');
+    const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    title.textContent = `${monthNames[calMonth]} ${calYear}`;
+
+    const firstDay = new Date(calYear, calMonth, 1).getDay();
+    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+    const todayStr = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
+
+    daysEl.innerHTML = '';
+
+    // Empty slots
+    for (let i = 0; i < firstDay; i++) {
+      const el = document.createElement('div');
+      el.className = 'cal-day empty';
+      daysEl.appendChild(el);
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const date = new Date(calYear, calMonth, d);
+      const el = document.createElement('div');
+      const isToday = date.getFullYear() === today.getFullYear() && date.getMonth() === today.getMonth() && date.getDate() === today.getDate();
+      const isPast = date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      const isSunday = date.getDay() === 0;
+      const disabled = isPast || isSunday;
+
+      el.className = 'cal-day' + (disabled ? ' disabled' : '') + (isToday ? ' today' : '');
+      el.textContent = d;
+
+      if (state.date && state.date.getDate() === d && state.date.getMonth() === calMonth && state.date.getFullYear() === calYear) {
+        el.classList.add('selected');
+      }
+
+      if (!disabled) {
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('role', 'button');
+        el.setAttribute('aria-label', `${d} ${monthNames[calMonth]} ${calYear}`);
+        el.onclick = () => selectDate(new Date(calYear, calMonth, d), el);
+        el.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') selectDate(new Date(calYear, calMonth, d), el); };
+      }
+      daysEl.appendChild(el);
+    }
+  }
+
+  function changeMonth(dir) {
+    calMonth += dir;
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    if (calMonth < 0) { calMonth = 11; calYear--; }
+    renderCalendar();
+  }
+
+  function selectDate(date, el) {
+    state.date = date;
+    state.timeSlot = '';
+    document.querySelectorAll('.cal-day').forEach(d => d.classList.remove('selected'));
+    el.classList.add('selected');
+    showTimeSlots();
+  }
+
+  function showTimeSlots() {
+    const section = document.getElementById('slotsSection');
+    section.style.display = 'block';
+    const slots = ['09:00 AM','10:00 AM','11:00 AM','12:00 PM','02:00 PM','03:00 PM','04:00 PM','05:00 PM'];
+    document.getElementById('slotsGrid').innerHTML = slots.map(s =>
+      `<div class="slot-chip" tabindex="0" role="button" aria-label="${s}" onclick="selectSlot(this,'${s}')" onkeydown="if(event.key==='Enter'||event.key===' ')selectSlot(this,'${s}')">${s}</div>`
+    ).join('');
+    document.getElementById('scheduleBtn').style.display = 'none';
+    section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function selectSlot(el, slot) {
+    document.querySelectorAll('.slot-chip').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+    state.timeSlot = slot;
+    document.getElementById('scheduleBtn').style.display = 'flex';
+  }
+
+  function submitSchedule() {
+    if (!state.date || !state.timeSlot) return;
+    const dateStr = state.date.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' });
+    appendUserBubble(`${dateStr} · ${state.timeSlot}`);
+    setProgress(7);
+    showStep7();
+  }
+
+  // ── STEP 7: Confirm ──
+  async function showStep7() {
+    document.getElementById('inputArea').innerHTML = '';
+    await showTyping(700);
+    await appendBubble(`Excellent choice, <strong>${state.firstName}</strong>. Here's a summary of your consultation.`);
+
+    const dateStr = state.date ? state.date.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '—';
+
+    setInputArea(`
+      <div class="summary-card">
+        <div class="summary-row"><span class="summary-key">Name</span><span class="summary-val">${state.name}</span></div>
+        <div class="summary-row"><span class="summary-key">Email</span><span class="summary-val">${state.email}</span></div>
+        <div class="summary-row"><span class="summary-key">Income Range</span><span class="summary-val">${state.income}</span></div>
+        <div class="summary-row"><span class="summary-key">Mobile</span><span class="summary-val">+91 ${state.phone}</span></div>
+        <div class="summary-row"><span class="summary-key">Date</span><span class="summary-val">${dateStr}</span></div>
+        <div class="summary-row"><span class="summary-key">Time</span><span class="summary-val">${state.timeSlot}</span></div>
+      </div>
+      <button class="btn-primary" onclick="confirmBooking()">
+        Confirm Booking
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </button>
+    `);
+  }
+
+  function confirmBooking() {
+    setProgress(8);
+    document.getElementById('chatInterface').style.display = 'none';
+    document.getElementById('tyName').textContent = state.firstName;
+    document.getElementById('thankYouScreen').classList.add('active');
+  }
+</script>
+</body>
+</html>
