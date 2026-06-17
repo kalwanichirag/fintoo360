@@ -233,6 +233,63 @@
       box-shadow: 0 10px 18px rgba(221, 115, 0, .26);
     }
 
+    #chatArea {
+      background-color: #fbfcfe;
+      background-image:
+        url("data:image/svg+xml,%3Csvg width='220' height='220' viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23042b62' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' opacity='.055'%3E%3Cpath d='M34 58h42M34 78h30M44 42v52'/%3E%3Cpath d='M151 50c20 0 34 13 34 31s-14 31-34 31-34-13-34-31 14-31 34-31Z'/%3E%3Cpath d='M137 74h29M137 88h20M148 64v36'/%3E%3Cpath d='M32 158l24-22 26 18 34-42 29 25 42-54'/%3E%3Cpath d='M42 170h132M58 170v-22M88 170v-34M118 170v-52M148 170v-41'/%3E%3Cpath d='M170 154c10 0 18 8 18 18s-8 18-18 18-18-8-18-18 8-18 18-18Z'/%3E%3Cpath d='M164 172h12M170 166v12'/%3E%3C/g%3E%3C/svg%3E"),
+        linear-gradient(rgba(4, 43, 98, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(4, 43, 98, .035) 1px, transparent 1px),
+        radial-gradient(circle at 18% 18%, rgba(221, 115, 0, .08), transparent 28%),
+        radial-gradient(circle at 82% 78%, rgba(4, 43, 98, .07), transparent 26%);
+      background-position: center, 0 0, 0 0, center, center;
+      background-size: 220px 220px, 28px 28px, 28px 28px, 100% 100%, 100% 100%;
+    }
+
+    #chatArea.intro-mode {
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 1.25rem;
+    }
+
+    .intro-panel {
+      width: min(100%, 340px);
+      text-align: center;
+    }
+
+    .intro-mark {
+      display: grid;
+      place-items: center;
+      width: 3rem;
+      height: 3rem;
+      margin: 0 auto 1rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #042b62, #073b84);
+      color: #fff;
+      font-weight: 800;
+      box-shadow: 0 14px 28px rgba(4, 43, 98, .22);
+    }
+
+    .intro-copy {
+      border-radius: 24px;
+      background: #fff;
+      padding: 1.25rem;
+      line-height: 1.6;
+      box-shadow: 0 18px 42px rgba(4, 43, 98, .10);
+    }
+
+    .intro-copy strong {
+      display: block;
+      margin-bottom: .75rem;
+      color: #042b62;
+      font-size: 1.05rem;
+    }
+
+    .intro-panel .primary-action {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
     @media (min-width: 640px) {
       .assistant-avatar {
         width: 2.75rem;
@@ -279,7 +336,7 @@
     focus:border-fintoo-orange focus:ring-4 focus:ring-fintoo-orange/10 focus-within:border-fintoo-orange/70 focus-within:ring-4 focus-within:ring-fintoo-orange/10
     sm:grid-cols-2 sm:min-h-[60px] sm:p-5 sm:p-10 lg:grid-cols-2">
   </div>
-  <main class="h-[100svh] overflow-hidden bg-[linear-gradient(115deg,#062b63_0%,#0b3b88_48%,#2447b8_100%)] lg:min-h-screen lg:overflow-auto">
+  <main class="h-[100dvh] overflow-hidden bg-[linear-gradient(115deg,#062b63_0%,#0b3b88_48%,#2447b8_100%)] lg:min-h-screen lg:overflow-auto">
     <section class="mx-auto grid h-full w-full max-w-7xl items-center gap-4 px-3 py-3 sm:px-8 lg:min-h-screen lg:grid-cols-[1fr_520px] lg:gap-10 lg:px-10 lg:py-10"
       aria-label="Fintoo consultation booking">
       <aside class="relative hidden overflow-hidden py-4 text-white lg:block lg:py-0">
@@ -303,17 +360,8 @@
 
       <section id="chatShell"
         class="flex h-full min-h-0 w-full flex-col overflow-hidden rounded-[24px] border border-white/70 bg-white shadow-concierge lg:min-h-[620px] lg:max-h-[760px] lg:rounded-[28px]">
-        <div id="topbar" class="shrink-0 border-b border-fintoo-line/80 bg-white px-4 py-4 sm:px-7 sm:py-5">
-          <div class="mb-4 flex items-center justify-between gap-4">
-            <div class="text-xs font-extrabold uppercase tracking-[0.16em] text-fintoo-muted">Consultation Request</div>
-          </div>
-          <div class="h-2 overflow-hidden rounded-full bg-[#e4ebf4]" aria-label="Progress">
-            <span id="progressBar"
-              class="block h-full w-[11%] rounded-full bg-gradient-to-r from-fintoo-orange to-fintoo-gold transition-all duration-500"></span>
-          </div>
-        </div>
         <div id="chatArea" class="min-h-0 flex-1 overflow-auto bg-[#fbfcfe] px-4 py-4 sm:px-7 sm:py-5" aria-live="polite"></div>
-        <div id="controls" class="max-h-[42svh] shrink-0 overflow-auto border-t border-fintoo-line/70 bg-white px-4 pb-4 pt-3 sm:max-h-none sm:px-7 sm:pb-6 sm:pt-4"></div>
+        <div id="controls" class="max-h-[42dvh] shrink-0 overflow-auto border-t border-fintoo-line/70 bg-white px-4 pb-4 pt-3 sm:max-h-none sm:px-7 sm:pb-6 sm:pt-4"></div>
       </section>
     </section>
   
@@ -334,8 +382,6 @@
 
     const chatArea = document.getElementById('chatArea');
     const controls = document.getElementById('controls');
-    const progressBar = document.getElementById('progressBar');
-    const totalSteps = 10;
 
     const incomeOptions = [
       'Under ₹10 Lakhs',
@@ -367,10 +413,6 @@
 
     function focusOnDesktop(element) {
       if (window.matchMedia('(min-width: 768px)').matches) element.focus();
-    }
-
-    function setProgress() {
-      progressBar.style.width = `${(state.step / totalSteps) * 100}%`;
     }
 
     function scrollChat() {
@@ -410,8 +452,16 @@
 
     function goTo(step) {
       state.step = step;
-      setProgress();
       controls.innerHTML = '';
+      if (step === 1) {
+        renderIntro();
+        return;
+      }
+      controls.classList.remove('hidden');
+      if (chatArea.classList.contains('intro-mode')) {
+        chatArea.classList.remove('intro-mode');
+        chatArea.innerHTML = '';
+      }
       const copy = assistantText[step];
       showTyping(() => {
         addMessage('assistant', typeof copy === 'function' ? copy() : copy);
@@ -424,12 +474,22 @@
       goTo(nextStep);
     }
 
-    function renderControls() {
-      if (state.step === 1) {
-        controls.innerHTML = `<button class="${primaryBtn} w-full sm:w-auto" type="button">Let's Begin</button>`;
-        controls.querySelector('button').addEventListener('click', () => goTo(2));
-      }
+    function renderIntro() {
+      controls.classList.add('hidden');
+      chatArea.classList.add('intro-mode');
+      chatArea.innerHTML = `
+        <div class="intro-panel animate-rise">
+          <div class="intro-mark">F</div>
+          <div class="intro-copy">
+            <strong>Welcome to Fintoo Wealth Advisory.</strong>
+            <span>Let's understand your financial goals and schedule a consultation with one of our experts.</span>
+          </div>
+          <button class="${primaryBtn}" type="button" id="introStart">Let's Begin</button>
+        </div>`;
+      document.getElementById('introStart').addEventListener('click', () => goTo(2));
+    }
 
+    function renderControls() {
       if (state.step === 2) {
         renderTextField('name', 'Enter your full name', 'text', value => {
           if (value.trim().length < 2) return 'Please enter your name.';
@@ -670,7 +730,6 @@
 
     function showSuccess() {
       state.step = 10;
-      setProgress();
       document.getElementById('chatShell').innerHTML = `
         <div class="grid min-h-full place-items-center px-4 py-10 text-center sm:px-7">
           <div class="animate-rise w-full max-w-xl rounded-[28px] border border-fintoo-line/90 bg-white/90 p-7 shadow-premium sm:p-10">
@@ -696,7 +755,6 @@
       }[char]));
     }
 
-    setProgress();
     goTo(1);
   </script>
 </body>
