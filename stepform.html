@@ -306,7 +306,6 @@
         <div id="topbar" class="shrink-0 border-b border-fintoo-line/80 bg-white px-4 py-4 sm:px-7 sm:py-5">
           <div class="mb-4 flex items-center justify-between gap-4">
             <div class="text-xs font-extrabold uppercase tracking-[0.16em] text-fintoo-muted">Consultation Request</div>
-            <div id="stepCount" class="whitespace-nowrap text-sm font-extrabold text-fintoo-navy">Step 1 of 9</div>
           </div>
           <div class="h-2 overflow-hidden rounded-full bg-[#e4ebf4]" aria-label="Progress">
             <span id="progressBar"
@@ -326,6 +325,7 @@
       firstName: '',
       name: '',
       email: '',
+      city: '',
       income: '',
       mobile: '',
       date: '',
@@ -335,8 +335,7 @@
     const chatArea = document.getElementById('chatArea');
     const controls = document.getElementById('controls');
     const progressBar = document.getElementById('progressBar');
-    const stepCount = document.getElementById('stepCount');
-    const totalSteps = 9;
+    const totalSteps = 10;
 
     const incomeOptions = [
       'Under ₹10 Lakhs',
@@ -353,11 +352,12 @@
       1: 'Welcome to Fintoo Wealth Advisory.\n\nLet\'s understand your financial goals and schedule a consultation with one of our experts.',
       2: 'What should I call you?',
       3: () => `${state.firstName}, what's your email address?`,
-      4: 'To connect you with the right advisor, what\'s your annual income range?',
-      5: 'What\'s the best number for our advisor to reach you on?',
-      6: 'Let\'s quickly verify your number.',
-      7: () => `Great ${state.firstName}. Let's schedule your consultation.`,
-      8: () => `Excellent choice, ${state.firstName}.`
+      4: () => `${state.firstName}, which city are you based in?`,
+      5: 'To connect you with the right advisor, what\'s your annual income range?',
+      6: 'What\'s the best number for our advisor to reach you on?',
+      7: 'Let\'s quickly verify your number.',
+      8: () => `Great ${state.firstName}. Let's schedule your consultation.`,
+      9: () => `Excellent choice, ${state.firstName}.`
     };
 
     const cardClass = 'animate-rise field-surface';
@@ -370,7 +370,6 @@
     }
 
     function setProgress() {
-      stepCount.textContent = `Step ${state.step} of ${totalSteps}`;
       progressBar.style.width = `${(state.step / totalSteps) * 100}%`;
     }
 
@@ -455,11 +454,20 @@
         }, true);
       }
 
-      if (state.step === 4) renderIncome();
-      if (state.step === 5) renderMobileField();
-      if (state.step === 6) renderOtp();
-      if (state.step === 7) renderBooking();
-      if (state.step === 8) renderSummary();
+      if (state.step === 4) {
+        renderTextField('city', 'Enter your city', 'text', value => {
+          if (value.trim().length < 2) return 'Please enter your city.';
+        }, value => {
+          state.city = value.trim();
+          answer(state.city, 5);
+        });
+      }
+
+      if (state.step === 5) renderIncome();
+      if (state.step === 6) renderMobileField();
+      if (state.step === 7) renderOtp();
+      if (state.step === 8) renderBooking();
+      if (state.step === 9) renderSummary();
     }
 
     function renderTextField(id, placeholder, type, validator, onSubmit, liveValidate = false) {
@@ -500,7 +508,7 @@
           controls.querySelectorAll('.choice').forEach(item => item.classList.remove('is-selected'));
           button.classList.add('is-selected');
           state.income = button.textContent;
-          setTimeout(() => answer(state.income, 5), 260);
+          setTimeout(() => answer(state.income, 6), 260);
         });
       });
     }
@@ -526,7 +534,7 @@
         }
         input.blur();
         state.mobile = `+91 ${input.value}`;
-        answer(state.mobile, 6);
+        answer(state.mobile, 7);
       });
       focusOnDesktop(input);
     }
@@ -550,7 +558,7 @@
             verified.classList.add('flex');
             setTimeout(() => {
               addMessage('assistant', 'Perfect, your number has been verified.');
-              goTo(7);
+              goTo(8);
             }, 760);
           }
         });
@@ -566,25 +574,22 @@
     }
 
     function renderBooking() {
+      state.date = '';
+      state.time = '';
+      renderBookingCalendar();
+    }
+
+    function renderBookingCalendar() {
       controls.innerHTML = `
         <div class="${cardClass}">
-          <div class="grid gap-3 lg:grid-cols-2">
-            <div class="rounded-[16px] border border-fintoo-line bg-white p-3 sm:rounded-[20px] sm:p-4">
-              <div class="mb-3 flex items-center justify-between gap-3 text-sm font-extrabold text-fintoo-navy sm:mb-4 sm:text-base"><span>Select Date</span><span>June 2026</span></div>
-              <div class="mb-2 grid grid-cols-7 gap-1.5 text-center text-xs font-extrabold text-fintoo-muted">${['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => `<span>${day}</span>`).join('')}</div>
-              <div class="grid grid-cols-7 gap-1.5" id="dates"></div>
-            </div>
-            <div>
-              <div class="mb-3 text-sm font-extrabold text-fintoo-navy sm:mb-4 sm:text-base">Available Time Slots</div>
-              <div class="grid grid-cols-2 gap-2">${slots.map(slot => `<button class="slot min-h-[42px] rounded-xl border border-fintoo-line bg-white text-sm font-extrabold text-fintoo-navy transition disabled:cursor-not-allowed disabled:opacity-45 sm:min-h-[50px] sm:rounded-2xl sm:text-base" type="button" disabled>${slot}</button>`).join('')}</div>
-            </div>
+          <div class="rounded-[16px] border border-fintoo-line bg-white p-3 sm:rounded-[20px] sm:p-4">
+            <div class="mb-3 flex items-center justify-between gap-3 text-sm font-extrabold text-fintoo-navy sm:mb-4 sm:text-base"><span>Select Date</span><span>June 2026</span></div>
+            <div class="mb-2 grid grid-cols-7 gap-1.5 text-center text-xs font-extrabold text-fintoo-muted">${['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => `<span>${day}</span>`).join('')}</div>
+            <div class="grid grid-cols-7 gap-1.5" id="dates"></div>
           </div>
-          <div class="min-h-[20px] pt-3 text-sm font-bold text-red-700" id="bookingError"></div>
-          <button class="${primaryBtn} w-full" type="button" disabled id="bookingBtn">Continue</button>
+          <p class="pt-3 text-xs font-bold text-fintoo-muted">Pick an available date to view time slots.</p>
         </div>`;
       const dates = controls.querySelector('#dates');
-      const bookingBtn = controls.querySelector('#bookingBtn');
-      const error = controls.querySelector('#bookingError');
       dates.appendChild(document.createElement('span'));
       for (let day = 1; day <= 30; day++) {
         const button = document.createElement('button');
@@ -596,12 +601,32 @@
           controls.querySelectorAll('#dates button').forEach(item => item.classList.remove('date-active'));
           button.classList.add('date-active');
           state.date = `June ${day}, 2026`;
-          error.textContent = '';
-          controls.querySelectorAll('.slot').forEach(slot => slot.disabled = false);
-          checkBooking();
+          state.time = '';
+          setTimeout(renderBookingTimes, 180);
         });
         dates.appendChild(button);
       }
+    }
+
+    function renderBookingTimes() {
+      controls.innerHTML = `
+        <div class="${cardClass}">
+          <div class="mb-3 flex items-center justify-between gap-3">
+            <button class="rounded-full border border-fintoo-line bg-white px-3 py-1.5 text-xs font-extrabold text-fintoo-navy transition hover:border-fintoo-orange" type="button" id="backToCalendar">Back</button>
+            <div class="text-right text-xs font-extrabold uppercase tracking-[0.12em] text-fintoo-muted">${state.date}</div>
+          </div>
+          <div class="mb-3 text-sm font-extrabold text-fintoo-navy sm:mb-4 sm:text-base">Select Time Slot</div>
+          <div class="grid grid-cols-2 gap-2">${slots.map(slot => `<button class="slot min-h-[42px] rounded-xl border border-fintoo-line bg-white text-sm font-extrabold text-fintoo-navy transition sm:min-h-[50px] sm:rounded-2xl sm:text-base" type="button">${slot}</button>`).join('')}</div>
+          <div class="min-h-[20px] pt-3 text-sm font-bold text-red-700" id="bookingError"></div>
+          <button class="${primaryBtn} w-full" type="button" disabled id="bookingBtn">Continue</button>
+        </div>`;
+      const bookingBtn = controls.querySelector('#bookingBtn');
+      const error = controls.querySelector('#bookingError');
+      controls.querySelector('#backToCalendar').addEventListener('click', () => {
+        state.date = '';
+        state.time = '';
+        renderBookingCalendar();
+      });
       controls.querySelectorAll('.slot').forEach(button => {
         button.addEventListener('click', () => {
           controls.querySelectorAll('.slot').forEach(item => item.classList.remove('slot-active'));
@@ -615,7 +640,7 @@
           error.textContent = 'Please select an available date and time slot.';
           return;
         }
-        answer(`${state.date} at ${state.time}`, 8);
+        answer(`${state.date} at ${state.time}`, 9);
       });
       function checkBooking() {
         bookingBtn.disabled = !(state.date && state.time);
@@ -628,6 +653,7 @@
           <div class="grid gap-1">
             ${summaryRow('Name', state.name)}
             ${summaryRow('Email', state.email)}
+            ${summaryRow('City', state.city)}
             ${summaryRow('Income Slab', state.income)}
             ${summaryRow('Mobile Number', state.mobile)}
             ${summaryRow('Selected Date', state.date)}
@@ -643,7 +669,7 @@
     }
 
     function showSuccess() {
-      state.step = 9;
+      state.step = 10;
       setProgress();
       document.getElementById('chatShell').innerHTML = `
         <div class="grid min-h-full place-items-center px-4 py-10 text-center sm:px-7">
