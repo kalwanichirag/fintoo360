@@ -1,0 +1,2929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File ITR Live With A CA | Fintoo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --fintoo-blue: #042b62;
+    --fintoo-orange: #dd7300;
+    --navy: #042b62;
+    --navy-mid: #073b84;
+    --navy-light: #0b4d9f;
+    --gold: #dd7300;
+    --gold-light: #f08a18;
+    --gold-pale: #fff4e8;
+    --white: #FFFFFF;
+    --ice: #f4f7fb;
+    --slate: #657286;
+    --coral: #dd7300;
+    --coral-pale: #fff4e8;
+    --green: #dd7300;
+    --green-pale: #fff4e8;
+    --text: #10233f;
+    --text-muted: #657286;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── STICKY CTA BAR ─── */
+  .sticky-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--navy);
+    border-top: 2px solid var(--gold);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 999;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+  }
+  .sticky-bar.visible { transform: translateY(0); }
+  .sticky-bar span {
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .sticky-bar .btn-gold {
+    background: var(--gold);
+    color: var(--navy);
+    border: none;
+    padding: 10px 22px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .sticky-bar .btn-gold:hover { background: var(--gold-light); }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(4, 43, 98, 0.96);
+    backdrop-filter: blur(12px);
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+    z-index: 100;
+    border-bottom: 1px solid rgba(221, 115, 0, 0.2);
+  }
+  .logo {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--gold); }
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .nav-link {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 9px 20px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--navy);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -100px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(221,115,0,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -150px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(7,59,132,0.8) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(221,115,0,0.12);
+    border: 1px solid rgba(221,115,0,0.3);
+    color: var(--gold-light);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero-eyebrow::before { content: '●'; font-size: 0.5rem; }
+  .hero h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2.6rem, 4.6vw, 4.4rem);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.08;
+    letter-spacing: -0.045em;
+    margin-bottom: 22px;
+    max-width: 720px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero h1 .hero-line {
+    display: block;
+  }
+  .hero-not {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 26px;
+    padding-left: 18px;
+    border-left: 2px solid rgba(221,115,0,0.55);
+  }
+  .hero-not span {
+    position: relative;
+    width: max-content;
+    color: rgba(255,255,255,0.52);
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .hero-not span::after {
+    content: '';
+    position: absolute;
+    left: -4px;
+    right: -4px;
+    top: 52%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: strikeLine 900ms ease forwards;
+  }
+  .hero-not span:nth-child(2)::after { animation-delay: 220ms; }
+  @keyframes strikeLine {
+    to { transform: scaleX(1); }
+  }
+  .hero-desc {
+    color: rgba(255,255,255,0.88);
+    font-size: clamp(1.08rem, 1.4vw, 1.25rem);
+    line-height: 1.65;
+    max-width: 620px;
+    margin-bottom: 18px;
+  }
+  .hero-desc strong {
+    color: var(--white);
+    font-weight: 800;
+  }
+  .hero-subline {
+    color: rgba(255,255,255,0.72);
+    font-size: 0.98rem;
+    margin-bottom: 28px;
+    max-width: 620px;
+  }
+  .hero-proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 12px;
+    margin-bottom: 30px;
+  }
+  .hero-proof span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.86);
+    padding: 8px 14px;
+    border-radius: 100px;
+    font-size: 0.84rem;
+    font-weight: 700;
+  }
+  .hero-proof .icon-svg {
+    color: var(--gold);
+  }
+  .hero-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 48px;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--ice);
+    padding: 15px 28px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(221,115,0,0.3);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--white);
+    padding: 15px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover {
+    border-color: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.05);
+  }
+
+  /* Trust Strip */
+  .trust-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    max-width: 560px;
+  }
+  .trust-item {
+    padding: 16px 20px;
+    background: rgba(255,255,255,0.03);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: background .25s ease, transform .25s ease;
+  }
+  .trust-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent, rgba(221,115,0,.16), transparent);
+    transform: translateX(-120%);
+    animation: trustSweep 5s ease-in-out infinite;
+  }
+  .trust-item:nth-child(2)::after { animation-delay: .5s; }
+  .trust-item:nth-child(3)::after { animation-delay: 1s; }
+  .trust-item:nth-child(4)::after { animation-delay: 1.5s; }
+  .trust-item:hover {
+    background: rgba(255,255,255,0.07);
+    transform: translateY(-2px);
+  }
+  .trust-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+    line-height: 1.2;
+  }
+  .trust-label {
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.3;
+    display: block;
+    margin-top: 3px;
+  }
+
+  /* ─── PRODUCT MOTION SHOWCASE ─── */
+  .product-showcase {
+    background: linear-gradient(180deg, #ffffff 0%, #f7f9fd 100%);
+    padding: 92px 0 80px;
+    overflow: hidden;
+  }
+  .showcase-header {
+    max-width: 760px;
+    margin: 0 auto 42px;
+    padding: 0 24px;
+    text-align: center;
+  }
+  .showcase-header h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2.1rem, 4vw, 3.4rem);
+    line-height: 1.12;
+    letter-spacing: -0.045em;
+    color: var(--text);
+    font-weight: 800;
+  }
+  .showcase-header h2 span {
+    color: var(--fintoo-orange);
+  }
+  .showcase-header p {
+    margin: 16px auto 0;
+    max-width: 580px;
+    color: var(--text-muted);
+    font-size: 1rem;
+  }
+  .showcase-rail {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(320px, 520px);
+    gap: 24px;
+    overflow-x: auto;
+    padding: 0 max(24px, calc((100vw - 1180px) / 2)) 18px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+  .showcase-rail::-webkit-scrollbar { display: none; }
+  .motion-card {
+    position: relative;
+    min-height: 520px;
+    border-radius: 28px;
+    background: #fff;
+    border: 1px solid rgba(4,43,98,.08);
+    box-shadow: 0 20px 60px rgba(4,43,98,.08);
+    overflow: hidden;
+    scroll-snap-align: center;
+    isolation: isolate;
+  }
+  .motion-card::before {
+    content: '';
+    position: absolute;
+    inset: 36px -20% auto;
+    height: 300px;
+    border-radius: 50%;
+    background: var(--card-wash, rgba(4,43,98,.06));
+    opacity: .9;
+    z-index: -1;
+  }
+  .motion-card::after {
+    content: '';
+    position: absolute;
+    inset: 120px 12% auto;
+    height: 260px;
+    border: 2px solid rgba(255,255,255,.72);
+    border-bottom: 0;
+    border-radius: 999px 999px 0 0;
+    opacity: .9;
+    z-index: -1;
+  }
+  .motion-stage {
+    height: 330px;
+    display: grid;
+    place-items: center;
+    padding: 34px;
+  }
+  .motion-copy {
+    padding: 0 42px 36px;
+    text-align: center;
+  }
+  .motion-copy h3 {
+    font-size: clamp(1.45rem, 2.3vw, 2rem);
+    line-height: 1.18;
+    letter-spacing: -.035em;
+    color: var(--text);
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+  .motion-copy p {
+    color: var(--text-muted);
+    font-size: .95rem;
+    line-height: 1.55;
+  }
+  .mini-panel {
+    width: min(100%, 300px);
+    border: 1px solid rgba(4,43,98,.1);
+    border-radius: 16px;
+    background: rgba(255,255,255,.92);
+    box-shadow: 0 18px 46px rgba(4,43,98,.12);
+    padding: 18px;
+  }
+  .mini-title {
+    text-align: center;
+    color: var(--text);
+    font-size: .78rem;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 18px;
+  }
+  .mini-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 48px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: #f7f9fc;
+    color: var(--text);
+    font-size: .8rem;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  .mini-row.scanning::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(221,115,0,.16), transparent);
+    transform: translateX(-100%);
+    animation: scanRow 2.2s ease-in-out infinite;
+  }
+  .mini-row strong {
+    font-weight: 800;
+    white-space: nowrap;
+  }
+  .mini-check {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(221,115,0,.14);
+    color: var(--fintoo-orange);
+  }
+  .broker-stack {
+    width: min(100%, 320px);
+    display: grid;
+    gap: 12px;
+  }
+  .broker-pill {
+    display: grid;
+    grid-template-columns: 42px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    min-height: 58px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid rgba(4,43,98,.08);
+    box-shadow: 0 16px 36px rgba(4,43,98,.1);
+    animation: floatCard 4s ease-in-out infinite;
+  }
+  .broker-pill:nth-child(2) { animation-delay: .35s; }
+  .broker-pill:nth-child(3) { animation-delay: .7s; }
+  .broker-logo {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--fintoo-blue);
+    color: #fff;
+    font-size: .75rem;
+    font-weight: 900;
+  }
+  .broker-line {
+    height: 8px;
+    width: 100%;
+    border-radius: 999px;
+    background: #e8eef6;
+    overflow: hidden;
+  }
+  .broker-line span {
+    display: block;
+    height: 100%;
+    width: var(--w, 70%);
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--fintoo-blue), var(--fintoo-orange));
+    animation: loadBar 2.8s ease-in-out infinite;
+  }
+  .broker-status {
+    color: var(--fintoo-orange);
+    font-size: .72rem;
+    font-weight: 800;
+  }
+  .regime-card {
+    width: min(100%, 300px);
+    padding: 16px;
+    border-radius: 16px;
+    background: rgba(255,255,255,.94);
+    border: 1px solid rgba(4,43,98,.1);
+    box-shadow: 0 18px 46px rgba(4,43,98,.12);
+  }
+  .regime-option {
+    border: 1px solid rgba(4,43,98,.08);
+    background: #f7f9fc;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .regime-option.best {
+    background: #fff7ef;
+    border-color: rgba(221,115,0,.4);
+    animation: glowOrange 2.8s ease-in-out infinite;
+  }
+  .regime-label {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text);
+    font-weight: 800;
+    font-size: .82rem;
+  }
+  .regime-tax {
+    color: var(--text-muted);
+    font-size: .72rem;
+    margin-top: 4px;
+  }
+  .regime-bar {
+    height: 3px;
+    border-radius: 999px;
+    background: rgba(4,43,98,.08);
+    margin-top: 10px;
+    overflow: hidden;
+  }
+  .regime-bar span {
+    display: block;
+    width: var(--w);
+    height: 100%;
+    background: var(--fintoo-orange);
+    animation: loadBar 3s ease-in-out infinite;
+  }
+  .refund-card {
+    width: min(100%, 300px);
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid rgba(4,43,98,.1);
+    box-shadow: 0 18px 46px rgba(4,43,98,.12);
+    padding: 22px;
+  }
+  .refund-amount {
+    text-align: center;
+    color: var(--fintoo-orange);
+    font-size: 2.25rem;
+    font-weight: 900;
+    letter-spacing: -.04em;
+    margin: 8px 0 22px;
+    animation: pulseAmount 2.8s ease-in-out infinite;
+  }
+  .refund-flow {
+    display: grid;
+    gap: 12px;
+  }
+  .flow-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    color: var(--text);
+    font-size: .78rem;
+  }
+  .flow-row span:last-child { font-weight: 800; }
+  .flow-line {
+    height: 2px;
+    background: linear-gradient(90deg, var(--fintoo-blue), var(--fintoo-orange));
+    transform-origin: left;
+    animation: loadBar 2.6s ease-in-out infinite;
+  }
+  .showcase-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .showcase-dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(4,43,98,.16);
+  }
+  .showcase-dots span:last-child {
+    width: 26px;
+    background: var(--fintoo-orange);
+  }
+  .showcase-cta {
+    width: min(100% - 40px, 900px);
+    margin: 28px auto 0;
+    padding: 18px 24px;
+    border-radius: 18px;
+    background: var(--fintoo-blue);
+    color: #fff;
+    box-shadow: 0 18px 46px rgba(4,43,98,.24);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .showcase-cta strong {
+    display: block;
+    font-size: 1.05rem;
+    margin-bottom: 2px;
+  }
+  .showcase-cta span {
+    color: rgba(255,255,255,.68);
+    font-size: .86rem;
+  }
+  .showcase-cta a {
+    flex-shrink: 0;
+    min-width: 170px;
+    justify-content: center;
+  }
+  @keyframes scanRow {
+    0%, 18% { transform: translateX(-100%); }
+    60%, 100% { transform: translateX(100%); }
+  }
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes loadBar {
+    0% { transform: scaleX(.25); opacity: .6; }
+    55% { transform: scaleX(1); opacity: 1; }
+    100% { transform: scaleX(.82); opacity: .9; }
+  }
+  @keyframes glowOrange {
+    0%, 100% { box-shadow: 0 0 0 rgba(221,115,0,0); }
+    50% { box-shadow: 0 0 0 5px rgba(221,115,0,.08); }
+  }
+  @keyframes pulseAmount {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.045); }
+  }
+
+  /* Hero Card */
+  .hero-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(221,115,0,0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    animation: heroCardFloat 5.5s ease-in-out infinite;
+    box-shadow: 0 24px 70px rgba(0,0,0,.12);
+  }
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 18% 22%, rgba(221,115,0,.16), transparent 24%),
+      linear-gradient(110deg, transparent 0%, rgba(255,255,255,.08) 48%, transparent 58%);
+    transform: translateX(-80%);
+    animation: heroCardSweep 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .hero-card-header {
+    background: linear-gradient(135deg, var(--gold) 0%, #b85d00 100%);
+    padding: 20px 24px;
+  }
+  .hero-card-header h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    color: var(--navy);
+    font-weight: 700;
+  }
+  .hero-card-header p {
+    font-size: 0.8rem;
+    color: rgba(4,43,98,0.7);
+    margin-top: 4px;
+  }
+  .hero-card-body { padding: 24px; }
+  .ca-profile {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .ca-avatar {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, var(--navy-light), var(--gold));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.3rem;
+    color: var(--white);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .ca-info h4 {
+    color: var(--white);
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  .ca-info p {
+    color: var(--gold-light);
+    font-size: 0.78rem;
+    margin-top: 2px;
+  }
+  .ca-info small {
+    color: rgba(255,255,255,0.45);
+    font-size: 0.72rem;
+  }
+  .session-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .session-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.85rem;
+    opacity: 0;
+    transform: translateY(8px);
+    animation: sessionIn .6s ease forwards;
+  }
+  .session-row:nth-child(2) { animation-delay: .12s; }
+  .session-row:nth-child(3) { animation-delay: .24s; }
+  .session-row:nth-child(4) { animation-delay: .36s; }
+  .session-row .icon {
+    width: 28px; height: 28px;
+    background: rgba(221,115,0,0.1);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    color: var(--gold-light);
+    animation: iconPulse 2.8s ease-in-out infinite;
+  }
+  .hero-card .btn-primary {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.9rem;
+    padding: 13px;
+  }
+  .card-badge {
+    text-align: center;
+    margin-top: 12px;
+    color: rgba(255,255,255,0.35);
+    font-size: 0.72rem;
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 96px 48px; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .section-title.light { color: var(--white); }
+
+  /* ─── SECTION 2: MISTAKES ─── */
+  .mistakes-section {
+    position: relative;
+    overflow: hidden;
+  }
+  .mistakes-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 60px,
+      rgba(255,255,255,0.015) 60px,
+      rgba(255,255,255,0.015) 61px
+    );
+  }
+  .mistakes-header {
+    text-align: center;
+    margin-bottom: 56px;
+    position: relative;
+    z-index: 1;
+  }
+  .mistakes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 56px;
+    position: relative;
+    z-index: 1;
+  }
+  .mistake-card {
+    background: rgba(221, 115, 0, 0.06);
+    border: 1px solid rgba(221,115,0,0.25);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    transition: all 0.25s;
+    overflow: hidden;
+  }
+  .mistake-card::after {
+    content: '';
+    position: absolute;
+    right: 18px;
+    bottom: 18px;
+    width: 52px;
+    height: 34px;
+    opacity: .16;
+    background:
+      linear-gradient(var(--fintoo-orange), var(--fintoo-orange)) 0 75% / 8px 25% no-repeat,
+      linear-gradient(var(--fintoo-orange), var(--fintoo-orange)) 16px 45% / 8px 55% no-repeat,
+      linear-gradient(var(--fintoo-orange), var(--fintoo-orange)) 32px 18% / 8px 82% no-repeat,
+      linear-gradient(var(--fintoo-orange), var(--fintoo-orange)) 48px 0 / 8px 100% no-repeat;
+    transform-origin: bottom;
+    animation: tinyBars 2.8s ease-in-out infinite;
+  }
+  .mistake-card::before,
+  .who-card::before,
+  .plan-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,.42) 48%, transparent 56%);
+    transform: translateX(-120%);
+    transition: transform .7s ease;
+    pointer-events: none;
+  }
+  .mistake-card:hover::before,
+  .who-card:hover::before,
+  .plan-card:hover::before {
+    transform: translateX(120%);
+  }
+  .mistake-card:hover {
+    background: rgba(221,115,0,0.1);
+    border-color: rgba(221,115,0,0.5);
+    transform: translateY(-2px);
+  }
+  .mistake-card:hover .mistake-stamp .icon-svg {
+    animation: wiggleIcon .45s ease;
+  }
+  .mistake-stamp {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(221,115,0,0.15);
+    border: 1px solid rgba(221,115,0,0.3);
+    border-radius: 4px;
+    padding: 4px 10px;
+    margin-bottom: 12px;
+  }
+  .mistake-stamp span:first-child {
+    color: var(--coral);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .mistake-stamp span:last-child {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--coral);
+  }
+  .mistake-card h4 {
+    color: var(--fintoo-blue);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .mistake-card p {
+        color: var(--text-muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+  .mistakes-transition {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+  .mistakes-transition p {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.3rem;
+    color: var(--text);
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .mistakes-transition small {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.88rem;
+  }
+
+  /* ─── SECTION 3: COMPARISON ─── */
+  .compare-section { background: var(--ice); }
+  .compare-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .compare-copy .section-title { margin-bottom: 20px; }
+  .compare-copy p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+  table.compare {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 32px rgba(4,43,98,0.08);
+    position: relative;
+  }
+  table.compare thead th {
+    padding: 14px 24px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  table.compare thead th:first-child {
+    background: #EEE;
+    color: #888;
+    text-align: left;
+  }
+  table.compare thead th:last-child {
+    background: var(--navy);
+    color: var(--gold);
+    text-align: center;
+  }
+  table.compare tbody tr:nth-child(odd) td:first-child { background: var(--white); }
+  table.compare tbody tr:nth-child(even) td:first-child { background: #F7F7F7; }
+  table.compare tbody td {
+    padding: 14px 24px;
+    font-size: 0.88rem;
+    vertical-align: middle;
+  }
+  table.compare tbody td:first-child {
+    color: #888;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  table.compare tbody td:first-child::before {
+    content: '';
+    width: 13px;
+    height: 13px;
+    color: #9ca3af;
+    background: currentColor;
+    clip-path: polygon(42% 0, 58% 0, 58% 42%, 100% 42%, 100% 58%, 58% 58%, 58% 100%, 42% 100%, 42% 58%, 0 58%, 0 42%, 42% 42%);
+    transform: rotate(45deg);
+    font-weight: 700;
+  }
+  table.compare tbody td:last-child {
+    text-align: center;
+    font-weight: 600;
+    color: var(--text);
+  }
+  table.compare tbody tr:nth-child(odd) td:last-child { background: #EAF3FF; }
+  table.compare tbody tr:nth-child(even) td:last-child { background: #E0EFF9; }
+  table.compare tbody td .check-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--fintoo-orange);
+    font-size: 0.85rem;
+  }
+  table.compare tbody tr {
+    transition: transform .22s ease, filter .22s ease;
+  }
+  table.compare tbody tr:hover {
+    transform: translateX(6px);
+    filter: drop-shadow(0 8px 18px rgba(4,43,98,.08));
+  }
+  table.compare tbody tr:hover .check-icon .icon-svg {
+    animation: checkPop .38s ease;
+  }
+
+  /* ─── SECTION 4: TIMELINE ─── */
+  .timeline-section { background: var(--white); }
+  .timeline-header { text-align: center; margin-bottom: 64px; }
+  .timeline {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .timeline-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    position: relative;
+    text-align: center;
+  }
+  .timeline-step:hover .step-icon {
+    transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 12px 28px rgba(221,115,0,.2);
+  }
+  .timeline-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 50%;
+    right: -50%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold) 0%, rgba(221,115,0,0.3) 100%);
+    z-index: 0;
+    background-size: 200% 100%;
+    animation: timelineFlow 3.8s linear infinite;
+  }
+  .step-circle {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--navy);
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gold);
+    position: relative;
+    z-index: 1;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 0 rgba(221,115,0,.22);
+    animation: stepPulse 3s ease-in-out infinite;
+  }
+  .step-icon {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    display: block;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .step-title {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .step-sub {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .step-tag {
+    display: inline-block;
+    background: var(--gold-pale);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 100px;
+    margin-top: 6px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ─── SECTION 5: WHO ─── */
+  .who-section { background: var(--ice); }
+  .who-header { text-align: center; margin-bottom: 48px; }
+  .who-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .who-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 28px;
+    border: 1px solid rgba(4,43,98,0.07);
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .who-card:hover .who-icon {
+    transform: translateY(-6px) rotate(-3deg);
+  }
+  .who-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+  }
+  .who-card:hover {
+    box-shadow: 0 8px 32px rgba(4,43,98,0.1);
+    transform: translateY(-3px);
+  }
+  .who-card:hover::after { transform: scaleX(1); }
+  .who-icon {
+    font-size: 2rem;
+    margin-bottom: 14px;
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    background: var(--gold-pale);
+    color: var(--fintoo-orange);
+    transition: transform .25s ease;
+  }
+  .who-card h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .who-card p {
+    color: var(--text-muted);
+    font-size: 0.83rem;
+    line-height: 1.5;
+  }
+
+  /* ─── SECTION 6: CHECKLIST ─── */
+  .checklist-section { background: var(--navy); }
+  .checklist-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .checklist-copy { }
+  .checklist-copy .section-title.light { margin-bottom: 20px; }
+  .checklist-copy p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+  .checklist-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .check-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(221,115,0,.12), transparent);
+    transform: translateX(-120%);
+  }
+  .check-item:hover::after {
+    animation: scanRow .9s ease;
+  }
+  .check-item:hover {
+    background: rgba(221,115,0,0.08);
+    border-color: rgba(221,115,0,0.2);
+  }
+  .check-tick {
+    width: 20px; height: 20px;
+    background: rgba(221,115,0,0.16);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    color: var(--fintoo-orange);
+    flex-shrink: 0;
+    transition: transform .22s ease;
+  }
+  .check-item:hover .check-tick { transform: scale(1.16) rotate(-6deg); }
+  .check-item span {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+
+  /* ─── SECTION 7: STATS ─── */
+  .stats-section {
+    background: var(--white);
+    text-align: center;
+  }
+  .stats-header { margin-bottom: 64px; }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .stat-item {
+    padding: 18px 12px;
+    border-radius: 16px;
+    transition: transform .25s ease, background .25s ease;
+  }
+  .stat-item:hover {
+    transform: translateY(-6px);
+    background: var(--ice);
+  }
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.4rem, 4vw, 3.2rem);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+    display: block;
+    margin-bottom: 8px;
+    letter-spacing: -0.03em;
+    background: linear-gradient(90deg, var(--navy), var(--gold), var(--navy));
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: numberSheen 5s ease-in-out infinite;
+  }
+  .stat-num em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .stat-label {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  .stat-divider {
+    width: 40px;
+    height: 3px;
+    background: var(--gold);
+    margin: 12px auto 0;
+    border-radius: 2px;
+  }
+
+  /* ─── SECTION 8: TESTIMONIALS ─── */
+  .testimonials-section { background: var(--ice); }
+  .testimonials-header { text-align: center; margin-bottom: 48px; }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .testimonial-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 28px;
+    border: 1px solid rgba(4,43,98,0.07);
+    position: relative;
+    overflow: hidden;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 44px rgba(4,43,98,.1);
+  }
+  .testimonial-card::before {
+    content: '"';
+    position: absolute;
+    top: 16px; right: 24px;
+    font-family: 'Inter', sans-serif;
+    font-size: 4rem;
+    color: var(--gold);
+    opacity: 0.2;
+    line-height: 1;
+  }
+  .testimonial-stars {
+    color: var(--gold);
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+  }
+  .testimonial-text {
+    color: var(--text);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .author-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+  .author-info h5 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .author-info span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .video-placeholder {
+    background: var(--navy);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 180px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .video-placeholder:hover { background: var(--navy-light); }
+  .play-btn {
+    width: 52px; height: 52px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    animation: playPulse 2.2s ease-in-out infinite;
+  }
+  .video-placeholder p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.8rem;
+    font-style: italic;
+  }
+
+  /* ─── SECTION 9: EXPERTS ─── */
+  .experts-section { background: var(--white); }
+  .experts-header { text-align: center; margin-bottom: 48px; }
+  .experts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .expert-card {
+    border: 1px solid rgba(4,43,98,0.08);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.25s;
+  }
+  .expert-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(4,43,98,0.1);
+  }
+  .expert-avatar-wrap {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+  }
+  .expert-info { padding: 16px; }
+  .expert-info h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .expert-info .qual {
+    font-size: 0.72rem;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .expert-info .exp {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .expert-tag {
+    display: inline-block;
+    background: var(--ice);
+    border-radius: 100px;
+    padding: 3px 10px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  /* ─── SECTION 10: PLANNING ─── */
+  .planning-section {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .planning-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center top, rgba(221,115,0,0.1) 0%, transparent 60%);
+  }
+  .planning-inner { position: relative; z-index: 1; }
+  .planning-section .section-title {
+    color: var(--white);
+    max-width: 700px;
+    margin: 12px auto 24px;
+    line-height: 1.3;
+  }
+  .planning-section .section-title span { color: var(--gold); }
+  .planning-section p {
+    color: rgba(255,255,255,0.65);
+    font-size: 1rem;
+    max-width: 560px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+  .planning-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 48px;
+    text-align: left;
+  }
+  .planning-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(221,115,0,0.2);
+    border-radius: 12px;
+    padding: 24px;
+    transition: transform .24s ease, border-color .24s ease, background .24s ease;
+  }
+  .planning-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(221,115,0,.45);
+    background: rgba(255,255,255,.08);
+  }
+  .planning-card h4 {
+    color: var(--gold-light);
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .planning-card p {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.8rem;
+    margin-bottom: 0;
+    line-height: 1.5;
+  }
+
+  /* ─── FAQ ─── */
+  .faq-section { background: var(--ice); }
+  .faq-header { text-align: center; margin-bottom: 56px; }
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .faq-item {
+    background: var(--white);
+    border-radius: 10px;
+    border: 1px solid rgba(4,43,98,0.07);
+    overflow: hidden;
+  }
+  .faq-q {
+    padding: 18px 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--text);
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .faq-q:hover { background: var(--ice); }
+  .faq-icon {
+    width: 22px; height: 22px;
+    background: var(--navy);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    transition: transform 0.25s;
+  }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s;
+    padding: 0 22px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    line-height: 1.65;
+  }
+  .faq-item.open .faq-a {
+    max-height: 200px;
+    padding: 0 22px 18px;
+  }
+
+  /* ─── PRICING SECTION ─── */
+  .pricing-section { background: var(--white); }
+  .pricing-header { text-align: center; margin-bottom: 56px; }
+  .pricing-tagline {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--gold-pale);
+    border: 1px solid rgba(221,115,0,0.3);
+    color: var(--gold);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto 40px;
+  }
+  .plan-card {
+    border-radius: 18px;
+    border: 2px solid rgba(4,43,98,0.08);
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s;
+    background: var(--white);
+    isolation: isolate;
+  }
+  .plan-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(4,43,98,0.12);
+  }
+  .plan-card:hover .plan-price-box {
+    animation: priceBounce .45s ease;
+  }
+  @keyframes wiggleIcon {
+    0%, 100% { transform: rotate(0deg); }
+    30% { transform: rotate(-10deg); }
+    65% { transform: rotate(8deg); }
+  }
+  @keyframes heroCardFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes heroCardSweep {
+    0%, 38% { transform: translateX(-90%); opacity: .5; }
+    62%, 100% { transform: translateX(90%); opacity: 1; }
+  }
+  @keyframes sessionIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes iconPulse {
+    0%, 100% { box-shadow: 0 0 0 rgba(221,115,0,0); }
+    50% { box-shadow: 0 0 0 5px rgba(221,115,0,.08); }
+  }
+  @keyframes trustSweep {
+    0%, 40% { transform: translateX(-120%); }
+    65%, 100% { transform: translateX(120%); }
+  }
+  @keyframes tinyBars {
+    0%, 100% { transform: scaleY(.75); }
+    50% { transform: scaleY(1); }
+  }
+  @keyframes checkPop {
+    0% { transform: scale(.75); }
+    70% { transform: scale(1.22); }
+    100% { transform: scale(1); }
+  }
+  @keyframes timelineFlow {
+    to { background-position: -200% 0; }
+  }
+  @keyframes stepPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(221,115,0,.2); }
+    50% { box-shadow: 0 0 0 8px rgba(221,115,0,0); }
+  }
+  @keyframes numberSheen {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  @keyframes playPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(221,115,0,.22); }
+    50% { transform: scale(1.07); box-shadow: 0 0 0 12px rgba(221,115,0,0); }
+  }
+  @keyframes priceBounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.045); }
+  }
+  .plan-card.popular {
+    border-color: var(--fintoo-orange);
+    box-shadow: 0 8px 32px rgba(221,115,0,0.15);
+  }
+  .popular-badge {
+    background: var(--fintoo-orange);
+    color: var(--white);
+    text-align: center;
+    padding: 7px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .plan-header {
+    padding: 28px 28px 20px;
+    border-bottom: 1px solid rgba(4,43,98,0.06);
+  }
+  .plan-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .plan-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+  }
+  .plan-card.popular .plan-name { color: var(--fintoo-orange); }
+  .plan-subtitle {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+  .plan-price-wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .plan-price-box {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 10px;
+    padding: 14px 20px;
+    min-width: 120px;
+    text-align: center;
+  }
+  .plan-card.popular .plan-price-box {
+    background: linear-gradient(135deg, var(--fintoo-orange), #b85d00);
+  }
+  .plan-price-actual {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1;
+    display: block;
+  }
+  .plan-price-original {
+    font-size: 0.75rem;
+    text-decoration: line-through;
+    opacity: 0.5;
+    display: block;
+    margin-top: 2px;
+  }
+  .plan-price-label {
+    font-size: 0.68rem;
+    opacity: 0.7;
+    display: block;
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+  }
+  .plan-savings {
+    background: var(--gold-pale);
+    color: var(--fintoo-orange);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    align-self: center;
+    white-space: nowrap;
+  }
+  .plan-body {
+    padding: 24px 28px;
+  }
+  .plan-inclusions-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 14px;
+  }
+  .plan-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-bottom: 24px;
+  }
+  .plan-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 0.82rem;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .plan-features li::before {
+    content: '';
+    width: 17px; height: 17px;
+    border-radius: 50%;
+    background: var(--gold-pale);
+    color: var(--fintoo-orange);
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    clip-path: polygon(14% 48%, 32% 30%, 46% 44%, 75% 15%, 92% 32%, 46% 78%);
+  }
+  .btn-plan {
+    width: 100%;
+    padding: 14px;
+    border-radius: 9px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .btn-plan-navy {
+    background: var(--navy);
+    color: var(--white);
+  }
+  .btn-plan-navy:hover { background: var(--navy-light); }
+  .btn-plan-orange {
+    background: linear-gradient(135deg, var(--fintoo-orange), #b85d00);
+    color: var(--white);
+  }
+  .btn-plan-orange:hover { filter: brightness(1.08); }
+
+  .icon-svg {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vertical-align: -0.15em;
+  }
+  .icon-fill {
+    fill: currentColor;
+    stroke: none;
+  }
+
+  /* ─── CALENDLY MODAL ─── */
+  .calendly-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 12, 24, 0.85);
+    backdrop-filter: blur(6px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .calendly-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .calendly-modal {
+    background: var(--white);
+    border-radius: 18px;
+    width: min(96vw, 820px);
+    max-height: 92vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transform: scale(0.95) translateY(16px);
+    transition: transform 0.3s;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+  }
+  .calendly-overlay.active .calendly-modal {
+    transform: scale(1) translateY(0);
+  }
+  .calendly-modal-header {
+    background: var(--navy);
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .calendly-modal-header-left h3 {
+    font-family: 'Inter', sans-serif;
+    color: var(--white);
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+  .calendly-modal-header-left p {
+    color: var(--gold-light);
+    font-size: 0.78rem;
+    margin-top: 2px;
+  }
+  .calendly-close {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    border-radius: 50%;
+    width: 34px; height: 34px;
+    color: var(--white);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .calendly-close:hover { background: rgba(255,255,255,0.2); }
+  .calendly-frame-wrap {
+    flex: 1;
+    min-height: 560px;
+    position: relative;
+    background: #F5F7FA;
+  }
+  .calendly-frame-wrap iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 560px;
+    border: none;
+    display: block;
+  }
+  .calendly-loading {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    background: #F5F7FA;
+  }
+  .calendly-loading .spinner {
+    width: 36px; height: 36px;
+    border: 3px solid rgba(221,115,0,0.2);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .calendly-loading p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  .pricing-trust {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding-top: 16px;
+  }
+  .pricing-trust span {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  .pricing-trust span::before {
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 900px) {
+    .pricing-grid { grid-template-columns: 1fr; max-width: 460px; }
+  }
+
+  /* ─── FOOTER CTA ─── */
+  .footer-cta {
+    background: var(--navy);
+    text-align: center;
+    padding: 80px 48px 100px;
+  }
+  .footer-cta .section-label { margin-bottom: 16px; }
+  .footer-cta h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    color: var(--white);
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+  .footer-cta p {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.95rem;
+    margin-bottom: 36px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .footer-btns {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  footer {
+    background: #060E1A;
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer p {
+    color: rgba(255,255,255,0.3);
+    font-size: 0.75rem;
+  }
+  footer a {
+    color: rgba(255,255,255,0.3);
+    text-decoration: none;
+    font-size: 0.75rem;
+    transition: color 0.2s;
+  }
+  footer a:hover { color: var(--gold); }
+  .footer-links { display: flex; gap: 20px; }
+
+  /* ─── SEBI BADGE ─── */
+  .sebi-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(221,115,0,0.3);
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin-top: 16px;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.72rem;
+  }
+  .sebi-badge strong { color: var(--gold-light); }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    nav .nav-link { display: none; }
+    section { padding: 64px 20px; }
+    .hero { padding: 100px 20px 60px; }
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .hero h1 { font-size: clamp(2.35rem, 11vw, 3.25rem); }
+    .hero-not { margin-bottom: 22px; }
+    .hero-proof { flex-direction: column; align-items: stretch; }
+    .hero-proof span { justify-content: center; }
+    .hero-btns a { width: 100%; justify-content: center; }
+    .hero-card { display: none; }
+    .product-showcase { padding: 64px 0; }
+    .showcase-rail {
+      grid-auto-columns: minmax(82vw, 1fr);
+      gap: 16px;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    .motion-card { min-height: 500px; }
+    .motion-copy { padding: 0 24px 28px; }
+    .showcase-cta {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+    }
+    .showcase-cta a { width: 100%; }
+    .mistakes-grid { grid-template-columns: 1fr 1fr; }
+    .compare-inner { grid-template-columns: 1fr; }
+    .timeline { flex-direction: column; align-items: center; gap: 24px; }
+    .timeline-step:not(:last-child)::after { display: none; }
+    .who-grid { grid-template-columns: 1fr 1fr; }
+    .checklist-inner { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .experts-grid { grid-template-columns: repeat(2, 1fr); }
+    .planning-cards { grid-template-columns: 1fr; }
+    .faq-grid { grid-template-columns: 1fr; }
+    .trust-strip { grid-template-columns: repeat(2, 1fr); }
+    footer { flex-direction: column; text-align: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+
+  /* Scroll animations */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+<svg aria-hidden="true" class="hidden" width="0" height="0" style="position:absolute">
+  <symbol id="icon-calendar" viewBox="0 0 24 24"><path d="M7 3v4"/><path d="M17 3v4"/><path d="M4 8h16"/><path d="M5 5h14v16H5z"/></symbol>
+  <symbol id="icon-lock" viewBox="0 0 24 24"><path d="M7 10V8a5 5 0 0 1 10 0v2"/><path d="M5 10h14v11H5z"/><path d="M12 15v2"/></symbol>
+  <symbol id="icon-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+  <symbol id="icon-x" viewBox="0 0 24 24"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></symbol>
+  <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.4 8.5-8 9-4.6-.5-8-4-8-9V6z"/><path d="M9 12l2 2 4-5"/></symbol>
+  <symbol id="icon-briefcase" viewBox="0 0 24 24"><path d="M10 6V5a2 2 0 0 1 4 0v1"/><path d="M4 7h16v12H4z"/><path d="M4 12h16"/></symbol>
+  <symbol id="icon-trophy" viewBox="0 0 24 24"><path d="M8 4h8v4a4 4 0 0 1-8 0z"/><path d="M6 6H4a3 3 0 0 0 3 3"/><path d="M18 6h2a3 3 0 0 1-3 3"/><path d="M12 12v5"/><path d="M8 21h8"/><path d="M9 17h6"/></symbol>
+  <symbol id="icon-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l3-3 3 2 5-7"/></symbol>
+  <symbol id="icon-rupee" viewBox="0 0 24 24"><path d="M7 5h10"/><path d="M7 9h10"/><path d="M8 5c6 0 6 8 0 8h-1l8 6"/></symbol>
+  <symbol id="icon-plane" viewBox="0 0 24 24"><path d="M2 16l20-8-8 20-4-8z"/><path d="M10 20l4-8"/></symbol>
+  <symbol id="icon-building" viewBox="0 0 24 24"><path d="M4 21V5h10v16"/><path d="M14 9h6v12"/><path d="M8 9h2"/><path d="M8 13h2"/><path d="M8 17h2"/><path d="M17 13h1"/><path d="M17 17h1"/></symbol>
+  <symbol id="icon-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 10-13h-7z"/></symbol>
+  <symbol id="icon-file" viewBox="0 0 24 24"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4"/><path d="M9 13h6"/><path d="M9 17h4"/></symbol>
+  <symbol id="icon-star" viewBox="0 0 24 24"><path d="M12 3l2.7 5.5 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.8 1-6.1-4.4-4.3 6.1-.9z"/></symbol>
+  <symbol id="icon-user-tie" viewBox="0 0 24 24"><circle cx="12" cy="7" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/><path d="M10 14l2 3 2-3"/></symbol>
+  <symbol id="icon-video" viewBox="0 0 24 24"><path d="M4 6h11v12H4z"/><path d="M15 10l5-3v10l-5-3z"/></symbol>
+  <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6l4 2"/></symbol>
+  <symbol id="icon-folder" viewBox="0 0 24 24"><path d="M3 6h7l2 3h9v10H3z"/></symbol>
+  <symbol id="icon-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0"/><circle cx="17" cy="10" r="2.5"/><path d="M15 17a5 5 0 0 1 6 3"/></symbol>
+  <symbol id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
+</svg>
+
+<!-- Sticky Bar -->
+<div class="sticky-bar" id="stickyBar">
+  <span>Need Help Filing Taxes?</span>
+  <button class="btn-gold" onclick="scrollToTop()"><svg class="icon-svg"><use href="#icon-calendar"></use></svg> Book Free 15-Min Consultation</button>
+</div>
+
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Live CA-Assisted ITR Filing</div>
+      <h1>
+        <span class="hero-line">One CA.</span>
+        <span class="hero-line">One Dedicated session.</span>
+        <span class="hero-line">Your <em>ITR filed</em> 45 Minutes.</span>
+      </h1>
+      <div class="hero-not">
+        <span>No chatbot maze</span>
+        <span>No ticketing-system wait</span>
+      </div>
+      <p class="hero-desc">
+ Connect with a qualified tax expert over a live video consultation and get your return filed with complete confidence.      </p>
+      <p class="hero-subline">Experience tax filing the way it should be—personalized, accurate, and stress-free.</p>
+     
+  
+      <div class="hero-btns">
+        <a href="#book" class="btn-primary"><svg class="icon-svg"><use href="#icon-calendar"></use></svg> Book Free 15-Minute Introductory Call</a>
+        <a href="#how" class="btn-secondary"><svg class="icon-svg icon-fill"><use href="#icon-play"></use></svg> Watch How Live Filing Works</a>
+      </div>
+      <div class="trust-strip">
+        <div class="trust-item">
+          <span class="trust-num">₹5K+Cr</span>
+          <span class="trust-label">Assets Under Advisory</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-num">2.5L+</span>
+          <span class="trust-label">Happy Clients</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-num">100+</span>
+          <span class="trust-label">Corporate Partners</span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-num">SEBI</span>
+          <span class="trust-label">Registered Advisor</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <div class="hero-card-header">
+        <h3>Your Next Available Session</h3>
+        <p>Introductory Call · Free · 15 Minutes</p>
+      </div>
+      <div class="hero-card-body">
+        <div class="ca-profile">
+          <div class="ca-avatar">R</div>
+          <div class="ca-info">
+            <h4>CA Rohan Mehta</h4>
+            <p>Senior Tax Expert · 11 Years Exp.</p>
+            <small>Specialisation: ESOPs &amp; NRI Taxation</small>
+          </div>
+        </div>
+        <div class="session-details">
+          <div class="session-row"><div class="icon"><svg class="icon-svg"><use href="#icon-video"></use></svg></div>Video Call · Secure Platform</div>
+          <div class="session-row"><div class="icon"><svg class="icon-svg"><use href="#icon-clock"></use></svg></div>Tomorrow, 10:00 AM – 10:15 AM</div>
+          <div class="session-row"><div class="icon"><svg class="icon-svg"><use href="#icon-lock"></use></svg></div>Your data is fully encrypted</div>
+          <div class="session-row"><div class="icon"><svg class="icon-svg"><use href="#icon-check"></use></svg></div>No payment required to book</div>
+        </div>
+        <a href="#book" class="btn-primary">Reserve My Spot →</a>
+        <p class="card-badge"><svg class="icon-svg"><use href="#icon-shield"></use></svg> SEBI Registered · Trusted by 25,000+ individuals</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRODUCT MOTION SHOWCASE ═══ -->
+<section class="product-showcase" aria-label="Fintoo filing experience">
+  <div class="showcase-header fade-up">
+    <h2>ITR filing that feels <span>guided, visual, and precise.</span></h2>
+    <p>From income import to deductions, regime selection, and refund clarity, every step is reviewed live with your CA.</p>
+  </div>
+  <div class="showcase-rail">
+    <article class="motion-card fade-up" style="--card-wash:rgba(4,43,98,.07)">
+      <div class="motion-stage">
+        <div class="broker-stack">
+          <div class="broker-pill">
+            <div class="broker-logo">AIS</div>
+            <div class="broker-line"><span style="--w:82%"></span></div>
+            <div class="broker-status">FETCHING</div>
+          </div>
+          <div class="broker-pill">
+            <div class="broker-logo">16</div>
+            <div class="broker-line"><span style="--w:68%"></span></div>
+            <div class="broker-status">MATCHED</div>
+          </div>
+          <div class="broker-pill">
+            <div class="broker-logo">CG</div>
+            <div class="broker-line"><span style="--w:76%"></span></div>
+            <div class="broker-status">SYNCED</div>
+          </div>
+        </div>
+      </div>
+      <div class="motion-copy">
+        <h3>Income details pulled together before your call</h3>
+        <p>Salary, interest, capital gains, and AIS data are organized so your CA starts with context, not guesswork.</p>
+      </div>
+    </article>
+
+    <article class="motion-card fade-up" style="--card-wash:rgba(221,115,0,.08)">
+      <div class="motion-stage">
+        <div class="mini-panel">
+          <div class="mini-title">Deductions reviewed automatically</div>
+          <div class="mini-row scanning"><span>Standard deduction</span><strong>₹75,000</strong><span class="mini-check"><svg class="icon-svg"><use href="#icon-check"></use></svg></span></div>
+          <div class="mini-row scanning"><span>Section 80C</span><strong>₹1,50,000</strong><span class="mini-check"><svg class="icon-svg"><use href="#icon-check"></use></svg></span></div>
+          <div class="mini-row scanning"><span>HRA exemption</span><strong>Found</strong><span class="mini-check"><svg class="icon-svg"><use href="#icon-check"></use></svg></span></div>
+        </div>
+      </div>
+      <div class="motion-copy">
+        <h3>No deduction left sitting in your documents</h3>
+        <p>Your tax expert checks what applies and explains what should be claimed, line by line.</p>
+      </div>
+    </article>
+
+    <article class="motion-card fade-up" style="--card-wash:rgba(4,43,98,.06)">
+      <div class="motion-stage">
+        <div class="regime-card">
+          <div class="mini-title">Best regime comparison</div>
+          <div class="regime-option best">
+            <div class="regime-label"><span>New regime</span><span><svg class="icon-svg"><use href="#icon-check"></use></svg></span></div>
+            <div class="regime-tax">Estimated tax payable: ₹3,68,807</div>
+            <div class="regime-bar"><span style="--w:58%"></span></div>
+          </div>
+          <div class="regime-option">
+            <div class="regime-label"><span>Old regime</span><span>Compare</span></div>
+            <div class="regime-tax">Estimated tax payable: ₹5,78,567</div>
+            <div class="regime-bar"><span style="--w:88%"></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="motion-copy">
+        <h3>Right form, right regime, selected with proof</h3>
+        <p>See the math clearly before filing, with your CA validating the final choice.</p>
+      </div>
+    </article>
+
+    <article class="motion-card fade-up" style="--card-wash:rgba(221,115,0,.07)">
+      <div class="motion-stage">
+        <div class="refund-card">
+          <div class="mini-title">Interactive tax summary</div>
+          <div class="refund-amount">₹88,090</div>
+          <div class="refund-flow">
+            <div class="flow-row"><span>Gross income</span><span>₹30,26,152</span></div>
+            <div class="flow-line"></div>
+            <div class="flow-row"><span>Deductions</span><span>₹3,99,673</span></div>
+            <div class="flow-line"></div>
+            <div class="flow-row"><span>Taxable income</span><span>₹26,26,479</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="motion-copy">
+        <h3>Every number visualized before submission</h3>
+        <p>Refund, taxable income, deductions, and liability are presented clearly before you approve filing.</p>
+      </div>
+    </article>
+  </div>
+  <div class="showcase-dots" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="showcase-cta fade-up">
+    <div>
+      <strong>File ITR with expert accuracy, not form-filling anxiety.</strong>
+      <span>Book a free intro call and understand your filing path in minutes.</span>
+    </div>
+    <a href="#book" class="btn-primary"><svg class="icon-svg"><use href="#icon-calendar"></use></svg> Start Filing</a>
+  </div>
+</section>
+
+<!-- ═══ SECTION 2: MISTAKES ═══ -->
+<section class="mistakes-section">
+  <div class="container">
+    <div class="mistakes-header fade-up">
+      <div class="section-label">The Hidden Risk</div>
+      <h2 class="section-title ">Why Most Taxpayers Make<br>Costly Mistakes</h2>
+    </div>
+    <div class="mistakes-grid">
+      <div class="mistake-card fade-up">
+        <div class="mistake-stamp">
+          <span><svg class="icon-svg"><use href="#icon-x"></use></svg></span><span>Error Detected</span>
+        </div>
+        <h4>Missing Foreign Asset Disclosure</h4>
+        <p>Foreign accounts, properties, and investments left unreported — a trigger for income tax notices and heavy penalties under FEMA.</p>
+      </div>
+      <div class="mistake-card fade-up">
+        <div class="mistake-stamp">
+          <span><svg class="icon-svg"><use href="#icon-x"></use></svg></span><span>Error Detected</span>
+        </div>
+        <h4>Wrong Capital Gains Calculation</h4>
+        <p>Confusing short-term and long-term gains, incorrect cost basis, or missed indexation benefits leading to excess tax payment.</p>
+      </div>
+      <div class="mistake-card fade-up">
+        <div class="mistake-stamp">
+          <span><svg class="icon-svg"><use href="#icon-x"></use></svg></span><span>Error Detected</span>
+        </div>
+        <h4>Incorrect Tax Regime Selection</h4>
+        <p>Choosing the wrong regime without analysing your actual deductions — potentially paying lakhs more than necessary.</p>
+      </div>
+      <div class="mistake-card fade-up">
+        <div class="mistake-stamp">
+          <span><svg class="icon-svg"><use href="#icon-x"></use></svg></span><span>Error Detected</span>
+        </div>
+        <h4>Missed Deductions</h4>
+        <p>Leaving behind 80C, 80D, HRA, LTA, and NPS deductions that are legitimately yours — simply from not knowing they apply.</p>
+      </div>
+      <div class="mistake-card fade-up">
+        <div class="mistake-stamp">
+          <span><svg class="icon-svg"><use href="#icon-x"></use></svg></span><span>Error Detected</span>
+        </div>
+        <h4>ESOP Reporting Errors</h4>
+        <p>Incorrect perquisite valuation, timing of tax events, or failure to disclose unvested options — common for startup employees.</p>
+      </div>
+      <div class="mistake-card fade-up">
+        <div class="mistake-stamp">
+          <span><svg class="icon-svg"><use href="#icon-x"></use></svg></span><span>Error Detected</span>
+        </div>
+        <h4>Incorrect Advance Tax Reporting</h4>
+        <p>Missing advance tax deadlines or miscalculating liability results in interest levied under Section 234B and 234C.</p>
+      </div>
+    </div>
+    <div class="mistakes-transition fade-up">
+      <p>"Your tax return is more than a form. It's a financial declaration."</p>
+      <small>One mistake can lead to notices, penalties, or excess tax payments that take years to resolve. Don't leave it to software.</small>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 3: COMPARISON ═══ -->
+<section class="compare-section">
+  <div class="container compare-inner">
+    <div class="compare-copy fade-up">
+      <div class="section-label">What Makes Us Different</div>
+      <h2 class="section-title">Fintoo vs<br>Everyone Else</h2>
+      <p>Most platforms hand you a form and wish you luck. Fintoo gives you a tax expert who sits with you, understands your situation, and files it right the first time.</p>
+      <a href="#book" class="btn-primary"><svg class="icon-svg"><use href="#icon-calendar"></use></svg> Book Free Intro Call</a>
+    </div>
+    <div class="fade-up">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>Other Platforms</th>
+            <th>Fintoo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Upload documents</td>
+            <td><span class="check-icon"><svg class="icon-svg"><use href="#icon-check"></use></svg> Live CA consultation</span></td>
+          </tr>
+          <tr>
+            <td>Ticket-based support</td>
+            <td><span class="check-icon"><svg class="icon-svg"><use href="#icon-check"></use></svg> Dedicated tax expert</span></td>
+          </tr>
+          <tr>
+            <td>DIY filing</td>
+            <td><span class="check-icon"><svg class="icon-svg"><use href="#icon-check"></use></svg> Assisted live filing</span></td>
+          </tr>
+          <tr>
+            <td>Generic advice</td>
+            <td><span class="check-icon"><svg class="icon-svg"><use href="#icon-check"></use></svg> Personalised tax planning</span></td>
+          </tr>
+          <tr>
+            <td>One-time filing only</td>
+            <td><span class="check-icon"><svg class="icon-svg"><use href="#icon-check"></use></svg> Year-round guidance</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 4: TIMELINE ═══ -->
+<section class="timeline-section" id="how">
+  <div class="container">
+    <div class="timeline-header fade-up">
+      <div class="section-label">The Process</div>
+      <h2 class="section-title">Your 45-Minute Tax Session</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-step fade-up">
+        <div class="step-circle">1</div>
+        <span class="step-icon"><svg class="icon-svg"><use href="#icon-calendar"></use></svg></span>
+        <div class="step-title">Book Intro Call</div>
+        <div class="step-sub">Free, 15 minutes</div>
+        <span class="step-tag">Start here</span>
+      </div>
+      <div class="timeline-step fade-up">
+        <div class="step-circle">2</div>
+        <span class="step-icon"><svg class="icon-svg"><use href="#icon-folder"></use></svg></span>
+        <div class="step-title">Share Documents</div>
+        <div class="step-sub">Secure upload portal</div>
+      </div>
+      <div class="timeline-step fade-up">
+        <div class="step-circle">3</div>
+        <span class="step-icon"><svg class="icon-svg"><use href="#icon-users"></use></svg></span>
+        <div class="step-title">Meet Your Expert</div>
+        <div class="step-sub">Video consultation</div>
+      </div>
+      <div class="timeline-step fade-up">
+        <div class="step-circle">4</div>
+        <span class="step-icon"><svg class="icon-svg"><use href="#icon-bolt"></use></svg></span>
+        <div class="step-title">Live Filing</div>
+        <div class="step-sub">45-minute session</div>
+        <span class="step-tag">Core session</span>
+      </div>
+      <div class="timeline-step fade-up">
+        <div class="step-circle">5</div>
+        <span class="step-icon"><svg class="icon-svg"><use href="#icon-check"></use></svg></span>
+        <div class="step-title">Review &amp; Submit</div>
+        <div class="step-sub">Complete confidence</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 5: WHO ═══ -->
+<section class="who-section">
+  <div class="container">
+    <div class="who-header fade-up">
+      <div class="section-label">Who It's For</div>
+      <h2 class="section-title">Built For Complex Tax Situations</h2>
+    </div>
+    <div class="who-grid">
+      <div class="who-card fade-up">
+        <span class="who-icon"><svg class="icon-svg"><use href="#icon-briefcase"></use></svg></span>
+        <h3>Salaried Professionals</h3>
+        <p>One employer or multiple. Form 16, HRA, Leave Travel, and more — accurately filed with every deduction claimed.</p>
+      </div>
+      <div class="who-card fade-up">
+        <span class="who-icon"><svg class="icon-svg"><use href="#icon-trophy"></use></svg></span>
+        <h3>Senior Managers &amp; CXOs</h3>
+        <p>Complex compensation structures with variable pay, bonuses, perquisites, and multiple investment accounts.</p>
+      </div>
+      <div class="who-card fade-up">
+        <span class="who-icon"><svg class="icon-svg"><use href="#icon-chart"></use></svg></span>
+        <h3>ESOP Holders</h3>
+        <p>Startup and listed company employees navigating perquisite tax, RSUs, and foreign equity reporting.</p>
+      </div>
+      <div class="who-card fade-up">
+        <span class="who-icon"><svg class="icon-svg"><use href="#icon-rupee"></use></svg></span>
+        <h3>Investors</h3>
+        <p>Mutual funds, stocks, bonds, REITs, unlisted shares, and crypto — every asset class reported correctly.</p>
+      </div>
+      <div class="who-card fade-up">
+        <span class="who-icon"><svg class="icon-svg"><use href="#icon-plane"></use></svg></span>
+        <h3>NRIs</h3>
+        <p>Foreign income, DTAA benefits, remittance taxation, and schedule FA disclosure requirements handled end-to-end.</p>
+      </div>
+      <div class="who-card fade-up">
+        <span class="who-icon"><svg class="icon-svg"><use href="#icon-building"></use></svg></span>
+        <h3>Business Owners</h3>
+        <p>Salary plus business income plus investments — a combined picture filed seamlessly under one expert's guidance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 6: CHECKLIST ═══ -->
+<section class="checklist-section">
+  <div class="container checklist-inner">
+    <div class="checklist-copy fade-up">
+      <div class="section-label">Session Coverage</div>
+      <h2 class="section-title light">Everything Covered In Your Session</h2>
+      <p>Your 45-minute session is structured to leave nothing on the table — from accurate reporting to optimisation opportunities most people miss.</p>
+      <a href="#book" class="btn-primary"><svg class="icon-svg"><use href="#icon-calendar"></use></svg> Book Your Session →</a>
+      <div class="sebi-badge"><svg class="icon-svg"><use href="#icon-shield"></use></svg> <strong>SEBI Registered Investment Advisor</strong> · RIA No. INA000014252</div>
+    </div>
+    <div class="checklist-grid fade-up">
+      <div class="check-item"><div class="check-tick"><svg class="icon-svg"><use href="#icon-check"></use></svg></div><span>Income Tax Return Filing</span></div>
+      <div class="check-item"><div class="check-tick"><svg class="icon-svg"><use href="#icon-check"></use></svg></div><span>Tax Regime Evaluation</span></div>
+      <div class="check-item"><div class="check-tick"><svg class="icon-svg"><use href="#icon-check"></use></svg></div><span>Capital Gain Reporting</span></div>
+      <div class="check-item"><div class="check-tick"><svg class="icon-svg"><use href="#icon-check"></use></svg></div><span>ESOP Taxation</span></div>
+      <div class="check-item"><div class="check-tick"><svg class="icon-svg"><use href="#icon-check"></use></svg></div><span>Foreign Assets Reporting</span></div>
+      <div class="check-item"><div class="check-tick"><svg class="icon-svg"><use href="#icon-check"></use></svg></div><span>Advance Tax Review</span></div>
+      <div class="check-item"><div class="check-tick"><svg class="icon-svg"><use href="#icon-check"></use></svg></div><span>Tax Saving Opportunities</span></div>
+      <div class="check-item"><div class="check-tick"><svg class="icon-svg"><use href="#icon-check"></use></svg></div><span>Investment Deductions</span></div>
+      <div class="check-item"><div class="check-tick"><svg class="icon-svg"><use href="#icon-check"></use></svg></div><span>HRA &amp; Exemptions</span></div>
+      <div class="check-item"><div class="check-tick"><svg class="icon-svg"><use href="#icon-check"></use></svg></div><span>Full Compliance Check</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 7: STATS ═══ -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-header fade-up">
+      <div class="section-label">Why Clients Choose Fintoo</div>
+      <h2 class="section-title">Trusted Across India</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-item fade-up">
+        <span class="stat-num">₹5,000<em>+</em>Cr</span>
+        <div class="stat-divider"></div>
+        <div class="stat-label">Assets Under Advisory</div>
+      </div>
+      <div class="stat-item fade-up">
+        <span class="stat-num">25,000<em>+</em></span>
+        <div class="stat-divider"></div>
+        <div class="stat-label">Individuals Advised</div>
+      </div>
+      <div class="stat-item fade-up">
+        <span class="stat-num">100<em>+</em></span>
+        <div class="stat-divider"></div>
+        <div class="stat-label">Corporate Relationships</div>
+      </div>
+      <div class="stat-item fade-up">
+        <span class="stat-num">80<em>+</em></span>
+        <div class="stat-divider"></div>
+        <div class="stat-label">Experts &amp; Specialists</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECTION 8: TESTIMONIALS ═══ -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="testimonials-header fade-up">
+      <div class="section-label">Client Experiences</div>
+      <h2 class="section-title">What Executives Say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars"><span class="stars"><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg></span></div>
+        <p class="testimonial-text">"I had ESOPs from two companies and foreign assets I'd never disclosed. The CA walked me through everything in one session. Saved me from what could have been a serious compliance issue."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background: var(--navy-light);">A</div>
+          <div class="author-info">
+            <h5>Ananya S.</h5>
+            <span>Senior Manager, Tech MNC · Bengaluru</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars"><span class="stars"><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg></span></div>
+        <p class="testimonial-text">"As a VP Engineering, I have RSUs, multiple investment accounts, and a US-based savings account. For the first time I feel like someone actually understood my financial situation and filed it right."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background: #073b84;">V</div>
+          <div class="author-info">
+            <h5>Vikram R.</h5>
+            <span>VP Engineering · Pune</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-stars"><span class="stars"><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg></span></div>
+        <p class="testimonial-text">"Being an NRI based in Singapore, I always struggled with DTAA claims and my Indian rental income. Fintoo's team handled it with confidence and clarity. Filing felt simple for the first time."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background: #0b4d9f;">P</div>
+          <div class="author-info">
+            <h5>Priya K.</h5>
+            <span>Finance Director · Singapore-based NRI</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up">
+        <div class="video-placeholder" title="Watch client video testimonial">
+          <div class="play-btn"><svg class="icon-svg icon-fill"><use href="#icon-play"></use></svg></div>
+          <p>Watch: CXO shares his experience filing with a live CA</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ═══ CALENDLY MODAL ═══ -->
+<div class="calendly-overlay" id="calendlyOverlay" onclick="closeCalendly(event)">
+  <div class="calendly-modal">
+    <div class="calendly-modal-header">
+      <div class="calendly-modal-header-left">
+        <h3 id="calendlyTitle">Book Your Free Introductory Call</h3>
+        <p id="calendlySubtitle">15-minute consultation · No payment required</p>
+      </div>
+      <button class="calendly-close" onclick="closeCalendlyBtn()"><svg class="icon-svg"><use href="#icon-x"></use></svg></button>
+    </div>
+    <div class="calendly-frame-wrap">
+      <div class="calendly-loading" id="calendlyLoading">
+        <div class="spinner"></div>
+        <p>Loading your booking calendar…</p>
+      </div>
+      <iframe
+        id="calendlyFrame"
+        src=""
+        onload="document.getElementById('calendlyLoading').style.display='none'"
+        allow="camera; microphone"
+        title="Book a session with Fintoo">
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PRICING ═══ -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div class="pricing-header fade-up">
+      <div class="section-label">Transparent Pricing</div>
+      <div class="pricing-tagline"><svg class="icon-svg"><use href="#icon-file"></use></svg> Expert Guidance · Accurate Filing · Maximum Refund</div>
+      <h2 class="section-title">Fintoo ITR Rate Card 2026</h2>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- BASIC -->
+      <div class="plan-card fade-up">
+        <div class="plan-header">
+          <div class="plan-label">Plan 1</div>
+          <div class="plan-name">BASIC</div>
+          <div class="plan-subtitle">Individual with Salary, House Property &amp; Other Sources</div>
+          <div class="plan-price-wrap">
+            <div class="plan-price-box">
+              <span class="plan-price-actual">₹999</span>
+              <span class="plan-price-original">₹1,999</span>
+              <span class="plan-price-label">All Inclusive</span>
+            </div>
+            <div class="plan-savings">Save ₹1,000</div>
+          </div>
+        </div>
+        <div class="plan-body">
+          <div class="plan-inclusions-label">Inclusions</div>
+          <ul class="plan-features">
+            <li>Live Video ITR Filing with Tax Expert</li>
+            <li>Resident Individuals</li>
+            <li>Income up to ₹50 Lakhs</li>
+            <li>Multiple Form 16</li>
+            <li>Income up to 2 House Properties</li>
+            <li>Multiple Other Sources of Income</li>
+          </ul>
+          <button class="btn-plan btn-plan-navy" onclick="openCalendly('basic')">
+            <svg class="icon-svg"><use href="#icon-calendar"></use></svg> Get Started with Basic
+          </button>
+        </div>
+      </div>
+
+      <!-- GOLD (POPULAR) -->
+      <div class="plan-card popular fade-up">
+        <div class="popular-badge"><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg> Most Popular</div>
+        <div class="plan-header">
+          <div class="plan-label">Plan 2</div>
+          <div class="plan-name">GOLD</div>
+          <div class="plan-subtitle">Individual with Capital Gains</div>
+          <div class="plan-price-wrap">
+            <div class="plan-price-box">
+              <span class="plan-price-actual">₹2,499</span>
+              <span class="plan-price-original">₹2,999</span>
+              <span class="plan-price-label">All Inclusive</span>
+            </div>
+            <div class="plan-savings">Save ₹500</div>
+          </div>
+        </div>
+        <div class="plan-body">
+          <div class="plan-inclusions-label">Inclusions</div>
+          <ul class="plan-features">
+            <li>Live Video ITR Filing with Tax Expert</li>
+            <li>Resident / NRI / RNOR Individuals &amp; HUFs</li>
+            <li>Multiple House Properties</li>
+            <li>Multiple Form 16</li>
+            <li>Multiple Other Sources of Income</li>
+            <li>Capital Gains — MF / Shares / Property / Other Assets (India)</li>
+            <li>Income Exceeding ₹50 Lakhs</li>
+            <li>Assets Disclosure (Indian)</li>
+          </ul>
+          <button class="btn-plan btn-plan-orange" onclick="openCalendly('gold')">
+            <svg class="icon-svg"><use href="#icon-calendar"></use></svg> Get Started with Gold
+          </button>
+        </div>
+      </div>
+
+      <!-- DIAMOND -->
+      <div class="plan-card fade-up">
+        <div class="plan-header">
+          <div class="plan-label">Plan 3</div>
+          <div class="plan-name">DIAMOND</div>
+          <div class="plan-subtitle">Resident / Non-Resident / Foreign National with foreign income</div>
+          <div class="plan-price-wrap">
+            <div class="plan-price-box">
+              <span class="plan-price-actual">₹4,499</span>
+              <span class="plan-price-original">₹4,999</span>
+              <span class="plan-price-label">All Inclusive</span>
+            </div>
+            <div class="plan-savings">Save ₹500</div>
+          </div>
+        </div>
+        <div class="plan-body">
+          <div class="plan-inclusions-label">Inclusions</div>
+          <ul class="plan-features">
+            <li>Live Video ITR Filing with Tax Expert</li>
+            <li>Resident / NRI / RNOR / Foreign National</li>
+            <li>Multiple Form 16 &amp; House Properties</li>
+            <li>Multiple Other Sources of Income</li>
+            <li>Income Exceeding ₹50 Lakhs</li>
+            <li>Indian &amp; Foreign Assets Disclosure</li>
+            <li>Capital Gains — MF / Shares / Property / Other Assets</li>
+            <li>Foreign Income Disclosure</li>
+            <li>Professional Income &amp; Business Income</li>
+            <li>ESOPs / RSU Computation</li>
+          </ul>
+          <button class="btn-plan btn-plan-navy" onclick="openCalendly('diamond')">
+            <svg class="icon-svg"><use href="#icon-calendar"></use></svg> Get Started with Diamond
+          </button>
+        </div>
+      </div>
+
+    </div>
+    <div class="pricing-trust fade-up">
+      <span><svg class="icon-svg"><use href="#icon-lock"></use></svg> 100% Secure &amp; Confidential</span>
+      <span><svg class="icon-svg"><use href="#icon-bolt"></use></svg> Quick &amp; Accurate Filing</span>
+      <span><svg class="icon-svg"><use href="#icon-user-tie"></use></svg> Expert Tax Support</span>
+      <span><svg class="icon-svg"><use href="#icon-rupee"></use></svg> Max Refund. Zero Stress.</span>
+      <span><svg class="icon-svg"><use href="#icon-check"></use></svg> CA Reviewed &amp; Verified</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="faq-header fade-up">
+      <div class="section-label">Common Questions</div>
+      <h2 class="section-title">Frequently Asked</h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item fade-up">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          How is this different from ClearTax or Quicko?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">ClearTax and Quicko are software platforms where you fill in forms yourself. Fintoo gives you a real Chartered Accountant in a live video call who files alongside you, explains every entry, and ensures nothing is missed — especially for complex situations like ESOPs, foreign assets, or multiple income sources.</div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Will I speak to a real CA? Not a support agent?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Absolutely. You are directly connected with a practising Chartered Accountant, not a support executive or bot. Your CA is assigned based on your specific income profile and will handle your filing personally.</div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          What documents do I need to share?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Typically: Form 16(s) from employer(s), bank statements, capital gains statements from brokers, foreign asset details if applicable, and rent receipts. Your CA will send you a customised checklist after the introductory call based on your situation.</div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Can you help with ESOP taxation?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Yes. We handle ESOP perquisite reporting at exercise, capital gains on sale, RSU vesting, and cross-border ESOP complications for employees of foreign-listed companies. This is one of our most common specialisations.</div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Can you help with foreign asset disclosure?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Yes, including Schedule FA reporting, foreign bank accounts, overseas property, PFIC holdings, and DTAA treaty benefits. Missing these disclosures can result in significant penalties — our experts handle this routinely.</div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Can NRIs use this service?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Yes. We serve NRIs across the US, UK, Singapore, UAE, and other countries. We handle residential status determination, DTAA claims, Indian source income, and repatriation planning.</div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          How long does the full filing take?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">The core session is 45 minutes. After the free 15-minute intro call and document collection, most returns are filed within 2–3 working days from the time of your session.</div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Is my financial data secure?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Yes. All document uploads use 256-bit encryption. We operate under strict data privacy standards and your information is never shared with third parties. Fintoo is a SEBI Registered Investment Advisor.</div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          What happens after I book?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">You'll receive a confirmation with a secure meeting link. Before the call, we'll send a short intake form and document checklist tailored to your income profile. Your CA will review this before your session.</div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Is the consultation online only?
+          <div class="faq-icon">+</div>
+        </div>
+        <div class="faq-a">Yes — fully online via video call. This allows you to access our experts from anywhere in India or abroad, without any travel or waiting room time.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER CTA ═══ -->
+
+
+<footer>
+  <p>© 2024 Fintoo. All rights reserved. SEBI Registered Investment Advisor.</p>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Disclaimer</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+<script>
+  // ─── CALENDLY ───
+  const CALENDLY_URL = 'https://calendly.com/fintoo/tax-consultation';
+
+  const planMeta = {
+    basic:   { title: 'Book Your Basic Plan Session',   subtitle: 'Salary & House Property · ₹999 All Inclusive' },
+    gold:    { title: 'Book Your Gold Plan Session',    subtitle: 'Capital Gains & NRI · ₹2,499 All Inclusive' },
+    diamond: { title: 'Book Your Diamond Plan Session', subtitle: 'Foreign Assets & ESOPs · ₹4,499 All Inclusive' },
+    free:    { title: 'Book Free 15-Minute Intro Call', subtitle: '15-minute consultation · No payment required' },
+  };
+
+  function openCalendly(plan = 'free') {
+    const meta = planMeta[plan] || planMeta.free;
+    document.getElementById('calendlyTitle').textContent = meta.title;
+    document.getElementById('calendlySubtitle').textContent = meta.subtitle;
+    document.getElementById('calendlyLoading').style.display = 'flex';
+    // Set iframe src — swap CALENDLY_URL for your real link
+    const frame = document.getElementById('calendlyFrame');
+    frame.src = CALENDLY_URL + '?hide_gdpr_banner=1&primary_color=0a1628';
+    document.getElementById('calendlyOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCalendlyBtn() {
+    const overlay = document.getElementById('calendlyOverlay');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    setTimeout(() => { document.getElementById('calendlyFrame').src = ''; }, 300);
+  }
+
+  function closeCalendly(e) {
+    if (e.target === document.getElementById('calendlyOverlay')) closeCalendlyBtn();
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeCalendlyBtn();
+  });
+
+  // Attach openCalendly to all existing CTA buttons/links
+  document.querySelectorAll('a[href="#book"], a.nav-cta').forEach(el => {
+    el.addEventListener('click', (e) => { e.preventDefault(); openCalendly('free'); });
+  });
+  document.querySelectorAll('.sticky-bar .btn-gold').forEach(el => {
+    el.addEventListener('click', () => openCalendly('free'));
+  });
+
+  // ─── STICKY BAR ───
+  const stickyBar = document.getElementById('stickyBar');
+  window.addEventListener('scroll', () => {
+    stickyBar.classList.toggle('visible', window.scrollY > 600);
+  });
+
+  function scrollToTop() { openCalendly('free'); }
+
+  // FAQ toggle
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
