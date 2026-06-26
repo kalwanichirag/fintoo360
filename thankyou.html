@@ -105,11 +105,21 @@
             transition: background 0.5s ease;
         }
 
-        .testimonial-slide {
-            display: none;
+        .testimonial-track {
+            transition: transform 0.5s ease;
         }
-        .testimonial-slide.active {
-            display: block;
+        .testimonial-slide {
+            flex: 0 0 100%;
+        }
+        @media (min-width: 768px) {
+            .testimonial-slide {
+                flex-basis: 50%;
+            }
+        }
+        @media (min-width: 1024px) {
+            .testimonial-slide {
+                flex-basis: 33.333333%;
+            }
         }
 
         .social-card:hover {
@@ -164,6 +174,16 @@
                     boxShadow: {
                         card: '-2px 4px 12px 4px rgba(51,51,51,0.05)',
                         'card-hover': '0 12px 40px rgba(4,43,98,0.12)',
+                    },
+                    keyframes: {
+                        scrollMove: {
+                            '0%': { transform: 'translate(-50%, 10px)', opacity: '0' },
+                            '50%': { transform: 'translate(-50%, 22px)', opacity: '1' },
+                            '100%': { transform: 'translate(-50%, 42px)', opacity: '0' },
+                        },
+                    },
+                    animation: {
+                        scrollMove: 'scrollMove 2s linear infinite',
                     }
                 }
             }
@@ -174,7 +194,7 @@
 
    
     <!-- Section 1: Success Hero -->
-    <section id="hero" class="bg-gradient-to-br from-primary via-primary to-[#063a82] relative overflow-hidden py-20 md:py-28">
+    <section id="hero" class="bg-gradient-to-br from-primary via-primary to-[#063a82] relative flex min-h-screen items-center overflow-hidden py-20 md:py-24">
         <!-- Decorative elements -->
         <div class="absolute top-0 right-0 w-96 h-96 bg-secondary opacity-5 rounded-full -translate-y-1/2 translate-x-1/4"></div>
         <div class="absolute bottom-0 left-0 w-64 h-64 bg-white opacity-5 rounded-full translate-y-1/2 -translate-x-1/4"></div>
@@ -249,42 +269,81 @@
                     </div>
                 </div>
 
-                <!-- Add to Calendar Split Button -->
-                <div class="relative">
-                    <div class="flex rounded-xl overflow-hidden border border-primary">
-                        <button class="flex-1 bg-primary text-white text-sm font-semibold px-5 py-3.5 flex items-center justify-center gap-2 hover:bg-opacity-90 transition-colors duration-200">
-                            <i class="fa-solid fa-calendar-plus text-secondary"></i>
-                            Add to Calendar
-                        </button>
-                        <button id="calDropdownBtn" class="bg-primary bg-opacity-90 text-white px-4 py-3.5 border-l border-white border-opacity-20 hover:bg-opacity-100 transition-colors duration-200" onclick="toggleCalDropdown()">
-                            <i class="fa-solid fa-chevron-down text-xs"></i>
-                        </button>
-                    </div>
-                    <div id="calDropdown" class="cal-dropdown absolute top-full left-0 right-0 mt-2 bg-card border border-border rounded-xl shadow-xl z-20 overflow-hidden">
-                        <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-background transition-colors text-sm text-foreground font-medium">
-                            <i class="fa-brands fa-google text-red-500"></i>
-                            Google Calendar
-                        </a>
-                        <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-background transition-colors text-sm text-foreground font-medium border-t border-border">
-                            <i class="fa-brands fa-microsoft text-blue-500"></i>
-                            Outlook Calendar
-                        </a>
-                        <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-background transition-colors text-sm text-foreground font-medium border-t border-border">
-                            <i class="fa-brands fa-apple text-gray-700"></i>
-                            Apple iCal
-                        </a>
-                    </div>
-                </div>
-
-                
             </div>
 
            
         </div>
+
+        <div id="scroll-down-animation" class="absolute bottom-4 left-1/2 z-10 hidden -translate-x-1/2 text-center lg:block">
+            <span class="relative mx-auto block h-12 w-6 rounded-[50px] border-2 border-white">
+                <span class="absolute left-1/2 top-0 h-1.5 w-1.5 rounded-full bg-white animate-scrollMove"></span>
+            </span>
+            <h2 class="mt-1.5 text-[10px] font-semibold uppercase tracking-wide text-white text-opacity-80">Scroll down</h2>
+        </div>
     </section>
 
+       <section id="testimonials" class="py-12 md:py-14 bg-[#F3F7FB] border-t border-[#E4ECF5]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <span class="inline-block text-secondary font-semibold text-xs tracking-widest uppercase mb-3">Client Stories</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-primary mb-2">Hear From Our Clients</h2>
+                <p class="text-muted-foreground text-sm md:text-base">Real outcomes. Real people. Real trust.</p>
+            </div>
+
+            <div class="relative">
+                <div class="overflow-hidden">
+                    <div id="testimonialCarousel" class="testimonial-track flex -mx-3 md:-mx-4">
+                        <div class="testimonial-slide px-3 md:px-4">
+                            <div class="overflow-hidden rounded-2xl border border-border bg-card p-3 shadow-card">
+                                <div class="aspect-video overflow-hidden rounded-xl bg-black">
+                                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/2InkOjJmgxQ" title="Fintoo client testimonial 1" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-slide px-3 md:px-4">
+                            <div class="overflow-hidden rounded-2xl border border-border bg-card p-3 shadow-card">
+                                <div class="aspect-video overflow-hidden rounded-xl bg-black">
+                                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/WMDLsTcbFtY" title="Fintoo client testimonial 2" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-slide px-3 md:px-4">
+                            <div class="overflow-hidden rounded-2xl border border-border bg-card p-3 shadow-card">
+                                <div class="aspect-video overflow-hidden rounded-xl bg-black">
+                                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/b1w34_mGfM0" title="Fintoo client testimonial 3" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-slide px-3 md:px-4">
+                            <div class="overflow-hidden rounded-2xl border border-border bg-card p-3 shadow-card">
+                                <div class="aspect-video overflow-hidden rounded-xl bg-black">
+                                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/C0bzu0ZAEe4" title="Fintoo client testimonial 4" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex items-center justify-between">
+                    <div class="flex gap-2">
+                        <button onclick="prevSlide()" class="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-colors duration-200">
+                            <i class="fa-solid fa-arrow-left text-sm"></i>
+                        </button>
+                        <button onclick="nextSlide(); restartTestimonialTimer()" class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white hover:bg-opacity-90 transition-colors duration-200">
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="flex gap-2" id="carouselDots"></div>
+                    <span class="text-xs text-muted-foreground font-medium" id="slideCounter">1 / 2</span>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Section 2: What Happens Next – Interactive Timeline -->
-    <section id="timeline" class="py-20 bg-background">
+    <section id="timeline" class="py-20 bg-white border-t border-[#E7EEF6]">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-14">
                 <span class="inline-block text-secondary font-semibold text-xs tracking-widest uppercase mb-3">Your Journey</span>
@@ -405,7 +464,7 @@
     </section>
 
     <!-- Section 3: Who We Are -->
-    <section id="who-we-are" class="py-20 bg-primary relative overflow-hidden">
+    <section id="who-we-are" class="py-20 bg-gradient-to-br from-[#05285A] via-primary to-[#063B86] relative overflow-hidden border-t border-[#0C4A8F]">
         <div class="absolute inset-0 opacity-5">
             <div class="absolute top-10 right-10 w-64 h-64 rounded-full border border-white"></div>
             <div class="absolute bottom-10 left-10 w-48 h-48 rounded-full border border-white"></div>
@@ -426,11 +485,11 @@
                     <!-- Stat Cards -->
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                         <div class="glassmorphism rounded-2xl p-5 text-center">
-                            <p class="text-2xl md:text-3xl font-bold text-primary mb-1" data-count="12000">2,50,000+</p>
-                            <p class="text-xs text-muted-foreground font-semibold uppercase tracking-wide">Satisfied Clients</p>
+                            <p class="text-2xl md:text-3xl font-bold text-primary mb-1" data-count="12000">450+</p>
+                            <p class="text-xs text-muted-foreground font-semibold uppercase tracking-wide">Happy Families</p>
                         </div>
                         <div class="glassmorphism rounded-2xl p-5 text-center">
-                            <p class="text-2xl md:text-3xl font-bold text-primary mb-1">₹4,200<span class="text-lg">Cr</span></p>
+                            <p class="text-2xl md:text-3xl font-bold text-primary mb-1">₹450<span class="text-lg">Cr</span></p>
                             <p class="text-xs text-muted-foreground font-semibold uppercase tracking-wide">Assets Managed</p>
                         </div>
                         <div class="glassmorphism rounded-2xl p-5 text-center">
@@ -467,8 +526,8 @@
                             <i class="fa-solid fa-star text-white text-sm"></i>
                         </div>
                         <div>
-                            <p class="text-primary font-bold text-sm">4.9 / 5.0</p>
-                            <p class="text-muted-foreground text-xs">2,400+ Verified Reviews</p>
+                            <p class="text-primary font-bold text-sm">4.5 / 5.0</p>
+                            <p class="text-muted-foreground text-xs">250+ Verified Reviews</p>
                         </div>
                     </div>
                     <!-- Decorative -->
@@ -478,225 +537,13 @@
         </div>
     </section>
 
-    <!-- Section 4: Testimonial Carousel -->
-    <section id="testimonials" class="py-20 bg-background">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-14">
-                <span class="inline-block text-secondary font-semibold text-xs tracking-widest uppercase mb-3">Client Stories</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-3">Hear From Our Clients</h2>
-                <p class="text-muted-foreground text-base">Real outcomes. Real people. Real trust.</p>
-                <div class="flex justify-center items-center gap-1.5 mt-4">
-                    <i class="fa-solid fa-star text-secondary text-lg"></i>
-                    <i class="fa-solid fa-star text-secondary text-lg"></i>
-                    <i class="fa-solid fa-star text-secondary text-lg"></i>
-                    <i class="fa-solid fa-star text-secondary text-lg"></i>
-                    <i class="fa-solid fa-star text-secondary text-lg"></i>
-                    <span class="text-muted-foreground text-sm ml-2 font-medium">4.9 / 5.0 from 2,400+ reviews</span>
-                </div>
-            </div>
+    <!-- Section 4: Video Testimonials -->
+ 
 
-            <!-- Carousel -->
-            <div class="relative bg-card rounded-3xl shadow-card border border-border p-8 md:p-12 overflow-hidden">
-                <!-- Background decoration -->
-                <div class="absolute top-6 left-8 text-primary opacity-10 text-[100px] font-serif leading-none select-none">"</div>
-
-                <div id="testimonialCarousel">
-                    <!-- Slide 1 -->
-                    <div class="testimonial-slide active">
-                        <div class="relative z-10">
-                            <div class="flex items-center gap-2 mb-6">
-                                <span class="flex items-center gap-1.5 bg-green-50 text-green-700 text-xs font-semibold px-3 py-1.5 rounded-full">
-                                    <i class="fa-solid fa-circle-check text-xs"></i>
-                                    Verified Client
-                                </span>
-                                <div class="flex gap-0.5">
-                                    <i class="fa-solid fa-star text-secondary text-xs"></i>
-                                    <i class="fa-solid fa-star text-secondary text-xs"></i>
-                                    <i class="fa-solid fa-star text-secondary text-xs"></i>
-                                    <i class="fa-solid fa-star text-secondary text-xs"></i>
-                                    <i class="fa-solid fa-star text-secondary text-xs"></i>
-                                </div>
-                            </div>
-                            <blockquote class="font-serif text-xl md:text-2xl text-foreground leading-relaxed mb-8 italic">
-                                "Fintoo completely transformed how I think about money. Within 18 months, my portfolio grew by 34% while I slept soundly knowing experts were watching over every rupee. The clarity and confidence their advisors gave me is priceless."
-                            </blockquote>
-                            <div class="flex items-center gap-4">
-                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg" alt="Ananya Kapoor" class="w-14 h-14 rounded-full object-cover border-2 border-secondary">
-                                <div>
-                                    <p class="font-bold text-foreground text-sm">Ananya Kapoor</p>
-                                    <p class="text-muted-foreground text-xs">Senior Director, Bangalore</p>
-                                    <p class="text-secondary text-xs font-semibold mt-0.5">Client since 2021 · ₹85L portfolio</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 2 -->
-                    <div class="testimonial-slide">
-                        <div class="relative z-10">
-                            <div class="flex items-center gap-2 mb-6">
-                                <span class="flex items-center gap-1.5 bg-green-50 text-green-700 text-xs font-semibold px-3 py-1.5 rounded-full">
-                                    <i class="fa-solid fa-circle-check text-xs"></i>
-                                    Verified Client
-                                </span>
-                                <div class="flex gap-0.5">
-                                    <i class="fa-solid fa-star text-secondary text-xs"></i>
-                                    <i class="fa-solid fa-star text-secondary text-xs"></i>
-                                    <i class="fa-solid fa-star text-secondary text-xs"></i>
-                                    <i class="fa-solid fa-star text-secondary text-xs"></i>
-                                    <i class="fa-solid fa-star text-secondary text-xs"></i>
-                                </div>
-                            </div>
-                            <blockquote class="font-serif text-xl md:text-2xl text-foreground leading-relaxed mb-8 italic">
-                                "I came in with a scattered investment portfolio and left with a clear, focused strategy. My advisor understood my risk tolerance and life goals perfectly. The tax-saving advice alone saved me over ₹3.2 lakhs last year. Absolutely worth every minute."
-                            </blockquote>
-                            <div class="flex items-center gap-4">
-                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg" alt="Rajesh Mehta" class="w-14 h-14 rounded-full object-cover border-2 border-secondary">
-                                <div>
-                                    <p class="font-bold text-foreground text-sm">Rajesh Mehta</p>
-                                    <p class="text-muted-foreground text-xs">Entrepreneur, Mumbai</p>
-                                    <p class="text-secondary text-xs font-semibold mt-0.5">Client since 2019 · ₹1.4Cr portfolio</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Slide 3 -->
-                    <div class="testimonial-slide">
-                        <div class="relative z-10">
-                            <div class="flex items-center gap-2 mb-6">
-                                <span class="flex items-center gap-1.5 bg-green-50 text-green-700 text-xs font-semibold px-3 py-1.5 rounded-full">
-                                    <i class="fa-solid fa-circle-check text-xs"></i>
-                                    Verified Client
-                                </span>
-                                <div class="flex gap-0.5">
-                                    <i class="fa-solid fa-star text-secondary text-xs"></i>
-                                    <i class="fa-solid fa-star text-secondary text-xs"></i>
-                                    <i class="fa-solid fa-star text-secondary text-xs"></i>
-                                    <i class="fa-solid fa-star text-secondary text-xs"></i>
-                                    <i class="fa-solid fa-star text-secondary text-xs"></i>
-                                </div>
-                            </div>
-                            <blockquote class="font-serif text-xl md:text-2xl text-foreground leading-relaxed mb-8 italic">
-                                "As a first-time investor, I was overwhelmed. Fintoo made everything simple and approachable. They built a retirement plan that lets me live my life today while securing my future. I'm finally stress-free about money."
-                            </blockquote>
-                            <div class="flex items-center gap-4">
-                                <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg" alt="Preethi Nair" class="w-14 h-14 rounded-full object-cover border-2 border-secondary">
-                                <div>
-                                    <p class="font-bold text-foreground text-sm">Preethi Nair</p>
-                                    <p class="text-muted-foreground text-xs">Software Engineer, Pune</p>
-                                    <p class="text-secondary text-xs font-semibold mt-0.5">Client since 2022 · ₹42L portfolio</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Carousel Controls -->
-                <div class="flex items-center justify-between mt-8 pt-6 border-t border-border">
-                    <div class="flex gap-2">
-                        <button onclick="prevSlide()" class="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:border-primary hover:text-primary transition-colors duration-200">
-                            <i class="fa-solid fa-arrow-left text-sm"></i>
-                        </button>
-                        <button onclick="nextSlide()" class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white hover:bg-opacity-90 transition-colors duration-200">
-                            <i class="fa-solid fa-arrow-right text-sm"></i>
-                        </button>
-                    </div>
-                    <div class="flex gap-2" id="carouselDots">
-                        <button onclick="goToSlide(0)" class="w-2 h-2 rounded-full bg-primary transition-all duration-300"></button>
-                        <button onclick="goToSlide(1)" class="w-2 h-2 rounded-full bg-border transition-all duration-300"></button>
-                        <button onclick="goToSlide(2)" class="w-2 h-2 rounded-full bg-border transition-all duration-300"></button>
-                    </div>
-                    <span class="text-xs text-muted-foreground font-medium" id="slideCounter">1 / 3</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 5: Video Section -->
-    <section id="video-section" class="py-20 bg-background">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-14">
-                <span class="inline-block text-secondary font-semibold text-xs tracking-widest uppercase mb-3">Meet the Team</span>
-                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-3">What to Expect Next</h2>
-                <p class="text-muted-foreground text-base max-w-xl mx-auto">A quick walkthrough of how your consultation will work and how to prepare for it.</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Main Video -->
-                <div class="lg:col-span-2">
-                    <div class="relative rounded-2xl overflow-hidden cursor-pointer group shadow-xl" id="mainVideo" onclick="playVideo('mainVideo')">
-                        <div class="h-[380px] md:h-[480px] overflow-hidden">
-                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_1ec6e0d87e_facfb429e0f2ab9e.png" alt="professional female Indian financial advisor speaking to camera in modern office, warm and inviting " />
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-black to-transparent opacity-40"></div>
-
-                        <!-- Play Button -->
-                        <div class="video-play-btn absolute inset-0 flex flex-col items-center justify-center">
-                            <div class="w-20 h-20 bg-secondary rounded-full flex items-center justify-center shadow-2xl mb-4">
-                                <i class="fa-solid fa-play text-white text-2xl ml-1.5" id="mainVideoIcon"></i>
-                            </div>
-                            <span class="text-white font-semibold text-sm tracking-wide">Watch Now</span>
-                        </div>
-
-                        <!-- Duration Badge -->
-                        <div class="absolute bottom-5 right-5 bg-black bg-opacity-70 text-white text-xs font-semibold px-3 py-1.5 rounded-lg flex items-center gap-1.5">
-                            <i class="fa-solid fa-clock text-secondary text-xs"></i>
-                            2:15 min
-                        </div>
-
-                        <!-- Label -->
-                        <div class="absolute bottom-5 left-5">
-                            <p class="text-white font-bold text-base">Welcome to Fintoo</p>
-                            <p class="text-white text-xs" style="color: rgba(255,255,255,0.75)">Fintoo Wealth Advisory Team</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Secondary Videos -->
-                <div class="relative rounded-2xl overflow-hidden cursor-pointer group shadow-card border border-border" id="video2" onclick="playVideo('video2')">
-                    <div class="h-52 overflow-hidden">
-                        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_3d0e00ce45_71a51d0a32ea00fa.png" alt="professional male Indian financial advisor at desk with charts and graphs, modern financial office, " />
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
-                    <div class="video-play-btn absolute inset-0 flex items-center justify-center">
-                        <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center shadow-xl">
-                            <i class="fa-solid fa-play text-white text-sm ml-0.5"></i>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-4 left-4 right-16">
-                        <p class="text-white font-semibold text-sm">How We Manage Your Wealth</p>
-                        <p class="text-xs" style="color: rgba(255,255,255,0.75)">Our investment philosophy</p>
-                    </div>
-                    <div class="absolute bottom-4 right-4 bg-black bg-opacity-70 text-white text-xs font-semibold px-2 py-1 rounded-lg">
-                        3:45
-                    </div>
-                </div>
-
-                <div class="relative rounded-2xl overflow-hidden cursor-pointer group shadow-card border border-border" id="video3" onclick="playVideo('video3')">
-                    <div class="h-52 overflow-hidden">
-                        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_c844d260fa_27b3155b63983a7d.png" alt="diverse team of financial experts in conference room discussing investment strategy with graphs on s" />
-                    </div>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
-                    <div class="video-play-btn absolute inset-0 flex items-center justify-center">
-                        <div class="w-12 h-12 bg-secondary rounded-full flex items-center justify-center shadow-xl">
-                            <i class="fa-solid fa-play text-white text-sm ml-0.5"></i>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-4 left-4 right-16">
-                        <p class="text-white font-semibold text-sm">What to Expect in Your Session</p>
-                        <p class="text-xs" style="color: rgba(255,255,255,0.75)">Consultation walkthrough</p>
-                    </div>
-                    <div class="absolute bottom-4 right-4 bg-black bg-opacity-70 text-white text-xs font-semibold px-2 py-1 rounded-lg">
-                        1:55
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+   
 
     <!-- Section 6: Why Clients Work With Us -->
-    <section id="benefits" class="py-20 bg-primary">
+    <section id="benefits" class="py-20 bg-[#06234F] border-t border-[#174678]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-14">
                 <span class="inline-block text-secondary font-semibold text-xs tracking-widest uppercase mb-3">Our Edge</span>
@@ -764,7 +611,7 @@
 
   
     <!-- Section 9: FAQ -->
-    <section id="faq" class="py-20 bg-card border-t border-border">
+    <section id="faq" class="py-20 bg-[#F8FAFC] border-t border-[#DDE7F2]">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-14">
                 <span class="inline-block text-secondary font-semibold text-xs tracking-widest uppercase mb-3">Common Questions</span>
@@ -843,62 +690,88 @@
     </section>
 
     <!-- Section 10: Final Reassurance -->
- <div id="footer-disclaimer" class="container m-auto py-4 px-3 border-t-solid"><div class="flex justify-between items-center block lg:hidden"><h4 class="text-sm text-gray-400 font-semibold">Disclaimer</h4><button class="text-gray-400 text-xl font-bold">+</button></div><div class="text-xs text-gray-400 leading-relaxed space-y-4 transition-all duration-300 max-h-0 opacity-0 overflow-hidden lg:max-h-screen lg:opacity-100 lg:mt-4"><p>Fintoo Wealth Private Limited (Brand Name - Fintoo.in, Fintoo app, Fintoo) makes no warranties or representations, express or implied, on products and services offered through the platform. It accepts no liability for any damages or losses, however, caused in connection with the use of, or on the reliance of its advisory or related services. Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs. Performance and returns of any investment portfolio can neither be predicted nor guaranteed. Investments made on advisory are subject to market risks, read all scheme related documents carefully.</p><p>© Fintoo Wealth Private Limited [SEBI RIA Registration No: INA000020031] [BASL Membership ID: 2252] [Type of Registration: Non-Individual] [Validity of registration: March 26,2025-Perpetual] [Address: Fintoo Wealth Private Limited, B/309, Dynasty Business park, Opp Sangam Cinema, Andheri (East), J B Nagar, Mumbai, Maharashtra 400059] [CIN - U66301MH2023PTC414206] [GST No : 27AAFCF7114E1ZV] [Principal Officer details : Mr. Mihir Shah (mihir.shah@fintoo.in)] [Compliance Officer details : Mrs. Nisha Harchekar (nisha.harchekar@fintoo.in)] [Corresponding SEBI regional/local office: Plot No. C 4-A , G Block, Near Bank of India, Bandra Kurla Complex,Bandra East, Mumbai, Maharashtra 400051]</p><p class="text-center m-0">Copyright © 2025 Fintoo. All rights reserved</p></div></div>
+ <div id="footer-disclaimer" class="w-full border-t border-[#DDE7F2] bg-[#EEF3F8] py-4 px-3"><div class="mx-auto max-w-7xl"><div class="flex justify-between items-center block lg:hidden"><h4 class="text-sm text-gray-400 font-semibold">Disclaimer</h4><button class="text-gray-400 text-xl font-bold">+</button></div><div class="text-xs text-gray-400 leading-relaxed space-y-4 transition-all duration-300 max-h-0 opacity-0 overflow-hidden lg:max-h-screen lg:opacity-100 lg:mt-4"><p>Fintoo Wealth Private Limited (Brand Name - Fintoo.in, Fintoo app, Fintoo) makes no warranties or representations, express or implied, on products and services offered through the platform. It accepts no liability for any damages or losses, however, caused in connection with the use of, or on the reliance of its advisory or related services. Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs. Performance and returns of any investment portfolio can neither be predicted nor guaranteed. Investments made on advisory are subject to market risks, read all scheme related documents carefully.</p><p>© Fintoo Wealth Private Limited [SEBI RIA Registration No: INA000020031] [BASL Membership ID: 2252] [Type of Registration: Non-Individual] [Validity of registration: March 26,2025-Perpetual] [Address: Fintoo Wealth Private Limited, B/309, Dynasty Business park, Opp Sangam Cinema, Andheri (East), J B Nagar, Mumbai, Maharashtra 400059] [CIN - U66301MH2023PTC414206] [GST No : 27AAFCF7114E1ZV] [Principal Officer details : Mr. Mihir Shah (mihir.shah@fintoo.in)] [Compliance Officer details : Mrs. Nisha Harchekar (nisha.harchekar@fintoo.in)] [Corresponding SEBI regional/local office: Plot No. C 4-A , G Block, Near Bank of India, Bandra Kurla Complex,Bandra East, Mumbai, Maharashtra 400051]</p><p class="text-center m-0">Copyright © 2025 Fintoo. All rights reserved</p></div></div></div>
 
     <!-- Footer -->
   
 
     <script>
-        // Calendar Dropdown
-        function toggleCalDropdown() {
-            const dropdown = document.getElementById('calDropdown');
-            dropdown.classList.toggle('open');
-        }
-
-        document.addEventListener('click', function(e) {
-            const btn = document.getElementById('calDropdownBtn');
-            const dropdown = document.getElementById('calDropdown');
-            if (!btn.contains(e.target) && !dropdown.contains(e.target)) {
-                dropdown.classList.remove('open');
-            }
-        });
-
         // Testimonial Carousel
         let currentSlide = 0;
+        const carousel = document.getElementById('testimonialCarousel');
         const slides = document.querySelectorAll('.testimonial-slide');
-        const dots = document.querySelectorAll('#carouselDots button');
+        const dotsContainer = document.getElementById('carouselDots');
         const counter = document.getElementById('slideCounter');
+        let testimonialTimer;
+
+        function getVisibleSlides() {
+            if (window.innerWidth >= 1024) return 3;
+            if (window.innerWidth >= 768) return 2;
+            return 1;
+        }
+
+        function getMaxSlide() {
+            return Math.max(slides.length - getVisibleSlides(), 0);
+        }
+
+        function buildCarouselDots() {
+            const totalDots = getMaxSlide() + 1;
+            dotsContainer.innerHTML = '';
+
+            for (let i = 0; i < totalDots; i++) {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'h-2 rounded-full bg-border transition-all duration-300';
+                dot.setAttribute('aria-label', `Go to testimonial ${i + 1}`);
+                dot.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
 
         function updateCarousel() {
-            slides.forEach((s, i) => {
-                s.classList.toggle('active', i === currentSlide);
-            });
+            currentSlide = Math.min(currentSlide, getMaxSlide());
+            const slideWidth = slides[0] ? slides[0].getBoundingClientRect().width : 0;
+            carousel.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+
+            const dots = dotsContainer.querySelectorAll('button');
             dots.forEach((d, i) => {
                 d.style.background = i === currentSlide ? '#042B62' : '#EEE';
                 d.style.width = i === currentSlide ? '24px' : '8px';
                 d.style.borderRadius = '9999px';
             });
-            counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+            counter.textContent = `${currentSlide + 1} / ${getMaxSlide() + 1}`;
         }
 
         function nextSlide() {
-            currentSlide = (currentSlide + 1) % slides.length;
+            currentSlide = currentSlide >= getMaxSlide() ? 0 : currentSlide + 1;
             updateCarousel();
         }
 
         function prevSlide() {
-            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            currentSlide = currentSlide <= 0 ? getMaxSlide() : currentSlide - 1;
             updateCarousel();
+            restartTestimonialTimer();
         }
 
         function goToSlide(index) {
             currentSlide = index;
             updateCarousel();
+            restartTestimonialTimer();
         }
 
-        // Auto-advance carousel
-        setInterval(nextSlide, 6000);
+        function restartTestimonialTimer() {
+            clearInterval(testimonialTimer);
+            testimonialTimer = setInterval(nextSlide, 4500);
+        }
+
+        buildCarouselDots();
         updateCarousel();
+        restartTestimonialTimer();
+        window.addEventListener('resize', () => {
+            buildCarouselDots();
+            updateCarousel();
+            restartTestimonialTimer();
+        });
 
         // FAQ Accordion
         function toggleAccordion(index) {
