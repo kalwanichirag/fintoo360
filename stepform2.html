@@ -1,1273 +1,762 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fintoo Advisory – Schedule Consultation</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fintoo Wealth Advisory Consultation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { jakarta: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'] },
+          colors: {
+            fintoo: {
+              navy: '#042b62',
+              navy2: '#073b84',
+              orange: '#dd7300',
+              gold: '#c59738',
+              ink: '#10233f',
+              muted: '#657286',
+              line: '#dbe3ee',
+              soft: '#f5f8fc'
+            }
+          },
+          boxShadow: {
+            concierge: '0 28px 80px rgba(4, 43, 98, 0.18)',
+            premium: '0 18px 42px rgba(4, 43, 98, 0.10)'
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
 
-  :root {
-    --navy: #042b62;
-    --navy-mid: #1a3a6b;
-    --navy-light: #e8edf5;
-    --orange: #dd7300;
-    --orange-light: #fff3e0;
-    --gold: #c9a84c;
-    --white: #ffffff;
-    --bg: #f0f4fa;
-    --text-primary: #0d1f3c;
-    --text-secondary: #5a6a84;
-    --text-muted: #8fa0b8;
-    --border: #d6e0ef;
-    --success: #1db954;
-    --error: #e53935;
-    --card-shadow: 0 24px 80px rgba(4,43,98,0.13), 0 4px 16px rgba(4,43,98,0.07);
-    --radius: 20px;
-    --radius-sm: 12px;
-    --transition: 0.32s cubic-bezier(0.4,0,0.2,1);
-  }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-  html, body {
-    height: 100%;
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text-primary);
-    -webkit-font-smoothing: antialiased;
-  }
+    @keyframes pulseDot {
 
-  body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px 16px;
-    position: relative;
-    overflow-x: hidden;
-  }
+      0%,
+      80%,
+      100% {
+        opacity: .35;
+        transform: translateY(0);
+      }
 
-  /* Ambient background */
-  .bg-orb {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(80px);
-    pointer-events: none;
-    z-index: 0;
-  }
-  .bg-orb-1 {
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(4,43,98,0.12) 0%, transparent 70%);
-    top: -150px; left: -150px;
-    animation: orbFloat 12s ease-in-out infinite alternate;
-  }
-  .bg-orb-2 {
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(221,115,0,0.08) 0%, transparent 70%);
-    bottom: -100px; right: -100px;
-    animation: orbFloat 15s ease-in-out infinite alternate-reverse;
-  }
-  @keyframes orbFloat {
-    0% { transform: translate(0,0) scale(1); }
-    100% { transform: translate(30px,20px) scale(1.05); }
-  }
+      40% {
+        opacity: 1;
+        transform: translateY(-4px);
+      }
+    }
 
-  /* Main card */
-  .card {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    max-width: 540px;
-    background: var(--white);
-    border-radius: var(--radius);
-    box-shadow: var(--card-shadow);
-    border: 1px solid rgba(4,43,98,0.07);
-    overflow: hidden;
-  }
+    @keyframes pop {
+      0% {
+        opacity: 0;
+        transform: scale(.72);
+      }
 
-  /* Progress bar */
-  .progress-track {
-    height: 3px;
-    background: var(--navy-light);
-    position: relative;
-  }
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--navy), var(--orange));
-    border-radius: 2px;
-    transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
-  }
+      70% {
+        opacity: 1;
+        transform: scale(1.08);
+      }
 
-  /* Card header */
-  .card-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 20px 28px 16px;
-    border-bottom: 1px solid var(--navy-light);
-  }
-  .logo-badge {
-    width: 40px; height: 40px;
-    background: var(--navy);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .logo-badge svg { width: 22px; height: 22px; }
-  .header-text h1 {
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--navy);
-    letter-spacing: 0.02em;
-  }
-  .header-text p {
-    font-size: 11px;
-    color: var(--text-muted);
-    font-weight: 400;
-    margin-top: 1px;
-  }
-  .step-label {
-    margin-left: auto;
-    font-size: 11px;
-    color: var(--text-muted);
-    font-weight: 500;
-    font-feature-settings: 'tnum';
-  }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
 
-  /* Chat body */
-  .chat-body {
-    padding: 28px 28px 0;
-    min-height: 280px;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
+    .animate-rise {
+      animation: rise 360ms ease both;
+    }
 
-  /* Assistant message */
-  .msg-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 6px;
-  }
-  .avatar {
-    width: 34px; height: 34px;
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-family: 'DM Serif Display', serif;
-    font-size: 12px;
-    color: var(--gold);
-    letter-spacing: 0.05em;
-    box-shadow: 0 2px 8px rgba(4,43,98,0.2);
-  }
-  .bubble {
-    background: var(--navy-light);
-    border-radius: 4px 16px 16px 16px;
-    padding: 14px 18px;
-    max-width: 380px;
-    font-family: 'DM Serif Display', serif;
-    font-size: 16.5px;
-    line-height: 1.6;
-    color: var(--navy);
-    position: relative;
-  }
-  .bubble.animate-in {
-    animation: bubbleIn 0.35s cubic-bezier(0.4,0,0.2,1) forwards;
-  }
-  @keyframes bubbleIn {
-    from { opacity: 0; transform: translateY(8px) scale(0.97); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
-  .bubble strong { font-style: italic; color: var(--orange); }
+    .animate-pop {
+      animation: pop 440ms ease both;
+    }
 
-  /* Typing indicator */
-  .typing-indicator {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    padding: 14px 18px;
-    background: var(--navy-light);
-    border-radius: 4px 16px 16px 16px;
-  }
-  .typing-dot {
-    width: 6px; height: 6px;
-    background: var(--navy-mid);
-    border-radius: 50%;
-    animation: typingBounce 1.2s ease infinite;
-    opacity: 0.5;
-  }
-  .typing-dot:nth-child(2) { animation-delay: 0.15s; }
-  .typing-dot:nth-child(3) { animation-delay: 0.3s; }
-  @keyframes typingBounce {
-    0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
-    40% { transform: translateY(-5px); opacity: 1; }
-  }
+    .typing-dot {
+      animation: pulseDot 900ms infinite ease-in-out;
+    }
 
-  /* User reply bubble */
-  .user-row {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 16px;
-    margin-top: 8px;
-  }
-  .user-bubble {
-    background: var(--navy);
-    color: var(--white);
-    border-radius: 16px 16px 4px 16px;
-    padding: 10px 16px;
-    font-size: 14px;
-    font-weight: 500;
-    max-width: 300px;
-    animation: bubbleIn 0.3s cubic-bezier(0.4,0,0.2,1) forwards;
-  }
+    .typing-dot:nth-child(2) {
+      animation-delay: 120ms;
+    }
 
-  /* Input area */
-  .input-area {
-    padding: 20px 28px 28px;
-  }
-  .input-area.hidden { display: none; }
+    .typing-dot:nth-child(3) {
+      animation-delay: 240ms;
+    }
 
-  /* Text input */
-  .fancy-input {
-    width: 100%;
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 14px 18px;
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
-    color: var(--text-primary);
-    background: #fafbfd;
-    outline: none;
-    transition: border-color var(--transition), box-shadow var(--transition);
-    -webkit-appearance: none;
-  }
-  .fancy-input:focus {
-    border-color: var(--navy);
-    box-shadow: 0 0 0 3px rgba(4,43,98,0.08);
-    background: var(--white);
-  }
-  .fancy-input::placeholder { color: var(--text-muted); }
-  .fancy-input.error { border-color: var(--error); }
-  .input-hint {
-    font-size: 11.5px;
-    color: var(--error);
-    margin-top: 6px;
-    display: none;
-  }
-  .input-hint.visible { display: block; }
+    .assistant-avatar {
+      display: grid;
+      place-items: center;
+      width: 2.25rem;
+      height: 2.25rem;
+      flex-shrink: 0;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #042b62, #073b84);
+      color: #fff;
+      font-size: .875rem;
+      font-weight: 800;
+      box-shadow: 0 12px 24px rgba(4, 43, 98, .18);
+    }
 
-  /* Phone input with prefix */
-  .phone-wrap {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-  }
-  .phone-prefix {
-    flex-shrink: 0;
-    background: var(--navy-light);
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 14px 14px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--navy);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    white-space: nowrap;
-  }
-  .flag { font-size: 16px; }
+    .assistant-bubble {
+      max-width: min(560px, calc(100% - 56px));
+      border-radius: 20px 20px 20px 8px;
+      background: #fff;
+      padding: .85rem 1rem;
+      line-height: 1.55;
+      box-shadow: 0 18px 42px rgba(4, 43, 98, .10);
+    }
 
-  /* CTA Button */
-  .btn-primary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    background: var(--navy);
-    color: var(--white);
-    border: none;
-    border-radius: var(--radius-sm);
-    padding: 15px 24px;
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background var(--transition), transform 0.15s, box-shadow var(--transition);
-    margin-top: 14px;
-    letter-spacing: 0.01em;
-  }
-  .btn-primary:hover {
-    background: var(--navy-mid);
-    box-shadow: 0 8px 24px rgba(4,43,98,0.25);
-    transform: translateY(-1px);
-  }
-  .btn-primary:active { transform: translateY(0); }
-  .btn-primary svg { width: 18px; height: 18px; }
+    .user-bubble {
+      max-width: min(560px, calc(100% - 56px));
+      border-radius: 20px 20px 8px 20px;
+      background: linear-gradient(135deg, #042b62, #0c438e);
+      color: #fff;
+      padding: .85rem 1rem;
+      line-height: 1.55;
+      box-shadow: 0 18px 42px rgba(4, 43, 98, .10);
+      overflow-wrap: anywhere;
+    }
 
-  /* Income cards */
-  .income-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 4px;
-  }
-  .income-card {
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 13px 14px;
-    cursor: pointer;
-    transition: all var(--transition);
-    background: #fafbfd;
-    font-size: 13.5px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    text-align: center;
-    user-select: none;
-  }
-  .income-card:hover {
-    border-color: var(--navy);
-    color: var(--navy);
-    background: var(--navy-light);
-  }
-  .income-card.selected {
-    border-color: var(--orange);
-    background: var(--orange-light);
-    color: var(--orange);
-    font-weight: 600;
-    box-shadow: 0 2px 12px rgba(221,115,0,0.15);
-  }
-  .income-card .amount { display: block; font-size: 12px; margin-top: 2px; opacity: 0.7; }
+    .primary-action {
+      min-height: 52px;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, #dd7300, #b85d00);
+      color: #fff;
+      padding: 0 1.25rem;
+      font-weight: 800;
+      box-shadow: 0 14px 28px rgba(221, 115, 0, .26);
+      transition: transform .2s ease, opacity .2s ease, box-shadow .2s ease;
+    }
 
-  /* OTP inputs */
-  .otp-row {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin-bottom: 16px;
-  }
-  .otp-box {
-    width: 46px; height: 54px;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    text-align: center;
-    font-size: 22px;
-    font-weight: 700;
-    font-family: 'Inter', sans-serif;
-    color: var(--navy);
-    background: #fafbfd;
-    outline: none;
-    transition: all 0.2s;
-    caret-color: var(--orange);
-  }
-  .otp-box:focus {
-    border-color: var(--navy);
-    box-shadow: 0 0 0 3px rgba(4,43,98,0.08);
-    background: var(--white);
-  }
-  .otp-box.filled { border-color: var(--orange); background: var(--orange-light); }
-  .otp-box.verified { border-color: var(--success); background: #e8f9ee; color: var(--success); }
-  .resend-link {
-    text-align: center;
-    font-size: 12.5px;
-    color: var(--text-muted);
-    margin-top: 4px;
-  }
-  .resend-link a {
-    color: var(--navy);
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  .resend-link a:hover { color: var(--orange); }
+    .primary-action:hover {
+      transform: translateY(-2px);
+    }
 
-  /* OTP success */
-  .otp-success {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 0;
-  }
-  .otp-success.show { display: flex; }
-  .check-circle {
-    width: 48px; height: 48px;
-    background: var(--success);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards;
-  }
-  @keyframes popIn {
-    from { transform: scale(0); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
-  .check-circle svg { width: 24px; height: 24px; stroke: white; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-  .otp-success p { font-size: 13px; color: var(--success); font-weight: 600; }
+    .primary-action:disabled {
+      cursor: not-allowed;
+      opacity: .45;
+      transform: none;
+      box-shadow: none;
+    }
 
-  /* Calendar */
-  .calendar-wrap {
-    border: 1.5px solid var(--border);
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-    background: #fafbfd;
-    margin-bottom: 14px;
-  }
-  .cal-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
-    background: var(--navy);
-    color: white;
-  }
-  .cal-header h3 { font-size: 14px; font-weight: 600; }
-  .cal-nav {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 16px;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-  }
-  .cal-nav:hover { opacity: 1; background: rgba(255,255,255,0.1); }
-  .cal-weekdays {
-    display: grid;
-    grid-template-columns: repeat(7,1fr);
-    padding: 8px 12px 4px;
-    gap: 2px;
-  }
-  .cal-weekday {
-    text-align: center;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-muted);
-    padding: 4px 0;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  .cal-days {
-    display: grid;
-    grid-template-columns: repeat(7,1fr);
-    padding: 0 12px 12px;
-    gap: 4px;
-  }
-  .cal-day {
-    aspect-ratio: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.18s;
-    color: var(--text-primary);
-    border: 1.5px solid transparent;
-  }
-  .cal-day:hover:not(.disabled):not(.empty) {
-    background: var(--navy-light);
-    color: var(--navy);
-  }
-  .cal-day.selected {
-    background: var(--navy);
-    color: white;
-    font-weight: 700;
-    border-color: var(--navy);
-  }
-  .cal-day.today {
-    border-color: var(--orange);
-    color: var(--orange);
-    font-weight: 700;
-  }
-  .cal-day.today.selected { color: white; }
-  .cal-day.disabled { color: var(--text-muted); opacity: 0.35; cursor: not-allowed; }
-  .cal-day.empty { cursor: default; }
+    .field-surface {
+      border: 1px solid rgba(219, 227, 238, .9);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .92);
+      padding: .85rem;
+      box-shadow: 0 18px 42px rgba(4, 43, 98, .10);
+    }
 
-  /* Time slots */
-  .slots-label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
-  .slots-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-bottom: 4px;
-  }
-  .slot-chip {
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    padding: 9px 6px;
-    text-align: center;
-    font-size: 12.5px;
-    font-weight: 600;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.18s;
-    background: #fafbfd;
-    user-select: none;
-  }
-  .slot-chip:hover {
-    border-color: var(--navy);
-    color: var(--navy);
-    background: var(--navy-light);
-  }
-  .slot-chip.selected {
-    background: var(--orange);
-    border-color: var(--orange);
-    color: white;
-    box-shadow: 0 2px 10px rgba(221,115,0,0.3);
-  }
+    @media (min-width: 640px) {
+      .field-surface {
+        padding: 1.25rem;
+      }
+    }
 
-  /* Summary card */
-  .summary-card {
-    background: var(--navy-light);
-    border-radius: var(--radius-sm);
-    padding: 18px 20px;
-    margin-bottom: 4px;
-    border: 1px solid var(--border);
-  }
-  .summary-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 7px 0;
-    border-bottom: 1px solid rgba(4,43,98,0.07);
-  }
-  .summary-row:last-child { border-bottom: none; }
-  .summary-key { font-size: 11.5px; color: var(--text-muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; }
-  .summary-val { font-size: 13.5px; color: var(--navy); font-weight: 600; text-align: right; max-width: 60%; }
+    .input-surface {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      border: 1px solid #dbe3ee;
+      border-radius: 1rem;
+      background: #fff;
+      transition: border-color .2s ease, box-shadow .2s ease;
+    }
 
-  /* Step container */
-  .step { display: none; }
-  .step.active { display: block; animation: stepIn 0.38s cubic-bezier(0.4,0,0.2,1) forwards; }
-  @keyframes stepIn {
-    from { opacity: 0; transform: translateX(16px); }
-    to { opacity: 1; transform: translateX(0); }
-  }
+    .input-surface:focus-within {
+      border-color: rgba(221, 115, 0, .72);
+      box-shadow: 0 0 0 4px rgba(221, 115, 0, .10);
+    }
 
-  /* Thank you screen */
-  .thankyou-screen {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    padding: 48px 32px;
-    text-align: center;
-    gap: 0;
-  }
-  .thankyou-screen.active { display: flex; animation: stepIn 0.38s forwards; }
-  .success-ring {
-    width: 90px; height: 90px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #1db954, #00b341);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 24px;
-    box-shadow: 0 8px 32px rgba(29,185,84,0.3);
-    animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
-  }
-  .success-ring svg { width: 40px; height: 40px; stroke: white; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-  .thankyou-screen h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 24px;
-    color: var(--navy);
-    margin-bottom: 10px;
-    line-height: 1.3;
-  }
-  .thankyou-screen p {
-    font-size: 14.5px;
-    color: var(--text-secondary);
-    line-height: 1.65;
-    max-width: 360px;
-    margin-bottom: 28px;
-  }
-  .confirm-list {
-    width: 100%;
-    max-width: 320px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 28px;
-  }
-  .confirm-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--navy-light);
-    border-radius: 10px;
-    padding: 12px 16px;
-    font-size: 13.5px;
-    font-weight: 600;
-    color: var(--navy);
-    animation: bubbleIn 0.35s forwards;
-  }
-  .confirm-item:nth-child(2) { animation-delay: 0.15s; opacity: 0; }
-  .confirm-item:nth-child(3) { animation-delay: 0.3s; opacity: 0; }
-  .confirm-dot {
-    width: 22px; height: 22px;
-    background: var(--success);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .confirm-dot svg { width: 12px; height: 12px; stroke: white; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-  .ty-brand {
-    font-size: 12px;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 4px;
-  }
-  .ty-brand span { color: var(--navy); font-weight: 700; }
+    .premium-input {
+      width: 100%;
+      min-height: 54px;
+      border-radius: 1rem;
+      background: transparent;
+      padding: 0 1rem;
+      color: #10233f;
+      outline: none;
+    }
 
-  /* Welcome screen */
-  .welcome-screen {
-    padding: 40px 28px 36px;
-    display: none;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-  }
-  .welcome-screen.active { display: flex; }
-  .welcome-avatar {
-    width: 52px; height: 52px;
-    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 24px;
-    box-shadow: 0 6px 20px rgba(4,43,98,0.2);
-  }
-  .welcome-avatar svg { width: 28px; height: 28px; }
-  .welcome-screen h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 26px;
-    color: var(--navy);
-    line-height: 1.3;
-    margin-bottom: 12px;
-  }
-  .welcome-screen p {
-    font-size: 14.5px;
-    color: var(--text-secondary);
-    line-height: 1.65;
-    max-width: 400px;
-    margin-bottom: 32px;
-  }
-  .welcome-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 28px;
-  }
-  .w-chip {
-    background: var(--navy-light);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 6px 14px;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--navy);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .w-chip-dot { width: 6px; height: 6px; background: var(--orange); border-radius: 50%; }
+    .premium-input::placeholder {
+      color: #94a3b8;
+    }
 
-  /* Divider */
-  .divider { width: 100%; height: 1px; background: var(--navy-light); margin: 0; }
+    .income-choice {
+      min-height: 50px;
+      border: 1px solid #dbe3ee;
+      border-radius: 1rem;
+      background: #fff;
+      padding: .75rem;
+      text-align: left;
+      color: #10233f;
+      font-size: .82rem;
+      font-weight: 800;
+      line-height: 1.2;
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
 
-  /* Loading overlay */
-  .loading-row {
-    display: none;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 6px;
-  }
-  .loading-row.show { display: flex; }
+    .income-choice:hover {
+      transform: translateY(-2px);
+      border-color: #c59738;
+      box-shadow: 0 18px 42px rgba(4, 43, 98, .10);
+    }
 
-  @media (max-width: 600px) {
-    .card { border-radius: 16px; }
-    .chat-body { padding: 20px 20px 0; }
-    .input-area { padding: 16px 20px 24px; }
-    .income-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
-    .slots-grid { grid-template-columns: repeat(4,1fr); gap: 6px; }
-    .bubble { font-size: 15px; }
-    .welcome-screen { padding: 28px 20px 28px; }
-    .welcome-screen h2 { font-size: 22px; }
-    .otp-box { width: 40px; height: 48px; font-size: 20px; }
-  }
+    .income-choice.is-selected {
+      border-color: #c59738;
+      background: #fff8ed;
+      box-shadow: 0 18px 42px rgba(4, 43, 98, .10);
+    }
 
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-  }
+    .date-active,
+    .slot-active {
+      border-color: #dd7300 !important;
+      background: #dd7300 !important;
+      color: #fff !important;
+      box-shadow: 0 10px 18px rgba(221, 115, 0, .26);
+    }
 
-  /* Disable state */
-  .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: none; }
+    #chatArea {
+      background-color: #fbfcfe;
+      background-image:
+        url("data:image/svg+xml,%3Csvg width='220' height='220' viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23042b62' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' opacity='.055'%3E%3Cpath d='M34 58h42M34 78h30M44 42v52'/%3E%3Cpath d='M151 50c20 0 34 13 34 31s-14 31-34 31-34-13-34-31 14-31 34-31Z'/%3E%3Cpath d='M137 74h29M137 88h20M148 64v36'/%3E%3Cpath d='M32 158l24-22 26 18 34-42 29 25 42-54'/%3E%3Cpath d='M42 170h132M58 170v-22M88 170v-34M118 170v-52M148 170v-41'/%3E%3Cpath d='M170 154c10 0 18 8 18 18s-8 18-18 18-18-8-18-18 8-18 18-18Z'/%3E%3Cpath d='M164 172h12M170 166v12'/%3E%3C/g%3E%3C/svg%3E"),
+        linear-gradient(rgba(4, 43, 98, .035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(4, 43, 98, .035) 1px, transparent 1px),
+        radial-gradient(circle at 18% 18%, rgba(221, 115, 0, .08), transparent 28%),
+        radial-gradient(circle at 82% 78%, rgba(4, 43, 98, .07), transparent 26%);
+      background-position: center, 0 0, 0 0, center, center;
+      background-size: 220px 220px, 28px 28px, 28px 28px, 100% 100%, 100% 100%;
+    }
 
-  /* Scroll within card body if needed */
-  .chat-body { max-height: 420px; overflow-y: auto; scroll-behavior: smooth; }
-  .chat-body::-webkit-scrollbar { width: 4px; }
-  .chat-body::-webkit-scrollbar-track { background: transparent; }
-  .chat-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-</style>
+    #chatArea.intro-mode {
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 1.25rem;
+    }
+
+    .intro-panel {
+      width: min(100%, 340px);
+      text-align: center;
+    }
+
+    .intro-mark {
+      display: grid;
+      place-items: center;
+      width: 3rem;
+      height: 3rem;
+      margin: 0 auto 1rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #042b62, #073b84);
+      color: #fff;
+      font-weight: 800;
+      box-shadow: 0 14px 28px rgba(4, 43, 98, .22);
+    }
+
+    .intro-copy {
+      border-radius: 24px;
+      background: #fff;
+      padding: 1.25rem;
+      line-height: 1.6;
+      box-shadow: 0 18px 42px rgba(4, 43, 98, .10);
+    }
+
+    .intro-copy strong {
+      display: block;
+      margin-bottom: .75rem;
+      color: #042b62;
+      font-size: 1.05rem;
+    }
+
+    .intro-panel .primary-action {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 640px) {
+      .assistant-avatar {
+        width: 2.75rem;
+        height: 2.75rem;
+        font-size: 1rem;
+      }
+
+      .assistant-bubble,
+      .user-bubble {
+        padding: 1rem 1.25rem;
+        line-height: 1.65;
+      }
+
+      .field-surface {
+        border-radius: 22px;
+        padding: 1.25rem;
+      }
+
+      .income-choice {
+        min-height: 74px;
+        padding: 1rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
-<body>
 
-<div class="bg-orb bg-orb-1"></div>
-<div class="bg-orb bg-orb-2"></div>
-
-<div class="card" role="main" aria-label="Fintoo Advisory Consultation Form">
-
-  <!-- Progress bar -->
-  <div class="progress-track" role="progressbar" aria-label="Form progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-    <div class="progress-fill" id="progressFill" style="width:0%"></div>
+<body
+  class="min-h-screen overflow-x-hidden bg-white font-jakarta text-fintoo-ink antialiased">
+  <div class="hidden
+    animate-rise animate-pop flex grid hidden justify-end items-center gap-1.5 gap-3 gap-4
+    h-2 h-9 h-11 h-24 w-2 w-9 w-11 w-24 w-[76px] max-w-xl
+    min-h-11 min-h-[20px] min-h-[50px] min-h-[52px] min-h-[54px] min-h-[60px] min-h-[74px]
+    rounded-full rounded-xl rounded-2xl rounded-[20px] rounded-[22px] rounded-[28px] rounded-bl-lg rounded-br-lg
+    border border-0 border-b border-fintoo-line border-fintoo-line/80 border-fintoo-line/90 border-fintoo-gold border-fintoo-orange
+    bg-white bg-white/90 bg-white/55 bg-transparent bg-[#f3f6fa] bg-[#f4faf6] bg-[#fff8ed] bg-slate-50 bg-fintoo-orange bg-[#138a4a]
+    bg-gradient-to-br bg-gradient-to-r from-fintoo-navy from-fintoo-orange from-[#138a4a] to-fintoo-navy2 to-[#0c438e] to-[#b85d00] to-[#20b86a] to-fintoo-gold
+    p-0 p-4 p-5 p-7 p-10 px-4 px-5 py-3 py-4 pt-1 pt-3 pl-0 pl-4 mt-4 mt-7 mb-2 mb-4 mb-6
+    text-white text-fintoo-ink text-fintoo-navy text-fintoo-muted text-fintoo-orange text-red-700 text-slate-400 text-[#138a4a]
+    text-sm text-xl text-4xl font-bold font-extrabold leading-relaxed text-left text-right text-center
+    shadow-lg shadow-premium shadow-[0_14px_28px_rgba(221,115,0,.26)] shadow-[0_10px_18px_rgba(221,115,0,.26)]
+    transition duration-200 duration-500 hover:-translate-y-0.5 hover:border-fintoo-gold hover:shadow-premium
+    disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-45 disabled:shadow-none disabled:bg-slate-50 disabled:text-slate-400
+    focus:border-fintoo-orange focus:ring-4 focus:ring-fintoo-orange/10 focus-within:border-fintoo-orange/70 focus-within:ring-4 focus-within:ring-fintoo-orange/10
+    sm:grid-cols-2 sm:min-h-[60px] sm:p-5 sm:p-10 lg:grid-cols-2">
   </div>
+  <main class="h-[100dvh] overflow-hidden bg-[linear-gradient(115deg,#062b63_0%,#0b3b88_48%,#2447b8_100%)] lg:min-h-screen lg:overflow-auto">
+    <section class="mx-auto grid h-full w-full max-w-7xl items-center gap-4 px-3 py-3 sm:px-8 lg:min-h-screen lg:grid-cols-[1fr_520px] lg:gap-10 lg:px-10 lg:py-10"
+      aria-label="Fintoo consultation booking">
+      <aside class="relative  overflow-hidden py-4 text-white lg:py-0">
+        <img src="https://www.fintoo.in/static/media/wp/Fintoowhitelogo_.svg" alt="Fintoo"
+          class="mb-7 h-8 w-auto lg:mb-6">
+        <div class="mb-9 flex flex-wrap gap-3">
+          <span class="rounded-full bg-white px-4 py-2 text-sm font-extrabold text-fintoo-navy shadow-lg text-slate-900">Free Consultation</span>
+          <span class="rounded-full bg-white px-4 py-2 text-sm font-extrabold text-fintoo-navy shadow-lg text-slate-900">15-Min Session</span>
+          <span class="rounded-full bg-white px-4 py-2 text-sm font-extrabold text-fintoo-navy shadow-lg text-slate-900">Certified Advisors</span>
+        </div>
+        <p class="mb-4 text-xs font-extrabold uppercase tracking-[0.18em] text-white/70">Private Wealth Concierge</p>
+        <h1 class="max-w-3xl text-[2.55rem] font-extrabold leading-[1.05] text-white sm:text-[3.4rem] lg:text-[4rem]">
+          Plan smarter. <span class="text-fintoo-orange">Invest better.</span> Grow confidently.
+        </h1>
+        <p class="mt-7 max-w-2xl text-lg font-medium leading-relaxed text-white/80 sm:text-xl">
+          Schedule a complimentary 1-on-1 wealth planning session with a certified Fintoo financial advisor.
+        </p>
+       
+       
+      </aside>
 
-  <!-- Card header -->
-  <div class="card-header">
-    <div class="logo-badge">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M3 6h18M3 12h12M3 18h8" stroke="#dd7300" stroke-width="2.2" stroke-linecap="round"/>
-        <circle cx="19" cy="18" r="3" fill="#dd7300" opacity="0.3"/>
-        <circle cx="19" cy="18" r="1.5" fill="#dd7300"/>
-      </svg>
-    </div>
-    <div class="header-text">
-      <h1>Fintoo Advisory</h1>
-      <p>SEBI Registered · REG NO: INA000015491</p>
-    </div>
-    <span class="step-label" id="stepLabel" aria-live="polite">Step 1 of 8</span>
-  </div>
+      <section id="chatShell"
+        class="flex h-full min-h-0 w-full flex-col overflow-hidden rounded-[24px] border border-white/70 bg-white shadow-concierge lg:min-h-[620px] lg:max-h-[760px] lg:rounded-[28px]">
+        <div id="chatArea" class="min-h-0 flex-1 overflow-auto bg-[#fbfcfe] px-4 py-4 sm:px-7 sm:py-5" aria-live="polite"></div>
+        <div id="controls" class="max-h-[42dvh] shrink-0 overflow-auto border-t border-fintoo-line/70 bg-white px-4 pb-4 pt-3 sm:max-h-none sm:px-7 sm:pb-6 sm:pt-4"></div>
+      </section>
+    </section>
+  
+  </main>
 
-  <!-- WELCOME SCREEN -->
-  <div class="welcome-screen active" id="welcomeScreen" aria-label="Welcome to Fintoo">
-    <div class="welcome-avatar">
-      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M14 4C9.58 4 6 7.58 6 12s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8z" fill="#dd7300" opacity="0.2"/>
-        <path d="M14 4C9.58 4 6 7.58 6 12s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8z" stroke="#dd7300" stroke-width="1.5"/>
-        <path d="M10 23c0-2.21 1.79-4 4-4s4 1.79 4 4" stroke="#dd7300" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="14" cy="11" r="2.5" fill="#dd7300"/>
-      </svg>
-    </div>
-    <h2>Welcome to<br>Fintoo Advisory.</h2>
-    <p>Let's understand your financial goals and schedule a consultation with one of our dedicated experts.</p>
-    <div class="welcome-chips">
-      <span class="w-chip"><span class="w-chip-dot"></span>Expert Advisors</span>
-      <span class="w-chip"><span class="w-chip-dot"></span>20+ Years Experience</span>
-      <span class="w-chip"><span class="w-chip-dot"></span>₹5,000 Cr+ AUM</span>
-      <span class="w-chip"><span class="w-chip-dot"></span>25,000+ Employees Advised</span>
-    </div>
-    <button class="btn-primary" onclick="startForm()" aria-label="Begin consultation form">
-      Let's Begin
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M5 12h14M12 5l7 7-7 7"/>
-      </svg>
-    </button>
-  </div>
+  <script>
+    const state = {
+      step: 1,
+      firstName: '',
+      name: '',
+      email: '',
+      city: '',
+      income: '',
+      mobile: '',
+      date: '',
+      time: ''
+    };
 
-  <!-- CHAT INTERFACE (steps 2–8) -->
-  <div id="chatInterface" style="display:none;">
-    <!-- Chat body: messages accumulate here -->
-    <div class="chat-body" id="chatBody" aria-live="polite" aria-label="Chat conversation"></div>
-    <div class="divider"></div>
-    <!-- Dynamic input area -->
-    <div class="input-area" id="inputArea"></div>
-  </div>
+    const chatArea = document.getElementById('chatArea');
+    const controls = document.getElementById('controls');
 
-  <!-- THANK YOU SCREEN -->
-  <div class="thankyou-screen" id="thankYouScreen" aria-label="Booking confirmed">
-    <div class="success-ring">
-      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-    </div>
-    <h2>Your Consultation<br>Has Been Reserved</h2>
-    <p>Thank you, <strong id="tyName"></strong>. One of our financial experts will connect with you at your scheduled time.</p>
-    <div class="confirm-list">
-      <div class="confirm-item">
-        <div class="confirm-dot"><svg viewBox="0 0 12 12"><polyline points="10 3 5 9 2 6"/></svg></div>
-        Consultation Confirmed
-      </div>
-      <div class="confirm-item">
-        <div class="confirm-dot"><svg viewBox="0 0 12 12"><polyline points="10 3 5 9 2 6"/></svg></div>
-        Expert Assigned
-      </div>
-      <div class="confirm-item">
-        <div class="confirm-dot"><svg viewBox="0 0 12 12"><polyline points="10 3 5 9 2 6"/></svg></div>
-        Calendar Invitation Sent
-      </div>
-    </div>
-    <div class="ty-brand">Secured by <span>Fintoo</span> · SEBI Registered</div>
-  </div>
-
-</div>
-
-<script>
-  // State
-  const state = { name: '', firstName: '', email: '', income: '', phone: '', date: null, timeSlot: '' };
-  let currentStep = 0;
-  let calMonth, calYear;
-  const today = new Date();
-  calMonth = today.getMonth();
-  calYear = today.getFullYear();
-
-  const totalSteps = 8;
-  const STEPS = ['name','email','income','phone','otp','schedule','confirm'];
-
-  function setProgress(step) {
-    const pct = Math.round((step / totalSteps) * 100);
-    document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('progressFill').parentElement.setAttribute('aria-valuenow', pct);
-    const labels = ['','Name','Email','Income','Mobile','Verify','Schedule','Confirm','Done'];
-    document.getElementById('stepLabel').textContent = step < totalSteps ? `Step ${step} of ${totalSteps}` : 'Complete';
-  }
-
-  function startForm() {
-    document.getElementById('welcomeScreen').style.display = 'none';
-    document.getElementById('chatInterface').style.display = 'block';
-    currentStep = 1;
-    setProgress(1);
-    showStep1();
-  }
-
-  function addAvatar() {
-    return `<div class="avatar" aria-hidden="true">F</div>`;
-  }
-
-  function appendBubble(html, delay = 0) {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        const chatBody = document.getElementById('chatBody');
-        // Remove any existing typing indicator
-        const ti = chatBody.querySelector('.typing-row');
-        if (ti) ti.remove();
-
-        const row = document.createElement('div');
-        row.className = 'msg-row';
-        row.innerHTML = `${addAvatar()}<div class="bubble animate-in">${html}</div>`;
-        chatBody.appendChild(row);
-        chatBody.scrollTop = chatBody.scrollHeight;
-        resolve();
-      }, delay);
-    });
-  }
-
-  function showTyping(duration = 900) {
-    return new Promise(resolve => {
-      const chatBody = document.getElementById('chatBody');
-      const row = document.createElement('div');
-      row.className = 'msg-row typing-row';
-      row.innerHTML = `${addAvatar()}<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
-      chatBody.appendChild(row);
-      chatBody.scrollTop = chatBody.scrollHeight;
-      setTimeout(resolve, duration);
-    });
-  }
-
-  function appendUserBubble(text) {
-    const chatBody = document.getElementById('chatBody');
-    const row = document.createElement('div');
-    row.className = 'user-row';
-    row.innerHTML = `<div class="user-bubble">${text}</div>`;
-    chatBody.appendChild(row);
-    chatBody.scrollTop = chatBody.scrollHeight;
-  }
-
-  function setInputArea(html) {
-    const ia = document.getElementById('inputArea');
-    ia.innerHTML = html;
-    ia.classList.remove('hidden');
-    // Focus first input
-    setTimeout(() => {
-      const first = ia.querySelector('input, button');
-      if (first) first.focus();
-    }, 100);
-  }
-
-  // ── STEP 1: Name ──
-  async function showStep1() {
-    await showTyping(800);
-    await appendBubble('What should I call you?');
-    setInputArea(`
-      <input class="fancy-input" id="nameInput" type="text" placeholder="Your full name" autocomplete="given-name" aria-label="Your name" maxlength="60" />
-      <div class="input-hint" id="nameHint">Please enter your name</div>
-      <button class="btn-primary" onclick="submitName()" id="nameBtn">
-        Continue
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    `);
-    document.getElementById('nameInput').addEventListener('keydown', e => { if (e.key === 'Enter') submitName(); });
-  }
-
-  function submitName() {
-    const input = document.getElementById('nameInput');
-    const val = input.value.trim();
-    if (!val) {
-      input.classList.add('error');
-      document.getElementById('nameHint').classList.add('visible');
-      return;
-    }
-    state.name = val;
-    state.firstName = val.split(' ')[0];
-    appendUserBubble(val);
-    setProgress(2);
-    showStep2();
-  }
-
-  // ── STEP 2: Email ──
-  async function showStep2() {
-    document.getElementById('inputArea').innerHTML = '';
-    await showTyping(700);
-    await appendBubble(`Nice to meet you, <strong>${state.firstName}</strong>.`);
-    await showTyping(600);
-    await appendBubble(`${state.firstName}, what's your email address?`);
-    setInputArea(`
-      <input class="fancy-input" id="emailInput" type="email" placeholder="you@example.com" autocomplete="email" aria-label="Email address" />
-      <div class="input-hint" id="emailHint">Please enter a valid email address</div>
-      <button class="btn-primary" onclick="submitEmail()" id="emailBtn">
-        Continue
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    `);
-    const emailInput = document.getElementById('emailInput');
-    emailInput.addEventListener('keydown', e => { if (e.key === 'Enter') submitEmail(); });
-    emailInput.addEventListener('input', () => {
-      if (validateEmail(emailInput.value)) {
-        emailInput.classList.remove('error');
-        document.getElementById('emailHint').classList.remove('visible');
-      }
-    });
-  }
-
-  function validateEmail(v) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
-  }
-
-  function submitEmail() {
-    const input = document.getElementById('emailInput');
-    const val = input.value.trim();
-    if (!validateEmail(val)) {
-      input.classList.add('error');
-      document.getElementById('emailHint').classList.add('visible');
-      return;
-    }
-    state.email = val;
-    appendUserBubble(val);
-    setProgress(3);
-    showStep3();
-  }
-
-  // ── STEP 3: Income ──
-  async function showStep3() {
-    document.getElementById('inputArea').innerHTML = '';
-    await showTyping(700);
-    await appendBubble(`To connect you with the right advisor, what's your annual income range?`);
-
-    const incomes = [
-      { label: 'Under ₹10 Lakhs', val: '<₹10L' },
-      { label: '₹10L – ₹25L', val: '₹10L–₹25L' },
-      { label: '₹25L – ₹50L', val: '₹25L–₹50L' },
-      { label: '₹50L – ₹1 Crore', val: '₹50L–₹1Cr' },
-      { label: '₹1 Crore – ₹5 Crore', val: '₹1Cr–₹5Cr' },
-      { label: 'Above ₹5 Crore', val: '>₹5Cr' },
+    const incomeOptions = [
+      'Under ₹10 Lakhs',
+      '₹10 Lakhs – ₹25 Lakhs',
+      '₹25 Lakhs – ₹50 Lakhs',
+      '₹50 Lakhs – ₹1 Crore',
+      '₹1 Crore – ₹5 Crore',
+      'Above ₹5 Crore'
     ];
+    const slots = ['09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '02:00 PM', '03:00 PM', '04:00 PM', '05:00 PM'];
+    const availableDates = [17, 18, 20, 23, 24, 25, 27, 30];
 
-    const cards = incomes.map((inc, i) =>
-      `<div class="income-card" tabindex="0" role="button" aria-label="${inc.label}" onclick="selectIncome(this,'${inc.label}','${inc.val}')" onkeydown="if(event.key==='Enter'||event.key===' ')selectIncome(this,'${inc.label}','${inc.val}')">${inc.label}</div>`
-    ).join('');
+    const assistantText = {
+      1: 'Welcome to Fintoo Wealth Advisory.\n\nLet\'s understand your financial goals and schedule a consultation with one of our experts.',
+      2: 'What should I call you?',
+      3: () => `${state.firstName}, what's your email address?`,
+      4: () => `${state.firstName}, which city are you based in?`,
+      5: 'To connect you with the right advisor, what\'s your annual income range?',
+      6: 'What\'s the best number for our advisor to reach you on?',
+      7: 'Let\'s quickly verify your number.',
+      8: () => `Great ${state.firstName}. Let's schedule your consultation.`,
+      9: () => `Excellent choice, ${state.firstName}.`
+    };
 
-    setInputArea(`
-      <div class="income-grid">${cards}</div>
-    `);
-  }
+    const cardClass = 'animate-rise field-surface';
+    const primaryBtn = 'primary-action';
+    const inputWrap = 'input-surface';
+    const inputClass = 'premium-input';
 
-  function selectIncome(el, label, val) {
-    document.querySelectorAll('.income-card').forEach(c => c.classList.remove('selected'));
-    el.classList.add('selected');
-    state.income = label;
-    setTimeout(() => {
-      appendUserBubble(label);
-      setProgress(4);
-      showStep4();
-    }, 300);
-  }
-
-  // ── STEP 4: Phone ──
-  async function showStep4() {
-    document.getElementById('inputArea').innerHTML = '';
-    await showTyping(700);
-    await appendBubble(`What's the best number for our advisor to reach you on?`);
-    setInputArea(`
-      <div class="phone-wrap">
-        <div class="phone-prefix"><span class="flag">🇮🇳</span> +91</div>
-        <input class="fancy-input" id="phoneInput" type="tel" placeholder="10-digit mobile number" inputmode="numeric" pattern="[0-9]*" maxlength="10" autocomplete="tel" aria-label="Mobile number" style="flex:1" />
-      </div>
-      <div class="input-hint" id="phoneHint">Please enter a valid 10-digit mobile number</div>
-      <button class="btn-primary" onclick="submitPhone()" style="margin-top:14px">
-        Send OTP
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    `);
-    const pi = document.getElementById('phoneInput');
-    pi.addEventListener('input', () => { pi.value = pi.value.replace(/\D/g,'').slice(0,10); });
-    pi.addEventListener('keydown', e => { if (e.key === 'Enter') submitPhone(); });
-  }
-
-  function submitPhone() {
-    const val = document.getElementById('phoneInput').value.trim();
-    if (!/^[6-9]\d{9}$/.test(val)) {
-      document.getElementById('phoneInput').classList.add('error');
-      document.getElementById('phoneHint').classList.add('visible');
-      return;
+    function focusOnDesktop(element) {
+      if (window.matchMedia('(min-width: 768px)').matches) element.focus();
     }
-    state.phone = val;
-    appendUserBubble(`+91 ${val}`);
-    setProgress(5);
-    showStep5();
-  }
 
-  // ── STEP 5: OTP ──
-  async function showStep5() {
-    document.getElementById('inputArea').innerHTML = '';
-    await showTyping(700);
-    await appendBubble(`Let's quickly verify your number. We've sent an OTP to <strong>+91 ${state.phone}</strong>.`);
-    setInputArea(`
-      <div class="otp-row" role="group" aria-label="OTP input">
-        ${[0,1,2,3,4,5].map(i=>`<input class="otp-box" id="otp${i}" type="tel" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="OTP digit ${i+1}" />`).join('')}
-      </div>
-      <div class="otp-success" id="otpSuccess">
-        <div class="check-circle"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
-        <p>Number verified!</p>
-      </div>
-      <div class="resend-link">Didn't receive? <a onclick="resendOTP()" tabindex="0" role="button">Resend OTP</a></div>
-    `);
-    setupOTPInputs();
-  }
-
-  function setupOTPInputs() {
-    for (let i = 0; i < 6; i++) {
-      const box = document.getElementById(`otp${i}`);
-      box.addEventListener('input', () => {
-        box.value = box.value.replace(/\D/,'');
-        if (box.value && i < 5) document.getElementById(`otp${i+1}`).focus();
-        box.classList.toggle('filled', !!box.value);
-        checkOTPComplete();
-      });
-      box.addEventListener('keydown', e => {
-        if (e.key === 'Backspace' && !box.value && i > 0) {
-          document.getElementById(`otp${i-1}`).focus();
-        }
-      });
-      box.addEventListener('paste', e => {
-        const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g,'').slice(0,6);
-        e.preventDefault();
-        for (let j = 0; j < pasted.length && j+i < 6; j++) {
-          const t = document.getElementById(`otp${i+j}`);
-          t.value = pasted[j];
-          t.classList.add('filled');
-        }
-        if (pasted.length >= 1) document.getElementById(`otp${Math.min(i+pasted.length, 5)}`).focus();
-        checkOTPComplete();
+    function scrollChat() {
+      requestAnimationFrame(() => {
+        chatArea.scrollTo({ top: chatArea.scrollHeight, behavior: 'auto' });
       });
     }
-    document.getElementById('otp0').focus();
-  }
 
-  function checkOTPComplete() {
-    const vals = [0,1,2,3,4,5].map(i => document.getElementById(`otp${i}`).value);
-    if (vals.every(v => v)) {
-      // Simulate verification
+    function addMessage(type, text) {
+      const row = document.createElement('div');
+      const isUser = type === 'user';
+      row.className = `animate-rise mb-3 flex gap-3 ${isUser ? 'justify-end' : ''}`;
+      row.innerHTML = isUser
+        ? `<div class="user-bubble">${escapeHtml(text).replace(/\n/g, '<br>')}</div>`
+        : `<div class="assistant-avatar">F</div><div class="assistant-bubble">${escapeHtml(text).replace(/\n/g, '<br>')}</div>`;
+      chatArea.appendChild(row);
+      scrollChat();
+    }
+
+    function showTyping(next) {
+      const row = document.createElement('div');
+      row.className = 'animate-rise mb-3 flex gap-3';
+      row.innerHTML = `
+        <div class="assistant-avatar">F</div>
+        <div class="flex min-h-11 w-[76px] items-center gap-1.5 rounded-[20px] rounded-bl-lg bg-white px-5 py-4 shadow-premium" aria-label="Fintoo assistant is typing">
+          <i class="typing-dot h-2 w-2 rounded-full bg-fintoo-orange"></i>
+          <i class="typing-dot h-2 w-2 rounded-full bg-fintoo-orange"></i>
+          <i class="typing-dot h-2 w-2 rounded-full bg-fintoo-orange"></i>
+        </div>`;
+      chatArea.appendChild(row);
+      scrollChat();
       setTimeout(() => {
-        for (let i = 0; i < 6; i++) {
-          const box = document.getElementById(`otp${i}`);
-          box.classList.add('verified');
-          box.disabled = true;
+        row.remove();
+        next();
+      }, 520);
+    }
+
+    function goTo(step) {
+      state.step = step;
+      controls.innerHTML = '';
+      if (step === 1) {
+        renderIntro();
+        return;
+      }
+      controls.classList.remove('hidden');
+      if (chatArea.classList.contains('intro-mode')) {
+        chatArea.classList.remove('intro-mode');
+        chatArea.innerHTML = '';
+      }
+      const copy = assistantText[step];
+      showTyping(() => {
+        addMessage('assistant', typeof copy === 'function' ? copy() : copy);
+        renderControls();
+      });
+    }
+
+    function answer(text, nextStep) {
+      addMessage('user', text);
+      goTo(nextStep);
+    }
+
+    function renderIntro() {
+      controls.classList.add('hidden');
+      chatArea.classList.add('intro-mode');
+      chatArea.innerHTML = `
+        <div class="intro-panel animate-rise">
+          <div class="intro-mark">F</div>
+          <div class="intro-copy">
+            <strong>Welcome to Fintoo Wealth Advisory.</strong>
+            <span>Let's understand your financial goals and schedule a consultation with one of our experts.</span>
+          </div>
+          <button class="${primaryBtn}" type="button" id="introStart">Let's Begin</button>
+        </div>`;
+      document.getElementById('introStart').addEventListener('click', () => goTo(2));
+    }
+
+    function renderControls() {
+      if (state.step === 2) {
+        renderTextField('name', 'Enter your full name', 'text', value => {
+          if (value.trim().length < 2) return 'Please enter your name.';
+        }, value => {
+          state.name = value.trim();
+          state.firstName = state.name.split(' ')[0];
+          addMessage('user', state.name);
+          showTyping(() => {
+            addMessage('assistant', `Nice to meet you, ${state.firstName}.`);
+            goTo(3);
+          });
+        });
+      }
+
+      if (state.step === 3) {
+        renderTextField('email', 'name@example.com', 'email', value => {
+          const email = value.trim();
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return 'Please enter a valid email address.';
+        }, value => {
+          state.email = value.trim();
+          answer(state.email, 4);
+        }, true);
+      }
+
+      if (state.step === 4) {
+        renderTextField('city', 'Enter your city', 'text', value => {
+          if (value.trim().length < 2) return 'Please enter your city.';
+        }, value => {
+          state.city = value.trim();
+          answer(state.city, 5);
+        });
+      }
+
+      if (state.step === 5) renderIncome();
+      if (state.step === 6) renderMobileField();
+      if (state.step === 7) renderOtp();
+      if (state.step === 8) renderBooking();
+      if (state.step === 9) renderSummary();
+    }
+
+    function renderTextField(id, placeholder, type, validator, onSubmit, liveValidate = false) {
+      controls.innerHTML = `
+        <form class="${cardClass}" novalidate>
+          <div class="${inputWrap}"><input id="${id}" class="${inputClass}" type="${type}" placeholder="${placeholder}" autocomplete="${id === 'email' ? 'email' : 'name'}"></div>
+          <div class="min-h-[20px] pt-1 text-sm font-bold text-red-700" id="error"></div>
+          <button class="${primaryBtn} w-full" type="submit">Continue</button>
+        </form>`;
+      const form = controls.querySelector('form');
+      const input = controls.querySelector('input');
+      const error = controls.querySelector('#error');
+      const validate = () => {
+        const message = validator(input.value);
+        error.textContent = message || '';
+        return !message;
+      };
+      if (liveValidate) input.addEventListener('input', () => input.value ? validate() : error.textContent = '');
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        if (validate()) {
+          input.blur();
+          onSubmit(input.value);
         }
-        document.getElementById('otpSuccess').classList.add('show');
-        document.querySelector('.resend-link').style.display = 'none';
-        setTimeout(() => {
-          appendUserBubble('✓ Verified');
-          setProgress(6);
-          showStep6();
-        }, 1000);
-      }, 400);
-    }
-  }
-
-  function resendOTP() {
-    for (let i = 0; i < 6; i++) {
-      const box = document.getElementById(`otp${i}`);
-      box.value = '';
-      box.classList.remove('filled','verified','error');
-      box.disabled = false;
-    }
-    document.getElementById('otp0').focus();
-  }
-
-  // ── STEP 6: Schedule ──
-  async function showStep6() {
-    document.getElementById('inputArea').innerHTML = '';
-    await showTyping(700);
-    await appendBubble(`Perfect, your number has been verified.`);
-    await showTyping(500);
-    await appendBubble(`Great <strong>${state.firstName}</strong>. Let's schedule your consultation.`);
-
-    setInputArea(`
-      <div class="calendar-wrap">
-        <div class="cal-header">
-          <button class="cal-nav" onclick="changeMonth(-1)" aria-label="Previous month">&#8249;</button>
-          <h3 id="calTitle"></h3>
-          <button class="cal-nav" onclick="changeMonth(1)" aria-label="Next month">&#8250;</button>
-        </div>
-        <div class="cal-weekdays">
-          ${['S','M','T','W','T','F','S'].map(d=>`<div class="cal-weekday">${d}</div>`).join('')}
-        </div>
-        <div class="cal-days" id="calDays"></div>
-      </div>
-      <div id="slotsSection" style="display:none;">
-        <div class="slots-label">Available Time Slots</div>
-        <div class="slots-grid" id="slotsGrid"></div>
-        <button class="btn-primary" id="scheduleBtn" onclick="submitSchedule()" style="display:none;margin-top:14px">
-          Confirm Schedule
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-      </div>
-    `);
-    renderCalendar();
-  }
-
-  function renderCalendar() {
-    const title = document.getElementById('calTitle');
-    const daysEl = document.getElementById('calDays');
-    const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-    title.textContent = `${monthNames[calMonth]} ${calYear}`;
-
-    const firstDay = new Date(calYear, calMonth, 1).getDay();
-    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-    const todayStr = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()}`;
-
-    daysEl.innerHTML = '';
-
-    // Empty slots
-    for (let i = 0; i < firstDay; i++) {
-      const el = document.createElement('div');
-      el.className = 'cal-day empty';
-      daysEl.appendChild(el);
+      });
+      focusOnDesktop(input);
     }
 
-    for (let d = 1; d <= daysInMonth; d++) {
-      const date = new Date(calYear, calMonth, d);
-      const el = document.createElement('div');
-      const isToday = date.getFullYear() === today.getFullYear() && date.getMonth() === today.getMonth() && date.getDate() === today.getDate();
-      const isPast = date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
-      const isSunday = date.getDay() === 0;
-      const disabled = isPast || isSunday;
+    function renderIncome() {
+      controls.innerHTML = `
+        <div class="${cardClass}">
+          <div class="grid grid-cols-2 gap-2 sm:gap-3">
+            ${incomeOptions.map(item => `<button class="choice income-choice" type="button">${item}</button>`).join('')}
+          </div>
+        </div>`;
+      controls.querySelectorAll('.choice').forEach(button => {
+        button.addEventListener('click', () => {
+          controls.querySelectorAll('.choice').forEach(item => item.classList.remove('is-selected'));
+          button.classList.add('is-selected');
+          state.income = button.textContent;
+          setTimeout(() => answer(state.income, 6), 260);
+        });
+      });
+    }
 
-      el.className = 'cal-day' + (disabled ? ' disabled' : '') + (isToday ? ' today' : '');
-      el.textContent = d;
+    function renderMobileField() {
+      controls.innerHTML = `
+        <form class="${cardClass}" novalidate>
+          <div class="${inputWrap}"><span class="pl-4 font-extrabold text-fintoo-navy">+91</span><input id="mobile" class="${inputClass} pl-0" type="tel" inputmode="numeric" maxlength="10" placeholder="10 digit mobile number" autocomplete="tel"></div>
+          <div class="min-h-[20px] pt-1 text-sm font-bold text-red-700" id="error"></div>
+          <button class="${primaryBtn} w-full" type="submit">Send OTP</button>
+        </form>`;
+      const input = controls.querySelector('input');
+      const error = controls.querySelector('#error');
+      input.addEventListener('input', () => {
+        input.value = input.value.replace(/\D/g, '').slice(0, 10);
+        error.textContent = input.value.length && input.value.length !== 10 ? 'Mobile number must be 10 digits.' : '';
+      });
+      controls.querySelector('form').addEventListener('submit', event => {
+        event.preventDefault();
+        if (input.value.length !== 10) {
+          error.textContent = 'Please enter a valid 10 digit Indian mobile number.';
+          return;
+        }
+        input.blur();
+        state.mobile = `+91 ${input.value}`;
+        answer(state.mobile, 7);
+      });
+      focusOnDesktop(input);
+    }
 
-      if (state.date && state.date.getDate() === d && state.date.getMonth() === calMonth && state.date.getFullYear() === calYear) {
-        el.classList.add('selected');
+    function renderOtp() {
+      controls.innerHTML = `
+        <div class="${cardClass}">
+          <div class="grid grid-cols-6 gap-1.5 sm:gap-3">${Array.from({ length: 6 }, (_, index) => `<input class="min-h-[46px] rounded-xl border border-fintoo-line bg-white p-0 text-center text-lg font-extrabold outline-none transition focus:border-fintoo-orange focus:ring-4 focus:ring-fintoo-orange/10 sm:min-h-[60px] sm:rounded-2xl sm:text-xl" aria-label="OTP digit ${index + 1}" inputmode="numeric" maxlength="1">`).join('')}</div>
+          <button class="mt-4 w-max border-0 bg-transparent font-extrabold text-fintoo-orange" type="button">Resend OTP</button>
+          <div class="mt-4 hidden items-center gap-3 font-extrabold text-[#138a4a]" id="verified"><span class="animate-pop grid h-9 w-9 place-items-center rounded-full bg-[#138a4a] text-white">✓</span><span>Number verified</span></div>
+        </div>`;
+      const inputs = [...controls.querySelectorAll('input')];
+      const verified = controls.querySelector('#verified');
+      inputs.forEach((input, index) => {
+        input.addEventListener('input', () => {
+          input.value = input.value.replace(/\D/g, '').slice(0, 1);
+          if (input.value && inputs[index + 1]) inputs[index + 1].focus();
+          if (inputs.every(item => item.value)) {
+            input.blur();
+            verified.classList.remove('hidden');
+            verified.classList.add('flex');
+            setTimeout(() => {
+              addMessage('assistant', 'Perfect, your number has been verified.');
+              goTo(8);
+            }, 760);
+          }
+        });
+        input.addEventListener('keydown', event => {
+          if (event.key === 'Backspace' && !input.value && inputs[index - 1]) inputs[index - 1].focus();
+        });
+      });
+      controls.querySelector('button').addEventListener('click', event => {
+        event.currentTarget.textContent = 'OTP resent';
+        setTimeout(() => event.currentTarget.textContent = 'Resend OTP', 1600);
+      });
+      focusOnDesktop(inputs[0]);
+    }
+
+    function renderBooking() {
+      state.date = '';
+      state.time = '';
+      renderBookingCalendar();
+    }
+
+    function renderBookingCalendar() {
+      controls.innerHTML = `
+        <div class="${cardClass}">
+          <div class="rounded-[16px] border border-fintoo-line bg-white p-3 sm:rounded-[20px] sm:p-4">
+            <div class="mb-3 flex items-center justify-between gap-3 text-sm font-extrabold text-fintoo-navy sm:mb-4 sm:text-base"><span>Select Date</span><span>June 2026</span></div>
+            <div class="mb-2 grid grid-cols-7 gap-1.5 text-center text-xs font-extrabold text-fintoo-muted">${['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => `<span>${day}</span>`).join('')}</div>
+            <div class="grid grid-cols-7 gap-1.5" id="dates"></div>
+          </div>
+          <p class="pt-3 text-xs font-bold text-fintoo-muted">Pick an available date to view time slots.</p>
+        </div>`;
+      const dates = controls.querySelector('#dates');
+      dates.appendChild(document.createElement('span'));
+      for (let day = 1; day <= 30; day++) {
+        const button = document.createElement('button');
+        button.className = 'aspect-square rounded-lg bg-[#f3f6fa] text-xs font-extrabold text-fintoo-ink transition disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 sm:rounded-xl sm:text-sm';
+        button.type = 'button';
+        button.textContent = day;
+        button.disabled = !availableDates.includes(day);
+        button.addEventListener('click', () => {
+          controls.querySelectorAll('#dates button').forEach(item => item.classList.remove('date-active'));
+          button.classList.add('date-active');
+          state.date = `June ${day}, 2026`;
+          state.time = '';
+          setTimeout(renderBookingTimes, 180);
+        });
+        dates.appendChild(button);
       }
-
-      if (!disabled) {
-        el.setAttribute('tabindex', '0');
-        el.setAttribute('role', 'button');
-        el.setAttribute('aria-label', `${d} ${monthNames[calMonth]} ${calYear}`);
-        el.onclick = () => selectDate(new Date(calYear, calMonth, d), el);
-        el.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') selectDate(new Date(calYear, calMonth, d), el); };
-      }
-      daysEl.appendChild(el);
     }
-  }
 
-  function changeMonth(dir) {
-    calMonth += dir;
-    if (calMonth > 11) { calMonth = 0; calYear++; }
-    if (calMonth < 0) { calMonth = 11; calYear--; }
-    renderCalendar();
-  }
+    function renderBookingTimes() {
+      controls.innerHTML = `
+        <div class="${cardClass}">
+          <div class="mb-3 flex items-center justify-between gap-3">
+            <button class="rounded-full border border-fintoo-line bg-white px-3 py-1.5 text-xs font-extrabold text-fintoo-navy transition hover:border-fintoo-orange" type="button" id="backToCalendar">Back</button>
+            <div class="text-right text-xs font-extrabold uppercase tracking-[0.12em] text-fintoo-muted">${state.date}</div>
+          </div>
+          <div class="mb-3 text-sm font-extrabold text-fintoo-navy sm:mb-4 sm:text-base">Select Time Slot</div>
+          <div class="grid grid-cols-2 gap-2">${slots.map(slot => `<button class="slot min-h-[42px] rounded-xl border border-fintoo-line bg-white text-sm font-extrabold text-fintoo-navy transition sm:min-h-[50px] sm:rounded-2xl sm:text-base" type="button">${slot}</button>`).join('')}</div>
+          <div class="min-h-[20px] pt-3 text-sm font-bold text-red-700" id="bookingError"></div>
+          <button class="${primaryBtn} w-full" type="button" disabled id="bookingBtn">Continue</button>
+        </div>`;
+      const bookingBtn = controls.querySelector('#bookingBtn');
+      const error = controls.querySelector('#bookingError');
+      controls.querySelector('#backToCalendar').addEventListener('click', () => {
+        state.date = '';
+        state.time = '';
+        renderBookingCalendar();
+      });
+      controls.querySelectorAll('.slot').forEach(button => {
+        button.addEventListener('click', () => {
+          controls.querySelectorAll('.slot').forEach(item => item.classList.remove('slot-active'));
+          button.classList.add('slot-active');
+          state.time = button.textContent;
+          checkBooking();
+        });
+      });
+      bookingBtn.addEventListener('click', () => {
+        if (!state.date || !state.time) {
+          error.textContent = 'Please select an available date and time slot.';
+          return;
+        }
+        answer(`${state.date} at ${state.time}`, 9);
+      });
+      function checkBooking() {
+        bookingBtn.disabled = !(state.date && state.time);
+      }
+    }
 
-  function selectDate(date, el) {
-    state.date = date;
-    state.timeSlot = '';
-    document.querySelectorAll('.cal-day').forEach(d => d.classList.remove('selected'));
-    el.classList.add('selected');
-    showTimeSlots();
-  }
+    function renderSummary() {
+      controls.innerHTML = `
+        <div class="${cardClass}">
+          <div class="grid gap-1">
+            ${summaryRow('Name', state.name)}
+            ${summaryRow('Email', state.email)}
+            ${summaryRow('City', state.city)}
+            ${summaryRow('Income Slab', state.income)}
+            ${summaryRow('Mobile Number', state.mobile)}
+            ${summaryRow('Selected Date', state.date)}
+            ${summaryRow('Selected Time', state.time)}
+          </div>
+          <button class="${primaryBtn} mt-4 w-full" type="button">Confirm Booking</button>
+        </div>`;
+      controls.querySelector('button').addEventListener('click', showSuccess);
+    }
 
-  function showTimeSlots() {
-    const section = document.getElementById('slotsSection');
-    section.style.display = 'block';
-    const slots = ['09:00 AM','10:00 AM','11:00 AM','12:00 PM','02:00 PM','03:00 PM','04:00 PM','05:00 PM'];
-    document.getElementById('slotsGrid').innerHTML = slots.map(s =>
-      `<div class="slot-chip" tabindex="0" role="button" aria-label="${s}" onclick="selectSlot(this,'${s}')" onkeydown="if(event.key==='Enter'||event.key===' ')selectSlot(this,'${s}')">${s}</div>`
-    ).join('');
-    document.getElementById('scheduleBtn').style.display = 'none';
-    section.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
+    function summaryRow(label, value) {
+      return `<div class="grid grid-cols-[110px_minmax(0,1fr)] gap-3 border-b border-slate-100 py-2.5 text-sm sm:grid-cols-[140px_minmax(0,1fr)] sm:py-3 sm:text-base"><span class="text-fintoo-muted">${label}</span><span class="min-w-0 break-words text-right font-extrabold text-fintoo-navy">${value}</span></div>`;
+    }
 
-  function selectSlot(el, slot) {
-    document.querySelectorAll('.slot-chip').forEach(c => c.classList.remove('selected'));
-    el.classList.add('selected');
-    state.timeSlot = slot;
-    document.getElementById('scheduleBtn').style.display = 'flex';
-  }
+    function showSuccess() {
+      state.step = 10;
+      document.getElementById('chatShell').innerHTML = `
+        <div class="grid min-h-full place-items-center px-4 py-10 text-center sm:px-7">
+          <div class="animate-rise w-full max-w-xl rounded-[28px] border border-fintoo-line/90 bg-white/90 p-7 shadow-premium sm:p-10">
+            <div class="animate-pop mx-auto mb-6 grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-[#138a4a] to-[#20b86a] text-4xl font-extrabold text-white">✓</div>
+            <h2 class="text-[1.8rem] font-extrabold leading-tight text-fintoo-navy sm:text-[2.35rem]">Your Consultation Has Been Reserved</h2>
+            <p class="mx-auto mt-4 max-w-md leading-relaxed text-fintoo-muted">Thank you, ${escapeHtml(state.firstName)}.<br>One of our financial experts will connect with you at your scheduled time.</p>
+            <div class="mt-7 grid gap-3 text-left">
+              <div class="rounded-2xl bg-[#f4faf6] px-4 py-3 font-extrabold text-fintoo-navy">✓ Consultation Confirmed</div>
+              <div class="rounded-2xl bg-[#f4faf6] px-4 py-3 font-extrabold text-fintoo-navy">✓ Advisory Desk Assigned</div>
+              <div class="rounded-2xl bg-[#f4faf6] px-4 py-3 font-extrabold text-fintoo-navy">✓ Calendar Invitation Sent</div>
+            </div>
+          </div>
+        </div>`;
+    }
 
-  function submitSchedule() {
-    if (!state.date || !state.timeSlot) return;
-    const dateStr = state.date.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' });
-    appendUserBubble(`${dateStr} · ${state.timeSlot}`);
-    setProgress(7);
-    showStep7();
-  }
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, char => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      }[char]));
+    }
 
-  // ── STEP 7: Confirm ──
-  async function showStep7() {
-    document.getElementById('inputArea').innerHTML = '';
-    await showTyping(700);
-    await appendBubble(`Excellent choice, <strong>${state.firstName}</strong>. Here's a summary of your consultation.`);
-
-    const dateStr = state.date ? state.date.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '—';
-
-    setInputArea(`
-      <div class="summary-card">
-        <div class="summary-row"><span class="summary-key">Name</span><span class="summary-val">${state.name}</span></div>
-        <div class="summary-row"><span class="summary-key">Email</span><span class="summary-val">${state.email}</span></div>
-        <div class="summary-row"><span class="summary-key">Income Range</span><span class="summary-val">${state.income}</span></div>
-        <div class="summary-row"><span class="summary-key">Mobile</span><span class="summary-val">+91 ${state.phone}</span></div>
-        <div class="summary-row"><span class="summary-key">Date</span><span class="summary-val">${dateStr}</span></div>
-        <div class="summary-row"><span class="summary-key">Time</span><span class="summary-val">${state.timeSlot}</span></div>
-      </div>
-      <button class="btn-primary" onclick="confirmBooking()">
-        Confirm Booking
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-      </button>
-    `);
-  }
-
-  function confirmBooking() {
-    setProgress(8);
-    document.getElementById('chatInterface').style.display = 'none';
-    document.getElementById('tyName').textContent = state.firstName;
-    document.getElementById('thankYouScreen').classList.add('active');
-  }
-</script>
+    goTo(1);
+  </script>
 </body>
+
 </html>

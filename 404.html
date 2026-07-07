@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        ::-webkit-scrollbar { display: none; }
+
+        @keyframes floatUp {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(3deg); }
+        }
+        @keyframes floatDown {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(10px) rotate(-2deg); }
+        }
+        @keyframes floatSide {
+            0%, 100% { transform: translateX(0px) rotate(0deg); }
+            50% { transform: translateX(8px) rotate(2deg); }
+        }
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .float-up { animation: floatUp 4s ease-in-out infinite; }
+        .float-down { animation: floatDown 5s ease-in-out infinite; }
+        .float-side { animation: floatSide 6s ease-in-out infinite; }
+        .float-up-slow { animation: floatUp 7s ease-in-out infinite; }
+        .pulse-soft { animation: pulse-soft 3s ease-in-out infinite; }
+
+        .chart-line {
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            animation: drawLine 2.5s ease forwards;
+        }
+        @keyframes drawLine {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #042b62, #dd7300);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .search-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+        }
+        .card-shadow {
+            box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.04), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+        }
+        .radial-bg {
+            background: #fafbfc;
+            background-image:
+                linear-gradient(rgba(4, 43, 98, 0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(4, 43, 98, 0.045) 1px, transparent 1px),
+                radial-gradient(ellipse at 0% 0%, rgba(4, 43, 98, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 100% 100%, rgba(221, 115, 0, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 100% 0%, rgba(4, 43, 98, 0.08) 0%, transparent 40%),
+                radial-gradient(ellipse at 0% 100%, rgba(221, 115, 0, 0.08) 0%, transparent 40%);
+            background-size:
+                2rem 2rem,
+                2rem 2rem,
+                auto,
+                auto,
+                auto,
+                auto;
+        }
+        .coin-3d {
+            background: #dd7300;
+            border-radius: 50%;
+        }
+        .mini-chip {
+            backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(4, 43, 98, 0.12);
+        }
+        .text-accent-blue, .group:hover .group-hover\:text-accent-blue { color: #042b62; }
+        .text-fintoo-orange, .group:hover .group-hover\:text-fintoo-orange { color: #dd7300; }
+        .bg-accent-blue { background-color: #042b62; }
+        .bg-fintoo-orange { background-color: #dd7300; }
+        .bg-fintoo-blue-soft, .group:hover .group-hover\:bg-fintoo-blue-soft { background-color: rgba(4, 43, 98, 0.08); }
+        .bg-fintoo-orange-soft, .group:hover .group-hover\:bg-fintoo-orange-soft { background-color: rgba(221, 115, 0, 0.10); }
+        .hover\:bg-fintoo-orange:hover { background-color: #dd7300; }
+        .hover\:border-accent-blue:hover { border-color: #042b62; }
+        .hover\:text-accent-blue:hover { color: #042b62; }
+        .focus\:ring-fintoo-blue-soft:focus { --tw-ring-color: rgba(4, 43, 98, 0.16); }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sora': ['Sora', 'sans-serif'],
+                        'manrope': ['Manrope', 'sans-serif'],
+                    },
+                    colors: {
+                        'bg-base': '#fafbfc',
+                        'fintoo-blue': '#042b62',
+                        'fintoo-orange': '#dd7300',
+                        'accent-blue': '#042b62',
+                        'muted': '#94a3b8',
+                        'border-soft': '#e2e8f0',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="radial-bg font-manrope min-h-screen">
+
+    <!-- Navigation -->
+  
+
+    <!-- Main Content -->
+    <main id="main-content" class="w-full max-w-6xl mx-auto px-6 pt-8 pb-0 flex flex-col items-center text-center">
+
+        <!-- Error Badge -->
+        <div class="inline-flex items-center gap-2 bg-fintoo-blue-soft border border-blue-100 text-accent-blue text-xs font-manrope font-600 px-4 py-2 rounded-full mb-8 tracking-wide uppercase" style="border-color: rgba(4,43,98,0.14);">
+            <i class="fa-solid fa-triangle-exclamation text-xs"></i>
+            Error 404 · Page Not Found
+        </div>
+
+        <!-- Central Illustration Block -->
+        <div id="illustration-block" class="relative w-full max-w-3xl flex items-center justify-center mb-6" style="height: 420px;">
+
+            <!-- Floating Mini Chart — Top Left -->
+            <div class="absolute top-6 left-4 md:left-16 mini-chip rounded-2xl p-3 float-up z-10 card-shadow">
+                <div class="flex items-center gap-2 mb-2">
+                    <div class="w-5 h-5 rounded-full bg-fintoo-orange-soft flex items-center justify-center">
+                        <i class="fa-solid fa-arrow-trend-up text-fintoo-orange" style="font-size: 9px;"></i>
+                    </div>
+                    <span class="text-xs font-manrope font-600 text-slate-700">NIFTY 50</span>
+                </div>
+                <svg width="80" height="36" viewBox="0 0 80 36">
+                    <polyline points="0,30 15,22 30,26 45,14 60,18 75,8" fill="none" stroke="#dd7300" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="chart-line"/>
+                    <polyline points="0,30 15,22 30,26 45,14 60,18 75,8" fill="rgba(221,115,0,0.08)" stroke="none"/>
+                </svg>
+            </div>
+
+            <!-- Floating Rupee Coin — Top Right -->
+            <div class="absolute top-4 right-4 md:right-12 float-side z-10">
+                <div class="w-14 h-14 coin-3d flex items-center justify-center" style="box-shadow: 0 8px 20px rgba(221,115,0,0.35), inset 0 2px 4px rgba(255,255,255,0.4);">
+                    <span class="text-white font-sora font-800 text-xl">₹</span>
+                </div>
+            </div>
+
+            <!-- Floating Percentage Chip — Middle Left -->
+            
+
+            <!-- Floating Small Coin — Bottom Left -->
+            <div class="absolute bottom-16 left-8 md:left-20 float-up-slow z-10">
+                <div class="w-9 h-9 coin-3d flex items-center justify-center opacity-70" style="box-shadow: 0 6px 14px rgba(221,115,0,0.3);">
+                    <span class="text-white font-sora font-800 text-base">₹</span>
+                </div>
+            </div>
+
+            <!-- Floating Mini Bar Chart — Bottom Right -->
+            <div class="absolute bottom-12 right-2 md:right-14 mini-chip rounded-2xl p-3 float-up z-10 card-shadow" style="animation-delay: 1s;">
+                <p class="text-xs font-manrope font-600 text-slate-500 mb-2">Portfolio Mix</p>
+                <div class="flex items-end gap-1 h-8">
+                    <div class="w-3 rounded-t-sm" style="height: 40%; background-color: rgba(4,43,98,0.22);"></div>
+                    <div class="w-3 bg-accent-blue rounded-t-sm" style="height: 75%;"></div>
+                    <div class="w-3 rounded-t-sm" style="height: 55%; background-color: rgba(221,115,0,0.24);"></div>
+                    <div class="w-3 bg-fintoo-orange rounded-t-sm" style="height: 90%;"></div>
+                    <div class="w-3 rounded-t-sm" style="height: 65%; background-color: rgba(4,43,98,0.22);"></div>
+                </div>
+            </div>
+
+            <!-- Floating ROI Chip — Top Center Right -->
+            
+
+            <!-- CENTRAL 404 ILLUSTRATION -->
+            <div id="signpost" class="relative z-20 flex flex-col items-center justify-center h-full">
+                <div class="font-sora font-800 leading-none text-8xl md:text-9xl drop-shadow-2xl" style="font-weight: 800;">
+                    404
+                </div>
+                <div class="mt-2 h-3 w-40 md:w-56 rounded-full bg-slate-200 opacity-70 blur-sm"></div>
+            </div>
+        </div>
+
+        <!-- Headline -->
+        <h1 id="headline" class="font-sora font-800 text-3xl md:text-5xl text-slate-800 leading-tight tracking-tight max-w-2xl mb-4" style="font-weight: 800;">
+            Oops! This page not found.
+        </h1>
+
+        <!-- Supporting Text -->
+        <p id="subtext" class="font-manrope text-base md:text-lg text-slate-400 max-w-xl leading-relaxed mb-10 font-400">
+            The page you're looking for has either moved or been removed. 
+            <br/>
+            Let's get you back on track.
+        </p>
+
+        <!-- Search Bar -->
+       
+
+        <!-- CTA Buttons -->
+        <div id="cta-group" class="flex flex-col sm:flex-row items-center gap-4 mb-20">
+            <a href="#" class="inline-flex items-center gap-2.5 bg-accent-blue text-white font-manrope font-600 text-sm md:text-base px-8 py-4 rounded-2xl hover:bg-fintoo-blue/90 transition-all duration-200 w-full sm:w-auto justify-center" style="box-shadow: 0 8px 20px rgba(4,43,98,0.24);">
+                <i class="fa-solid fa-house text-sm"></i>
+                Back to Dashboard
+            </a>
+            <button id="support-open" type="button" class="inline-flex items-center bg-white gap-2.5 bg-transparent text-slate-500 font-manrope font-500 text-sm md:text-base px-8 py-4 rounded-2xl border border-slate-200 hover:border-accent-blue hover:text-accent-blue transition-all duration-200 w-full sm:w-auto justify-center">
+                <i class="fa-solid fa-headset text-sm"></i>
+                Talk to Support
+            </button>
+        </div>
+
+    </main>
+
+    <!-- Footer Utility Grid -->
+ 
+    <div id="support-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/50 px-6 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="support-modal-title">
+        <div class="w-full max-w-md rounded-2xl bg-white p-6 text-left shadow-2xl">
+            <div class="flex items-start justify-between gap-4">
+                <div>
+                    <p class="text-xs font-manrope font-700 uppercase tracking-wide text-fintoo-orange">Support</p>
+                    <h2 id="support-modal-title" class="mt-1 font-sora text-2xl font-800 text-accent-blue" style="font-weight: 800;">Contact Fintoo</h2>
+                </div>
+                <button id="support-close" type="button" class="flex h-10 w-10 items-center justify-center rounded-full bg-fintoo-blue-soft text-accent-blue transition-colors hover:bg-fintoo-orange-soft" aria-label="Close support popup">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <p class="mt-4 font-manrope text-sm leading-relaxed text-slate-500">
+                This is our email and mobile number. Reach out and our team will help you get back on track.
+            </p>
+            <div class="mt-6 space-y-3">
+                <a href="mailto:online@fintoo.in" class="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 p-4 text-slate-700 transition-colors hover:border-accent-blue hover:text-accent-blue">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-fintoo-blue-soft text-accent-blue">
+                        <i class="fa-solid fa-envelope"></i>
+                    </span>
+                    <span>
+                        <span class="block text-xs font-manrope font-600 uppercase tracking-wide text-slate-400">Email</span>
+                        <span class="font-manrope font-700">online@fintoo.in</span>
+                    </span>
+                </a>
+                <a href="tel:+919699800600" class="flex items-center gap-3 rounded-xl border border-slate-100 bg-slate-50 p-4 text-slate-700 transition-colors hover:border-accent-blue hover:text-accent-blue">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-full bg-fintoo-orange-soft text-fintoo-orange">
+                        <i class="fa-solid fa-phone"></i>
+                    </span>
+                    <span>
+                        <span class="block text-xs font-manrope font-600 uppercase tracking-wide text-slate-400">Mobile</span>
+                        <span class="font-manrope font-700">+91-9699 800 600</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const supportOpen = document.getElementById('support-open');
+        const supportClose = document.getElementById('support-close');
+        const supportModal = document.getElementById('support-modal');
+
+        function openSupportModal() {
+            supportModal.classList.remove('hidden');
+            supportModal.classList.add('flex');
+        }
+
+        function closeSupportModal() {
+            supportModal.classList.add('hidden');
+            supportModal.classList.remove('flex');
+        }
+
+        supportOpen.addEventListener('click', openSupportModal);
+        supportClose.addEventListener('click', closeSupportModal);
+        supportModal.addEventListener('click', (event) => {
+            if (event.target === supportModal) closeSupportModal();
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') closeSupportModal();
+        });
+    </script>
+</body>
+</html>

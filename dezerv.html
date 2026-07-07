@@ -53,7 +53,7 @@
 
     <main class="pt-16">
         <!-- Hero Section -->
-        <section id="about" class="gradient-bg min-h-screen flex flex-col justify-center px-4 md:px-8">
+        <section id="about" class="gradient-bg py-20 flex flex-col justify-center px-4 md:px-8">
             <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center py-20">
                 <div class="space-y-8">
                     <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
@@ -118,7 +118,7 @@
         </section>
 
         <!-- Trusted By Section -->
-       <section id="clients" class="py-20 bg-black overflow-hidden">
+       <section id="clients" class="py-20 bg-black overflow-hidden" style="background: linear-gradient(180deg, rgba(0, 0, 0, .8), #000), linear-gradient(0deg, #2d9b95, #2d9b95);">
     <div class="max-w-7xl mx-auto px-4 md:px-8 text-center">
 
         <!-- Heading -->
@@ -721,7 +721,7 @@ gsap.from(".counter", {
         <div class="stack-container">
 
             <!-- HEADER -->
-            <div class="offer-header">
+            <div class="offer-header mx-auto w-full max-w-7xl px-4 md:px-8">
     <!-- HEADER -->
     <div class="text-center mb-20 space-y-8 relative z-50">
 
@@ -758,7 +758,7 @@ gsap.from(".counter", {
 
             <!-- EQUITY -->
             <div id="equity"
-                class="panel absolute w-full max-w-6xl rounded-[48px] bg-[#0f0f10] border border-white/5 p-10 md:p-16">
+                class="panel absolute w-full  rounded-[48px] bg-[#0f0f10] border border-white/5 p-10 md:p-16">
 
                 <div class="grid lg:grid-cols-2 gap-20 items-center">
 
@@ -856,7 +856,7 @@ gsap.from(".counter", {
 
             <!-- FIXED -->
             <div id="fixed"
-                class="panel absolute w-full max-w-6xl rounded-[48px] bg-[#0f0f10] border border-white/5 p-10 md:p-16">
+                class="panel absolute w-full  rounded-[48px] bg-[#0f0f10] border border-white/5 p-10 md:p-16">
 
                 <div class="grid lg:grid-cols-2 gap-20 items-center">
 
@@ -950,7 +950,7 @@ gsap.from(".counter", {
 
             <!-- OTHERS -->
             <div id="others"
-                class="panel absolute w-full max-w-6xl rounded-[48px] bg-[#0f0f10] border border-white/5 p-10 md:p-16">
+                class="panel absolute w-full  rounded-[48px] bg-[#0f0f10] border border-white/5 p-10 md:p-16">
 
                 <div class="grid lg:grid-cols-2 gap-20 items-center">
 
@@ -1107,7 +1107,6 @@ gsap.from(".counter", {
     position:absolute;
 
     width:100%;
-    max-width:1150px;
 
     height:78vh;
 
@@ -1401,83 +1400,7 @@ tl.to("#fixed",{
     </main>
 
     <!-- Footer -->
-    <footer class="bg-black pt-24 pb-12 border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-4 md:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-20">
-                <div class="lg:col-span-1 space-y-8">
-                    <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/TPXgOMVZTdXq8fZkCjQzXTMbbwL2%2Fclone-site-assets%2F7fc308ae-0216-4b2d-8a52-da87a3212af7.svg" alt="Fintoo" class="h-6">
-                    <div class="card-bg p-4 rounded-2xl flex items-center gap-4">
-                        <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/TPXgOMVZTdXq8fZkCjQzXTMbbwL2%2Fclone-site-assets%2F800574fb-a7f5-45fc-aae2-1b2515cb0d3b.svg" alt="QR" class="w-20 h-20">
-                        <div>
-                            <p class="text-xs font-bold">Track all your investments in one place</p>
-                            <p class="text-[10px] text-gray-500 mt-1">Download <span class="text-white">Fintoo App</span></p>
-                            <div class="flex gap-2 mt-2">
-                                <i class="fa-brands fa-apple text-sm"></i>
-                                <i class="fa-brands fa-google-play text-sm"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="space-y-4">
-                        <p class="text-xs text-gray-400">Our weekly expert newsletter on stories that matter to your money.</p>
-                        <div class="flex">
-                            <input type="email" placeholder="Email address" class="bg-white/5 border border-white/10 rounded-l-full px-4 py-2 text-sm w-full outline-none focus:border-white/30">
-                            <button class="bg-white text-black px-4 py-2 rounded-r-full text-xs font-bold">Subscribe</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-8">
-                    <div>
-                        <h4 class="text-sm font-bold mb-6 text-gray-300">Knowledge Repository</h4>
-                        <ul class="space-y-4 text-xs text-gray-500">
-                            <li><a href="#" class="hover:text-white transition-colors">Bonds</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">IPA</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">Mutual Funds</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">Portfolio Management Services</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">Wealth Monitor</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">ERS Factsheet</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-sm font-bold mb-6 text-gray-300">About</h4>
-                        <ul class="space-y-4 text-xs text-gray-500">
-                            <li><a href="#" class="hover:text-white transition-colors">Team</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">FAQs</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">Investment Philosophy</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-sm font-bold mb-6 text-gray-300">Legal</h4>
-                        <ul class="space-y-4 text-xs text-gray-500">
-                            <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">Disclaimer</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">Fraud Notice</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">ODR Portal</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">Privacy</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 pt-12 border-t border-white/5">
-                <div class="space-y-4">
-                    <p class="text-2xl font-extrabold leading-tight">You are building India's future,<br><span class="text-gray-600">we are building yours.</span></p>
-                    <div class="flex gap-4">
-                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors"><i class="fa-brands fa-youtube text-sm"></i></a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors"><i class="fa-brands fa-linkedin-in text-sm"></i></a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors"><i class="fa-brands fa-instagram text-sm"></i></a>
-                        <a href="#" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors"><i class="fa-brands fa-x-twitter text-sm"></i></a>
-                    </div>
-                </div>
-                <div class="text-[10px] text-gray-600 max-w-2xl leading-relaxed">
-                    ©2021-2026 Fintoo. All Rights Reserved. Fintoo Investments Pvt. Ltd. is a Portfolio Manager with SEBI Registration no. INP000007377. Distribution services are offered through Fintoo Distribution Services Pvt. Ltd. (APRN 00615). Investment in securities market are subject to market risks. Read all the related documents carefully before investing. <a href="#" class="text-white underline">Terms and conditions</a> and <a href="#" class="text-white underline">Privacy Policy</a> of the website are applicable.
-                </div>
-            </div>
-        </div>
-    </footer>
-
+ 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             Highcharts.chart('chart-container', {

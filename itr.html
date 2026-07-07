@@ -1,0 +1,3242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fintoo — Structured Tax Advisory for Corporate Professionals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --navy: #042b62;
+      --fintoo-blue: #042b62;
+      --fintoo-orange: #dd7300;
+      --navy-deep: #031f49;
+      --navy-mid: #063878;
+      --orange: #dd7300;
+      --orange-light: #ef8a18;
+      --white: #ffffff;
+      --off-white: #f4f7fb;
+      --cream: #ffffff;
+      --text-muted: rgba(4, 43, 98, 0.5);
+      --text-light: rgba(255, 255, 255, 0.65);
+      --border: rgba(4, 43, 98, 0.1);
+      --border-light: rgba(255, 255, 255, 0.12);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--navy);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    .cursor {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: var(--orange);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      transition: transform .1s ease, width .3s ease, height .3s ease;
+    }
+
+    .cursor-ring {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid var(--orange);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform .15s ease, width .4s ease, height .4s ease, opacity .3s ease;
+      opacity: .5;
+    }
+
+    body.cursor-hover .cursor {
+      width: 16px;
+      height: 16px;
+    }
+
+    body.cursor-hover .cursor-ring {
+      width: 52px;
+      height: 52px;
+      opacity: .3;
+    }
+
+    @media(pointer:coarse) {
+
+      .cursor,
+      .cursor-ring {
+        display: none;
+      }
+
+      body {
+        cursor: auto;
+      }
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 24px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all .4s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    header.scrolled {
+      background: rgba(253, 249, 243, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 14px 5%;
+      box-shadow: 0 1px 0 var(--border), 0 8px 40px rgba(4, 43, 98, .06);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 38px;
+      height: 38px;
+      background: var(--orange);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s ease;
+    }
+
+    .logo-mark::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--white);
+      right: 5px;
+      top: 5px;
+      transition: background 0.4s ease;
+    }
+
+    header.scrolled .logo-mark {
+      background: var(--navy);
+    }
+
+    header.scrolled .logo-mark::after {
+      background: var(--orange);
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: -.5px;
+      transition: color 0.4s ease;
+    }
+
+    .logo-text span {
+      color: var(--orange);
+    }
+
+    header.scrolled .logo-text {
+      color: var(--navy);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+      opacity: .8;
+      text-decoration: none;
+      letter-spacing: .02em;
+      transition: color .4s, opacity .2s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--orange);
+      transition: width .3s ease;
+    }
+
+    nav a:hover {
+      color: var(--white);
+      opacity: 1;
+    }
+
+    header.scrolled nav a {
+      color: var(--navy);
+      opacity: 0.7;
+    }
+
+    header.scrolled nav a:hover {
+      color: var(--navy);
+      opacity: 1;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      background: var(--orange);
+      color: var(--white) !important;
+      opacity: 1 !important;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      transition: background .2s, transform .2s, box-shadow .2s !important;
+      box-shadow: 0 4px 16px rgba(221, 115, 0, .25);
+    }
+
+    .nav-cta:hover {
+      background: var(--orange-light) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(221, 115, 0, .35) !important;
+    }
+
+    .nav-cta::after {
+      display: none !important;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: all .3s ease, background 0.4s ease;
+    }
+
+    header.scrolled .hamburger span {
+      background: var(--navy);
+    }
+
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--navy-deep);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all .4s ease;
+    }
+
+    .mobile-nav.open {
+      opacity: 1;
+      transform: translateY(0);
+      display: flex;
+    }
+
+    .mobile-nav a {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      color: var(--white);
+      text-decoration: none;
+      opacity: .8;
+      transition: opacity .2s, color .2s;
+    }
+
+    .mobile-nav a:hover {
+      opacity: 1;
+      color: var(--orange);
+    }
+
+    .mobile-nav .close-btn {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    .hero {
+      min-height: 100vh;
+      background: var(--navy-deep);
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 120px 5% 80px;
+    }
+
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255, 255, 255, .03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .hero-bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .orb-1 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(221, 115, 0, .18) 0%, transparent 70%);
+      top: -100px;
+      right: -100px;
+      animation: orb-float 8s ease-in-out infinite;
+    }
+
+    .orb-2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(8, 56, 128, .4) 0%, transparent 70%);
+      bottom: -100px;
+      left: 10%;
+      animation: orb-float 10s ease-in-out infinite reverse;
+    }
+
+    @keyframes orb-float {
+
+      0%,
+      100% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-30px) scale(1.05);
+      }
+    }
+
+    .hero-noise {
+      position: absolute;
+      inset: 0;
+      opacity: .4;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(221, 115, 0, .12);
+      border: 1px solid rgba(221, 115, 0, .25);
+      border-radius: 100px;
+      padding: 6px 14px 6px 8px;
+      margin-bottom: 28px;
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(221, 115, 0, .5);
+      }
+
+      50% {
+        box-shadow: 0 0 0 6px rgba(221, 115, 0, 0);
+      }
+    }
+
+    .hero-badge span {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .08em;
+      color: var(--orange);
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 5vw, 66px);
+      font-weight: 900;
+      line-height: 1.08;
+      color: var(--white);
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--orange);
+      position: relative;
+    }
+
+    .hero-headline em::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 4px;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--orange), transparent);
+      border-radius: 2px;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--text-light);
+      max-width: 480px;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 56px;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--orange);
+      color: var(--white);
+      padding: 15px 28px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: .01em;
+      box-shadow: 0 8px 32px rgba(221, 115, 0, .35), inset 0 1px 0 rgba(255, 255, 255, .15);
+      transition: all .3s cubic-bezier(.16, 1, .3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, .15) 0%, transparent 60%);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 44px rgba(221, 115, 0, .45);
+    }
+
+    .btn-primary svg {
+      transition: transform .3s ease;
+    }
+
+    .btn-primary:hover svg {
+      transform: translateX(4px);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: rgba(255, 255, 255, .75);
+      padding: 15px 24px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      border: 1.5px solid rgba(255, 255, 255, .18);
+      transition: all .3s ease;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, .06);
+      color: var(--white);
+      border-color: rgba(255, 255, 255, .35);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .hero-stat-num span {
+      color: var(--orange);
+    }
+
+    .hero-stat-label {
+      font-size: 12px;
+      letter-spacing: .06em;
+      color: var(--text-light);
+      margin-top: 4px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .stat-divider {
+      width: 1px;
+      background: rgba(255, 255, 255, .12);
+      align-self: stretch;
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-card-main {
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 20px;
+      padding: 32px;
+      backdrop-filter: blur(20px);
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+      animation: card-float 6s ease-in-out infinite;
+    }
+
+    @keyframes card-float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    .card-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .card-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      background: rgba(221, 115, 0, .1);
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    .card-sebi {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: rgba(255, 255, 255, .4);
+      letter-spacing: .04em;
+    }
+
+    .card-amount-label {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .5);
+      margin-bottom: 4px;
+      letter-spacing: .04em;
+    }
+
+    .card-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .card-amount span {
+      color: var(--orange);
+      font-size: 28px;
+    }
+
+    .card-sub {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .45);
+      margin-bottom: 28px;
+    }
+
+    .card-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, .08);
+      margin-bottom: 20px;
+    }
+
+    .card-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .card-row-label {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .5);
+    }
+
+    .card-row-value {
+      font-size: 13px;
+      color: var(--white);
+      font-weight: 500;
+    }
+
+    .card-row-value.positive {
+      color: var(--orange);
+    }
+
+    .card-cta-row {
+      margin-top: 24px;
+      background: var(--orange);
+      border-radius: 10px;
+      padding: 14px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      cursor: pointer;
+      transition: all .2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .card-cta-row:hover {
+      background: var(--orange-light);
+    }
+
+    .floating-chip {
+      position: absolute;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 12px 16px;
+      box-shadow: 0 20px 60px rgba(4, 43, 98, .25);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: chip-float 5s ease-in-out infinite;
+    }
+
+    .chip-1 {
+      bottom: -20px;
+      left: -30px;
+      animation-delay: -2s;
+    }
+
+    .chip-2 {
+      top: -20px;
+      right: -24px;
+      animation-delay: -1s;
+    }
+
+    @keyframes chip-float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(-2deg);
+      }
+
+      50% {
+        transform: translateY(-8px) rotate(1deg);
+      }
+    }
+
+    .chip-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .chip-icon.blue {
+      background: rgba(4, 43, 98, .08);
+    }
+
+    .chip-icon.orange {
+      background: rgba(221, 115, 0, .1);
+    }
+
+    .chip-text strong {
+      display: block;
+      font-size: 14px;
+      color: var(--navy);
+      font-weight: 600;
+    }
+
+    .chip-text span {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .marquee-section {
+      background: var(--navy);
+      padding: 18px 0;
+      overflow: hidden;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      white-space: nowrap;
+      animation: marquee-scroll 30s linear infinite;
+    }
+
+    @keyframes marquee-scroll {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    .marquee-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 32px;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .4);
+    }
+
+    .marquee-item .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--orange);
+      opacity: .6;
+    }
+
+    section {
+      padding: 100px 5%;
+    }
+
+    .section-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    .section-tag::before {
+      content: '';
+      width: 20px;
+      height: 1.5px;
+      background: var(--orange);
+      border-radius: 1px;
+    }
+
+    .section-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1px;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-weight: 300;
+      max-width: 560px;
+    }
+
+    .serve-section {
+      background: var(--cream);
+    }
+
+    .serve-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+
+    .serve-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .serve-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 32px;
+      position: relative;
+      overflow: hidden;
+      transition: all .4s cubic-bezier(.16, 1, .3, 1);
+      cursor: default;
+    }
+
+    .serve-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--orange);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s ease;
+    }
+
+    .serve-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 64px rgba(4, 43, 98, .1);
+      border-color: transparent;
+    }
+
+    .serve-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .serve-card-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .serve-card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: rgba(4, 43, 98, .05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+      transition: background .3s;
+    }
+
+    .serve-card:hover .serve-card-icon {
+      background: rgba(221, 115, 0, .08);
+    }
+
+    .serve-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+      letter-spacing: -.3px;
+    }
+
+    .serve-card p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .serve-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .serve-card-tag {
+      background: rgba(4, 43, 98, .05);
+      border: 1px solid rgba(4, 43, 98, .08);
+      border-radius: 100px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: var(--navy);
+      opacity: .65;
+      font-weight: 500;
+    }
+
+    .process-section {
+      background: var(--navy-deep);
+    }
+
+    .process-section .section-headline {
+      color: var(--white);
+    }
+
+    .process-section .section-sub {
+      color: var(--text-light);
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 60px;
+    }
+
+    .process-step {
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 16px;
+      padding: 36px 28px;
+      position: relative;
+      transition: all .4s cubic-bezier(.16, 1, .3, 1);
+      overflow: hidden;
+    }
+
+    .process-step::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(221, 115, 0, .06) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity .4s;
+    }
+
+    .process-step:hover {
+      background: rgba(255, 255, 255, .08);
+      border-color: rgba(221, 115, 0, .4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(221, 115, 0, .15);
+    }
+
+    .process-step:hover::after {
+      opacity: 1;
+    }
+
+    .process-step-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 48px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, .04);
+      line-height: 1;
+      margin-bottom: -10px;
+      display: block;
+    }
+
+    .process-step-icon {
+      font-size: 28px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .process-step h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: var(--white);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .process-step p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .45);
+      line-height: 1.6;
+    }
+
+    .services-section {
+      background: var(--off-white);
+    }
+
+    .services-layout {
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-top: 60px;
+    }
+
+    .services-sticky {
+      position: sticky;
+      top: 120px;
+    }
+
+    .services-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .service-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: all .3s ease;
+      cursor: default;
+    }
+
+    .service-item:hover {
+      border-color: rgba(221, 115, 0, .3);
+      box-shadow: 0 8px 32px rgba(4, 43, 98, .08);
+    }
+
+    .service-item-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .service-item-icon {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      border-radius: 12px;
+      background: rgba(4, 43, 98, .05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .service-item h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .service-item-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--orange);
+    }
+
+    .service-item p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .trust-section {
+      background: var(--cream);
+    }
+
+    .clients-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      margin-bottom: 64px;
+    }
+
+    .client-logo {
+      height: 24px;
+      color: var(--navy);
+      opacity: 0.45;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .client-logo:hover {
+      opacity: 0.95;
+      color: var(--orange);
+      transform: translateY(-2px);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all .3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonial-card:hover {
+      box-shadow: 0 16px 48px rgba(4, 43, 98, .1);
+      transform: translateY(-4px);
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 16px;
+      right: 24px;
+      font-family: 'Playfair Display', serif;
+      font-size: 80px;
+      line-height: 1;
+      color: rgba(221, 115, 0, .08);
+      pointer-events: none;
+    }
+
+    .testimonial-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 16px;
+    }
+
+    .testimonial-stars span {
+      color: var(--orange);
+      font-size: 14px;
+    }
+
+    .testimonial-card blockquote {
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--navy);
+      font-style: italic;
+      margin-bottom: 24px;
+      font-weight: 400;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy-mid), var(--navy));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: var(--white);
+      font-weight: 700;
+    }
+
+    .testimonial-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .testimonial-role {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .metrics-section {
+      background: var(--navy-deep);
+      padding: 80px 5%;
+      position: relative;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .metrics-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+
+    .metric-item {
+      text-align: center;
+    }
+
+    .metric-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, var(--white) 30%, var(--orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .metric-label {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .65);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .booking-section {
+      background: var(--navy-deep);
+      padding: 100px 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .booking-bg {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255, 255, 255, .02) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .02) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+
+    .booking-orb {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(221, 115, 0, .12) 0%, transparent 65%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .booking-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .booking-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(221, 115, 0, .12);
+      border: 1px solid rgba(221, 115, 0, .2);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 28px;
+    }
+
+    .booking-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 900;
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .booking-headline em {
+      font-style: italic;
+      color: var(--orange);
+    }
+
+    .booking-sub {
+      font-size: 17px;
+      color: var(--text-light);
+      line-height: 1.65;
+      font-weight: 300;
+      margin-bottom: 40px;
+    }
+
+    .booking-form {
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 20px;
+      padding: 32px;
+      backdrop-filter: blur(20px);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-field label {
+      font-size: 12px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .45);
+      font-weight: 500;
+    }
+
+    .form-field input,
+    .form-field select {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-size: 15px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+      transition: border-color .2s, background .2s;
+      width: 100%;
+    }
+
+    .form-field input::placeholder {
+      color: rgba(255, 255, 255, .25);
+    }
+
+    .form-field input:focus,
+    .form-field select:focus {
+      border-color: rgba(221, 115, 0, .5);
+      background: rgba(255, 255, 255, .08);
+    }
+
+    .form-field select option {
+      background: var(--navy-deep);
+      color: var(--white);
+    }
+
+    .form-submit {
+      width: 100%;
+      margin-top: 8px;
+      background: var(--orange);
+      color: var(--white);
+      padding: 16px 32px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'DM Sans', sans-serif;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 32px rgba(221, 115, 0, .35);
+      transition: all .3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .form-submit:hover {
+      background: var(--orange-light);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 44px rgba(221, 115, 0, .45);
+    }
+
+    .form-note {
+      margin-top: 12px;
+      font-size: 12px;
+      color: rgba(255, 255, 255, .3);
+      text-align: center;
+    }
+
+    footer {
+      background: var(--navy);
+      padding: 60px 5% 40px;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      margin-bottom: 32px;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .4);
+      line-height: 1.7;
+      margin-top: 16px;
+      max-width: 300px;
+    }
+
+    .footer-col h5 {
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .3);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col ul li a {
+      font-size: 14px;
+      color: rgba(255, 255, 255, .55);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--orange);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-disclaimer {
+      font-size: 11px;
+      color: rgba(255, 255, 255, .2);
+      line-height: 1.6;
+      max-width: 680px;
+    }
+
+    .footer-legal {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .3);
+      white-space: nowrap;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s cubic-bezier(.16, 1, .3, 1), transform .7s cubic-bezier(.16, 1, .3, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 {
+      transition-delay: .1s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: .2s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: .3s;
+    }
+
+    .reveal-delay-4 {
+      transition-delay: .4s;
+    }
+
+    @media(max-width:1024px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero-visual {
+        justify-content: flex-start;
+      }
+
+      .hero-card-main {
+        max-width: 100%;
+      }
+
+      .serve-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .process-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .services-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .services-sticky {
+        position: static;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+
+      .metrics-inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media(max-width:768px) {
+      section {
+        padding: 70px 5%;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .serve-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+
+      .hero-stats {
+        gap: 24px;
+      }
+
+      .stat-divider {
+        display: none;
+      }
+
+      .metrics-inner {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+      }
+
+      .hero-ctas {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .chip-1,
+      .chip-2 {
+        display: none;
+      }
+
+      .booking-form {
+        padding: 24px 20px;
+      }
+
+      .clients-row {
+        gap: 24px;
+        justify-content: center;
+      }
+
+      .hero-card-main {
+        max-width: 340px;
+      }
+    }
+
+    @media(max-width:480px) {
+      .metrics-inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      .metric-num {
+        font-size: 36px;
+      }
+
+      .hero {
+        padding: 100px 5% 60px;
+      }
+    }
+
+    /* Comparison Section */
+    .comparison-section {
+      background: var(--cream);
+      padding: 100px 5%;
+    }
+
+    .comparison-table-wrapper {
+      margin-top: 50px;
+      overflow-x: auto;
+      border-radius: 16px;
+      box-shadow: 0 12px 48px rgba(4, 43, 98, 0.04);
+      background: var(--white);
+      border: 1px solid var(--border);
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      min-width: 750px;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 22px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comparison-table th {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .comparison-table th.highlight-col,
+    .comparison-table td.highlight-col {
+      background: rgba(221, 115, 0, 0.03);
+      border-left: 1.5px solid rgba(221, 115, 0, 0.15);
+      border-right: 1.5px solid rgba(221, 115, 0, 0.15);
+    }
+
+    .comparison-table th.highlight-col {
+      border-top: 4px solid var(--orange);
+      color: var(--orange);
+    }
+
+    .comparison-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .comparison-table td.feature-name {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--navy);
+      max-width: 280px;
+    }
+
+    .comparison-table td.feature-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 4px;
+      font-weight: 400;
+    }
+
+    .comparison-table td .status-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .comparison-table td .status-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .status-icon.yes {
+      background: rgba(221, 115, 0, 0.1);
+      color: var(--orange);
+    }
+
+    .status-icon.no {
+      background: rgba(4, 43, 98, 0.08);
+      color: var(--navy);
+    }
+
+    .status-icon.partial {
+      background: rgba(221, 115, 0, 0.1);
+      color: var(--orange);
+    }
+
+    .comparison-table td .status-text {
+      font-size: 14px;
+      color: var(--navy);
+      font-weight: 500;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      background: var(--off-white);
+      padding: 100px 5%;
+    }
+
+    .faq-container {
+      max-width: 800px;
+      margin: 50px auto 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .faq-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .faq-item:hover {
+      box-shadow: 0 8px 24px rgba(4, 43, 98, 0.04);
+      border-color: rgba(4, 43, 98, 0.15);
+    }
+
+    .faq-item.active {
+      border-color: rgba(221, 115, 0, 0.3);
+      box-shadow: 0 12px 32px rgba(4, 43, 98, 0.06);
+    }
+
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-align: left;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .faq-question h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      margin: 0;
+    }
+
+    .faq-toggle-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(4, 43, 98, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .faq-item.active .faq-toggle-icon {
+      background: rgba(221, 115, 0, 0.1);
+      color: var(--orange);
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .faq-answer-inner {
+      padding: 0 28px 24px;
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* Interactive Options in Hero Card */
+    .interactive-selectors {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .interactive-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      border-radius: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+      user-select: none;
+      transition: all .2s ease;
+    }
+
+    .interactive-option:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .interactive-option input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+      outline: none;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      background: transparent;
+    }
+
+    .interactive-option input[type="checkbox"]:checked {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+
+    .interactive-option input[type="checkbox"]::after {
+      content: '';
+      width: 8px;
+      height: 4px;
+      border-left: 2px solid white;
+      border-bottom: 2px solid white;
+      transform: rotate(-45deg) translateY(-1px);
+      display: none;
+    }
+
+    .interactive-option input[type="checkbox"]:checked::after {
+      display: block;
+    }
+
+    .icon-svg {
+      width: 1em;
+      height: 1em;
+      flex-shrink: 0;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vertical-align: -0.15em;
+    }
+
+    .icon-fill {
+      fill: currentColor;
+      stroke: none;
+    }
+
+    .interactive-option span {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .interactive-option input[type="checkbox"]:checked+span {
+      color: var(--white);
+    }
+
+    .card-row-value.muted {
+      color: rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+
+<body>
+  <svg aria-hidden="true" class="hidden" width="0" height="0" style="position:absolute">
+    <symbol id="icon-chart" viewBox="0 0 24 24">
+      <path d="M3 3v18h18" />
+      <path d="M7 15l3-3 3 2 5-7" />
+    </symbol>
+    <symbol id="icon-briefcase" viewBox="0 0 24 24">
+      <path d="M10 6V5a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v1" />
+      <path d="M4 7h16v12H4z" />
+      <path d="M4 12h16" />
+    </symbol>
+    <symbol id="icon-globe" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18" />
+      <path d="M12 3c3 3.3 3 14.7 0 18" />
+      <path d="M12 3c-3 3.3-3 14.7 0 18" />
+    </symbol>
+    <symbol id="icon-clipboard" viewBox="0 0 24 24">
+      <path d="M9 4h6l1 2h3v15H5V6h3z" />
+      <path d="M9 12h6" />
+      <path d="M9 16h4" />
+    </symbol>
+    <symbol id="icon-search" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="7" />
+      <path d="M16.5 16.5L21 21" />
+    </symbol>
+    <symbol id="icon-map" viewBox="0 0 24 24">
+      <path d="M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3z" />
+      <path d="M9 3v15" />
+      <path d="M15 6v15" />
+    </symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24">
+      <path d="M20 6L9 17l-5-5" />
+    </symbol>
+    <symbol id="icon-file" viewBox="0 0 24 24">
+      <path d="M14 3H6v18h12V7z" />
+      <path d="M14 3v4h4" />
+      <path d="M9 13h6" />
+      <path d="M9 17h4" />
+    </symbol>
+    <symbol id="icon-calendar" viewBox="0 0 24 24">
+      <path d="M7 3v4" />
+      <path d="M17 3v4" />
+      <path d="M4 8h16" />
+      <path d="M5 5h14v16H5z" />
+    </symbol>
+    <symbol id="icon-star" viewBox="0 0 24 24">
+      <path d="M12 3l2.7 5.5 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.8 1-6.1-4.4-4.3 6.1-.9z" />
+    </symbol>
+    <symbol id="icon-lock" viewBox="0 0 24 24">
+      <path d="M7 10V8a5 5 0 0 1 10 0v2" />
+      <path d="M5 10h14v11H5z" />
+      <path d="M12 15v2" />
+    </symbol>
+    <symbol id="icon-x" viewBox="0 0 24 24">
+      <path d="M18 6L6 18" />
+      <path d="M6 6l12 12" />
+    </symbol>
+  </svg>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+  <div class="mobile-nav" id="mobileNav">
+    <button class="close-btn" id="closeNav" aria-label="Close menu"><svg class="icon-svg"><use href="#icon-x"></use></svg></button>
+    <a href="#serve">Who We Help</a>
+    <a href="#process">How It Works</a>
+    <a href="#services">Services</a>
+    <a href="#testimonials">Clients</a>
+    <a href="#booking">Book a Session</a>
+  </div>
+  <header id="header">
+    <a href="#" class="logo">
+      <div class="logo-mark">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M3 14L9 4L15 14H3Z" fill="white" opacity="0.9" />
+        </svg>
+      </div>
+      <span class="logo-text">FINT<span>OO</span></span>
+    </a>
+    <nav>
+      <a href="#serve">Who We Help</a>
+      <a href="#process">How It Works</a>
+      <a href="#services">Services</a>
+      <a href="#testimonials">Clients</a>
+      <a href="#booking" class="nav-cta">Book a Session</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <section class="hero" id="home">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-bg-orb orb-1"></div>
+    <div class="hero-bg-orb orb-2"></div>
+    <div class="hero-noise"></div>
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          <span>SEBI Registered &middot; INA000020031</span>
+        </div>
+        <h1 class="hero-headline">Not Just<br><em>ITR Filing.</em><br>Structured Tax<br>Advisory.</h1>
+        <p class="hero-sub">India's most trusted tax advisory for corporate professionals with complex income streams
+          &mdash; ESOPs, global assets, multiple sources, and beyond.</p>
+        <div class="hero-ctas">
+          <a href="#booking" class="btn-primary">
+            Book Free Consultation
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8H13M9 4L13 8L9 12" stroke="white" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </a>
+          <a href="#process" class="btn-ghost">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <circle cx="8" cy="8" r="6.5" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" />
+              <path d="M6 5L11 8L6 11V5Z" fill="rgba(255,255,255,0.6)" />
+            </svg>
+            See how it works
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num">&#8377;5,000<span>Cr+</span></div>
+            <div class="hero-stat-label">Assets Tracked</div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">25,000<span>+</span></div>
+            <div class="hero-stat-label">Employees Advised</div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">100<span>+</span></div>
+            <div class="hero-stat-label">Corporate Tie-Ups</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card-main">
+          <div class="card-header-row">
+            <div class="card-label">Tax Advisory</div>
+            <div class="card-sebi">INA000020031</div>
+          </div>
+          <div class="card-amount-label">Estimated Tax Savings</div>
+          <div class="card-amount" id="est-savings"><span>&#8377;</span>3,20,000</div>
+          <div class="card-sub">Optimized for FY 2024-25</div>
+          <div class="card-divider"></div>
+
+          <!-- Interactive Widget Options -->
+          <div class="interactive-selectors">
+            <label class="interactive-option">
+              <input type="checkbox" id="chk-esop" checked onchange="updateHeroWidget()">
+              <span>ESOPs / RSUs</span>
+            </label>
+            <label class="interactive-option">
+              <input type="checkbox" id="chk-foreign" checked onchange="updateHeroWidget()">
+              <span>Global Assets / Foreign Income</span>
+            </label>
+            <label class="interactive-option">
+              <input type="checkbox" id="chk-multiple" checked onchange="updateHeroWidget()">
+              <span>Multiple Incomes / Freelance</span>
+            </label>
+          </div>
+
+          <div class="card-divider"></div>
+
+          <div class="card-row">
+            <span class="card-row-label">ESOP Disclosure</span>
+            <span class="card-row-value positive" id="row-esop-val"><svg class="icon-svg"><use href="#icon-check"></use></svg> Compliant</span>
+          </div>
+          <div class="card-row">
+            <span class="card-row-label">Advance Tax</span>
+            <span class="card-row-value positive" id="row-advance-val">₹1,02,000 Saved</span>
+          </div>
+          <div class="card-row">
+            <span class="card-row-label">Foreign Assets</span>
+            <span class="card-row-value positive" id="row-foreign-val"><svg class="icon-svg"><use href="#icon-check"></use></svg> Disclosed</span>
+          </div>
+          <div class="card-row">
+            <span class="card-row-label">Regime Selection</span>
+            <span class="card-row-value" id="row-regime-val">Optimized</span>
+          </div>
+          <div class="card-cta-row" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">
+            Get My Tax Plan
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8H13M9 4L13 8L9 12" stroke="white" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          </div>
+        </div>
+        <div class="floating-chip chip-1">
+          <div class="chip-icon blue"><svg class="icon-svg"><use href="#icon-chart"></use></svg></div>
+          <div class="chip-text">
+            <strong>Fee-Only</strong>
+            <span>Zero Commissions</span>
+          </div>
+        </div>
+        <div class="floating-chip chip-2">
+          <div class="chip-icon orange"><svg class="icon-svg"><use href="#icon-star"></use></svg></div>
+          <div class="chip-text">
+            <strong>Top 3 Advisory</strong>
+            <span>India Ranked</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <span class="marquee-item"><span class="dot"></span>Live ITR Filing</span>
+      <span class="marquee-item"><span class="dot"></span>ESOP Advisory</span>
+      <span class="marquee-item"><span class="dot"></span>Advance Tax Planning</span>
+      <span class="marquee-item"><span class="dot"></span>Global Income</span>
+      <span class="marquee-item"><span class="dot"></span>Regime Optimization</span>
+      <span class="marquee-item"><span class="dot"></span>Foreign Asset Disclosure</span>
+      <span class="marquee-item"><span class="dot"></span>Estate Planning</span>
+      <span class="marquee-item"><span class="dot"></span>Wealth Advisory</span>
+      <span class="marquee-item"><span class="dot"></span>Live ITR Filing</span>
+      <span class="marquee-item"><span class="dot"></span>ESOP Advisory</span>
+      <span class="marquee-item"><span class="dot"></span>Advance Tax Planning</span>
+      <span class="marquee-item"><span class="dot"></span>Global Income</span>
+      <span class="marquee-item"><span class="dot"></span>Regime Optimization</span>
+      <span class="marquee-item"><span class="dot"></span>Foreign Asset Disclosure</span>
+      <span class="marquee-item"><span class="dot"></span>Estate Planning</span>
+      <span class="marquee-item"><span class="dot"></span>Wealth Advisory</span>
+    </div>
+  </div>
+  <section class="serve-section" id="serve">
+    <div class="section-inner">
+      <div class="serve-header">
+        <div>
+          <div class="section-tag reveal">Who We Help</div>
+          <h2 class="section-headline reveal reveal-delay-1">Built for<br>Complex Incomes.</h2>
+        </div>
+        <p class="section-sub reveal reveal-delay-2">If your tax situation goes beyond a single salary, you need more
+          than just a CA who files. You need a structured advisory team.</p>
+      </div>
+      <div class="serve-grid">
+        <div class="serve-card reveal">
+          <div class="serve-card-num">01 &mdash; Profile</div>
+          <div class="serve-card-icon"><svg class="icon-svg"><use href="#icon-briefcase"></use></svg></div>
+          <h3>Corporate Employees</h3>
+          <p>Salaried professionals with taxable income from multiple sources &mdash; salary, rental income, capital
+            gains, and freelance.</p>
+          <div class="serve-card-tags">
+            <span class="serve-card-tag">Multiple Income</span>
+            <span class="serve-card-tag">Advance Tax</span>
+            <span class="serve-card-tag">Deductions</span>
+          </div>
+        </div>
+        <div class="serve-card reveal reveal-delay-1">
+          <div class="serve-card-num">02 &mdash; Profile</div>
+          <div class="serve-card-icon"><svg class="icon-svg"><use href="#icon-chart"></use></svg></div>
+          <h3>Managers &amp; C-Suite</h3>
+          <p>Senior professionals with ESOPs, RSUs, bonuses, and complex remuneration structures that demand proactive
+            tax strategy.</p>
+          <div class="serve-card-tags">
+            <span class="serve-card-tag">ESOPs &amp; RSUs</span>
+            <span class="serve-card-tag">Perquisites</span>
+            <span class="serve-card-tag">Bonuses</span>
+          </div>
+        </div>
+        <div class="serve-card reveal reveal-delay-2">
+          <div class="serve-card-num">03 &mdash; Profile</div>
+          <div class="serve-card-icon"><svg class="icon-svg"><use href="#icon-globe"></use></svg></div>
+          <h3>Global Income Earners</h3>
+          <p>Expats, NRIs, and professionals with overseas assets, SBUs, foreign bank accounts, or US tax filing
+            obligations.</p>
+          <div class="serve-card-tags">
+            <span class="serve-card-tag">FBAR / FATCA</span>
+            <span class="serve-card-tag">Foreign Assets</span>
+            <span class="serve-card-tag">US Tax Filing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="process-section" id="process">
+    <div class="section-inner">
+      <div class="section-tag reveal" style="color:var(--orange);">How It Works</div>
+      <h2 class="section-headline reveal reveal-delay-1" style="color:var(--white);">From confusion to<br>complete
+        clarity.</h2>
+      <p class="section-sub reveal reveal-delay-2" style="color:var(--text-light);">A 4-step expert-led process designed
+        around your financial complexity.</p>
+      <div class="process-grid">
+        <div class="process-step reveal">
+          <span class="process-step-num">01</span>
+          <span class="process-step-icon"><svg class="icon-svg"><use href="#icon-clipboard"></use></svg></span>
+          <h3>Discovery Session</h3>
+          <p>A 45-minute live session with a CA to understand your income structure, goals, and tax challenges in full.
+          </p>
+        </div>
+        <div class="process-step reveal reveal-delay-1">
+          <span class="process-step-num">02</span>
+          <span class="process-step-icon"><svg class="icon-svg"><use href="#icon-search"></use></svg></span>
+          <h3>Deep Analysis</h3>
+          <p>Our team reviews every income source, investments, assets, and disclosure requirements across India &amp;
+            global.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <span class="process-step-num">03</span>
+          <span class="process-step-icon"><svg class="icon-svg"><use href="#icon-map"></use></svg></span>
+          <h3>Tax Strategy</h3>
+          <p>Personalized tax optimization plan &mdash; regime selection, advance tax, deductions, and savings maximized
+            ethically.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <span class="process-step-num">04</span>
+          <span class="process-step-icon"><svg class="icon-svg"><use href="#icon-check"></use></svg></span>
+          <h3>Accurate Filing</h3>
+          <p>Complete, disclosure-accurate ITR filing with full compliance. Ongoing advisory all year, not just at
+            deadline.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="services-section" id="services">
+    <div class="section-inner">
+      <div class="section-tag reveal">The Offering</div>
+      <h2 class="section-headline reveal reveal-delay-1">One advisory.<br>Every dimension.</h2>
+      <div class="services-layout">
+        <div class="services-sticky reveal">
+          <p class="section-sub" style="margin-bottom:32px;">We don't just file your ITR. We structure and optimize your
+            entire tax life &mdash; ethically, accurately, and transparently.</p>
+          <div
+            style="background:rgba(221,115,0,.06);border:1px solid rgba(221,115,0,.15);border-radius:16px;padding:28px;">
+            <div
+              style="font-family:'DM Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--orange);margin-bottom:12px;">
+              Our Promise</div>
+            <div
+              style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--navy);line-height:1.25;margin-bottom:16px;">
+              Fee-Only. Zero Commissions. Always.</div>
+            <p style="font-size:14px;color:var(--text-muted);line-height:1.6;">Every recommendation we make is purely in
+              your interest. We earn no commission &mdash; ever. That's how trust is built.</p>
+          </div>
+        </div>
+        <div class="services-list">
+          <div class="service-item reveal">
+            <div class="service-item-header">
+              <div class="service-item-icon"><svg class="icon-svg"><use href="#icon-file"></use></svg></div>
+              <div>
+                <h4>Live ITR Filing</h4>
+                <div class="service-item-tag">45 min session &middot; Expert-Led</div>
+              </div>
+            </div>
+            <p>File your return live, with a CA walking you through every field &mdash; accurate, transparent, and
+              tailored to your disclosures.</p>
+          </div>
+          <div class="service-item reveal reveal-delay-1">
+            <div class="service-item-header">
+              <div class="service-item-icon"><svg class="icon-svg"><use href="#icon-calendar"></use></svg></div>
+              <div>
+                <h4>Tax Planning</h4>
+                <div class="service-item-tag">Current FY &middot; Proactive</div>
+              </div>
+            </div>
+            <p>Plan your taxes well before the deadline. Reduce liability legally using the right regime, deductions,
+              and investment structuring.</p>
+          </div>
+          <div class="service-item reveal reveal-delay-2">
+            <div class="service-item-header">
+              <div class="service-item-icon"><svg class="icon-svg"><use href="#icon-chart"></use></svg></div>
+              <div>
+                <h4>ESOP &amp; Equity Advisory</h4>
+                <div class="service-item-tag">RSUs &middot; ESOPs &middot; SBUs</div>
+              </div>
+            </div>
+            <p>Navigate the tax complexity of stock options, vested shares, and equity income with expert-guided
+              disclosure and planning.</p>
+          </div>
+          <div class="service-item reveal reveal-delay-3">
+            <div class="service-item-header">
+              <div class="service-item-icon"><svg class="icon-svg"><use href="#icon-globe"></use></svg></div>
+              <div>
+                <h4>Global Tax Assistance</h4>
+                <div class="service-item-tag">US Filing &middot; Foreign Assets &middot; FBAR</div>
+              </div>
+            </div>
+            <p>Expert help for international income, overseas assets, NRI status, and US tax filing obligations &mdash;
+              all under one roof.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="comparison-section" id="comparison">
+    <div class="section-inner">
+      <div style="text-align: center; margin-bottom: 50px;">
+        <div class="section-tag reveal">How We Compare</div>
+        <h2 class="section-headline reveal reveal-delay-1">Choose the right path<br>for your taxes.</h2>
+        <p class="section-sub reveal reveal-delay-2" style="margin: 0 auto; max-width: 600px;">Why corporate
+          professionals with stock options, global assets, and multi-source incomes trust Fintoo over traditional
+          options.</p>
+      </div>
+      <div class="comparison-table-wrapper reveal reveal-delay-3">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Features & Capabilities</th>
+              <th class="highlight-col">Fintoo Structured Advisory</th>
+              <th>Traditional CAs</th>
+              <th>DIY Tax Portals</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="feature-name">
+                Live Screen-Share Filing
+                <span class="feature-desc">Go through every line item with your CA in real time.</span>
+              </td>
+              <td class="highlight-col">
+                <div class="status-container">
+                  <span class="status-icon yes"><svg class="icon-svg"><use href="#icon-check"></use></svg></span>
+                  <span class="status-text">45-Min Live Session</span>
+                </div>
+              </td>
+              <td>
+                <div class="status-container">
+                  <span class="status-icon no"><svg class="icon-svg"><use href="#icon-x"></use></svg></span>
+                  <span class="status-text">Offline / Email-based</span>
+                </div>
+              </td>
+              <td>
+                <div class="status-container">
+                  <span class="status-icon no"><svg class="icon-svg"><use href="#icon-x"></use></svg></span>
+                  <span class="status-text">Fully Automated DIY</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="feature-name">
+                ESOP & RSU Tax Optimization
+                <span class="feature-desc">Navigating double taxation, vesting, and capital gains.</span>
+              </td>
+              <td class="highlight-col">
+                <div class="status-container">
+                  <span class="status-icon yes"><svg class="icon-svg"><use href="#icon-check"></use></svg></span>
+                  <span class="status-text">Expert Equity Advisory</span>
+                </div>
+              </td>
+              <td>
+                <div class="status-container">
+                  <span class="status-icon partial">~</span>
+                  <span class="status-text">Varies by CA</span>
+                </div>
+              </td>
+              <td>
+                <div class="status-container">
+                  <span class="status-icon no"><svg class="icon-svg"><use href="#icon-x"></use></svg></span>
+                  <span class="status-text">No Custom Advice</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="feature-name">
+                Global Income & Schedule FA
+                <span class="feature-desc">Accurate foreign asset disclosure & DTAA compliance.</span>
+              </td>
+              <td class="highlight-col">
+                <div class="status-container">
+                  <span class="status-icon yes"><svg class="icon-svg"><use href="#icon-check"></use></svg></span>
+                  <span class="status-text">Full Disclosures Handled</span>
+                </div>
+              </td>
+              <td>
+                <div class="status-container">
+                  <span class="status-icon partial">~</span>
+                  <span class="status-text">Prone to omissions</span>
+                </div>
+              </td>
+              <td>
+                <div class="status-container">
+                  <span class="status-icon no"><svg class="icon-svg"><use href="#icon-x"></use></svg></span>
+                  <span class="status-text">High risk of notices</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="feature-name">
+                Fee-Only Structure
+                <span class="feature-desc">Strictly zero commission from investment products.</span>
+              </td>
+              <td class="highlight-col">
+                <div class="status-container">
+                  <span class="status-icon yes"><svg class="icon-svg"><use href="#icon-check"></use></svg></span>
+                  <span class="status-text">100% Conflict-Free</span>
+                </div>
+              </td>
+              <td>
+                <div class="status-container">
+                  <span class="status-icon no"><svg class="icon-svg"><use href="#icon-x"></use></svg></span>
+                  <span class="status-text">Often sells products</span>
+                </div>
+              </td>
+              <td>
+                <div class="status-container">
+                  <span class="status-icon no"><svg class="icon-svg"><use href="#icon-x"></use></svg></span>
+                  <span class="status-text">Upsells loans/insurances</span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="feature-name">
+                Year-Round Proactive Review
+                <span class="feature-desc">Advance tax updates and planning calls every quarter.</span>
+              </td>
+              <td class="highlight-col">
+                <div class="status-container">
+                  <span class="status-icon yes"><svg class="icon-svg"><use href="#icon-check"></use></svg></span>
+                  <span class="status-text">Continuous Advisory</span>
+                </div>
+              </td>
+              <td>
+                <div class="status-container">
+                  <span class="status-icon no"><svg class="icon-svg"><use href="#icon-x"></use></svg></span>
+                  <span class="status-text">Only at tax deadline</span>
+                </div>
+              </td>
+              <td>
+                <div class="status-container">
+                  <span class="status-icon no"><svg class="icon-svg"><use href="#icon-x"></use></svg></span>
+                  <span class="status-text">One-time tool access</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <div class="metrics-section">
+    <div class="metrics-inner">
+      <div class="metric-item reveal">
+        <div class="metric-num">&#8377;5K Cr+</div>
+        <div class="metric-label">Assets Under Tracking</div>
+      </div>
+      <div class="metric-item reveal reveal-delay-1">
+        <div class="metric-num">25,000+</div>
+        <div class="metric-label">Employees Advised</div>
+      </div>
+      <div class="metric-item reveal reveal-delay-2">
+        <div class="metric-num">100+</div>
+        <div class="metric-label">Corporate Tie-Ups</div>
+      </div>
+      <div class="metric-item reveal reveal-delay-3">
+        <div class="metric-num">Top 3</div>
+        <div class="metric-label">Financial Advisory Firm</div>
+      </div>
+    </div>
+  </div>
+  <section class="trust-section" id="testimonials">
+    <div class="section-inner">
+      <div class="section-tag reveal">Trusted By</div>
+      <h2 class="section-headline reveal reveal-delay-1">Professionals from<br>the world's best companies.</h2>
+      <div class="clients-row reveal reveal-delay-2">
+        <!-- Google -->
+        <svg class="client-logo" viewBox="0 0 120 24" width="110" height="22" fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M12.24 10.285V13.4h6.887c-.275 1.565-1.88 4.604-6.887 4.604-4.33 0-7.859-3.579-7.859-8s3.53-8 7.859-8c2.46 0 4.105 1.025 5.047 1.926l2.427-2.334C17.955 2.192 15.34 1 12.24 1 5.92 1 1 5.92 1 12s4.92 11 11.24 11c6.6 0 11-4.65 11-11.19 0-.756-.08-1.333-.179-1.815l-10.82-.01z" />
+          <text x="28" y="17" font-family="'DM Sans', sans-serif" font-weight="700" font-size="16"
+            letter-spacing="-0.5px">Google</text>
+        </svg>
+        <!-- Amazon -->
+        <svg class="client-logo" viewBox="0 0 120 24" width="110" height="22" fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M12 15c-3.3 0-6-2.7-6-6s2.7-6 6-6c2.4 0 4.5 1.4 5.4 3.4l-2.7 1.1c-.5-.9-1.5-1.5-2.7-1.5-1.7 0-3 1.3-3 3s1.3 3 3 3c1.2 0 2.2-.6 2.7-1.5l2.7 1.1c-.9 2-3 3.4-5.4 3.4zM2 13.5c4.5 2.5 11.5 2.5 16 0 .5-.3.1-.8-.4-.6-4 1.8-10.8 1.8-14.8 0-.5-.2-.9.3-.8.6z" />
+          <text x="28" y="17" font-family="'DM Sans', sans-serif" font-weight="700" font-size="16"
+            letter-spacing="-0.5px">Amazon</text>
+        </svg>
+        <!-- Microsoft -->
+        <svg class="client-logo" viewBox="0 0 120 24" width="110" height="22" fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="2" width="9" height="9" />
+          <rect x="10" y="2" width="9" height="9" />
+          <rect x="0" y="12" width="9" height="9" />
+          <rect x="10" y="12" width="9" height="9" />
+          <text x="25" y="17" font-family="'DM Sans', sans-serif" font-weight="700" font-size="16"
+            letter-spacing="-0.3px">Microsoft</text>
+        </svg>
+        <!-- Broadcom -->
+        <svg class="client-logo" viewBox="0 0 130 24" width="120" height="22" fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 14c2-4 5-8 10-8s8 4 10 8" stroke="currentColor" stroke-width="2.5" fill="none"
+            stroke-linecap="round" />
+          <text x="28" y="17" font-family="'DM Sans', sans-serif" font-weight="700" font-size="16"
+            letter-spacing="-0.5px">Broadcom</text>
+        </svg>
+        <!-- TCS -->
+        <svg class="client-logo" viewBox="0 0 120 24" width="100" height="22" fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
+          <circle cx="10" cy="11" r="8" stroke="currentColor" stroke-width="2.5" fill="none" />
+          <path d="M10 6v10M6 10h8" stroke="currentColor" stroke-width="2" />
+          <text x="25" y="17" font-family="'DM Sans', sans-serif" font-weight="700" font-size="16"
+            letter-spacing="0.5px">TCS</text>
+        </svg>
+        <!-- Swiggy -->
+        <svg class="client-logo" viewBox="0 0 120 24" width="100" height="22" fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm1 11h-2v-4h2v4z" fill="currentColor" />
+          <text x="26" y="17" font-family="'DM Sans', sans-serif" font-weight="700" font-size="16"
+            letter-spacing="-0.3px">Swiggy</text>
+        </svg>
+        <!-- BPCL -->
+        <svg class="client-logo" viewBox="0 0 120 24" width="100" height="22" fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 16c0-4 4-8 4-8s4 4 4 8-1.8 4-4 4-4-1.8-4-4z" fill="currentColor" />
+          <text x="22" y="17" font-family="'DM Sans', sans-serif" font-weight="700" font-size="16"
+            letter-spacing="-0.3px">BPCL</text>
+        </svg>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal">
+          <div class="testimonial-stars">
+            <span><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg></span><span><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg></span><span><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg></span><span><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg></span><span><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg></span>
+          </div>
+          <blockquote>"Confidence and clarity &mdash; tailored strategies, not products. They understood my ESOP
+            complexity better than anyone else I'd spoken to."</blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">MS</div>
+            <div>
+              <div class="testimonial-name">Manish Sunthwal</div>
+              <div class="testimonial-role">Sr. Technical Program Manager, Amazon</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-stars">
+            <span><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg></span><span><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg></span><span><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg></span><span><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg></span><span><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg></span>
+          </div>
+          <blockquote>"Holistic, well-rounded inputs &mdash; always aligned to my goals. My advance tax is finally
+            structured properly after years of confusion."</blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SG</div>
+            <div>
+              <div class="testimonial-name">Swapnil Gupta</div>
+              <div class="testimonial-role">VP Engineering, Xpress Bees</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-stars">
+            <span><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg></span><span><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg></span><span><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg></span><span><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg></span><span><svg class="icon-svg icon-fill"><use href="#icon-star"></use></svg></span>
+          </div>
+          <blockquote>"Complete transparency and a genuine personal touch. They saved me over &#8377;3 lakhs in taxes I
+            didn't know I was overpaying."</blockquote>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">ST</div>
+            <div>
+              <div class="testimonial-name">Satish Thakur</div>
+              <div class="testimonial-role">VP Engineering, Swiggy</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="team" class="py-20 relative overflow-hidden bg-gray-50/50 border-t border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
+
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span
+          class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-[#042b62] text-xs font-bold uppercase tracking-wider mb-3">
+          Expert-Led Fiduciary Group
+        </span>
+        <h2 class="text-3xl md:text-5xl font-display font-extrabold text-[#042b62] mb-4 tracking-tight">
+          Meet Our Team <span class="text-[#dd7300]">Leaders</span>
+        </h2>
+        <p class="text-slate-500 text-sm md:text-base font-semibold">
+          Backed by an accredited team of 80+ Chartered Accountants, global wealth strategists, and regulatory analysts
+          dedicated to high-precision asset filing.
+        </p>
+      </div>
+
+      <!-- All Leaders listed transparently without dynamic tabs -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8 md:gap-10 justify-center">
+
+        <!-- Leader 1 -->
+        <div class="relative flex flex-col items-center text-center group">
+          <div
+            class="relative w-28 h-28 md:w-32 md:h-32 mb-4 rounded-full transition-transform duration-300 group-hover:scale-105">
+            <div
+              class="absolute inset-0 rounded-full border-2 border-[#dd7300] p-1 bg-white shadow-md flex items-center justify-center transition-all group-hover:border-[#dd7300]">
+              <img
+                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200&h=200"
+                alt="CA Manish H"
+                class="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all pointer-events-none"
+                referrerplicy="no-referrer" />
+            </div>
+            <div
+              class="absolute bottom-1 right-2 w-7 h-7 bg-[#042b62] text-white rounded-full border border-[#dd7300] flex items-center justify-center shadow">
+              <svg class="icon-svg icon-fill text-[#dd7300] text-xs"><use href="#icon-star"></use></svg>
+            </div>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-[#042b62] group-hover:text-[#dd7300] transition-colors">CA
+            Manish H</h3>
+          <p class="text-xs text-slate-500 font-medium">Founder & CEO</p>
+        </div>
+
+        <!-- Leader 2 -->
+        <div class="relative flex flex-col items-center text-center group">
+          <div
+            class="relative w-28 h-28 md:w-32 md:h-32 mb-4 rounded-full transition-transform duration-300 group-hover:scale-105">
+            <div
+              class="absolute inset-0 rounded-full border-2 border-[#dd7300] p-1 bg-white shadow-md flex items-center justify-center transition-all group-hover:border-[#dd7300]">
+              <img
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200&h=200"
+                alt="Suchita H"
+                class="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all pointer-events-none"
+                referrerplicy="no-referrer" />
+            </div>
+            <div
+              class="absolute bottom-1 right-2 w-7 h-7 bg-[#042b62] text-white rounded-full border border-[#dd7300] flex items-center justify-center shadow">
+              <svg class="icon-svg icon-fill text-[#dd7300] text-xs"><use href="#icon-star"></use></svg>
+            </div>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-[#042b62] group-hover:text-[#dd7300] transition-colors">Suchita
+            H</h3>
+          <p class="text-xs text-slate-500 font-medium">Co - Founder & COO</p>
+        </div>
+
+        <!-- Leader 3 -->
+        <div class="relative flex flex-col items-center text-center group">
+          <div
+            class="relative w-28 h-28 md:w-32 md:h-32 mb-4 rounded-full transition-transform duration-300 group-hover:scale-105">
+            <div
+              class="absolute inset-0 rounded-full border-2 border-[#dd7300] p-1 bg-white shadow-md flex items-center justify-center transition-all group-hover:border-[#dd7300]">
+              <img
+                src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=200&h=200"
+                alt="CA Nikhil S"
+                class="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all pointer-events-none"
+                referrerplicy="no-referrer" />
+            </div>
+            <div
+              class="absolute bottom-1 right-2 w-7 h-7 bg-[#042b62] text-white rounded-full border border-[#dd7300] flex items-center justify-center shadow">
+              <svg class="icon-svg icon-fill text-[#dd7300] text-xs"><use href="#icon-star"></use></svg>
+            </div>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-[#042b62] group-hover:text-[#dd7300] transition-colors">CA
+            Nikhil S</h3>
+          <p class="text-xs text-slate-500 font-medium text-center leading-tight">Chief Revenue Officer <br /><span
+              class="text-[10px] text-slate-400">& Co Founder PRNAM</span></p>
+        </div>
+
+        <!-- Leader 4 -->
+        <div class="relative flex flex-col items-center text-center group">
+          <div
+            class="relative w-28 h-28 md:w-32 md:h-32 mb-4 rounded-full transition-transform duration-300 group-hover:scale-105">
+            <div
+              class="absolute inset-0 rounded-full border-2 border-[#dd7300] p-1 bg-white shadow-md flex items-center justify-center transition-all group-hover:border-[#dd7300]">
+              <img
+                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200&h=200"
+                alt="CA Vitesh W"
+                class="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all pointer-events-none"
+                referrerplicy="no-referrer" />
+            </div>
+            <div
+              class="absolute bottom-1 right-2 w-7 h-7 bg-[#042b62] text-white rounded-full border border-[#dd7300] flex items-center justify-center shadow">
+              <svg class="icon-svg icon-fill text-[#dd7300] text-xs"><use href="#icon-star"></use></svg>
+            </div>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-[#042b62] group-hover:text-[#dd7300] transition-colors">CA
+            Vitesh W</h3>
+          <p class="text-xs text-slate-500 font-medium text-center leading-tight">Taxation Lead <br /><span
+              class="text-[10px] text-slate-400">& Co Founder - PRNAM</span></p>
+        </div>
+
+        <!-- Leader 5 -->
+        <div class="relative flex flex-col items-center text-center group">
+          <div
+            class="relative w-28 h-28 md:w-32 md:h-32 mb-4 rounded-full transition-transform duration-300 group-hover:scale-105">
+            <div
+              class="absolute inset-0 rounded-full border-2 border-[#dd7300] p-1 bg-white shadow-md flex items-center justify-center transition-all group-hover:border-[#dd7300]">
+              <img
+                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=200&h=200"
+                alt="Nisha H"
+                class="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all pointer-events-none"
+                referrerplicy="no-referrer" />
+            </div>
+            <div
+              class="absolute bottom-1 right-2 w-7 h-7 bg-[#042b62] text-white rounded-full border border-[#dd7300] flex items-center justify-center shadow">
+              <svg class="icon-svg icon-fill text-[#dd7300] text-xs"><use href="#icon-star"></use></svg>
+            </div>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-[#042b62] group-hover:text-[#dd7300] transition-colors">Nisha H
+          </h3>
+          <p class="text-xs text-slate-500 font-medium">Fund Manager & Strategy</p>
+        </div>
+
+        <!-- Leader 6 -->
+        <div class="relative flex flex-col items-center text-center group">
+          <div
+            class="relative w-28 h-28 md:w-32 md:h-32 mb-4 rounded-full transition-transform duration-300 group-hover:scale-105">
+            <div
+              class="absolute inset-0 rounded-full border-2 border-[#dd7300] p-1 bg-white shadow-md flex items-center justify-center transition-all group-hover:border-[#dd7300]">
+              <img
+                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200&h=200"
+                alt="Mihir S"
+                class="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all pointer-events-none"
+                referrerplicy="no-referrer" />
+            </div>
+            <div
+              class="absolute bottom-1 right-2 w-7 h-7 bg-[#042b62] text-white rounded-full border border-[#dd7300] flex items-center justify-center shadow">
+              <svg class="icon-svg icon-fill text-[#dd7300] text-xs"><use href="#icon-star"></use></svg>
+            </div>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-[#042b62] group-hover:text-[#dd7300] transition-colors">Mihir S
+          </h3>
+          <p class="text-xs text-slate-500 font-medium">Principal Officer</p>
+        </div>
+
+        <!-- Leader 7 -->
+        <div class="relative flex flex-col items-center text-center group">
+          <div
+            class="relative w-28 h-28 md:w-32 md:h-32 mb-4 rounded-full transition-transform duration-300 group-hover:scale-105">
+            <div
+              class="absolute inset-0 rounded-full border-2 border-[#dd7300] p-1 bg-white shadow-md flex items-center justify-center transition-all group-hover:border-[#dd7300]">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200&h=200"
+                alt="Shama M"
+                class="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all pointer-events-none"
+                referrerplicy="no-referrer" />
+            </div>
+            <div
+              class="absolute bottom-1 right-2 w-7 h-7 bg-[#042b62] text-white rounded-full border border-[#dd7300] flex items-center justify-center shadow">
+              <svg class="icon-svg icon-fill text-[#dd7300] text-xs"><use href="#icon-star"></use></svg>
+            </div>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-[#042b62] group-hover:text-[#dd7300] transition-colors">Shama M
+          </h3>
+          <p class="text-xs text-slate-500 font-medium">Business Development</p>
+        </div>
+
+        <!-- Leader 8 -->
+        <div class="relative flex flex-col items-center text-center group">
+          <div
+            class="relative w-28 h-28 md:w-32 md:h-32 mb-4 rounded-full transition-transform duration-300 group-hover:scale-105">
+            <div
+              class="absolute inset-0 rounded-full border-2 border-[#dd7300] p-1 bg-white shadow-md flex items-center justify-center transition-all group-hover:border-[#dd7300]">
+              <img
+                src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=200&h=200"
+                alt="Barinder D"
+                class="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all pointer-events-none"
+                referrerplicy="no-referrer" />
+            </div>
+            <div
+              class="absolute bottom-1 right-2 w-7 h-7 bg-[#042b62] text-white rounded-full border border-[#dd7300] flex items-center justify-center shadow">
+              <svg class="icon-svg icon-fill text-[#dd7300] text-xs"><use href="#icon-star"></use></svg>
+            </div>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-[#042b62] group-hover:text-[#dd7300] transition-colors">
+            Barinder D</h3>
+          <p class="text-xs text-slate-500 font-medium">Business Development</p>
+        </div>
+
+        <!-- Leader 9 -->
+        <div class="relative flex flex-col items-center text-center group">
+          <div
+            class="relative w-28 h-28 md:w-32 md:h-32 mb-4 rounded-full transition-transform duration-300 group-hover:scale-105">
+            <div
+              class="absolute inset-0 rounded-full border-2 border-[#dd7300] p-1 bg-white shadow-md flex items-center justify-center transition-all group-hover:border-[#dd7300]">
+              <img
+                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200&h=200"
+                alt="Salman W"
+                class="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all pointer-events-none"
+                referrerplicy="no-referrer" />
+            </div>
+            <div
+              class="absolute bottom-1 right-2 w-7 h-7 bg-[#042b62] text-white rounded-full border border-[#dd7300] flex items-center justify-center shadow">
+              <svg class="icon-svg icon-fill text-[#dd7300] text-xs"><use href="#icon-star"></use></svg>
+            </div>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-[#042b62] group-hover:text-[#dd7300] transition-colors">Salman
+            W</h3>
+          <p class="text-xs text-slate-500 font-medium">VP Marketing</p>
+        </div>
+
+        <!-- Leader 10 -->
+        <div class="relative flex flex-col items-center text-center group">
+          <div
+            class="relative w-28 h-28 md:w-32 md:h-32 mb-4 rounded-full transition-transform duration-300 group-hover:scale-105">
+            <div
+              class="absolute inset-0 rounded-full border-2 border-[#dd7300] p-1 bg-white shadow-md flex items-center justify-center transition-all group-hover:border-[#dd7300]">
+              <img
+                src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=200&h=200"
+                alt="Hussain A"
+                class="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all pointer-events-none"
+                referrerplicy="no-referrer" />
+            </div>
+            <div
+              class="absolute bottom-1 right-2 w-7 h-7 bg-[#042b62] text-white rounded-full border border-[#dd7300] flex items-center justify-center shadow">
+              <svg class="icon-svg icon-fill text-[#dd7300] text-xs"><use href="#icon-star"></use></svg>
+            </div>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-[#042b62] group-hover:text-[#dd7300] transition-colors">Hussain
+            A</h3>
+          <p class="text-xs text-slate-500 font-medium">IT Development</p>
+        </div>
+
+        <!-- Leader 11 -->
+        <div class="relative flex flex-col items-center text-center group">
+          <div
+            class="relative w-28 h-28 md:w-32 md:h-32 mb-4 rounded-full transition-transform duration-300 group-hover:scale-105">
+            <div
+              class="absolute inset-0 rounded-full border-2 border-[#dd7300] p-1 bg-white shadow-md flex items-center justify-center transition-all group-hover:border-[#dd7300]">
+              <img
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200&h=200"
+                alt="Mayuri S"
+                class="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all pointer-events-none"
+                referrerplicy="no-referrer" />
+            </div>
+            <div
+              class="absolute bottom-1 right-2 w-7 h-7 bg-[#042b62] text-white rounded-full border border-[#dd7300] flex items-center justify-center shadow">
+              <svg class="icon-svg icon-fill text-[#dd7300] text-xs"><use href="#icon-star"></use></svg>
+            </div>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-[#042b62] group-hover:text-[#dd7300] transition-colors">Mayuri
+            S</h3>
+          <p class="text-xs text-slate-500 font-medium">Global Advisory</p>
+        </div>
+
+        <!-- Leader 12 -->
+        <div class="relative flex flex-col items-center text-center group">
+          <div
+            class="relative w-28 h-28 md:w-32 md:h-32 mb-4 rounded-full transition-transform duration-300 group-hover:scale-105">
+            <div
+              class="absolute inset-0 rounded-full border-2 border-[#dd7300] p-1 bg-white shadow-md flex items-center justify-center transition-all group-hover:border-[#dd7300]">
+              <img
+                src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&q=80&w=200&h=200"
+                alt="Yash J"
+                class="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all pointer-events-none"
+                referrerplicy="no-referrer" />
+            </div>
+            <div
+              class="absolute bottom-1 right-2 w-7 h-7 bg-[#042b62] text-white rounded-full border border-[#dd7300] flex items-center justify-center shadow">
+              <svg class="icon-svg icon-fill text-[#dd7300] text-xs"><use href="#icon-star"></use></svg>
+            </div>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-[#042b62] group-hover:text-[#dd7300] transition-colors">Yash J
+          </h3>
+          <p class="text-xs text-slate-500 font-medium">Global Advisory</p>
+        </div>
+
+        <!-- Leader 13 -->
+        <div class="relative flex flex-col items-center text-center group">
+          <div
+            class="relative w-28 h-28 md:w-32 md:h-32 mb-4 rounded-full transition-transform duration-300 group-hover:scale-105">
+            <div
+              class="absolute inset-0 rounded-full border-2 border-[#dd7300] p-1 bg-white shadow-md flex items-center justify-center transition-all group-hover:border-[#dd7300]">
+              <img
+                src="https://images.unsplash.com/photo-1534751516642-a131ffd473fd?auto=format&fit=crop&q=80&w=200&h=200"
+                alt="Shraddha P"
+                class="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all pointer-events-none"
+                referrerplicy="no-referrer" />
+            </div>
+            <div
+              class="absolute bottom-1 right-2 w-7 h-7 bg-[#042b62] text-white rounded-full border border-[#dd7300] flex items-center justify-center shadow">
+              <svg class="icon-svg icon-fill text-[#dd7300] text-xs"><use href="#icon-star"></use></svg>
+            </div>
+          </div>
+          <h3 class="text-sm md:text-base font-bold text-[#042b62] group-hover:text-[#dd7300] transition-colors">
+            Shraddha P</h3>
+          <p class="text-xs text-slate-500 font-medium">Estate Planning</p>
+        </div>
+
+      </div>
+
+      <!-- Dynamic CTA at Team level -->
+      <div
+        class="mt-16 bg-[#042b62] text-white p-8 md:p-10 rounded-3xlRelative rounded-3xl overflow-hidden shadow-xl border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6 relative">
+        <div class="absolute inset-0 bg-blue-950/20 opacity-30 pointer-events-none"></div>
+        <div class="space-y-2 relative z-10 text-center md:text-left">
+          <h4 class="text-lg md:text-2xl font-bold font-display">Engage directly with CA Manish or senior partners</h4>
+          <p class="text-xs md:text-sm text-slate-300 max-w-xl">
+            Our lead partners assist elite corporate executives to safeguard capital and prevent tax compliance
+            notification cycles.
+          </p>
+        </div>
+        <button onclick="openBookingModal()"
+          class="flex-shrink-0 bg-[#dd7300] hover:bg-[#f38002] text-white py-3.5 px-6 rounded-full font-bold shadow-lg transition-all hover:-translate-y-0.5 pointer-events-auto cursor-pointer">
+          Schedule Partner Meeting
+        </button>
+      </div>
+
+    </div>
+  </section>
+  <section class="faq-section" id="faq">
+    <div class="section-inner">
+      <div style="text-align: center; margin-bottom: 50px;">
+        <div class="section-tag reveal">Common Questions</div>
+        <h2 class="section-headline reveal reveal-delay-1">Got questions?<br>We have answers.</h2>
+        <p class="section-sub reveal reveal-delay-2" style="margin: 0 auto; max-width: 600px;">Clear, honest details
+          about how Fintoo Advisory works for corporate professionals.</p>
+      </div>
+      <div class="faq-container reveal reveal-delay-3">
+        <div class="faq-item">
+          <button class="faq-question">
+            <h4>Is my financial data secure with Fintoo?</h4>
+            <span class="faq-toggle-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Yes, absolutely. We treat data privacy and security with the highest standards. Fintoo is SEBI Registered
+              (INA000020031), compliant with strict regulatory guidelines. All your files, Form 16, and statements are
+              processed through bank-grade 256-bit encryption and never shared with any third party.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <h4>What documents do I need for my tax review?</h4>
+            <span class="faq-toggle-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              For a complete and optimal tax strategy, we typically need your Form 16, capital gains statements from
+              your brokerages, ESOP/RSU vesting and sale reports (if applicable), and foreign assets details (for
+              Schedule FA filing). You can share these securely with your dedicated CA during or before your session.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <h4>How is Fintoo different from a local CA or online filing portals?</h4>
+            <span class="faq-toggle-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Unlike DIY portals that automate filing without strategic depth, Fintoo offers expert CA-led advisory
+              specialized in corporate remuneration structures (ESOPs, RSUs, global earnings). Unlike traditional CAs
+              who are often transaction-focused and only active near deadlines, Fintoo provides proactive, fee-only
+              planning all year round with live screen-share reviews.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            <h4>Are there any hidden fees or commission-based product sales?</h4>
+            <span class="faq-toggle-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              No. Fintoo is a fee-only advisory. We earn 100% of our revenue from transparent, upfront fees for our
+              filing and advisory services. We do not sell insurance, mutual funds, or loans, and we receive zero
+              commission from any product recommendation. Every strategy we recommend is purely in your best interest.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="booking-section" id="booking">
+    <div class="booking-bg"></div>
+    <div class="booking-orb"></div>
+    <div class="booking-inner">
+      <div class="booking-tag">Free 45-Minute Session</div>
+      <h2 class="booking-headline reveal">Let's <em>simplify</em><br>your taxes.</h2>
+      <p class="booking-sub reveal reveal-delay-1">Book a personalized consultation with a CA. Walk away with a clear
+        tax strategy &mdash; no jargon, no pressure.</p>
+      <div class="booking-form reveal reveal-delay-2">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Full Name</label>
+            <input type="text" placeholder="Rahul Sharma">
+          </div>
+          <div class="form-field">
+            <label>Mobile Number</label>
+            <input type="tel" placeholder="+91 98765 43210">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Company / Employer</label>
+            <input type="text" placeholder="Google, Amazon, TCS...">
+          </div>
+          <div class="form-field">
+            <label>Income Type</label>
+            <select>
+              <option value="">Select complexity</option>
+              <option>Salary only</option>
+              <option>Salary + ESOPs/RSUs</option>
+              <option>Salary + Capital Gains</option>
+              <option>Global / NRI Income</option>
+              <option>Multiple Income Sources</option>
+            </select>
+          </div>
+        </div>
+        <button class="form-submit" id="submitBtn">
+          Book My Free Consultation
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M3 9H15M10 4L15 9L10 14" stroke="white" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </button>
+        <p class="form-note"><svg class="icon-svg"><use href="#icon-lock"></use></svg> Your information is secure and never shared. No spam, ever.</p>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <div class="logo-mark">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <path d="M3 14L9 4L15 14H3Z" fill="white" opacity="0.9" />
+              </svg>
+            </div>
+            <span class="logo-text" style="color:white;">FINT<span>OO</span></span>
+          </a>
+          <p>Building Trust &amp; Technology in Wealth. SEBI Registered Investment Advisor &mdash; structured tax &amp;
+            financial advisory for India's corporate professionals.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="#">ITR Filing</a></li>
+            <li><a href="#">Tax Planning</a></li>
+            <li><a href="#">ESOP Advisory</a></li>
+            <li><a href="#">Global Tax</a></li>
+            <li><a href="#">Wealth Advisory</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Company</h5>
+          <ul>
+            <li><a href="#">About Fintoo</a></li>
+            <li><a href="#">Our Team</a></li>
+            <li><a href="#">Corporate Tie-Ups</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul>
+            <li><a href="tel:+917738914692">+91 77389 14692</a></li>
+            <li><a href="mailto:salman.warwande@fintoo.in">salman.warwande@fintoo.in</a></li>
+            <li><a href="#">Mumbai &middot; Bangalore &middot; Dubai</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-disclaimer">Fintoo Wealth Private Limited [SEBI RIA: INA000020031] [BASL: 2252] &middot; B/309
+          Dynasty Business Park, Andheri East, Mumbai 400059 &middot; Investments are subject to market risk. Past
+          performance is not indicative of future returns.</p>
+        <span class="footer-legal">&copy; 2025 Fintoo</span>
+      </div>
+    </div>
+  </footer>
+  <script>
+    const cursor = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+    (function animR() { rx += (mx - rx) * .12; ry += (my - ry) * .12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animR); })();
+    document.querySelectorAll('a,button,.serve-card,.service-item,.process-step,.card-cta-row,.testimonial-card,.interactive-option,.faq-question').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+    const hdr = document.getElementById('header');
+    window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', scrollY > 40));
+    const ham = document.getElementById('hamburger'), mnav = document.getElementById('mobileNav'), cls = document.getElementById('closeNav');
+    ham.addEventListener('click', () => { mnav.style.display = 'flex'; setTimeout(() => mnav.classList.add('open'), 10); });
+    cls.addEventListener('click', () => { mnav.classList.remove('open'); setTimeout(() => mnav.style.display = 'none', 400); });
+    mnav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { mnav.classList.remove('open'); setTimeout(() => mnav.style.display = 'none', 400); }));
+    const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); obs.unobserve(e.target); } }), { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    document.getElementById('submitBtn').addEventListener('click', function () {
+      this.innerHTML = "<svg class=\"icon-svg\"><use href=\"#icon-check\"></use></svg> Session Requested &mdash; We'll be in touch within 24hrs";
+      this.style.background = '#dd7300';
+      this.style.boxShadow = '0 8px 32px rgba(221,115,0,.35)';
+    });
+
+    // Interactive Hero Widget Logic
+    let currentSavingsVal = 320000;
+
+    function animateValue(obj, start, end, duration) {
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const val = Math.floor(progress * (end - start) + start);
+        obj.innerHTML = `<span>&#8377;</span>${val.toLocaleString('en-IN')}`;
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+
+    function updateHeroWidget() {
+      const isEsop = document.getElementById('chk-esop').checked;
+      const isForeign = document.getElementById('chk-foreign').checked;
+      const isMultiple = document.getElementById('chk-multiple').checked;
+
+      let savings = 60000; // base savings
+      let advanceTaxSaved = 22000;
+
+      if (isEsop) {
+        savings += 140000;
+        advanceTaxSaved += 40000;
+      }
+      if (isForeign) {
+        savings += 100000;
+        advanceTaxSaved += 30000;
+      }
+      if (isMultiple) {
+        savings += 80000;
+        advanceTaxSaved += 32000;
+      }
+
+      // Animate the main savings number changing
+      const savingsContainer = document.getElementById('est-savings');
+      animateValue(savingsContainer, currentSavingsVal, savings, 400);
+      currentSavingsVal = savings;
+
+      // Update rows
+      const rowEsopVal = document.getElementById('row-esop-val');
+      if (isEsop) {
+        rowEsopVal.innerHTML = '<svg class="icon-svg"><use href="#icon-check"></use></svg> Compliant';
+        rowEsopVal.className = 'card-row-value positive';
+      } else {
+        rowEsopVal.textContent = '—';
+        rowEsopVal.className = 'card-row-value muted';
+      }
+
+      const rowAdvanceVal = document.getElementById('row-advance-val');
+      if (advanceTaxSaved > 22000) {
+        rowAdvanceVal.textContent = `₹${advanceTaxSaved.toLocaleString('en-IN')} Saved`;
+        rowAdvanceVal.className = 'card-row-value positive';
+      } else {
+        rowAdvanceVal.textContent = '—';
+        rowAdvanceVal.className = 'card-row-value muted';
+      }
+
+      const rowForeignVal = document.getElementById('row-foreign-val');
+      if (isForeign) {
+        rowForeignVal.innerHTML = '<svg class="icon-svg"><use href="#icon-check"></use></svg> Disclosed';
+        rowForeignVal.className = 'card-row-value positive';
+      } else {
+        rowForeignVal.textContent = '—';
+        rowForeignVal.className = 'card-row-value muted';
+      }
+
+      const rowRegimeVal = document.getElementById('row-regime-val');
+      if (isForeign) {
+        rowRegimeVal.textContent = 'Old vs New Analyzed';
+      } else if (isMultiple || isEsop) {
+        rowRegimeVal.textContent = 'Optimized Regime';
+      } else {
+        rowRegimeVal.textContent = 'Standard';
+      }
+    }
+
+    // FAQ Accordion Logic
+    document.querySelectorAll('.faq-question').forEach(button => {
+      button.addEventListener('click', () => {
+        const item = button.parentNode;
+        const answer = item.querySelector('.faq-answer');
+        const isActive = item.classList.contains('active');
+
+        // Close all FAQ items
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+          otherItem.classList.remove('active');
+          otherItem.querySelector('.faq-answer').style.maxHeight = null;
+        });
+
+        // Open clicked one if it wasn't already active
+        if (!isActive) {
+          item.classList.add('active');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
