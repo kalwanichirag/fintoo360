@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retirement Planning | Fintoo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fintoo-blue: #042b62;
+      --fintoo-orange: #dd7300;
+      --navy: var(--fintoo-blue);
+      --navy-2: var(--fintoo-blue);
+      --deep: var(--fintoo-blue);
+      --ink: var(--fintoo-blue);
+      --muted: rgba(4, 43, 98, .72);
+      --soft: rgba(4, 43, 98, .05);
+      --soft-2: rgba(4, 43, 98, .08);
+      --orange: var(--fintoo-orange);
+      --orange-2: var(--fintoo-orange);
+      --line: rgba(4, 43, 98, .16);
+      --white: #fff;
+      --shadow: 0 18px 42px rgba(4, 43, 98, .12);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #fff;
+      font-weight: 400;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--navy);
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .logo-mark {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 68% 35%, var(--orange) 0 18%, transparent 19%), var(--navy);
+      display: inline-block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: rgba(4, 43, 98, .70);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      background: var(--orange);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      box-shadow: 0 12px 24px rgba(221, 115, 0, .22);
+    }
+
+    .btn-sm { height: 34px; padding: 0 18px; font-size: 12px; }
+    .btn-lg { height: 46px; padding: 0 24px; font-size: 14px; }
+    .btn-dark { background: var(--navy); box-shadow: 0 14px 28px rgba(4, 43, 98, .18); }
+
+    .icon {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex: 0 0 auto;
+    }
+
+    .hero {
+      background: linear-gradient(180deg, rgba(4, 43, 98, .04) 0%, rgba(4, 43, 98, .07) 100%);
+      padding-bottom: 72px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 485px;
+      gap: 64px;
+      align-items: center;
+      padding-top: 54px;
+    }
+
+    .eyebrow {
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1 {
+      color: var(--navy);
+      font-size: 47px;
+      line-height: .98;
+      letter-spacing: -0.02em;
+      font-weight: 600;
+      max-width: 520px;
+    }
+
+    .lead {
+      margin-top: 18px;
+      max-width: 500px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .text-link {
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .trust-row {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 210px));
+      gap: 13px 18px;
+      color: rgba(4, 43, 98, .72);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .trust-row span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .check {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(221, 115, 0, .12);
+      color: #dd7300;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-card {
+      position: relative;
+      min-height: 455px;
+    }
+
+    .dash-card {
+      background: rgba(255,255,255,.98);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .main-dash {
+      width: 410px;
+      margin-left: 42px;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .dash-top {
+      display: flex;
+      justify-content: space-between;
+      color: rgba(4, 43, 98, .68);
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .metric {
+      background: rgba(4, 43, 98, .05);
+      border: 1px solid rgba(4, 43, 98, .14);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .metric b {
+      display: block;
+      color: var(--navy);
+      font-size: 15px;
+      margin-top: 5px;
+    }
+
+    .metric small {
+      color: rgba(4, 43, 98, .62);
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .chart {
+      width: 100%;
+      height: 160px;
+      overflow: visible;
+    }
+
+    .chart-grid { stroke: rgba(4, 43, 98, .14); stroke-width: 1; }
+    .chart-area { fill: url(#areaGrad); opacity: .75; }
+    .chart-line {
+      fill: none;
+      stroke: var(--orange);
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 520;
+      stroke-dashoffset: 520;
+      animation: drawLine 2.4s ease forwards .4s;
+    }
+    .chart-line.blue { stroke: #042b62; animation-delay: .8s; }
+
+    @keyframes drawLine { to { stroke-dashoffset: 0; } }
+
+    .amount-chip {
+      position: absolute;
+      left: 0;
+      bottom: 37px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 15px 18px;
+      box-shadow: var(--shadow);
+      color: var(--navy);
+      font-weight: 600;
+      animation: float 5.5s ease-in-out infinite reverse;
+    }
+
+    .tip-chip {
+      position: absolute;
+      right: 5px;
+      bottom: 0;
+      width: 210px;
+      background: #fff;
+      border: 1px solid rgba(221, 115, 0, .26);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+      color: rgba(4, 43, 98, .68);
+      font-size: 11px;
+      line-height: 1.45;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .stats {
+      background: #fff;
+      border-bottom: 1px solid rgba(4, 43, 98, .14);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      padding: 29px 0;
+      text-align: center;
+    }
+
+    .stats b {
+      display: block;
+      color: var(--navy);
+      font-size: 20px;
+      margin-bottom: 5px;
+    }
+
+    .stats span {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    section { padding: 78px 0; }
+    .soft { background: var(--soft); }
+    .soft-blue { background: rgba(4, 43, 98, .06); }
+    .dark { background: var(--deep); color: #fff; }
+
+    .section-head {
+      max-width: 610px;
+      margin-bottom: 36px;
+    }
+
+    .center { text-align: center; margin-left: auto; margin-right: auto; }
+
+    h2 {
+      color: var(--navy);
+      font-size: 34px;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      font-weight: 600;
+    }
+
+    .dark h2 { color: #fff; }
+    h2 .orange, h1 .orange { color: var(--orange); }
+
+    .section-copy {
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    .dark .section-copy { color: rgba(255,255,255,.76); }
+
+    .calc-row {
+      display: grid;
+      grid-template-columns: 1fr 140px 1fr;
+      gap: 18px;
+      align-items: center;
+      margin: 36px 0 28px;
+    }
+
+    .value-card {
+      min-height: 122px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 26px;
+      box-shadow: 0 12px 28px rgba(4, 43, 98, .06);
+    }
+
+    .value-card.warm { background: rgba(221, 115, 0, .10); border-color: rgba(221, 115, 0, .22); }
+    .value-card small {
+      color: rgba(4, 43, 98, .62);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .value-card b {
+      display: block;
+      color: var(--navy);
+      font-size: 29px;
+      margin-top: 12px;
+      letter-spacing: -0.015em;
+    }
+
+    .mini-spark {
+      width: 135px;
+      height: 70px;
+    }
+
+    .spark-line {
+      fill: none;
+      stroke: var(--orange);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-dasharray: 180;
+      stroke-dashoffset: 180;
+      animation: drawLine 2s ease infinite alternate;
+    }
+
+    .note-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 22px 26px;
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .form-preview {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .question-line {
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(4, 43, 98, .14);
+    }
+
+    .question-line p {
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .slider {
+      height: 5px;
+      background: rgba(4, 43, 98, .10);
+      border-radius: 999px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slider::before {
+      content: "";
+      display: block;
+      width: var(--w, 55%);
+      height: 100%;
+      background: var(--orange);
+      border-radius: inherit;
+      animation: growBar 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes growBar {
+      from { width: 20%; }
+      to { width: var(--w, 65%); }
+    }
+
+    .result-panel {
+      background: linear-gradient(160deg, #042b62 0%, #042b62 100%);
+      color: #fff;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 28px 50px rgba(4, 43, 98, .25);
+    }
+
+    .result-panel .big {
+      font-size: 36px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin: 12px 0;
+    }
+
+    .donut {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: conic-gradient(var(--orange) 0 73%, rgba(255,255,255,.16) 73% 100%);
+      animation: spinIn 1.4s ease both;
+    }
+
+    @keyframes spinIn {
+      from { background: conic-gradient(var(--orange) 0 0%, rgba(255,255,255,.16) 0 100%); }
+      to { background: conic-gradient(var(--orange) 0 73%, rgba(255,255,255,.16) 73% 100%); }
+    }
+
+    .meaning-grid, .service-grid, .testimonial-grid, .clarity-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .small-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 21px;
+      box-shadow: 0 10px 26px rgba(4, 43, 98, .05);
+    }
+
+    .small-card h3 {
+      color: var(--navy);
+      font-size: 16px;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+
+    .small-card p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.65;
+      font-weight: 400;
+    }
+
+    .chart-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .legend {
+      display: flex;
+      justify-content: flex-end;
+      gap: 16px;
+      color: rgba(4, 43, 98, .62);
+      font-size: 10px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .bullet-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .bullet-list span {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .network {
+      min-height: 330px;
+      position: relative;
+    }
+
+    .node {
+      position: absolute;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      color: rgba(255,255,255,.86);
+      font-size: 11px;
+      font-weight: 600;
+      box-shadow: 0 0 24px rgba(221, 115, 0, .25);
+      animation: pulseNode 2.5s ease-in-out infinite;
+    }
+
+    .node.main {
+      left: 50%;
+      top: 45%;
+      transform: translate(-50%, -50%);
+      background: var(--orange);
+      color: white;
+      box-shadow: 0 0 28px rgba(221, 115, 0, .45);
+    }
+
+    @keyframes pulseNode {
+      0%, 100% { opacity: .65; }
+      50% { opacity: 1; }
+    }
+
+    .dark-card {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      padding: 23px;
+      color: rgba(255,255,255,.78);
+    }
+
+    .dark-card h3 {
+      color: #fff;
+      font-size: 15px;
+      margin-bottom: 11px;
+    }
+
+    .plan-strip {
+      background: rgba(4, 43, 98, .04);
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 19px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .plan-step {
+      background: #fff;
+      border: 1px solid rgba(4, 43, 98, .14);
+      border-radius: 12px;
+      padding: 17px;
+    }
+
+    .plan-step b {
+      display: block;
+      color: var(--navy);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .plan-step p {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .comparison {
+      margin-top: 24px;
+      background: rgba(4, 43, 98, .04);
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .service-grid { grid-template-columns: repeat(4, 1fr); }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .goal-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .table-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(4, 43, 98, .14);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .table-row.head {
+      color: var(--navy);
+      font-weight: 600;
+      background: rgba(4, 43, 98, .05);
+      border-radius: 10px;
+      padding: 12px 14px;
+      border: 0;
+    }
+
+    .goal-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 16px;
+    }
+
+    .goal-metrics b {
+      color: var(--navy);
+      font-size: 22px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .faq {
+      width: min(780px, 100%);
+      margin: 0 auto;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    details {
+      border-bottom: 1px solid rgba(4, 43, 98, .14);
+      padding: 0 22px;
+    }
+
+    details:last-child { border-bottom: 0; }
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 18px 0;
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; color: rgba(4, 43, 98, .62); }
+    details[open] summary::after { content: "-"; }
+    details p {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.65;
+      padding-bottom: 18px;
+    }
+
+    .final-cta {
+      background: linear-gradient(160deg, #042b62 0%, #042b62 100%);
+      color: white;
+    }
+
+    .final-grid {
+      display: grid;
+      grid-template-columns: 1fr 390px;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .final-grid h2 { color: #fff; font-size: 42px; }
+
+    .booking-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 26px;
+      color: var(--ink);
+      box-shadow: 0 30px 60px rgba(4,43,98,.2);
+    }
+
+    .booking-line {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(4, 43, 98, .14);
+      color: rgba(4, 43, 98, .72);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    footer {
+      background: #042b62;
+      color: rgba(255,255,255,.72);
+      padding: 50px 0 36px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: 42px;
+    }
+
+    footer h4 {
+      color: #fff;
+      margin: 0 0 14px;
+      font-size: 13px;
+    }
+
+    footer p, footer a {
+      color: rgba(255,255,255,.72);
+      font-size: 12px;
+      line-height: 1.8;
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hero-grid, .two-col, .final-grid { grid-template-columns: 1fr; }
+      .hero-card { min-height: 390px; }
+      .main-dash { width: 100%; margin-left: 0; }
+      .calc-row { grid-template-columns: 1fr; }
+      .mini-spark { justify-self: center; }
+      .meaning-grid, .testimonial-grid, .clarity-grid, .service-grid { grid-template-columns: 1fr; }
+      .plan-strip, .comparison { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      h1 { font-size: 40px; }
+      h2 { font-size: 30px; }
+    }
+
+    @media (max-width: 560px) {
+      .container { width: min(100% - 28px, 1120px); }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .btn-lg { width: 100%; }
+      .trust-row, .stats-grid, .goal-metrics, .footer-grid { grid-template-columns: 1fr; }
+      .amount-chip, .tip-chip { position: static; margin-top: 14px; width: 100%; }
+      .hero-card { min-height: 0; }
+      section { padding: 56px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <nav class="container nav">
+      <a class="logo" href="#"><span class="logo-mark"></span>Fintoo</a>
+      <div class="nav-links">
+        <a href="#calculator">Retirement Calculator</a>
+        <a href="#benefits">Why Fintoo</a>
+        <a href="#faq">FAQs</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a class="btn btn-sm" href="#calculator">Calculate my corpus</a>
+    </nav>
+
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Retirement Planning</div>
+        <h1>Will ₹1 crore actually be enough for your retirement?</h1>
+        <p class="lead">Retirement is not one number. It is 20-30 years of inflation, healthcare costs and lifestyle choices. See the gap today, so every SIP, asset and decision can start working harder.</p>
+        <div class="hero-actions">
+          <a class="btn btn-lg" href="#calculator">Calculate Retirement Need <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a class="text-link" href="#plan">Talk to a retirement planner <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </div>
+        <div class="trust-row">
+          <span><span class="check"><svg class="icon" viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></svg></span>SEBI registered partner ecosystem</span>
+          <span><span class="check"><svg class="icon" viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></svg></span>Human advisor support</span>
+          <span><span class="check"><svg class="icon" viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></svg></span>Goal-based planning</span>
+          <span><span class="check"><svg class="icon" viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></svg></span>Tax-aware recommendations</span>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="dash-card main-dash">
+          <div class="dash-top"><span>Retirement Projection</span><span>Live Preview</span></div>
+          <div class="metric-grid">
+            <div class="metric"><small>Current Age</small><b>35</b></div>
+            <div class="metric"><small>Retire At</small><b>60</b></div>
+            <div class="metric"><small>Inflation</small><b>6%</b></div>
+          </div>
+          <svg class="chart" viewBox="0 0 420 160" aria-label="animated retirement projection chart">
+            <defs>
+              <linearGradient id="areaGrad" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#042b62" stop-opacity=".65"/>
+                <stop offset="100%" stop-color="#042b62" stop-opacity=".08"/>
+              </linearGradient>
+            </defs>
+            <path class="chart-grid" d="M15 30H405M15 75H405M15 120H405"/>
+            <path class="chart-area" d="M20 130 C100 116 155 105 205 88 C250 73 298 55 400 24 L400 145 L20 145Z"/>
+            <path class="chart-line blue" d="M20 130 C100 116 155 105 205 88 C250 73 298 55 400 24"/>
+            <path class="chart-line" d="M20 128 C95 119 150 109 205 96 C237 88 255 87 265 84 C300 66 345 47 400 31"/>
+          </svg>
+        </div>
+        <div class="amount-chip">₹1.00 Cr</div>
+        <div class="tip-chip">At 6% inflation, today's ₹50,000 lifestyle can need more than ₹2 lakh per month later.</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="container stats-grid">
+      <div><b>15+</b><span>Years of planning expertise</span></div>
+      <div><b>10,000+</b><span>Financial plans created</span></div>
+      <div><b>₹2,500 Cr+</b><span>Assets guided and tracked</span></div>
+      <div><b>SEBI</b><span>Registered advisory ecosystem</span></div>
+    </div>
+  </div>
+
+  <section class="soft" id="calculator">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Inflation can rewrite your future</div>
+        <h2>₹50,000 a month today. Here is what it may cost in 20 years.</h2>
+        <p class="section-copy">Use this simple view to understand how inflation changes the retirement corpus you need. The orange graph keeps moving because the cost keeps compounding.</p>
+      </div>
+      <div class="calc-row">
+        <div class="value-card"><small>Monthly Expense Today</small><b>₹50,000</b></div>
+        <svg class="mini-spark" viewBox="0 0 140 70">
+          <path class="spark-line" d="M10 52 C35 36 47 44 66 31 C85 18 103 25 130 10"/>
+          <path class="spark-line" style="animation-delay:.4s; opacity:.45" d="M10 58 C45 50 60 42 75 38 C94 31 111 18 130 18"/>
+        </svg>
+        <div class="value-card warm"><small>Projected Expense Later</small><b>₹1,60,356</b></div>
+      </div>
+      <div class="note-card">A large corpus is not automatically a retirement plan. Without inflation-adjusted cash-flow planning, it is still only an estimate.</div>
+    </div>
+  </section>
+
+  <section id="plan">
+    <div class="container two-col">
+      <div>
+        <div class="eyebrow">Know your retirement number</div>
+        <h2>Stop guessing. Know your retirement number in under a minute.</h2>
+        <p class="section-copy">Answer a few questions and see the corpus needed, future monthly expense and SIP required to reach it.</p>
+        <div class="form-preview">
+          <div class="question-line"><p>Tell us about your retirement</p><div class="slider" style="--w:62%"></div></div>
+          <div class="question-line"><p>At what age would you like to retire?</p><div class="slider" style="--w:70%"></div></div>
+          <div class="question-line"><p>How much have you already saved?</p><div class="slider" style="--w:45%"></div></div>
+          <div class="question-line"><p>What monthly lifestyle do you want?</p><div class="slider" style="--w:78%"></div></div>
+        </div>
+      </div>
+      <div class="result-panel">
+        <p style="color:rgba(255,255,255,.76);font-size:12px;font-weight:600;text-transform:uppercase;">Your retirement number</p>
+        <div class="big">₹53.17 L</div>
+        <p style="color:rgba(255,255,255,.76);font-size:13px;line-height:1.6;">Projected annual expense at retirement based on your lifestyle and inflation.</p>
+        <div style="display:flex;gap:20px;align-items:center;margin:26px 0;">
+          <div class="donut"></div>
+          <div><b style="font-size:20px;">68%</b><p style="color:rgba(255,255,255,.76);font-size:12px;margin-top:5px;">Readiness score</p></div>
+        </div>
+        <div class="metric-grid">
+          <div class="metric" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);"><small>Corpus</small><b style="color:#fff">₹8.4 Cr</b></div>
+          <div class="metric" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);"><small>SIP</small><b style="color:#fff">₹54k</b></div>
+          <div class="metric" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12);"><small>Gap</small><b style="color:#fff">₹2.1 Cr</b></div>
+        </div>
+        <a class="btn btn-lg" style="width:100%;margin-top:24px;" href="retirement-corpus-calculator.html">Start My Plan Now</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="soft">
+    <div class="container">
+      <div class="section-head center">
+        <div class="eyebrow">What your numbers actually mean</div>
+        <h2>What your numbers actually mean.</h2>
+      </div>
+      <div class="meaning-grid">
+        <div class="small-card"><h3>Your corpus number</h3><p>The amount needed to maintain your lifestyle through retirement after adjusting for inflation.</p></div>
+        <div class="small-card"><h3>Your monthly savings</h3><p>The SIP required today to bridge the gap between where you are and where you need to be.</p></div>
+        <div class="small-card"><h3>Your retirement readiness</h3><p>A practical indication of whether your current plan can sustain your lifestyle.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="soft-blue">
+    <div class="container two-col">
+      <div>
+        <div class="eyebrow">Cost of waiting</div>
+        <h2>The cost that may grow faster than everything else you are planning for.</h2>
+        <p class="section-copy">Healthcare, lifestyle and emergencies do not wait for markets. Retirement plans need to work with compounding and risk together.</p>
+        <div class="bullet-list">
+          <span><span class="check"><svg class="icon" viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></svg></span>Estimate healthcare reserve</span>
+          <span><span class="check"><svg class="icon" viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></svg></span>Map income after retirement</span>
+          <span><span class="check"><svg class="icon" viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></svg></span>Create tax-aware withdrawal strategy</span>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="legend"><span>Planned corpus</span><span>Actual need</span></div>
+        <svg class="chart" viewBox="0 0 420 160">
+          <path class="chart-grid" d="M15 35H405M15 80H405M15 125H405"/>
+          <path class="chart-line blue" d="M20 132 C90 122 145 112 205 95 C275 73 330 52 400 28"/>
+          <path class="chart-line" d="M20 135 C83 128 145 116 195 92 C250 65 307 39 400 12"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="container two-col">
+      <div>
+        <div class="eyebrow">The planning problem</div>
+        <h2>You do not have a savings problem. You have a <span class="orange">coordination</span> problem.</h2>
+        <p class="section-copy">Your EPF, NPS, mutual funds, insurance, real estate, tax strategy, healthcare buffer and withdrawals must work together. A plan turns scattered assets into one retirement system.</p>
+        <div class="network">
+          <div class="node main">Retirement Goal</div>
+          <div class="node" style="left:8%;top:20%;">EPF</div>
+          <div class="node" style="left:37%;top:7%;">NPS</div>
+          <div class="node" style="right:14%;top:19%;">Mutual Funds</div>
+          <div class="node" style="left:5%;bottom:28%;">Insurance</div>
+          <div class="node" style="right:8%;bottom:24%;">Tax</div>
+          <div class="node" style="left:35%;bottom:8%;">Cash Flow</div>
+        </div>
+        <a class="btn btn-lg" href="#contact">Coordinate My Plan</a>
+      </div>
+      <div>
+        <div class="dark-card">
+          <h3>Fragmented planning creates silent gaps</h3>
+          <p>Investments may grow, but retirement can still fail if withdrawals, taxes, risk and healthcare are planned separately.</p>
+        </div>
+        <div class="dark-card" style="margin-top:18px;">
+          <h3>Fintoo connects the moving pieces</h3>
+          <p>We map goals, assets, cash flows, tax impact and risk so your retirement plan has one coordinated direction.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Complete retirement life</div>
+        <h2>A retirement plan built around your complete financial life.</h2>
+      </div>
+      <div class="plan-strip">
+        <div class="plan-step"><b>Retirement corpus</b><p>Estimate the amount needed to sustain your lifestyle.</p></div>
+        <div class="plan-step"><b>Investment plan</b><p>Align your SIPs, asset allocation and risk level.</p></div>
+        <div class="plan-step"><b>Tax strategy</b><p>Use tax-aware investments and withdrawal choices.</p></div>
+        <div class="plan-step"><b>Risk review</b><p>Protect the plan from health, income and market shocks.</p></div>
+        <div class="plan-step"><b>Estate clarity</b><p>Keep nominee, legacy and family needs visible.</p></div>
+      </div>
+      <div class="comparison">
+        <span>Current lifestyle</span><span>Future expenses</span><span>Existing assets</span><span>Monthly SIP gap</span><span>Action plan</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="benefits">
+    <div class="container">
+      <div class="section-head center">
+        <div class="eyebrow">Why clients stay</div>
+        <h2>We do not get paid more when you buy something.</h2>
+        <p class="section-copy">Fintoo’s planning lens is built around your retirement outcome, not product pushing. We help you compare choices and make decisions with context.</p>
+      </div>
+      <div class="service-grid">
+        <div class="small-card"><h3>Goal-based plan</h3><p>Every recommendation maps back to your retirement goal.</p></div>
+        <div class="small-card"><h3>Advisor-led review</h3><p>Human specialists explain what the numbers actually mean.</p></div>
+        <div class="small-card"><h3>Tax-aware advice</h3><p>Plan investments and withdrawals with tax impact in mind.</p></div>
+        <div class="small-card"><h3>Long-term support</h3><p>Adjust your plan as life, markets and expenses change.</p></div>
+      </div>
+      <div style="text-align:center;margin-top:28px;"><a class="btn btn-dark btn-lg" href="#contact">Book Your Retirement Review</a></div>
+    </div>
+  </section>
+
+  <section class="soft">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Real people. Long relationships.</div>
+        <h2>Real people. Fiduciary intent. Long relationships.</h2>
+      </div>
+      <div class="testimonial-grid">
+        <div class="small-card"><div class="avatar">RS</div><h3>“I finally understood the gap.”</h3><p>The plan showed me that my corpus looked large but my future expenses were larger. The review helped me change course early.</p></div>
+        <div class="small-card"><div class="avatar">AM</div><h3>“No product pressure.”</h3><p>The advisor explained multiple options and helped me prioritize what mattered for retirement income.</p></div>
+        <div class="small-card"><div class="avatar">VP</div><h3>“A plan we revisit.”</h3><p>We update the retirement plan every year, which keeps my family and investments aligned.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head center">
+        <div class="eyebrow">More than a number</div>
+        <h2>A plan is not just about the number. It is about not having to ask anyone for help.</h2>
+        <p class="section-copy">The goal of retirement planning is independence: to pay bills, travel, handle emergencies and support your family without constantly wondering whether the plan will work.</p>
+      </div>
+      <div class="comparison">
+        <span>Reserve your dignity</span><span>Track healthcare costs</span><span>Support your family</span><span>Handle market volatility</span><span>Create certainty</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="soft-blue">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Your future dashboard</div>
+        <h2>Your retirement plan should work in more than one version of the future.</h2>
+        <p class="section-copy">A strong plan tests what happens if inflation rises, returns fall, expenses increase or retirement starts earlier than expected.</p>
+      </div>
+      <div class="goal-card">
+        <div class="table-row head"><span>Scenario</span><span>Required Corpus</span><span>Monthly SIP</span></div>
+        <div class="table-row"><span>Base case</span><span>₹8.4 Cr</span><span>₹54,000</span></div>
+        <div class="table-row"><span>Higher inflation</span><span>₹9.7 Cr</span><span>₹68,000</span></div>
+        <div class="goal-metrics">
+          <div><b>₹8.4 Cr</b><span class="mini-note">Corpus target</span></div>
+          <div><b>₹54,000</b><span class="mini-note">Monthly SIP</span></div>
+          <div><b>Annual</b><span class="mini-note">Review frequency</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Client clarity</div>
+        <h2>Clarity clients tell us they did not have before.</h2>
+      </div>
+      <div class="clarity-grid">
+        <div class="small-card"><p>“We did not know the retirement number should include healthcare and inflation separately.”</p></div>
+        <div class="small-card"><p>“The withdrawal plan mattered almost as much as how much we saved.”</p></div>
+        <div class="small-card"><p>“We could finally see why one big corpus number was not enough.”</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="soft" id="faq">
+    <div class="container">
+      <div class="section-head center">
+        <div class="eyebrow">Questions people usually ask</div>
+        <h2>Questions people usually ask before planning their retirement.</h2>
+      </div>
+      <div class="faq">
+        <details open><summary>How much money do I need to retire comfortably in India?</summary><p>It depends on your lifestyle, retirement age, inflation, life expectancy, healthcare costs and existing assets. A calculator gives an estimate; a plan validates the path.</p></details>
+        <details><summary>Is ₹1 crore enough for retirement?</summary><p>For many families, ₹1 crore may not be enough after inflation and long retirement duration are considered.</p></details>
+        <details><summary>How does inflation affect my retirement corpus?</summary><p>Inflation raises future monthly expenses. The formula FV = PV × (1 + r)^n is used to project today’s expense into the retirement year.</p></details>
+        <details><summary>Does the calculator include healthcare expenses?</summary><p>The calculator gives an indicative lifestyle projection. A full plan should also include a separate healthcare and emergency reserve.</p></details>
+        <details><summary>What if I already invest through mutual funds, NPS or EPF?</summary><p>Those assets should be mapped into your retirement projection to understand the remaining gap and asset allocation required.</p></details>
+        <details><summary>Can Fintoo help create a complete retirement plan?</summary><p>Yes. The team can help review your number, investment gap, tax impact, risk cover and retirement income plan.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta" id="contact">
+    <div class="container final-grid">
+      <div>
+        <div class="eyebrow">Start with clarity</div>
+        <h2>Your retirement number is knowable. Most people simply never sit down to find it.</h2>
+        <p class="section-copy">A 30-minute review can show whether your current savings are enough, what gap remains and what action can close it.</p>
+      </div>
+      <div class="booking-card">
+        <div class="booking-line"><span>Retirement Review</span><strong>Free</strong></div>
+        <div class="booking-line"><span>Duration</span><strong>30 mins</strong></div>
+        <div class="booking-line"><span>Format</span><strong>Phone or video</strong></div>
+        <a class="btn btn-lg" style="width:100%;margin-top:22px;" href="retirement-corpus-calculator.html">Calculate My Retirement Number</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="logo" style="color:#fff;"><span class="logo-mark"></span>Fintoo</div>
+        <p style="margin-top:14px;">Retirement planning, tax-aware investing and long-term financial decision support for Indian families.</p>
+      </div>
+      <div><h4>Services</h4><a>Retirement Planning</a><a>Tax Planning</a><a>Investment Advisory</a><a>Estate Planning</a></div>
+      <div><h4>Company</h4><a>About</a><a>Advisors</a><a>Contact</a><a>Careers</a></div>
+      <div><h4>Legal</h4><a>Privacy Policy</a><a>Terms</a><a>Disclosures</a><a>Grievance</a></div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retirement Corpus Calculator | Fintoo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #071421;
+      --muted: #5f6b78;
+      --paper: #f7f1e8;
+      --paper-2: #fbf6ee;
+      --line: #dfd5c8;
+      --orange: #f09a27;
+      --navy: #061320;
+      --green: #16a06c;
+      --shadow: 0 28px 65px rgba(33, 28, 20, .12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-color: var(--paper);
+      background-image:
+        radial-gradient(rgba(42, 35, 25, .055) 1px, transparent 1px),
+        radial-gradient(rgba(255, 255, 255, .55) 1px, transparent 1px);
+      background-position: 0 0, 8px 8px;
+      background-size: 16px 16px;
+    }
+
+    button, input { font: inherit; }
+
+    .screen {
+      min-height: 100vh;
+      display: none;
+      padding: 96px 24px 56px;
+    }
+
+    .screen.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeUp .32s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      position: fixed;
+      top: 31px;
+      left: 42px;
+      z-index: 10;
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: .02em;
+      color: #253866;
+    }
+
+    .logo .coin { color: var(--orange); }
+
+    .restart {
+      position: fixed;
+      top: 32px;
+      right: 68px;
+      z-index: 10;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 14px;
+      align-items: center;
+      gap: 6px;
+      display: none;
+    }
+
+    .restart.show { display: inline-flex; }
+
+    .hero-wrap {
+      width: min(760px, 100%);
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .62);
+      border-radius: 999px;
+      padding: 7px 17px;
+      color: #53606e;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      box-shadow: 0 5px 14px rgba(25, 21, 16, .05);
+    }
+
+    .eyebrow-icon {
+      width: 10px;
+      height: 10px;
+      border: 1.5px solid #f4b45e;
+      border-radius: 3px;
+      display: inline-block;
+      position: relative;
+    }
+
+    .eyebrow-icon::after {
+      content: "";
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 1px;
+      background: #f4b45e;
+      inset: 2px;
+    }
+
+    h1, h2, h3 {
+      font-family: "DM Serif Display", Georgia, serif;
+      font-weight: 400;
+      letter-spacing: 0;
+      margin: 0;
+      color: var(--ink);
+    }
+
+    .hero-title {
+      margin-top: 27px;
+      font-size: clamp(46px, 3.85vw, 72px);
+      line-height: 1.03;
+    }
+
+    .orange { color: var(--orange); }
+
+    .hero-copy {
+      max-width: 600px;
+      margin: 25px auto 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.52;
+      font-weight: 500;
+    }
+
+    .primary-btn {
+      margin-top: 38px;
+      min-width: 340px;
+      height: 57px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--navy);
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 18px 34px rgba(6, 19, 32, .16);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-icon { margin-left: 12px; }
+
+    .icon {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      vertical-align: -3px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .icon-sm {
+      width: 13px;
+      height: 13px;
+      vertical-align: -2px;
+    }
+
+    .trust {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 38px;
+      color: #687482;
+      font-size: 12px;
+    }
+
+    .trust span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .trust .icon {
+      color: var(--green);
+      width: 12px;
+      height: 12px;
+    }
+
+    .step-wrap {
+      width: min(576px, 100%);
+      text-align: center;
+      margin-top: 18px;
+    }
+
+    .progress {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 43px;
+      color: #5d6876;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .14em;
+    }
+
+    .progress span {
+      white-space: nowrap;
+      text-align: left;
+    }
+
+    .bar {
+      height: 2px;
+      background: #e8ded1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      width: var(--progress);
+      background: var(--orange);
+      transition: width .26s ease;
+    }
+
+    .step-title {
+      font-size: clamp(38px, 2.75vw, 52px);
+      line-height: 1.12;
+    }
+
+    .step-copy {
+      width: min(430px, 100%);
+      margin: 18px auto 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .input-panel {
+      margin: 38px auto 0;
+      width: min(446px, 100%);
+      display: grid;
+      gap: 16px;
+    }
+
+    .field-label {
+      display: block;
+      text-align: left;
+      margin: 0 0 8px 2px;
+      color: #5b6673;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .field {
+      width: 100%;
+      height: 64px;
+      padding: 0 22px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .78);
+      color: var(--ink);
+      font-size: 17px;
+      font-weight: 700;
+      text-align: center;
+      outline: 0;
+      box-shadow: 0 10px 25px rgba(35, 29, 20, .06);
+      transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .field::placeholder {
+      color: #9aa3ad;
+      font-weight: 600;
+    }
+
+    .field:focus {
+      border-color: var(--orange);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(240, 154, 39, .12), 0 10px 25px rgba(35, 29, 20, .08);
+    }
+
+    .next-btn {
+      height: 56px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--navy);
+      color: #fff;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hint {
+      color: #8a7660;
+      font-size: 12px;
+      min-height: 18px;
+    }
+
+    .lead-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f5dfbb;
+      color: #3f3428;
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .lead-badge .icon {
+      color: #4a3a28;
+      width: 13px;
+      height: 13px;
+    }
+
+    .form-card {
+      width: min(576px, 100%);
+      margin: 33px auto 0;
+      background: rgba(255, 255, 255, .82);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 30px 32px 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-card .field {
+      height: 48px;
+      text-align: left;
+      font-size: 14px;
+      font-weight: 600;
+      background: #fbf7ef;
+    }
+
+    .form-card .next-btn {
+      width: 100%;
+      margin-top: 22px;
+      height: 49px;
+    }
+
+    .privacy {
+      margin-top: 16px;
+      color: #687482;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+    }
+
+    .otp-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #fae7c4;
+      color: var(--orange);
+      margin-bottom: 22px;
+    }
+
+    .otp-icon .icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .otp-card {
+      width: min(446px, 100%);
+      margin: 34px auto 0;
+      background: rgba(255, 255, 255, .82);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .otp-row {
+      display: grid;
+      grid-template-columns: repeat(4, 56px);
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 19px;
+    }
+
+    .otp-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #fbf7ef;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 800;
+      outline: 0;
+    }
+
+    .otp-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 18px;
+      color: #697481;
+      font-size: 12px;
+    }
+
+    .link-btn {
+      border: 0;
+      background: transparent;
+      color: #697481;
+      padding: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .report-screen {
+      align-items: flex-start !important;
+      padding-top: 166px;
+      padding-bottom: 28px;
+    }
+
+    .report-wrap {
+      width: min(672px, 100%);
+      text-align: center;
+    }
+
+    .report-intro {
+      color: #5f6b78;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    .report-card {
+      background: rgba(255, 255, 255, .85);
+      border: 1px solid #f0c988;
+      border-radius: 25px;
+      padding: 34px 24px 31px;
+      box-shadow: var(--shadow);
+    }
+
+    .report-kicker {
+      color: #5c6674;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .36em;
+      text-transform: uppercase;
+    }
+
+    .report-number {
+      margin-top: 13px;
+      color: var(--orange);
+      font-family: "DM Serif Display", Georgia, serif;
+      font-size: clamp(60px, 5.65vw, 82px);
+      line-height: 1;
+    }
+
+    .report-sub {
+      margin-top: 15px;
+      color: #5f6b78;
+      font-size: 15px;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 17px;
+    }
+
+    .mini-card, .calc-card, .call-card {
+      background: rgba(255, 255, 255, .82);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 18px 42px rgba(33, 28, 20, .09);
+      text-align: left;
+    }
+
+    .mini-card {
+      padding: 25px 20px 20px;
+    }
+
+    .mini-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: #5c6674;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .mini-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #fae7c4;
+      color: var(--orange);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    .mini-icon .icon {
+      color: var(--orange);
+      stroke-width: 2;
+    }
+
+    .mini-value {
+      margin-top: 14px;
+      font-family: "DM Serif Display", Georgia, serif;
+      font-size: 32px;
+      line-height: 1;
+      color: var(--ink);
+    }
+
+    .mini-note {
+      margin-top: 9px;
+      color: #5f6b78;
+      font-size: 12px;
+    }
+
+    .calc-card {
+      margin-top: 17px;
+      padding: 20px 24px;
+    }
+
+    .calc-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .calc-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #5f6b78;
+      font-size: 14px;
+      line-height: 1.85;
+    }
+
+    .calc-card strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .call-card {
+      margin-top: 25px;
+      padding: 32px 35px;
+      text-align: center;
+      background: rgba(254, 243, 224, .72);
+      border-color: #f6c97e;
+    }
+
+    .call-card h3 {
+      font-size: 26px;
+      line-height: 1.2;
+    }
+
+    .call-card p {
+      margin: 12px auto 0;
+      max-width: 510px;
+      color: #63707d;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .disclaimer {
+      margin-top: 25px;
+      color: #697481;
+      font-size: 12px;
+      line-height: 1.45;
+      display: inline-flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 7px;
+      max-width: 520px;
+    }
+
+    @media (max-width: 700px) {
+      .logo { top: 22px; left: 22px; font-size: 21px; }
+      .restart { top: 24px; right: 22px; }
+      .screen { padding: 88px 18px 38px; }
+      .hero-title { font-size: 44px; }
+      .hero-copy { font-size: 16px; }
+      .primary-btn { min-width: 0; width: 100%; }
+      .trust { flex-wrap: wrap; gap: 12px 20px; }
+      .step-title { font-size: 37px; }
+      .form-card, .otp-card { padding: 24px 20px; }
+      .mini-grid { grid-template-columns: 1fr; }
+      .report-screen { padding-top: 112px; }
+      .report-number { font-size: 62px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">FINT<span class="coin">O</span>O</div>
+  <button class="restart" id="restartBtn">
+    <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v6h6"/></svg>
+    Restart
+  </button>
+
+  <section class="screen active" id="heroScreen">
+    <div class="hero-wrap">
+      <div class="eyebrow"><span class="eyebrow-icon"></span>Retirement Corpus Calculator · 60 Seconds</div>
+      <h1 class="hero-title">How much do you need<br>to <span class="orange">retire comfortably?</span></h1>
+      <p class="hero-copy">Answer 5 quick questions. Get your inflation-adjusted retirement corpus and the monthly SIP required to reach it — instantly.</p>
+      <button class="primary-btn" id="startBtn">
+        Calculate my Retirement Corpus
+        <svg class="icon btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+      <div class="trust">
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg>Free</span>
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg>No signup to start</span>
+        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg>60 seconds</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="questionScreen">
+    <div class="step-wrap">
+      <div class="progress">
+        <span id="stepCounter">01 / 05</span>
+        <div class="bar"><div class="bar-fill" id="barFill" style="--progress: 20%"></div></div>
+      </div>
+      <h2 class="step-title" id="questionTitle">What is your current age?</h2>
+      <p class="step-copy" id="questionCopy">We use this to calculate how many years you have left to build your corpus.</p>
+      <form class="input-panel" id="questionForm">
+        <label>
+          <span class="field-label" id="inputLabel">Current age</span>
+          <input class="field" id="questionInput" inputmode="decimal" autocomplete="off" required>
+        </label>
+        <div class="hint" id="questionHint"></div>
+        <button class="next-btn">
+          Continue
+          <svg class="icon btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <section class="screen" id="leadScreen">
+    <div class="step-wrap">
+      <div class="lead-badge">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v5"/><path d="M12 17v5"/><path d="M2 12h5"/><path d="M17 12h5"/><path d="m4.9 4.9 3.5 3.5"/><path d="m15.6 15.6 3.5 3.5"/><path d="m19.1 4.9-3.5 3.5"/><path d="m8.4 15.6-3.5 3.5"/></svg>
+        Almost there
+      </div>
+      <h2 class="step-title">Where should we send<br>your Corpus Report?</h2>
+      <p class="step-copy">Your personalised report is ready. Tell us where to deliver it.</p>
+      <form class="form-card" id="leadForm">
+        <label>
+          <span class="field-label">Full name</span>
+          <input class="field" id="nameInput" placeholder="Priya Sharma" autocomplete="name" required>
+        </label>
+        <label>
+          <span class="field-label">Mobile</span>
+          <input class="field" id="mobileInput" placeholder="9876543210" inputmode="numeric" maxlength="10" autocomplete="tel" required>
+        </label>
+        <label>
+          <span class="field-label">Email</span>
+          <input class="field" id="emailInput" placeholder="priya@example.com" type="email" autocomplete="email" required>
+        </label>
+        <div class="hint" id="leadHint"></div>
+        <button class="next-btn">
+          Send OTP
+          <svg class="icon btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+        <div class="privacy">
+          <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+          Your details are kept private. No spam, ever.
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="screen" id="otpScreen">
+    <div class="step-wrap">
+      <div class="otp-icon">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.7.6 2.5a2 2 0 0 1-.5 2.1L8 9.5a16 16 0 0 0 6.5 6.5l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.5.6a2 2 0 0 1 1.7 2Z"/></svg>
+      </div>
+      <h2 class="step-title" style="font-size: 36px;">Verify your mobile</h2>
+      <p class="step-copy" id="otpCopy">We've sent a 4-digit code to your mobile.</p>
+      <form class="otp-card" id="otpForm">
+        <div class="otp-row">
+          <input class="otp-box" inputmode="numeric" maxlength="1" required>
+          <input class="otp-box" inputmode="numeric" maxlength="1" required>
+          <input class="otp-box" inputmode="numeric" maxlength="1" required>
+          <input class="otp-box" inputmode="numeric" maxlength="1" required>
+        </div>
+        <button class="next-btn" style="width: 100%;">
+          Verify & view my report
+          <svg class="icon btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+        <div class="otp-actions">
+          <button type="button" class="link-btn" id="changeNumberBtn">
+            <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+            Change number
+          </button>
+          <span>Resend code in 28s</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="screen report-screen" id="reportScreen">
+    <div class="report-wrap">
+      <p class="report-intro" id="reportIntro">Here's your Retirement Corpus Report</p>
+      <div class="report-card">
+        <div class="report-kicker">Corpus Required At Retirement</div>
+        <div class="report-number" id="requiredCorpus">₹0 Cr</div>
+        <div class="report-sub" id="reportSub">Inflation-adjusted, to sustain retirement</div>
+      </div>
+      <div class="mini-grid">
+        <div class="mini-card">
+          <div class="mini-title">
+            <span class="mini-icon"><svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v10H4z"/><path d="M8 7V5h8v2"/><path d="M12 10v4"/><path d="M10 12h4"/></svg></span>
+            Required Monthly SIP
+          </div>
+          <div class="mini-value" id="monthlySip">₹0</div>
+          <div class="mini-note" id="sipNote">Invested until retirement @ 12% p.a.</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-title">
+            <span class="mini-icon"><svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17 9 11l4 4 8-8"/><path d="M14 7h7v7"/></svg></span>
+            Future Monthly Expense
+          </div>
+          <div class="mini-value" id="futureExpense">₹0</div>
+          <div class="mini-note" id="expenseNote">Inflation-adjusted lifestyle cost</div>
+        </div>
+      </div>
+      <div class="calc-card">
+        <div class="calc-title">
+          <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8"/><path d="M8 11h2"/><path d="M14 11h2"/><path d="M8 15h2"/><path d="M14 15h2"/></svg>
+          How we calculated this
+        </div>
+        <ul id="calcList"></ul>
+      </div>
+      <div class="call-card">
+        <div class="otp-icon" style="margin-bottom: 16px;">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.7.6 2.5a2 2 0 0 1-.5 2.1L8 9.5a16 16 0 0 0 6.5 6.5l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.5.6a2 2 0 0 1 1.7 2Z"/></svg>
+        </div>
+        <h3>Our team will reach out to you shortly</h3>
+        <p>A Fintoo retirement specialist will call you within 24 hours to walk you through your full Retirement Blueprint and help you build a plan to hit this corpus.</p>
+        <p style="font-size: 12px;">Prefer to talk now? Call us at <strong style="color: var(--ink);">+91 22 4893 1000</strong></p>
+      </div>
+      <div class="disclaimer">
+        <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 18H2L12 3Z"/><path d="M12 9v5"/><path d="M12 17h.01"/></svg>
+        Estimates are indicative and assume a 12% pre-retirement return and post-retirement returns matching inflation. Your actual numbers may vary.
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const questions = [
+      {
+        key: "age",
+        title: "What is your current age?",
+        copy: "We use this to calculate how many years you have left to build your corpus.",
+        label: "Current age",
+        placeholder: "30",
+        suffix: "yrs",
+        min: 18,
+        max: 70
+      },
+      {
+        key: "retireAge",
+        title: "At what age do\nyou plan to retire?",
+        copy: "This determines your investing horizon (n).",
+        label: "Target retirement age",
+        placeholder: "60",
+        suffix: "yrs",
+        min: 40,
+        max: 75
+      },
+      {
+        key: "lifeExpectancy",
+        title: "What life expectancy\nshould we plan for?",
+        copy: "This tells us how long your retirement corpus must last.",
+        label: "Life expectancy",
+        placeholder: "85",
+        suffix: "yrs",
+        min: 60,
+        max: 110
+      },
+      {
+        key: "monthlyExpense",
+        title: "What are your current\nmonthly expenses?",
+        copy: "Today's lifestyle cost. We'll inflate this to your retirement year.",
+        label: "Monthly expense",
+        placeholder: "75000",
+        prefix: "₹",
+        min: 1000,
+        max: 10000000
+      },
+      {
+        key: "inflation",
+        title: "Expected inflation rate?",
+        copy: "India's long-term average is 6-7%.",
+        label: "Inflation rate",
+        placeholder: "6",
+        suffix: "%",
+        min: 1,
+        max: 15
+      }
+    ];
+
+    const state = {
+      age: null,
+      retireAge: null,
+      lifeExpectancy: null,
+      monthlyExpense: null,
+      inflation: null,
+      name: "",
+      mobile: "",
+      email: ""
+    };
+
+    let currentQuestion = 0;
+    const screens = ["heroScreen", "questionScreen", "leadScreen", "otpScreen", "reportScreen"];
+    const restartBtn = document.getElementById("restartBtn");
+    const questionForm = document.getElementById("questionForm");
+    const questionInput = document.getElementById("questionInput");
+    const questionHint = document.getElementById("questionHint");
+
+    document.getElementById("startBtn").addEventListener("click", () => {
+      currentQuestion = 0;
+      renderQuestion();
+      showScreen("questionScreen");
+    });
+
+    restartBtn.addEventListener("click", () => {
+      currentQuestion = 0;
+      Object.keys(state).forEach(key => state[key] = typeof state[key] === "string" ? "" : null);
+      document.querySelectorAll("input").forEach(input => input.value = "");
+      showScreen("heroScreen");
+    });
+
+    questionForm.addEventListener("submit", event => {
+      event.preventDefault();
+      const question = questions[currentQuestion];
+      const value = Number(String(questionInput.value).replace(/,/g, ""));
+      if (!Number.isFinite(value) || value < question.min || value > question.max) {
+        questionHint.textContent = `Enter a value between ${question.min} and ${question.max}.`;
+        return;
+      }
+      if (question.key === "retireAge" && value <= state.age) {
+        questionHint.textContent = "Retirement age should be higher than current age.";
+        return;
+      }
+      if (question.key === "lifeExpectancy" && value <= state.retireAge) {
+        questionHint.textContent = "Life expectancy should be higher than retirement age.";
+        return;
+      }
+      state[question.key] = value;
+      currentQuestion += 1;
+      if (currentQuestion >= questions.length) {
+        showScreen("leadScreen");
+      } else {
+        renderQuestion();
+      }
+    });
+
+    document.getElementById("leadForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const name = document.getElementById("nameInput").value.trim();
+      const mobile = document.getElementById("mobileInput").value.trim();
+      const email = document.getElementById("emailInput").value.trim();
+      const hint = document.getElementById("leadHint");
+      if (name.length < 2) {
+        hint.textContent = "Please enter your full name.";
+        return;
+      }
+      if (!/^[0-9]{10}$/.test(mobile)) {
+        hint.textContent = "Please enter a valid 10-digit mobile number.";
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        hint.textContent = "Please enter a valid email address.";
+        return;
+      }
+      state.name = name;
+      state.mobile = mobile;
+      state.email = email;
+      document.getElementById("otpCopy").innerHTML = `We've sent a 4-digit code to <strong>+91 ${mobile}</strong>`;
+      showScreen("otpScreen");
+      document.querySelector(".otp-box").focus();
+    });
+
+    document.getElementById("otpForm").addEventListener("submit", event => {
+      event.preventDefault();
+      const code = Array.from(document.querySelectorAll(".otp-box")).map(input => input.value).join("");
+      if (!/^[0-9]{4}$/.test(code)) return;
+      renderReport();
+      showScreen("reportScreen");
+    });
+
+    document.getElementById("changeNumberBtn").addEventListener("click", () => showScreen("leadScreen"));
+
+    document.querySelectorAll(".otp-box").forEach((input, index, all) => {
+      input.addEventListener("input", () => {
+        input.value = input.value.replace(/\D/g, "").slice(0, 1);
+        if (input.value && all[index + 1]) all[index + 1].focus();
+      });
+      input.addEventListener("keydown", event => {
+        if (event.key === "Backspace" && !input.value && all[index - 1]) all[index - 1].focus();
+      });
+    });
+
+    function renderQuestion() {
+      const question = questions[currentQuestion];
+      document.getElementById("stepCounter").textContent = `${String(currentQuestion + 1).padStart(2, "0")} / 05`;
+      document.getElementById("barFill").style.setProperty("--progress", `${((currentQuestion + 1) / questions.length) * 100}%`);
+      document.getElementById("questionTitle").innerHTML = question.title.replace(/\n/g, "<br>");
+      document.getElementById("questionCopy").textContent = question.copy;
+      document.getElementById("inputLabel").textContent = question.label;
+      questionInput.placeholder = question.placeholder;
+      questionInput.value = state[question.key] || "";
+      questionHint.textContent = formatHint(question);
+      setTimeout(() => questionInput.focus(), 50);
+    }
+
+    function showScreen(id) {
+      screens.forEach(screen => document.getElementById(screen).classList.toggle("active", screen === id));
+      restartBtn.classList.toggle("show", id !== "heroScreen");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function formatHint(question) {
+      const prefix = question.prefix || "";
+      const suffix = question.suffix ? ` ${question.suffix}` : "";
+      return `Enter ${prefix}${question.placeholder}${suffix} or your exact number.`;
+    }
+
+    function renderReport() {
+      const yearsToRetirement = Math.max(state.retireAge - state.age, 1);
+      const retirementYears = Math.max(state.lifeExpectancy - state.retireAge, 1);
+      const inflationRate = state.inflation / 100;
+      const annualReturn = 0.12;
+      const monthlyReturn = annualReturn / 12;
+      const futureMonthlyExpense = state.monthlyExpense * Math.pow(1 + inflationRate, yearsToRetirement);
+      const requiredCorpus = futureMonthlyExpense * 12 * retirementYears;
+      const monthlySip = requiredCorpus * monthlyReturn / (Math.pow(1 + monthlyReturn, yearsToRetirement * 12) - 1);
+
+      document.getElementById("reportIntro").innerHTML = `Here's your Retirement Corpus Report, <strong style="color: var(--ink);">${escapeHtml(state.name.split(" ")[0] || state.name)}</strong>`;
+      document.getElementById("requiredCorpus").textContent = formatCr(requiredCorpus);
+      document.getElementById("reportSub").textContent = `Inflation-adjusted, to sustain ${retirementYears} years of retirement`;
+      document.getElementById("monthlySip").textContent = formatShort(monthlySip);
+      document.getElementById("sipNote").textContent = `Invested for ${yearsToRetirement} years @ 12% p.a.`;
+      document.getElementById("futureExpense").textContent = formatShort(futureMonthlyExpense);
+      document.getElementById("expenseNote").textContent = `Today's ${formatShort(state.monthlyExpense)} at ${state.inflation}% inflation`;
+      document.getElementById("calcList").innerHTML = `
+        <li>Years to retirement (n) = ${state.retireAge} - ${state.age} = <strong>${yearsToRetirement} yrs</strong></li>
+        <li>Retirement duration = ${state.lifeExpectancy} - ${state.retireAge} = <strong>${retirementYears} yrs</strong></li>
+        <li>Future Value formula: <strong>FV = PV × (1 + r)<sup>n</sup></strong></li>
+        <li>FV of monthly expense = ${formatShort(state.monthlyExpense)} × (1 + ${state.inflation}%)<sup>${yearsToRetirement}</sup> = <strong>${formatShort(futureMonthlyExpense)}</strong></li>
+      `;
+    }
+
+    function formatCr(value) {
+      return `₹${(value / 10000000).toFixed(2)} Cr`;
+    }
+
+    function formatShort(value) {
+      if (value >= 10000000) return `₹${(value / 10000000).toFixed(2)} Cr`;
+      if (value >= 100000) return `₹${trim(value / 100000)} L`;
+      if (value >= 1000) return `₹${Math.round(value / 1000)}k`;
+      return `₹${Math.round(value).toLocaleString("en-IN")}`;
+    }
+
+    function trim(value) {
+      return value.toFixed(2).replace(/\.00$/, "").replace(/(\.\d)0$/, "$1");
+    }
+
+    function escapeHtml(value) {
+      return value.replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[char]));
+    }
+  </script>
+</body>
+</html>
