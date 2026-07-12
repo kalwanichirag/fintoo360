@@ -6,731 +6,168 @@
   <title>Retirement Corpus Calculator | Fintoo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script>
+    window.tailwind = {
+      config: {
+        theme: {
+          extend: {
+            fontFamily: { inter: ["Inter", "sans-serif"] },
+            colors: {
+              "fintoo-blue": "#042b62",
+              "fintoo-orange": "#dd7300"
+            },
+            boxShadow: {
+              soft: "0 16px 48px rgba(4,43,98,.10)",
+              premium: "0 32px 90px rgba(4,43,98,.14)",
+              button: "0 20px 46px rgba(4,43,98,.22)"
+            }
+          },
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    :root {
-      --ink: #071421;
-      --muted: #5f6b78;
-      --paper: #f7f1e8;
-      --paper-2: #fbf6ee;
-      --line: #dfd5c8;
-      --orange: #f09a27;
-      --navy: #061320;
-      --green: #16a06c;
-      --shadow: 0 28px 65px rgba(33, 28, 20, .12);
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      min-height: 100vh;
-      margin: 0;
-      color: var(--ink);
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background-color: var(--paper);
-      background-image:
-        radial-gradient(rgba(42, 35, 25, .055) 1px, transparent 1px),
-        radial-gradient(rgba(255, 255, 255, .55) 1px, transparent 1px);
-      background-position: 0 0, 8px 8px;
-      background-size: 16px 16px;
-    }
-
-    button, input { font: inherit; }
-
-    .screen {
-      min-height: 100vh;
-      display: none;
-      padding: 96px 24px 56px;
-    }
-
-    .screen.active {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: fadeUp .32s ease both;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(14px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .logo {
-      position: fixed;
-      top: 31px;
-      left: 42px;
-      z-index: 10;
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: .02em;
-      color: #253866;
-    }
-
-    .logo .coin { color: var(--orange); }
-
-    .restart {
-      position: fixed;
-      top: 32px;
-      right: 68px;
-      z-index: 10;
-      border: 0;
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      font-size: 14px;
-      align-items: center;
-      gap: 6px;
-      display: none;
-    }
-
-    .restart.show { display: inline-flex; }
-
-    .hero-wrap {
-      width: min(760px, 100%);
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, .62);
-      border-radius: 999px;
-      padding: 7px 17px;
-      color: #53606e;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .28em;
-      text-transform: uppercase;
-      box-shadow: 0 5px 14px rgba(25, 21, 16, .05);
-    }
-
-    .eyebrow-icon {
-      width: 10px;
-      height: 10px;
-      border: 1.5px solid #f4b45e;
-      border-radius: 3px;
-      display: inline-block;
-      position: relative;
-    }
-
-    .eyebrow-icon::after {
-      content: "";
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      border-radius: 1px;
-      background: #f4b45e;
-      inset: 2px;
-    }
-
-    h1, h2, h3 {
-      font-family: "DM Serif Display", Georgia, serif;
-      font-weight: 400;
-      letter-spacing: 0;
-      margin: 0;
-      color: var(--ink);
-    }
-
-    .hero-title {
-      margin-top: 27px;
-      font-size: clamp(46px, 3.85vw, 72px);
-      line-height: 1.03;
-    }
-
-    .orange { color: var(--orange); }
-
-    .hero-copy {
-      max-width: 600px;
-      margin: 25px auto 0;
-      color: var(--muted);
-      font-size: 18px;
-      line-height: 1.52;
-      font-weight: 500;
-    }
-
-    .primary-btn {
-      margin-top: 38px;
-      min-width: 340px;
-      height: 57px;
-      border: 0;
-      border-radius: 999px;
-      background: var(--navy);
-      color: white;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 18px 34px rgba(6, 19, 32, .16);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .btn-icon { margin-left: 12px; }
-
-    .icon {
-      width: 16px;
-      height: 16px;
-      display: inline-block;
-      vertical-align: -3px;
-      stroke: currentColor;
-      stroke-width: 2;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .icon-sm {
-      width: 13px;
-      height: 13px;
-      vertical-align: -2px;
-    }
-
-    .trust {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      margin-top: 38px;
-      color: #687482;
-      font-size: 12px;
-    }
-
-    .trust span {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .trust .icon {
-      color: var(--green);
-      width: 12px;
-      height: 12px;
-    }
-
-    .step-wrap {
-      width: min(576px, 100%);
-      text-align: center;
-      margin-top: 18px;
-    }
-
-    .progress {
-      display: grid;
-      grid-template-columns: 86px 1fr;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 43px;
-      color: #5d6876;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .14em;
-    }
-
-    .progress span {
-      white-space: nowrap;
-      text-align: left;
-    }
-
-    .bar {
-      height: 2px;
-      background: #e8ded1;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .bar-fill {
-      height: 100%;
-      width: var(--progress);
-      background: var(--orange);
-      transition: width .26s ease;
-    }
-
-    .step-title {
-      font-size: clamp(38px, 2.75vw, 52px);
-      line-height: 1.12;
-    }
-
-    .step-copy {
-      width: min(430px, 100%);
-      margin: 18px auto 0;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.45;
-    }
-
-    .input-panel {
-      margin: 38px auto 0;
-      width: min(446px, 100%);
-      display: grid;
-      gap: 16px;
-    }
-
-    .field-label {
-      display: block;
-      text-align: left;
-      margin: 0 0 8px 2px;
-      color: #5b6673;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .field {
-      width: 100%;
-      height: 64px;
-      padding: 0 22px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: rgba(255, 255, 255, .78);
-      color: var(--ink);
-      font-size: 17px;
-      font-weight: 700;
-      text-align: center;
-      outline: 0;
-      box-shadow: 0 10px 25px rgba(35, 29, 20, .06);
-      transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
-    }
-
-    .field::placeholder {
-      color: #9aa3ad;
-      font-weight: 600;
-    }
-
-    .field:focus {
-      border-color: var(--orange);
-      background: #fff;
-      box-shadow: 0 0 0 4px rgba(240, 154, 39, .12), 0 10px 25px rgba(35, 29, 20, .08);
-    }
-
-    .next-btn {
-      height: 56px;
-      border: 0;
-      border-radius: 999px;
-      background: var(--navy);
-      color: #fff;
-      font-weight: 800;
-      cursor: pointer;
-      margin-top: 6px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hint {
-      color: #8a7660;
-      font-size: 12px;
-      min-height: 18px;
-    }
+    body{
+      font-family: 'Inter', sans-serif;
+    }
+    .bg-fintoo-blue { background-color: #042b62; }
+    .bg-fintoo-orange { background-color: #dd7300; }
+    .text-fintoo-orange { color: #dd7300; }
+    .bg-fintoo-blue\/10 { background-color: rgba(4, 43, 98, .10); }
+    .bg-fintoo-orange\/10 { background-color: rgba(221, 115, 0, .10); }
+    .bg-fintoo-orange\/20 { background-color: rgba(221, 115, 0, .20); }
 
-    .lead-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #f5dfbb;
-      color: #3f3428;
-      border-radius: 999px;
-      padding: 7px 14px;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    .lead-badge .icon {
-      color: #4a3a28;
-      width: 13px;
-      height: 13px;
-    }
-
-    .form-card {
-      width: min(576px, 100%);
-      margin: 33px auto 0;
-      background: rgba(255, 255, 255, .82);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 30px 32px 32px;
-      box-shadow: var(--shadow);
-    }
-
-    .form-card .field {
-      height: 48px;
-      text-align: left;
-      font-size: 14px;
-      font-weight: 600;
-      background: #fbf7ef;
-    }
-
-    .form-card .next-btn {
-      width: 100%;
-      margin-top: 22px;
-      height: 49px;
-    }
-
-    .privacy {
-      margin-top: 16px;
-      color: #687482;
-      font-size: 12px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-    }
-
-    .otp-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #fae7c4;
-      color: var(--orange);
-      margin-bottom: 22px;
-    }
-
-    .otp-icon .icon {
-      width: 20px;
-      height: 20px;
-    }
-
-    .otp-card {
-      width: min(446px, 100%);
-      margin: 34px auto 0;
-      background: rgba(255, 255, 255, .82);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      padding: 32px;
-      box-shadow: var(--shadow);
-    }
-
-    .otp-row {
-      display: grid;
-      grid-template-columns: repeat(4, 56px);
-      gap: 12px;
-      justify-content: center;
-      margin-bottom: 19px;
-    }
-
-    .otp-box {
-      width: 56px;
-      height: 56px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: #fbf7ef;
-      text-align: center;
-      font-size: 22px;
-      font-weight: 800;
-      outline: 0;
-    }
-
-    .otp-actions {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 18px;
-      color: #697481;
-      font-size: 12px;
-    }
-
-    .link-btn {
-      border: 0;
-      background: transparent;
-      color: #697481;
-      padding: 0;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .report-screen {
-      align-items: flex-start !important;
-      padding-top: 166px;
-      padding-bottom: 28px;
-    }
-
-    .report-wrap {
-      width: min(672px, 100%);
-      text-align: center;
-    }
-
-    .report-intro {
-      color: #5f6b78;
-      font-size: 14px;
-      margin-bottom: 14px;
-    }
-
-    .report-card {
-      background: rgba(255, 255, 255, .85);
-      border: 1px solid #f0c988;
-      border-radius: 25px;
-      padding: 34px 24px 31px;
-      box-shadow: var(--shadow);
-    }
-
-    .report-kicker {
-      color: #5c6674;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .36em;
-      text-transform: uppercase;
-    }
-
-    .report-number {
-      margin-top: 13px;
-      color: var(--orange);
-      font-family: "DM Serif Display", Georgia, serif;
-      font-size: clamp(60px, 5.65vw, 82px);
-      line-height: 1;
-    }
-
-    .report-sub {
-      margin-top: 15px;
-      color: #5f6b78;
-      font-size: 15px;
-    }
-
-    .mini-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 17px;
-    }
-
-    .mini-card, .calc-card, .call-card {
-      background: rgba(255, 255, 255, .82);
-      border: 1px solid var(--line);
-      border-radius: 22px;
-      box-shadow: 0 18px 42px rgba(33, 28, 20, .09);
-      text-align: left;
-    }
-
-    .mini-card {
-      padding: 25px 20px 20px;
-    }
-
-    .mini-title {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      color: #5c6674;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: .11em;
-      text-transform: uppercase;
-    }
-
-    .mini-icon {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: #fae7c4;
-      color: var(--orange);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-    }
-
-    .mini-icon .icon {
-      color: var(--orange);
-      stroke-width: 2;
-    }
-
-    .mini-value {
-      margin-top: 14px;
-      font-family: "DM Serif Display", Georgia, serif;
-      font-size: 32px;
-      line-height: 1;
-      color: var(--ink);
-    }
-
-    .mini-note {
-      margin-top: 9px;
-      color: #5f6b78;
-      font-size: 12px;
-    }
-
-    .calc-card {
-      margin-top: 17px;
-      padding: 20px 24px;
-    }
-
-    .calc-title {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      color: var(--ink);
-      font-size: 14px;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-
-    .calc-card ul {
-      margin: 0;
-      padding-left: 18px;
-      color: #5f6b78;
-      font-size: 14px;
-      line-height: 1.85;
-    }
-
-    .calc-card strong {
-      color: var(--ink);
-      font-weight: 700;
-    }
-
-    .call-card {
-      margin-top: 25px;
-      padding: 32px 35px;
-      text-align: center;
-      background: rgba(254, 243, 224, .72);
-      border-color: #f6c97e;
-    }
-
-    .call-card h3 {
-      font-size: 26px;
-      line-height: 1.2;
-    }
-
-    .call-card p {
-      margin: 12px auto 0;
-      max-width: 510px;
-      color: #63707d;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .disclaimer {
-      margin-top: 25px;
-      color: #697481;
-      font-size: 12px;
-      line-height: 1.45;
-      display: inline-flex;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 7px;
-      max-width: 520px;
-    }
-
-    @media (max-width: 700px) {
-      .logo { top: 22px; left: 22px; font-size: 21px; }
-      .restart { top: 24px; right: 22px; }
-      .screen { padding: 88px 18px 38px; }
-      .hero-title { font-size: 44px; }
-      .hero-copy { font-size: 16px; }
-      .primary-btn { min-width: 0; width: 100%; }
-      .trust { flex-wrap: wrap; gap: 12px 20px; }
-      .step-title { font-size: 37px; }
-      .form-card, .otp-card { padding: 24px 20px; }
-      .mini-grid { grid-template-columns: 1fr; }
-      .report-screen { padding-top: 112px; }
-      .report-number { font-size: 62px; }
-    }
   </style>
 </head>
-<body>
-  <div class="logo">FINT<span class="coin">O</span>O</div>
-  <button class="restart" id="restartBtn">
-    <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v6h6"/></svg>
+<body class="min-h-screen overflow-x-hidden bg-white bg-[linear-gradient(135deg,rgba(4,43,98,.08),rgba(221,115,0,.08)_42%,rgba(4,43,98,.035))] font-inter text-fintoo-blue antialiased selection:bg-fintoo-orange/20 selection:text-fintoo-blue before:pointer-events-none before:fixed before:inset-0 before:bg-[linear-gradient(90deg,rgba(4,43,98,.055)_1px,transparent_1px),linear-gradient(180deg,rgba(4,43,98,.045)_1px,transparent_1px)] before:bg-[length:72px_72px] before:[mask-image:radial-gradient(circle_at_50%_22%,#000_0,transparent_66%)]">
+<img src="https://www.fintoo.in/static/media/wp/Fintoologo_.svg" alt="Fintoo Logo" class="fixed left-[22px] top-[22px] z-10 text-[21px] font-extrabold tracking-[-.025em] text-fintoo-blue md:left-[clamp(22px,4vw,54px)] md:top-[30px]">
+  <button class="hidden fixed right-[22px] top-6 z-10 items-center gap-2 rounded-full border border-fintoo-blue/10 bg-white/75 px-3.5 py-2.5 text-[13px] font-semibold text-fintoo-blue shadow-sm backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-fintoo-orange/40 hover:text-fintoo-orange md:right-[clamp(22px,4vw,54px)] md:top-8" id="restartBtn">
+    <svg class="h-[13px] w-[13px] fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v6h6"/></svg>
     Restart
   </button>
 
-  <section class="screen active" id="heroScreen">
-    <div class="hero-wrap">
-      <div class="eyebrow"><span class="eyebrow-icon"></span>Retirement Corpus Calculator · 60 Seconds</div>
-      <h1 class="hero-title">How much do you need<br>to <span class="orange">retire comfortably?</span></h1>
-      <p class="hero-copy">Answer 5 quick questions. Get your inflation-adjusted retirement corpus and the monthly SIP required to reach it — instantly.</p>
-      <button class="primary-btn" id="startBtn">
+  <section class="flex min-h-[100svh] items-start justify-center px-[18px] pb-9 pt-32 md:min-h-screen md:items-center md:px-6 md:pb-16 md:pt-[clamp(104px,12vh,146px)]" id="heroScreen">
+    <div class="w-full max-w-[900px] text-center">
+      <div class="mx-auto mb-6 grid h-16 w-16 place-items-center rounded-3xl bg-fintoo-orange text-white shadow-button">
+        <svg class="h-8 w-8 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-4 4"/></svg>
+      </div>
+      <div class="inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-fintoo-orange/25 bg-white/75 px-3 py-2 text-[10px] font-bold uppercase leading-tight tracking-[.09em] text-fintoo-blue shadow-soft backdrop-blur-xl md:px-[18px] md:text-[11px] md:tracking-[.14em]">
+        <span class="relative h-2.5 w-2.5 shrink-0 rounded-[3px] border border-fintoo-orange after:absolute after:inset-0.5 after:rounded-[1px] after:bg-fintoo-orange"></span>
+        <span>Retirement Corpus Calculator · 60 Seconds</span>
+      </div>
+      <h1 class="mx-auto mt-6 max-w-[360px] text-[clamp(32px,8.8vw,40px)] font-bold leading-[1.08] tracking-[-.035em] text-fintoo-blue md:mt-7 md:max-w-[900px] md:text-[clamp(40px,5.35vw,74px)] md:leading-none">How much do you need to <span class="text-fintoo-orange">retire comfortably?</span></h1>
+      <p class="mx-auto mt-[18px] max-w-[340px] text-sm font-medium leading-[1.55] text-fintoo-blue/70 md:mt-6 md:max-w-[620px] md:text-[clamp(15px,1.12vw,18px)] md:leading-[1.6]">Answer 5 quick questions. Get your inflation-adjusted retirement corpus and the monthly SIP required to reach it — instantly.</p>
+      <div class="mx-auto mt-6 grid max-w-[560px] grid-cols-3 gap-2 md:gap-3">
+        <div class="rounded-2xl border border-fintoo-blue/10 bg-white/80 p-3 shadow-soft backdrop-blur-xl">
+          <span class="mx-auto grid h-9 w-9 place-items-center rounded-full bg-fintoo-orange/10">
+            <svg viewBox="0 0 24 24" aria-hidden="true" style="width:20px;height:20px;fill:none;stroke:#dd7300;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-4 4"/></svg>
+          </span>
+          <div class="mt-2 text-[11px] font-extrabold text-fintoo-blue md:text-xs">Inflation</div>
+        </div>
+        <div class="rounded-2xl border border-fintoo-blue/10 bg-white/80 p-3 shadow-soft backdrop-blur-xl">
+          <span class="mx-auto grid h-9 w-9 place-items-center rounded-full bg-fintoo-orange/10">
+            <svg viewBox="0 0 24 24" aria-hidden="true" style="width:20px;height:20px;fill:none;stroke:#dd7300;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H15a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </span>
+          <div class="mt-2 text-[11px] font-extrabold text-fintoo-blue md:text-xs">Corpus</div>
+        </div>
+        <div class="rounded-2xl border border-fintoo-blue/10 bg-white/80 p-3 shadow-soft backdrop-blur-xl">
+          <span class="mx-auto grid h-9 w-9 place-items-center rounded-full bg-fintoo-orange/10">
+            <svg viewBox="0 0 24 24" aria-hidden="true" style="width:20px;height:20px;fill:none;stroke:#dd7300;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-6"/></svg>
+          </span>
+          <div class="mt-2 text-[11px] font-extrabold text-fintoo-blue md:text-xs">SIP</div>
+        </div>
+      </div>
+      <button class="mt-8 inline-flex h-[54px] w-full items-center justify-center rounded-full bg-fintoo-blue px-[18px] text-sm font-bold text-white shadow-button transition hover:-translate-y-0.5 hover:shadow-premium active:translate-y-0 md:mt-9 md:h-14 md:w-auto md:min-w-[340px] md:text-[15px]" id="startBtn">
         Calculate my Retirement Corpus
-        <svg class="icon btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        <svg class="ml-3 h-4 w-4 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </button>
-      <div class="trust">
-        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg>Free</span>
-        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg>No signup to start</span>
-        <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg>60 seconds</span>
+      <div class="mt-6 flex items-center justify-between gap-2 text-xs font-semibold text-fintoo-blue/65 md:mt-9 md:justify-center md:gap-6 md:text-[13px]">
+        <span class="inline-flex items-center gap-1.5 whitespace-nowrap"><svg class="h-3 w-3 fill-none stroke-fintoo-orange stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg>Free</span>
+        <span class="inline-flex items-center gap-1.5 whitespace-nowrap"><svg class="h-3 w-3 fill-none stroke-fintoo-orange stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg>No signup to start</span>
+        <span class="inline-flex items-center gap-1.5 whitespace-nowrap"><svg class="h-3 w-3 fill-none stroke-fintoo-orange stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><path d="m20 6-11 11-5-5"/></svg>60 seconds</span>
       </div>
     </div>
   </section>
 
-  <section class="screen" id="questionScreen">
-    <div class="step-wrap">
-      <div class="progress">
-        <span id="stepCounter">01 / 05</span>
-        <div class="bar"><div class="bar-fill" id="barFill" style="--progress: 20%"></div></div>
+  <section class="hidden min-h-[100svh] items-start justify-center px-[18px] pb-10 pt-[92px] md:min-h-screen md:items-center md:px-6 md:pb-16 md:pt-[clamp(104px,12vh,146px)]" id="questionScreen">
+    <div class="mt-[18px] w-full max-w-[620px] text-center">
+      <div class="mb-11 grid grid-cols-[86px_1fr] items-center gap-3.5 text-[13px] font-semibold tracking-[.14em] text-fintoo-blue/70">
+        <span class="text-left whitespace-nowrap" id="stepCounter">01 / 05</span>
+        <div class="h-0.5 overflow-hidden bg-fintoo-blue/10"><div class="h-full w-1/5 bg-fintoo-orange transition-all duration-500" id="barFill"></div></div>
       </div>
-      <h2 class="step-title" id="questionTitle">What is your current age?</h2>
-      <p class="step-copy" id="questionCopy">We use this to calculate how many years you have left to build your corpus.</p>
-      <form class="input-panel" id="questionForm">
+      <h2 class="text-[clamp(30px,8.4vw,40px)] font-bold leading-[1.08] tracking-[-.035em] text-fintoo-blue md:text-[clamp(32px,3.8vw,52px)]" id="questionTitle">What is your current age?</h2>
+      <p class="mx-auto mt-[18px] max-w-[430px] text-sm leading-[1.58] text-fintoo-blue/70" id="questionCopy">We use this to calculate how many years you have left to build your corpus.</p>
+      <form class="mx-auto mt-9 grid w-full max-w-[446px] gap-4" id="questionForm">
         <label>
-          <span class="field-label" id="inputLabel">Current age</span>
-          <input class="field" id="questionInput" inputmode="decimal" autocomplete="off" required>
+          <span class="mb-2 ml-0.5 block text-left text-xs font-bold uppercase tracking-[.08em] text-fintoo-blue/70" id="inputLabel">Current age</span>
+          <input class="h-[62px] w-full rounded-[20px] border border-fintoo-blue/10 bg-white/80 px-6 text-center text-base font-bold text-fintoo-blue shadow-soft outline-none transition placeholder:font-semibold placeholder:text-fintoo-blue/40 focus:-translate-y-px focus:border-fintoo-orange focus:bg-white focus:shadow-[0_0_0_5px_rgba(221,115,0,.12),0_18px_46px_rgba(4,43,98,.12)]" id="questionInput" inputmode="decimal" autocomplete="off" required>
         </label>
-        <div class="hint" id="questionHint"></div>
-        <button class="next-btn">
+        <div class="min-h-[18px] text-xs text-fintoo-orange" id="questionHint"></div>
+        <button class="inline-flex h-[52px] items-center justify-center rounded-full bg-fintoo-blue text-[15px] font-bold text-white shadow-button transition hover:-translate-y-0.5 hover:shadow-premium active:translate-y-0">
           Continue
-          <svg class="icon btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <svg class="ml-3 h-4 w-4 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </button>
       </form>
     </div>
   </section>
 
-  <section class="screen" id="leadScreen">
-    <div class="step-wrap">
-      <div class="lead-badge">
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v5"/><path d="M12 17v5"/><path d="M2 12h5"/><path d="M17 12h5"/><path d="m4.9 4.9 3.5 3.5"/><path d="m15.6 15.6 3.5 3.5"/><path d="m19.1 4.9-3.5 3.5"/><path d="m8.4 15.6-3.5 3.5"/></svg>
+  <section class="hidden min-h-[100svh] items-start justify-center px-[18px] pb-10 pt-[104px] md:min-h-screen md:items-center md:px-6 md:pb-16 md:pt-[clamp(104px,12vh,146px)]" id="leadScreen">
+    <div class="w-full max-w-[620px] text-center md:mt-[18px]">
+      <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-fintoo-orange/10 px-[13px] py-1.5 text-[11px] font-bold uppercase tracking-[.12em] text-fintoo-blue md:mb-5 md:px-3.5 md:py-2 md:text-xs">
+        <svg class="h-[13px] w-[13px] fill-none stroke-fintoo-orange stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v5"/><path d="M12 17v5"/><path d="M2 12h5"/><path d="M17 12h5"/><path d="m4.9 4.9 3.5 3.5"/><path d="m15.6 15.6 3.5 3.5"/><path d="m19.1 4.9-3.5 3.5"/><path d="m8.4 15.6-3.5 3.5"/></svg>
         Almost there
       </div>
-      <h2 class="step-title">Where should we send<br>your Corpus Report?</h2>
-      <p class="step-copy">Your personalised report is ready. Tell us where to deliver it.</p>
-      <form class="form-card" id="leadForm">
-        <label>
-          <span class="field-label">Full name</span>
-          <input class="field" id="nameInput" placeholder="Priya Sharma" autocomplete="name" required>
+      <h2 class="text-[clamp(27px,7.4vw,34px)] font-bold leading-[1.08] tracking-[-.03em] text-fintoo-blue md:text-[clamp(32px,3.8vw,52px)]">Where should we send<br>your Corpus Report?</h2>
+      <p class="mx-auto mt-3.5 max-w-[430px] text-sm leading-normal text-fintoo-blue/70 md:mt-[18px] md:leading-[1.58]">Your personalised report is ready. Tell us where to deliver it.</p>
+      <form class="mx-auto mt-7 w-full max-w-[576px] rounded-[22px] border border-fintoo-blue/10 bg-white/85 p-5 pt-[22px] text-left shadow-premium backdrop-blur-xl md:mt-8 md:rounded-3xl md:p-8 md:pt-7" id="leadForm">
+        <label class="block">
+          <span class="mb-1.5 ml-0.5 block text-left text-[11px] font-bold uppercase tracking-[.08em] text-fintoo-blue/70 md:text-xs">Full name</span>
+          <input class="h-[46px] w-full rounded-[17px] border border-fintoo-blue/10 bg-white/75 px-[22px] text-sm font-semibold text-fintoo-blue shadow-soft outline-none transition placeholder:font-semibold placeholder:text-fintoo-blue/40 focus:-translate-y-px focus:border-fintoo-orange focus:bg-white focus:shadow-[0_0_0_5px_rgba(221,115,0,.12),0_18px_46px_rgba(4,43,98,.12)] md:h-12" id="nameInput" placeholder="Priya Sharma" autocomplete="name" required>
         </label>
-        <label>
-          <span class="field-label">Mobile</span>
-          <input class="field" id="mobileInput" placeholder="9876543210" inputmode="numeric" maxlength="10" autocomplete="tel" required>
+        <label class="mt-3 block md:mt-4">
+          <span class="mb-1.5 ml-0.5 block text-left text-[11px] font-bold uppercase tracking-[.08em] text-fintoo-blue/70 md:text-xs">Mobile</span>
+          <input class="h-[46px] w-full rounded-[17px] border border-fintoo-blue/10 bg-white/75 px-[22px] text-sm font-semibold text-fintoo-blue shadow-soft outline-none transition placeholder:font-semibold placeholder:text-fintoo-blue/40 focus:-translate-y-px focus:border-fintoo-orange focus:bg-white focus:shadow-[0_0_0_5px_rgba(221,115,0,.12),0_18px_46px_rgba(4,43,98,.12)] md:h-12" id="mobileInput" placeholder="9876543210" inputmode="numeric" maxlength="10" autocomplete="tel" required>
         </label>
-        <label>
-          <span class="field-label">Email</span>
-          <input class="field" id="emailInput" placeholder="priya@example.com" type="email" autocomplete="email" required>
+        <label class="mt-3 block md:mt-4">
+          <span class="mb-1.5 ml-0.5 block text-left text-[11px] font-bold uppercase tracking-[.08em] text-fintoo-blue/70 md:text-xs">Email</span>
+          <input class="h-[46px] w-full rounded-[17px] border border-fintoo-blue/10 bg-white/75 px-[22px] text-sm font-semibold text-fintoo-blue shadow-soft outline-none transition placeholder:font-semibold placeholder:text-fintoo-blue/40 focus:-translate-y-px focus:border-fintoo-orange focus:bg-white focus:shadow-[0_0_0_5px_rgba(221,115,0,.12),0_18px_46px_rgba(4,43,98,.12)] md:h-12" id="emailInput" placeholder="priya@example.com" type="email" autocomplete="email" required>
         </label>
-        <div class="hint" id="leadHint"></div>
-        <button class="next-btn">
+        <div class="min-h-[18px] text-center text-xs text-fintoo-orange" id="leadHint"></div>
+        <button class="mt-[18px] inline-flex h-12 w-full items-center justify-center rounded-full bg-fintoo-blue text-[15px] font-bold text-white shadow-button transition hover:-translate-y-0.5 hover:shadow-premium active:translate-y-0 md:mt-[22px] md:h-[49px]">
           Send OTP
-          <svg class="icon btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <svg class="ml-3 h-4 w-4 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </button>
-        <div class="privacy">
-          <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
+        <div class="mt-3.5 flex items-start justify-center gap-2 text-center text-xs leading-snug text-fintoo-blue/60 md:mt-4 md:items-center">
+          <svg class="mt-0.5 h-[13px] w-[13px] shrink-0 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round] md:mt-0" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></svg>
           Your details are kept private. No spam, ever.
         </div>
       </form>
     </div>
   </section>
 
-  <section class="screen" id="otpScreen">
-    <div class="step-wrap">
-      <div class="otp-icon">
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.7.6 2.5a2 2 0 0 1-.5 2.1L8 9.5a16 16 0 0 0 6.5 6.5l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.5.6a2 2 0 0 1 1.7 2Z"/></svg>
+  <section class="hidden min-h-[100svh] items-start justify-center px-[18px] pb-10 pt-[92px] md:min-h-screen md:items-center md:px-6 md:pb-16 md:pt-[clamp(104px,12vh,146px)]" id="otpScreen">
+    <div class="mt-[18px] w-full max-w-[620px] text-center">
+      <div class="mb-[22px] inline-flex h-12 w-12 items-center justify-center rounded-full bg-fintoo-orange/10 text-fintoo-orange">
+        <svg class="h-5 w-5 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.7.6 2.5a2 2 0 0 1-.5 2.1L8 9.5a16 16 0 0 0 6.5 6.5l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.5.6a2 2 0 0 1 1.7 2Z"/></svg>
       </div>
-      <h2 class="step-title" style="font-size: 36px;">Verify your mobile</h2>
-      <p class="step-copy" id="otpCopy">We've sent a 4-digit code to your mobile.</p>
-      <form class="otp-card" id="otpForm">
-        <div class="otp-row">
-          <input class="otp-box" inputmode="numeric" maxlength="1" required>
-          <input class="otp-box" inputmode="numeric" maxlength="1" required>
-          <input class="otp-box" inputmode="numeric" maxlength="1" required>
-          <input class="otp-box" inputmode="numeric" maxlength="1" required>
+      <h2 class="text-[30px] font-bold leading-[1.08] tracking-[-.035em] text-fintoo-blue md:text-[32px]">Verify your mobile</h2>
+      <p class="mx-auto mt-[18px] max-w-[430px] text-sm leading-[1.58] text-fintoo-blue/70" id="otpCopy">We've sent a 4-digit code to your mobile.</p>
+      <form class="mx-auto mt-8 w-full max-w-[446px] rounded-3xl border border-fintoo-blue/10 bg-white/85 p-5 shadow-premium backdrop-blur-xl md:p-8" id="otpForm">
+        <div class="mb-5 grid grid-cols-4 justify-center gap-2.5 md:grid-cols-[repeat(4,56px)] md:gap-3">
+          <input class="h-14 w-full rounded-[18px] border border-fintoo-blue/10 bg-white/75 text-center text-xl font-bold text-fintoo-blue outline-none transition focus:-translate-y-px focus:border-fintoo-orange focus:shadow-[0_0_0_5px_rgba(221,115,0,.12),0_14px_34px_rgba(4,43,98,.12)]" inputmode="numeric" maxlength="1" required>
+          <input class="h-14 w-full rounded-[18px] border border-fintoo-blue/10 bg-white/75 text-center text-xl font-bold text-fintoo-blue outline-none transition focus:-translate-y-px focus:border-fintoo-orange focus:shadow-[0_0_0_5px_rgba(221,115,0,.12),0_14px_34px_rgba(4,43,98,.12)]" inputmode="numeric" maxlength="1" required>
+          <input class="h-14 w-full rounded-[18px] border border-fintoo-blue/10 bg-white/75 text-center text-xl font-bold text-fintoo-blue outline-none transition focus:-translate-y-px focus:border-fintoo-orange focus:shadow-[0_0_0_5px_rgba(221,115,0,.12),0_14px_34px_rgba(4,43,98,.12)]" inputmode="numeric" maxlength="1" required>
+          <input class="h-14 w-full rounded-[18px] border border-fintoo-blue/10 bg-white/75 text-center text-xl font-bold text-fintoo-blue outline-none transition focus:-translate-y-px focus:border-fintoo-orange focus:shadow-[0_0_0_5px_rgba(221,115,0,.12),0_14px_34px_rgba(4,43,98,.12)]" inputmode="numeric" maxlength="1" required>
         </div>
-        <button class="next-btn" style="width: 100%;">
+        <button class="inline-flex h-[52px] w-full items-center justify-center rounded-full bg-fintoo-blue text-[15px] font-bold text-white shadow-button transition hover:-translate-y-0.5 hover:shadow-premium active:translate-y-0">
           Verify & view my report
-          <svg class="icon btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <svg class="ml-3 h-4 w-4 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </button>
-        <div class="otp-actions">
-          <button type="button" class="link-btn" id="changeNumberBtn">
-            <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        <div class="mt-[18px] flex justify-between text-xs text-fintoo-blue/65">
+          <button type="button" class="inline-flex items-center gap-1.5 bg-transparent p-0 text-fintoo-blue/75 transition hover:-translate-x-0.5 hover:text-fintoo-orange" id="changeNumberBtn">
+            <svg class="h-[13px] w-[13px] fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
             Change number
           </button>
           <span>Resend code in 28s</span>
@@ -739,49 +176,49 @@
     </div>
   </section>
 
-  <section class="screen report-screen" id="reportScreen">
-    <div class="report-wrap">
-      <p class="report-intro" id="reportIntro">Here's your Retirement Corpus Report</p>
-      <div class="report-card">
-        <div class="report-kicker">Corpus Required At Retirement</div>
-        <div class="report-number" id="requiredCorpus">₹0 Cr</div>
-        <div class="report-sub" id="reportSub">Inflation-adjusted, to sustain retirement</div>
+  <section class="hidden min-h-[100svh] items-start justify-center px-[18px] pb-10 pt-[106px] md:min-h-screen md:px-6 md:pb-7 md:pt-[166px]" id="reportScreen">
+    <div class="w-full max-w-[672px] text-center">
+      <p class="mb-3.5 text-[13px] leading-snug text-fintoo-blue/70 md:text-sm" id="reportIntro">Here's your Retirement Corpus Report</p>
+      <div class="rounded-[22px] border border-fintoo-orange/25 bg-white/95 px-5 py-7 shadow-premium md:rounded-[28px] md:px-6 md:py-9">
+        <div class="text-[10px] font-bold uppercase leading-normal tracking-[.32em] text-fintoo-blue/65 md:text-xs">Corpus Required At Retirement</div>
+        <div class="mt-3.5 text-[44px] font-bold leading-none tracking-[-.045em] text-fintoo-orange md:text-[clamp(46px,4.5vw,68px)]" id="requiredCorpus">₹0 Cr</div>
+        <div class="mt-3.5 text-sm leading-snug text-fintoo-blue/70 md:text-[15px]" id="reportSub">Inflation-adjusted, to sustain retirement</div>
       </div>
-      <div class="mini-grid">
-        <div class="mini-card">
-          <div class="mini-title">
-            <span class="mini-icon"><svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v10H4z"/><path d="M8 7V5h8v2"/><path d="M12 10v4"/><path d="M10 12h4"/></svg></span>
+      <div class="mt-4 grid grid-cols-2 gap-2.5 md:gap-3.5">
+        <div class="min-w-0 rounded-[22px] border border-fintoo-blue/10 bg-white/85 px-3.5 py-4 text-left shadow-soft backdrop-blur-xl md:p-5">
+          <div class="flex items-start gap-2 text-[9px] font-bold uppercase leading-snug tracking-[.08em] text-fintoo-blue/70 md:items-center md:text-xs">
+            <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-fintoo-orange/10 text-fintoo-orange md:h-[22px] md:w-[22px]"><svg class="h-[13px] w-[13px] fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16v10H4z"/><path d="M8 7V5h8v2"/><path d="M12 10v4"/><path d="M10 12h4"/></svg></span>
             Required Monthly SIP
           </div>
-          <div class="mini-value" id="monthlySip">₹0</div>
-          <div class="mini-note" id="sipNote">Invested until retirement @ 12% p.a.</div>
+          <div class="mt-4 text-[clamp(22px,6.2vw,26px)] font-bold leading-none tracking-[-.04em] text-fintoo-blue md:text-[28px]" id="monthlySip">₹0</div>
+          <div class="mt-2 text-[11px] leading-snug text-fintoo-blue/65 md:text-xs" id="sipNote">Invested until retirement @ 12% p.a.</div>
         </div>
-        <div class="mini-card">
-          <div class="mini-title">
-            <span class="mini-icon"><svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17 9 11l4 4 8-8"/><path d="M14 7h7v7"/></svg></span>
+        <div class="min-w-0 rounded-[22px] border border-fintoo-blue/10 bg-white/85 px-3.5 py-4 text-left shadow-soft backdrop-blur-xl md:p-5">
+          <div class="flex items-start gap-2 text-[9px] font-bold uppercase leading-snug tracking-[.08em] text-fintoo-blue/70 md:items-center md:text-xs">
+            <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-fintoo-orange/10 text-fintoo-orange md:h-[22px] md:w-[22px]"><svg class="h-[13px] w-[13px] fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17 9 11l4 4 8-8"/><path d="M14 7h7v7"/></svg></span>
             Future Monthly Expense
           </div>
-          <div class="mini-value" id="futureExpense">₹0</div>
-          <div class="mini-note" id="expenseNote">Inflation-adjusted lifestyle cost</div>
+          <div class="mt-4 text-[clamp(22px,6.2vw,26px)] font-bold leading-none tracking-[-.04em] text-fintoo-blue md:text-[28px]" id="futureExpense">₹0</div>
+          <div class="mt-2 text-[11px] leading-snug text-fintoo-blue/65 md:text-xs" id="expenseNote">Inflation-adjusted lifestyle cost</div>
         </div>
       </div>
-      <div class="calc-card">
-        <div class="calc-title">
-          <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8"/><path d="M8 11h2"/><path d="M14 11h2"/><path d="M8 15h2"/><path d="M14 15h2"/></svg>
+      <div class="mt-4 rounded-[22px] border border-fintoo-blue/10 bg-white/85 p-5 text-left shadow-soft backdrop-blur-xl md:p-6">
+        <div class="mb-3 flex items-center gap-2 text-sm font-bold text-fintoo-blue">
+          <svg class="h-[13px] w-[13px] fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8"/><path d="M8 11h2"/><path d="M14 11h2"/><path d="M8 15h2"/><path d="M14 15h2"/></svg>
           How we calculated this
         </div>
-        <ul id="calcList"></ul>
+        <ul class="list-disc pl-5 text-[13px] leading-7 text-fintoo-blue/70 md:text-sm" id="calcList"></ul>
       </div>
-      <div class="call-card">
-        <div class="otp-icon" style="margin-bottom: 16px;">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.7.6 2.5a2 2 0 0 1-.5 2.1L8 9.5a16 16 0 0 0 6.5 6.5l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.5.6a2 2 0 0 1 1.7 2Z"/></svg>
+      <div class="mt-4 rounded-[22px] border border-fintoo-orange/20 bg-fintoo-orange/10 px-5 py-6 text-center shadow-soft backdrop-blur-xl md:mt-6 md:px-9 md:py-8">
+        <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-fintoo-orange/10 text-fintoo-orange">
+          <svg class="h-5 w-5 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.7.6 2.5a2 2 0 0 1-.5 2.1L8 9.5a16 16 0 0 0 6.5 6.5l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.5.6a2 2 0 0 1 1.7 2Z"/></svg>
         </div>
-        <h3>Our team will reach out to you shortly</h3>
-        <p>A Fintoo retirement specialist will call you within 24 hours to walk you through your full Retirement Blueprint and help you build a plan to hit this corpus.</p>
-        <p style="font-size: 12px;">Prefer to talk now? Call us at <strong style="color: var(--ink);">+91 22 4893 1000</strong></p>
+        <h3 class="text-[22px] font-bold leading-tight tracking-[-.035em] text-fintoo-blue md:text-2xl">Our team will reach out to you shortly</h3>
+        <p class="mx-auto mt-3 max-w-[510px] text-[13px] leading-normal text-fintoo-blue/70 md:text-sm">A Fintoo retirement specialist will call you within 24 hours to walk you through your full Retirement Blueprint and help you build a plan to hit this corpus.</p>
+        <p class="mx-auto mt-3 max-w-[510px] text-xs leading-normal text-fintoo-blue/70">Prefer to talk now? Call us at <strong class="text-fintoo-blue">+91 22 4893 1000</strong></p>
       </div>
-      <div class="disclaimer">
-        <svg class="icon icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 18H2L12 3Z"/><path d="M12 9v5"/><path d="M12 17h.01"/></svg>
+      <div class="mx-auto mt-6 flex max-w-[520px] items-start justify-center gap-2 text-xs leading-snug text-fintoo-blue/65">
+        <svg class="h-[13px] w-[13px] shrink-0 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 10 18H2L12 3Z"/><path d="M12 9v5"/><path d="M12 17h.01"/></svg>
         Estimates are indicative and assume a 12% pre-retirement return and post-retirement returns matching inflation. Your actual numbers may vary.
       </div>
     </div>
@@ -920,12 +357,12 @@
       state.email = email;
       document.getElementById("otpCopy").innerHTML = `We've sent a 4-digit code to <strong>+91 ${mobile}</strong>`;
       showScreen("otpScreen");
-      document.querySelector(".otp-box").focus();
+      document.querySelector("#otpForm input").focus();
     });
 
     document.getElementById("otpForm").addEventListener("submit", event => {
       event.preventDefault();
-      const code = Array.from(document.querySelectorAll(".otp-box")).map(input => input.value).join("");
+      const code = Array.from(document.querySelectorAll("#otpForm input")).map(input => input.value).join("");
       if (!/^[0-9]{4}$/.test(code)) return;
       renderReport();
       showScreen("reportScreen");
@@ -933,7 +370,7 @@
 
     document.getElementById("changeNumberBtn").addEventListener("click", () => showScreen("leadScreen"));
 
-    document.querySelectorAll(".otp-box").forEach((input, index, all) => {
+    document.querySelectorAll("#otpForm input").forEach((input, index, all) => {
       input.addEventListener("input", () => {
         input.value = input.value.replace(/\D/g, "").slice(0, 1);
         if (input.value && all[index + 1]) all[index + 1].focus();
@@ -946,7 +383,9 @@
     function renderQuestion() {
       const question = questions[currentQuestion];
       document.getElementById("stepCounter").textContent = `${String(currentQuestion + 1).padStart(2, "0")} / 05`;
-      document.getElementById("barFill").style.setProperty("--progress", `${((currentQuestion + 1) / questions.length) * 100}%`);
+      const barFill = document.getElementById("barFill");
+      barFill.classList.remove("w-1/5", "w-2/5", "w-3/5", "w-4/5", "w-full");
+      barFill.classList.add(["w-1/5", "w-2/5", "w-3/5", "w-4/5", "w-full"][currentQuestion]);
       document.getElementById("questionTitle").innerHTML = question.title.replace(/\n/g, "<br>");
       document.getElementById("questionCopy").textContent = question.copy;
       document.getElementById("inputLabel").textContent = question.label;
@@ -957,8 +396,14 @@
     }
 
     function showScreen(id) {
-      screens.forEach(screen => document.getElementById(screen).classList.toggle("active", screen === id));
-      restartBtn.classList.toggle("show", id !== "heroScreen");
+      screens.forEach(screen => {
+        const element = document.getElementById(screen);
+        const isActive = screen === id;
+        element.classList.toggle("hidden", !isActive);
+        element.classList.toggle("flex", isActive);
+      });
+      restartBtn.classList.toggle("hidden", id === "heroScreen");
+      restartBtn.classList.toggle("inline-flex", id !== "heroScreen");
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
@@ -978,7 +423,7 @@
       const requiredCorpus = futureMonthlyExpense * 12 * retirementYears;
       const monthlySip = requiredCorpus * monthlyReturn / (Math.pow(1 + monthlyReturn, yearsToRetirement * 12) - 1);
 
-      document.getElementById("reportIntro").innerHTML = `Here's your Retirement Corpus Report, <strong style="color: var(--ink);">${escapeHtml(state.name.split(" ")[0] || state.name)}</strong>`;
+      document.getElementById("reportIntro").innerHTML = `Here's your Retirement Corpus Report, <strong class="text-fintoo-blue">${escapeHtml(state.name.split(" ")[0] || state.name)}</strong>`;
       document.getElementById("requiredCorpus").textContent = formatCr(requiredCorpus);
       document.getElementById("reportSub").textContent = `Inflation-adjusted, to sustain ${retirementYears} years of retirement`;
       document.getElementById("monthlySip").textContent = formatShort(monthlySip);
