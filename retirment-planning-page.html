@@ -40,6 +40,7 @@
         ::-webkit-scrollbar { display: none; }
         html, body { width: 100%; overflow-x: hidden; }
         body { background-color: #FAFBFC; font-family: 'Inter', sans-serif; color: #0F172A; }
+        body.has-sticky-retirement-cta { padding-bottom: 11rem; }
         .page-shell { width: 100%; }
         .section-pad {
             padding-left: max(clamp(1.25rem, 4vw, 3rem), calc((100vw - 1180px) / 2));
@@ -143,11 +144,90 @@
             margin-inline: auto;
             padding-block: clamp(2rem, 6vh, 4rem);
         }
+        .retirement-cta-banner {
+            transition: box-shadow 240ms ease, transform 240ms ease;
+            box-shadow: 0 24px 70px rgba(4, 43, 98, 0.18);
+        }
+        .retirement-cta-banner.is-sticky {
+            position: fixed;
+            left: 50%;
+            bottom: 1rem;
+            width: min(56rem, calc(100% - 2rem));
+            z-index: 80;
+            margin-top: 0;
+            transform: translateX(-50%);
+            box-shadow: 0 28px 80px rgba(4, 43, 98, 0.30);
+        }
+        .retirement-cta-placeholder {
+            display: none;
+            width: 100%;
+            max-width: 56rem;
+            margin-inline: auto;
+        }
+        .retirement-cta-placeholder.is-active {
+            display: block;
+            height: 0;
+        }
+        .credibility-tags {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+        .credibility-tag {
+            border: 1px solid rgba(4, 43, 98, 0.10);
+            background: rgba(255, 255, 255, 0.72);
+            border-radius: 0.75rem;
+            padding: 0.85rem 0.9rem;
+            box-shadow: 0 14px 35px rgba(4, 43, 98, 0.06);
+        }
+        .credibility-tag strong {
+            display: block;
+            color: #042B62;
+            font-size: 1rem;
+            line-height: 1.1;
+        }
+        .credibility-tag span {
+            display: block;
+            margin-top: 0.25rem;
+            color: #64748B;
+            font-size: 0.72rem;
+            line-height: 1.25;
+        }
         @media (max-width: 767px) {
+            body.has-sticky-retirement-cta { padding-bottom: 9rem; }
             #proof { min-height: auto; }
             .proof-sticky { position: relative; min-height: auto; }
             .proof-panel { min-height: auto; }
             .proof-panel::before { border-radius: 0; transform: none; }
+            .retirement-cta-banner {
+                padding: 1rem !important;
+                gap: 0.75rem !important;
+                border-radius: 0.875rem !important;
+                align-items: flex-start !important;
+            }
+            .retirement-cta-banner.is-sticky {
+                bottom: 0.75rem;
+                width: calc(100% - 1.5rem);
+            }
+            .retirement-cta-banner h3 {
+                max-width: none;
+                font-size: 1.35rem !important;
+                line-height: 1.12 !important;
+            }
+            .retirement-cta-banner h3 svg,
+            .retirement-cta-banner h3 i {
+                font-size: 1rem !important;
+                margin-left: 0.25rem !important;
+            }
+            .retirement-cta-banner a {
+                padding: 0.55rem 1rem !important;
+                font-size: 0.78rem !important;
+            }
+            .retirement-cta-banner span {
+                font-size: 0.7rem !important;
+            }
+            .credibility-tags { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .credibility-tag:last-child { grid-column: 1 / -1; }
         }
         @media (prefers-reduced-motion: reduce) {
             .hero-slide, .hero-badge, .hero-dot { transition: none; }
@@ -177,12 +257,20 @@
                 </h1>
                 
                 <p class="text-gray-600 text-base lg:text-lg max-w-[360px] sm:max-w-lg leading-relaxed w-full">
-                    Build a retirement corpus that keeps pace with inflation and supports the life you want, with a plan designed around your goals.
+                    Start with a free retirement consultation and understand how much you may need, where you stand today and which next steps fit your goals.
                 </p>
                 
                 <div class="flex flex-wrap items-center gap-5 mt-2">
-                    <a href="#plans" class="w-full sm:w-auto text-center px-7 py-3.5 bg-brand-orange text-white rounded-full text-base font-medium hover:bg-[#B85C00] transition-colors">Explore Retirement Plans</a>
-                    <a href="#book-consultation" class="w-full sm:w-auto text-center py-2 text-base text-brand-dark font-medium underline decoration-1 underline-offset-4 hover:text-brand-orange transition-colors">Book a Consultation</a>
+                    <a href="#book-consultation" class="w-full sm:w-auto text-center px-7 py-3.5 bg-brand-orange text-white rounded-full text-base font-medium hover:bg-[#B85C00] transition-colors">Book Free Consultation</a>
+                    <a href="#book-consultation" class="w-full sm:w-auto text-center py-2 text-base text-brand-dark font-medium underline decoration-1 underline-offset-4 hover:text-brand-orange transition-colors">Talk to an Advisor</a>
+                </div>
+
+                <div class="credibility-tags max-w-2xl mt-4">
+                    <div class="credibility-tag"><strong>450+</strong><span>Happy families</span></div>
+                    <div class="credibility-tag"><strong>&#8377;450 Cr</strong><span>AUM</span></div>
+                    <div class="credibility-tag"><strong>&#8377;5,000 Cr</strong><span>AUT</span></div>
+                    <div class="credibility-tag"><strong>SEBI</strong><span>Registered advisor</span></div>
+                    <div class="credibility-tag"><strong>20+ yrs</strong><span>Experience</span></div>
                 </div>
             </div>
 
@@ -285,7 +373,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <h3 class="text-lg font-medium mb-2">A plan built around you</h3>
+                                        <h3 class="text-lg font-medium mb-2">Guidance built around you</h3>
                                         <p class="text-gray-400 text-sm leading-relaxed">Your income, existing investments, family responsibilities and preferred retirement age shape every recommendation.</p>
                                     </div>
                                 </div>
@@ -315,7 +403,7 @@
                 <div>
                     <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">Features</span>
                     <h2 class="font-serif text-4xl lg:text-5xl leading-tight text-gray-900 mt-4">
-                        Everything you need to<br>plan retirement better
+                        Everything you need before<br>you decide your next step
                     </h2>
                 </div>
 
@@ -332,7 +420,7 @@
                         <div id="feature-answer-1" class="feature-answer md:pr-8 text-gray-600 text-sm leading-relaxed">
                             <div>
                                 <p>Estimate how much you may need by considering your retirement age, current lifestyle, inflation, healthcare needs and expected income sources.</p>
-                                <a href="#book-consultation" class="inline-block mt-4 px-5 py-2 border border-gray-300 rounded-full text-xs font-medium text-gray-700 hover:bg-gray-50">Calculate Your Corpus</a>
+                                <a href="#book-consultation" class="inline-block mt-4 px-5 py-2 border border-gray-300 rounded-full text-xs font-medium text-gray-700 hover:bg-gray-50">Book Free Consultation</a>
                             </div>
                         </div>
                     </div>
@@ -389,36 +477,47 @@
             </div>
         </section>
 
-        <!-- CTA Section -->
-        <section class="w-full bg-[#F7FAFC] py-20 section-pad text-center flex flex-col items-center">
-            <div class="w-16 h-16 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-8">
-                <i class="fa-solid fa-calculator text-gray-400 text-2xl"></i>
+      
+
+  
+        <!-- Section 1: Features / Stats (Dark Section) -->
+      
+        <!-- Section 2: CTA Image overlay -->
+        <section id="cta-image" class="relative min-h-[560px] md:min-h-[640px] bg-fixed bg-center bg-cover overflow-hidden flex items-center justify-center px-5 py-20 md:py-24" style="background-image: url('https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_5d53de33d4_1a6d9fe7053c1f38.png');">
+            <div class="absolute inset-0 bg-gradient-to-r from-[#042B62]/88 via-[#042B62]/62 to-[#042B62]/34"></div>
+            <div class="absolute inset-0 bg-black/20"></div>
+
+            <div class="relative z-10 flex flex-col items-center justify-center text-center max-w-3xl rounded-2xl bg-brand-dark/55 px-6 py-8 md:px-10 md:py-10 shadow-[0_24px_80px_rgba(4,43,98,0.28)] backdrop-blur-sm">
+                <div class="w-16 h-16 bg-white rounded-2xl shadow-sm border border-white/70 flex items-center justify-center mb-8">
+                    <i class="fa-solid fa-calculator text-brand-dark text-2xl"></i>
+                </div>
+
+                <h2 class="font-serif text-4xl lg:text-5xl leading-tight text-white max-w-2xl mx-auto drop-shadow-sm">
+                    Get a clearer retirement roadmap in a free consultation
+                </h2>
+
+                <p class="text-white/90 mt-6 max-w-2xl mx-auto leading-relaxed">
+                    Speak with a Fintoo advisor about your future expenses, retirement corpus and investment gap before making any commitment.
+                </p>
+
+                <a href="#book-consultation" class="mt-8 px-6 py-3 bg-brand-orange text-white rounded-full text-sm font-medium hover:bg-[#B85C00] transition-colors">
+                    Book Free Consultation
+                </a>
             </div>
-            
-            <h2 class="font-serif text-4xl lg:text-5xl leading-tight text-gray-900 max-w-2xl mx-auto">
-                Will your savings support the retirement you imagine?
-            </h2>
-            
-            <p class="text-gray-500 mt-6 max-w-2xl mx-auto leading-relaxed">
-                Estimate your future monthly expenses, retirement corpus and investment gap. A clear target today can help you make better contribution and asset-allocation decisions for tomorrow.
-            </p>
-            
-            <a href="#book-consultation" class="mt-8 px-6 py-3 bg-brand-dark text-white rounded-full text-sm font-medium hover:bg-[#021F47] transition-colors">
-                Calculate My Retirement Corpus
-            </a>
-            
-            <!-- Green CTA Banner -->
-            <div class="w-full max-w-4xl bg-brand-dark rounded-2xl mt-14 p-8 md:p-10 flex flex-col md:flex-row items-center justify-between text-left relative overflow-hidden">
-                <!-- Background decoration -->
+        </section>
+
+        <section class="bg-[#F7FAFC] px-5 md:px-8">
+            <div id="retirement-cta-placeholder" class="retirement-cta-placeholder" aria-hidden="true"></div>
+            <div id="retirement-cta-banner" class="retirement-cta-banner w-full max-w-4xl bg-brand-dark rounded-2xl -mt-10 md:-mt-16 mx-auto p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 text-left relative overflow-hidden">
                 <div class="absolute -right-20 -top-20 w-64 h-64 border-[30px] border-white/10 rounded-full"></div>
-                
+
                 <h3 class="font-serif text-3xl md:text-4xl text-white relative z-10 max-w-md">
-                    Ready to build a retirement plan you can rely on? <i class="fa-solid fa-bolt text-brand-orange text-2xl ml-2"></i>
+                    Book a free retirement consultation <i class="fa-solid fa-bolt text-brand-orange text-2xl ml-2"></i>
                 </h3>
-                
-                <div class="flex flex-col items-end gap-3 relative z-10 mt-6 md:mt-0">
+
+                <div class="flex flex-col items-start md:items-end gap-3 relative z-10">
                     <a href="#book-consultation" class="px-6 py-2.5 bg-brand-orange text-white rounded-full text-sm font-medium flex items-center gap-2 hover:bg-[#B85C00] transition-colors">
-                        Get Started <i class="fa-solid fa-arrow-right"></i>
+                        Book Free Call <i class="fa-solid fa-arrow-right"></i>
                     </a>
                     <span class="text-white/80 text-xs flex items-center gap-2">
                         Have questions? <a href="#book-consultation" class="text-white underline underline-offset-2">Talk to an Advisor</a>
@@ -427,107 +526,27 @@
             </div>
         </section>
 
-   
-
-
-  
-        <!-- Section 1: Features / Stats (Dark Section) -->
-      
-        <!-- Section 2: CTA Image overlay -->
-        <section id="cta-image" class="relative min-h-[520px] md:min-h-[640px] bg-fixed bg-center bg-cover overflow-hidden" style="background-image: url('https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_5d53de33d4_1a6d9fe7053c1f38.png');">
-            <div class="absolute inset-0 bg-brand-dark/15"></div>
-            <div class="relative min-h-[520px] md:min-h-[640px] section-pad py-16 flex items-end">
-            <div class="w-full h-full relative">
-                <!-- CTA Box -->
-                <div class="w-full bg-brand-dark rounded-2xl p-5 md:p-8 flex flex-col md:flex-row items-center justify-between gap-5 text-white backdrop-blur-sm bg-opacity-95">
-                    <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl max-w-xl leading-tight">
-                        Create the retirement lifestyle <span class="serif-italic text-brand-orange">you have worked for</span>
-                    </h2>
-                    
-                    <div class="flex flex-col items-start md:items-end gap-3 shrink-0 w-full md:w-auto">
-                            <a href="#book-consultation" class="bg-brand-orange text-white px-6 py-3 rounded-full font-medium hover:bg-[#B85C00] transition-colors flex items-center gap-2">
-                            Get Started <i class="fa-solid fa-arrow-right text-sm"></i>
-                        </a>
-                        <div class="text-sm flex items-center gap-2">
-                            <span class="text-blue-100">Have questions?</span>
-                            <a href="#book-consultation" class="font-medium underline hover:text-blue-200 flex items-center gap-1">
-                                <i class="fa-regular fa-comments"></i> Talk to an Advisor
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </section>
-
-        <!-- Section 3: Pricing / Plans -->
-        <section id="plans" class="section-pad py-20 bg-[#F7FAFC]">
-            <div class="text-center mb-12">
-                <div class="text-brand-gray text-xs font-bold tracking-widest uppercase mb-4">Retirement Plans</div>
-                <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl text-brand-dark mb-6 max-w-3xl mx-auto leading-tight">
-                    Choose a retirement strategy that fits your life
-                </h2>
-                <p class="text-brand-gray max-w-2xl mx-auto leading-relaxed">
-                    Whether you are starting early, catching up in your peak earning years or approaching retirement, we help connect every investment to one clear goal.
-                </p>
-            </div>
-
-            <div class="bg-white rounded-2xl p-4 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                <div class="grid md:grid-cols-[1fr_2fr] gap-8">
-                    <!-- Image -->
-                    <div class="h-64 md:h-auto rounded-2xl overflow-hidden bg-gray-100">
-                        <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_22e29ed1c1_ec6b1ec072652233.png" alt="portrait of a smiling male artisan in an apron holding a ceramic pot in a bright studio, lifestyle p" />
-                    </div>
-
-                    <!-- Plan Details -->
-                    <div class="grid sm:grid-cols-2 gap-8 py-4 px-2 md:px-6">
-                        <!-- NPS Plan -->
-                        <div class="flex flex-col h-full">
-                            <div class="inline-flex items-center gap-1.5 bg-blue-50 text-brand-green px-3 py-1 rounded-full text-xs font-medium w-fit mb-6 border border-blue-100">
-                                <i class="fa-solid fa-landmark"></i> Government-backed option
-                            </div>
-                            <h3 class="text-2xl font-semibold text-brand-dark mb-3">NPS Retirement Strategy</h3>
-                            <p class="text-brand-gray text-sm leading-relaxed mb-8 flex-grow">
-                                Understand NPS tiers, asset allocation, tax considerations, annuity requirements and how NPS fits with your wider portfolio.
-                            </p>
-                            <a href="#book-consultation" class="inline-flex items-center gap-2 text-brand-orange border border-brand-orange/30 rounded-full px-5 py-2 text-sm font-medium w-fit hover:bg-orange-50 transition-colors">
-                                Explore NPS Planning <i class="fa-solid fa-arrow-right"></i>
-                            </a>
-                        </div>
-
-                        <!-- Personal Plan -->
-                        <div class="flex flex-col h-full sm:border-l border-gray-100 sm:pl-8">
-                            <div class="inline-flex items-center gap-1.5 bg-orange-50 text-brand-orange px-3 py-1 rounded-full text-xs font-medium w-fit mb-6 border border-orange-100">
-                                <i class="fa-solid fa-user"></i> Personalised guidance
-                            </div>
-                            <h3 class="text-2xl font-semibold text-brand-dark mb-3">Complete Retirement Plan</h3>
-                            <p class="text-brand-gray text-sm leading-relaxed mb-8 flex-grow">
-                                A goal-based roadmap combining EPF, PPF, mutual funds, deposits, insurance and other assets into one retirement strategy.
-                            </p>
-                            <a href="#book-consultation" class="inline-flex items-center gap-2 text-brand-orange border border-brand-orange/30 rounded-full px-5 py-2 text-sm font-medium w-fit hover:bg-orange-50 transition-colors">
-                                Build My Retirement Plan <i class="fa-solid fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Consultation Booking -->
-        <section id="book-consultation" class="section-pad py-20 md:py-24 bg-white">
+        <section id="book-consultation" class="bg-[#F7FAFC] px-5 md:px-8 pt-12 pb-20 md:pt-16 md:pb-24">
             <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 lg:gap-20 items-center max-w-[1180px] mx-auto">
                 <div>
                     <span class="text-xs font-bold tracking-widest text-brand-orange uppercase">Book a consultation</span>
-                    <h2 class="font-serif text-4xl md:text-5xl text-brand-dark leading-tight mt-4">Take the first step towards a confident retirement</h2>
-                    <p class="text-brand-gray leading-relaxed mt-6 max-w-lg">Speak with a Fintoo advisor about your retirement age, current savings, expected lifestyle and investment gap. Your first conversation helps us understand where you are and what your roadmap should address.</p>
+                    <h2 class="font-serif text-4xl md:text-5xl text-brand-dark leading-tight mt-4">Take the first step with a free advisor call</h2>
+                    <p class="text-brand-gray leading-relaxed mt-6 max-w-lg">Speak with a Fintoo advisor about your retirement age, current savings, expected lifestyle and investment gap. Your first conversation is free and helps us understand where you are and what your roadmap should address.</p>
+                    <div class="credibility-tags mt-8 max-w-xl">
+                        <div class="credibility-tag"><strong>450+</strong><span>Happy families</span></div>
+                        <div class="credibility-tag"><strong>&#8377;450 Cr</strong><span>AUM</span></div>
+                        <div class="credibility-tag"><strong>&#8377;5,000 Cr</strong><span>AUT</span></div>
+                        <div class="credibility-tag"><strong>SEBI</strong><span>Registered advisor</span></div>
+                        <div class="credibility-tag"><strong>20+ yrs</strong><span>Experience</span></div>
+                    </div>
                     <div class="mt-8 space-y-4 text-sm text-slate-700">
-                        <div class="flex items-center gap-3"><span class="w-7 h-7 rounded-full bg-blue-50 text-brand-green flex items-center justify-center"><i class="fa-solid fa-check text-xs"></i></span><span>Personalised retirement corpus estimate</span></div>
+                        <div class="flex items-center gap-3"><span class="w-7 h-7 rounded-full bg-blue-50 text-brand-green flex items-center justify-center"><i class="fa-solid fa-check text-xs"></i></span><span>Free personalised retirement corpus estimate</span></div>
                         <div class="flex items-center gap-3"><span class="w-7 h-7 rounded-full bg-blue-50 text-brand-green flex items-center justify-center"><i class="fa-solid fa-check text-xs"></i></span><span>Review of existing savings and investments</span></div>
                         <div class="flex items-center gap-3"><span class="w-7 h-7 rounded-full bg-blue-50 text-brand-green flex items-center justify-center"><i class="fa-solid fa-check text-xs"></i></span><span>Clear next steps for your retirement goal</span></div>
                     </div>
                 </div>
 
-                <form id="consultation-form" class="bg-[#F7FAFC] border border-slate-200 rounded-lg p-6 md:p-8 shadow-[0_18px_50px_rgba(4,43,98,0.08)]">
+                <form id="consultation-form" class="bg-white border border-slate-200 rounded-xl p-6 md:p-8 shadow-[0_18px_50px_rgba(4,43,98,0.08)]">
                     <div class="grid sm:grid-cols-2 gap-5">
                         <label class="block sm:col-span-2">
                             <span class="block text-sm font-medium text-brand-dark mb-2">Full name</span>
@@ -546,12 +565,27 @@
                             <div class="relative"><span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">&#8377;</span><input name="annual_income" type="number" inputmode="numeric" min="0" step="50000" required class="w-full h-12 pl-9 pr-4 bg-white border border-slate-300 rounded-md outline-none focus:border-brand-orange focus:ring-2 focus:ring-orange-100" placeholder="Your annual income"></div>
                         </label>
                     </div>
-                    <button type="submit" class="w-full mt-6 h-12 bg-brand-orange text-white rounded-md font-medium hover:bg-[#B85C00] transition-colors">Book My Consultation</button>
-                    <p class="mt-3 text-xs text-slate-500 text-center">By submitting, you agree to be contacted by Fintoo regarding retirement-planning services.</p>
-                    <p id="consultation-status" class="hidden mt-4 text-sm font-medium text-brand-green text-center" role="status">Thank you. Your consultation request has been received.</p>
+                    <button type="submit" class="w-full mt-6 h-12 bg-brand-orange text-white rounded-md font-medium hover:bg-[#B85C00] transition-colors">Book My Free Consultation</button>
+                    <p class="mt-3 text-xs text-slate-500 text-center">No payment required. By submitting, you agree to be contacted by Fintoo regarding retirement-planning services.</p>
+                    <p id="consultation-status" class="hidden mt-4 text-sm font-medium text-brand-green text-center" role="status">Thank you. Your free consultation request has been received.</p>
                 </form>
             </div>
         </section>
+
+     <section class="bg-[#f7f9fc] py-12 px-8">
+<div class="max-w-7xl mx-auto space-y-5 text-sm leading-7 text-slate-500">
+<p class="uppercase tracking-[0.18em] text-[11px] text-slate-400">Disclaimer</p>
+<p>
+                Fintoo Wealth Private Limited (Brand Name - Fintoo.in, Fintoo app, Fintoo) makes no warranties or representations, express or implied, on products and services offered through the platform. It accepts no liability for any damages or losses, however, caused in connection with the use of, or on the reliance of its advisory or related services. Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs. Performance and returns of any investment portfolio can neither be predicted nor guaranteed. Investments made on advisory are subject to market risks, read all scheme related documents carefully.
+            </p>
+<p>
+                © Fintoo Wealth Private Limited [SEBI RIA Registration No: INA000020031] [BASL Membership ID: 2252] [Type of Registration: Non-Individual] [Validity of registration: March 26,2025-Perpetual] [Address: Fintoo Wealth Private Limited, B/309, Dynasty Business park, Opp Sangam Cinema, Andheri (East), J B Nagar, Mumbai, Maharashtra 400059] [CIN - U66301MH2023PTC414206] [GST No : 27AAFCF7114E1ZV] [Principal Officer details : Mr. Mihir Shah (mihir.shah@fintoo.in)] [Compliance Officer details : Mrs. Nisha Harchekar (nisha.harchekar@fintoo.in)] [Corresponding SEBI regional/local office: Plot No. C 4-A , G Block, Near Bank of India, Bandra Kurla Complex,Bandra East, Mumbai, Maharashtra 400051]
+            </p>
+<p class="text-slate-400">
+                Copyright © 2025 Fintoo. All rights reserved
+            </p>
+</div>
+</section>
  </div>
 <script>
     const heroSlider = document.getElementById('hero-slider');
@@ -663,6 +697,40 @@
     updateProofReveal();
     window.addEventListener('scroll', requestProofReveal, { passive: true });
     window.addEventListener('resize', requestProofReveal);
+
+    const retirementCtaBanner = document.getElementById('retirement-cta-banner');
+    const retirementCtaPlaceholder = document.getElementById('retirement-cta-placeholder');
+    let retirementCtaFramePending = false;
+
+    function updateRetirementCtaStickiness() {
+        if (!retirementCtaBanner || !retirementCtaPlaceholder) return;
+
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const shouldStick = maxScroll > 0 && window.scrollY >= maxScroll * 0.2;
+
+        if (shouldStick) {
+            retirementCtaPlaceholder.classList.add('is-active');
+            retirementCtaBanner.classList.add('is-sticky');
+            document.body.classList.add('has-sticky-retirement-cta');
+        } else {
+            retirementCtaBanner.classList.remove('is-sticky');
+            retirementCtaPlaceholder.classList.remove('is-active');
+            document.body.classList.remove('has-sticky-retirement-cta');
+        }
+
+        retirementCtaFramePending = false;
+    }
+
+    function requestRetirementCtaStickiness() {
+        if (retirementCtaFramePending) return;
+        retirementCtaFramePending = true;
+        window.requestAnimationFrame(updateRetirementCtaStickiness);
+    }
+
+    updateRetirementCtaStickiness();
+    window.addEventListener('scroll', requestRetirementCtaStickiness, { passive: true });
+    window.addEventListener('resize', requestRetirementCtaStickiness);
+
 </script>
 </body>
 </html>
