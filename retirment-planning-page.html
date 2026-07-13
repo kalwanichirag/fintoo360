@@ -1,0 +1,668 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fintoo - Retirement Planning for India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <!-- Google Fonts: Playfair Display for headings, Inter for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            orange: '#DD7300',
+                            green: '#0047AB',
+                            dark: '#042B62',
+                            light: '#F7FAFC',
+                            gray: '#64748B'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { display: none; }
+        html, body { width: 100%; overflow-x: hidden; }
+        body { background-color: #FAFBFC; font-family: 'Inter', sans-serif; color: #0F172A; }
+        .page-shell { width: 100%; }
+        .section-pad {
+            padding-left: max(clamp(1.25rem, 4vw, 3rem), calc((100vw - 1180px) / 2));
+            padding-right: max(clamp(1.25rem, 4vw, 3rem), calc((100vw - 1180px) / 2));
+        }
+        .hero-pad {
+            padding-left: max(clamp(1.25rem, 4vw, 3rem), calc((100vw - 1280px) / 2));
+            padding-right: max(clamp(1.25rem, 4vw, 3rem), calc((100vw - 1280px) / 2));
+        }
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transform: scale(1.03);
+            transition: opacity 700ms ease, transform 900ms ease;
+        }
+        .hero-slide.is-active { opacity: 1; transform: scale(1); }
+        .hero-badge {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transform: translateY(100%);
+            transition: opacity 420ms ease, transform 520ms cubic-bezier(.22, 1, .36, 1);
+        }
+        .hero-badge.is-active { opacity: 1; transform: translateY(0); }
+        .hero-badge.is-leaving { opacity: 0; transform: translateY(-100%); }
+        .hero-dot { transition: width 250ms ease, background-color 250ms ease; }
+        .hero-dot.is-active { width: 1.5rem; background: #DD7300; }
+        .logo-marquee {
+            min-width: 0;
+            overflow: hidden;
+            mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+        }
+        .logo-marquee-track {
+            display: flex;
+            width: max-content;
+            animation: logo-marquee 22s linear infinite;
+        }
+        .logo-marquee:hover .logo-marquee-track { animation-play-state: paused; }
+        .logo-marquee-group {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            gap: clamp(2.5rem, 4vw, 5rem);
+            padding-right: clamp(2.5rem, 4vw, 5rem);
+            white-space: nowrap;
+        }
+        @keyframes logo-marquee {
+            to { transform: translateX(-50%); }
+        }
+        .feature-answer {
+            display: grid;
+            grid-template-rows: 0fr;
+            opacity: 0;
+            transition: grid-template-rows 350ms ease, opacity 250ms ease, padding-bottom 350ms ease;
+        }
+        .feature-answer > div { overflow: hidden; }
+        .feature-item.is-open .feature-answer {
+            grid-template-rows: 1fr;
+            opacity: 1;
+            padding-bottom: 1.5rem;
+        }
+        .feature-item .feature-chevron { transition: transform 300ms ease, color 300ms ease; }
+        .feature-item.is-open .feature-chevron { transform: rotate(180deg); color: #DD7300; }
+        .feature-item.is-open .feature-title { color: #DD7300; }
+        .feature-marker { opacity: 0; transition: opacity 250ms ease; }
+        .feature-item.is-open .feature-marker { opacity: 1; }
+        #proof {
+            --proof-progress: 0;
+            min-height: 60vh;
+           
+        }
+        .proof-sticky {
+            min-height: 60vh;
+            position: sticky;
+            top: 0;
+            overflow: hidden;
+        }
+        .proof-panel {
+            position: relative;
+            min-height: 60vh;
+            color: white;
+            isolation: isolate;
+        }
+        .proof-panel::before {
+            content: "";
+            position: absolute;
+            inset-block: 0;
+            inset-inline: 0;
+            z-index: -1;
+            background: #020617;
+            border-radius: calc(1.5rem * (1 - var(--proof-progress)));
+            transform: scaleX(calc(0.65 + (0.35 * var(--proof-progress))));
+            transform-origin: center;
+            box-shadow: 0 24px 80px rgba(4, 43, 98, 0.18);
+            will-change: transform, border-radius;
+        }
+        .proof-panel-content {
+            position: relative;
+            width: min(1180px, calc(100% - 2.5rem));
+            margin-inline: auto;
+            padding-block: clamp(2rem, 6vh, 4rem);
+        }
+        @media (max-width: 767px) {
+            #proof { min-height: auto; }
+            .proof-sticky { position: relative; min-height: auto; }
+            .proof-panel { min-height: auto; }
+            .proof-panel::before { border-radius: 0; transform: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .hero-slide, .hero-badge, .hero-dot { transition: none; }
+            .logo-marquee-track { animation-play-state: paused; }
+            .proof-panel::before { border-radius: 0; transform: none; }
+        }
+    </style>
+</head>
+<body >
+
+    <!-- Main Container wrapping the whole site like the dribbble shot -->
+    <div class="page-shell overflow-x-hidden relative">
+
+        <!-- Header -->
+      
+
+        <!-- Hero Section -->
+        <section id="hero" class="w-full min-h-[85vh] hero-pad py-16 lg:py-20 grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-12 xl:gap-20 items-center bg-[#E8E5DF]">
+            <div class="flex flex-col gap-6">
+                <span class="text-xs font-bold tracking-widest text-gray-400 uppercase">Retirement Planning</span>
+                
+                <h1 class="font-serif text-[2.35rem] min-[420px]:text-[2.65rem] sm:text-6xl lg:text-7xl xl:text-[76px] leading-[0.96] text-gray-900">
+                    Personalised
+                 <span class="text-brand-orange">   Retirement Planning </span> 
+                    for a Secure
+                    Future
+                </h1>
+                
+                <p class="text-gray-600 text-base lg:text-lg max-w-[360px] sm:max-w-lg leading-relaxed w-full">
+                    Build a retirement corpus that keeps pace with inflation and supports the life you want, with a plan designed around your goals.
+                </p>
+                
+                <div class="flex flex-wrap items-center gap-5 mt-2">
+                    <a href="#plans" class="w-full sm:w-auto text-center px-7 py-3.5 bg-brand-orange text-white rounded-full text-base font-medium hover:bg-[#B85C00] transition-colors">Explore Retirement Plans</a>
+                    <a href="#book-consultation" class="w-full sm:w-auto text-center py-2 text-base text-brand-dark font-medium underline decoration-1 underline-offset-4 hover:text-brand-orange transition-colors">Book a Consultation</a>
+                </div>
+            </div>
+
+            <!-- Hero Image with overlays -->
+            <div id="hero-slider" class="relative h-[390px] min-[420px]:h-[430px] md:h-[500px] xl:h-[540px] w-full flex justify-center lg:justify-end overflow-visible">
+                <div class="relative w-full max-w-[370px] sm:max-w-[430px] md:max-w-[500px] xl:max-w-[540px] h-full rounded-tl-[15rem] overflow-hidden bg-[#E8EEF7]">
+                    <img class="hero-slide is-active w-full h-full object-cover" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1000&q=85" alt="Financial professional working at a desk" />
+                    <img class="hero-slide w-full h-full object-cover" src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1000&q=85" alt="Business team discussing financial plans" />
+                    <img class="hero-slide w-full h-full object-cover" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=1000&q=85" alt="Financial planning discussion" />
+                    <div class="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-2" aria-label="Hero slides">
+                        <button class="hero-dot is-active h-2 w-2 rounded-full bg-white/80" type="button" aria-label="Show slide 1" aria-current="true"></button>
+                        <button class="hero-dot h-2 w-2 rounded-full bg-white/80" type="button" aria-label="Show slide 2"></button>
+                        <button class="hero-dot h-2 w-2 rounded-full bg-white/80" type="button" aria-label="Show slide 3"></button>
+                    </div>
+                </div>
+                
+                <!-- Floating badges -->
+                <div class="hidden sm:block absolute bottom-12 right-0 md:-right-6 xl:-right-8 w-[280px] h-[52px]">
+                    <div class="hero-badge is-active bg-white px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-3">
+                        <div class="w-5 h-5 shrink-0 rounded-full bg-blue-50 flex items-center justify-center text-brand-green text-xs">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <span class="min-w-0 text-sm font-medium leading-tight text-gray-800">NPS and pension planning</span>
+                    </div>
+                    <div class="hero-badge bg-white px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-3">
+                        <div class="w-5 h-5 shrink-0 rounded-full bg-blue-50 flex items-center justify-center text-brand-green text-xs">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <span class="min-w-0 text-sm font-medium leading-tight text-gray-800">EPF, PPF and mutual funds</span>
+                    </div>
+                    <div class="hero-badge bg-white px-4 py-2.5 rounded-xl shadow-lg flex items-center gap-3">
+                        <div class="w-5 h-5 shrink-0 rounded-full bg-blue-50 flex items-center justify-center text-brand-green text-xs">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <span class="min-w-0 text-sm font-medium leading-tight text-gray-800">Tax-efficient withdrawals</span>
+                    </div>
+                </div>
+
+                <!-- Dark floating card -->
+                
+            </div>
+        </section>
+
+        <!-- Logo Strip -->
+         <section id="proof" class="bg-[#E8E5DF]">
+            <div class="proof-sticky">
+                <div class="proof-panel">
+                    <div class="proof-panel-content">
+                        <!-- Logos Top -->
+                        <div class="flex items-center gap-8 md:gap-12 pb-10 border-b border-gray-700 overflow-hidden">
+                            <div class="text-gray-400 text-sm w-40 md:w-56 shrink-0">
+                                Insights for Indian investors and families
+                            </div>
+                            <div class="logo-marquee flex-1 opacity-70 grayscale">
+                                <div class="logo-marquee-track">
+                                    <div class="logo-marquee-group">
+                                        <span class="font-serif text-xl font-bold">Forbes India</span>
+                                        <span class="font-serif text-xl italic">Mint</span>
+                                        <span class="font-sans text-base font-bold">Moneycontrol</span>
+                                        <span class="font-sans font-bold tracking-widest text-lg">ET WEALTH</span>
+                                        <span class="font-serif text-xl">Business Standard</span>
+                                    </div>
+                                    <div class="logo-marquee-group" aria-hidden="true">
+                                        <span class="font-serif text-xl font-bold">Forbes India</span>
+                                        <span class="font-serif text-xl italic">Mint</span>
+                                        <span class="font-sans text-base font-bold">Moneycontrol</span>
+                                        <span class="font-sans font-bold tracking-widest text-lg">ET WEALTH</span>
+                                        <span class="font-serif text-xl">Business Standard</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Content -->
+                        <div class="grid lg:grid-cols-2 gap-12 pt-10">
+                            <div>
+                                <div class="text-gray-400 text-xs font-bold tracking-widest uppercase mb-6">Why Fintoo</div>
+                                <h2 class="font-serif text-[1.6rem] min-[420px]:text-[2rem] sm:text-4xl md:text-5xl leading-tight max-w-[280px] sm:max-w-none">
+                                    Helping Indian families retire with clarity, confidence and financial independence
+                                </h2>
+                            </div>
+
+                            <div class="flex flex-col gap-8">
+                                <div class="flex gap-4">
+                                    <div class="mt-1">
+                                        <div class="w-6 h-6 rounded-full bg-gray-800 flex items-center justify-center">
+                                            <i class="fa-solid fa-dollar-sign text-xs"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-medium mb-2">Inflation-aware projections</h3>
+                                        <p class="text-gray-400 text-sm leading-relaxed">Understand the corpus you may need after accounting for rising healthcare, lifestyle costs and a longer retirement.</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex gap-4">
+                                    <div class="mt-1">
+                                        <div class="w-6 h-6 rounded-full bg-gray-800 flex items-center justify-center">
+                                            <i class="fa-solid fa-sliders text-xs"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-medium mb-2">A plan built around you</h3>
+                                        <p class="text-gray-400 text-sm leading-relaxed">Your income, existing investments, family responsibilities and preferred retirement age shape every recommendation.</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex gap-4">
+                                    <div class="mt-1">
+                                        <div class="w-6 h-6 rounded-full bg-gray-800 flex items-center justify-center">
+                                            <i class="fa-solid fa-user-group text-xs"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-lg font-medium mb-2">Tax-efficient retirement income</h3>
+                                        <p class="text-gray-400 text-sm leading-relaxed">Coordinate NPS, EPF, PPF, mutual funds and other assets to create a practical contribution and withdrawal strategy.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Features Section -->
+        <section id="features" class="w-full section-pad py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-white">
+            <div class="flex flex-col gap-6">
+                <div>
+                    <span class="text-[10px] font-bold tracking-widest text-gray-400 uppercase">Features</span>
+                    <h2 class="font-serif text-4xl lg:text-5xl leading-tight text-gray-900 mt-4">
+                        Everything you need to<br>plan retirement better
+                    </h2>
+                </div>
+
+                <div id="feature-accordion" class="flex flex-col mt-4">
+                    <!-- Accordion Item 1 (Active) -->
+                    <div class="feature-item is-open border-b border-gray-200">
+                        <button class="feature-trigger w-full flex items-center justify-between py-5 text-left group" type="button" aria-expanded="true" aria-controls="feature-answer-1">
+                            <span class="feature-title text-lg font-medium text-gray-800 relative transition-colors">
+                                Retirement corpus planning
+                                <span class="feature-marker absolute -top-4 left-0 w-8 h-0.5 bg-brand-orange"></span>
+                            </span>
+                            <i class="feature-chevron fa-solid fa-chevron-down text-gray-400 text-sm"></i>
+                        </button>
+                        <div id="feature-answer-1" class="feature-answer md:pr-8 text-gray-600 text-sm leading-relaxed">
+                            <div>
+                                <p>Estimate how much you may need by considering your retirement age, current lifestyle, inflation, healthcare needs and expected income sources.</p>
+                                <a href="#book-consultation" class="inline-block mt-4 px-5 py-2 border border-gray-300 rounded-full text-xs font-medium text-gray-700 hover:bg-gray-50">Calculate Your Corpus</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accordion Item 2 -->
+                    <div class="feature-item border-b border-gray-200">
+                        <button class="feature-trigger w-full flex items-center justify-between py-5 text-left group" type="button" aria-expanded="false" aria-controls="feature-answer-2">
+                            <span class="feature-title text-lg font-medium text-gray-800 group-hover:text-brand-orange transition-colors">NPS, EPF and PPF review</span>
+                            <i class="feature-chevron fa-solid fa-chevron-down text-gray-400 text-sm"></i>
+                        </button>
+                        <div id="feature-answer-2" class="feature-answer md:pr-8 text-gray-600 text-sm leading-relaxed"><div><p>Bring your existing retirement accounts into one view and understand how each can contribute to your long-term goal.</p></div></div>
+                    </div>
+
+                    <!-- Accordion Item 3 -->
+                    <div class="feature-item border-b border-gray-200">
+                        <button class="feature-trigger w-full flex items-center justify-between py-5 text-left group" type="button" aria-expanded="false" aria-controls="feature-answer-3">
+                            <span class="feature-title text-lg font-medium text-gray-800 group-hover:text-brand-orange transition-colors">Diversified investment strategy</span>
+                            <i class="feature-chevron fa-solid fa-chevron-down text-gray-400 text-sm"></i>
+                        </button>
+                        <div id="feature-answer-3" class="feature-answer md:pr-8 text-gray-600 text-sm leading-relaxed"><div><p>Balance equity, debt and stable-income options according to your time horizon, risk comfort and required retirement corpus.</p></div></div>
+                    </div>
+
+                    <!-- Accordion Item 4 -->
+                    <div class="feature-item border-b border-gray-200">
+                        <button class="feature-trigger w-full flex items-center justify-between py-5 text-left group" type="button" aria-expanded="false" aria-controls="feature-answer-4">
+                            <span class="feature-title text-lg font-medium text-gray-800 group-hover:text-brand-orange transition-colors">Post-retirement income plan</span>
+                            <i class="feature-chevron fa-solid fa-chevron-down text-gray-400 text-sm"></i>
+                        </button>
+                        <div id="feature-answer-4" class="feature-answer md:pr-8 text-gray-600 text-sm leading-relaxed"><div><p>Create a withdrawal plan that combines pension income, systematic withdrawals and emergency reserves while managing taxes and longevity risk.</p></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive graphic area -->
+            <div class="relative w-full flex items-center justify-center py-4">
+                <div class="relative aspect-square w-full max-w-[500px] bg-[#F7FAFC] rounded-full border border-slate-100 shadow-[0_20px_60px_rgba(4,43,98,0.08)]">
+                    <!-- Concentric circles -->
+                    <div class="absolute inset-[8%] rounded-full border border-slate-200"></div>
+                    <div class="absolute inset-[22%] rounded-full border border-slate-300"></div>
+                    <div class="absolute inset-[36%] rounded-full border border-slate-300"></div>
+                    
+                    <!-- Center Logo -->
+                    <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 md:w-32 md:h-32 bg-brand-dark rounded-full flex items-center justify-center shadow-xl z-10">
+                        <i class="fa-solid fa-square-poll-vertical text-brand-orange text-4xl md:text-5xl"></i>
+                    </div>
+
+                    <!-- Integration Icons floating on orbits -->
+                    <div class="absolute left-[45%] top-[7%] -translate-x-1/2 w-12 h-12 bg-white rounded-lg shadow-md flex items-center justify-center text-brand-green text-sm font-bold">NPS</div>
+                    <div class="absolute right-[8%] top-[27%] w-12 h-12 bg-white rounded-lg shadow-md flex items-center justify-center text-brand-orange text-sm font-bold">EPF</div>
+                    <div class="absolute right-[17%] bottom-[14%] w-12 h-12 bg-white rounded-lg shadow-md flex items-center justify-center text-brand-green text-sm font-bold">PPF</div>
+                    <div class="absolute left-[12%] bottom-[24%] w-12 h-12 bg-white rounded-lg shadow-md flex items-center justify-center text-brand-orange text-sm font-bold">MF</div>
+                    <div class="absolute left-[13%] top-[25%] w-12 h-12 bg-white rounded-lg shadow-md flex items-center justify-center text-brand-dark text-sm font-bold">FD</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="w-full bg-[#F7FAFC] py-20 section-pad text-center flex flex-col items-center">
+            <div class="w-16 h-16 bg-white rounded-2xl shadow-sm border border-gray-100 flex items-center justify-center mb-8">
+                <i class="fa-solid fa-calculator text-gray-400 text-2xl"></i>
+            </div>
+            
+            <h2 class="font-serif text-4xl lg:text-5xl leading-tight text-gray-900 max-w-2xl mx-auto">
+                Will your savings support the retirement you imagine?
+            </h2>
+            
+            <p class="text-gray-500 mt-6 max-w-2xl mx-auto leading-relaxed">
+                Estimate your future monthly expenses, retirement corpus and investment gap. A clear target today can help you make better contribution and asset-allocation decisions for tomorrow.
+            </p>
+            
+            <a href="#book-consultation" class="mt-8 px-6 py-3 bg-brand-dark text-white rounded-full text-sm font-medium hover:bg-[#021F47] transition-colors">
+                Calculate My Retirement Corpus
+            </a>
+            
+            <!-- Green CTA Banner -->
+            <div class="w-full max-w-4xl bg-brand-dark rounded-2xl mt-14 p-8 md:p-10 flex flex-col md:flex-row items-center justify-between text-left relative overflow-hidden">
+                <!-- Background decoration -->
+                <div class="absolute -right-20 -top-20 w-64 h-64 border-[30px] border-white/10 rounded-full"></div>
+                
+                <h3 class="font-serif text-3xl md:text-4xl text-white relative z-10 max-w-md">
+                    Ready to build a retirement plan you can rely on? <i class="fa-solid fa-bolt text-brand-orange text-2xl ml-2"></i>
+                </h3>
+                
+                <div class="flex flex-col items-end gap-3 relative z-10 mt-6 md:mt-0">
+                    <a href="#book-consultation" class="px-6 py-2.5 bg-brand-orange text-white rounded-full text-sm font-medium flex items-center gap-2 hover:bg-[#B85C00] transition-colors">
+                        Get Started <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <span class="text-white/80 text-xs flex items-center gap-2">
+                        Have questions? <a href="#book-consultation" class="text-white underline underline-offset-2">Talk to an Advisor</a>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+   
+
+
+  
+        <!-- Section 1: Features / Stats (Dark Section) -->
+      
+        <!-- Section 2: CTA Image overlay -->
+        <section id="cta-image" class="relative min-h-[520px] md:min-h-[640px] bg-fixed bg-center bg-cover overflow-hidden" style="background-image: url('https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_5d53de33d4_1a6d9fe7053c1f38.png');">
+            <div class="absolute inset-0 bg-brand-dark/15"></div>
+            <div class="relative min-h-[520px] md:min-h-[640px] section-pad py-16 flex items-end">
+            <div class="w-full h-full relative">
+                <!-- CTA Box -->
+                <div class="w-full bg-brand-dark rounded-2xl p-5 md:p-8 flex flex-col md:flex-row items-center justify-between gap-5 text-white backdrop-blur-sm bg-opacity-95">
+                    <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl max-w-xl leading-tight">
+                        Create the retirement lifestyle <span class="serif-italic text-brand-orange">you have worked for</span>
+                    </h2>
+                    
+                    <div class="flex flex-col items-start md:items-end gap-3 shrink-0 w-full md:w-auto">
+                            <a href="#book-consultation" class="bg-brand-orange text-white px-6 py-3 rounded-full font-medium hover:bg-[#B85C00] transition-colors flex items-center gap-2">
+                            Get Started <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </a>
+                        <div class="text-sm flex items-center gap-2">
+                            <span class="text-blue-100">Have questions?</span>
+                            <a href="#book-consultation" class="font-medium underline hover:text-blue-200 flex items-center gap-1">
+                                <i class="fa-regular fa-comments"></i> Talk to an Advisor
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Pricing / Plans -->
+        <section id="plans" class="section-pad py-20 bg-[#F7FAFC]">
+            <div class="text-center mb-12">
+                <div class="text-brand-gray text-xs font-bold tracking-widest uppercase mb-4">Retirement Plans</div>
+                <h2 class="font-serif text-4xl md:text-5xl lg:text-6xl text-brand-dark mb-6 max-w-3xl mx-auto leading-tight">
+                    Choose a retirement strategy that fits your life
+                </h2>
+                <p class="text-brand-gray max-w-2xl mx-auto leading-relaxed">
+                    Whether you are starting early, catching up in your peak earning years or approaching retirement, we help connect every investment to one clear goal.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-4 md:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+                <div class="grid md:grid-cols-[1fr_2fr] gap-8">
+                    <!-- Image -->
+                    <div class="h-64 md:h-auto rounded-2xl overflow-hidden bg-gray-100">
+                        <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_22e29ed1c1_ec6b1ec072652233.png" alt="portrait of a smiling male artisan in an apron holding a ceramic pot in a bright studio, lifestyle p" />
+                    </div>
+
+                    <!-- Plan Details -->
+                    <div class="grid sm:grid-cols-2 gap-8 py-4 px-2 md:px-6">
+                        <!-- NPS Plan -->
+                        <div class="flex flex-col h-full">
+                            <div class="inline-flex items-center gap-1.5 bg-blue-50 text-brand-green px-3 py-1 rounded-full text-xs font-medium w-fit mb-6 border border-blue-100">
+                                <i class="fa-solid fa-landmark"></i> Government-backed option
+                            </div>
+                            <h3 class="text-2xl font-semibold text-brand-dark mb-3">NPS Retirement Strategy</h3>
+                            <p class="text-brand-gray text-sm leading-relaxed mb-8 flex-grow">
+                                Understand NPS tiers, asset allocation, tax considerations, annuity requirements and how NPS fits with your wider portfolio.
+                            </p>
+                            <a href="#book-consultation" class="inline-flex items-center gap-2 text-brand-orange border border-brand-orange/30 rounded-full px-5 py-2 text-sm font-medium w-fit hover:bg-orange-50 transition-colors">
+                                Explore NPS Planning <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+
+                        <!-- Personal Plan -->
+                        <div class="flex flex-col h-full sm:border-l border-gray-100 sm:pl-8">
+                            <div class="inline-flex items-center gap-1.5 bg-orange-50 text-brand-orange px-3 py-1 rounded-full text-xs font-medium w-fit mb-6 border border-orange-100">
+                                <i class="fa-solid fa-user"></i> Personalised guidance
+                            </div>
+                            <h3 class="text-2xl font-semibold text-brand-dark mb-3">Complete Retirement Plan</h3>
+                            <p class="text-brand-gray text-sm leading-relaxed mb-8 flex-grow">
+                                A goal-based roadmap combining EPF, PPF, mutual funds, deposits, insurance and other assets into one retirement strategy.
+                            </p>
+                            <a href="#book-consultation" class="inline-flex items-center gap-2 text-brand-orange border border-brand-orange/30 rounded-full px-5 py-2 text-sm font-medium w-fit hover:bg-orange-50 transition-colors">
+                                Build My Retirement Plan <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Consultation Booking -->
+        <section id="book-consultation" class="section-pad py-20 md:py-24 bg-white">
+            <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 lg:gap-20 items-center max-w-[1180px] mx-auto">
+                <div>
+                    <span class="text-xs font-bold tracking-widest text-brand-orange uppercase">Book a consultation</span>
+                    <h2 class="font-serif text-4xl md:text-5xl text-brand-dark leading-tight mt-4">Take the first step towards a confident retirement</h2>
+                    <p class="text-brand-gray leading-relaxed mt-6 max-w-lg">Speak with a Fintoo advisor about your retirement age, current savings, expected lifestyle and investment gap. Your first conversation helps us understand where you are and what your roadmap should address.</p>
+                    <div class="mt-8 space-y-4 text-sm text-slate-700">
+                        <div class="flex items-center gap-3"><span class="w-7 h-7 rounded-full bg-blue-50 text-brand-green flex items-center justify-center"><i class="fa-solid fa-check text-xs"></i></span><span>Personalised retirement corpus estimate</span></div>
+                        <div class="flex items-center gap-3"><span class="w-7 h-7 rounded-full bg-blue-50 text-brand-green flex items-center justify-center"><i class="fa-solid fa-check text-xs"></i></span><span>Review of existing savings and investments</span></div>
+                        <div class="flex items-center gap-3"><span class="w-7 h-7 rounded-full bg-blue-50 text-brand-green flex items-center justify-center"><i class="fa-solid fa-check text-xs"></i></span><span>Clear next steps for your retirement goal</span></div>
+                    </div>
+                </div>
+
+                <form id="consultation-form" class="bg-[#F7FAFC] border border-slate-200 rounded-lg p-6 md:p-8 shadow-[0_18px_50px_rgba(4,43,98,0.08)]">
+                    <div class="grid sm:grid-cols-2 gap-5">
+                        <label class="block sm:col-span-2">
+                            <span class="block text-sm font-medium text-brand-dark mb-2">Full name</span>
+                            <input name="name" type="text" autocomplete="name" required class="w-full h-12 px-4 bg-white border border-slate-300 rounded-md outline-none focus:border-brand-orange focus:ring-2 focus:ring-orange-100" placeholder="Enter your full name">
+                        </label>
+                        <label class="block">
+                            <span class="block text-sm font-medium text-brand-dark mb-2">Email address</span>
+                            <input name="email" type="email" autocomplete="email" required class="w-full h-12 px-4 bg-white border border-slate-300 rounded-md outline-none focus:border-brand-orange focus:ring-2 focus:ring-orange-100" placeholder="you@example.com">
+                        </label>
+                        <label class="block">
+                            <span class="block text-sm font-medium text-brand-dark mb-2">Mobile number</span>
+                            <input name="phone" type="tel" inputmode="numeric" autocomplete="tel" pattern="[6-9][0-9]{9}" maxlength="10" required class="w-full h-12 px-4 bg-white border border-slate-300 rounded-md outline-none focus:border-brand-orange focus:ring-2 focus:ring-orange-100" placeholder="10-digit mobile number">
+                        </label>
+                        <label class="block sm:col-span-2">
+                            <span class="block text-sm font-medium text-brand-dark mb-2">Annual income</span>
+                            <div class="relative"><span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">&#8377;</span><input name="annual_income" type="number" inputmode="numeric" min="0" step="50000" required class="w-full h-12 pl-9 pr-4 bg-white border border-slate-300 rounded-md outline-none focus:border-brand-orange focus:ring-2 focus:ring-orange-100" placeholder="Your annual income"></div>
+                        </label>
+                    </div>
+                    <button type="submit" class="w-full mt-6 h-12 bg-brand-orange text-white rounded-md font-medium hover:bg-[#B85C00] transition-colors">Book My Consultation</button>
+                    <p class="mt-3 text-xs text-slate-500 text-center">By submitting, you agree to be contacted by Fintoo regarding retirement-planning services.</p>
+                    <p id="consultation-status" class="hidden mt-4 text-sm font-medium text-brand-green text-center" role="status">Thank you. Your consultation request has been received.</p>
+                </form>
+            </div>
+        </section>
+ </div>
+<script>
+    const heroSlider = document.getElementById('hero-slider');
+    const heroSlides = [...document.querySelectorAll('.hero-slide')];
+    const heroBadges = [...document.querySelectorAll('.hero-badge')];
+    const heroDots = [...document.querySelectorAll('.hero-dot')];
+    let heroIndex = 0;
+    let heroTimer;
+
+    function showHeroSlide(nextIndex) {
+        if (!heroSlides.length || nextIndex === heroIndex) return;
+
+        const previousIndex = heroIndex;
+        heroIndex = (nextIndex + heroSlides.length) % heroSlides.length;
+
+        heroSlides[previousIndex].classList.remove('is-active');
+        heroSlides[heroIndex].classList.add('is-active');
+
+        heroBadges[previousIndex].classList.remove('is-active');
+        heroBadges[previousIndex].classList.add('is-leaving');
+        heroBadges[heroIndex].classList.remove('is-leaving');
+        heroBadges[heroIndex].classList.add('is-active');
+
+        window.setTimeout(() => {
+            heroBadges[previousIndex].classList.remove('is-leaving');
+        }, 550);
+
+        heroDots.forEach((dot, index) => {
+            const isActive = index === heroIndex;
+            dot.classList.toggle('is-active', isActive);
+            dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+        });
+    }
+
+    function startHeroSlider() {
+        window.clearInterval(heroTimer);
+        heroTimer = window.setInterval(() => showHeroSlide(heroIndex + 1), 2500);
+    }
+
+    heroDots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            showHeroSlide(index);
+            startHeroSlider();
+        });
+    });
+
+    if (heroSlider && heroSlides.length > 1) {
+        startHeroSlider();
+        heroSlider.addEventListener('mouseenter', () => window.clearInterval(heroTimer));
+        heroSlider.addEventListener('mouseleave', startHeroSlider);
+        heroSlider.addEventListener('focusin', () => window.clearInterval(heroTimer));
+        heroSlider.addEventListener('focusout', startHeroSlider);
+    }
+
+    const featureItems = [...document.querySelectorAll('.feature-item')];
+
+    featureItems.forEach((item) => {
+        const trigger = item.querySelector('.feature-trigger');
+
+        trigger.addEventListener('click', () => {
+            const wasOpen = item.classList.contains('is-open');
+
+            featureItems.forEach((featureItem) => {
+                featureItem.classList.remove('is-open');
+                featureItem.querySelector('.feature-trigger').setAttribute('aria-expanded', 'false');
+            });
+
+            if (!wasOpen) {
+                item.classList.add('is-open');
+                trigger.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+
+    const consultationForm = document.getElementById('consultation-form');
+    const consultationStatus = document.getElementById('consultation-status');
+
+    consultationForm?.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!consultationForm.reportValidity()) return;
+
+        consultationStatus.classList.remove('hidden');
+        consultationForm.reset();
+    });
+
+    const proofSection = document.getElementById('proof');
+
+    let proofFramePending = false;
+
+    function updateProofReveal() {
+        if (!proofSection) return;
+
+        const rect = proofSection.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const revealDistance = viewportHeight * 0.7;
+        const rawProgress = (viewportHeight - rect.top) / revealDistance;
+        const progress = Math.min(Math.max(rawProgress, 0), 1);
+
+        proofSection.style.setProperty('--proof-progress', progress.toFixed(3));
+        proofFramePending = false;
+    }
+
+    function requestProofReveal() {
+        if (proofFramePending) return;
+        proofFramePending = true;
+        window.requestAnimationFrame(updateProofReveal);
+    }
+
+    updateProofReveal();
+    window.addEventListener('scroll', requestProofReveal, { passive: true });
+    window.addEventListener('resize', requestProofReveal);
+</script>
+</body>
+</html>
