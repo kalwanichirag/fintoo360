@@ -1,0 +1,649 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Much Refund Do I Get? | Fintoo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #f4f8fc;
+    --bg-panel: #ffffff;
+    --surface: #fbfdff;
+    --surface-warm: #f8fafc;
+    --navy: #25364d;
+    --navy-soft: #334155;
+    --orange: #dd7300;
+    --orange-glow: #dd7300;
+    --caution: #c1562f;
+    --ink: #172033;
+    --ink-dim: #526173;
+    --ink-faint: #8490a0;
+    --line: rgba(51,65,85,0.16);
+    --blue-soft: rgba(51,65,85,0.07);
+    --orange-soft: rgba(221,115,0,0.08);
+    --shadow: 0 24px 60px rgba(51,65,85,0.12);
+
+    --serif: 'Google Sans', 'Product Sans', 'Inter', Arial, sans-serif;
+    --mono: 'Roboto Mono', 'Google Sans Mono', monospace;
+    --sans: 'Google Sans', 'Product Sans', 'Inter', Arial, sans-serif;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:#ffffff;
+    color:var(--ink); font-family:var(--sans); overflow-x:hidden; cursor:none;
+  }
+
+  @media (hover:none), (pointer:coarse){ body{ cursor:auto; } }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important; }
+  }
+
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible{
+    outline:2px solid var(--orange); outline-offset:3px;
+  }
+
+  #cursor{
+    position:fixed; top:0; left:0; width:22px; height:22px;
+    border:1px solid var(--orange); border-radius:50%;
+    pointer-events:none; z-index:9999; transform:translate(-50%,-50%);
+    transition:width .18s ease, height .18s ease, background .18s ease;
+    mix-blend-mode:multiply;
+  }
+  #cursor.grow{ width:52px; height:52px; background:rgba(51,65,85,0.10); }
+  @media (hover:none), (pointer:coarse){ #cursor{ display:none; } }
+
+  .grain{ position:fixed; inset:0; z-index:9998; pointer-events:none; opacity:0.018; mix-blend-mode:multiply; }
+
+  .orb{ display:none; }
+  .orb-navy{
+    width:58vw; height:360px; border-radius:0 0 0 160px;
+    background:linear-gradient(135deg, rgba(4,43,98,0.13), rgba(4,43,98,0));
+    top:0; right:0; animation:drift1 24s ease-in-out infinite alternate;
+  }
+  .orb-orange{
+    width:42vw; height:420px; border-radius:0 180px 0 0;
+    background:linear-gradient(35deg, rgba(221,115,0,0.14), rgba(221,115,0,0));
+    bottom:0; left:0; animation:drift2 20s ease-in-out infinite alternate;
+  }
+  @keyframes drift1{ from{ transform:translate(0,0);} to{ transform:translate(-50px,70px);} }
+  @keyframes drift2{ from{ transform:translate(0,0);} to{ transform:translate(60px,-40px);} }
+
+  section{ position:relative; z-index:1; }
+  .wrap{ max-width:1170px; margin:0 auto; padding:0 28px; }
+
+  .promo-band{
+    background:linear-gradient(90deg, #f1f5f9 0%, #f1f5f9 54%, #ffffff 54%, #ffffff 100%);
+    border-bottom:1px solid #edf1f6;
+  }
+  .promo-inner{
+    max-width:1170px; min-height:176px; margin:0 auto; padding:32px 28px;
+    display:grid; grid-template-columns:1fr 260px; gap:40px; align-items:center;
+  }
+  .promo-chip{
+    display:inline-flex; align-items:center; gap:8px; background:#ffffff; border:1px solid #d9e1ea;
+    border-radius:999px; padding:8px 13px; color:#1f2f46; font-size:12px; font-weight:700; margin-bottom:18px;
+  }
+  .promo-chip::before{ content:''; width:8px; height:8px; border-radius:50%; background:var(--orange); box-shadow:0 0 0 4px rgba(221,115,0,0.13); }
+  .promo-band h2{ color:var(--ink); font-size:32px; line-height:1.25; letter-spacing:0; max-width:430px; }
+  .promo-offer{ color:var(--ink); font-size:22px; line-height:1.25; font-weight:500; }
+  .promo-offer strong{ font-weight:800; }
+  .promo-offer .btn{ margin-top:18px; justify-content:center; min-width:240px; box-shadow:none; border-radius:8px; }
+
+  header.hero{ padding:30px 0 28px; }
+  .brand{
+    display:inline-flex; align-items:center; gap:10px; color:var(--navy);
+    font-weight:800; font-size:20px; letter-spacing:0; text-decoration:none; margin-bottom:74px;
+    background:rgba(255,255,255,0.72); border:1px solid rgba(4,43,98,0.10);
+    padding:8px 12px 8px 8px; border-radius:14px; box-shadow:0 18px 45px rgba(4,43,98,0.08);
+  }
+  .brand-mark{
+    width:34px; height:34px; border-radius:10px;
+    background:linear-gradient(135deg, var(--navy), var(--navy-soft));
+    display:inline-flex; align-items:center; justify-content:center; color:#fff; font-weight:800;
+    box-shadow:0 12px 26px rgba(4,43,98,0.20);
+  }
+  .eyebrow{
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--ink-faint); display:flex; align-items:center; gap:10px; margin-bottom:26px;
+  }
+  .eyebrow .dot{ width:6px; height:6px; border-radius:50%; background:var(--orange); animation:pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{ opacity:1;} 50%{ opacity:.3;} }
+
+  h1{
+    font-family:var(--sans); font-weight:800; font-size:32px;
+    line-height:1.22; letter-spacing:0; max-width:860px; overflow-wrap:break-word;
+  }
+  h1 em{ font-style:normal; color:var(--orange); }
+
+  .sub{ margin-top:12px; font-size:14px; line-height:1.65; color:var(--ink-dim); max-width:720px; }
+
+  .breadcrumb{ display:flex; gap:8px; align-items:center; color:#6b7a90; font-size:13px; margin-bottom:42px; }
+  .breadcrumb span:first-child{ color:var(--orange); }
+  .title-row{ display:flex; align-items:flex-start; justify-content:space-between; gap:24px; }
+  .updated{ margin-top:14px; color:#526178; font-size:13px; }
+  .badge-soft{ display:inline-block; margin-left:8px; background:#f1f5f9; color:var(--ink-dim); padding:4px 10px; border-radius:6px; font-size:12px; }
+  .share{ color:#7b8798; font-size:13px; font-weight:600; margin-top:12px; }
+
+  .deadline-strip{
+    margin-top:34px; display:inline-flex; align-items:center; gap:12px;
+    font-family:var(--mono); font-size:13px; color:var(--ink-dim);
+    border:1px solid rgba(4,43,98,0.14); background:rgba(255,255,255,0.78); padding:10px 16px; border-radius:100px;
+    box-shadow:0 14px 36px rgba(4,43,98,0.09);
+    max-width:100%;
+  }
+  .deadline-strip strong{ color:var(--ink); font-weight:500; }
+
+  .calc{
+    position:relative; overflow:hidden;
+    background:#ffffff;
+    border:1px solid #eef2f7; border-radius:0; padding:48px; margin:28px 0 64px;
+    box-shadow:0 10px 40px rgba(4,43,98,0.08);
+  }
+  .calc::before{
+    display:none;
+  }
+  .calc > *{ position:relative; z-index:1; }
+  @media (max-width:640px){ .calc{ padding:28px 20px; } }
+
+  .calc-grid{ display:grid; grid-template-columns:1fr 1fr; gap:36px 44px; }
+  @media (max-width:760px){ .calc-grid{ grid-template-columns:1fr; } }
+
+  .field{ margin-bottom:26px; }
+  .field:last-child{ margin-bottom:0; }
+  .field-label{ display:flex; justify-content:space-between; align-items:baseline; font-size:13px; color:var(--ink-dim); margin-bottom:10px; font-weight:500; }
+  .field-label .val{ font-family:var(--mono); color:var(--orange); font-size:14px; }
+
+  input[type="range"]{ -webkit-appearance:none; appearance:none; width:100%; height:3px; background:var(--line); border-radius:3px; outline:none; }
+  input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none; width:16px; height:16px; border-radius:50%;
+    background:var(--orange); border:3px solid var(--ink); cursor:pointer; transition:transform .15s ease;
+  }
+  input[type="range"]::-webkit-slider-thumb:hover{ transform:scale(1.15); }
+  input[type="range"]::-moz-range-thumb{ width:16px; height:16px; border-radius:50%; background:var(--orange); border:3px solid var(--ink); cursor:pointer; }
+
+  .lookup-field{
+    border:1px solid var(--line); border-radius:12px; padding:18px 20px;
+    background:#f8fafc;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.8);
+  }
+  .lookup-field .field-label{ margin-bottom:12px; }
+  .num-input{
+    width:100%; background:transparent; border:none; border-bottom:1px solid var(--line);
+    color:var(--ink); font-family:var(--mono); font-size:26px; padding:6px 0;
+  }
+  .num-input:focus{ border-color:var(--orange); }
+  .lookup-hint{ font-size:12px; color:var(--ink-faint); margin-top:12px; line-height:1.6; }
+  .lookup-hint strong{ color:var(--ink-dim); font-weight:500; }
+
+  .toggle-row{ display:flex; align-items:center; justify-content:space-between; padding:16px 0; border-top:1px solid var(--line); }
+  .toggle-row .label{ font-size:14px; color:var(--ink); font-weight:500; }
+  .toggle-row .hint{ font-size:12.5px; color:var(--ink-faint); margin-top:3px; }
+
+  .switch{ position:relative; width:42px; height:24px; flex-shrink:0; }
+  .switch input{ opacity:0; width:0; height:0; }
+  .switch .track{ position:absolute; inset:0; background:var(--line); border-radius:100px; cursor:pointer; transition:background .2s ease; }
+  .switch .track::before{ content:''; position:absolute; width:18px; height:18px; border-radius:50%; background:var(--ink-dim); top:3px; left:3px; transition:transform .2s ease, background .2s ease; }
+  .switch input:checked + .track{ background:rgba(221,115,0,0.22); }
+  .switch input:checked + .track::before{ transform:translateX(18px); background:var(--orange); }
+
+  .segmented{ display:flex; gap:8px; margin-top:12px; }
+  .segmented button{
+    flex:1; padding:9px 0; font-family:var(--sans); font-size:13px; background:transparent;
+    border:1px solid var(--line); color:var(--ink-dim); border-radius:8px; cursor:pointer; transition:all .15s ease;
+  }
+  .segmented button.active{ border-color:var(--orange); color:var(--orange); background:#fff; }
+
+  .extra-fields{ max-height:0; overflow:hidden; transition:max-height .35s ease; }
+  .extra-fields.open{ max-height:420px; margin-top:8px; }
+
+  .age-select{
+    width:100%; background:transparent; border:1px solid var(--line); color:var(--ink);
+    font-family:var(--sans); font-size:14px; padding:10px 12px; border-radius:8px; margin-top:8px;
+  }
+  .age-select option{ background:var(--bg-panel); color:var(--ink); }
+
+  .assumption{ font-size:12px; color:var(--ink-faint); margin-top:18px; line-height:1.6; border-top:1px solid var(--line); padding-top:16px; }
+
+  /* ---------- ledger / equation result ---------- */
+  .result{ margin-top:56px; }
+
+  .ledger{
+    position:relative; border:1px solid var(--line); border-radius:16px;
+    padding:40px 30px; background:#f8fafc;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.9);
+  }
+  .ledger::before{
+    content:''; position:absolute; left:0; right:0; top:50%;
+    border-top:1px dashed var(--line); z-index:0;
+  }
+  @media (min-width:760px){ .ledger::before{ display:none; } }
+
+  .equation{
+    display:flex; align-items:center; justify-content:center; gap:22px;
+    flex-wrap:wrap; position:relative; z-index:1;
+  }
+  @media (max-width:760px){ .equation{ flex-direction:column; gap:18px; } }
+
+  .term{ text-align:center; min-width:140px; }
+  .term-label{ font-family:var(--mono); font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:8px; }
+  .term-value{ font-family:var(--mono); font-size:clamp(20px, 2.6vw, 27px); color:var(--ink-dim); }
+  .op{ font-family:var(--sans); font-weight:700; font-size:30px; color:var(--ink-faint); }
+
+  .term.result-term{
+    padding:16px 28px; border-radius:14px;
+    background:#ffffff;
+    border:1px solid var(--orange);
+    box-shadow:0 12px 30px rgba(51,65,85,0.08);
+  }
+  .term.result-term.due{ background:#ffffff; border-color:var(--caution); }
+  .term.result-term .term-label{ color:var(--orange); }
+  .term.result-term.due .term-label{ color:var(--caution); }
+  .term.result-term .term-value{ font-size:clamp(28px, 4vw, 40px); color:var(--navy); }
+  .term.result-term.due .term-value{ color:var(--caution); }
+
+  .cta-row{ display:flex; gap:14px; margin-top:36px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--sans); font-weight:600; font-size:14.5px; padding:15px 26px; border-radius:10px;
+    border:none; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn-primary{ background:var(--orange); color:#fff; box-shadow:0 12px 28px rgba(221,115,0,0.22); }
+  .btn-ghost{ background:#fff; color:var(--navy); border:1px solid var(--line); }
+
+  .consult-section{
+    display:grid; grid-template-columns:minmax(280px, 0.86fr) minmax(420px, 1.14fr);
+    gap:34px; align-items:stretch; margin:10px 0 64px;
+  }
+  .consult-copy{
+    background:#172033; color:#fff; padding:36px; border-radius:0;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .consult-kicker{ color:var(--orange); font-weight:800; font-size:12px; letter-spacing:.1em; text-transform:uppercase; margin-bottom:14px; }
+  .consult-copy h2{ font-size:30px; line-height:1.2; margin-bottom:14px; }
+  .consult-copy p{ color:rgba(255,255,255,0.74); line-height:1.7; font-size:14px; }
+  .consult-points{ display:grid; gap:12px; margin-top:24px; color:rgba(255,255,255,0.86); font-size:14px; }
+  .consult-points span{ display:flex; gap:10px; align-items:flex-start; }
+  .consult-points span::before{ content:''; width:7px; height:7px; border-radius:50%; background:var(--orange); margin-top:7px; flex:0 0 auto; }
+  .calendly-card{ border:1px solid #e2e8f0; background:#fff; box-shadow:0 10px 40px rgba(51,65,85,0.10); min-height:680px; }
+  .calendly-card iframe{ width:100%; height:680px; border:0; display:block; }
+
+  footer{ padding:40px 0 70px; }
+  .foot-note{ font-size:12px; color:var(--ink-faint); max-width:640px; line-height:1.7; }
+
+  @media (max-width:520px){
+    body{ cursor:auto; }
+    .wrap{ padding:0 20px; }
+    .promo-band{ background:#f1f5f9; }
+    .promo-inner{ min-height:auto; grid-template-columns:1fr; gap:20px; padding:28px 20px; }
+    .promo-band h2{ font-size:26px; }
+    .promo-offer{ font-size:18px; }
+    .promo-offer .btn{ width:auto; min-width:180px; }
+    header.hero{ padding:34px 0 54px; }
+    .brand{ margin-bottom:62px; }
+    .eyebrow{ font-size:11px; letter-spacing:.12em; flex-wrap:wrap; row-gap:6px; }
+    .breadcrumb{ margin-bottom:24px; flex-wrap:wrap; }
+    .title-row{ display:block; }
+    .share{ display:none; }
+    h1{ font-size:28px; line-height:1.2; }
+    .sub{ font-size:16px; }
+    .deadline-strip{
+      align-items:flex-start; border-radius:16px; line-height:1.55; white-space:normal;
+    }
+    .field-label{ gap:16px; }
+    .segmented{ flex-wrap:wrap; }
+    .segmented button{ min-width:0; }
+    .consult-section{ grid-template-columns:1fr; }
+    .consult-copy{ padding:28px 22px; }
+    .consult-copy h2{ font-size:24px; }
+    .calendly-card, .calendly-card iframe{ min-height:720px; height:720px; }
+    .cta-row{ flex-direction:column; }
+    .btn{ width:100%; justify-content:center; text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<svg class="grain" xmlns="http://www.w3.org/2000/svg">
+  <filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/></filter>
+  <rect width="100%" height="100%" filter="url(#noise)"/>
+</svg>
+
+<div class="promo-band">
+  <div class="promo-inner">
+    <div>
+      <div class="promo-chip">ITR Filing Is Live</div>
+      <h2>File your ITR with Fintoo experts and claim the right refund.</h2>
+    </div>
+    <div class="promo-offer">
+      <div>Get a tax review<br><strong>before you file</strong></div>
+      <a class="btn btn-primary" href="#tax-consultation">Book now</a>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="orb orb-navy"></div>
+  <div class="orb orb-orange"></div>
+
+  <div class="wrap">
+    <header class="hero">
+      <div class="breadcrumb"><span>Home</span><span>›</span><span>Calculators</span><span>›</span><span>Tax Refund Calculator - FY 2025-26</span></div>
+      <div class="title-row">
+        <div>
+          <h1>How Much Refund Do I Get?</h1>
+          <p class="sub">Estimate whether your TDS can lead to a refund or additional tax payable before filing your return.</p>
+        </div>
+        <div class="share">SHARE</div>
+      </div>
+    </header>
+
+    <div class="calc">
+      <div class="calc-grid">
+        <div>
+          <div class="field">
+            <div class="field-label"><span>Annual gross salary</span><span class="val" id="salaryVal">₹9,00,000</span></div>
+            <input type="range" id="salary" min="300000" max="5000000" step="10000" value="900000">
+          </div>
+
+          <div class="field">
+            <div class="field-label"><span>Tax regime</span></div>
+            <div class="segmented" id="regimeSeg">
+              <button class="active" data-regime="new">New Regime</button>
+              <button data-regime="old">Old Regime</button>
+            </div>
+          </div>
+
+          <div class="lookup-field">
+            <div class="field-label"><span>Total TDS deducted this year</span></div>
+            <input type="number" class="num-input" id="tds" value="60000" min="0" step="1000">
+            <div class="lookup-hint"><strong>Where to find this:</strong> Form 16, Part A → "Total tax deducted." Or your Form 26AS on the income tax portal.</div>
+          </div>
+        </div>
+
+        <div id="oldRegimeFields" style="display:none;">
+          <div class="field">
+            <div class="field-label"><span>Age</span></div>
+            <select class="age-select" id="ageBand">
+              <option value="below60">Below 60</option>
+              <option value="60to80">60 – 80 (senior citizen)</option>
+              <option value="above80">Above 80 (super senior)</option>
+            </select>
+          </div>
+
+          <div class="toggle-row">
+            <div><div class="label">I pay rent</div><div class="hint">Claim HRA exemption</div></div>
+            <label class="switch"><input type="checkbox" id="rentToggle"><span class="track"></span></label>
+          </div>
+          <div class="extra-fields" id="rentFields">
+            <div class="field" style="margin-top:18px;">
+              <div class="field-label"><span>Monthly rent paid</span><span class="val" id="rentVal">₹20,000</span></div>
+              <input type="range" id="rent" min="0" max="150000" step="1000" value="20000">
+            </div>
+            <div class="field-label" style="margin-bottom:0;"><span>City type</span></div>
+            <div class="segmented" id="citySeg">
+              <button class="active" data-city="metro">Metro</button>
+              <button data-city="nonmetro">Non-metro</button>
+            </div>
+          </div>
+
+          <div class="toggle-row">
+            <div><div class="label">80C / home loan / NPS</div><div class="hint">Other old-regime deductions</div></div>
+            <label class="switch"><input type="checkbox" id="deductToggle"><span class="track"></span></label>
+          </div>
+          <div class="extra-fields" id="deductFields">
+            <div class="field" style="margin-top:18px;">
+              <div class="field-label"><span>80C investments</span><span class="val" id="c80Val">₹0</span></div>
+              <input type="range" id="c80" min="0" max="150000" step="5000" value="0">
+            </div>
+            <div class="field">
+              <div class="field-label"><span>Home loan interest (self-occupied)</span><span class="val" id="hliVal">₹0</span></div>
+              <input type="range" id="hli" min="0" max="200000" step="5000" value="0">
+            </div>
+            <div class="field">
+              <div class="field-label"><span>Additional NPS (80CCD-1B)</span><span class="val" id="npsVal">₹0</span></div>
+              <input type="range" id="nps" min="0" max="50000" step="5000" value="0">
+            </div>
+          </div>
+        </div>
+
+        <div id="newRegimeNote" class="field">
+          <div class="field-label"><span>Deductions</span></div>
+          <div class="lookup-hint" style="margin-top:0;">The new regime only allows the ₹75,000 standard deduction — 80C, HRA, and home loan interest don't apply here. Switch to "Old Regime" above if you want to factor those in.</div>
+        </div>
+      </div>
+
+      <div class="assumption">Assumes salary income only and standard FY 2025-26 slab rates. Bank interest, capital gains, and other TDS aren't included — those need a proper look before you rely on the number.</div>
+
+      <div class="result">
+        <div class="ledger">
+          <div class="equation">
+            <div class="term">
+              <div class="term-label">TDS Deducted</div>
+              <div class="term-value" id="tdsTerm">₹0</div>
+            </div>
+            <div class="op">−</div>
+            <div class="term">
+              <div class="term-label">Tax Payable</div>
+              <div class="term-value" id="taxTerm">₹0</div>
+            </div>
+            <div class="op">=</div>
+            <div class="term result-term" id="resultTerm">
+              <div class="term-label" id="resultLabel">REFUND DUE</div>
+              <div class="term-value" id="resultValue">₹0</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a href="#tax-consultation" class="btn btn-primary" id="calendlyBtn">Book a tax consultation</a>
+          <a href="#tax-consultation" class="btn btn-ghost">Review my ITR filing</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="consult-section" id="tax-consultation">
+      <div class="consult-copy">
+        <div class="consult-kicker">Fintoo tax consultation</div>
+        <h2>Review your refund estimate with a tax expert.</h2>
+        <p>Book a convenient slot and our team will help verify your TDS, deductions, regime choice and documents before your return is filed.</p>
+        <div class="consult-points">
+          <span>Check Form 16, AIS and Form 26AS before filing.</span>
+          <span>Confirm refund or additional tax payable with context.</span>
+          <span>Get guided next steps for your ITR filing.</span>
+        </div>
+      </div>
+      <div class="calendly-card">
+        <iframe id="calendlyFrame" title="Book a Fintoo tax consultation" src="https://calendly.com/fintoo/tax-consultation?hide_gdpr_banner=1"></iframe>
+      </div>
+    </div>
+
+    <footer>
+      <p class="foot-note">This is an estimate based on the inputs above and standard FY 2025-26 slab rates — meant to give you a working number, not a filed figure. Fintoo verifies the exact amount against your actual documents before anything is filed.</p>
+    </footer>
+  </div>
+</section>
+
+<script>
+(function(){
+  var cursor = document.getElementById('cursor');
+  var canHover = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+  if (canHover){
+    window.addEventListener('mousemove', function(e){
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    document.querySelectorAll('a, button, input, select').forEach(function(el){
+      el.addEventListener('mouseenter', function(){ cursor.classList.add('grow'); });
+      el.addEventListener('mouseleave', function(){ cursor.classList.remove('grow'); });
+    });
+  }
+
+  /* ---------- tax logic (FY 2025-26 / AY 2026-27) ---------- */
+  var NEW_SLABS = [[400000,0],[800000,0.05],[1200000,0.10],[1600000,0.15],[2000000,0.20],[2400000,0.25],[Infinity,0.30]];
+  var OLD_SLABS = {
+    below60:  [[250000,0],[500000,0.05],[1000000,0.20],[Infinity,0.30]],
+    '60to80': [[300000,0],[500000,0.05],[1000000,0.20],[Infinity,0.30]],
+    above80:  [[500000,0],[1000000,0.20],[Infinity,0.30]]
+  };
+
+  function slabTax(income, slabs){
+    var tax = 0, prev = 0;
+    for (var i=0; i<slabs.length; i++){
+      var upper = slabs[i][0], rate = slabs[i][1];
+      if (income > upper){ tax += (upper - prev) * rate; prev = upper; }
+      else { tax += (income - prev) * rate; break; }
+    }
+    return tax;
+  }
+
+  function newRegimeTax(taxableIncome){
+    var tax = slabTax(taxableIncome, NEW_SLABS);
+    if (taxableIncome <= 1200000){
+      tax = Math.max(0, tax - Math.min(tax, 60000));
+    } else {
+      var excess = taxableIncome - 1200000;
+      if (tax > excess) tax = excess;
+    }
+    return Math.round(tax * 1.04);
+  }
+
+  function oldRegimeTax(taxableIncome, ageBand){
+    var tax = slabTax(taxableIncome, OLD_SLABS[ageBand]);
+    if (taxableIncome <= 500000){
+      tax = Math.max(0, tax - Math.min(tax, 12500));
+    }
+    return Math.round(tax * 1.04);
+  }
+
+  function hraExemption(basic, rentPaidAnnual, isMetro){
+    var pctBasic = isMetro ? 0.5 : 0.4;
+    return Math.max(0, Math.min(rentPaidAnnual, rentPaidAnnual - (0.10 * basic), pctBasic * basic));
+  }
+
+  function inr(n){ return '₹' + Math.round(Math.abs(n)).toLocaleString('en-IN'); }
+
+  function animateNumber(el, to){
+    var from = parseInt(el.getAttribute('data-raw') || '0', 10);
+    if (from === to) return;
+    el.setAttribute('data-raw', to);
+    var start = performance.now(), dur = 450;
+    function tick(now){
+      var p = Math.min(1, (now - start) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = inr(from + (to - from) * eased);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* ---------- elements ---------- */
+  var salary = document.getElementById('salary'), salaryVal = document.getElementById('salaryVal');
+  var regimeSeg = document.getElementById('regimeSeg');
+  var oldRegimeFields = document.getElementById('oldRegimeFields');
+  var newRegimeNote = document.getElementById('newRegimeNote');
+  var regime = 'new';
+
+  var tds = document.getElementById('tds');
+  var ageBand = document.getElementById('ageBand');
+
+  var rentToggle = document.getElementById('rentToggle'), rentFields = document.getElementById('rentFields');
+  var rent = document.getElementById('rent'), rentVal = document.getElementById('rentVal');
+  var citySeg = document.getElementById('citySeg'); var city = 'metro';
+
+  var deductToggle = document.getElementById('deductToggle'), deductFields = document.getElementById('deductFields');
+  var c80 = document.getElementById('c80'), c80Val = document.getElementById('c80Val');
+  var hli = document.getElementById('hli'), hliVal = document.getElementById('hliVal');
+  var nps = document.getElementById('nps'), npsVal = document.getElementById('npsVal');
+
+  var tdsTerm = document.getElementById('tdsTerm');
+  var taxTerm = document.getElementById('taxTerm');
+  var resultTerm = document.getElementById('resultTerm');
+  var resultLabel = document.getElementById('resultLabel');
+  var resultValue = document.getElementById('resultValue');
+  var calendlyBtn = document.getElementById('calendlyBtn');
+  var calendlyFrame = document.getElementById('calendlyFrame');
+  var calendlyUrl = 'https://calendly.com/fintoo/tax-consultation';
+
+  regimeSeg.querySelectorAll('button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      regimeSeg.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      regime = btn.getAttribute('data-regime');
+      oldRegimeFields.style.display = regime === 'old' ? 'block' : 'none';
+      newRegimeNote.style.display = regime === 'old' ? 'none' : 'block';
+      recalc();
+    });
+  });
+
+  citySeg.querySelectorAll('button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      citySeg.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      city = btn.getAttribute('data-city');
+      recalc();
+    });
+  });
+
+  rentToggle.addEventListener('change', function(){ rentFields.classList.toggle('open', this.checked); recalc(); });
+  deductToggle.addEventListener('change', function(){ deductFields.classList.toggle('open', this.checked); recalc(); });
+
+  [salary, tds, rent, c80, hli, nps, ageBand].forEach(function(el){ el.addEventListener('input', recalc); });
+
+  function recalc(){
+    var gross = parseInt(salary.value, 10);
+    var tdsAmount = parseInt(tds.value, 10) || 0;
+    salaryVal.textContent = inr(gross);
+    rentVal.textContent = inr(parseInt(rent.value,10));
+    c80Val.textContent = inr(parseInt(c80.value,10));
+    hliVal.textContent = inr(parseInt(hli.value,10));
+    npsVal.textContent = inr(parseInt(nps.value,10));
+
+    var liability;
+    if (regime === 'new'){
+      var taxableNew = Math.max(0, gross - 75000);
+      liability = newRegimeTax(taxableNew);
+    } else {
+      var basic = gross * 0.5;
+      var deductions = 50000;
+      if (rentToggle.checked){ deductions += hraExemption(basic, parseInt(rent.value,10) * 12, city === 'metro'); }
+      if (deductToggle.checked){
+        deductions += Math.min(parseInt(c80.value,10), 150000);
+        deductions += Math.min(parseInt(hli.value,10), 200000);
+        deductions += Math.min(parseInt(nps.value,10), 50000);
+      }
+      var taxableOld = Math.max(0, gross - deductions);
+      liability = oldRegimeTax(taxableOld, ageBand.value);
+    }
+
+    animateNumber(tdsTerm, tdsAmount);
+    animateNumber(taxTerm, liability);
+
+    var diff = tdsAmount - liability;
+    var isRefund = diff >= 0;
+
+    animateNumber(resultValue, diff);
+    resultLabel.textContent = isRefund ? 'REFUND DUE' : 'ADDITIONAL TAX DUE';
+    resultTerm.classList.toggle('due', !isRefund);
+
+    var bookingNote = 'Refund estimator: ' +
+      (isRefund ? 'refund due ' + inr(diff) : 'additional tax due ' + inr(diff)) +
+      ' | TDS ' + inr(tdsAmount) + ' | Tax payable ' + inr(liability);
+    if (calendlyFrame){
+      calendlyFrame.setAttribute('data-booking-note', bookingNote);
+    }
+  }
+
+  recalc();
+})();
+</script>
+
+</body>
+</html>
