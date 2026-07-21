@@ -233,11 +233,11 @@
 
     <section id="family" class="scroll-mt-24 bg-[#fdf9f6] py-20 md:py-28">
       <div class="mx-auto grid w-[min(1216px,calc(100%-48px))] items-center gap-14 lg:grid-cols-[1fr_1fr] xl:grid-cols-[608px_576px] xl:gap-8">
-        <div class="relative pb-[31px]">
+        <div id="family-visual" class="relative pb-[31px]">
           <img class="h-[330px] w-full rounded-[30px] object-cover shadow-[0_18px_44px_rgba(31,42,85,.13)] md:h-[480px]" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_f7a168e4e8_c47e2ecc109ce7b7.png" alt="Indian family managing their money together">
           <div class="phone-mockup phone-mockup-compact absolute bottom-0 right-0 w-[180px] shadow-[0_20px_42px_rgba(31,42,85,.18)] md:w-[256px]"><div class="phone-screen h-[346px] md:h-[532px]"><img class="h-full w-full object-cover object-top" src="assets/app-screens/add-family.png" alt="Add family member screen"></div></div>
         </div>
-        <div>
+        <div id="family-copy">
           <span class="text-[11px] font-bold uppercase tracking-[.19em] text-orange">Family dashboard</span>
           <h2 class="mt-[18px] text-[36px] font-bold leading-[1.08] tracking-[-.025em] text-ink md:text-[54px]">One dashboard for<br>the <span class="font-['DM_Serif_Display'] font-normal italic text-orange">whole family.</span></h2>
           <p class="mt-[25px] max-w-[575px] text-[17px] leading-[1.72] text-[#535b73]">Parents, spouse, kids, in-laws — every member's money in one place. Individual privacy where it matters, shared clarity where it counts.</p>
@@ -294,16 +294,16 @@
 
   
 
-    <section id="waitlist" class="scroll-mt-24 bg-[#fdf9f6] py-20 md:py-28">
-      <div class="mx-auto w-[min(1080px,calc(100%-48px))]">
-        <div class="grid items-center gap-10 overflow-hidden rounded-[42px] bg-[radial-gradient(circle_at_90%_10%,rgba(255,132,74,.32),transparent_32%),linear-gradient(125deg,#071861,#09277b)] p-7 text-white shadow-[0_28px_70px_rgba(6,29,103,.22)] md:p-14 lg:grid-cols-[1fr_430px] lg:gap-16">
+    <section id="waitlist" class="scroll-mt-24 bg-[#fdf9f6] py-14 md:py-20">
+      <div class="mx-auto w-[min(1120px,calc(100%-48px))]">
+        <div class="grid items-center gap-10 overflow-hidden rounded-[36px] bg-[radial-gradient(circle_at_90%_5%,rgba(255,132,74,.28),transparent_34%),radial-gradient(circle_at_8%_100%,rgba(76,96,184,.3),transparent_38%),linear-gradient(125deg,#071861,#102f86)] p-7 text-white shadow-[0_24px_60px_rgba(6,29,103,.18)] md:p-10 lg:grid-cols-[1fr_430px] lg:gap-12 lg:p-12">
           <div>
             <span class="text-[11px] font-bold uppercase tracking-[.19em] text-[#ff9c6c]">Early access</span>
             <h2 class="mt-[18px] text-[36px] font-bold leading-[1.08] tracking-[-.025em] md:text-[50px]">Your clearer financial<br>future <span class="font-['DM_Serif_Display'] font-normal italic text-[#ff9c6c]">starts here.</span></h2>
             <p class="mt-[25px] max-w-[480px] text-[17px] leading-[1.7] text-white/72">Join the FINTOO360 early-access list and be among the first to plan, track and act with AANA by your side.</p>
             <ul class="mt-[27px] grid gap-[14px] text-[14px] text-white/85"><li><span class="mr-2 font-bold text-orange">✓</span>200 complimentary AANA tokens</li><li><span class="mr-2 font-bold text-orange">✓</span>Early-user pricing locked in</li><li><span class="mr-2 font-bold text-orange">✓</span>Priority product access</li></ul>
           </div>
-          <div class="lg:border-l lg:border-white/15 lg:pl-14">
+          <div class="rounded-[28px] border border-white/10 bg-white/[.07] p-5 backdrop-blur-sm lg:p-7">
             <form id="waitForm" class="grid gap-[17px]" novalidate>
               <label class="block"><span class="text-[11px] font-bold uppercase tracking-[.07em] text-white/65">Full name</span><input id="name" class="mt-[9px] h-[52px] w-full rounded-[16px] border border-white/15 bg-white px-4 text-[14px] text-ink outline-none placeholder:text-[#9ba2b2] focus:border-orange focus:ring-4 focus:ring-orange/20" maxlength="100" autocomplete="name" placeholder="Priya Sharma" required></label>
               <label class="block"><span class="text-[11px] font-bold uppercase tracking-[.07em] text-white/65">Email</span><input id="email" type="email" class="mt-[9px] h-[52px] w-full rounded-[16px] border border-white/15 bg-white px-4 text-[14px] text-ink outline-none placeholder:text-[#9ba2b2] focus:border-orange focus:ring-4 focus:ring-orange/20" maxlength="255" autocomplete="email" placeholder="priya@example.com" required></label>
