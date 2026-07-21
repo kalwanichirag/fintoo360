@@ -77,6 +77,64 @@
     .phone-mockup-compact::before { top: 12px; width: 62px; height: 17px; }
     .phone-mockup-compact::after { top: 76px; height: 38px; }
     .phone-mockup-compact .phone-screen { border-radius: 27px; }
+    .mobile-slider { scrollbar-width: none; }
+    .mobile-slider::-webkit-scrollbar { display: none; }
+    @media (max-width: 767px) {
+      main > section { padding-top: 56px !important; padding-bottom: 56px !important; }
+      main > section:first-child { padding-top: 38px !important; padding-bottom: 42px !important; }
+      main > section > div,
+      #features > div,
+      #wellness > div,
+      #family > div,
+      #aana > div,
+      #waitlist > div { width: calc(100% - 32px) !important; }
+      main h2 { font-size: 32px !important; }
+      #features h2 { font-size: 34px !important; }
+      main > section:first-child > div { grid-template-columns: minmax(0, 1fr) !important; gap: 30px !important; }
+      main > section:first-child > div > * { min-width: 0; }
+      main > section:first-child h1 { margin-top: 16px; font-size: 34px !important; line-height: 1.08; }
+      main > section:first-child p { margin-top: 18px; font-size: 15px; line-height: 1.65; }
+      main > section:first-child .relative.min-h-\[430px\] { min-height: 330px; }
+      main > section:first-child .phone-mockup { top: 0; width: 172px !important; }
+      main > section:first-child .phone-screen { height: 326px !important; }
+      main > section:first-child .phone-mockup::before { top: 12px; width: 58px; height: 16px; }
+      .mobile-slider {
+        display: flex !important;
+        width: auto !important;
+        max-width: none !important;
+        gap: 14px !important;
+        margin-left: -16px !important;
+        margin-right: -16px !important;
+        padding: 2px 16px 18px !important;
+        overflow-x: auto !important;
+        overscroll-behavior-inline: contain;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: 16px;
+      }
+      .mobile-slider > * {
+        flex: 0 0 min(82vw, 310px) !important;
+        scroll-snap-align: start;
+      }
+      .mobile-slider-compact > * { flex-basis: auto !important; }
+      #features .mobile-slider { margin-top: 36px !important; }
+      #features .mobile-slider > article { min-height: 220px; padding: 24px; }
+      #family .mobile-slider { margin-top: 28px !important; }
+      #investments-showcase .phone-mockup { width: 230px !important; }
+      #investments-showcase .phone-screen { height: 430px !important; }
+      #investment-stats > div { min-width: 220px; padding: 20px; border: 1px solid #eadfd7; border-radius: 20px; background: white; }
+      #wellness .phone-mockup { width: 230px !important; padding: 8px !important; border-radius: 36px; }
+      #wellness .phone-screen { height: 440px !important; border-radius: 29px; }
+      #wellness .phone-mockup::before { top: 14px; width: 68px; height: 18px; }
+      #wellness .phone-mockup > div:last-child { right: -8px; bottom: -14px; padding: 12px 14px; font-size: 14px; }
+      #family > div { gap: 40px !important; }
+      #family > div > div:first-child { width: min(100%, 330px); margin-inline: auto; padding-bottom: 22px; }
+      #family > div > div:first-child > img { height: 250px; border-radius: 24px; }
+      #family .phone-mockup { width: 140px !important; }
+      #family .phone-screen { height: 275px !important; }
+      #aana > div { gap: 36px !important; }
+      #aana > div > div:last-child { padding: 18px; border-radius: 24px; }
+      #waitlist > div > div { padding: 26px !important; border-radius: 28px; }
+    }
   </style>
 </head>
 <body class="overflow-x-hidden bg-linen font-sans text-text antialiased">
@@ -91,9 +149,9 @@
           <p class="mt-[23px] max-w-[535px] text-[17px] leading-[1.72] text-[#535b73]">FINTOO is an AI-powered wealth companion for people who care about money but don’t know where to begin. Track investments, score your financial wellness, and manage your whole family’s money — all in one place.</p>
           <div class="mt-[24px] flex flex-wrap gap-3">
             <a href="#waitlist" class="inline-flex h-[46px] items-center gap-3 rounded-full bg-ink px-[20px] text-[14px] font-medium text-white shadow-soft transition hover:-translate-y-0.5 hover:shadow-card">Join the waitlist <span class="text-[18px]">→</span></a>
-            <a href="#aana" class="inline-flex h-[46px] items-center gap-2 rounded-full border border-[#ded6d1] bg-white/75 px-[20px] text-[14px] font-medium text-ink transition hover:bg-white"><span class="grid h-4 w-4 place-items-center rounded-full border border-ink text-[7px]">◯</span> Meet AANA</a>
+            <a href="#aana" class="inline-flex h-[46px] items-center gap-2 rounded-full border border-[#ded6d1] bg-white/75 px-[20px] text-[14px] font-medium text-ink transition hover:bg-white"><span class="h-5 w-5 overflow-hidden rounded-full bg-white"><img class="h-full w-full scale-[1.45] object-cover" src="assets/aana/aana-orb.png" alt=""></span> Meet AANA</a>
           </div>
-          <div class="mt-[34px] flex flex-wrap items-start gap-6">
+          <div class="mobile-slider mobile-slider-compact mt-[34px] flex flex-wrap items-start gap-6">
             <div><b class="block text-[22px] font-bold leading-none text-ink">2.5L+</b><span class="mt-2 block text-[10px] uppercase tracking-[.07em] text-muted">Clients guided</span></div>
             <div class="hidden h-9 w-px bg-borderline sm:block"></div>
             <div><b class="block text-[22px] font-bold leading-none text-ink">SEBI</b><span class="mt-2 block text-[10px] uppercase tracking-[.07em] text-muted">Registered advisor</span></div>
@@ -118,7 +176,7 @@
     </section>
 
     <div class="border-y border-borderline bg-white/60 backdrop-blur">
-      <div class="mx-auto flex min-h-[60px] w-[calc(100%-48px)] flex-wrap items-center justify-center gap-x-14 gap-y-3 py-4">
+      <div class="mobile-slider mobile-slider-compact mx-auto flex min-h-[60px] w-[calc(100%-48px)] flex-wrap items-center justify-center gap-x-14 gap-y-3 py-4">
         <span class="inline-flex items-center whitespace-nowrap text-[13px] font-medium uppercase tracking-[.07em] text-ink/75"><svg class="mr-2 h-[14px] w-[14px] shrink-0 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 19 6v5c0 4.6-2.8 8.1-7 10-4.2-1.9-7-5.4-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg>SEBI Registered</span>
         <span class="inline-flex items-center whitespace-nowrap text-[13px] font-medium uppercase tracking-[.07em] text-ink/75"><svg class="mr-2 h-[14px] w-[14px] shrink-0 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 19 6v5c0 4.6-2.8 8.1-7 10-4.2-1.9-7-5.4-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg>Bank-grade Security</span>
         <span class="inline-flex items-center whitespace-nowrap text-[13px] font-medium uppercase tracking-[.07em] text-ink/75"><svg class="mr-2 h-[14px] w-[14px] shrink-0 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 19 6v5c0 4.6-2.8 8.1-7 10-4.2-1.9-7-5.4-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg>AI + Human Advisors</span>
@@ -134,7 +192,7 @@
           <h2 class="mt-[18px] text-[36px] font-bold leading-[1.08] tracking-[-.025em] text-ink md:text-[54px]">Built for the aware, <span class="font-['DM_Serif_Display'] font-normal italic text-orange">not the expert.</span></h2>
           <p class="mt-[24px] max-w-[650px] text-[17px] leading-[1.7] text-[#535b73]">You know financial planning matters. FINTOO shows you exactly what to do next.</p>
         </div>
-        <div class="mt-[62px] grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div class="mobile-slider mt-[62px] grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <article class="min-h-[248px] rounded-[24px] border border-[#e5d9d1] bg-white p-8 shadow-[0_12px_28px_rgba(31,42,85,.065)] transition hover:-translate-y-1 hover:shadow-card"><div class="mb-[20px] grid h-12 w-12 place-items-center rounded-[16px] bg-[#ffbd98] text-ink"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 14a8 8 0 1 1 16 0"/><path d="m12 14 3-4"/><circle cx="12" cy="14" r="1" fill="currentColor" stroke="none"/></svg></div><h3 class="text-[18px] font-bold leading-tight text-ink">Financial Wellness Score</h3><p class="mt-[14px] text-[16px] leading-[1.65] text-[#596078]">A live score of your money health, updated as your life changes. Know exactly where you stand.</p></article>
           <article class="min-h-[248px] rounded-[24px] border border-[#e5d9d1] bg-white p-8 shadow-[0_12px_28px_rgba(31,42,85,.065)] transition hover:-translate-y-1 hover:shadow-card"><div class="mb-[20px] grid h-12 w-12 place-items-center rounded-[16px] bg-[#ffbd98] text-ink"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 19v-1.5A4.5 4.5 0 0 1 8 13h2a4.5 4.5 0 0 1 4.5 4.5V19"/><path d="M16 5.5a3 3 0 0 1 0 5.8M17 13.2a4.5 4.5 0 0 1 3.5 4.3V19"/></svg></div><h3 class="text-[18px] font-bold leading-tight text-ink">One Family, One Dashboard</h3><p class="mt-[14px] text-[16px] leading-[1.65] text-[#596078]">Consolidate every member's money, goals, and holdings — with role-based access.</p></article>
           <article class="min-h-[248px] rounded-[24px] border border-[#e5d9d1] bg-white p-8 shadow-[0_12px_28px_rgba(31,42,85,.065)] transition hover:-translate-y-1 hover:shadow-card"><div class="mb-[20px] grid h-12 w-12 place-items-center rounded-[16px] bg-[#ffbd98] text-ink"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 16 5-5 4 3 7-8"/><path d="M15 6h5v5"/></svg></div><h3 class="text-[18px] font-bold leading-tight text-ink">Track All Investments</h3><p class="mt-[14px] text-[16px] leading-[1.65] text-[#596078]">Mutual funds, equities, FDs, gold, real estate, NCDs — auto-linked and always up to date.</p></article>
@@ -176,7 +234,7 @@
           <span class="text-[11px] font-bold uppercase tracking-[.19em] text-orange">Family dashboard</span>
           <h2 class="mt-[18px] text-[36px] font-bold leading-[1.08] tracking-[-.025em] text-ink md:text-[54px]">One dashboard for<br>the <span class="font-['DM_Serif_Display'] font-normal italic text-orange">whole family.</span></h2>
           <p class="mt-[25px] max-w-[575px] text-[17px] leading-[1.72] text-[#535b73]">Parents, spouse, kids, in-laws — every member's money in one place. Individual privacy where it matters, shared clarity where it counts.</p>
-          <div class="mt-[37px] grid gap-5 sm:grid-cols-2">
+          <div class="mobile-slider mt-[37px] grid gap-5 sm:grid-cols-2">
             <div class="min-h-[122px] rounded-[22px] border border-[#e3d6ce] bg-white/45 p-[20px] shadow-none"><svg class="mb-[13px] text-orange" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><path d="M3.5 20v-2A4.5 4.5 0 0 1 8 13.5h2A4.5 4.5 0 0 1 14.5 18v2M16 5.5a3 3 0 0 1 0 5.8M17 13.5a4.5 4.5 0 0 1 3.5 4.5v2"/></svg><b class="text-[16px] font-bold text-ink">Role-based access</b><p class="mt-[5px] text-[14px] text-[#596078]">You decide who sees what.</p></div>
             <div class="min-h-[122px] rounded-[22px] border border-[#e3d6ce] bg-white/45 p-[20px] shadow-none"><svg class="mb-[13px] text-orange" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v9h9"/><path d="M20.5 15.5A9 9 0 1 1 8.5 3.7"/></svg><b class="text-[16px] font-bold text-ink">Consolidated net worth</b><p class="mt-[5px] text-[14px] text-[#596078]">Every asset and liability, unified.</p></div>
             <div class="min-h-[122px] rounded-[22px] border border-[#e3d6ce] bg-white/45 p-[20px] shadow-none"><svg class="mb-[13px] text-orange" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="2"/></svg><b class="text-[16px] font-bold text-ink">Shared goals</b><p class="mt-[5px] text-[14px] leading-[1.45] text-[#596078]">Plan retirement, education, home — together.</p></div>
@@ -186,19 +244,19 @@
       </div>
     </section>
 
-    <section class="bg-[#fdf9f6] py-20 md:py-[84px]">
+    <section id="investments-showcase" class="bg-[#fdf9f6] py-20 md:py-[84px]">
       <div class="mx-auto w-[min(1216px,calc(100%-48px))]">
         <div class="mx-auto max-w-[780px] text-center">
           <span class="text-[11px] font-bold uppercase tracking-[.19em] text-orange">My Investments</span>
           <h2 class="mt-[18px] text-[36px] font-bold leading-[1.08] tracking-[-.025em] text-ink md:text-[54px]">Every rupee. <span class="font-['DM_Serif_Display'] font-normal italic text-orange">Every asset.</span><br>Every insight.</h2>
           <p class="mx-auto mt-[25px] max-w-[730px] text-[17px] leading-[1.7] text-[#535b73]">Link accounts once. See mutual funds, equities, gold, real estate, FDs, bonds, PPF and cash<br class="hidden md:block"> — all in a single, honest view.</p>
         </div>
-        <div class="mt-[62px] grid items-start gap-6 md:grid-cols-3">
+        <div class="mobile-slider mt-[62px] grid items-start gap-6 md:grid-cols-3">
           <article class="group flex flex-col items-center text-center"><div class="phone-mockup phone-mockup-compact w-[min(300px,100%)] transition duration-300 group-hover:-translate-y-2"><div class="phone-screen h-[560px]"><img class="h-full w-full object-cover object-top" src="assets/app-screens/my-money.png" alt="My Money app screen"></div></div><b class="mt-5 flex w-[min(300px,100%)] items-center justify-between text-[15px] font-bold text-ink">My Money <span class="text-sm">→</span></b></article>
           <article class="group flex flex-col items-center text-center"><div class="phone-mockup phone-mockup-compact w-[min(300px,100%)] transition duration-300 group-hover:-translate-y-2"><div class="phone-screen h-[560px]"><img class="h-full w-full object-cover object-top" src="assets/app-screens/investments.png" alt="My Investments app screen"></div></div><b class="mt-5 flex w-[min(300px,100%)] items-center justify-between text-[15px] font-bold text-ink">My Investments <span class="text-sm">→</span></b></article>
           <article class="group flex flex-col items-center text-center"><div class="phone-mockup phone-mockup-compact w-[min(300px,100%)] transition duration-300 group-hover:-translate-y-2"><div class="phone-screen h-[560px]"><img class="h-full w-full object-cover object-top" src="assets/app-screens/mutual-fund.png" alt="Mutual fund performance app screen"></div></div><b class="mt-5 flex w-[min(300px,100%)] items-center justify-between text-[15px] font-bold text-ink">Performance <span class="text-sm">→</span></b></article>
         </div>
-        <div class="mt-[66px] grid gap-8 text-center md:grid-cols-3">
+        <div id="investment-stats" class="mobile-slider mt-[66px] grid gap-8 text-center md:grid-cols-3">
           <div><b class="block text-[46px] font-bold leading-none tracking-[-.03em] text-ink md:text-[56px]">15+</b><span class="mt-3 block text-[11px] font-medium uppercase tracking-[.08em] text-muted">Asset classes tracked</span></div>
           <div><b class="block text-[46px] font-bold leading-none tracking-[-.03em] text-ink md:text-[56px]">Auto</b><span class="mt-3 block text-[11px] font-medium uppercase tracking-[.08em] text-muted">Sync via account aggregator</span></div>
           <div><b class="block text-[46px] font-bold leading-none tracking-[-.03em] text-ink md:text-[56px]">24/7</b><span class="mt-3 block text-[11px] font-medium uppercase tracking-[.08em] text-muted">Live rebalancing insights</span></div>
@@ -212,10 +270,10 @@
           <span class="text-xs font-medium uppercase tracking-[.18em] text-orange">Meet AANA</span>
           <h2 class="mt-3 text-[34px] font-semibold leading-[1.06] tracking-normal text-ink md:text-[56px]">Your AI guide.<br><span class="font-medium text-orange">Not another chatbot.</span></h2>
           <p class="mt-5 max-w-[680px] text-base leading-8 text-text/70 md:text-lg">AANA is a virtual CFO trained on your goals, income, holdings and risk profile. She explains, warns, plans and encourages - the way a trusted advisor would, in plain English.</p>
-          <div class="mt-8 flex items-center gap-4"><img class="h-16 w-16 rounded-full object-cover shadow-soft" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_cb39e690d8_471241686000448d.png" alt="AANA"><div><b class="font-semibold text-ink">AANA</b><p class="mt-0.5 text-sm text-muted">Always-on financial companion</p></div></div>
+          <div class="mt-8 flex items-center gap-4"><span class="h-16 w-16 shrink-0 overflow-hidden rounded-full bg-white shadow-soft"><img class="h-full w-full scale-[1.45] object-cover" src="assets/aana/aana-orb.png" alt="AANA"></span><div><b class="font-semibold text-ink">AANA</b><p class="mt-0.5 text-sm text-muted">Always-on financial companion</p></div></div>
         </div>
         <div class="rounded-[32px] border border-borderline bg-white p-6 shadow-card md:p-7">
-          <div class="flex items-center gap-3 border-b border-borderline pb-4"><img class="h-10 w-10 rounded-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_56cb63e195_9bcd49d9da0088d9.png" alt="AANA"><div><b class="text-sm font-semibold text-ink">AANA - AI Personal CFO</b><p class="text-xs text-orange">● online</p></div></div>
+          <div class="flex items-center gap-3 border-b border-borderline pb-4"><span class="h-10 w-10 shrink-0 overflow-hidden rounded-full bg-white"><img class="h-full w-full scale-[1.45] object-cover" src="assets/aana/aana-orb.png" alt="AANA"></span><div><b class="text-sm font-semibold text-ink">AANA - AI Personal CFO</b><p class="text-xs text-orange">● online</p></div></div>
           <div class="mt-5 grid gap-4">
             <div class="max-w-[85%] justify-self-end rounded-2xl rounded-br-md bg-ink px-4 py-3 text-sm leading-7 text-white">Should I take a ₹5L personal loan for my wedding?</div>
             <div class="max-w-[85%] justify-self-start rounded-2xl rounded-bl-md bg-linen px-4 py-3 text-sm leading-7 text-text">Let's see. At 14% for 3 years, EMI is ₹17,090/mo. Your wellness score would drop from 76 → 58 and pause your retirement SIP.</div>
@@ -255,25 +313,11 @@
 
   </main>
 
-  <button id="chatToggle" class="fixed bottom-6 right-6 z-[60] grid h-16 w-16 place-items-center rounded-full bg-ink text-white shadow-card transition hover:scale-105" aria-label="Chat with AANA" aria-expanded="false">
-    <img class="h-10 w-10 rounded-full" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_cb39e690d8_471241686000448d.png" alt="">
-  </button>
-  <div id="floatingChat" class="fixed bottom-28 right-6 z-[60] hidden w-[min(380px,calc(100vw-32px))] overflow-hidden rounded-[28px] border border-borderline bg-white shadow-card">
-    <div class="flex items-center gap-3 bg-gradient-to-br from-[#06175f] to-[#09297a] p-4 text-white"><img class="h-10 w-10 rounded-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_cb39e690d8_471241686000448d.png" alt=""><div><b class="text-sm font-semibold">AANA</b><p class="text-xs text-white/70">Your AI personal CFO</p></div></div>
-    <div id="chatBody" class="grid h-72 content-start gap-3 overflow-y-auto bg-linen p-4"><div class="max-w-[85%] justify-self-start rounded-2xl rounded-bl-md border border-borderline bg-white px-3.5 py-2.5 text-sm leading-6 text-text">Hi! I'm AANA, your AI CFO. Ask me anything about money, goals or investments.</div></div>
-    <div class="flex gap-2 border-t border-borderline p-3"><input id="chatInput" class="flex-1 rounded-full bg-linen px-4 py-2.5 text-sm outline-none ring-1 ring-transparent focus:ring-orange" placeholder="Ask AANA..."><button id="sendChat" class="grid h-10 w-10 place-items-center rounded-full bg-ink text-white" aria-label="Send">→</button></div>
-  </div>
-
   <script>
     const waitForm = document.getElementById("waitForm");
     const formError = document.getElementById("formError");
     const successBox = document.getElementById("successBox");
     const successText = document.getElementById("successText");
-    const chatToggle = document.getElementById("chatToggle");
-    const floatingChat = document.getElementById("floatingChat");
-    const chatBody = document.getElementById("chatBody");
-    const chatInput = document.getElementById("chatInput");
-    const sendChat = document.getElementById("sendChat");
     const appTabs = [...document.querySelectorAll(".app-tab")];
     const appMainScreen = document.getElementById("appMainScreen");
     const appSideLeft = document.getElementById("appSideLeft");
@@ -337,35 +381,6 @@
       successBox.classList.remove("hidden");
     });
 
-    chatToggle.addEventListener("click", () => {
-      const open = floatingChat.classList.toggle("hidden") === false;
-      chatToggle.setAttribute("aria-expanded", String(open));
-      chatToggle.innerHTML = open
-        ? '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>'
-        : '<img class="h-10 w-10 rounded-full" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_cb39e690d8_471241686000448d.png" alt="">';
-      if (open) chatInput.focus();
-    });
-
-    function appendMessage(from, text) {
-      const msg = document.createElement("div");
-      msg.className = from === "user"
-        ? "max-w-[85%] justify-self-end rounded-2xl rounded-br-md bg-ink px-3.5 py-2.5 text-sm leading-6 text-white"
-        : "max-w-[85%] justify-self-start rounded-2xl rounded-bl-md border border-borderline bg-white px-3.5 py-2.5 text-sm leading-6 text-text";
-      msg.textContent = text;
-      chatBody.appendChild(msg);
-      chatBody.scrollTo({ top: chatBody.scrollHeight, behavior: "smooth" });
-    }
-    function sendAanaMessage() {
-      const text = chatInput.value.trim();
-      if (!text) return;
-      appendMessage("user", text);
-      chatInput.value = "";
-      setTimeout(() => appendMessage("aana", "Great question! In the full app I'd analyze your goals, holdings and cashflow to answer this. Sign up for 200 free tokens to try me for real."), 700);
-    }
-    sendChat.addEventListener("click", sendAanaMessage);
-    chatInput.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") sendAanaMessage();
-    });
   </script>
 </body>
 </html>
