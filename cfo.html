@@ -80,7 +80,7 @@
     .mobile-slider { scrollbar-width: none; }
     .mobile-slider::-webkit-scrollbar { display: none; }
     @media (max-width: 767px) {
-      main > section { padding-top: 56px !important; padding-bottom: 56px !important; }
+      main > section { padding-top: 46px !important; padding-bottom: 46px !important; }
       main > section:first-child { padding-top: 38px !important; padding-bottom: 42px !important; }
       main > section > div,
       #features > div,
@@ -126,14 +126,21 @@
       #wellness .phone-screen { height: 440px !important; border-radius: 29px; }
       #wellness .phone-mockup::before { top: 14px; width: 68px; height: 18px; }
       #wellness .phone-mockup > div:last-child { right: -8px; bottom: -14px; padding: 12px 14px; font-size: 14px; }
-      #family > div { gap: 40px !important; }
-      #family > div > div:first-child { width: min(100%, 330px); margin-inline: auto; padding-bottom: 22px; }
-      #family > div > div:first-child > img { height: 250px; border-radius: 24px; }
-      #family .phone-mockup { width: 140px !important; }
-      #family .phone-screen { height: 275px !important; }
+      #family > div { display: flex !important; flex-direction: column; gap: 26px !important; }
+      #family-copy { order: 1; }
+      #family-visual { order: 2; width: min(100%, 310px); margin-inline: auto; padding-bottom: 16px; }
+      #family-visual > img { height: 210px; border-radius: 22px; }
+      #family .phone-mockup { width: 122px !important; }
+      #family .phone-screen { height: 238px !important; }
       #aana > div { gap: 36px !important; }
       #aana > div > div:last-child { padding: 18px; border-radius: 24px; }
-      #waitlist > div > div { padding: 26px !important; border-radius: 28px; }
+      #waitlist > div > div { gap: 28px !important; padding: 24px !important; border-radius: 26px; }
+      #waitlist h2 { font-size: 34px !important; }
+      #waitlist p { margin-top: 18px; }
+      #waitlist ul { margin-top: 20px; }
+      #waitlist form { gap: 13px; border-radius: 20px; background: rgba(255,255,255,.08); padding: 16px; }
+      #waitlist input { height: 48px; }
+      #waitlist form button { height: 50px; }
     }
   </style>
 </head>
