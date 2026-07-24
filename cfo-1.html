@@ -53,7 +53,7 @@ h1,h2,h3{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02e
 .hero .subline{font-family:var(--font-display); font-weight:600; font-size:22px; color:var(--peach); margin-bottom:22px;}
 .hero p.desc{font-size:18px; line-height:1.65; color:rgba(255,255,255,0.72); max-width:520px; margin-bottom:36px;}
 .waitlist-form{display:flex; gap:10px; max-width:480px; margin-bottom:16px;}
-.waitlist-form input[type=email]{flex:1; height:56px; border-radius:100px; border:1.5px solid rgba(255,255,255,0.18); background:rgba(255,255,255,0.07); color:var(--white); padding:0 22px; font-size:15px; outline:none; transition:border-color .2s ease, background .2s ease;}
+.waitlist-form input[type=email]{flex:1 1 0; width:100%; min-width:0; height:56px; border-radius:100px; border:1.5px solid rgba(255,255,255,0.18); background:rgba(255,255,255,0.07); color:var(--white); padding:0 22px; font-size:15px; outline:none; appearance:none; transition:border-color .2s ease, background .2s ease;}
 .waitlist-form input[type=email]::placeholder{color:rgba(255,255,255,0.45);}
 .waitlist-form input[type=email]:focus{border-color:var(--orange-light); background:rgba(255,255,255,0.11);}
 .waitlist-form button{height:56px; padding:0 28px; background:var(--orange); color:var(--white); border-radius:100px; font-family:var(--font-display); font-weight:700; font-size:15px; display:flex; align-items:center; gap:8px; white-space:nowrap; transition:background .2s ease, transform .2s ease;}
@@ -110,6 +110,7 @@ h1,h2,h3{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02e
 .float-chip.c1 .ic svg{stroke:#1E7B34;}
 .float-chip.c2 .ic{background:var(--peach);}
 .float-chip.c2 .ic svg{stroke:var(--orange-dark);}
+.float-chip .aana-chip-image{width:30px; height:30px; border-radius:9px; object-fit:cover;}
 .float-chip .ic svg{width:15px; height:15px;}
 .float-chip b{display:block; font-size:12px; color:var(--navy); font-family:var(--font-display); font-weight:700;}
 .float-chip span{font-size:10px; color:var(--slate);}
@@ -123,12 +124,20 @@ h1,h2,h3{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02e
 
 /* PROBLEM CARDS */
 .p-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
-.p-card{background:var(--white); border:1px solid var(--border-soft); border-radius:20px; padding:32px 28px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;}
+.p-card{background:var(--white); border:1px solid var(--border-soft); border-radius:20px; padding:28px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;}
 .p-card:hover{transform:translateY(-4px); box-shadow:0 24px 48px -20px rgba(4,43,98,0.16); border-color:transparent;}
-.p-card .ic-wrap{width:48px; height:48px; border-radius:13px; background:var(--linen); display:flex; align-items:center; justify-content:center; margin-bottom:20px;}
+.p-card .ic-wrap{width:48px; height:48px; border-radius:13px; background:var(--linen); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
 .p-card .ic-wrap svg{width:23px; height:23px; stroke:var(--orange);}
-.p-card h3{font-size:19px; color:var(--navy); margin-bottom:10px; font-weight:700;}
-.p-card p{font-size:14.5px; color:var(--slate); line-height:1.6;}
+.p-card-toggle{width:100%; background:transparent; display:grid; grid-template-columns:48px 1fr 36px; gap:16px; align-items:center; text-align:left; color:inherit;}
+.p-card h3{font-size:19px; color:var(--navy); font-weight:700;}
+.p-card-arrow{width:36px; height:36px; border-radius:50%; background:var(--linen); display:grid; place-items:center; transition:transform .25s ease, background .25s ease;}
+.p-card-arrow svg{width:17px; height:17px; stroke:var(--navy);}
+.p-card-toggle[aria-expanded="true"] .p-card-arrow{transform:rotate(180deg); background:var(--peach);}
+.p-card-desc{display:grid; grid-template-rows:0fr; transition:grid-template-rows .3s ease;}
+.p-card-desc > div{overflow:hidden;}
+.p-card-desc p{font-size:14.5px; color:var(--slate); line-height:1.6; padding:0 0 0 64px; transition:padding-top .3s ease;}
+.p-card.open .p-card-desc{grid-template-rows:1fr;}
+.p-card.open .p-card-desc p{padding-top:18px;}
 
 /* MEET AANA */
 .aana-section{background:var(--navy); color:var(--white); position:relative; overflow:hidden;}
@@ -216,9 +225,14 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
   .hero h1{font-size:33px;}
   .hero{padding:48px 0;}
   .hero .subline{font-size:18px;}
-  .waitlist-form{flex-direction:column;}
-  .waitlist-form button{justify-content:center;}
+  .waitlist-form{flex-direction:column; width:100%; max-width:none;}
+  .waitlist-form input[type=email]{flex:none; width:100%; font-size:16px;}
+  .waitlist-form button{justify-content:center; width:100%;}
   .p-grid, .feat-grid{grid-template-columns:1fr;}
+  .p-card{padding:22px;}
+  .p-card-toggle{grid-template-columns:42px 1fr 34px; gap:12px;}
+  .p-card .ic-wrap{width:42px; height:42px;}
+  .p-card-desc p{padding-left:54px;}
   .foot-links{gap:32px;}
   .countdown{gap:8px;}
   .cd-box{min-width:68px; padding:14px 10px;}
@@ -265,7 +279,7 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
         <div class="trust-row">
           <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/></svg>SEBI-registered adviser</div>
           <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>20+ years</div>
-          <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="8" r="4"/><path d="M22 20v-2a4 4 0 0 0-3-3.87"/><path d="M16 4.13a4 4 0 0 1 0 7.75"/></svg>2,50,000+ clients</div>
+          <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="8" r="4"/><path d="M22 20v-2a4 4 0 0 0-3-3.87"/><path d="M16 4.13a4 4 0 0 1 0 7.75"/></svg>450+ Happy Families</div>
         </div>
       </div>
 
@@ -277,8 +291,8 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
           <div><b>+14.2%</b><span>SIP returns</span></div>
         </div>
         <div class="float-chip c2">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-          <div><b>Aana</b><span>reviewed today</span></div>
+          <img class="aana-chip-image" src="assets/aana/aana-orb.png" alt="Aana">
+          <div><b>Aana</b><span>Your AI CFO</span></div>
         </div>
         <div class="phone">
           <div class="phone-screen hero-app-screen">
@@ -300,19 +314,28 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
     </div>
     <div class="p-grid">
       <div class="p-card reveal">
-        <div class="ic-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></div>
-        <h3>Scattered, not simple</h3>
-        <p>Stop switching between your bank, broker and insurance apps just to know where you actually stand.</p>
+        <button class="p-card-toggle" type="button" aria-expanded="false" aria-controls="why-desc-1">
+          <span class="ic-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></span>
+          <h3>Scattered, not simple</h3>
+          <span class="p-card-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div class="p-card-desc" id="why-desc-1"><div><p>Stop switching between your bank, broker and insurance apps just to know where you actually stand.</p></div></div>
       </div>
       <div class="p-card reveal">
-        <div class="ic-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div>
-        <h3>Generic advice isn't advice</h3>
-        <p>Most robo-advisors hand you a model portfolio. Aana builds a plan around your goals, your risk and your life.</p>
+        <button class="p-card-toggle" type="button" aria-expanded="false" aria-controls="why-desc-2">
+          <span class="ic-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span>
+          <h3>Generic advice isn't advice</h3>
+          <span class="p-card-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div class="p-card-desc" id="why-desc-2"><div><p>Most robo-advisors hand you a model portfolio. Aana builds a plan around your goals, your risk and your life.</p></div></div>
       </div>
       <div class="p-card reveal">
-        <div class="ic-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <h3>AI you can actually trust</h3>
-        <p>Every nudge is backed by a 20-year, SEBI-registered advisory team — not just an algorithm's best guess.</p>
+        <button class="p-card-toggle" type="button" aria-expanded="false" aria-controls="why-desc-3">
+          <span class="ic-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <h3>AI you can actually trust</h3>
+          <span class="p-card-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+        </button>
+        <div class="p-card-desc" id="why-desc-3"><div><p>Every nudge is backed by a 20-year, SEBI-registered advisory team — not just an algorithm's best guess.</p></div></div>
       </div>
     </div>
   </div>
@@ -493,6 +516,15 @@ function handleForm(formId, emailId, successId){
 }
 handleForm('heroForm','heroEmail','heroSuccess');
 handleForm('finalForm','finalEmail','finalSuccess');
+
+document.querySelectorAll('.p-card-toggle').forEach((toggle) => {
+  toggle.addEventListener('click', () => {
+    const card = toggle.closest('.p-card');
+    const willOpen = !card.classList.contains('open');
+    card.classList.toggle('open', willOpen);
+    toggle.setAttribute('aria-expanded', String(willOpen));
+  });
+});
 
 const revealEls = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries) => {
