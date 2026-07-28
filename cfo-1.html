@@ -76,12 +76,75 @@ h1,h2,h3{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02e
 .orb-ring{position:absolute; top:6%; right:2%; width:420px; height:420px; border-radius:50%; border:1px solid rgba(255,255,255,0.10);}
 .orb-ring::after{content:""; position:absolute; inset:38px; border-radius:50%; border:1px solid rgba(255,255,255,0.08);}
 .orb-glow{position:absolute; top:2%; right:-6%; width:460px; height:460px; border-radius:50%; background:radial-gradient(circle, rgba(255,146,72,0.30) 0%, rgba(221,115,0,0.10) 45%, transparent 72%); filter:blur(6px);}
-.phone{position:relative; z-index:3; width:280px; background:var(--navy-deep); border-radius:38px; padding:12px; box-shadow:0 40px 80px -20px rgba(2,4,20,0.6), 0 0 0 1px rgba(255,255,255,0.06); animation:float 6s ease-in-out infinite;}
+.phone{
+  --phone-width:280px;
+  position:relative;
+  z-index:3;
+  width:var(--phone-width);
+  padding:10px;
+  border:2px solid #263454;
+  border-radius:43px;
+  background:linear-gradient(145deg,#344363 0%,#080d1c 16%,#02040b 82%,#23304d 100%);
+  box-shadow:
+    0 40px 80px -20px rgba(2,4,20,0.65),
+    0 12px 28px rgba(0,0,0,0.32),
+    inset 0 0 0 1px rgba(255,255,255,0.12),
+    inset 0 0 0 3px rgba(0,0,0,0.72);
+  animation:float 6s ease-in-out infinite;
+}
+.phone::before{
+  content:"";
+  position:absolute;
+  z-index:6;
+  top:17px;
+  left:50%;
+  width:78px;
+  height:22px;
+  transform:translateX(-50%);
+  border-radius:20px;
+  background:#02040a;
+  box-shadow:inset 0 -1px 1px rgba(255,255,255,0.08), 0 1px 3px rgba(0,0,0,0.35);
+  pointer-events:none;
+}
+.phone::after{
+  content:"";
+  position:absolute;
+  top:105px;
+  right:-5px;
+  width:3px;
+  height:70px;
+  border-radius:0 3px 3px 0;
+  background:linear-gradient(#35415d,#111827);
+  box-shadow:
+    calc(2px - var(--phone-width)) -28px 0 #1a2338,
+    calc(2px - var(--phone-width)) 18px 0 #1a2338;
+  pointer-events:none;
+}
 @keyframes float{0%,100%{transform:translateY(0);} 50%{transform:translateY(-14px);}}
 .phone-screen{background:var(--linen); border-radius:28px; overflow:hidden; padding:22px 18px 26px;}
-.phone-screen.hero-app-screen{padding:0; height:560px; background:var(--linen);}
-.hero-app-image{width:100%; height:100%; object-fit:cover; object-position:top; transition:object-position 8s ease-in-out;}
-.phone:hover .hero-app-image{object-position:bottom;}
+.phone-screen.hero-app-screen{
+  position:relative;
+  padding:0;
+  height:560px;
+  border:1px solid rgba(255,255,255,0.16);
+  border-radius:33px;
+  background:var(--linen);
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,0.22);
+}
+.hero-app-image{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center top;
+}
+.hero-app-image.is-auto-scrolling{
+  animation:heroImageAutoScroll 20s ease-in-out .5s 1 forwards;
+}
+@keyframes heroImageAutoScroll{
+  0%,8%{object-position:center top;}
+  48%,58%{object-position:center bottom;}
+  100%{object-position:center top;}
+}
 .ph-topbar{display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;}
 .ph-avatar{width:32px; height:32px; border-radius:50%; background:var(--navy); color:var(--white); font-family:var(--font-display); font-weight:700; font-size:12px; display:flex; align-items:center; justify-content:center;}
 .ph-bell{width:28px; height:28px; border-radius:50%; background:var(--white); border:1px solid var(--border-soft); display:flex; align-items:center; justify-content:center;}
@@ -138,6 +201,14 @@ h1,h2,h3{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02e
 .p-card-desc p{font-size:14.5px; color:var(--slate); line-height:1.6; padding:0 0 0 64px; transition:padding-top .3s ease;}
 .p-card.open .p-card-desc{grid-template-rows:1fr;}
 .p-card.open .p-card-desc p{padding-top:18px;}
+.why-title{line-height:1.14;}
+
+@media (min-width:641px){
+  .p-card-toggle{grid-template-columns:48px 1fr; cursor:default;}
+  .p-card-arrow{display:none;}
+  .p-card-desc{grid-template-rows:1fr;}
+  .p-card-desc p{padding-top:18px;}
+}
 
 /* MEET AANA */
 .aana-section{background:var(--navy); color:var(--white); position:relative; overflow:hidden;}
@@ -241,7 +312,7 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
   .aana-section h2{font-size:29px;}
   .float-chip{display:none;}
   .hero-visual{height:520px;}
-  .phone{width:240px;}
+  .phone{--phone-width:240px;}
   .phone-screen.hero-app-screen{height:480px;}
 }
 </style>
@@ -253,7 +324,7 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
     <a class="logo" href="#waitlist" aria-label="Fintoo home">
       <img src="https://www.fintoo.in/static/media/wp/Fintoologo_.svg" alt="Fintoo">
     </a>
-    <a href="#waitlist" class="nav-cta">Join waitlist</a>
+    <a href="#waitlist" class="nav-cta">Login</a>
   </div>
 </nav>
 
@@ -264,7 +335,7 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
         <div class="hero-eyebrow"><span class="dot"></span>Launching 1 September 2026</div>
         <h1>Declare your <span>financial freedom.</span></h1>
         <div class="subline">Meet Aana — your AI-powered personal CFO</div>
-        <p class="desc">One app for your net worth, goals, investments, insurance and tax — guided by AI, backed by 20 years of SEBI-registered advice. Get in before everyone else.</p>
+        <p class="desc">One app for your net worth, goals, investments, insurance and tax — guided by AI, backed by 10 years of SEBI-registered advice. Get in before everyone else.</p>
 
         <form class="waitlist-form" id="heroForm">
           <input type="email" placeholder="Enter your email address" required id="heroEmail">
@@ -274,26 +345,19 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
           <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L19 7"/></svg></div>
           <span>You're on the list — we'll email you before 1 September.</span>
         </div>
-        <p class="form-note">Join <b id="counterHero">12,406</b>+ people already on the list. No spam, just one email on launch day.</p>
+        <p class="form-note"> No spam, just one email on launch day.</p>
 
         <div class="trust-row">
           <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/></svg>SEBI-registered adviser</div>
-          <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>20+ years</div>
-          <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 20v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="8" r="4"/><path d="M22 20v-2a4 4 0 0 0-3-3.87"/><path d="M16 4.13a4 4 0 0 1 0 7.75"/></svg>450+ Happy Families</div>
+          <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>10+ years</div>
+          <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.4 4.1a5 5 0 0 1-3.1 3.1L3 12l4.5 1.8a5 5 0 0 1 3.1 3.1L12 21l1.4-4.1a5 5 0 0 1 3.1-3.1L21 12l-4.5-1.8a5 5 0 0 1-3.1-3.1L12 3Z"/></svg>Agentic AI-backed</div>
         </div>
       </div>
 
       <div class="hero-visual">
         <div class="orb-glow"></div>
         <div class="orb-ring"></div>
-        <div class="float-chip c1">
-          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></div>
-          <div><b>+14.2%</b><span>SIP returns</span></div>
-        </div>
-        <div class="float-chip c2">
-          <img class="aana-chip-image" src="assets/aana/aana-orb.png" alt="Aana">
-          <div><b>Aana</b><span>Your AI CFO</span></div>
-        </div>
+        
         <div class="phone">
           <div class="phone-screen hero-app-screen">
             <img class="hero-app-image" src="assets/app-screens/dashboard.png" alt="Fintoo dashboard showing financial wellness, net worth and goals">
@@ -309,7 +373,7 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
   <div class="wrap">
     <div class="section-head reveal">
       <div class="eyebrow">Why Fintoo</div>
-      <h2 style="font-size:38px; color:var(--navy);">Your money lives in six apps.<br>Your personal CFO shouldn't.</h2>
+      <h2 class="why-title" style="font-size:38px; color:var(--navy);">Your money lives in six apps.<br>Your personal CFO shouldn't.</h2>
       <p>Fintoo brings your full financial picture into one place — and adds an AI that actually understands it.</p>
     </div>
     <div class="p-grid">
@@ -324,18 +388,22 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
       <div class="p-card reveal">
         <button class="p-card-toggle" type="button" aria-expanded="false" aria-controls="why-desc-2">
           <span class="ic-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></span>
-          <h3>Generic advice isn't advice</h3>
+          <h3>Informal advice isn't advice</h3>
           <span class="p-card-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
-        <div class="p-card-desc" id="why-desc-2"><div><p>Most robo-advisors hand you a model portfolio. Aana builds a plan around your goals, your risk and your life.</p></div></div>
+        <div class="p-card-desc" id="why-desc-2"><div><p>
+
+Advice from friends & relatives can cause you to lose wealth.
+Our AI-backed application builds a plan around your goals, your risk and your life.
+         </p></div></div>
       </div>
       <div class="p-card reveal">
         <button class="p-card-toggle" type="button" aria-expanded="false" aria-controls="why-desc-3">
           <span class="ic-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></span>
-          <h3>AI you can actually trust</h3>
+          <h3>Agentic I you can actually trust</h3>
           <span class="p-card-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
         </button>
-        <div class="p-card-desc" id="why-desc-3"><div><p>Every nudge is backed by a 20-year, SEBI-registered advisory team — not just an algorithm's best guess.</p></div></div>
+        <div class="p-card-desc" id="why-desc-3"><div><p>Avoid hallucinations caused by generic AI tools/platforms. Every nudge is backed by a 10-year, SEBI-registered advisory team — not just an algorithm's best guess.</p></div></div>
       </div>
     </div>
   </div>
@@ -472,6 +540,18 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 20);
 });
 
+function restartHeroImageScroll(){
+  const image = document.querySelector('.hero-app-image');
+  if(!image) return;
+
+  image.classList.remove('is-auto-scrolling');
+  void image.offsetWidth;
+
+  image.classList.add('is-auto-scrolling');
+}
+restartHeroImageScroll();
+window.addEventListener('pageshow', restartHeroImageScroll);
+
 // Launch: 1 September 2026 at midnight, India Standard Time.
 const countdownTarget = new Date('2026-09-01T00:00:00+05:30').getTime();
 let countdownTimer;
@@ -519,12 +599,23 @@ handleForm('finalForm','finalEmail','finalSuccess');
 
 document.querySelectorAll('.p-card-toggle').forEach((toggle) => {
   toggle.addEventListener('click', () => {
+    if(window.matchMedia('(min-width: 641px)').matches) return;
     const card = toggle.closest('.p-card');
     const willOpen = !card.classList.contains('open');
     card.classList.toggle('open', willOpen);
     toggle.setAttribute('aria-expanded', String(willOpen));
   });
 });
+
+function syncProblemCardState(){
+  const desktop = window.matchMedia('(min-width: 641px)').matches;
+  document.querySelectorAll('.p-card-toggle').forEach((toggle) => {
+    const card = toggle.closest('.p-card');
+    toggle.setAttribute('aria-expanded', String(desktop || card.classList.contains('open')));
+  });
+}
+syncProblemCardState();
+window.addEventListener('resize', syncProblemCardState);
 
 const revealEls = document.querySelectorAll('.reveal');
 const io = new IntersectionObserver((entries) => {
