@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retirement Calculator — Fintoo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#042b62;
+    --orange:#dd7300;
+    --navy-05:#f4f6f9;
+    --navy-10:#e9edf3;
+    --navy-60:rgba(4,43,98,0.6);
+    --border:#e2e6ec;
+    --white:#ffffff;
+    --green:#0f8a4b;
+    --red:#c23b3b;
+    font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--white);color:var(--navy);font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+
+  header.site{display:flex;align-items:center;justify-content:space-between;padding:22px 64px;border-bottom:1px solid var(--border);}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px;color:var(--navy);}
+  .logo-mark{width:30px;height:30px;border-radius:8px;background:var(--navy);display:flex;align-items:center;justify-content:center;}
+  .logo-mark svg{width:16px;height:16px;}
+  nav.main{display:flex;gap:40px;}
+  nav.main a{font-size:15px;font-weight:500;color:var(--navy-60);padding-bottom:4px;border-bottom:2px solid transparent;}
+  nav.main a.active{color:var(--navy);border-bottom-color:var(--orange);}
+  .btn-advisor{background:var(--navy);color:#fff;font-weight:500;font-size:14px;padding:11px 22px;border-radius:24px;border:none;cursor:pointer;}
+
+  main{max-width:1128px;margin:0 auto;padding:0 32px;}
+
+  .crumb{font-size:13px;color:var(--navy-60);padding:24px 0 0;}
+  .crumb span{color:var(--navy);font-weight:500;}
+  .page-head{display:flex;align-items:flex-start;gap:16px;padding:20px 0 32px;}
+  .page-icon{width:52px;height:52px;border-radius:14px;background:#fdead6;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .page-icon svg{width:26px;height:26px;stroke:var(--orange);}
+  .page-head h1{font-size:34px;font-weight:700;letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;}
+  .popular-tag{font-size:11px;font-weight:700;letter-spacing:0.03em;background:#fdead6;color:var(--orange);padding:4px 10px;border-radius:20px;}
+  .page-head p{font-size:15px;color:var(--navy-60);margin-top:4px;}
+
+  .calc-card{display:grid;grid-template-columns:1fr 1.15fr;border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-bottom:28px;}
+  .calc-inputs{padding:36px;display:flex;flex-direction:column;gap:22px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  .field label{display:block;font-size:13.5px;font-weight:500;color:var(--navy);margin-bottom:10px;}
+  .field-top{display:flex;align-items:center;justify-content:space-between;}
+  .amount-box{display:flex;align-items:center;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#fff;}
+  .amount-box span{padding:7px 9px;color:var(--navy-60);font-size:13.5px;border-right:1px solid var(--border);}
+  .amount-box input{border:none;outline:none;padding:7px 10px;font-size:13.5px;font-weight:600;color:var(--navy);width:100%;font-family:inherit;}
+  input[type=range]{-webkit-appearance:none;width:100%;height:4px;border-radius:4px;background:var(--navy-10);margin-top:12px;}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid var(--orange);cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.2);}
+  input[type=range]::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--orange);cursor:pointer;}
+  .range-labels{display:flex;justify-content:space-between;font-size:11.5px;color:var(--navy-60);margin-top:6px;}
+  hr.div{border:none;border-top:1px solid var(--border);margin:2px 0;}
+  .sip-toggle{display:flex;gap:8px;}
+  .sip-toggle button{flex:1;padding:10px 8px;border-radius:8px;border:1px solid var(--border);background:#fff;color:var(--navy-60);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;}
+  .sip-toggle button.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+  .stepup-field{display:none;}
+  .stepup-field.show{display:block;}
+  .cta-invest{margin-top:auto;background:var(--navy);color:#fff;border:none;border-radius:28px;padding:14px 24px;font-size:14.5px;font-weight:500;display:inline-flex;align-items:center;gap:8px;cursor:pointer;align-self:flex-start;}
+
+  .calc-result{background:var(--navy-05);padding:34px 38px;display:flex;flex-direction:column;}
+  .result-block{margin-bottom:18px;}
+  .result-label{font-size:13.5px;color:var(--navy-60);}
+  .result-value{font-size:30px;font-weight:700;margin-top:4px;}
+  .result-value.small{font-size:22px;}
+  .result-row{display:flex;gap:16px;margin-bottom:18px;}
+  .result-row .result-block{flex:1;margin-bottom:0;}
+  .sip-hero{
+    background:#fff;border:1.5px solid var(--orange);border-radius:14px;padding:18px 20px;margin-bottom:18px;
+  }
+  .sip-hero .lbl{font-size:13px;color:var(--navy-60);font-weight:500;}
+  .sip-hero .val{font-size:32px;font-weight:700;color:var(--navy);margin-top:2px;}
+  .sip-hero .val span{color:var(--orange);}
+  .sip-hero .note{font-size:12px;color:var(--navy-60);margin-top:6px;}
+  .donut-row{display:flex;align-items:center;gap:22px;margin-bottom:20px;}
+  .legend{display:flex;flex-direction:column;gap:9px;}
+  .legend-row{display:flex;align-items:center;justify-content:space-between;gap:24px;font-size:13.5px;}
+  .legend-row .dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:8px;}
+  .legend-row .lbl{color:var(--navy-60);display:flex;align-items:center;}
+  .legend-row .val{font-weight:600;}
+  .chart-foot{display:flex;justify-content:space-between;font-size:12px;color:var(--navy-60);margin-top:4px;}
+  .disclaimer{font-size:11.5px;color:var(--navy-60);margin-top:14px;line-height:1.5;}
+
+  .table-card{border:1px solid var(--border);border-radius:20px;padding:32px 40px;margin-bottom:28px;}
+  .table-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+  .table-head h2{font-size:20px;font-weight:700;}
+  .table-head p{font-size:13.5px;color:var(--navy-60);margin-top:2px;}
+  .drawdown-flex{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:18px;align-items:start;}
+  .growth-table-wrap{max-height:230px;overflow-y:auto;}
+  table{width:100%;border-collapse:collapse;}
+  thead th{text-align:left;font-size:12px;letter-spacing:0.04em;color:var(--navy-60);padding:8px 10px;position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);}
+  thead th:not(:first-child){text-align:right;}
+  tbody td{padding:11px 10px;font-size:13.5px;border-bottom:1px solid var(--navy-10);}
+  tbody td:not(:first-child){text-align:right;font-weight:600;}
+  tbody td.gain{color:var(--green);}
+  tbody td.loss{color:var(--red);}
+
+  .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;}
+  .compare-card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:20px;position:relative;}
+  .compare-card.winner{border-color:var(--orange);}
+  .compare-card .badge{position:absolute;top:-11px;left:14px;background:var(--orange);color:#fff;font-size:10.5px;font-weight:700;letter-spacing:0.03em;padding:3px 10px;border-radius:20px;}
+  .compare-card h3{font-size:13.5px;font-weight:600;color:var(--navy-60);margin-bottom:10px;}
+  .compare-row{display:flex;justify-content:space-between;font-size:13.5px;padding:6px 0;border-bottom:1px solid var(--navy-10);}
+  .compare-row:last-child{border-bottom:none;}
+  .compare-row .v{font-weight:700;}
+
+  .info-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;margin-bottom:28px;}
+  .info-card{border:1px solid var(--border);border-radius:20px;padding:32px 36px;}
+  .info-card h2{font-size:19px;font-weight:700;margin-bottom:14px;}
+  .info-card p{font-size:14.5px;color:var(--navy-60);line-height:1.7;margin-bottom:14px;}
+  .formula-box{background:var(--navy-05);border-radius:12px;padding:18px 20px;margin-top:14px;}
+  .formula-box .f{font-size:15px;font-weight:700;margin-bottom:8px;line-height:1.6;}
+  .formula-box .k{font-size:12.5px;color:var(--navy-60);display:flex;gap:16px;flex-wrap:wrap;}
+  .formula-box .k b{color:var(--navy);}
+  .faq-item{border-bottom:1px solid var(--border);padding:14px 0;display:flex;justify-content:space-between;align-items:center;font-size:14.5px;font-weight:600;cursor:pointer;}
+  .faq-item:last-child{border-bottom:none;}
+  .faq-item span.plus{color:var(--orange);font-weight:700;font-size:18px;}
+
+  .related h2{font-size:20px;font-weight:700;margin-bottom:16px;}
+  .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:36px;}
+  .related-card{border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;}
+  .related-card .ic{width:38px;height:38px;border-radius:9px;background:#fdead6;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .related-card .ic svg{width:18px;height:18px;stroke:var(--orange);}
+  .related-card .t{font-size:14.5px;font-weight:700;}
+  .related-card .s{font-size:12.5px;color:var(--navy-60);margin-top:2px;}
+
+  .cta-banner{background:var(--navy);border-radius:20px;padding:44px 52px;display:flex;justify-content:space-between;align-items:center;color:#fff;margin-bottom:40px;overflow:hidden;position:relative;}
+  .cta-banner h3{font-size:26px;font-weight:700;line-height:1.3;max-width:420px;}
+  .cta-banner p{font-size:14px;color:rgba(255,255,255,0.7);margin-top:10px;max-width:420px;}
+  .cta-banner button{background:#fff;color:var(--navy);border:none;border-radius:24px;padding:14px 24px;font-weight:600;font-size:14.5px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;white-space:nowrap;}
+
+  footer{border-top:1px solid var(--border);padding:26px 0 40px;display:flex;justify-content:space-between;font-size:13px;color:var(--navy-60);}
+  footer .links{display:flex;gap:24px;}
+
+  @media(max-width:860px){
+    header.site{padding:18px 20px;}
+    nav.main{display:none;}
+    main{padding:0 20px;}
+    .calc-card{grid-template-columns:1fr;}
+    .info-grid{grid-template-columns:1fr;}
+    .related-grid{grid-template-columns:1fr;}
+    .compare-grid{grid-template-columns:1fr;}
+    .drawdown-flex{grid-template-columns:1fr;}
+    .cta-banner{flex-direction:column;align-items:flex-start;gap:20px;}
+    .grid2{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="logo">
+    <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12L11 5L20 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    fintoo
+  </div>
+  <nav class="main">
+    <a href="#">Invest</a>
+    <a href="#">Plan</a>
+    <a href="#">Learn</a>
+    <a href="#" class="active">Tools</a>
+  </nav>
+  <button class="btn-advisor">Talk to an advisor</button>
+</header>
+
+<main>
+  <div class="crumb"><a href="fintoo-tools.html">Tools</a> &nbsp;›&nbsp; <span>Retirement Calculator</span></div>
+
+  <div class="page-head">
+    <div class="page-icon">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4.5 8-11V5l-8-3-8 3v6c0 6.5 8 11 8 11z"/></svg>
+    </div>
+    <div>
+      <h1>Retirement Calculator <span class="popular-tag">POPULAR</span></h1>
+      <p>Check if your current savings rate gets you to the retirement corpus you'll need — and what to do if it doesn't.</p>
+    </div>
+  </div>
+
+  <section class="calc-card">
+    <div class="calc-inputs">
+
+      <div class="grid2">
+        <div class="field">
+          <div class="field-top"><label>Current age</label></div>
+          <div class="amount-box"><input type="text" id="curAgeInput" value="30"></div>
+          <input type="range" id="curAgeRange" min="18" max="65" step="1" value="30">
+        </div>
+        <div class="field">
+          <div class="field-top"><label>Retirement age</label></div>
+          <div class="amount-box"><input type="text" id="retAgeInput" value="60"></div>
+          <input type="range" id="retAgeRange" min="40" max="75" step="1" value="60">
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-top"><label>Life expectancy</label></div>
+        <div class="amount-box"><input type="text" id="lifeExpInput" value="85"></div>
+        <input type="range" id="lifeExpRange" min="65" max="100" step="1" value="85">
+        <div class="range-labels"><span>65</span><span>100</span></div>
+      </div>
+
+      <hr class="div">
+
+      <div class="field">
+        <div class="field-top"><label>Current monthly expenses</label></div>
+        <div class="amount-box"><span>₹</span><input type="text" id="expenseInput" value="50,000"></div>
+        <input type="range" id="expenseRange" min="10000" max="500000" step="1000" value="50000">
+        <div class="range-labels"><span>₹10k</span><span>₹5L</span></div>
+      </div>
+
+      <div class="grid2">
+        <div class="field">
+          <div class="field-top"><label>Expected inflation</label></div>
+          <div class="amount-box"><input type="text" id="inflationInput" value="6%"></div>
+          <input type="range" id="inflationRange" min="2" max="10" step="0.5" value="6">
+        </div>
+        <div class="field">
+          <div class="field-top"><label>Current investments</label></div>
+          <div class="amount-box"><span>₹</span><input type="text" id="currentSavingsInput" value="5,00,000"></div>
+          <input type="range" id="currentSavingsRange" min="0" max="20000000" step="50000" value="500000">
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="field">
+          <div class="field-top"><label>Return till retirement</label></div>
+          <div class="amount-box"><input type="text" id="preReturnInput" value="12%"></div>
+          <input type="range" id="preReturnRange" min="4" max="20" step="0.5" value="12">
+        </div>
+        <div class="field">
+          <div class="field-top"><label>Return after retirement</label></div>
+          <div class="amount-box"><input type="text" id="postReturnInput" value="7%"></div>
+          <input type="range" id="postReturnRange" min="2" max="14" step="0.5" value="7">
+        </div>
+      </div>
+
+      <hr class="div">
+
+      <div class="field">
+        <label>How do you want to invest?</label>
+        <div class="sip-toggle">
+          <button class="active" data-mode="flat">Flat SIP</button>
+          <button data-mode="stepup">Step-up SIP</button>
+        </div>
+      </div>
+
+      <div class="field stepup-field" id="stepupField">
+        <div class="field-top"><label>Annual step-up</label>
+          <div class="amount-box" style="width:70px;"><input type="text" id="stepupInput" value="10%"></div>
+        </div>
+        <input type="range" id="stepupRange" min="0" max="25" step="1" value="10">
+        <div class="range-labels"><span>0%</span><span>25%</span></div>
+      </div>
+
+      <button class="cta-invest">Talk to a retirement advisor →</button>
+    </div>
+
+    <div class="calc-result">
+      <div class="result-row">
+        <div class="result-block">
+          <div class="result-label">Monthly expense at retirement</div>
+          <div class="result-value small" id="futureExpense">₹0</div>
+        </div>
+        <div class="result-block">
+          <div class="result-label">Retirement corpus needed</div>
+          <div class="result-value small" id="corpusNeeded">₹0</div>
+        </div>
+      </div>
+
+      <div class="sip-hero">
+        <div class="lbl" id="sipHeroLabel">Flat monthly SIP needed, starting today</div>
+        <div class="val"><span id="sipNeeded">₹0</span></div>
+        <div class="note" id="sipNote">On top of what your current investments will grow into by retirement.</div>
+      </div>
+
+      <div class="donut-row">
+        <svg width="110" height="110" viewBox="0 0 120 120" id="donut">
+          <circle cx="60" cy="60" r="48" fill="none" stroke="#e9edf3" stroke-width="16"/>
+          <circle id="donutArc" cx="60" cy="60" r="48" fill="none" stroke="#dd7300" stroke-width="16" stroke-linecap="round" transform="rotate(-90 60 60)"/>
+          <text id="donutPct" x="60" y="66" text-anchor="middle" font-size="17" font-weight="700" fill="#042b62" font-family="Google Sans, Roboto, sans-serif">0%</text>
+        </svg>
+        <div class="legend">
+          <div class="legend-row"><span class="lbl"><span class="dot" style="background:#042b62;"></span>Current investments (grown)</span><span class="val" id="existingVal">₹0</span></div>
+          <div class="legend-row"><span class="lbl"><span class="dot" style="background:#dd7300;"></span>Built by new SIP</span><span class="val" id="sipBuiltVal" style="color:var(--orange);">₹0</span></div>
+        </div>
+      </div>
+
+      <div class="chart-wrap">
+        <svg id="growthChart" width="100%" height="130" viewBox="0 0 480 130" preserveAspectRatio="none"></svg>
+        <div class="chart-foot"><span>Age <span id="chartAgeStart">30</span></span><span id="chartAgeEnd">Age 60 · retirement</span></div>
+      </div>
+
+      <div class="disclaimer">Illustrative only. Assumes returns and inflation stay constant every year — actual markets will vary. Not investment advice.</div>
+    </div>
+  </section>
+
+  <section class="table-card">
+    <div class="table-head">
+      <div>
+        <h2>Will your corpus last?</h2>
+        <p>Corpus projected during retirement, drawing down your inflation-adjusted expenses each year.</p>
+      </div>
+    </div>
+    <div class="drawdown-flex">
+      <div>
+        <svg id="drawdownChart" width="100%" height="180" viewBox="0 0 460 180" preserveAspectRatio="none"></svg>
+        <div class="chart-foot"><span id="drawdownAgeStart">Age 60</span><span id="drawdownAgeEnd">Age 85</span></div>
+      </div>
+      <div class="growth-table-wrap">
+        <table>
+          <thead><tr><th>AGE</th><th>WITHDRAWAL</th><th>YEAR-END CORPUS</th></tr></thead>
+          <tbody id="drawdownBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="table-card">
+    <div class="table-head">
+      <div>
+        <h2>Flat SIP vs Step-up SIP</h2>
+        <p>Two ways to reach the same corpus — compare the monthly outgo and total invested.</p>
+      </div>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-card" id="flatCompareCard">
+        <h3>Flat SIP</h3>
+        <div class="compare-row"><span>Monthly SIP (constant)</span><span class="v" id="cmpFlatSip">₹0</span></div>
+        <div class="compare-row"><span>Total invested</span><span class="v" id="cmpFlatInvested">₹0</span></div>
+        <div class="compare-row"><span>Corpus at retirement</span><span class="v" id="cmpFlatCorpus">₹0</span></div>
+      </div>
+      <div class="compare-card" id="stepupCompareCard">
+        <h3>Step-up SIP</h3>
+        <div class="compare-row"><span>Starting monthly SIP</span><span class="v" id="cmpStepupSip">₹0</span></div>
+        <div class="compare-row"><span>Total invested</span><span class="v" id="cmpStepupInvested">₹0</span></div>
+        <div class="compare-row"><span>Corpus at retirement</span><span class="v" id="cmpStepupCorpus">₹0</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-grid">
+    <div class="info-card">
+      <h2>How this calculator works</h2>
+      <p>Your monthly expenses are first inflated to what they'll cost at the age you retire. That future monthly expense is turned into a retirement corpus — a lump sum big enough to fund inflation-adjusted withdrawals every year from retirement until your life expectancy, assuming the leftover corpus keeps earning your post-retirement return.</p>
+      <p>Whatever your current investments will grow into by retirement is subtracted from that corpus. What's left is the gap a new SIP needs to close — shown either as one constant flat SIP, or as a smaller starting SIP that increases every year if you choose the step-up option.</p>
+      <div class="formula-box">
+        <div class="f">Corpus = W × [1 – (1+r)⁻ⁿ] / r × (1+r)</div>
+        <div class="k"><span><b>W</b> — expense in year 1 of retirement</span><span><b>r</b> — real return after inflation</span><span><b>n</b> — years in retirement</span></div>
+      </div>
+    </div>
+    <div class="info-card">
+      <h2>Common questions</h2>
+      <div class="faq-item">What if my corpus runs out early?<span class="plus">+</span></div>
+      <div class="faq-item">Should I use pre-tax or post-tax returns?<span class="plus">+</span></div>
+      <div class="faq-item">Does this include a pension or NPS payout?<span class="plus">+</span></div>
+      <div class="faq-item">Flat SIP or step-up SIP — which should I pick?<span class="plus">+</span></div>
+    </div>
+  </section>
+
+  <section class="related">
+    <h2>Related calculators</h2>
+    <div class="related-grid">
+      <div class="related-card">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg></span>
+        <div><div class="t">SIP Calculator</div><div class="s">Monthly investing, projected</div></div>
+      </div>
+      <div class="related-card">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="3" height="9"/><rect x="10.5" y="6" width="3" height="13"/><rect x="17" y="3" width="3" height="16"/></svg></span>
+        <div><div class="t">Step-Up SIP Calculator</div><div class="s">Annual increases, modelled</div></div>
+      </div>
+      <div class="related-card">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></span>
+        <div><div class="t">Goal Planner</div><div class="s">Back-calculate your SIP</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div>
+      <h3>Turn this plan into an actual retirement portfolio.</h3>
+      <p>A Fintoo advisor can help you pick the funds, set up the SIP, and review it every year, at no extra cost to browse.</p>
+    </div>
+    <button>Talk to an advisor →</button>
+  </section>
+
+  <footer>
+    <div>© 2026 Fintoo. SEBI-registered investment adviser.</div>
+    <div class="links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a></div>
+  </footer>
+</main>
+
+<script>
+const fmt = n => '₹' + Math.round(Math.max(0,n)).toLocaleString('en-IN');
+const $ = id => document.getElementById(id);
+
+const els = {
+  curAgeInput: $('curAgeInput'), curAgeRange: $('curAgeRange'),
+  retAgeInput: $('retAgeInput'), retAgeRange: $('retAgeRange'),
+  lifeExpInput: $('lifeExpInput'), lifeExpRange: $('lifeExpRange'),
+  expenseInput: $('expenseInput'), expenseRange: $('expenseRange'),
+  inflationInput: $('inflationInput'), inflationRange: $('inflationRange'),
+  currentSavingsInput: $('currentSavingsInput'), currentSavingsRange: $('currentSavingsRange'),
+  preReturnInput: $('preReturnInput'), preReturnRange: $('preReturnRange'),
+  postReturnInput: $('postReturnInput'), postReturnRange: $('postReturnRange'),
+  stepupInput: $('stepupInput'), stepupRange: $('stepupRange'),
+};
+
+let mode = 'flat';
+document.querySelectorAll('.sip-toggle button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.sip-toggle button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    mode = btn.dataset.mode;
+    $('stepupField').classList.toggle('show', mode==='stepup');
+    render();
+  });
+});
+
+function parseNum(str){ return parseFloat(String(str).replace(/[^0-9.]/g,'')) || 0; }
+
+// ---- Core retirement math ----
+function computeCorpusNeeded(monthlyExpenseAtRetirement, inflation, postReturn, yearsInRetirement){
+  const W = monthlyExpenseAtRetirement*12; // annual expense, year 1 of retirement
+  const rReal = ((1+postReturn)/(1+inflation)) - 1;
+  const n = yearsInRetirement;
+  if(Math.abs(rReal) < 1e-6){
+    return W*n;
+  }
+  return W * (1-Math.pow(1+rReal,-n))/rReal * (1+rReal);
+}
+
+function flatSipForTarget(target, monthlyRate, months){
+  if(target<=0) return 0;
+  if(Math.abs(monthlyRate) < 1e-9) return target/months;
+  const r = monthlyRate;
+  return target * r / ((Math.pow(1+r,months)-1)*(1+r));
+}
+
+function stepUpSipFV(P, monthlyRate, months, stepAnnual){
+  let balance=0;
+  for(let m=1;m<=months;m++){
+    const yearIndex = Math.floor((m-1)/12);
+    const sip = P*Math.pow(1+stepAnnual, yearIndex);
+    balance = balance*(1+monthlyRate) + sip;
+  }
+  return balance;
+}
+
+function stepUpSipForTarget(target, monthlyRate, months, stepAnnual){
+  if(target<=0) return 0;
+  let lo=0, hi=target;
+  for(let i=0;i<60;i++){
+    const mid=(lo+hi)/2;
+    if(stepUpSipFV(mid, monthlyRate, months, stepAnnual) < target) lo=mid; else hi=mid;
+  }
+  return (lo+hi)/2;
+}
+
+function invertedTotal(P, months, stepAnnual){
+  let total=0;
+  for(let m=1;m<=months;m++){
+    const yearIndex = Math.floor((m-1)/12);
+    total += P*Math.pow(1+stepAnnual, yearIndex);
+  }
+  return total;
+}
+
+function drawGrowthChart(svgId, values, colorStroke, colorFillTop){
+  const svg = document.getElementById(svgId);
+  const vb = svg.viewBox.baseVal;
+  const W = vb.width, H = vb.height, pad=6;
+  const maxV = Math.max(...values, 1);
+  const pts = values.map((v,i)=>{
+    const x = pad + (i/(values.length-1||1))*(W-2*pad);
+    const y = H-pad - (v/maxV)*(H-2*pad);
+    return [x,y];
+  });
+  const linePath = pts.map((p,i)=> (i===0?'M':'L')+p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');
+  const areaPath = linePath + ` L${pts[pts.length-1][0].toFixed(1)},${H} L${pts[0][0].toFixed(1)},${H} Z`;
+  const gradId = svgId+'Grad';
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="${gradId}" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="${colorFillTop}" stop-opacity="0.25"/>
+        <stop offset="100%" stop-color="${colorFillTop}" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <path d="${areaPath}" fill="url(#${gradId})" stroke="none"/>
+    <path d="${linePath}" fill="none" stroke="${colorStroke}" stroke-width="2.5"/>
+    <circle cx="${pts[pts.length-1][0]}" cy="${pts[pts.length-1][1]}" r="4.5" fill="${colorStroke}"/>
+  `;
+}
+
+function drawDonut(pct){
+  const circumference = 2*Math.PI*48;
+  const arc = document.getElementById('donutArc');
+  const clamped = Math.max(0, Math.min(100, pct));
+  arc.setAttribute('stroke-dasharray', `${circumference}`);
+  arc.setAttribute('stroke-dashoffset', `${circumference*(1-clamped/100)}`);
+  document.getElementById('donutPct').textContent = Math.round(clamped)+'%';
+}
+
+function render(){
+  const curAge = parseNum(els.curAgeInput.value);
+  const retAge = parseNum(els.retAgeInput.value);
+  const lifeExp = parseNum(els.lifeExpInput.value);
+  const expense = parseNum(els.expenseInput.value);
+  const inflation = parseNum(els.inflationInput.value)/100;
+  const currentSavings = parseNum(els.currentSavingsInput.value);
+  const preReturn = parseNum(els.preReturnInput.value)/100;
+  const postReturn = parseNum(els.postReturnInput.value)/100;
+  const stepup = parseNum(els.stepupInput.value)/100;
+
+  els.curAgeRange.value = curAge; els.retAgeRange.value = retAge; els.lifeExpRange.value = lifeExp;
+  els.expenseRange.value = expense; els.inflationRange.value = inflation*100;
+  els.currentSavingsRange.value = currentSavings; els.preReturnRange.value = preReturn*100;
+  els.postReturnRange.value = postReturn*100; els.stepupRange.value = stepup*100;
+
+  const yearsToRetirement = Math.max(1, retAge-curAge);
+  const yearsInRetirement = Math.max(1, lifeExp-retAge);
+  const monthsToRetirement = yearsToRetirement*12;
+
+  const futureExpense = expense * Math.pow(1+inflation, yearsToRetirement);
+  const corpusNeeded = computeCorpusNeeded(futureExpense, inflation, postReturn, yearsInRetirement);
+  const existingFV = currentSavings * Math.pow(1+preReturn, yearsToRetirement);
+  const gap = Math.max(0, corpusNeeded - existingFV);
+
+  const preMonthlyRate = preReturn/12;
+  const flatSip = flatSipForTarget(gap, preMonthlyRate, monthsToRetirement);
+  const stepupSip = stepUpSipForTarget(gap, preMonthlyRate, monthsToRetirement, stepup);
+
+  document.getElementById('futureExpense').textContent = fmt(futureExpense);
+  document.getElementById('corpusNeeded').textContent = fmt(corpusNeeded);
+
+  if(mode==='flat'){
+    document.getElementById('sipHeroLabel').textContent = 'Flat monthly SIP needed, starting today';
+    document.getElementById('sipNeeded').textContent = fmt(flatSip);
+    document.getElementById('sipNote').textContent = 'Stays constant every month until retirement.';
+  } else {
+    document.getElementById('sipHeroLabel').textContent = 'Starting monthly SIP needed (step-up)';
+    document.getElementById('sipNeeded').textContent = fmt(stepupSip);
+    document.getElementById('sipNote').textContent = `Increases ${Math.round(stepup*100)}% every year after this.`;
+  }
+
+  document.getElementById('existingVal').textContent = fmt(existingFV);
+  document.getElementById('sipBuiltVal').textContent = fmt(gap);
+  const totalCorpus = existingFV+gap;
+  drawDonut(totalCorpus>0 ? 100*gap/totalCorpus : 0);
+
+  // Accumulation chart: year-by-year corpus growth to retirement
+  const chosenSip = mode==='flat' ? flatSip : stepupSip;
+  const accValues = [];
+  let bal = currentSavings;
+  accValues.push(bal);
+  for(let y=1;y<=yearsToRetirement;y++){
+    for(let m=1;m<=12;m++){
+      let sipThisMonth;
+      if(mode==='flat'){
+        sipThisMonth = flatSip;
+      } else {
+        const yearIndex = y-1;
+        sipThisMonth = stepupSip*Math.pow(1+stepup, yearIndex);
+      }
+      bal = bal*(1+preMonthlyRate) + sipThisMonth;
+    }
+    accValues.push(bal);
+  }
+  drawGrowthChart('growthChart', accValues, '#dd7300', '#dd7300');
+  document.getElementById('chartAgeStart').textContent = curAge;
+  document.getElementById('chartAgeEnd').textContent = 'Age '+retAge+' · retirement';
+
+  // Drawdown simulation during retirement
+  let corpusAtRetirement = accValues[accValues.length-1];
+  let drawBal = corpusAtRetirement;
+  const drawValues = [drawBal];
+  const drawRows = [];
+  let withdrawal = futureExpense*12;
+  for(let y=1;y<=yearsInRetirement;y++){
+    drawBal = drawBal - withdrawal;
+    const negative = drawBal < 0;
+    drawBal = drawBal*(1+postReturn);
+    drawValues.push(Math.max(0,drawBal));
+    drawRows.push({age: retAge+y, withdrawal, corpus: drawBal, negative});
+    withdrawal = withdrawal*(1+inflation);
+  }
+  drawGrowthChart('drawdownChart', drawValues, '#042b62', '#042b62');
+  document.getElementById('drawdownAgeStart').textContent = 'Age '+retAge;
+  document.getElementById('drawdownAgeEnd').textContent = 'Age '+lifeExp;
+
+  const dbody = document.getElementById('drawdownBody');
+  dbody.innerHTML = drawRows.map(r=>`
+    <tr>
+      <td>${r.age}</td>
+      <td>${fmt(r.withdrawal)}</td>
+      <td class="${r.corpus<0?'loss':''}">${r.corpus<0? '–'+fmt(Math.abs(r.corpus)) : fmt(r.corpus)}</td>
+    </tr>
+  `).join('');
+
+  // Flat vs Step-up comparison (always both, regardless of toggle)
+  const flatTotalInvested = flatSip*monthsToRetirement;
+  const flatCorpusReached = existingFV + flatSipFV(flatSip, preMonthlyRate, monthsToRetirement);
+  const stepupTotalInvested = invertedTotal(stepupSip, monthsToRetirement, stepup);
+  const stepupCorpusReached = existingFV + stepUpSipFV(stepupSip, preMonthlyRate, monthsToRetirement, stepup);
+
+  document.getElementById('cmpFlatSip').textContent = fmt(flatSip);
+  document.getElementById('cmpFlatInvested').textContent = fmt(flatTotalInvested);
+  document.getElementById('cmpFlatCorpus').textContent = fmt(flatCorpusReached);
+
+  document.getElementById('cmpStepupSip').textContent = fmt(stepupSip);
+  document.getElementById('cmpStepupInvested').textContent = fmt(stepupTotalInvested);
+  document.getElementById('cmpStepupCorpus').textContent = fmt(stepupCorpusReached);
+
+  const flatCard = document.getElementById('flatCompareCard');
+  const stepupCard = document.getElementById('stepupCompareCard');
+  flatCard.classList.remove('winner'); stepupCard.classList.remove('winner');
+  flatCard.querySelector('.badge')?.remove(); stepupCard.querySelector('.badge')?.remove();
+  const activeCard = mode==='flat' ? flatCard : stepupCard;
+  activeCard.classList.add('winner');
+  const b = document.createElement('span'); b.className='badge'; b.textContent='SELECTED';
+  activeCard.appendChild(b);
+}
+
+function flatSipFV(P, r, n){
+  if(Math.abs(r)<1e-9) return P*n;
+  return P * ((Math.pow(1+r,n)-1)/r) * (1+r);
+}
+
+// Explicit field config: avoids fragile string-matching on ids.
+const fieldConfig = [
+  {range: els.curAgeRange, input: els.curAgeInput, type: 'plain'},
+  {range: els.retAgeRange, input: els.retAgeInput, type: 'plain'},
+  {range: els.lifeExpRange, input: els.lifeExpInput, type: 'plain'},
+  {range: els.expenseRange, input: els.expenseInput, type: 'currency'},
+  {range: els.inflationRange, input: els.inflationInput, type: 'percent'},
+  {range: els.currentSavingsRange, input: els.currentSavingsInput, type: 'currency'},
+  {range: els.preReturnRange, input: els.preReturnInput, type: 'percent'},
+  {range: els.postReturnRange, input: els.postReturnInput, type: 'percent'},
+  {range: els.stepupRange, input: els.stepupInput, type: 'percent'},
+];
+
+fieldConfig.forEach(({range, input, type})=>{
+  range.addEventListener('input', ()=>{
+    if(type==='currency') input.value = parseInt(range.value).toLocaleString('en-IN');
+    else if(type==='percent') input.value = range.value+'%';
+    else input.value = range.value;
+    render();
+  });
+  input.addEventListener('input', render);
+  input.addEventListener('blur', ()=>{
+    let v = parseNum(input.value);
+    const min = parseFloat(range.min), max = parseFloat(range.max);
+    v = Math.min(max, Math.max(min, v));
+    if(type==='currency') input.value = Math.round(v).toLocaleString('en-IN');
+    else if(type==='percent') input.value = v+'%';
+    else input.value = Math.round(v);
+    render();
+  });
+});
+
+render();
+</script>
+
+</body>
+</html>
