@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumpsum Calculator — Fintoo</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700;800&family=Google+Sans+Text:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: {
+            50:  '#f4f6fb',
+            100: '#e7ecf6',
+            200: '#c9d5ea',
+            600: '#0a3f82',
+            700: '#063569',
+            800: '#053061',
+            900: '#042b62',
+          },
+          brand: {
+            50:  '#fff8ef',
+            100: '#fdedd9',
+            500: '#e88414',
+            600: '#dd7300',
+            700: '#b85f00',
+          },
+          ink: '#0e1626',
+          canvas: '#fbfcfe',
+        },
+        fontFamily: {
+          sans: ['"Google Sans Text"', '"Google Sans"', 'Roboto', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          display: ['"Google Sans"', 'Roboto', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        },
+        boxShadow: {
+          card: '0 1px 2px rgba(4,43,98,0.04), 0 1px 3px rgba(4,43,98,0.03)',
+          'card-hover': '0 12px 24px -8px rgba(4,43,98,0.16), 0 4px 8px -2px rgba(4,43,98,0.06)',
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  html { scroll-behavior: smooth; }
+  .num { font-variant-numeric: tabular-nums; }
+  ::selection { background: #fdedd9; color: #042b62; }
+
+  /* range slider */
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(to right, #dd7300 var(--fill,50%), #e7ecf6 var(--fill,50%));
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 3px solid #042b62;
+    box-shadow: 0 2px 6px rgba(4,43,98,0.25);
+    cursor: pointer;
+    transition: transform .15s ease;
+  }
+  input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.1); }
+  input[type="range"]::-moz-range-thumb {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 3px solid #042b62;
+    box-shadow: 0 2px 6px rgba(4,43,98,0.25);
+    cursor: pointer;
+  }
+  input[type="range"]::-moz-range-track {
+    height: 6px;
+    border-radius: 999px;
+    background: #e7ecf6;
+  }
+
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+
+  #growth-fill { transition: d .15s ease-out; }
+  #growth-line { transition: d .15s ease-out; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    #growth-fill, #growth-line { transition: none !important; }
+  }
+</style>
+</head>
+
+<body class="bg-canvas text-ink font-sans antialiased">
+
+<!-- ============ NAV ============ -->
+<nav class="sticky top-0 z-40 border-b border-navy-100/80 bg-canvas/85 backdrop-blur-md">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
+    <a href="fintoo-tools.html" class="flex items-center gap-2">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+        <rect x="2" y="2" width="20" height="20" rx="6" fill="#042b62"/>
+        <path d="M7 16.5V12c0-2.76 2.24-5 5-5s5 2.24 5 5" stroke="#dd7300" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="7" cy="16.5" r="1.4" fill="#ffffff"/>
+      </svg>
+      <span class="font-display text-[19px] font-bold tracking-tight text-navy-900">fintoo</span>
+    </a>
+
+    <div class="hidden items-center gap-8 md:flex">
+      <a href="#" class="text-[14.5px] font-medium text-slate-600 hover:text-navy-900 transition-colors">Invest</a>
+      <a href="#" class="text-[14.5px] font-medium text-slate-600 hover:text-navy-900 transition-colors">Plan</a>
+      <a href="#" class="text-[14.5px] font-medium text-slate-600 hover:text-navy-900 transition-colors">Learn</a>
+      <a href="fintoo-tools.html" class="relative text-[14.5px] font-semibold text-navy-900">
+        Tools
+        <span class="absolute -bottom-[18px] left-0 right-0 h-[2.5px] rounded-full bg-brand-600"></span>
+      </a>
+    </div>
+
+    <a href="#" class="rounded-full bg-navy-900 px-5 py-2.5 text-[13.5px] font-semibold text-white shadow-card transition-all hover:bg-navy-800 hover:shadow-card-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy-900">
+      Talk to an advisor
+    </a>
+  </div>
+</nav>
+
+<!-- ============ BREADCRUMB + TITLE ============ -->
+<header class="mx-auto max-w-7xl px-6 pt-8 lg:px-10">
+  <div class="flex items-center gap-1.5 text-[13px] text-slate-500">
+    <a href="fintoo-tools.html" class="hover:text-navy-700">Tools</a>
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+    <span class="font-medium text-navy-800">Lumpsum Calculator</span>
+  </div>
+
+  <div class="mt-5 flex flex-wrap items-center gap-4">
+    <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-100 text-brand-600">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+        <ellipse cx="12" cy="6.5" rx="7" ry="2.8"/>
+        <path d="M5 6.5v5.2c0 1.55 3.13 2.8 7 2.8s7-1.25 7-2.8V6.5"/>
+        <path d="M5 11.7v5.2c0 1.55 3.13 2.8 7 2.8s7-1.25 7-2.8v-5.2"/>
+      </svg>
+    </div>
+    <div>
+      <h1 class="font-display text-[1.9rem] font-bold tracking-tight text-navy-900 sm:text-4xl">Lumpsum Calculator</h1>
+      <p class="mt-1 max-w-xl text-[14.5px] leading-relaxed text-slate-500">Project what a one-time investment grows into, at any expected rate of return.</p>
+    </div>
+  </div>
+</header>
+
+<!-- ============ CALCULATOR ============ -->
+<main class="mx-auto max-w-7xl px-6 py-10 lg:px-10">
+  <div class="grid grid-cols-1 gap-6 rounded-3xl border border-navy-100 bg-white p-6 shadow-card-hover sm:p-8 lg:grid-cols-[1fr_1.1fr] lg:gap-10">
+
+    <!-- ---- INPUTS ---- -->
+    <div class="flex flex-col gap-8">
+
+      <div>
+        <div class="flex items-center justify-between">
+          <label for="amount-range" class="text-[13.5px] font-semibold text-navy-900">Lumpsum amount</label>
+          <div class="flex items-center rounded-lg border border-navy-100 bg-navy-50 px-3 py-1.5">
+            <span class="text-[13.5px] font-semibold text-navy-700">₹</span>
+            <input id="amount-input" type="text" inputmode="numeric" value="1,00,000"
+              class="num w-28 bg-transparent text-right text-[13.5px] font-semibold text-navy-900 outline-none">
+          </div>
+        </div>
+        <input id="amount-range" type="range" min="1000" max="10000000" step="1000" value="100000" class="mt-3 w-full">
+        <div class="mt-1.5 flex justify-between text-[11.5px] text-slate-400">
+          <span>₹1,000</span><span>₹1 Cr</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between">
+          <label for="rate-range" class="text-[13.5px] font-semibold text-navy-900">Expected return rate (p.a.)</label>
+          <div class="flex items-center rounded-lg border border-navy-100 bg-navy-50 px-3 py-1.5">
+            <input id="rate-input" type="text" inputmode="decimal" value="12"
+              class="num w-10 bg-transparent text-right text-[13.5px] font-semibold text-navy-900 outline-none">
+            <span class="text-[13.5px] font-semibold text-navy-700">%</span>
+          </div>
+        </div>
+        <input id="rate-range" type="range" min="1" max="30" step="0.5" value="12" class="mt-3 w-full">
+        <div class="mt-1.5 flex justify-between text-[11.5px] text-slate-400">
+          <span>1%</span><span>30%</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between">
+          <label for="years-range" class="text-[13.5px] font-semibold text-navy-900">Time period</label>
+          <div class="flex items-center rounded-lg border border-navy-100 bg-navy-50 px-3 py-1.5">
+            <input id="years-input" type="text" inputmode="numeric" value="10"
+              class="num w-8 bg-transparent text-right text-[13.5px] font-semibold text-navy-900 outline-none">
+            <span class="text-[13.5px] font-semibold text-navy-700">Yr</span>
+          </div>
+        </div>
+        <input id="years-range" type="range" min="1" max="40" step="1" value="10" class="mt-3 w-full">
+        <div class="mt-1.5 flex justify-between text-[11.5px] text-slate-400">
+          <span>1 Yr</span><span>40 Yr</span>
+        </div>
+      </div>
+
+      <div class="mt-auto flex flex-wrap gap-3 border-t border-navy-50 pt-6">
+        <a href="#" class="inline-flex items-center gap-2 rounded-full bg-navy-900 px-6 py-3 text-[13.5px] font-semibold text-white shadow-card transition-all hover:bg-navy-800 hover:shadow-card-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy-900">
+          Start investing this amount
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- ---- RESULTS ---- -->
+    <div class="flex flex-col rounded-2xl bg-navy-50/60 p-6 sm:p-7">
+      <p class="text-[12.5px] font-medium text-slate-500">Total value after <span id="result-years-label" class="font-semibold text-navy-800">10 years</span></p>
+      <p id="result-total" class="num mt-1 font-display text-[2.5rem] font-bold leading-none text-navy-900">₹3,10,585</p>
+
+      <div class="mt-6 flex items-center gap-6">
+        <div class="relative flex h-28 w-28 shrink-0 items-center justify-center rounded-full" id="donut" style="background: conic-gradient(#042b62 0% 32.2%, #dd7300 32.2% 100%);">
+          <div class="flex h-[76px] w-[76px] items-center justify-center rounded-full bg-white">
+            <span id="donut-pct" class="num text-[13px] font-bold text-brand-600">68%</span>
+          </div>
+        </div>
+        <div class="flex flex-1 flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <span class="flex items-center gap-2 text-[13px] text-slate-500"><i class="h-2 w-2 rounded-full bg-navy-900"></i>Invested amount</span>
+            <span id="result-invested" class="num text-[13.5px] font-semibold text-navy-900">₹1,00,000</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="flex items-center gap-2 text-[13px] text-slate-500"><i class="h-2 w-2 rounded-full bg-brand-600"></i>Est. returns</span>
+            <span id="result-returns" class="num text-[13.5px] font-semibold text-brand-600">₹2,10,585</span>
+          </div>
+        </div>
+      </div>
+
+      <svg id="growth-chart" viewBox="0 0 560 190" class="mt-6 w-full" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="fillGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#dd7300" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#dd7300" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <line id="baseline" x1="12" x2="548" y1="126.9" y2="126.9" stroke="#c9d5ea" stroke-width="1" stroke-dasharray="3 4"/>
+        <path id="growth-fill" d="" fill="url(#fillGrad)" stroke="none"/>
+        <path id="growth-line" d="" fill="none" stroke="#dd7300" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle id="growth-dot" cx="548" cy="27.7" r="4.5" fill="#dd7300"/>
+      </svg>
+      <div class="mt-1 flex justify-between text-[11px] text-slate-400">
+        <span>Year 0</span>
+        <span id="chart-year-label">Year 10</span>
+      </div>
+
+      <p class="mt-4 text-[11.5px] leading-relaxed text-slate-400">Illustrative only. Mutual fund investments are subject to market risk; the return shown is an assumption, not a guarantee.</p>
+    </div>
+  </div>
+
+  <!-- ---- YEAR-WISE BREAKUP ---- -->
+  <div class="mt-6 rounded-3xl border border-navy-100 bg-white p-6 shadow-card sm:p-8">
+    <div class="flex items-center justify-between">
+      <h2 class="font-display text-[1.15rem] font-bold text-navy-900">Year-wise growth</h2>
+      <span class="text-[12.5px] text-slate-400">Scroll to see all years</span>
+    </div>
+    <div class="mt-4 max-h-72 overflow-y-auto rounded-xl border border-navy-50">
+      <table class="w-full border-collapse">
+        <thead class="sticky top-0 bg-navy-50">
+          <tr>
+            <th class="py-2.5 pl-4 text-left text-[12px] font-semibold uppercase tracking-wide text-slate-500">Year</th>
+            <th class="py-2.5 text-right text-[12px] font-semibold uppercase tracking-wide text-slate-500">Value</th>
+            <th class="py-2.5 pr-4 text-right text-[12px] font-semibold uppercase tracking-wide text-slate-500">Wealth gained</th>
+          </tr>
+        </thead>
+        <tbody id="year-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ---- EXPLAINER ---- -->
+  <div class="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1.3fr_1fr]">
+    <div class="rounded-3xl border border-navy-100 bg-white p-6 shadow-card sm:p-8">
+      <h2 class="font-display text-[1.15rem] font-bold text-navy-900">What is a lumpsum investment?</h2>
+      <p class="mt-3 text-[14px] leading-relaxed text-slate-600">A lumpsum investment means putting a single, one-time amount into a mutual fund or other market-linked instrument, rather than spreading it out over several instalments. It suits money you already have on hand — a bonus, a maturity payout, or savings you're ready to deploy in one go.</p>
+      <p class="mt-3 text-[14px] leading-relaxed text-slate-600">Because the full amount is invested from day one, it has more time in the market to compound — but it's also more exposed to short-term timing, since there's no averaging across market highs and lows the way a SIP provides.</p>
+
+      <h3 class="mt-6 text-[14px] font-semibold text-navy-900">How this calculator works</h3>
+      <div class="mt-3 rounded-2xl bg-navy-50/60 p-5">
+        <p class="font-display text-[15px] font-semibold text-navy-900">A&nbsp; = &nbsp;P &times; (1 + r)<sup>t</sup></p>
+        <div class="mt-3 grid grid-cols-2 gap-x-4 gap-y-1.5 text-[12.5px] text-slate-500 sm:grid-cols-4">
+          <span><b class="text-navy-800">A</b> — final value</span>
+          <span><b class="text-navy-800">P</b> — amount invested</span>
+          <span><b class="text-navy-800">r</b> — annual return</span>
+          <span><b class="text-navy-800">t</b> — years invested</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rounded-3xl border border-navy-100 bg-white p-6 shadow-card sm:p-8">
+      <h2 class="font-display text-[1.15rem] font-bold text-navy-900">Common questions</h2>
+      <div class="mt-3 divide-y divide-navy-50">
+
+        <details class="group py-3.5">
+          <summary class="flex cursor-pointer items-center justify-between gap-3">
+            <span class="text-[13.5px] font-semibold text-navy-900">Lumpsum vs SIP — which is better?</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0a3f82" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 transition-transform group-open:rotate-45"><path d="M12 5v14M5 12h14"/></svg>
+          </summary>
+          <p class="mt-2.5 text-[13.5px] leading-relaxed text-slate-500">Neither is universally better — a lumpsum suits money you already have; a SIP suits money you'll earn over time and want to invest gradually, which also averages out your purchase price.</p>
+        </details>
+
+        <details class="group py-3.5">
+          <summary class="flex cursor-pointer items-center justify-between gap-3">
+            <span class="text-[13.5px] font-semibold text-navy-900">Is the return shown here guaranteed?</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0a3f82" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 transition-transform group-open:rotate-45"><path d="M12 5v14M5 12h14"/></svg>
+          </summary>
+          <p class="mt-2.5 text-[13.5px] leading-relaxed text-slate-500">No. The rate you set is an assumption for illustration only. Actual returns from market-linked instruments go up and down with the market and are never guaranteed.</p>
+        </details>
+
+        <details class="group py-3.5">
+          <summary class="flex cursor-pointer items-center justify-between gap-3">
+            <span class="text-[13.5px] font-semibold text-navy-900">Can I withdraw before the full period?</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0a3f82" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 transition-transform group-open:rotate-45"><path d="M12 5v14M5 12h14"/></svg>
+          </summary>
+          <p class="mt-2.5 text-[13.5px] leading-relaxed text-slate-500">Usually yes, though this depends on the specific fund — some carry an exit load for early redemption, and equity gains are taxed differently depending on how long you've held them.</p>
+        </details>
+
+        <details class="group py-3.5">
+          <summary class="flex cursor-pointer items-center justify-between gap-3">
+            <span class="text-[13.5px] font-semibold text-navy-900">Does this account for taxes or fees?</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0a3f82" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 transition-transform group-open:rotate-45"><path d="M12 5v14M5 12h14"/></svg>
+          </summary>
+          <p class="mt-2.5 text-[13.5px] leading-relaxed text-slate-500">No — this is a pre-tax, pre-expense estimate. Fund expense ratios and capital gains tax will both reduce your actual take-home amount.</p>
+        </details>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ---- RELATED TOOLS ---- -->
+  <div class="mt-10">
+    <h2 class="font-display text-[1.15rem] font-bold text-navy-900">Related calculators</h2>
+    <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+
+      <a href="fintoo-tools.html" class="group flex items-center gap-3.5 rounded-2xl border border-navy-100 bg-white p-4 shadow-card transition-all hover:-translate-y-0.5 hover:border-navy-200 hover:shadow-card-hover">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-100 text-brand-600">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,17 9,11 13,15 21,5"/><polyline points="15,5 21,5 21,11"/></svg>
+        </div>
+        <div>
+          <p class="text-[13.5px] font-semibold text-navy-900">SIP Calculator</p>
+          <p class="text-[12px] text-slate-500">Monthly investing, projected</p>
+        </div>
+      </a>
+
+      <a href="fintoo-tools.html" class="group flex items-center gap-3.5 rounded-2xl border border-navy-100 bg-white p-4 shadow-card transition-all hover:-translate-y-0.5 hover:border-navy-200 hover:shadow-card-hover">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-100 text-brand-600">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="15" width="4" height="6" rx="0.8"/><rect x="9" y="10.5" width="4" height="10.5" rx="0.8"/><rect x="15" y="6" width="4" height="15" rx="0.8"/></svg>
+        </div>
+        <div>
+          <p class="text-[13.5px] font-semibold text-navy-900">Step-Up SIP Calculator</p>
+          <p class="text-[12px] text-slate-500">Annual increases, modelled</p>
+        </div>
+      </a>
+
+      <a href="fintoo-tools.html" class="group flex items-center gap-3.5 rounded-2xl border border-navy-100 bg-white p-4 shadow-card transition-all hover:-translate-y-0.5 hover:border-navy-200 hover:shadow-card-hover">
+        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-100 text-brand-600">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.8"/><circle cx="12" cy="12" r="1.1" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <div>
+          <p class="text-[13.5px] font-semibold text-navy-900">Goal Planner</p>
+          <p class="text-[12px] text-slate-500">Back-calculate your SIP</p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ---- CTA BANNER ---- -->
+  <div class="relative mt-12 overflow-hidden rounded-3xl bg-navy-900 px-8 py-11 sm:px-14 sm:py-14">
+    <svg class="pointer-events-none absolute inset-0 h-full w-full opacity-[0.16]" preserveAspectRatio="none" viewBox="0 0 800 220">
+      <polyline points="0,190 60,178 120,185 180,150 240,160 300,115 360,130 420,85 480,100 540,60 600,75 660,35 720,48 800,15" stroke="#dd7300" stroke-width="1.4" fill="none"/>
+    </svg>
+    <div class="relative flex flex-col items-start justify-between gap-7 sm:flex-row sm:items-center">
+      <div>
+        <h3 class="max-w-md font-display text-[1.5rem] font-bold leading-tight text-white">Turn this number into an actual investment.</h3>
+        <p class="mt-2 max-w-md text-[14px] text-navy-100/80">A Fintoo advisor can help you pick a fund and place this lumpsum, at no extra cost to browse.</p>
+      </div>
+      <a href="#" class="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-6 py-3.5 text-[14px] font-semibold text-navy-900 transition-transform hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+        Talk to an advisor
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="border-t border-navy-100">
+  <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-8 text-center sm:flex-row sm:text-left lg:px-10">
+    <p class="text-[13px] text-slate-500">© 2026 Fintoo. SEBI-registered investment adviser.</p>
+    <div class="flex items-center gap-5 text-[13px] text-slate-500">
+      <a href="#" class="hover:text-navy-800">Privacy</a>
+      <a href="#" class="hover:text-navy-800">Terms</a>
+      <a href="#" class="hover:text-navy-800">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---- elements ----
+  const amountRange = document.getElementById('amount-range');
+  const amountInput = document.getElementById('amount-input');
+  const rateRange = document.getElementById('rate-range');
+  const rateInput = document.getElementById('rate-input');
+  const yearsRange = document.getElementById('years-range');
+  const yearsInput = document.getElementById('years-input');
+
+  const resultTotal = document.getElementById('result-total');
+  const resultInvested = document.getElementById('result-invested');
+  const resultReturns = document.getElementById('result-returns');
+  const resultYearsLabel = document.getElementById('result-years-label');
+  const chartYearLabel = document.getElementById('chart-year-label');
+  const donut = document.getElementById('donut');
+  const donutPct = document.getElementById('donut-pct');
+  const tableBody = document.getElementById('year-table-body');
+
+  const growthLine = document.getElementById('growth-line');
+  const growthFill = document.getElementById('growth-fill');
+  const growthDot = document.getElementById('growth-dot');
+  const baseline = document.getElementById('baseline');
+
+  const CHART_W = 560, CHART_H = 190, PAD_X = 12, PAD_Y = 16;
+
+  // ---- helpers ----
+  function toINR(num) {
+    return Math.round(num).toLocaleString('en-IN');
+  }
+  function setSliderFill(rangeEl) {
+    const pct = ((rangeEl.value - rangeEl.min) / (rangeEl.max - rangeEl.min)) * 100;
+    rangeEl.style.setProperty('--fill', pct + '%');
+  }
+
+  // ---- core calc + render ----
+  function recalc() {
+    const P = parseFloat(amountRange.value);
+    const r = parseFloat(rateRange.value);
+    const t = parseInt(yearsRange.value, 10);
+
+    const FV = P * Math.pow(1 + r / 100, t);
+    const gain = FV - P;
+
+    resultTotal.textContent = '₹' + toINR(FV);
+    resultInvested.textContent = '₹' + toINR(P);
+    resultReturns.textContent = '₹' + toINR(gain);
+    resultYearsLabel.textContent = t + (t === 1 ? ' year' : ' years');
+    chartYearLabel.textContent = 'Year ' + t;
+
+    const investedPct = (P / FV) * 100;
+    donut.style.background = `conic-gradient(#042b62 0% ${investedPct}%, #dd7300 ${investedPct}% 100%)`;
+    donutPct.textContent = Math.round(100 - investedPct) + '%';
+
+    // yearly points
+    const pts = [];
+    for (let y = 0; y <= t; y++) pts.push(P * Math.pow(1 + r / 100, y));
+    const maxV = Math.max(...pts) * 1.08;
+    const stepX = (CHART_W - 2 * PAD_X) / t;
+
+    let lineD = '', fillD = '';
+    pts.forEach((v, i) => {
+      const x = PAD_X + stepX * i;
+      const y = CHART_H - PAD_Y - (v / maxV) * (CHART_H - 2 * PAD_Y);
+      lineD += (i === 0 ? 'M' : 'L') + x.toFixed(1) + ' ' + y.toFixed(1) + ' ';
+    });
+    const lastX = PAD_X + stepX * t;
+    fillD = lineD + `L ${lastX.toFixed(1)} ${CHART_H - PAD_Y} L ${PAD_X} ${CHART_H - PAD_Y} Z`;
+
+    growthLine.setAttribute('d', lineD.trim());
+    growthFill.setAttribute('d', fillD.trim());
+
+    const baseY = CHART_H - PAD_Y - (P / maxV) * (CHART_H - 2 * PAD_Y);
+    baseline.setAttribute('y1', baseY.toFixed(1));
+    baseline.setAttribute('y2', baseY.toFixed(1));
+
+    const lastY = CHART_H - PAD_Y - (pts[pts.length - 1] / maxV) * (CHART_H - 2 * PAD_Y);
+    growthDot.setAttribute('cx', lastX.toFixed(1));
+    growthDot.setAttribute('cy', lastY.toFixed(1));
+
+    // table
+    let rows = '';
+    for (let y = 0; y <= t; y++) {
+      const v = P * Math.pow(1 + r / 100, y);
+      const g = v - P;
+      rows += `<tr class="border-b border-navy-50 last:border-0">
+        <td class="py-2.5 pl-4 text-[13px] font-medium text-slate-500">Year ${y}</td>
+        <td class="py-2.5 text-right text-[13.5px] num font-semibold text-navy-900">₹${toINR(v)}</td>
+        <td class="py-2.5 pr-4 text-right text-[13px] num text-brand-600">+₹${toINR(g)}</td>
+      </tr>`;
+    }
+    tableBody.innerHTML = rows;
+  }
+
+  // ---- sync range <-> text inputs ----
+  amountRange.addEventListener('input', () => {
+    amountInput.value = Number(amountRange.value).toLocaleString('en-IN');
+    setSliderFill(amountRange);
+    recalc();
+  });
+  amountInput.addEventListener('input', () => {
+    const raw = amountInput.value.replace(/[^\d]/g, '');
+    let v = raw ? parseInt(raw, 10) : 0;
+    v = Math.min(Math.max(v, parseInt(amountRange.min)), parseInt(amountRange.max));
+    amountRange.value = v;
+    setSliderFill(amountRange);
+    recalc();
+  });
+  amountInput.addEventListener('blur', () => {
+    amountInput.value = Number(amountRange.value).toLocaleString('en-IN');
+  });
+
+  rateRange.addEventListener('input', () => {
+    rateInput.value = rateRange.value;
+    setSliderFill(rateRange);
+    recalc();
+  });
+  rateInput.addEventListener('input', () => {
+    let v = parseFloat(rateInput.value) || 0;
+    v = Math.min(Math.max(v, parseFloat(rateRange.min)), parseFloat(rateRange.max));
+    rateRange.value = v;
+    setSliderFill(rateRange);
+    recalc();
+  });
+  rateInput.addEventListener('blur', () => { rateInput.value = rateRange.value; });
+
+  yearsRange.addEventListener('input', () => {
+    yearsInput.value = yearsRange.value;
+    setSliderFill(yearsRange);
+    recalc();
+  });
+  yearsInput.addEventListener('input', () => {
+    let v = parseInt(yearsInput.value, 10) || 0;
+    v = Math.min(Math.max(v, parseInt(yearsRange.min)), parseInt(yearsRange.max));
+    yearsRange.value = v;
+    setSliderFill(yearsRange);
+    recalc();
+  });
+  yearsInput.addEventListener('blur', () => { yearsInput.value = yearsRange.value; });
+
+  // ---- init ----
+  setSliderFill(amountRange);
+  setSliderFill(rateRange);
+  setSliderFill(yearsRange);
+  recalc();
+</script>
+
+</body>
+</html>
