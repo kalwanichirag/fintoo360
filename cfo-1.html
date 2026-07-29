@@ -173,7 +173,7 @@ h1,h2,h3{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02e
 .float-chip.c1 .ic svg{stroke:#1E7B34;}
 .float-chip.c2 .ic{background:var(--peach);}
 .float-chip.c2 .ic svg{stroke:var(--orange-dark);}
-.float-chip .aana-chip-image{width:30px; height:30px; border-radius:9px; object-fit:cover;}
+.float-chip .anna-chip-image{width:30px; height:30px; border-radius:9px; object-fit:cover;}
 .float-chip .ic svg{width:15px; height:15px;}
 .float-chip b{display:block; font-size:12px; color:var(--navy); font-family:var(--font-display); font-weight:700;}
 .float-chip span{font-size:10px; color:var(--slate);}
@@ -210,14 +210,14 @@ h1,h2,h3{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02e
   .p-card-desc p{padding-top:18px;}
 }
 
-/* MEET AANA */
-.aana-section{background:var(--navy); color:var(--white); position:relative; overflow:hidden;}
-.aana-section::before{content:""; position:absolute; width:520px; height:520px; border-radius:50%; background:radial-gradient(circle, rgba(255,146,72,0.16), transparent 68%); top:-180px; left:-140px;}
-.aana-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:56px; align-items:center; position:relative; z-index:2;}
-.aana-title{display:flex; align-items:center; gap:14px; margin-bottom:18px;}
-.aana-section h2{font-size:38px; color:var(--white); margin-bottom:0;}
-.aana-logo{width:52px; height:52px; border-radius:50%; object-fit:cover; box-shadow:0 8px 24px rgba(0,0,0,0.25);}
-.aana-section .section-head p{color:rgba(255,255,255,0.66);}
+/* MEET anna */
+.anna-section{background:var(--navy) url('assets/anna/meet-anna-bg.png') center/cover no-repeat; color:var(--white); position:relative; overflow:hidden;}
+.anna-section::before{content:""; position:absolute; width:520px; height:520px; border-radius:50%; background:radial-gradient(circle, rgba(255,146,72,0.16), transparent 68%); top:-180px; left:-140px;}
+.anna-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:56px; align-items:center; position:relative; z-index:2;}
+.anna-title{display:flex; align-items:center; gap:14px; margin-bottom:18px;}
+.anna-section h2{font-size:38px; color:var(--white); margin-bottom:0;}
+.anna-logo{width:52px; height:52px; border-radius:50%; object-fit:cover; box-shadow:0 8px 24px rgba(0,0,0,0.25);}
+.anna-section .section-head p{color:rgba(255,255,255,0.66);}
 .chat-stack{display:flex; flex-direction:column; gap:14px;}
 .chat-bubble{background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.10); border-radius:18px 18px 18px 4px; padding:16px 20px; max-width:420px; display:flex; gap:12px; align-items:flex-start; opacity:0; transform:translateY(14px) scale(0.98); transition:all .55s cubic-bezier(.2,.7,.3,1);}
 .chat-bubble.in{opacity:1; transform:translateY(0) scale(1);}
@@ -290,7 +290,7 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
   .section-head p{font-size:18px;}
   .p-card h3{font-size:20px;}
   .p-card-desc p{font-size:16px;}
-  .aana-section h2{font-size:40px;}
+  .anna-section h2{font-size:40px;}
   .chat-bubble{max-width:460px;}
   .chat-bubble p{font-size:16px;}
   .feat-card h3{font-size:18px;}
@@ -300,7 +300,7 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
 }
 
 @media (max-width:980px){
-  .hero-grid, .aana-grid, .how-grid{grid-template-columns:1fr;}
+  .hero-grid, .anna-grid, .how-grid{grid-template-columns:1fr;}
   .hero{padding:64px 0;}
   .hero-visual{height:560px; margin-top:24px;}
   .p-grid, .feat-grid{grid-template-columns:repeat(2,1fr);}
@@ -327,7 +327,7 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
   .cd-box{min-width:68px; padding:14px 10px;}
   .cd-box .n{font-size:24px;}
   .final-cta h2{font-size:26px;}
-  .aana-section h2{font-size:29px;}
+  .anna-section h2{font-size:29px;}
   .float-chip{display:none;}
   .hero-visual{height:520px;}
   .phone{--phone-width:240px;}
@@ -352,7 +352,7 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
       <div>
         <div class="hero-eyebrow"><span class="dot"></span>Launching 1 September 2026</div>
         <h1>Celebrate your <span>financial freedom.</span></h1>
-        <div class="subline">Meet Aana — your AI-powered personal CFO</div>
+        <div class="subline">Meet anna — your AI-powered personal CFO</div>
         <p class="desc">One app for your net worth, goals, investments, insurance and tax — guided by AI, backed by 10 years of SEBI-registered advice. Get in before everyone else.</p>
 
         <form class="waitlist-form" id="heroForm">
@@ -427,21 +427,21 @@ Our AI-backed application builds a plan around your goals, your risk and your li
   </div>
 </section>
 
-<section class="section aana-section">
+<section class="section anna-section">
   <div class="wrap">
-    <div class="aana-grid">
+    <div class="anna-grid">
       <div class="section-head reveal" style="margin-bottom:0;">
         <div class="eyebrow">Your AI CFO</div>
-        <div class="aana-title">
-          <img class="aana-logo" src="assets/aana/aana-orb.png" alt="AANA">
-          <h2>Meet Aana.</h2>
+        <div class="anna-title">
+          <img class="anna-logo" src="assets/anna/anna-orb.png" alt="anna">
+          <h2>Meet anna.</h2>
         </div>
-        <p>Aana watches your money the way a great CFO would — quietly, constantly, and only speaking up when it matters.</p>
+        <p>anna watches your money the way a great CFO would — quietly, constantly, and only speaking up when it matters.</p>
       </div>
       <div class="chat-stack reveal">
-        <div class="chat-bubble"><img class="chat-avatar" src="assets/aana/aana-orb.png" alt=""><p>Your SIP in Mirae Asset has delivered 14.2% returns, beating its benchmark. Want to increase it?</p></div>
-        <div class="chat-bubble" style="margin-left:32px;"><img class="chat-avatar" src="assets/aana/aana-orb.png" alt=""><p>You saved ₹19,000 this month. Redirecting it to your Emergency Fund gets you there 3 months sooner.</p></div>
-        <div class="chat-bubble" style="margin-left:64px;"><img class="chat-avatar" src="assets/aana/aana-orb.png" alt=""><p>Heads up — you have zero exposure to Healthcare and FMCG. Want me to suggest a rebalance?</p></div>
+        <div class="chat-bubble"><img class="chat-avatar" src="assets/anna/anna-orb.png" alt=""><p>Your SIP in Mirae Asset has delivered 14.2% returns, beating its benchmark. Want to increase it?</p></div>
+        <div class="chat-bubble" style="margin-left:32px;"><img class="chat-avatar" src="assets/anna/anna-orb.png" alt=""><p>You saved ₹19,000 this month. Redirecting it to your Emergency Fund gets you there 3 months sooner.</p></div>
+        <div class="chat-bubble" style="margin-left:64px;"><img class="chat-avatar" src="assets/anna/anna-orb.png" alt=""><p>Heads up — you have zero exposure to Healthcare and FMCG. Want me to suggest a rebalance?</p></div>
       </div>
     </div>
   </div>
@@ -467,7 +467,7 @@ Our AI-backed application builds a plan around your goals, your risk and your li
       <div class="feat-card reveal">
         <div class="ic-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M16 8l-2.5 5.5L8 16l2.5-5.5z"/></svg></div>
         <h3>Smart goal planning</h3>
-        <p>Set a goal — a home, a trip, retirement — and let Aana build the plan to get you there.</p>
+        <p>Set a goal — a home, a trip, retirement — and let anna build the plan to get you there.</p>
       </div>
       <div class="feat-card reveal">
         <div class="ic-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></div>
@@ -524,7 +524,7 @@ Our AI-backed application builds a plan around your goals, your risk and your li
         <div class="foot-col">
           <h4>Product</h4>
           <a href="#waitlist">Join waitlist</a>
-          <a href="#">Meet Aana</a>
+          <a href="#">Meet anna</a>
           <a href="#">Features</a>
         </div>
         <div class="foot-col">
