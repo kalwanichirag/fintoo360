@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,9 +55,6 @@
   .service-row:hover .row-desc, .service-row.active .row-desc { max-height:200px; opacity:1; margin-top:1rem; }
   .service-row:hover .row-arrow { transform: translateX(6px) rotate(0deg); }
 
-  .process-track { display:flex; height:100%; will-change: transform; }
-  .process-panel { flex: 0 0 100vw; }
-
   .clip-card { scroll-snap-align:center; }
   #clip-row { scroll-snap-type: x mandatory; cursor: grab; }
   #clip-row:active { cursor: grabbing; }
@@ -74,6 +72,19 @@
 
   .globe-dot { animation: pulse-dot 2.4s ease-in-out infinite; }
   @keyframes pulse-dot { 0%,100%{ opacity:.5; transform:scale(1); } 50%{ opacity:1; transform:scale(1.4); } }
+
+  .duotone-wrap { position:relative; overflow:hidden; }
+  .duotone-wrap img { filter: grayscale(1) contrast(1.05); display:block; width:100%; height:100%; object-fit:cover; }
+  .duotone-wrap::after { content:""; position:absolute; inset:0; background:#042b62; mix-blend-mode:color; }
+  .duotone-wrap::before { content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(2,12,30,0.05) 30%, rgba(2,12,30,0.85) 100%); z-index:2; }
+  .bg-photo-wrap { position:absolute; inset:0; }
+  .bg-photo-wrap img { width:100%; height:100%; object-fit:cover; filter: grayscale(1) contrast(1.05) brightness(.55); }
+
+  .donut-seg { transition: stroke-width .25s ease, filter .25s ease, opacity .25s ease; cursor:pointer; }
+  .donut-seg:hover, .donut-seg.active { filter: brightness(1.15); }
+  .legend-row { transition: opacity .2s ease, transform .2s ease; cursor:pointer; }
+  .legend-row.dim { opacity:.35; }
+  .legend-row:hover { transform: translateX(4px); }
 
   @media (prefers-reduced-motion: reduce) {
     * { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior:auto !important; }
@@ -97,8 +108,6 @@
     <nav class="hidden lg:flex items-center gap-10 text-[13px] font-semibold uppercase tracking-widest text-fintoo-blue/60">
       <a href="#about" class="hover:text-fintoo-blue transition">About</a>
       <a href="#services" class="hover:text-fintoo-blue transition">Services</a>
-      <a href="#process" class="hover:text-fintoo-blue transition">Process</a>
-      <a href="#global" class="hover:text-fintoo-blue transition">Global</a>
       <a href="#faq" class="hover:text-fintoo-blue transition">FAQ</a>
     </nav>
     <a href="#consult" class="magnetic bg-fintoo-blue text-white text-[13px] font-semibold uppercase tracking-widest px-6 py-3 rounded-full">
@@ -123,28 +132,70 @@
   <div id="glow" class="pointer-events-none absolute w-[600px] h-[600px] rounded-full bg-fintoo-orange/10 blur-[100px]" style="top:-10%; left:60%;"></div>
 
   <div class="relative max-w-[1600px] w-full mx-auto px-6 lg:px-12">
-    <p class="hero-reveal flex items-center gap-3 text-xs font-semibold tracking-[0.3em] uppercase text-fintoo-orange mb-8">
-      <span class="w-8 h-px bg-fintoo-orange"></span> Wealth Management &middot; NRI &amp; HNI Advisory
-    </p>
+    <div class="grid lg:grid-cols-12 gap-12 items-center">
 
-    <h1 class="font-bold text-fintoo-blue leading-[0.98] tracking-tight" style="font-size: clamp(2.6rem, 7.2vw, 6.8rem);">
-      <span class="hero-line block overflow-hidden"><span class="hero-line-inner block">Your Financial Goals</span></span>
-      <span class="hero-line block overflow-hidden"><span class="hero-line-inner block">Deserve More Than</span></span>
-      <span class="hero-line block overflow-hidden"><span class="hero-line-inner block text-fintoo-orange italic">Generic Advice.</span></span>
-    </h1>
+      <div class="lg:col-span-7">
+        <p class="hero-reveal flex items-center gap-3 text-xs font-semibold tracking-[0.3em] uppercase text-fintoo-orange mb-8">
+          <span class="w-8 h-px bg-fintoo-orange"></span> Wealth Management &middot; NRI &amp; HNI Advisory
+        </p>
 
-    <div class="mt-10 grid lg:grid-cols-12 gap-8 items-end">
-      <p class="hero-reveal lg:col-span-7 text-lg lg:text-xl text-fintoo-blue/60 leading-relaxed">
-        Whether you're building wealth, planning for retirement, or looking to make smarter investment decisions, every financial journey deserves a strategy tailored to your goals. At Fintoo, our experienced financial advisors work closely with you to create personalized wealth management solutions that help you grow, protect, and manage your wealth with confidence.
-      </p>
-      <div class="hero-reveal lg:col-span-5 flex lg:justify-end">
-        <a id="consult" href="#" class="magnetic group inline-flex items-center gap-4 bg-fintoo-blue text-white font-semibold pl-8 pr-3 py-3 rounded-full">
-          <span>Schedule Your Complimentary Consultation</span>
-          <span class="w-9 h-9 rounded-full bg-fintoo-orange flex items-center justify-center flex-shrink-0 group-hover:rotate-45 transition-transform">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
-          </span>
-        </a>
+        <h1 class="font-bold text-fintoo-blue leading-[0.98] tracking-tight" style="font-size: clamp(2.4rem, 5.6vw, 5.4rem);">
+          <span class="hero-line block overflow-hidden"><span class="hero-line-inner block">Your Financial Goals</span></span>
+          <span class="hero-line block overflow-hidden"><span class="hero-line-inner block">Deserve More Than</span></span>
+          <span class="hero-line block overflow-hidden"><span class="hero-line-inner block text-fintoo-orange italic">Generic Advice.</span></span>
+        </h1>
+
+        <p class="hero-reveal mt-8 text-lg text-fintoo-blue/60 leading-relaxed max-w-xl">
+          Whether you're building wealth, planning for retirement, or looking to make smarter investment decisions, every financial journey deserves a strategy tailored to your goals. At Fintoo, our experienced financial advisors work closely with you to create personalized wealth management solutions that help you grow, protect, and manage your wealth with confidence.
+        </p>
+
+        <div class="hero-reveal mt-10">
+          <a id="consult" href="#" class="magnetic group inline-flex items-center gap-4 bg-fintoo-blue text-white font-semibold pl-8 pr-3 py-3 rounded-full">
+            <span>Schedule Your Complimentary Consultation</span>
+            <span class="w-9 h-9 rounded-full bg-fintoo-orange flex items-center justify-center flex-shrink-0 group-hover:rotate-45 transition-transform">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+            </span>
+          </a>
+        </div>
       </div>
+
+      <div class="hero-reveal lg:col-span-5 relative">
+        <div class="illus-wrap rounded-[2rem] aspect-[4/5] shadow-2xl shadow-fintoo-blue/20 overflow-hidden relative bg-fintoo-blue">
+          <svg viewBox="0 0 400 500" class="w-full h-full" preserveAspectRatio="xMidYMax slice">
+            <defs>
+              <radialGradient id="heroGlow" cx="52%" cy="30%" r="55%">
+                <stop offset="0%" stop-color="#dd7300" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#dd7300" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="400" height="500" fill="#042b62"/>
+            <circle cx="205" cy="160" r="180" fill="url(#heroGlow)"/>
+            <path d="M-20,430 C100,390 200,450 300,410 S420,390 460,420" stroke="#ffffff" stroke-opacity="0.10" stroke-width="1.5" fill="none"/>
+            <path d="M-20,470 C100,430 200,490 300,450 S420,430 460,460" stroke="#dd7300" stroke-opacity="0.18" stroke-width="1.5" fill="none"/>
+            <polyline points="30,300 90,270 140,286 190,218 240,240 290,158 350,190" fill="none" stroke="#dd7300" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.65"/>
+            <circle cx="350" cy="190" r="5" fill="#dd7300"/>
+            <g>
+              <circle cx="150" cy="330" r="24" fill="#ffffff"/>
+              <path d="M114 434 Q114 372 150 372 Q186 372 186 434 Z" fill="#ffffff"/>
+              <circle cx="216" cy="320" r="22" fill="#dd7300"/>
+              <path d="M184 434 Q184 374 216 374 Q248 374 248 434 Z" fill="#dd7300"/>
+              <circle cx="272" cy="366" r="16" fill="#ffffff" fill-opacity="0.85"/>
+              <path d="M250 434 Q250 390 272 390 Q294 390 294 434 Z" fill="#ffffff" fill-opacity="0.85"/>
+            </g>
+            <rect x="0" y="434" width="400" height="66" fill="#020c1e"/>
+            <text x="24" y="470" fill="#ffffff" fill-opacity="0.5" font-size="12" font-weight="600" letter-spacing="1">A FAMILY'S WEALTH, PLANNED TOGETHER</text>
+          </svg>
+        </div>
+        <div class="absolute -bottom-6 -left-6 lg:-left-10 bg-white rounded-2xl shadow-xl shadow-fintoo-blue/10 border border-line px-6 py-5 z-10">
+          <p class="text-2xl font-bold text-fintoo-blue num-tab">92,000+</p>
+          <p class="text-xs text-fintoo-blue/50 uppercase tracking-wide mt-1">Families &amp; NRIs Advised</p>
+        </div>
+        <div class="absolute -top-5 -right-4 bg-fintoo-orange text-white rounded-full w-24 h-24 flex flex-col items-center justify-center text-center shadow-xl shadow-fintoo-orange/30 z-10">
+          <span class="text-lg font-bold leading-none">20+</span>
+          <span class="text-[10px] uppercase tracking-wide mt-1">Years</span>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -183,17 +234,49 @@
     </svg>
   </div>
 
-  <div class="relative max-w-6xl mx-auto px-6 lg:px-12">
-    <div class="flex items-center gap-3 mb-8">
-      <span class="w-8 h-px bg-fintoo-orange"></span>
-      <p class="text-xs font-semibold tracking-[0.3em] uppercase text-fintoo-orange">About Fintoo</p>
+  <div class="relative max-w-6xl mx-auto px-6 lg:px-12 grid lg:grid-cols-12 gap-14 items-start">
+    <div class="lg:col-span-8">
+      <div class="flex items-center gap-3 mb-8">
+        <span class="w-8 h-px bg-fintoo-orange"></span>
+        <p class="text-xs font-semibold tracking-[0.3em] uppercase text-fintoo-orange">About Fintoo</p>
+      </div>
+      <h2 class="text-3xl lg:text-5xl font-bold text-white leading-tight mb-14 max-w-3xl">
+        Financial Planning That Puts You First
+      </h2>
+      <p id="about-para" class="text-2xl lg:text-[2.4rem] leading-[1.35] font-medium max-w-5xl">
+        <span class="word-dim">No</span> <span class="word-dim">two</span> <span class="word-dim">financial</span> <span class="word-dim">journeys</span> <span class="word-dim">are</span> <span class="word-dim">the</span> <span class="word-dim">same.</span> <span class="word-dim">That's</span> <span class="word-dim">why</span> <span class="word-dim">we</span> <span class="word-dim">begin</span> <span class="word-dim">by</span> <span class="word-dim">understanding</span> <span class="word-dim">your</span> <span class="word-dim">aspirations,</span> <span class="word-dim">financial</span> <span class="word-dim">priorities,</span> <span class="word-dim">and</span> <span class="word-dim">long-term</span> <span class="word-dim">objectives</span> <span class="word-dim">before</span> <span class="word-dim">recommending</span> <span class="word-dim">a</span> <span class="word-dim">strategy.</span> <span class="word-dim">From</span> <span class="word-dim">investment</span> <span class="word-dim">planning</span> <span class="word-dim">to</span> <span class="word-dim">retirement</span> <span class="word-dim">planning</span> <span class="word-dim">and</span> <span class="word-dim">portfolio</span> <span class="word-dim">management,</span> <span class="word-dim">our</span> <span class="word-dim">advisors</span> <span class="word-dim">provide</span> <span class="word-dim">practical</span> <span class="word-dim">guidance</span> <span class="word-dim">designed</span> <span class="word-dim">to</span> <span class="word-dim">help</span> <span class="word-dim">you</span> <span class="word-dim">make</span> <span class="word-dim">confident</span> <span class="word-dim">financial</span> <span class="word-dim">decisions</span> <span class="word-dim">at</span> <span class="word-dim">every</span> <span class="word-dim">stage</span> <span class="word-dim">of</span> <span class="word-dim">life.</span>
+      </p>
     </div>
-    <h2 class="text-3xl lg:text-5xl font-bold text-white leading-tight mb-14 max-w-3xl">
-      Financial Planning That Puts You First
-    </h2>
-    <p id="about-para" class="text-2xl lg:text-[2.6rem] leading-[1.35] font-medium max-w-5xl">
-      <span class="word-dim">No</span> <span class="word-dim">two</span> <span class="word-dim">financial</span> <span class="word-dim">journeys</span> <span class="word-dim">are</span> <span class="word-dim">the</span> <span class="word-dim">same.</span> <span class="word-dim">That's</span> <span class="word-dim">why</span> <span class="word-dim">we</span> <span class="word-dim">begin</span> <span class="word-dim">by</span> <span class="word-dim">understanding</span> <span class="word-dim">your</span> <span class="word-dim">aspirations,</span> <span class="word-dim">financial</span> <span class="word-dim">priorities,</span> <span class="word-dim">and</span> <span class="word-dim">long-term</span> <span class="word-dim">objectives</span> <span class="word-dim">before</span> <span class="word-dim">recommending</span> <span class="word-dim">a</span> <span class="word-dim">strategy.</span> <span class="word-dim">From</span> <span class="word-dim">investment</span> <span class="word-dim">planning</span> <span class="word-dim">to</span> <span class="word-dim">retirement</span> <span class="word-dim">planning</span> <span class="word-dim">and</span> <span class="word-dim">portfolio</span> <span class="word-dim">management,</span> <span class="word-dim">our</span> <span class="word-dim">advisors</span> <span class="word-dim">provide</span> <span class="word-dim">practical</span> <span class="word-dim">guidance</span> <span class="word-dim">designed</span> <span class="word-dim">to</span> <span class="word-dim">help</span> <span class="word-dim">you</span> <span class="word-dim">make</span> <span class="word-dim">confident</span> <span class="word-dim">financial</span> <span class="word-dim">decisions</span> <span class="word-dim">at</span> <span class="word-dim">every</span> <span class="word-dim">stage</span> <span class="word-dim">of</span> <span class="word-dim">life.</span>
-    </p>
+    <div class="lg:col-span-4">
+      <div class="rounded-2xl aspect-[3/4] sticky top-32 overflow-hidden relative">
+        <svg viewBox="0 0 300 400" class="w-full h-full" preserveAspectRatio="xMidYMax slice">
+          <defs>
+            <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#0e3f82"/>
+              <stop offset="55%" stop-color="#dd7300" stop-opacity="0.55"/>
+              <stop offset="100%" stop-color="#042b62"/>
+            </linearGradient>
+          </defs>
+          <rect width="300" height="400" fill="url(#skyGrad)"/>
+          <circle cx="215" cy="150" r="46" fill="#f4a94d" fill-opacity="0.8"/>
+          <g fill="#020c1e" fill-opacity="0.85">
+            <rect x="10" y="230" width="24" height="140"/>
+            <rect x="40" y="200" width="20" height="170"/>
+            <rect x="66" y="245" width="26" height="125"/>
+            <rect x="98" y="180" width="22" height="190"/>
+            <rect x="126" y="220" width="30" height="150"/>
+            <rect x="162" y="160" width="24" height="210"/>
+            <rect x="192" y="235" width="20" height="135"/>
+            <rect x="218" y="195" width="26" height="175"/>
+            <rect x="250" y="250" width="22" height="120"/>
+            <rect x="276" y="210" width="18" height="160"/>
+          </g>
+          <path d="M0,378 C60,368 120,386 180,372 S260,364 300,376 L300,400 L0,400 Z" fill="#020c1e" fill-opacity="0.6"/>
+          <path d="M0,388 C60,380 120,396 180,384 S260,378 300,388 L300,400 L0,400 Z" fill="#020c1e"/>
+        </svg>
+        <span class="absolute bottom-5 left-5 z-10 text-xs font-semibold uppercase tracking-widest text-white/80">Mumbai &middot; Home Base</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -273,42 +356,6 @@
   </div>
 </section>
 
-<!-- ============ PROCESS — pinned horizontal scroll ============ -->
-<section id="process" class="relative bg-paper">
-  <div class="pin-wrap relative h-screen overflow-hidden">
-    <div class="process-track h-full">
-
-      <div class="process-panel h-full flex flex-col justify-center px-6 lg:px-24 relative">
-        <div class="contour-wrap opacity-30">
-          <svg viewBox="0 0 1440 900" preserveAspectRatio="none" class="w-full h-full"><path d="M-100,600 C300,520 500,680 750,580 S1150,480 1540,560" stroke="#042b62" stroke-width="1.5" fill="none"/></svg>
-        </div>
-        <p class="text-xs font-semibold tracking-[0.3em] uppercase text-fintoo-orange mb-6">How We Work &middot; 01/04</p>
-        <h3 class="text-4xl lg:text-6xl font-bold text-fintoo-blue mb-6">Discover</h3>
-        <p class="text-lg text-fintoo-blue/60 max-w-md leading-relaxed">We map your income, assets, liabilities, and life goals — across every country you hold money in.</p>
-      </div>
-
-      <div class="process-panel h-full flex flex-col justify-center px-6 lg:px-24 relative bg-mist">
-        <p class="text-xs font-semibold tracking-[0.3em] uppercase text-fintoo-orange mb-6">How We Work &middot; 02/04</p>
-        <h3 class="text-4xl lg:text-6xl font-bold text-fintoo-blue mb-6">Design</h3>
-        <p class="text-lg text-fintoo-blue/60 max-w-md leading-relaxed">Your advisor builds an allocation strategy across asset classes, tax jurisdictions, and time horizons.</p>
-      </div>
-
-      <div class="process-panel h-full flex flex-col justify-center px-6 lg:px-24 relative">
-        <p class="text-xs font-semibold tracking-[0.3em] uppercase text-fintoo-orange mb-6">How We Work &middot; 03/04</p>
-        <h3 class="text-4xl lg:text-6xl font-bold text-fintoo-blue mb-6">Deploy</h3>
-        <p class="text-lg text-fintoo-blue/60 max-w-md leading-relaxed">We execute — mutual funds, PMS, insurance, estate structures — with full transparency on cost and rationale.</p>
-      </div>
-
-      <div class="process-panel h-full flex flex-col justify-center px-6 lg:px-24 relative bg-fintoo-blue">
-        <p class="text-xs font-semibold tracking-[0.3em] uppercase text-fintoo-orange mb-6">How We Work &middot; 04/04</p>
-        <h3 class="text-4xl lg:text-6xl font-bold text-white mb-6">Review</h3>
-        <p class="text-lg text-white/50 max-w-md leading-relaxed">Markets move, life changes. We revisit the plan on a fixed schedule, not just when something breaks.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
 <!-- ============ WHY CHOOSE US ============ -->
 <section id="why" class="py-28 lg:py-36 bg-paper relative overflow-hidden">
   <div class="max-w-6xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-16 items-center">
@@ -364,76 +411,6 @@
       <div class="absolute top-10 right-10 text-right text-white">
         <p class="text-4xl font-bold">SEBI RIA</p>
         <p class="text-xs uppercase tracking-widest text-white/50 mt-1">Registered Advisors</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ GLOBAL / NRI ORBIT ============ -->
-<section id="global" class="py-28 lg:py-40 bg-deep relative overflow-hidden">
-  <div class="max-w-6xl mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-16 items-center">
-    <div>
-      <div class="flex items-center gap-3 mb-6">
-        <span class="w-8 h-px bg-fintoo-orange"></span>
-        <p class="text-xs font-semibold tracking-[0.3em] uppercase text-fintoo-orange">Built for the Global Indian</p>
-      </div>
-      <h2 class="text-3xl lg:text-4xl font-bold text-white leading-tight mb-6">
-        Wherever you live, your money still needs to make sense in India
-      </h2>
-      <p class="text-white/50 leading-relaxed mb-8 max-w-md">Cross-border earners face a different set of problems — repatriation, DTAA, dual tax filing, rupee assets managed from a foreign timezone. Our advisors work across geographies, not just across products.</p>
-      <div class="grid grid-cols-2 gap-y-4 text-sm">
-        <div class="flex items-center gap-2 text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-fintoo-orange"></span>Dubai</div>
-        <div class="flex items-center gap-2 text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-fintoo-orange"></span>Singapore</div>
-        <div class="flex items-center gap-2 text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-fintoo-orange"></span>London</div>
-        <div class="flex items-center gap-2 text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-fintoo-orange"></span>New York</div>
-        <div class="flex items-center gap-2 text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-fintoo-orange"></span>Toronto</div>
-        <div class="flex items-center gap-2 text-white/70"><span class="w-1.5 h-1.5 rounded-full bg-fintoo-orange"></span>Sydney</div>
-      </div>
-    </div>
-
-    <div class="relative h-[400px] flex items-center justify-center">
-      <svg viewBox="0 0 400 400" class="w-full h-full max-w-[400px]">
-        <circle cx="200" cy="200" r="170" stroke="rgba(255,255,255,0.08)" fill="none"/>
-        <circle cx="200" cy="200" r="120" stroke="rgba(255,255,255,0.08)" fill="none"/>
-        <circle cx="200" cy="200" r="70" stroke="rgba(255,255,255,0.08)" fill="none"/>
-        <circle cx="200" cy="200" r="34" fill="#dd7300"/>
-        <text x="200" y="205" text-anchor="middle" fill="white" font-size="12" font-weight="700">fintoo</text>
-        <g class="globe-dot"><circle cx="200" cy="30" r="6" fill="white"/></g>
-        <g class="globe-dot" style="animation-delay:.3s"><circle cx="368" cy="140" r="6" fill="white"/></g>
-        <g class="globe-dot" style="animation-delay:.6s"><circle cx="330" cy="330" r="6" fill="white"/></g>
-        <g class="globe-dot" style="animation-delay:.9s"><circle cx="70" cy="330" r="6" fill="white"/></g>
-        <g class="globe-dot" style="animation-delay:1.2s"><circle cx="32" cy="140" r="6" fill="white"/></g>
-        <line x1="200" y1="200" x2="200" y2="30" stroke="rgba(255,255,255,0.15)"/>
-        <line x1="200" y1="200" x2="368" y2="140" stroke="rgba(255,255,255,0.15)"/>
-        <line x1="200" y1="200" x2="330" y2="330" stroke="rgba(255,255,255,0.15)"/>
-        <line x1="200" y1="200" x2="70" y2="330" stroke="rgba(255,255,255,0.15)"/>
-        <line x1="200" y1="200" x2="32" y2="140" stroke="rgba(255,255,255,0.15)"/>
-      </svg>
-    </div>
-  </div>
-</section>
-
-<!-- ============ NUMBERS ============ -->
-<section class="py-28 lg:py-36 bg-paper">
-  <div class="max-w-6xl mx-auto px-6 lg:px-12">
-    <div class="flex items-center gap-3 mb-16">
-      <span class="w-8 h-px bg-fintoo-orange"></span>
-      <p class="text-xs font-semibold tracking-[0.3em] uppercase text-fintoo-orange">In Numbers</p>
-    </div>
-    <div class="grid md:grid-cols-3 gap-12 items-end">
-      <div class="md:col-span-2">
-        <p class="stat-count font-bold text-fintoo-blue leading-none num-tab" style="font-size:clamp(3.5rem,9vw,8rem);" data-target="92000">0</p>
-        <p class="text-sm mt-3 text-fintoo-blue/50 uppercase tracking-wide">Clients served since inception</p>
-      </div>
-      <div class="space-y-10">
-        <div>
-          <p class="stat-count text-4xl font-bold text-fintoo-blue num-tab" data-target="2004">0</p>
-          <p class="text-xs mt-2 text-fintoo-blue/50 uppercase tracking-wide">Founded, as Financial Hospital</p>
-        </div>
-        <div>
-          <p class="text-4xl font-bold text-fintoo-orange">Fee-Only</p>
-          <p class="text-xs mt-2 text-fintoo-blue/50 uppercase tracking-wide">No product commissions</p>
-        </div>
       </div>
     </div>
   </div>
@@ -634,28 +611,6 @@
       scrollTrigger: { trigger: "#why", start: "top 65%" } });
   }
 
-  ScrollTrigger.matchMedia({
-    "(min-width: 768px)": function () {
-      const track = document.querySelector(".process-track");
-      gsap.to(track, {
-        x: () => -(track.scrollWidth - window.innerWidth),
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#process",
-          start: "top top",
-          end: () => "+=" + (track.scrollWidth - window.innerWidth),
-          scrub: 1,
-          pin: true,
-          anticipatePin: 1,
-        }
-      });
-    },
-    "(max-width: 767px)": function () {
-      gsap.set(".process-track", { flexDirection: "column", height: "auto" });
-      gsap.set(".process-panel", { height: "70vh" });
-    }
-  });
-
   document.querySelectorAll(".faq-q").forEach(btn => {
     btn.addEventListener("click", () => {
       const item = btn.closest(".faq-item");
@@ -664,6 +619,64 @@
       if (!wasOpen) item.classList.add("open");
     });
   });
+
+  // interactive allocation donut
+  (function () {
+    const data = [
+      { pct: 40, name: "EQUITY & MF" },
+      { pct: 25, name: "DEBT & FIXED INCOME" },
+      { pct: 15, name: "REAL ESTATE" },
+      { pct: 12, name: "PMS / AIF" },
+      { pct: 8,  name: "GOLD & CASH" },
+    ];
+    const r = 90, circ = 2 * Math.PI * r;
+    const segs = document.querySelectorAll(".donut-seg");
+    let cumulative = 0;
+    const targets = [];
+    segs.forEach((seg, i) => {
+      const len = (data[i].pct / 100) * circ;
+      const offset = -cumulative;
+      targets.push({ len, offset });
+      cumulative += len;
+    });
+
+    ScrollTrigger.create({
+      trigger: "#allocation", start: "top 70%", once: true,
+      onEnter: () => {
+        segs.forEach((seg, i) => {
+          gsap.fromTo(seg,
+            { strokeDasharray: `0 ${circ}`, strokeDashoffset: 0 },
+            { strokeDasharray: `${targets[i].len} ${circ - targets[i].len}`, strokeDashoffset: targets[i].offset,
+              duration: 1.2, delay: i * 0.12, ease: "power2.out" });
+        });
+      }
+    });
+
+    const pctLabel = document.getElementById("donut-label-pct");
+    const nameLabel = document.getElementById("donut-label-name");
+    const legendRows = document.querySelectorAll(".legend-row");
+
+    function highlight(i) {
+      segs.forEach((s, idx) => s.classList.toggle("active", idx === i));
+      legendRows.forEach((row, idx) => row.classList.toggle("dim", idx !== i && i !== null));
+      if (i !== null) {
+        pctLabel.textContent = data[i].pct + "%";
+        nameLabel.textContent = data[i].name;
+      } else {
+        pctLabel.textContent = data[0].pct + "%";
+        nameLabel.textContent = data[0].name;
+      }
+    }
+    segs.forEach((seg, i) => {
+      seg.addEventListener("mouseenter", () => highlight(i));
+      seg.addEventListener("mouseleave", () => highlight(null));
+    });
+    legendRows.forEach((row) => {
+      const i = +row.dataset.seg;
+      row.addEventListener("mouseenter", () => highlight(i));
+      row.addEventListener("mouseleave", () => highlight(null));
+    });
+  })();
 
   (function () {
     const row = document.getElementById("clip-row");
