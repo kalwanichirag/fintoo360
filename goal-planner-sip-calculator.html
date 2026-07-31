@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goal Planner SIP Calculator — Fintoo</title>
+  <meta name="description" content="Calculate the monthly SIP required to reach your financial goal, including current savings and an optional annual step-up.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: {
+          navy: { 5:'#f7f9fc', 10:'#e9edf3', 20:'#d5deeb', 60:'rgba(4,43,98,.6)', DEFAULT:'#042b62', 700:'#063569', 900:'#042b62' },
+          brand: { orange:'#dd7300', orangeBg:'#fdebd7' },
+          bord:'#e2e6ec'
+        },
+        fontFamily: { sans:['"Google Sans"','Roboto','-apple-system','BlinkMacSystemFont','sans-serif'] },
+        boxShadow: { card:'0 8px 26px rgba(4,43,98,.07)' }
+      }}
+    };
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+    body { font-feature-settings: "tnum" 1; }
+    input[type="range"] { appearance:none; width:100%; height:4px; border-radius:999px; background:linear-gradient(to right,#dd7300 var(--fill,50%),#e9edf3 var(--fill,50%)); outline:none; }
+    input[type="range"]::-webkit-slider-thumb { appearance:none; width:17px; height:17px; border-radius:50%; background:#fff; border:3px solid #dd7300; box-shadow:0 1px 4px rgba(4,43,98,.2); cursor:pointer; }
+    input[type="range"]::-moz-range-thumb { width:12px; height:12px; border-radius:50%; background:#fff; border:3px solid #dd7300; cursor:pointer; }
+    .number-input::-webkit-inner-spin-button { appearance:none; }
+    .chart-line { stroke-dasharray:1000; stroke-dashoffset:1000; animation:draw 1s .15s ease forwards; }
+    @keyframes draw { to { stroke-dashoffset:0; } }
+    @media (prefers-reduced-motion:reduce) { .chart-line { animation:none; stroke-dashoffset:0; } }
+  </style>
+</head>
+<body class="bg-[#fbfcfe] font-sans text-navy antialiased">
+
+  <header class="border-b border-navy-10 bg-white">
+    <div class="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-6">
+      <a href="tools.html" class="flex items-center gap-2.5" aria-label="Fintoo tools home">
+        <span class="grid h-8 w-8 place-items-center rounded-[9px] bg-navy text-white">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 17V9.5L12 5l6 4.5V17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 17v-4h6v4" stroke="#dd7300" stroke-width="2"/></svg>
+        </span>
+        <span class="text-[19px] font-bold tracking-tight">fintoo</span>
+      </a>
+      <nav class="hidden items-center gap-8 text-[14px] font-medium md:flex">
+        <a href="#" class="text-navy/65 hover:text-navy">Invest</a><a href="#" class="text-navy/65 hover:text-navy">Plan</a><a href="#" class="text-navy/65 hover:text-navy">Learn</a>
+        <a href="tools.html" class="border-b-2 border-brand-orange pb-1">Tools</a>
+      </nav>
+      <a href="#plan-cta" class="rounded-full bg-navy px-5 py-2.5 text-[13px] font-semibold text-white transition hover:bg-navy-700">Talk to an advisor</a>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-[1200px] px-6 pb-12">
+    <div class="pt-6 text-[13px] text-navy-60"><a href="tools.html" class="hover:text-navy">Tools</a><span class="mx-2">›</span><span class="font-medium text-navy">Goal Planner SIP Calculator</span></div>
+
+    <section class="pb-8 pt-6">
+      <div class="flex items-center gap-4">
+        <div class="grid h-[58px] w-[58px] shrink-0 place-items-center rounded-[17px] border border-[#f4d0a9] bg-gradient-to-br from-[#fff7eb] to-[#fde8cc] text-navy shadow-sm">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="15" cy="17" r="11" fill="white" stroke="currentColor" stroke-width="1.7"/><circle cx="15" cy="17" r="6.5" fill="#f8c98f" stroke="#dd7300" stroke-width="1.7"/><circle cx="15" cy="17" r="2.2" fill="currentColor"/><path d="m17 15 9-9M22 6h4v4" stroke="#dd7300" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div><h1 class="text-[2rem] font-bold tracking-[-.035em] sm:text-[2.35rem]">Goal Planner SIP Calculator</h1><p class="mt-1 text-[14px] text-navy-60">Turn a future target into a practical monthly investment plan.</p></div>
+      </div>
+    </section>
+
+    <section class="grid overflow-hidden rounded-[22px] border border-bord bg-white shadow-card lg:grid-cols-[1.05fr_.95fr]">
+      <div class="p-6 sm:p-9 lg:border-r lg:border-bord">
+        <div class="mb-8">
+          <div class="mb-3 flex items-center justify-between gap-4"><label for="goal" class="text-[14px] font-semibold">Target goal amount</label><div class="flex items-center rounded-lg border border-bord bg-navy-5 px-3 py-2"><span class="mr-1 text-[13px] text-navy-60">₹</span><input id="goalNumber" class="number-input w-24 bg-transparent text-right text-[14px] font-bold outline-none" type="number" min="100000" max="100000000" step="100000" value="5000000"></div></div>
+          <input id="goal" type="range" min="100000" max="100000000" step="100000" value="5000000"><div class="mt-2 flex justify-between text-[11px] text-navy-60"><span>₹1 lakh</span><span>₹10 crore</span></div>
+        </div>
+        <div class="mb-8">
+          <div class="mb-3 flex items-center justify-between gap-4"><label for="saved" class="text-[14px] font-semibold">Already saved</label><div class="flex items-center rounded-lg border border-bord bg-navy-5 px-3 py-2"><span class="mr-1 text-[13px] text-navy-60">₹</span><input id="savedNumber" class="number-input w-24 bg-transparent text-right text-[14px] font-bold outline-none" type="number" min="0" max="50000000" step="50000" value="500000"></div></div>
+          <input id="saved" type="range" min="0" max="50000000" step="50000" value="500000"><div class="mt-2 flex justify-between text-[11px] text-navy-60"><span>₹0</span><span>₹5 crore</span></div>
+        </div>
+        <div class="grid gap-7 sm:grid-cols-2">
+          <div><div class="mb-3 flex items-center justify-between"><label for="years" class="text-[14px] font-semibold">Time to goal</label><span class="rounded-lg border border-bord bg-navy-5 px-3 py-2 text-[14px] font-bold"><b id="yearsValue">10</b> yr</span></div><input id="years" type="range" min="1" max="40" step="1" value="10"><div class="mt-2 flex justify-between text-[11px] text-navy-60"><span>1 yr</span><span>40 yr</span></div></div>
+          <div><div class="mb-3 flex items-center justify-between"><label for="returns" class="text-[14px] font-semibold">Expected return</label><span class="rounded-lg border border-bord bg-navy-5 px-3 py-2 text-[14px] font-bold"><b id="returnsValue">12</b>%</span></div><input id="returns" type="range" min="1" max="20" step="0.5" value="12"><div class="mt-2 flex justify-between text-[11px] text-navy-60"><span>1%</span><span>20%</span></div></div>
+          <div class="sm:col-span-2"><div class="mb-3 flex items-center justify-between"><label for="stepup" class="text-[14px] font-semibold">Annual SIP step-up</label><span class="rounded-lg border border-bord bg-navy-5 px-3 py-2 text-[14px] font-bold"><b id="stepupValue">10</b>%</span></div><input id="stepup" type="range" min="0" max="25" step="1" value="10"><div class="mt-2 flex justify-between text-[11px] text-navy-60"><span>Fixed SIP</span><span>25% yearly</span></div></div>
+        </div>
+      </div>
+
+      <div class="bg-navy-5 p-6 sm:p-9">
+        <p class="text-[12px] font-semibold uppercase tracking-[.08em] text-navy-60">Start with a monthly SIP of</p>
+        <div id="monthlySip" class="mt-2 text-[2.45rem] font-extrabold tracking-[-.04em] text-navy">₹20,789</div>
+        <p class="mt-1 text-[13px] text-navy-60">Increase it by <b id="stepupCopy" class="text-brand-orange">10% every year</b> to stay on track.</p>
+
+        <div class="mt-7 grid grid-cols-3 gap-3">
+          <div class="rounded-xl bg-white p-3.5"><div class="text-[11px] text-navy-60">Your investment</div><div id="invested" class="mt-1 text-[14px] font-bold">₹41.5L</div></div>
+          <div class="rounded-xl bg-white p-3.5"><div class="text-[11px] text-navy-60">Est. growth</div><div id="growth" class="mt-1 text-[14px] font-bold text-brand-orange">₹8.5L</div></div>
+          <div class="rounded-xl bg-white p-3.5"><div class="text-[11px] text-navy-60">Goal funded</div><div id="funded" class="mt-1 text-[14px] font-bold">100%</div></div>
+        </div>
+
+        <div class="mt-7 rounded-2xl bg-white p-4">
+          <div class="mb-3 flex items-center justify-between"><span class="text-[12px] font-semibold">Your path to the goal</span><span id="goalLabel" class="text-[12px] font-bold text-brand-orange">₹50L</span></div>
+          <svg id="chart" viewBox="0 0 500 180" class="h-[190px] w-full" role="img" aria-label="Projected goal growth chart"><defs><linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dd7300" stop-opacity=".24"/><stop offset="1" stop-color="#dd7300" stop-opacity=".02"/></linearGradient></defs><path d="M20 150H480" stroke="#e9edf3"/><path id="areaPath" fill="url(#area)"/><path id="linePath" class="chart-line" fill="none" stroke="#dd7300" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle id="endDot" r="5" fill="#dd7300"/><text x="20" y="172" fill="#71809a" font-size="11">Today</text><text id="endYear" x="480" y="172" text-anchor="end" fill="#71809a" font-size="11">Year 10</text></svg>
+        </div>
+        <a href="#plan-cta" class="mt-6 inline-flex items-center gap-2 rounded-full bg-navy px-5 py-3 text-[13px] font-semibold text-white transition hover:bg-navy-700">Plan this goal <span>→</span></a>
+      </div>
+    </section>
+
+    <section class="mt-6 rounded-2xl border border-bord bg-white p-6 sm:p-8">
+      <div class="flex flex-col justify-between gap-3 sm:flex-row sm:items-end"><div><h2 class="text-[1.2rem] font-bold">Year-wise goal plan</h2><p class="mt-1 text-[13px] text-navy-60">A milestone view based on the assumptions above.</p></div><span class="text-[11px] text-navy-60">Illustrative projection only</span></div>
+      <div class="mt-5 overflow-x-auto"><table class="w-full min-w-[620px] border-collapse text-left"><thead><tr class="border-b border-bord text-[11px] uppercase tracking-wide text-navy-60"><th class="px-3 py-3">Year</th><th class="px-3 py-3 text-right">Monthly SIP</th><th class="px-3 py-3 text-right">Total invested</th><th class="px-3 py-3 text-right">Projected value</th></tr></thead><tbody id="yearRows" class="text-[13px]"></tbody></table></div>
+    </section>
+
+    <section class="mt-8 grid gap-5 lg:grid-cols-2">
+      <article class="rounded-2xl border border-bord bg-white p-7"><h2 class="text-[1.15rem] font-bold">How this goal planner works</h2><p class="mt-3 text-[13.5px] leading-6 text-navy-60">The calculator works backwards from your goal. It first grows your current savings at the expected return, then estimates the starting monthly SIP required to fund the remaining amount. If you select a step-up, the SIP increases once every year.</p><div class="mt-5 rounded-xl bg-navy-5 p-4 text-[12px] leading-5 text-navy-60"><b class="text-navy">Keep assumptions realistic.</b> Market returns are not guaranteed. Review your goal annually and adjust the SIP when your income, timeline, or goal cost changes.</div></article>
+      <article class="rounded-2xl border border-bord bg-white p-7"><h2 class="text-[1.15rem] font-bold">Common questions</h2><div class="mt-3 divide-y divide-bord"><details class="group py-4"><summary class="cursor-pointer list-none text-[13.5px] font-semibold">Should I use a step-up SIP?<span class="float-right text-brand-orange">+</span></summary><p class="mt-2 text-[13px] leading-5 text-navy-60">A yearly increase can reduce the SIP you need today, but choose a rate you can sustain as your income grows.</p></details><details class="group py-4"><summary class="cursor-pointer list-none text-[13.5px] font-semibold">Does this include inflation?<span class="float-right text-brand-orange">+</span></summary><p class="mt-2 text-[13px] leading-5 text-navy-60">Enter the future amount you expect to need. If your goal is in today's prices, inflate it before using it here.</p></details><details class="group py-4"><summary class="cursor-pointer list-none text-[13.5px] font-semibold">Are returns guaranteed?<span class="float-right text-brand-orange">+</span></summary><p class="mt-2 text-[13px] leading-5 text-navy-60">No. The result is an estimate based on the return assumption you provide.</p></details></div></article>
+    </section>
+
+    <section class="related mt-9">
+      <h2 class="text-[1.2rem] font-bold">Related calculators</h2>
+      <div class="related-grid mt-4 grid gap-4 sm:grid-cols-3">
+        <div class="related-card flex items-center gap-3.5 rounded-2xl border border-bord bg-white p-4"><span class="ic grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-orangeBg"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="#dd7300" stroke-width="2"><path d="M3 17l6-6 4 4 8-8"/></svg></span><div><div class="t text-[13.5px] font-bold">SIP Calculator</div><div class="s mt-0.5 text-[12px] text-navy-60">Monthly investing, projected</div></div></div>
+        <div class="related-card flex items-center gap-3.5 rounded-2xl border border-bord bg-white p-4"><span class="ic grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-orangeBg"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="#dd7300" stroke-width="2"><path d="M5 19h3v-5H5zM11 19h3v-9h-3zM17 19h3V5h-3z"/></svg></span><div><div class="t text-[13.5px] font-bold">Step-Up SIP Calculator</div><div class="s mt-0.5 text-[12px] text-navy-60">Annual increases, modelled</div></div></div>
+        <div class="related-card flex items-center gap-3.5 rounded-2xl border border-bord bg-white p-4"><span class="ic grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-orangeBg"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="#dd7300" stroke-width="2"><path d="M12 22s8-4.5 8-11V5l-8-3-8 3v6c0 6.5 8 11 8 11z"/></svg></span><div><div class="t text-[13.5px] font-bold">Retirement Calculator</div><div class="s mt-0.5 text-[12px] text-navy-60">Plan the corpus you will need</div></div></div>
+      </div>
+    </section>
+
+    <section id="plan-cta" class="mt-8 flex flex-col items-start justify-between gap-5 overflow-hidden rounded-[20px] bg-navy px-7 py-8 text-white sm:flex-row sm:items-center sm:px-10">
+      <div><h2 class="max-w-[520px] text-[1.55rem] font-bold leading-tight">Turn your goal into an investment plan.</h2><p class="mt-2 max-w-[560px] text-[13px] text-white/70">A Fintoo advisor can help stress-test the assumptions and choose investments suited to your timeline.</p></div><a href="#" class="shrink-0 rounded-full bg-white px-5 py-3 text-[13px] font-semibold text-navy">Talk to an advisor →</a>
+    </section>
+  </main>
+
+  <footer class="border-t border-navy-10 bg-white"><div class="mx-auto flex max-w-[1200px] flex-col justify-between gap-3 px-6 py-6 text-[11px] text-navy-60 sm:flex-row"><span>© 2026 Fintoo. SEBI-registered investment adviser.</span><div class="flex gap-5"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a></div></div></footer>
+
+  <script>
+    const controls = {
+      goal: document.getElementById('goal'), saved: document.getElementById('saved'), years: document.getElementById('years'),
+      returns: document.getElementById('returns'), stepup: document.getElementById('stepup')
+    };
+    const money = new Intl.NumberFormat('en-IN', { maximumFractionDigits:0 });
+    const rupees = n => '₹' + money.format(Math.round(n));
+    const compact = n => n >= 10000000 ? '₹' + (n/10000000).toFixed(n%10000000 ? 1 : 0) + 'Cr' : n >= 100000 ? '₹' + (n/100000).toFixed(n%100000 ? 1 : 0) + 'L' : rupees(n);
+
+    function project(monthly, goal, saved, years, annualReturn, stepUp) {
+      const months = years * 12, rate = annualReturn / 1200;
+      let value = saved, invested = saved, sip = monthly, yearly = [];
+      for (let month=1; month<=months; month++) {
+        value = value * (1 + rate) + sip;
+        invested += sip;
+        if (month % 12 === 0) {
+          yearly.push({ year:month/12, sip, invested, value });
+          sip *= 1 + stepUp/100;
+        }
+      }
+      return { value, invested, yearly };
+    }
+
+    function calculate() {
+      const goal = +controls.goal.value, saved = Math.min(+controls.saved.value, goal), years = +controls.years.value, annualReturn = +controls.returns.value, stepUp = +controls.stepup.value;
+      let low=0, high=goal;
+      for (let i=0;i<70;i++) { const mid=(low+high)/2; project(mid,goal,saved,years,annualReturn,stepUp).value < goal ? low=mid : high=mid; }
+      const monthly = high, result = project(monthly,goal,saved,years,annualReturn,stepUp);
+      document.getElementById('monthlySip').textContent = rupees(monthly);
+      document.getElementById('invested').textContent = compact(result.invested);
+      document.getElementById('growth').textContent = compact(Math.max(0,result.value-result.invested));
+      document.getElementById('funded').textContent = Math.round(result.value/goal*100) + '%';
+      document.getElementById('goalLabel').textContent = compact(goal);
+      document.getElementById('stepupCopy').textContent = stepUp ? stepUp + '% every year' : '0% (fixed SIP)';
+      document.getElementById('yearsValue').textContent = years;
+      document.getElementById('returnsValue').textContent = annualReturn;
+      document.getElementById('stepupValue').textContent = stepUp;
+      document.getElementById('endYear').textContent = 'Year ' + years;
+
+      const points = [{year:0,value:saved}, ...result.yearly];
+      const coords = points.map((p,i) => [20 + (460*i/(points.length-1)), 150 - Math.min(1,p.value/goal)*125]);
+      const line = coords.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+      document.getElementById('linePath').setAttribute('d',line);
+      document.getElementById('areaPath').setAttribute('d',line+' L480 150 L20 150 Z');
+      const last=coords[coords.length-1]; document.getElementById('endDot').setAttribute('cx',last[0]); document.getElementById('endDot').setAttribute('cy',last[1]);
+
+      const milestones = result.yearly.filter((r,i)=> i===0 || i===result.yearly.length-1 || (i+1)%Math.max(1,Math.ceil(years/5))===0).slice(0,7);
+      document.getElementById('yearRows').innerHTML = milestones.map(r=>`<tr class="border-b border-bord last:border-0"><td class="px-3 py-3 font-semibold">Year ${r.year}</td><td class="px-3 py-3 text-right">${rupees(r.sip)}</td><td class="px-3 py-3 text-right">${rupees(r.invested)}</td><td class="px-3 py-3 text-right font-bold text-brand-orange">${rupees(r.value)}</td></tr>`).join('');
+      Object.values(controls).forEach(el => { const min=+el.min,max=+el.max; el.style.setProperty('--fill',((+el.value-min)/(max-min)*100)+'%'); });
+    }
+
+    function syncPair(range, number) {
+      range.addEventListener('input',()=>{ number.value=range.value; calculate(); });
+      number.addEventListener('input',()=>{ range.value=Math.max(+range.min,Math.min(+range.max,+number.value||0)); calculate(); });
+    }
+    syncPair(controls.goal,document.getElementById('goalNumber')); syncPair(controls.saved,document.getElementById('savedNumber'));
+    [controls.years,controls.returns,controls.stepup].forEach(el=>el.addEventListener('input',calculate));
+    calculate();
+  </script>
+  <script src="assets/inner-tool-icons.js"></script>
+</body>
+</html>
