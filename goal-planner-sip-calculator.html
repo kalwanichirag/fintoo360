@@ -96,7 +96,6 @@
           <div class="mb-3 flex items-center justify-between"><span class="text-[12px] font-semibold">Your path to the goal</span><span id="goalLabel" class="text-[12px] font-bold text-brand-orange">₹50L</span></div>
           <svg id="chart" viewBox="0 0 500 180" class="h-[190px] w-full" role="img" aria-label="Projected goal growth chart"><defs><linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dd7300" stop-opacity=".24"/><stop offset="1" stop-color="#dd7300" stop-opacity=".02"/></linearGradient></defs><path d="M20 150H480" stroke="#e9edf3"/><path id="areaPath" fill="url(#area)"/><path id="linePath" class="chart-line" fill="none" stroke="#dd7300" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle id="endDot" r="5" fill="#dd7300"/><text x="20" y="172" fill="#71809a" font-size="11">Today</text><text id="endYear" x="480" y="172" text-anchor="end" fill="#71809a" font-size="11">Year 10</text></svg>
         </div>
-        <a href="#plan-cta" class="mt-6 inline-flex items-center gap-2 rounded-full bg-navy px-5 py-3 text-[13px] font-semibold text-white transition hover:bg-navy-700">Plan this goal <span>→</span></a>
       </div>
     </section>
 
@@ -185,6 +184,6 @@
     [controls.years,controls.returns,controls.stepup].forEach(el=>el.addEventListener('input',calculate));
     calculate();
   </script>
-  <script src="assets/inner-tool-icons.js"></script>
+<script src="assets/inner-tool-icons.js?v=3"></script>
 </body>
 </html>

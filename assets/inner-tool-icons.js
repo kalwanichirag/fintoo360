@@ -1,4 +1,14 @@
 (function () {
+  // Calculator pages are intentionally presented without the global site shell.
+  const siteShell = Array.from(document.body.children).find(function (element) {
+    const isShellElement = element.tagName === 'HEADER' || element.tagName === 'NAV';
+    const isPageHeading = Boolean(element.querySelector && element.querySelector('h1'));
+    const hasGlobalNavigation = Boolean(element.querySelector && element.querySelector('nav')) || /Talk to an advisor/.test(element.textContent || '');
+    return isShellElement && !isPageHeading && hasGlobalNavigation;
+  });
+  if (siteShell) siteShell.remove();
+  document.querySelectorAll('footer').forEach(function (footer) { footer.remove(); });
+
   const icons = {
     'SIP Calculator': '<rect x="3.5" y="5.5" width="18" height="20" rx="4" fill="white" stroke="currentColor" stroke-width="1.7"/><path d="M7.5 3.8v4M17.5 3.8v4M3.8 11h17.4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="21.5" cy="21" r="7" fill="#e88414"/><path d="M18.7 18.2h5.6M18.7 20.2h5.6M19 18.2c3.6 0 3.6 4.8 0 4.8l4 3" fill="none" stroke="white" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/>',
     'Step-Up SIP Calculator': '<rect x="4" y="21" width="5" height="6" rx="1.5" fill="#e88414"/><rect x="12" y="16" width="5" height="11" rx="1.5" fill="#f3ad5d"/><rect x="20" y="10" width="5" height="17" rx="1.5" fill="currentColor"/><path d="M5 15l7-7 5 3 9-7M21 4h5v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',

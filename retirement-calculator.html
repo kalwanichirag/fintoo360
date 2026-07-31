@@ -145,8 +145,8 @@
     .calc-card{grid-template-columns:1fr;}
     .info-grid{grid-template-columns:1fr;}
     .related-grid{grid-template-columns:1fr;}
-    .compare-grid{grid-template-columns:1fr;}
     .drawdown-flex{grid-template-columns:1fr;}
+    .compare-grid{grid-template-columns:1fr;}
     .cta-banner{flex-direction:column;align-items:flex-start;gap:20px;}
     .grid2{grid-template-columns:1fr;}
   }
@@ -257,7 +257,6 @@
         <div class="range-labels"><span>0%</span><span>25%</span></div>
       </div>
 
-      <button class="cta-invest">Talk to a retirement advisor →</button>
     </div>
 
     <div class="calc-result">
@@ -623,6 +622,7 @@ function render(){
   activeCard.classList.add('winner');
   const b = document.createElement('span'); b.className='badge'; b.textContent='SELECTED';
   activeCard.appendChild(b);
+
 }
 
 function flatSipFV(P, r, n){
@@ -665,6 +665,6 @@ fieldConfig.forEach(({range, input, type})=>{
 render();
 </script>
 
-<script src="assets/inner-tool-icons.js"></script>
+<script src="assets/inner-tool-icons.js?v=3"></script>
 </body>
 </html>
