@@ -43,6 +43,104 @@
   style.textContent = '.inner-tool-link{color:inherit!important;text-decoration:none!important;cursor:pointer;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}.inner-tool-link:hover{transform:translateY(-2px);border-color:#c9d5ea!important;box-shadow:0 10px 22px -16px rgba(4,43,98,.5)}.inner-tool-link:focus-visible{outline:2px solid #063569;outline-offset:3px}.inner-tool-art,.page-tool-art{display:grid!important;place-items:center!important;color:#063569!important;background:linear-gradient(145deg,#fff7eb 0%,#fde8cc 100%)!important;border:1px solid rgba(232,132,20,.13)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 7px 16px -14px rgba(4,43,98,.55)!important}.inner-tool-art{width:42px!important;height:42px!important;min-width:42px;border-radius:13px!important}.page-tool-art{width:58px!important;height:58px!important;min-width:58px;border-radius:17px!important}.inner-tool-art.tax,.page-tool-art.tax{background:linear-gradient(145deg,#eef5ff 0%,#dce9fb 100%)!important;border-color:rgba(6,53,105,.1)!important}.inner-tool-art.retirement,.page-tool-art.retirement{background:linear-gradient(145deg,#f1f3ff 0%,#e4e7f8 100%)!important;border-color:rgba(6,53,105,.09)!important}.inner-tool-art.planning,.page-tool-art.planning{background:linear-gradient(145deg,#edfbf6 0%,#d9f3e9 100%)!important;border-color:rgba(17,121,90,.1)!important}.inner-tool-art svg{width:24px!important;height:24px!important;stroke:none!important;overflow:visible}.page-tool-art svg{width:31px!important;height:31px!important;stroke:none!important;overflow:visible}';
   document.head.appendChild(style);
 
+  const mobileStyle = document.createElement('style');
+  mobileStyle.textContent = `
+    @media (max-width: 600px) {
+      html, body { max-width: 100%; overflow-x: hidden; }
+      main { width: 100% !important; max-width: 100% !important; padding-left: 16px !important; padding-right: 16px !important; }
+      main > header, .page-head { gap: 14px !important; }
+      .page-head { align-items: flex-start !important; }
+      .page-head > div:last-child, .page-tool-art + div { min-width: 0 !important; max-width: 100% !important; }
+      .page-head h1, main > header h1, .page-tool-art + div h1 { max-width: 100%; font-size: 29px !important; line-height: 1.08 !important; overflow-wrap: anywhere; word-break: normal; }
+      .popular-tag, .free-tag { display: inline-flex !important; align-items: center; white-space: nowrap !important; word-break: keep-all !important; font-size: 9px !important; line-height: 1 !important; padding: 5px 8px !important; margin-left: 5px !important; vertical-align: middle; }
+      .page-tool-art { width: 52px !important; height: 52px !important; min-width: 52px !important; border-radius: 15px !important; }
+      .page-tool-art svg { width: 28px !important; height: 28px !important; }
+      .calc-card, .table-card, .info-card, .related-card, .cta-banner { min-width: 0 !important; max-width: 100% !important; }
+      .calc-card > *, .calc-inputs > *, .calc-result > * { min-width: 0 !important; }
+      .calc-inputs, .calc-result { padding: 24px 20px !important; }
+      .grid2 { grid-template-columns: minmax(0, 1fr) !important; gap: 20px !important; }
+      .field, .field-top { min-width: 0 !important; }
+      .field-top { gap: 10px !important; flex-wrap: wrap !important; }
+      .field-top label { flex: 1 1 130px; min-width: 0; }
+      .amount-box { flex: 0 1 auto; min-width: 0; max-width: 125px; margin-left: auto; }
+      .amount-box input { width: 82px !important; min-width: 0 !important; }
+      .result-row { flex-direction: column !important; gap: 12px !important; }
+      .donut-row { flex-wrap: wrap !important; gap: 16px !important; }
+      .legend { width: 100%; min-width: 0; }
+      .legend-row { gap: 8px !important; }
+      .legend-row .lbl { min-width: 0; }
+      .legend-row .val { white-space: nowrap; }
+      .table-card { padding: 24px 20px !important; }
+      .table-head { align-items: flex-start !important; flex-wrap: wrap !important; gap: 8px !important; }
+      .growth-table-wrap { width: 100%; max-width: 100%; overflow-x: auto !important; -webkit-overflow-scrolling: touch; }
+      table { min-width: 620px; }
+      .info-card { padding: 26px 22px !important; }
+      .cta-banner { padding: 32px 24px !important; }
+      .related-grid { grid-template-columns: minmax(0, 1fr) !important; }
+      .related-card { width: 100%; }
+    }
+  `;
+  document.head.appendChild(mobileStyle);
+
+  const advisorStyle = document.createElement('style');
+  advisorStyle.textContent = `
+    .advisor-banner {
+      position: relative !important;
+      isolation: isolate;
+      overflow: hidden !important;
+      background: linear-gradient(120deg, #021d46 0%, #042b62 55%, #063569 100%) !important;
+      box-shadow: 0 22px 48px -34px rgba(4, 43, 98, .75);
+    }
+    .advisor-banner::before {
+      content: '';
+      position: absolute;
+      z-index: 0;
+      left: -14%;
+      right: -14%;
+      top: 42%;
+      bottom: -105%;
+      background-image:
+        linear-gradient(rgba(46,126,207,.38) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(46,126,207,.38) 1px, transparent 1px);
+      background-size: 38px 38px;
+      transform: perspective(420px) rotateX(61deg) scale(1.18);
+      transform-origin: center top;
+      animation: fintooGridMove 6s linear infinite;
+      opacity: .88;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 100%);
+      mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 100%);
+      pointer-events: none;
+      will-change: background-position;
+    }
+    .advisor-banner::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background:
+        radial-gradient(circle at 88% 18%, rgba(221,115,0,.14), transparent 25%),
+        radial-gradient(circle at 18% 115%, rgba(10,63,130,.38), transparent 44%);
+      pointer-events: none;
+    }
+    .advisor-banner > * { position: relative; z-index: 1; }
+    .advisor-banner a, .advisor-banner button { box-shadow: 0 8px 20px -12px rgba(0,0,0,.5); }
+    @keyframes fintooGridMove {
+      from { background-position: 0 0, 0 0; }
+      to { background-position: 0 38px, 0 38px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .advisor-banner::before { animation: none; }
+    }
+  `;
+  document.head.appendChild(advisorStyle);
+
+  // Unify the advisory CTA across legacy and Tailwind calculator layouts.
+  document.querySelectorAll('a, button').forEach(function (control) {
+    if (!/talk to an advisor/i.test(control.textContent || '')) return;
+    const banner = control.closest('.cta-banner, section');
+    if (banner && banner.querySelector('h2, h3')) banner.classList.add('advisor-banner');
+  });
+
   // Replace the large legacy icon beside the page title as well.
   const pageHeading = document.querySelector('h1');
   if (pageHeading) {
