@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMI Calculator — Fintoo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: { DEFAULT: '#042b62', 5: '#f4f6f9', 10: '#e9edf3', 60: 'rgba(4,43,98,0.6)' },
+          brand: { orange: '#dd7300', orangeBg: '#fdead6' },
+          bord: '#e2e6ec',
+          green: '#0f8a4b',
+        },
+        fontFamily: {
+          sans: ["'Google Sans'", "'Roboto'", '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  input[type=range]{ -webkit-appearance:none; height:4px; border-radius:4px; background:#e9edf3; }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none; width:20px; height:20px; border-radius:50%;
+    background:#fff; border:3px solid #dd7300; cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,0.2);
+  }
+  input[type=range]::-moz-range-thumb{
+    width:14px; height:14px; border-radius:50%; background:#fff; border:3px solid #dd7300; cursor:pointer;
+  }
+  .donut{ width:120px; height:120px; border-radius:50%; position:relative; flex-shrink:0; }
+  .donut::after{ content:''; position:absolute; inset:18px; background:#fff; border-radius:50%; }
+  .donut-center{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:1; }
+  body{ font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,sans-serif; }
+</style>
+</head>
+<body class="bg-white text-navy antialiased">
+
+<header class="flex items-center justify-between px-16 py-5 border-b border-bord max-[860px]:px-5">
+  <div class="flex items-center gap-2.5 font-bold text-xl text-navy">
+    <span class="w-[30px] h-[30px] rounded-lg bg-navy flex items-center justify-center">
+      <svg viewBox="0 0 24 24" fill="none" class="w-4 h-4"><path d="M4 12L11 5L20 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+    fintoo
+  </div>
+  <nav class="flex gap-10 max-[860px]:hidden">
+    <a href="#" class="text-[15px] font-medium text-navy-60 border-b-2 border-transparent pb-1">Invest</a>
+    <a href="#" class="text-[15px] font-medium text-navy-60 border-b-2 border-transparent pb-1">Plan</a>
+    <a href="#" class="text-[15px] font-medium text-navy-60 border-b-2 border-transparent pb-1">Learn</a>
+    <a href="tools.html" class="text-[15px] font-medium text-navy border-b-2 border-brand-orange pb-1">Tools</a>
+  </nav>
+  <button class="bg-navy text-white font-medium text-sm px-[22px] py-[11px] rounded-full">Talk to an advisor</button>
+</header>
+
+<main class="max-w-[1128px] mx-auto px-8 max-[860px]:px-5">
+
+  <div class="text-[13px] text-navy-60 pt-6"><a href="tools.html" class="hover:text-navy">Tools</a> &nbsp;›&nbsp; <span class="text-navy font-medium">EMI Calculator</span></div>
+
+  <div class="flex items-start gap-4 pt-5 pb-8">
+    <div class="w-[52px] h-[52px] rounded-2xl bg-brand-orangeBg flex items-center justify-center shrink-0">
+      <svg viewBox="0 0 24 24" fill="none" class="w-[26px] h-[26px] stroke-brand-orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg>
+    </div>
+    <div>
+      <h1 class="text-[34px] font-bold tracking-tight">EMI Calculator</h1>
+      <p class="text-[15px] text-navy-60 mt-1">Work out your monthly loan instalment, total interest, and how the balance runs down over time.</p>
+    </div>
+  </div>
+
+  <section class="grid grid-cols-2 max-[860px]:grid-cols-1 border border-bord rounded-[20px] overflow-hidden mb-7">
+    <div class="p-10 max-[860px]:p-6 flex flex-col gap-7">
+
+      <div>
+        <div class="flex items-center justify-between mb-2.5">
+          <label class="text-[13.5px] font-medium text-navy">Loan amount</label>
+          <div class="flex items-center border border-bord rounded-lg overflow-hidden bg-white">
+            <span class="px-2.5 py-1.5 text-[13.5px] text-navy-60 border-r border-bord">₹</span>
+            <input type="text" id="principalInput" value="30,00,000" class="border-none outline-none px-2.5 py-1.5 text-[13.5px] font-semibold text-navy w-[120px]">
+          </div>
+        </div>
+        <input type="range" id="principalRange" min="50000" max="20000000" step="10000" value="3000000" class="w-full">
+        <div class="flex justify-between text-xs text-navy-60 mt-2"><span>₹50k</span><span>₹2Cr</span></div>
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between mb-2.5">
+          <label class="text-[13.5px] font-medium text-navy">Interest rate (p.a.)</label>
+          <div class="flex items-center border border-bord rounded-lg overflow-hidden bg-white w-[70px]">
+            <input type="text" id="rateInput" value="8.5%" class="border-none outline-none px-2.5 py-1.5 text-[13.5px] font-semibold text-navy w-full text-right">
+          </div>
+        </div>
+        <input type="range" id="rateRange" min="4" max="20" step="0.05" value="8.5" class="w-full">
+        <div class="flex justify-between text-xs text-navy-60 mt-2"><span>4%</span><span>20%</span></div>
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between mb-2.5">
+          <label class="text-[13.5px] font-medium text-navy">Loan tenure</label>
+          <div class="flex items-center border border-bord rounded-lg overflow-hidden bg-white w-[80px]">
+            <input type="text" id="tenureInput" value="20Yr" class="border-none outline-none px-2.5 py-1.5 text-[13.5px] font-semibold text-navy w-full text-right">
+          </div>
+        </div>
+        <input type="range" id="tenureRange" min="1" max="30" step="1" value="20" class="w-full">
+        <div class="flex justify-between text-xs text-navy-60 mt-2"><span>1 Yr</span><span>30 Yr</span></div>
+      </div>
+
+      <hr class="border-bord">
+
+      <div>
+        <div class="flex items-center justify-between mb-2.5">
+          <label class="text-[13.5px] font-medium text-navy">Extra monthly prepayment <span class="font-normal text-navy-60 text-xs">(optional)</span></label>
+          <div class="flex items-center border border-bord rounded-lg overflow-hidden bg-white">
+            <span class="px-2.5 py-1.5 text-[13.5px] text-navy-60 border-r border-bord">₹</span>
+            <input type="text" id="prepayInput" value="0" class="border-none outline-none px-2.5 py-1.5 text-[13.5px] font-semibold text-navy w-[110px]">
+          </div>
+        </div>
+        <input type="range" id="prepayRange" min="0" max="100000" step="500" value="0" class="w-full">
+        <div class="flex justify-between text-xs text-navy-60 mt-2"><span>₹0</span><span>₹1L</span></div>
+      </div>
+
+      <button class="mt-auto bg-navy text-white rounded-full px-6 py-3.5 text-[15px] font-medium inline-flex items-center gap-2 self-start">Check eligibility →</button>
+    </div>
+
+    <div class="bg-navy-5 p-10 max-[860px]:p-6 flex flex-col">
+      <div class="text-[13.5px] text-navy-60">Monthly EMI</div>
+      <div class="text-[38px] font-bold mt-1 mb-1" id="emiVal">₹0</div>
+      <div class="text-[13px] text-navy-60 mb-5" id="prepayNote" style="display:none;">Loan closes in <b class="text-navy" id="closesInLabel">0 years</b> with a prepayment of <span id="prepayNoteAmt">₹0</span>/month</div>
+
+      <div class="flex items-center gap-6 mb-5">
+        <div class="donut" id="donutCss">
+          <div class="donut-center"><span class="text-lg font-bold text-navy" id="donutPct">0%</span></div>
+        </div>
+        <div class="flex flex-col gap-2.5">
+          <div class="flex items-center justify-between gap-6 text-[13.5px]">
+            <span class="text-navy-60 flex items-center"><span class="w-2.5 h-2.5 rounded-full inline-block mr-2" style="background:#042b62;"></span>Principal</span>
+            <span class="font-semibold" id="principalVal">₹0</span>
+          </div>
+          <div class="flex items-center justify-between gap-6 text-[13.5px]">
+            <span class="text-navy-60 flex items-center"><span class="w-2.5 h-2.5 rounded-full inline-block mr-2" style="background:#dd7300;"></span>Total interest</span>
+            <span class="font-semibold text-brand-orange" id="interestVal">₹0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 mb-5">
+        <div class="bg-white border border-bord rounded-xl p-4">
+          <div class="text-xs text-navy-60">Total payment</div>
+          <div class="text-xl font-bold mt-1" id="totalPaymentVal">₹0</div>
+        </div>
+        <div class="bg-white border border-bord rounded-xl p-4">
+          <div class="text-xs text-navy-60">Interest as % of loan</div>
+          <div class="text-xl font-bold mt-1" id="interestPctVal">0%</div>
+        </div>
+      </div>
+
+      <div>
+        <svg id="balanceChart" width="100%" height="120" viewBox="0 0 460 120" preserveAspectRatio="none"></svg>
+        <div class="flex justify-between text-xs text-navy-60 mt-1"><span>Year 0</span><span id="chartYearEnd">Year 20</span></div>
+      </div>
+
+      <div class="text-[11.5px] text-navy-60 mt-3.5 leading-relaxed">Illustrative only. Actual EMI depends on your lender's exact rate, processing fees, and whether the rate is fixed or floating.</div>
+    </div>
+  </section>
+
+  <section class="border border-bord rounded-[20px] p-8 px-10 max-[860px]:px-6 mb-7">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-bold">Amortization schedule</h2>
+      <span class="text-[13px] text-navy-60">Scroll to see all years</span>
+    </div>
+    <div class="max-h-[230px] overflow-y-auto">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr class="sticky top-0 bg-white">
+            <th class="text-left text-xs tracking-wide text-navy-60 py-2 px-3 border-b border-bord">YEAR</th>
+            <th class="text-right text-xs tracking-wide text-navy-60 py-2 px-3 border-b border-bord">PRINCIPAL PAID</th>
+            <th class="text-right text-xs tracking-wide text-navy-60 py-2 px-3 border-b border-bord">INTEREST PAID</th>
+            <th class="text-right text-xs tracking-wide text-navy-60 py-2 px-3 border-b border-bord">BALANCE</th>
+          </tr>
+        </thead>
+        <tbody id="scheduleBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="grid grid-cols-[1.3fr_1fr] max-[860px]:grid-cols-1 gap-5 mb-7">
+    <div class="border border-bord rounded-[20px] p-9 max-[860px]:p-6">
+      <h2 class="text-[19px] font-bold mb-3.5">How your EMI is calculated</h2>
+      <p class="text-[14.5px] text-navy-60 leading-relaxed mb-3.5">Every EMI is the same fixed amount each month, but the split between principal and interest inside it isn't fixed — early instalments are mostly interest, since interest is charged on the outstanding balance and that balance is highest at the start. As you keep paying, more of each EMI chips away at the principal.</p>
+      <p class="text-[14.5px] text-navy-60 leading-relaxed mb-3.5">A prepayment doesn't reduce your EMI — it reduces the outstanding principal directly, which shortens how many months you end up paying interest for. Even a modest extra amount every month can cut years off a long home loan.</p>
+      <div class="bg-navy-5 rounded-xl p-5">
+        <div class="text-[15px] font-bold mb-2 leading-relaxed">EMI &nbsp;=&nbsp; P × r × (1+r)ⁿ / [(1+r)ⁿ − 1]</div>
+        <div class="text-xs text-navy-60 flex gap-4 flex-wrap"><span><b class="text-navy">P</b> — loan amount</span><span><b class="text-navy">r</b> — monthly interest rate</span><span><b class="text-navy">n</b> — tenure in months</span></div>
+      </div>
+    </div>
+    <div class="border border-bord rounded-[20px] p-9 max-[860px]:p-6">
+      <h2 class="text-[19px] font-bold mb-3.5">Common questions</h2>
+      <div class="border-b border-bord py-3.5 flex justify-between items-center text-[14.5px] font-semibold cursor-pointer">Does prepayment reduce my EMI or my tenure?<span class="text-brand-orange font-bold text-lg">+</span></div>
+      <div class="border-b border-bord py-3.5 flex justify-between items-center text-[14.5px] font-semibold cursor-pointer">What's the difference between flat and reducing rate?<span class="text-brand-orange font-bold text-lg">+</span></div>
+      <div class="border-b border-bord py-3.5 flex justify-between items-center text-[14.5px] font-semibold cursor-pointer">Is there a prepayment penalty?<span class="text-brand-orange font-bold text-lg">+</span></div>
+      <div class="py-3.5 flex justify-between items-center text-[14.5px] font-semibold cursor-pointer">How does a floating rate change my EMI?<span class="text-brand-orange font-bold text-lg">+</span></div>
+    </div>
+  </section>
+
+  <section class="mb-9">
+    <h2 class="text-xl font-bold mb-4">Related calculators</h2>
+    <div class="grid grid-cols-3 max-[860px]:grid-cols-1 gap-4">
+      <div class="border border-bord rounded-2xl p-5 flex items-center gap-3.5">
+        <span class="w-[38px] h-[38px] rounded-[9px] bg-brand-orangeBg flex items-center justify-center shrink-0">
+          <svg viewBox="0 0 24 24" fill="none" class="w-[18px] h-[18px] stroke-brand-orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6l-1 4h6l-2 16H6L4 6h6L9 2z"/></svg>
+        </span>
+        <div><div class="text-[14.5px] font-bold">Income Tax Calculator</div><div class="text-xs text-navy-60 mt-0.5">Old vs new regime, side by side</div></div>
+      </div>
+      <div class="border border-bord rounded-2xl p-5 flex items-center gap-3.5">
+        <span class="w-[38px] h-[38px] rounded-[9px] bg-brand-orangeBg flex items-center justify-center shrink-0">
+          <svg viewBox="0 0 24 24" fill="none" class="w-[18px] h-[18px] stroke-brand-orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg>
+        </span>
+        <div><div class="text-[14.5px] font-bold">SIP Calculator</div><div class="text-xs text-navy-60 mt-0.5">Monthly investing, projected</div></div>
+      </div>
+      <div class="border border-bord rounded-2xl p-5 flex items-center gap-3.5">
+        <span class="w-[38px] h-[38px] rounded-[9px] bg-brand-orangeBg flex items-center justify-center shrink-0">
+          <svg viewBox="0 0 24 24" fill="none" class="w-[18px] h-[18px] stroke-brand-orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>
+        </span>
+        <div><div class="text-[14.5px] font-bold">Goal Planner</div><div class="text-xs text-navy-60 mt-0.5">Back-calculate your SIP</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-navy rounded-[20px] px-[52px] py-11 max-[860px]:px-6 max-[860px]:py-8 flex max-[860px]:flex-col justify-between items-center max-[860px]:items-start gap-5 text-white mb-10">
+    <div>
+      <h3 class="text-[26px] font-bold leading-tight max-w-[420px]">Thinking about a loan or a balance transfer?</h3>
+      <p class="text-sm text-white/70 mt-2.5 max-w-[420px]">A Fintoo advisor can compare offers and check what fits your monthly budget, at no extra cost to browse.</p>
+    </div>
+    <button class="bg-white text-navy rounded-full px-6 py-3.5 font-semibold text-[14.5px] inline-flex items-center gap-2 whitespace-nowrap">Talk to an advisor →</button>
+  </section>
+
+  <footer class="border-t border-bord py-6 pb-10 flex justify-between text-[13px] text-navy-60 max-[860px]:flex-col max-[860px]:gap-3">
+    <div>© 2026 Fintoo. SEBI-registered investment adviser.</div>
+    <div class="flex gap-6"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a></div>
+  </footer>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const fmt = n => '₹' + Math.round(Math.max(0,n)).toLocaleString('en-IN');
+const parseNum = str => parseFloat(String(str).replace(/[^0-9.]/g,'')) || 0;
+
+function drawDonut(interestPct){
+  const clamped = Math.max(0, Math.min(100, interestPct));
+  $('donutCss').style.background = `conic-gradient(#042b62 0% ${100-clamped}%, #dd7300 ${100-clamped}% 100%)`;
+  $('donutPct').textContent = Math.round(clamped)+'%';
+}
+
+function drawBalanceChart(values){
+  const svg = $('balanceChart');
+  const vb = svg.viewBox.baseVal;
+  const W = vb.width, H = vb.height, pad=6;
+  const maxV = Math.max(...values, 1);
+  const pts = values.map((v,i)=>{
+    const x = pad + (i/(values.length-1||1))*(W-2*pad);
+    const y = H-pad - (v/maxV)*(H-2*pad);
+    return [x,y];
+  });
+  const linePath = pts.map((p,i)=> (i===0?'M':'L')+p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');
+  const areaPath = linePath + ` L${pts[pts.length-1][0].toFixed(1)},${H} L${pts[0][0].toFixed(1)},${H} Z`;
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="emiGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#042b62" stop-opacity="0.22"/>
+        <stop offset="100%" stop-color="#042b62" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <path d="${areaPath}" fill="url(#emiGrad)" stroke="none"/>
+    <path d="${linePath}" fill="none" stroke="#042b62" stroke-width="2.5"/>
+    <circle cx="${pts[pts.length-1][0]}" cy="${pts[pts.length-1][1]}" r="4.5" fill="#042b62"/>
+  `;
+}
+
+const els = {
+  principalInput: $('principalInput'), principalRange: $('principalRange'),
+  rateInput: $('rateInput'), rateRange: $('rateRange'),
+  tenureInput: $('tenureInput'), tenureRange: $('tenureRange'),
+  prepayInput: $('prepayInput'), prepayRange: $('prepayRange'),
+};
+
+const fieldConfig = [
+  {range: els.principalRange, input: els.principalInput, type: 'currency'},
+  {range: els.rateRange, input: els.rateInput, type: 'percent'},
+  {range: els.tenureRange, input: els.tenureInput, type: 'years'},
+  {range: els.prepayRange, input: els.prepayInput, type: 'currency'},
+];
+
+fieldConfig.forEach(({range, input, type})=>{
+  range.addEventListener('input', ()=>{
+    if(type==='currency') input.value = parseInt(range.value).toLocaleString('en-IN');
+    else if(type==='percent') input.value = range.value+'%';
+    else if(type==='years') input.value = range.value+'Yr';
+    else input.value = range.value;
+    render();
+  });
+  input.addEventListener('input', render);
+  input.addEventListener('blur', ()=>{
+    let v = parseNum(input.value);
+    const min = parseFloat(range.min), max = parseFloat(range.max);
+    v = Math.min(max, Math.max(min, v));
+    if(type==='currency') input.value = Math.round(v).toLocaleString('en-IN');
+    else if(type==='percent') input.value = v+'%';
+    else if(type==='years') input.value = Math.round(v)+'Yr';
+    else input.value = v;
+    render();
+  });
+});
+
+function calcEMI(P, annualRate, months){
+  const r = annualRate/12/100;
+  if(r===0) return P/months;
+  return P * r * Math.pow(1+r,months) / (Math.pow(1+r,months)-1);
+}
+
+function render(){
+  const principal = parseNum(els.principalInput.value);
+  const annualRate = parseNum(els.rateInput.value);
+  const tenureYears = parseNum(els.tenureInput.value);
+  const prepay = parseNum(els.prepayInput.value);
+
+  els.principalRange.value = principal;
+  els.rateRange.value = annualRate;
+  els.tenureRange.value = tenureYears;
+  els.prepayRange.value = prepay;
+
+  const totalMonths = tenureYears*12;
+  const monthlyRate = annualRate/12/100;
+  const emi = calcEMI(principal, annualRate, totalMonths);
+
+  $('emiVal').textContent = fmt(emi);
+
+  // Simulate month-by-month with optional prepayment to find actual payoff, interest, schedule
+  let balance = principal;
+  let totalInterestPaid = 0;
+  let month = 0;
+  const yearlySnapshots = [];
+  let yearPrincipalPaid = 0, yearInterestPaid = 0;
+  const balanceTrack = [balance];
+
+  while(balance > 0 && month < 1200){
+    month++;
+    const interestPortion = balance*monthlyRate;
+    let principalPortion = emi - interestPortion;
+    let payment = emi;
+    if(principalPortion > balance){ principalPortion = balance; payment = interestPortion+principalPortion; }
+    balance -= principalPortion;
+    if(prepay>0 && balance>0){
+      const extra = Math.min(prepay, balance);
+      balance -= extra;
+      principalPortion += extra;
+    }
+    totalInterestPaid += interestPortion;
+    yearPrincipalPaid += principalPortion;
+    yearInterestPaid += interestPortion;
+
+    if(month % 12 === 0 || balance<=0){
+      yearlySnapshots.push({
+        year: Math.ceil(month/12),
+        principalPaid: yearPrincipalPaid,
+        interestPaid: yearInterestPaid,
+        balance: Math.max(0,balance)
+      });
+      balanceTrack.push(Math.max(0,balance));
+      yearPrincipalPaid = 0; yearInterestPaid = 0;
+    }
+    if(balance<=0) break;
+  }
+
+  const actualMonths = month;
+  const totalPayment = principal + totalInterestPaid;
+
+  $('principalVal').textContent = fmt(principal);
+  $('interestVal').textContent = fmt(totalInterestPaid);
+  $('totalPaymentVal').textContent = fmt(totalPayment);
+  $('interestPctVal').textContent = Math.round(100*totalInterestPaid/principal)+'%';
+  drawDonut(100*totalInterestPaid/totalPayment);
+
+  if(prepay>0 && actualMonths<totalMonths){
+    $('prepayNote').style.display = '';
+    const closesYears = (actualMonths/12).toFixed(1);
+    $('closesInLabel').textContent = closesYears+' years';
+    $('prepayNoteAmt').textContent = fmt(prepay);
+  } else {
+    $('prepayNote').style.display = 'none';
+  }
+
+  drawBalanceChart(balanceTrack);
+  $('chartYearEnd').textContent = 'Year '+Math.ceil(actualMonths/12);
+
+  $('scheduleBody').innerHTML = yearlySnapshots.map(r=>`
+    <tr>
+      <td class="py-3 px-3 text-[13.5px] border-b border-navy-10">Year ${r.year}</td>
+      <td class="py-3 px-3 text-[13.5px] border-b border-navy-10 text-right font-semibold">${fmt(r.principalPaid)}</td>
+      <td class="py-3 px-3 text-[13.5px] border-b border-navy-10 text-right font-semibold text-brand-orange">${fmt(r.interestPaid)}</td>
+      <td class="py-3 px-3 text-[13.5px] border-b border-navy-10 text-right font-semibold">${fmt(r.balance)}</td>
+    </tr>
+  `).join('');
+}
+
+render();
+</script>
+
+</body>
+</html>

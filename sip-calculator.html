@@ -476,7 +476,7 @@
 
     <div class="calc-result">
       <div class="result-label">Total value after <b id="yearsLabel">10 years</b></div>
-      <div class="result-value" id="totalValue">₹23,23,391</div>
+      <div class="result-value" id="totalValue">₹22,40,359</div>
 
       <div class="donut-row">
         <svg width="120" height="120" viewBox="0 0 120 120" id="donut">
@@ -491,7 +491,7 @@
           </div>
           <div class="legend-row">
             <span class="lbl"><span class="dot" style="background:#dd7300;"></span>Est. returns</span>
-            <span class="val" id="returnsVal" style="color:var(--orange);">₹11,23,391</span>
+            <span class="val" id="returnsVal" style="color:var(--orange);">₹10,40,359</span>
           </div>
         </div>
       </div>
@@ -525,7 +525,7 @@
       <p>Because each instalment buys units at a different price, a SIP averages your purchase cost across market ups and downs — a benefit known as rupee-cost averaging — while still compounding the entire invested corpus over time.</p>
       <div class="formula-box">
         <div class="f">M&nbsp; =&nbsp; P × <span style="display:inline-block;">{[(1+r)<sup>n</sup> – 1] / r}</span> × (1+r)</div>
-        <div class="k"><span><b>M</b> — maturity value</span><span><b>P</b> — monthly investment</span><span><b>r</b> — monthly return</span><span><b>n</b> — number of months</span></div>
+        <div class="k"><span><b>M</b> — maturity value</span><span><b>P</b> — monthly investment</span><span><b>r</b> — equivalent monthly return from the annual rate</span><span><b>n</b> — number of months</span></div>
       </div>
     </div>
     <div class="info-card">
@@ -581,19 +581,24 @@ const yearsInput = document.getElementById('yearsInput');
 
 function parseAmount(str){ return parseInt(str.replace(/[^0-9]/g,'')) || 0; }
 
+function monthlyRate(annualRatePct){
+  return Math.pow(1 + annualRatePct/100, 1/12) - 1;
+}
+
 function calcSIP(P, annualRatePct, years){
-  const r = (annualRatePct/100)/12;
+  const r = monthlyRate(annualRatePct);
   const n = years*12;
+  if(r === 0) return P*n;
   const fv = P * ((Math.pow(1+r, n) - 1) / r) * (1+r);
   return fv;
 }
 
 function yearWiseSIP(P, annualRatePct, years){
-  const r = (annualRatePct/100)/12;
+  const r = monthlyRate(annualRatePct);
   const rows = [];
   for(let y=1; y<=years; y++){
     const n = y*12;
-    const value = P * ((Math.pow(1+r, n) - 1) / r) * (1+r);
+    const value = r === 0 ? P*n : P * ((Math.pow(1+r, n) - 1) / r) * (1+r);
     const invested = P*n;
     rows.push({year:y, invested, value, gain: value-invested});
   }

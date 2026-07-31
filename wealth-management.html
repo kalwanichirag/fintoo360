@@ -60,11 +60,6 @@
   #clip-row:active { cursor: grabbing; }
   #clip-row::-webkit-scrollbar { display:none; }
 
-  .faq-body { display:grid; grid-template-rows: 0fr; transition: grid-template-rows .4s ease; }
-  .faq-body > div { overflow:hidden; }
-  .faq-item.open .faq-body { grid-template-rows: 1fr; }
-  .faq-item.open .faq-icon { transform: rotate(45deg); }
-  .faq-icon { transition: transform .3s ease; }
 
   .magnetic { transition: transform .25s cubic-bezier(.2,.8,.2,1); }
 
@@ -96,28 +91,8 @@
 
 <div id="progress-bar"></div>
 
-<!-- ============ NAV ============ -->
-<header class="fixed top-0 left-0 w-full z-50">
-  <div class="max-w-[1600px] mx-auto px-6 lg:px-12 h-24 flex items-center justify-between">
-    <div class="flex items-center gap-2.5">
-      <div class="w-9 h-9 rounded-md bg-fintoo-blue flex items-center justify-center">
-        <span class="text-white font-bold text-lg">F</span>
-      </div>
-      <span class="text-xl font-bold text-fintoo-blue tracking-tight">fintoo</span>
-    </div>
-    <nav class="hidden lg:flex items-center gap-10 text-[13px] font-semibold uppercase tracking-widest text-fintoo-blue/60">
-      <a href="#about" class="hover:text-fintoo-blue transition">About</a>
-      <a href="#services" class="hover:text-fintoo-blue transition">Services</a>
-      <a href="#faq" class="hover:text-fintoo-blue transition">FAQ</a>
-    </nav>
-    <a href="#consult" class="magnetic bg-fintoo-blue text-white text-[13px] font-semibold uppercase tracking-widest px-6 py-3 rounded-full">
-      Book a Consultation
-    </a>
-  </div>
-</header>
-
 <!-- ============ HERO ============ -->
-<section class="relative min-h-screen flex flex-col justify-center overflow-hidden bg-paper pt-24">
+<section class="relative min-h-screen flex flex-col justify-center overflow-hidden bg-paper py-16 lg:py-24">
 
   <div class="contour-wrap opacity-[0.55]">
     <svg id="contour-svg" viewBox="0 0 1440 900" preserveAspectRatio="none" class="w-full h-full">
@@ -146,11 +121,11 @@
         </h1>
 
         <p class="hero-reveal mt-8 text-lg text-fintoo-blue/60 leading-relaxed max-w-xl">
-          Every financial journey is unique. That's why our SEBI-registered advisors create a personalized financial plan tailored to your goals, income, investments, and life stage - helping you make smarter financial decisions with confidence.
+          Whether you're building wealth, planning for retirement, or looking to make smarter investment decisions, every financial journey deserves a strategy tailored to your goals. At Fintoo, our experienced financial advisors work closely with you to create personalized wealth management solutions that help you grow, protect, and manage your wealth with confidence.
         </p>
 
         <div class="hero-reveal mt-10">
-          <a id="consult" href="#" class="magnetic group inline-flex items-center gap-4 bg-fintoo-blue text-white font-semibold pl-8 pr-3 py-3 rounded-full">
+          <a id="consult" href="#" class="magnetic group flex sm:inline-flex w-full sm:w-auto items-center justify-between gap-4 bg-fintoo-blue text-white font-semibold pl-8 pr-3 py-3 rounded-full">
             <span>Schedule Your Complimentary Consultation</span>
             <span class="w-9 h-9 rounded-full bg-fintoo-orange flex items-center justify-center flex-shrink-0 group-hover:rotate-45 transition-transform">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
@@ -186,11 +161,11 @@
             <text x="24" y="470" fill="#ffffff" fill-opacity="0.5" font-size="12" font-weight="600" letter-spacing="1">A FAMILY'S WEALTH, PLANNED TOGETHER</text>
           </svg>
         </div>
-        <div class="absolute -bottom-6 -left-6 lg:-left-10 bg-white rounded-2xl shadow-xl shadow-fintoo-blue/10 border border-line px-6 py-5 z-10">
-          <p class="text-2xl font-bold text-fintoo-blue num-tab">92,000+</p>
-          <p class="text-xs text-fintoo-blue/50 uppercase tracking-wide mt-1">Families &amp; NRIs Advised</p>
+        <div class="absolute bottom-4 left-4 lg:-bottom-6 lg:-left-10 bg-white rounded-2xl shadow-xl shadow-fintoo-blue/10 border border-line px-5 py-4 lg:px-6 lg:py-5 z-10">
+          <p class="text-2xl font-bold text-fintoo-blue num-tab">450+</p>
+          <p class="text-xs text-fintoo-blue/50 uppercase tracking-wide mt-1">Happy Families</p>
         </div>
-        <div class="absolute -top-5 -right-4 bg-fintoo-orange text-white rounded-full w-24 h-24 flex flex-col items-center justify-center text-center shadow-xl shadow-fintoo-orange/30 z-10">
+        <div class="absolute top-4 right-4 lg:-top-5 lg:-right-4 bg-fintoo-orange text-white rounded-full w-20 h-20 lg:w-24 lg:h-24 flex flex-col items-center justify-center text-center shadow-xl shadow-fintoo-orange/30 z-10">
           <span class="text-lg font-bold leading-none">20+</span>
           <span class="text-[10px] uppercase tracking-wide mt-1">Years</span>
         </div>
@@ -209,18 +184,16 @@
 <section class="bg-fintoo-blue py-5 overflow-hidden">
   <div class="marquee-track text-white/70 text-sm font-semibold uppercase tracking-widest whitespace-nowrap">
     <div class="flex items-center gap-8 pr-8">
-      <span>SEBI Registered Investment Advisor</span><span class="text-fintoo-orange">&bull;</span>
-      <span>92,000+ Clients Served</span><span class="text-fintoo-orange">&bull;</span>
-      <span>Est. 2004 as Financial Hospital</span><span class="text-fintoo-orange">&bull;</span>
-      <span>Fee-Only Advisory</span><span class="text-fintoo-orange">&bull;</span>
-      <span>Built for NRIs Worldwide</span><span class="text-fintoo-orange">&bull;</span>
+      <span>20+ Years</span><span class="text-fintoo-orange">&bull;</span>
+      <span>&#8377;5,000 Cr+ AUT</span><span class="text-fintoo-orange">&bull;</span>
+      <span>217+ AUA</span><span class="text-fintoo-orange">&bull;</span>
+      <span>450+ Happy Families</span><span class="text-fintoo-orange">&bull;</span>
     </div>
     <div class="flex items-center gap-8 pr-8" aria-hidden="true">
-      <span>SEBI Registered Investment Advisor</span><span class="text-fintoo-orange">&bull;</span>
-      <span>92,000+ Clients Served</span><span class="text-fintoo-orange">&bull;</span>
-      <span>Est. 2004 as Financial Hospital</span><span class="text-fintoo-orange">&bull;</span>
-      <span>Fee-Only Advisory</span><span class="text-fintoo-orange">&bull;</span>
-      <span>Built for NRIs Worldwide</span><span class="text-fintoo-orange">&bull;</span>
+      <span>20+ Years</span><span class="text-fintoo-orange">&bull;</span>
+      <span>&#8377;5,000 Cr+ AUT</span><span class="text-fintoo-orange">&bull;</span>
+      <span>217+ AUA</span><span class="text-fintoo-orange">&bull;</span>
+      <span>450+ Happy Families</span><span class="text-fintoo-orange">&bull;</span>
     </div>
   </div>
 </section>
@@ -235,7 +208,7 @@
   </div>
 
   <div class="relative max-w-6xl mx-auto px-6 lg:px-12 grid lg:grid-cols-12 gap-14 items-start">
-    <div class="lg:col-span-8">
+    <div class="lg:col-span-12">
       <div class="flex items-center gap-3 mb-8">
         <span class="w-8 h-px bg-fintoo-orange"></span>
         <p class="text-xs font-semibold tracking-[0.3em] uppercase text-fintoo-orange">About Fintoo</p>
@@ -244,38 +217,8 @@
         Financial Planning That Puts You First
       </h2>
       <p id="about-para" class="text-2xl lg:text-[2.4rem] leading-[1.35] font-medium max-w-5xl">
-        <span class="word-dim">No</span> <span class="word-dim">two</span> <span class="word-dim">financial</span> <span class="word-dim">journeys</span> <span class="word-dim">are</span> <span class="word-dim">the</span> <span class="word-dim">same.</span> <span class="word-dim">That's</span> <span class="word-dim">why</span> <span class="word-dim">we</span> <span class="word-dim">begin</span> <span class="word-dim">by</span> <span class="word-dim">understanding</span> <span class="word-dim">your</span> <span class="word-dim">aspirations,</span> <span class="word-dim">financial</span> <span class="word-dim">priorities,</span> <span class="word-dim">and</span> <span class="word-dim">long-term</span> <span class="word-dim">objectives</span> <span class="word-dim">before</span> <span class="word-dim">recommending</span> <span class="word-dim">a</span> <span class="word-dim">strategy.</span> <span class="word-dim">From</span> <span class="word-dim">investment</span> <span class="word-dim">planning</span> <span class="word-dim">to</span> <span class="word-dim">retirement</span> <span class="word-dim">planning</span> <span class="word-dim">and</span> <span class="word-dim">portfolio</span> <span class="word-dim">management,</span> <span class="word-dim">our</span> <span class="word-dim">advisors</span> <span class="word-dim">provide</span> <span class="word-dim">practical</span> <span class="word-dim">guidance</span> <span class="word-dim">designed</span> <span class="word-dim">to</span> <span class="word-dim">help</span> <span class="word-dim">you</span> <span class="word-dim">make</span> <span class="word-dim">confident</span> <span class="word-dim">financial</span> <span class="word-dim">decisions</span> <span class="word-dim">at</span> <span class="word-dim">every</span> <span class="word-dim">stage</span> <span class="word-dim">of</span> <span class="word-dim">life.</span>
+        <span class="word-dim">Every</span> <span class="word-dim">financial</span> <span class="word-dim">journey</span> <span class="word-dim">is</span> <span class="word-dim">unique.</span> <span class="word-dim">That's</span> <span class="word-dim">why</span> <span class="word-dim">our</span> <span class="word-dim">SEBI-registered</span> <span class="word-dim">advisors</span> <span class="word-dim">create</span> <span class="word-dim">a</span> <span class="word-dim">personalized</span> <span class="word-dim">financial</span> <span class="word-dim">plan</span> <span class="word-dim">tailored</span> <span class="word-dim">to</span> <span class="word-dim">your</span> <span class="word-dim">goals,</span> <span class="word-dim">income,</span> <span class="word-dim">investments,</span> <span class="word-dim">and</span> <span class="word-dim">life</span> <span class="word-dim">stage</span> <span class="word-dim">-</span> <span class="word-dim">helping</span> <span class="word-dim">you</span> <span class="word-dim">make</span> <span class="word-dim">smarter</span> <span class="word-dim">financial</span> <span class="word-dim">decisions</span> <span class="word-dim">with</span> <span class="word-dim">confidence.</span>
       </p>
-    </div>
-    <div class="lg:col-span-4">
-      <div class="rounded-2xl aspect-[3/4] sticky top-32 overflow-hidden relative">
-        <svg viewBox="0 0 300 400" class="w-full h-full" preserveAspectRatio="xMidYMax slice">
-          <defs>
-            <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#0e3f82"/>
-              <stop offset="55%" stop-color="#dd7300" stop-opacity="0.55"/>
-              <stop offset="100%" stop-color="#042b62"/>
-            </linearGradient>
-          </defs>
-          <rect width="300" height="400" fill="url(#skyGrad)"/>
-          <circle cx="215" cy="150" r="46" fill="#f4a94d" fill-opacity="0.8"/>
-          <g fill="#020c1e" fill-opacity="0.85">
-            <rect x="10" y="230" width="24" height="140"/>
-            <rect x="40" y="200" width="20" height="170"/>
-            <rect x="66" y="245" width="26" height="125"/>
-            <rect x="98" y="180" width="22" height="190"/>
-            <rect x="126" y="220" width="30" height="150"/>
-            <rect x="162" y="160" width="24" height="210"/>
-            <rect x="192" y="235" width="20" height="135"/>
-            <rect x="218" y="195" width="26" height="175"/>
-            <rect x="250" y="250" width="22" height="120"/>
-            <rect x="276" y="210" width="18" height="160"/>
-          </g>
-          <path d="M0,378 C60,368 120,386 180,372 S260,364 300,376 L300,400 L0,400 Z" fill="#020c1e" fill-opacity="0.6"/>
-          <path d="M0,388 C60,380 120,396 180,384 S260,378 300,388 L300,400 L0,400 Z" fill="#020c1e"/>
-        </svg>
-        <span class="absolute bottom-5 left-5 z-10 text-xs font-semibold uppercase tracking-widest text-white/80">Mumbai &middot; Home Base</span>
-      </div>
     </div>
   </div>
 </section>
@@ -404,13 +347,23 @@
           fill="none" stroke="#dd7300" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" id="growth-line"/>
         <circle cx="400" cy="20" r="7" fill="#dd7300"/>
       </svg>
-      <div class="absolute top-10 left-10 text-white">
-        <p class="text-4xl font-bold num-tab">20+ yrs</p>
-        <p class="text-xs uppercase tracking-widest text-white/50 mt-1">Advisory Experience</p>
-      </div>
-      <div class="absolute top-10 right-10 text-right text-white">
-        <p class="text-4xl font-bold">SEBI RIA</p>
-        <p class="text-xs uppercase tracking-widest text-white/50 mt-1">Registered Advisors</p>
+      <div class="absolute top-0 left-0 z-10 grid w-full grid-cols-2 gap-x-4 gap-y-6 p-6 lg:p-10 text-white">
+        <div>
+          <p class="text-2xl lg:text-4xl font-bold num-tab">20+</p>
+          <p class="text-[10px] lg:text-xs uppercase tracking-widest text-white/50 mt-1">Years</p>
+        </div>
+        <div>
+          <p class="text-2xl lg:text-4xl font-bold num-tab">&#8377;5,000 Cr+</p>
+          <p class="text-[10px] lg:text-xs uppercase tracking-widest text-white/50 mt-1">AUT</p>
+        </div>
+        <div>
+          <p class="text-2xl lg:text-4xl font-bold num-tab">217+</p>
+          <p class="text-[10px] lg:text-xs uppercase tracking-widest text-white/50 mt-1">AUA</p>
+        </div>
+        <div>
+          <p class="text-2xl lg:text-4xl font-bold num-tab">450+</p>
+          <p class="text-[10px] lg:text-xs uppercase tracking-widest text-white/50 mt-1">Happy Families</p>
+        </div>
       </div>
     </div>
   </div>
@@ -451,48 +404,6 @@
   </div>
 </section>
 
-<!-- ============ FAQ ============ -->
-<section id="faq" class="py-28 lg:py-36 bg-paper">
-  <div class="max-w-4xl mx-auto px-6 lg:px-12">
-    <div class="flex items-center gap-3 mb-6">
-      <span class="w-8 h-px bg-fintoo-orange"></span>
-      <p class="text-xs font-semibold tracking-[0.3em] uppercase text-fintoo-orange">FAQ</p>
-    </div>
-    <h2 class="text-3xl lg:text-4xl font-bold text-fintoo-blue leading-tight mb-14">Questions we get asked before someone signs up</h2>
-
-    <div class="space-y-0">
-      <div class="faq-item border-t border-line py-6">
-        <button class="faq-q w-full flex items-center justify-between text-left">
-          <span class="text-lg font-semibold text-fintoo-blue pr-6">What does it mean that Fintoo is fee-only?</span>
-          <span class="faq-icon text-fintoo-orange text-2xl flex-shrink-0">+</span>
-        </button>
-        <div class="faq-body"><div><p class="text-fintoo-blue/60 leading-relaxed pt-4 max-w-xl">We're paid a transparent advisory fee, not commissions on the products we recommend — so the incentive is your outcome, not a payout tied to what you buy.</p></div></div>
-      </div>
-      <div class="faq-item border-t border-line py-6">
-        <button class="faq-q w-full flex items-center justify-between text-left">
-          <span class="text-lg font-semibold text-fintoo-blue pr-6">Do you work with NRIs on dual taxation and repatriation?</span>
-          <span class="faq-icon text-fintoo-orange text-2xl flex-shrink-0">+</span>
-        </button>
-        <div class="faq-body"><div><p class="text-fintoo-blue/60 leading-relaxed pt-4 max-w-xl">Yes — cross-border tax treatment, DTAA claims, and repatriation timelines are a core part of NRI engagements, not an add-on.</p></div></div>
-      </div>
-      <div class="faq-item border-t border-line py-6">
-        <button class="faq-q w-full flex items-center justify-between text-left">
-          <span class="text-lg font-semibold text-fintoo-blue pr-6">Is there a minimum portfolio size to work with Fintoo?</span>
-          <span class="faq-icon text-fintoo-orange text-2xl flex-shrink-0">+</span>
-        </button>
-        <div class="faq-body"><div><p class="text-fintoo-blue/60 leading-relaxed pt-4 max-w-xl">Our HNI and UHNI advisory track is built for meaningful, complex portfolios — we'll confirm fit on your first consultation call.</p></div></div>
-      </div>
-      <div class="faq-item border-t border-b border-line py-6">
-        <button class="faq-q w-full flex items-center justify-between text-left">
-          <span class="text-lg font-semibold text-fintoo-blue pr-6">How often will I actually hear from my advisor?</span>
-          <span class="faq-icon text-fintoo-orange text-2xl flex-shrink-0">+</span>
-        </button>
-        <div class="faq-body"><div><p class="text-fintoo-blue/60 leading-relaxed pt-4 max-w-xl">Scheduled portfolio reviews at fixed intervals, plus ad-hoc check-ins whenever markets or your life circumstances shift materially.</p></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ FINAL CTA ============ -->
 <section class="relative py-32 lg:py-44 bg-fintoo-blue overflow-hidden">
   <div class="contour-wrap opacity-20">
@@ -513,41 +424,6 @@
     </a>
   </div>
 </section>
-
-<!-- ============ FOOTER ============ -->
-<footer class="bg-deep pt-20 pb-10">
-  <div class="max-w-6xl mx-auto px-6 lg:px-12">
-    <div class="grid md:grid-cols-3 gap-12 pb-16 border-b border-white/10">
-      <div>
-        <div class="flex items-center gap-2 mb-5">
-          <div class="w-8 h-8 rounded-md bg-fintoo-orange flex items-center justify-center"><span class="text-white font-bold text-sm">F</span></div>
-          <span class="text-white font-bold">fintoo</span>
-        </div>
-        <p class="text-white/40 text-sm leading-relaxed max-w-xs">SEBI registered wealth management for NRIs, HNIs, and families building long-term, cross-border financial plans.</p>
-      </div>
-      <div>
-        <p class="text-white text-sm font-semibold uppercase tracking-widest mb-5">Explore</p>
-        <div class="flex flex-col gap-3 text-white/40 text-sm">
-          <a href="#about" class="hover:text-white transition">About</a>
-          <a href="#services" class="hover:text-white transition">Services</a>
-          <a href="#process" class="hover:text-white transition">Process</a>
-          <a href="#global" class="hover:text-white transition">Global / NRI</a>
-        </div>
-      </div>
-      <div>
-        <p class="text-white text-sm font-semibold uppercase tracking-widest mb-5">Stay in touch</p>
-        <form class="flex gap-2" onsubmit="return false;">
-          <input type="email" placeholder="Your email" class="flex-1 min-w-0 bg-white/5 border border-white/10 rounded-full px-4 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-fintoo-orange">
-          <button class="bg-fintoo-orange text-white text-sm font-semibold px-5 rounded-full flex-shrink-0">Join</button>
-        </form>
-      </div>
-    </div>
-    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-white/30 text-xs">
-      <p>&copy; 2026 Fintoo. All rights reserved.</p>
-      <p>SEBI Registered Investment Advisor</p>
-    </div>
-  </div>
-</footer>
 
 <script>
   gsap.registerPlugin(ScrollTrigger);
@@ -610,15 +486,6 @@
     gsap.to(growthLine, { strokeDashoffset: 0, duration: 1.6, ease: "power2.out",
       scrollTrigger: { trigger: "#why", start: "top 65%" } });
   }
-
-  document.querySelectorAll(".faq-q").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const item = btn.closest(".faq-item");
-      const wasOpen = item.classList.contains("open");
-      document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("open"));
-      if (!wasOpen) item.classList.add("open");
-    });
-  });
 
   // interactive allocation donut
   (function () {

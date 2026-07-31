@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPS Calculator — Fintoo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: { DEFAULT: '#042b62', 5: '#f4f6f9', 10: '#e9edf3', 60: 'rgba(4,43,98,0.6)' },
+          brand: { orange: '#dd7300', orangeBg: '#fdead6' },
+          bord: '#e2e6ec',
+          green: '#0f8a4b',
+        },
+        fontFamily: {
+          sans: ["'Google Sans'", "'Roboto'", '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  /* Things Tailwind utilities can't reach: range-thumb styling and the conic-gradient donut. */
+  input[type=range]{ -webkit-appearance:none; height:4px; border-radius:4px; background:#e9edf3; }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none; width:20px; height:20px; border-radius:50%;
+    background:#fff; border:3px solid #dd7300; cursor:pointer; box-shadow:0 1px 3px rgba(0,0,0,0.2);
+  }
+  input[type=range]::-moz-range-thumb{
+    width:14px; height:14px; border-radius:50%; background:#fff; border:3px solid #dd7300; cursor:pointer;
+  }
+  .donut{ width:120px; height:120px; border-radius:50%; position:relative; flex-shrink:0; }
+  .donut::after{ content:''; position:absolute; inset:18px; background:#fff; border-radius:50%; }
+  .donut-center{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:1; }
+  body{ font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,sans-serif; }
+</style>
+</head>
+<body class="bg-white text-navy antialiased">
+
+<header class="flex items-center justify-between px-16 py-5 border-b border-bord max-[860px]:px-5">
+  <div class="flex items-center gap-2.5 font-bold text-xl text-navy">
+    <span class="w-[30px] h-[30px] rounded-lg bg-navy flex items-center justify-center">
+      <svg viewBox="0 0 24 24" fill="none" class="w-4 h-4"><path d="M4 12L11 5L20 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+    fintoo
+  </div>
+  <nav class="flex gap-10 max-[860px]:hidden">
+    <a href="#" class="text-[15px] font-medium text-navy-60 border-b-2 border-transparent pb-1">Invest</a>
+    <a href="#" class="text-[15px] font-medium text-navy-60 border-b-2 border-transparent pb-1">Plan</a>
+    <a href="#" class="text-[15px] font-medium text-navy-60 border-b-2 border-transparent pb-1">Learn</a>
+    <a href="tools.html" class="text-[15px] font-medium text-navy border-b-2 border-brand-orange pb-1">Tools</a>
+  </nav>
+  <button class="bg-navy text-white font-medium text-sm px-[22px] py-[11px] rounded-full">Talk to an advisor</button>
+</header>
+
+<main class="max-w-[1128px] mx-auto px-8 max-[860px]:px-5">
+
+  <div class="text-[13px] text-navy-60 pt-6"><a href="tools.html" class="hover:text-navy">Tools</a> &nbsp;›&nbsp; <span class="text-navy font-medium">NPS Calculator</span></div>
+
+  <div class="flex items-start gap-4 pt-5 pb-8">
+    <div class="w-[52px] h-[52px] rounded-2xl bg-brand-orangeBg flex items-center justify-center shrink-0">
+      <svg viewBox="0 0 24 24" fill="none" class="w-[26px] h-[26px] stroke-brand-orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M5 7l7-5 7 5M5 17l7 5 7-5"/><circle cx="12" cy="12" r="3"/></svg>
+    </div>
+    <div>
+      <h1 class="text-[34px] font-bold tracking-tight">NPS Calculator</h1>
+      <p class="text-[15px] text-navy-60 mt-1">Estimate your NPS maturity value and the monthly pension it can buy.</p>
+    </div>
+  </div>
+
+  <section class="grid grid-cols-2 max-[860px]:grid-cols-1 border border-bord rounded-[20px] overflow-hidden mb-7">
+    <div class="p-10 max-[860px]:p-6 flex flex-col gap-7">
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-[13.5px] font-medium text-navy-60 mb-2.5">Current age</label>
+          <div class="flex items-center border border-bord rounded-lg overflow-hidden bg-white">
+            <input type="text" id="curAgeInput" value="30" class="border-none outline-none px-2.5 py-2 text-[13.5px] font-semibold text-navy w-full">
+          </div>
+          <input type="range" id="curAgeRange" min="18" max="60" step="1" value="30" class="w-full mt-3">
+        </div>
+        <div>
+          <label class="block text-[13.5px] font-medium text-navy-60 mb-2.5">Retirement age</label>
+          <div class="flex items-center border border-bord rounded-lg overflow-hidden bg-white">
+            <input type="text" id="retAgeInput" value="60" class="border-none outline-none px-2.5 py-2 text-[13.5px] font-semibold text-navy w-full">
+          </div>
+          <input type="range" id="retAgeRange" min="50" max="70" step="1" value="60" class="w-full mt-3">
+        </div>
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between mb-2.5">
+          <label class="text-[13.5px] font-medium text-navy">Monthly NPS contribution</label>
+          <div class="flex items-center border border-bord rounded-lg overflow-hidden bg-white">
+            <span class="px-2.5 py-1.5 text-[13.5px] text-navy-60 border-r border-bord">₹</span>
+            <input type="text" id="contribInput" value="5,000" class="border-none outline-none px-2.5 py-1.5 text-[13.5px] font-semibold text-navy w-[110px]">
+          </div>
+        </div>
+        <input type="range" id="contribRange" min="500" max="150000" step="500" value="5000" class="w-full">
+        <div class="flex justify-between text-xs text-navy-60 mt-2"><span>₹500</span><span>₹1.5L</span></div>
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between mb-2.5">
+          <label class="text-[13.5px] font-medium text-navy">Expected return till retirement</label>
+          <div class="flex items-center border border-bord rounded-lg overflow-hidden bg-white w-[70px]">
+            <input type="text" id="returnInput" value="10%" class="border-none outline-none px-2.5 py-1.5 text-[13.5px] font-semibold text-navy w-full text-right">
+          </div>
+        </div>
+        <input type="range" id="returnRange" min="4" max="15" step="0.5" value="10" class="w-full">
+        <div class="flex justify-between text-xs text-navy-60 mt-2"><span>4%</span><span>15%</span></div>
+      </div>
+
+      <hr class="border-bord">
+
+      <div>
+        <div class="flex items-center justify-between mb-2.5">
+          <label class="text-[13.5px] font-medium text-navy">Annuity purchase <span class="font-normal text-navy-60 text-xs">(min. 40% mandatory)</span></label>
+          <div class="flex items-center border border-bord rounded-lg overflow-hidden bg-white w-[70px]">
+            <input type="text" id="annuityPctInput" value="40%" class="border-none outline-none px-2.5 py-1.5 text-[13.5px] font-semibold text-navy w-full text-right">
+          </div>
+        </div>
+        <input type="range" id="annuityPctRange" min="40" max="100" step="5" value="40" class="w-full">
+        <div class="flex justify-between text-xs text-navy-60 mt-2"><span>40%</span><span>100%</span></div>
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between mb-2.5">
+          <label class="text-[13.5px] font-medium text-navy">Expected annuity rate</label>
+          <div class="flex items-center border border-bord rounded-lg overflow-hidden bg-white w-[70px]">
+            <input type="text" id="annuityRateInput" value="6%" class="border-none outline-none px-2.5 py-1.5 text-[13.5px] font-semibold text-navy w-full text-right">
+          </div>
+        </div>
+        <input type="range" id="annuityRateRange" min="3" max="9" step="0.25" value="6" class="w-full">
+        <div class="flex justify-between text-xs text-navy-60 mt-2"><span>3%</span><span>9%</span></div>
+      </div>
+
+      <button class="mt-auto bg-navy text-white rounded-full px-6 py-3.5 text-[15px] font-medium inline-flex items-center gap-2 self-start">Start an NPS SIP →</button>
+    </div>
+
+    <div class="bg-navy-5 p-10 max-[860px]:p-6 flex flex-col">
+      <div class="text-[13.5px] text-navy-60">Total corpus at <b class="text-navy" id="yearsLabel">age 60</b></div>
+      <div class="text-[34px] font-bold mt-1 mb-5" id="totalCorpus">₹0</div>
+
+      <div class="flex items-center gap-6 mb-5">
+        <div class="donut" id="donutCss">
+          <div class="donut-center"><span class="text-lg font-bold text-navy" id="donutPct">0%</span></div>
+        </div>
+        <div class="flex flex-col gap-2.5">
+          <div class="flex items-center justify-between gap-6 text-[13.5px]">
+            <span class="text-navy-60 flex items-center"><span class="w-2.5 h-2.5 rounded-full inline-block mr-2" style="background:#042b62;"></span>Invested amount</span>
+            <span class="font-semibold" id="investedVal">₹0</span>
+          </div>
+          <div class="flex items-center justify-between gap-6 text-[13.5px]">
+            <span class="text-navy-60 flex items-center"><span class="w-2.5 h-2.5 rounded-full inline-block mr-2" style="background:#dd7300;"></span>Est. returns</span>
+            <span class="font-semibold text-brand-orange" id="returnsVal">₹0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 mb-5">
+        <div class="bg-white border border-bord rounded-xl p-4">
+          <div class="text-xs text-navy-60">Lump sum withdrawal <span id="lumpPctLabel">(60%)</span></div>
+          <div class="text-xl font-bold mt-1" id="lumpVal">₹0</div>
+          <div class="text-[11px] text-navy-60 mt-1">Tax-free up to 60% of corpus</div>
+        </div>
+        <div class="bg-white border-[1.5px] border-brand-orange rounded-xl p-4">
+          <div class="text-xs text-navy-60">Annuity corpus <span id="annuityPctLabel">(40%)</span></div>
+          <div class="text-xl font-bold mt-1" id="annuityCorpusVal">₹0</div>
+          <div class="text-[11px] text-navy-60 mt-1">Used to buy a life annuity</div>
+        </div>
+      </div>
+
+      <div class="bg-white border-[1.5px] border-brand-orange rounded-xl p-5 mb-5">
+        <div class="text-[13px] text-navy-60 font-medium">Estimated monthly pension</div>
+        <div class="text-2xl font-bold mt-0.5" id="pensionVal">₹0<span class="text-sm font-medium text-navy-60"> /month</span></div>
+        <div class="text-[11.5px] text-navy-60 mt-1.5">Pension income is fully taxable at your slab rate.</div>
+      </div>
+
+      <div>
+        <svg id="growthChart" width="100%" height="120" viewBox="0 0 460 120" preserveAspectRatio="none"></svg>
+        <div class="flex justify-between text-xs text-navy-60 mt-1"><span id="chartAgeStart">Age 30</span><span id="chartAgeEnd">Age 60</span></div>
+      </div>
+
+      <div class="text-[11.5px] text-navy-60 mt-3.5 leading-relaxed">Illustrative only. Actual NPS returns depend on your chosen asset allocation (equity/corp bond/gilt) and fund manager. Annuity rates vary by provider and product at the time of purchase.</div>
+    </div>
+  </section>
+
+  <section class="border border-bord rounded-[20px] p-8 px-10 max-[860px]:px-6 mb-7">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-bold">Year-wise growth</h2>
+      <span class="text-[13px] text-navy-60">Scroll to see all years</span>
+    </div>
+    <div class="max-h-[230px] overflow-y-auto">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr class="sticky top-0 bg-white">
+            <th class="text-left text-xs tracking-wide text-navy-60 py-2 px-3 border-b border-bord">AGE</th>
+            <th class="text-right text-xs tracking-wide text-navy-60 py-2 px-3 border-b border-bord">INVESTED</th>
+            <th class="text-right text-xs tracking-wide text-navy-60 py-2 px-3 border-b border-bord">CORPUS</th>
+            <th class="text-right text-xs tracking-wide text-navy-60 py-2 px-3 border-b border-bord">WEALTH GAINED</th>
+          </tr>
+        </thead>
+        <tbody id="growthTableBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="grid grid-cols-[1.3fr_1fr] max-[860px]:grid-cols-1 gap-5 mb-7">
+    <div class="border border-bord rounded-[20px] p-9 max-[860px]:p-6">
+      <h2 class="text-[19px] font-bold mb-3.5">How NPS works at retirement</h2>
+      <p class="text-[14.5px] text-navy-60 leading-relaxed mb-3.5">Your contributions build a market-linked corpus until you retire. At exit, at least 40% of that corpus must go into an annuity — a plan that pays you a fixed monthly pension for life. You can withdraw the remaining amount as a lump sum, and up to 60% of the total corpus is tax-free.</p>
+      <p class="text-[14.5px] text-navy-60 leading-relaxed mb-3.5">The monthly pension itself depends on the annuity rate the insurer offers at the time — not the return your NPS corpus earned while accumulating. It's fully taxable as income in the year you receive it.</p>
+      <div class="bg-navy-5 rounded-xl p-5">
+        <div class="text-[15px] font-bold mb-2 leading-relaxed">Monthly pension &nbsp;=&nbsp; Annuity corpus × Annuity rate / 12</div>
+        <div class="text-xs text-navy-60 flex gap-4 flex-wrap"><span><b class="text-navy">Annuity corpus</b> — the % of maturity value annuitized</span><span><b class="text-navy">Annuity rate</b> — fixed by the insurer at purchase</span></div>
+      </div>
+    </div>
+    <div class="border border-bord rounded-[20px] p-9 max-[860px]:p-6">
+      <h2 class="text-[19px] font-bold mb-3.5">Common questions</h2>
+      <div class="border-b border-bord py-3.5 flex justify-between items-center text-[14.5px] font-semibold cursor-pointer">Can I withdraw the full corpus at 60?<span class="text-brand-orange font-bold text-lg">+</span></div>
+      <div class="border-b border-bord py-3.5 flex justify-between items-center text-[14.5px] font-semibold cursor-pointer">Is the lump sum withdrawal really tax-free?<span class="text-brand-orange font-bold text-lg">+</span></div>
+      <div class="border-b border-bord py-3.5 flex justify-between items-center text-[14.5px] font-semibold cursor-pointer">What happens to the annuity rate after I buy it?<span class="text-brand-orange font-bold text-lg">+</span></div>
+      <div class="py-3.5 flex justify-between items-center text-[14.5px] font-semibold cursor-pointer">NPS vs SIP — which builds a bigger corpus?<span class="text-brand-orange font-bold text-lg">+</span></div>
+    </div>
+  </section>
+
+  <section class="mb-9">
+    <h2 class="text-xl font-bold mb-4">Related calculators</h2>
+    <div class="grid grid-cols-3 max-[860px]:grid-cols-1 gap-4">
+      <div class="border border-bord rounded-2xl p-5 flex items-center gap-3.5">
+        <span class="w-[38px] h-[38px] rounded-[9px] bg-brand-orangeBg flex items-center justify-center shrink-0">
+          <svg viewBox="0 0 24 24" fill="none" class="w-[18px] h-[18px] stroke-brand-orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg>
+        </span>
+        <div><div class="text-[14.5px] font-bold">SIP Calculator</div><div class="text-xs text-navy-60 mt-0.5">Monthly investing, projected</div></div>
+      </div>
+      <div class="border border-bord rounded-2xl p-5 flex items-center gap-3.5">
+        <span class="w-[38px] h-[38px] rounded-[9px] bg-brand-orangeBg flex items-center justify-center shrink-0">
+          <svg viewBox="0 0 24 24" fill="none" class="w-[18px] h-[18px] stroke-brand-orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4.5 8-11V5l-8-3-8 3v6c0 6.5 8 11 8 11z"/></svg>
+        </span>
+        <div><div class="text-[14.5px] font-bold">Retirement Calculator</div><div class="text-xs text-navy-60 mt-0.5">Check your savings rate</div></div>
+      </div>
+      <div class="border border-bord rounded-2xl p-5 flex items-center gap-3.5">
+        <span class="w-[38px] h-[38px] rounded-[9px] bg-brand-orangeBg flex items-center justify-center shrink-0">
+          <svg viewBox="0 0 24 24" fill="none" class="w-[18px] h-[18px] stroke-brand-orange" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>
+        </span>
+        <div><div class="text-[14.5px] font-bold">Goal Planner</div><div class="text-xs text-navy-60 mt-0.5">Back-calculate your SIP</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-navy rounded-[20px] px-[52px] py-11 max-[860px]:px-6 max-[860px]:py-8 flex max-[860px]:flex-col justify-between items-center max-[860px]:items-start gap-5 text-white mb-10">
+    <div>
+      <h3 class="text-[26px] font-bold leading-tight max-w-[420px]">Turn this into an actual NPS account.</h3>
+      <p class="text-sm text-white/70 mt-2.5 max-w-[420px]">A Fintoo advisor can help you pick your asset allocation and fund manager, at no extra cost to browse.</p>
+    </div>
+    <button class="bg-white text-navy rounded-full px-6 py-3.5 font-semibold text-[14.5px] inline-flex items-center gap-2 whitespace-nowrap">Talk to an advisor →</button>
+  </section>
+
+  <footer class="border-t border-bord py-6 pb-10 flex justify-between text-[13px] text-navy-60 max-[860px]:flex-col max-[860px]:gap-3">
+    <div>© 2026 Fintoo. SEBI-registered investment adviser.</div>
+    <div class="flex gap-6"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a></div>
+  </footer>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const fmt = n => '₹' + Math.round(Math.max(0,n)).toLocaleString('en-IN');
+const parseNum = str => parseFloat(String(str).replace(/[^0-9.]/g,'')) || 0;
+
+function drawDonut(pct){
+  const clamped = Math.max(0, Math.min(100, pct));
+  $('donutCss').style.background = `conic-gradient(#dd7300 0% ${clamped}%, #e9edf3 ${clamped}% 100%)`;
+  $('donutPct').textContent = Math.round(clamped)+'%';
+}
+
+function drawGrowthChart(values){
+  const svg = $('growthChart');
+  const vb = svg.viewBox.baseVal;
+  const W = vb.width, H = vb.height, pad=6;
+  const maxV = Math.max(...values, 1);
+  const pts = values.map((v,i)=>{
+    const x = pad + (i/(values.length-1||1))*(W-2*pad);
+    const y = H-pad - (v/maxV)*(H-2*pad);
+    return [x,y];
+  });
+  const linePath = pts.map((p,i)=> (i===0?'M':'L')+p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');
+  const areaPath = linePath + ` L${pts[pts.length-1][0].toFixed(1)},${H} L${pts[0][0].toFixed(1)},${H} Z`;
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="npsGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#dd7300" stop-opacity="0.25"/>
+        <stop offset="100%" stop-color="#dd7300" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <path d="${areaPath}" fill="url(#npsGrad)" stroke="none"/>
+    <path d="${linePath}" fill="none" stroke="#dd7300" stroke-width="2.5"/>
+    <circle cx="${pts[pts.length-1][0]}" cy="${pts[pts.length-1][1]}" r="4.5" fill="#dd7300"/>
+  `;
+}
+
+const els = {
+  curAgeInput: $('curAgeInput'), curAgeRange: $('curAgeRange'),
+  retAgeInput: $('retAgeInput'), retAgeRange: $('retAgeRange'),
+  contribInput: $('contribInput'), contribRange: $('contribRange'),
+  returnInput: $('returnInput'), returnRange: $('returnRange'),
+  annuityPctInput: $('annuityPctInput'), annuityPctRange: $('annuityPctRange'),
+  annuityRateInput: $('annuityRateInput'), annuityRateRange: $('annuityRateRange'),
+};
+
+const fieldConfig = [
+  {range: els.curAgeRange, input: els.curAgeInput, type: 'plain'},
+  {range: els.retAgeRange, input: els.retAgeInput, type: 'plain'},
+  {range: els.contribRange, input: els.contribInput, type: 'currency'},
+  {range: els.returnRange, input: els.returnInput, type: 'percent'},
+  {range: els.annuityPctRange, input: els.annuityPctInput, type: 'percent'},
+  {range: els.annuityRateRange, input: els.annuityRateInput, type: 'percent'},
+];
+
+function parseVal(input, type){
+  const v = parseNum(input.value);
+  return v;
+}
+
+fieldConfig.forEach(({range, input, type})=>{
+  range.addEventListener('input', ()=>{
+    if(type==='currency') input.value = parseInt(range.value).toLocaleString('en-IN');
+    else if(type==='percent') input.value = range.value+'%';
+    else input.value = range.value;
+    render();
+  });
+  input.addEventListener('input', render);
+  input.addEventListener('blur', ()=>{
+    let v = parseNum(input.value);
+    const min = parseFloat(range.min), max = parseFloat(range.max);
+    v = Math.min(max, Math.max(min, v));
+    if(type==='currency') input.value = Math.round(v).toLocaleString('en-IN');
+    else if(type==='percent') input.value = v+'%';
+    else input.value = Math.round(v);
+    render();
+  });
+});
+
+function render(){
+  const curAge = parseVal(els.curAgeInput);
+  let retAge = parseVal(els.retAgeInput);
+  if(retAge<=curAge) retAge = curAge+1;
+  const monthlyContrib = parseVal(els.contribInput);
+  const annualReturn = parseVal(els.returnInput)/100;
+  const annuityPct = parseVal(els.annuityPctInput)/100;
+  const annuityRate = parseVal(els.annuityRateInput)/100;
+
+  els.curAgeRange.value = curAge; els.retAgeRange.value = retAge;
+  els.contribRange.value = monthlyContrib; els.returnRange.value = annualReturn*100;
+  els.annuityPctRange.value = annuityPct*100; els.annuityRateRange.value = annuityRate*100;
+
+  const yearsToRetirement = retAge-curAge;
+  const monthlyRate = annualReturn/12;
+  const totalMonths = yearsToRetirement*12;
+
+  const fv = monthlyContrib * ((Math.pow(1+monthlyRate,totalMonths)-1)/monthlyRate) * (1+monthlyRate);
+  const invested = monthlyContrib*totalMonths;
+  const gains = fv-invested;
+
+  $('yearsLabel').textContent = 'age '+retAge;
+  $('totalCorpus').textContent = fmt(fv);
+  $('investedVal').textContent = fmt(invested);
+  $('returnsVal').textContent = fmt(gains);
+  drawDonut(fv>0 ? 100*gains/fv : 0);
+
+  const lumpPct = 1-annuityPct;
+  const lumpVal = fv*lumpPct;
+  const annuityCorpus = fv*annuityPct;
+  const monthlyPension = (annuityCorpus*annuityRate)/12;
+
+  $('lumpPctLabel').textContent = '('+Math.round(lumpPct*100)+'%)';
+  $('lumpVal').textContent = fmt(lumpVal);
+  $('annuityPctLabel').textContent = '('+Math.round(annuityPct*100)+'%)';
+  $('annuityCorpusVal').textContent = fmt(annuityCorpus);
+  $('pensionVal').innerHTML = fmt(monthlyPension)+'<span class="text-sm font-medium text-navy-60"> /month</span>';
+
+  const accValues = [];
+  let bal = 0;
+  accValues.push(0);
+  for(let y=1;y<=yearsToRetirement;y++){
+    for(let m=1;m<=12;m++){ bal = bal*(1+monthlyRate) + monthlyContrib; }
+    accValues.push(bal);
+  }
+  drawGrowthChart(accValues);
+  $('chartAgeStart').textContent = 'Age '+curAge;
+  $('chartAgeEnd').textContent = 'Age '+retAge;
+
+  const rows = [];
+  let runningBal = 0, runningInvested = 0;
+  for(let y=1;y<=yearsToRetirement;y++){
+    for(let m=1;m<=12;m++){ runningBal = runningBal*(1+monthlyRate) + monthlyContrib; runningInvested += monthlyContrib; }
+    rows.push({age: curAge+y, invested: runningInvested, value: runningBal, gain: runningBal-runningInvested});
+  }
+  $('growthTableBody').innerHTML = rows.map(r=>`
+    <tr>
+      <td class="py-3 px-3 text-[13.5px] border-b border-navy-10">Age ${r.age}</td>
+      <td class="py-3 px-3 text-[13.5px] border-b border-navy-10 text-right font-semibold">${fmt(r.invested)}</td>
+      <td class="py-3 px-3 text-[13.5px] border-b border-navy-10 text-right font-semibold">${fmt(r.value)}</td>
+      <td class="py-3 px-3 text-[13.5px] border-b border-navy-10 text-right font-semibold text-brand-orange">+${fmt(r.gain)}</td>
+    </tr>
+  `).join('');
+}
+
+render();
+</script>
+
+</body>
+</html>
