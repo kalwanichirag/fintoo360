@@ -109,8 +109,6 @@
     .coin-spin{ animation:spinSlow 10s linear infinite; }
     .ribbon-shimmer{ animation:shimmer 2.2s .8s ease-out 1; }
     .max-card::before{ animation:foilSpin 7s linear infinite; }
-    .plan-icon{ animation:iconFloat 3.8s ease-in-out infinite; }
-    .plan-icon svg{ animation:iconPulse 3.8s ease-in-out infinite; }
   }
   @property --angle{ syntax:'<angle>'; inherits:false; initial-value:0deg; }
 
@@ -148,10 +146,6 @@
   }
 
   .max-card{ position:relative; }
-  .reveal:nth-child(2) .plan-icon,
-  .reveal:nth-child(2) .plan-icon svg{ animation-delay:.35s; }
-  .reveal:nth-child(3) .plan-icon,
-  .reveal:nth-child(3) .plan-icon svg{ animation-delay:.7s; }
   .max-card::before{
     content:'';
     position:absolute; inset:0;
@@ -171,6 +165,52 @@
     background-size:2.75rem 2.75rem;
     -webkit-mask-image:radial-gradient(ellipse 70% 55% at 50% 0%, #000 30%, transparent 75%);
     mask-image:radial-gradient(ellipse 70% 55% at 50% 0%, #000 30%, transparent 75%);
+  }
+
+  .plan-mark{
+    position:relative; display:flex; align-items:center; justify-content:center;
+    width:3.75rem; height:3.75rem; flex:0 0 auto; border-radius:1rem;
+  }
+  .plan-mark--basic{
+    color:#0a3d80;
+    background:#f3f7fc;
+    border:1px solid #dbe6f5;
+  }
+  .plan-mark--pro{
+    color:#ffc785;
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.14);
+  }
+  .plan-mark--max{
+    color:#b96200;
+    background:#fff8ee;
+    border:1px solid #fbe8c8;
+  }
+  .plan-mark__icon{
+    display:block; width:1.65rem; height:1.65rem;
+  }
+  /* Pricing is intentionally denser than the rest of the landing page. */
+  #pricing .pricing-grid{ align-items:stretch; }
+  #pricing .pricing-card{
+    border-radius:1.5rem;
+    padding:1.5rem;
+    box-shadow:0 1rem 2.75rem -2rem rgba(4,43,98,.3);
+  }
+  #pricing .pricing-card:hover{ transform:translateY(-.25rem); }
+  #pricing .pricing-card .plan-icon{ width:3.5rem; height:3.5rem; }
+  #pricing .pricing-card .plan-price{ min-height:8.25rem; }
+  #pricing .pricing-card .coin-box{ margin-top:1.25rem; border-radius:1rem; }
+  #pricing .pricing-card .benefit-title{ margin-top:1.35rem; padding-top:1rem; }
+  #pricing .pricing-card .benefit-list{ margin-top:.85rem; }
+  #pricing .pricing-card .benefit-list li{ gap:.65rem; }
+  #pricing .pricing-card .benefit-list svg{ width:1.125rem; height:1.125rem; }
+  #pricing .pricing-card .plan-action{ margin-top:1.5rem; }
+  #pricing .pro-card{ box-shadow:0 1.5rem 3.5rem -1.75rem rgba(2,28,64,.6); }
+  @media (min-width:1024px){
+    #pricing .pricing-grid{ gap:1.25rem; }
+    #pricing .pricing-card{ padding:1.65rem; }
+    #pricing .pro-card{ transform:translateY(-.75rem); }
+    #pricing .pro-card:hover{ transform:translateY(-1rem); }
   }
 </style>
 </head>
@@ -338,25 +378,25 @@
 </header>
 
 <!-- ================= PRICING CARDS ================= -->
-<section id="pricing" class="relative pb-24 lg:pb-32">
+<section id="pricing" class="relative pb-20 lg:pb-24">
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
-    <div class="mb-12 text-center">
+    <div class="mb-10 text-center">
       <span class="inline-flex items-center gap-2 rounded-full border border-navy-200 bg-white px-3.5 py-1.5 text-xs font-bold uppercase tracking-[.14em] text-navy-600"><span class="h-1.5 w-1.5 rounded-full bg-accent"></span>Plans and benefits</span>
-      <h2 class="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">Compare every plan at a glance</h2>
-      <p class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-navy-500 sm:text-base">AI calculation data points are the financial inputs and scenarios used to compare outcomes and calculate your investment and retirement plan.</p>
+      <h2 class="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">A plan for every financial journey</h2>
+      <p class="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-navy-500 sm:text-base">Start free, or unlock deeper analysis and personalised guidance as your goals grow.</p>
     </div>
-    <div class="grid lg:grid-cols-3 gap-6 lg:gap-7 items-stretch">
+    <div class="pricing-grid grid lg:grid-cols-3 gap-5 items-stretch">
 
       <!-- FREE -->
-      <div class="reveal lg:mt-6">
-        <div class="h-full flex flex-col bg-white rounded-[1.75rem] border-2 border-navy-100 p-8 transition-all duration-300 hover:border-navy-200 hover:shadow-xl hover:shadow-navy-900/5 hover:-translate-y-1.5">
-          <div class="plan-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-navy-50 to-navy-100 text-navy flex items-center justify-center shadow-sm">
-            <svg viewBox="0 0 24 24" class="w-6 h-6 text-navy" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22 11 13 2 9 22 2Z"/></svg>
+      <div class="reveal">
+        <div class="pricing-card h-full flex flex-col bg-white border border-navy-100 transition-all duration-300 hover:border-navy-200">
+          <div class="plan-icon plan-mark plan-mark--basic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="plan-mark__icon" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.7 2.7L16.5 9"/></svg>
           </div>
-          <div class="mt-6 flex items-center gap-2.5"><h3 class="text-2xl font-bold text-navy">Basic</h3><span class="rounded-full border border-navy-200 bg-navy-50 px-2.5 py-1 text-[.625rem] font-bold uppercase tracking-wide text-navy">Current plan</span></div>
+          <div class="mt-4 flex items-center gap-2.5"><h3 class="text-2xl font-bold text-navy">Basic</h3><span class="rounded-full border border-navy-200 bg-navy-50 px-2.5 py-1 text-[.625rem] font-bold uppercase tracking-wide text-navy">Current plan</span></div>
           <p class="mt-1.5 text-sm text-navy-500 leading-relaxed">Essential analysis to begin planning with confidence.</p>
 
-          <div class="mt-7">
+          <div class="plan-price mt-6">
             <div class="flex items-start gap-1 text-navy">
               <span class="mt-1 text-xl font-semibold">₹</span>
               <span class="price-figure text-[3.5rem] font-bold">0</span>
@@ -364,7 +404,7 @@
             <p class="mt-2 text-sm text-navy-400">Basic plan · free forever</p>
           </div>
 
-          <div class="mt-6 rounded-2xl border border-navy-100 bg-mist px-4 py-3.5 shadow-sm shadow-navy-900/[.03]">
+          <div class="coin-box rounded-2xl border border-navy-100 bg-mist px-4 py-3.5 shadow-sm shadow-navy-900/[.03]">
             <div class="flex items-center gap-3">
               <img src="fincoin.png" alt="FinCoin" class="h-10 w-10 shrink-0 rounded-full object-cover shadow-md shadow-navy/15">
               <div class="min-w-0">
@@ -374,8 +414,11 @@
             </div>
           </div>
 
-          <div class="mt-7 border-t border-navy-100 pt-5 text-xs font-bold uppercase tracking-[.12em] text-navy-400">Plan benefits</div>
-          <ul class="mt-4 space-y-3.5 text-[.9375rem] text-navy-700 flex-1">
+          <div class="benefit-title border-t border-navy-100 pt-4">
+            <p class="flex items-center gap-2 text-sm font-semibold text-navy"><svg viewBox="0 0 24 24" class="h-4 w-4 text-navy-500" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V9M10 18V5M16 18v-7M22 18V3"/></svg>Uses basic simulations</p>
+            <p class="mt-3 text-xs font-bold uppercase tracking-[.12em] text-navy-400">What's included</p>
+          </div>
+          <ul class="benefit-list space-y-3 text-[.875rem] text-navy-700 flex-1">
             <li class="flex items-start gap-3">
               <svg viewBox="0 0 24 24" class="w-5 h-5 text-navy shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
               <strong class="font-medium text-navy">1,000 AI calculation data points</strong>
@@ -397,7 +440,7 @@
             <li class="flex items-start gap-3 text-navy-300"><span class="w-5 shrink-0 text-center">—</span><span>Target retirement-age planning</span></li>
           </ul>
 
-          <a href="#" class="mt-8 block text-center px-6 py-3.5 rounded-xl font-semibold text-navy border-2 border-navy-200 hover:bg-navy hover:text-white hover:border-navy transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2">
+          <a href="#" class="plan-action block text-center px-6 py-3.5 rounded-xl font-semibold text-navy border-2 border-navy-200 hover:bg-navy hover:text-white hover:border-navy transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2">
             Get Started
           </a>
         </div>
@@ -405,19 +448,19 @@
 
       <!-- PRO -->
       <div class="reveal" style="transition-delay:120ms">
-        <div class="pro-card relative h-full flex flex-col bg-gradient-to-b from-navy to-navy-900 rounded-[1.75rem] p-8 pt-9 shadow-2xl shadow-navy-900/30 lg:scale-[1.04]">
+        <div class="pricing-card pro-card relative h-full flex flex-col bg-gradient-to-b from-navy to-navy-900 pt-8">
           <span class="ribbon-shimmer absolute -top-4 left-1/2 -translate-x-1/2 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-accent text-white text-xs font-bold tracking-wide shadow-lg shadow-accent-700/30">
             <svg viewBox="0 0 24 24" class="w-3.5 h-3.5" fill="currentColor"><path d="m12 2 2.9 6.6 7.1.7-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7-5.4-4.7 7.1-.7Z"/></svg>
             MOST POPULAR
           </span>
 
-          <div class="plan-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-accent/25 to-gold/10 flex items-center justify-center shadow-inner shadow-accent/10">
-            <svg viewBox="0 0 24 24" class="w-6 h-6 text-accent-300" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 7 11l5-7 5 7 4-2.5-2 10.5H5L3 8.5Z"/><path d="M5 21h14"/></svg>
+          <div class="plan-icon plan-mark plan-mark--pro" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="plan-mark__icon" fill="currentColor"><path d="M8.2 6.1C8.65 9.2 10.8 11.35 13.9 11.8c-3.1.45-5.25 2.6-5.7 5.7-.45-3.1-2.6-5.25-5.7-5.7 3.1-.45 5.25-2.6 5.7-5.7Z"/><path d="M16.5 2.5c.28 1.92 1.58 3.22 3.5 3.5-1.92.28-3.22 1.58-3.5 3.5C16.22 7.58 14.92 6.28 13 6c1.92-.28 3.22-1.58 3.5-3.5Z"/><path d="M16.5 14.5c.32 2.2 1.8 3.68 4 4-2.2.32-3.68 1.8-4 4-.32-2.2-1.8-3.68-4-4 2.2-.32 3.68-1.8 4-4Z"/></svg>
           </div>
-          <h3 class="mt-6 text-2xl font-bold text-white">Pro</h3>
+          <h3 class="mt-4 text-2xl font-bold text-white">Pro</h3>
           <p class="mt-1.5 text-sm text-white/60 leading-relaxed">More data. Deeper financial insights.</p>
 
-          <div class="mt-7">
+          <div class="plan-price mt-6">
             <div class="mb-2 flex items-center gap-2"><span class="text-lg font-semibold text-white/55 line-through decoration-2">₹1,999</span><span class="rounded-full bg-accent/20 px-2 py-0.5 text-[.625rem] font-bold uppercase tracking-wide text-accent-200">Save 25%</span></div>
             <div class="flex items-start gap-1 text-white">
               <span class="mt-1 text-xl font-semibold text-white/75">₹</span>
@@ -427,7 +470,7 @@
             <p class="mt-1 text-sm text-accent-300 font-medium">Just ₹4 per day</p>
           </div>
 
-          <div class="mt-6 rounded-2xl border border-white/10 bg-white/[.08] px-4 py-3.5 shadow-inner shadow-white/[.03]">
+          <div class="coin-box rounded-2xl border border-white/10 bg-white/[.08] px-4 py-3.5 shadow-inner shadow-white/[.03]">
             <div class="flex items-center gap-3">
               <img src="fincoin.png" alt="FinCoin" class="h-10 w-10 shrink-0 rounded-full object-cover shadow-md shadow-black/20">
               <div class="min-w-0">
@@ -437,8 +480,11 @@
             </div>
           </div>
 
-          <div class="mt-7 border-t border-white/15 pt-5 text-xs font-bold uppercase tracking-[.12em] text-white/45">Plan benefits</div>
-          <ul class="mt-4 space-y-3.5 text-[.9375rem] text-white/85 flex-1">
+          <div class="benefit-title border-t border-white/15 pt-4">
+            <p class="flex items-center gap-2 text-sm font-semibold text-white"><svg viewBox="0 0 24 24" class="h-4 w-4 text-accent-300" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V9M10 18V5M16 18v-7M22 18V3"/></svg>Uses standard simulations</p>
+            <p class="mt-3 text-xs font-bold uppercase tracking-[.12em] text-white/45">What's included</p>
+          </div>
+          <ul class="benefit-list space-y-3 text-[.875rem] text-white/85 flex-1">
             <li class="flex items-start gap-3">
               <svg viewBox="0 0 24 24" class="w-5 h-5 text-accent-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
               <span><strong class="font-medium text-white">2,500 AI calculation data points</strong><span class="mt-1 block text-xs leading-relaxed text-white/55">More data points for deeper financial comparisons and projections.</span></span>
@@ -466,22 +512,22 @@
             </li>
           </ul>
 
-          <a href="#" class="mt-8 block text-center px-6 py-3.5 rounded-xl font-bold text-white bg-accent hover:bg-accent-600 transition-all shadow-lg shadow-accent-700/30 hover:shadow-xl hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-200 focus-visible:ring-offset-2 focus-visible:ring-offset-navy">
+          <a href="#" class="plan-action block text-center px-6 py-3.5 rounded-xl font-bold text-white bg-accent hover:bg-accent-600 transition-all shadow-lg shadow-accent-700/30 hover:shadow-xl hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-200 focus-visible:ring-offset-2 focus-visible:ring-offset-navy">
             Go Pro
           </a>
         </div>
       </div>
 
       <!-- MAX -->
-      <div class="reveal lg:mt-6" style="transition-delay:220ms">
-        <div class="max-card h-full flex flex-col bg-white rounded-[1.75rem] p-8 transition-all duration-300 hover:shadow-xl hover:shadow-gold/10 hover:-translate-y-1.5">
-          <div class="plan-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-gold-100 to-accent-100 flex items-center justify-center shadow-sm shadow-gold/20">
-            <svg viewBox="0 0 24 24" class="w-6 h-6 text-gold-600" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9Z"/><path d="M2 9h20"/><path d="m9 3-3 6 6 12 6-12-3-6"/></svg>
+      <div class="reveal" style="transition-delay:220ms">
+        <div class="pricing-card max-card h-full flex flex-col bg-white transition-all duration-300 hover:shadow-xl hover:shadow-gold/10">
+          <div class="plan-icon plan-mark plan-mark--max" aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="plan-mark__icon" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 7 4.5 4L12 4l4.5 7L21 7l-2 11H5z"/><path d="M5 18h14M8 14h8"/></svg>
           </div>
-          <h3 class="mt-6 text-2xl font-bold text-navy">Max</h3>
+          <h3 class="mt-4 text-2xl font-bold text-navy">Max</h3>
           <p class="mt-1.5 text-sm text-navy-500 leading-relaxed">Maximum power. Priority advantage.</p>
 
-          <div class="mt-7">
+          <div class="plan-price mt-6">
             <div class="mb-2 flex items-center gap-2"><span class="text-lg font-semibold text-navy-400 line-through decoration-2">₹4,999</span><span class="rounded-full bg-accent-50 px-2 py-0.5 text-[.625rem] font-bold uppercase tracking-wide text-accent">Save 40%</span></div>
             <div class="flex items-start gap-1 text-navy">
               <span class="mt-1 text-xl font-semibold text-navy-500">₹</span>
@@ -491,7 +537,7 @@
             <p class="mt-1 text-sm text-gold-600 font-medium">Just ₹8 per day</p>
           </div>
 
-          <div class="mt-6 rounded-2xl border border-navy-100 bg-mist px-4 py-3.5 shadow-sm shadow-navy-900/[.03]">
+          <div class="coin-box rounded-2xl border border-navy-100 bg-mist px-4 py-3.5 shadow-sm shadow-navy-900/[.03]">
             <div class="flex items-center gap-3">
               <img src="fincoin.png" alt="FinCoin" class="h-10 w-10 shrink-0 rounded-full object-cover shadow-md shadow-navy/15">
               <div class="min-w-0">
@@ -501,8 +547,11 @@
             </div>
           </div>
 
-          <div class="mt-7 border-t border-navy-100 pt-5 text-xs font-bold uppercase tracking-[.12em] text-navy-400">Plan benefits</div>
-          <ul class="mt-4 space-y-3.5 text-[.9375rem] text-navy-700 flex-1">
+          <div class="benefit-title border-t border-navy-100 pt-4">
+            <p class="flex items-center gap-2 text-sm font-semibold text-navy"><svg viewBox="0 0 24 24" class="h-4 w-4 text-gold-600" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V9M10 18V5M16 18v-7M22 18V3"/></svg>Uses premium simulations</p>
+            <p class="mt-3 text-xs font-bold uppercase tracking-[.12em] text-navy-400">What's included</p>
+          </div>
+          <ul class="benefit-list space-y-3 text-[.875rem] text-navy-700 flex-1">
             <li class="flex items-start gap-3">
               <svg viewBox="0 0 24 24" class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
               <strong class="font-medium text-navy">5,000 AI calculation data points</strong>
@@ -527,7 +576,7 @@
             <li class="flex items-start gap-3"><svg viewBox="0 0 24 24" class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong class="font-medium text-navy">Target retirement-age planning</strong><span class="mt-1 block text-xs leading-relaxed text-navy-400">Set your preferred retirement age and receive the investment adjustments needed to pursue it.</span></span></li>
           </ul>
 
-          <a href="#" class="mt-8 block text-center px-6 py-3.5 rounded-xl font-semibold text-navy border-2 border-gold/60 hover:bg-navy hover:text-white hover:border-navy transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2">
+          <a href="#" class="plan-action block text-center px-6 py-3.5 rounded-xl font-semibold text-navy border-2 border-gold/60 hover:bg-navy hover:text-white hover:border-navy transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2">
             Go Max
           </a>
         </div>
