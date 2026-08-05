@@ -261,9 +261,9 @@
                 <div class="ui-rise ui-delay-1 mt-3 flex min-h-[112px] items-center justify-between overflow-hidden rounded-xl bg-gradient-to-r from-navy to-navy-600 px-4 py-3 text-white">
                   <div class="wallet-balance relative z-10"><span class="text-[10px] text-white/55">Current balance</span><div class="mt-1 flex items-end gap-2"><strong class="text-3xl tracking-tight">500</strong><span class="pb-1 text-[10px] text-accent-200">FinCoins</span></div></div>
                   <div class="relative h-[86px] w-[102px] shrink-0" aria-hidden="true">
-                    <span class="wallet-coin wallet-coin-1 absolute left-2 top-2 z-0 flex h-7 w-7 items-center justify-center rounded-full border-[3px] border-accent-200 bg-gold text-[10px] font-bold text-navy shadow-sm">F</span>
-                    <span class="wallet-coin wallet-coin-2 absolute left-9 top-0 z-0 flex h-7 w-7 items-center justify-center rounded-full border-[3px] border-accent-200 bg-accent text-[10px] font-bold text-white shadow-sm">F</span>
-                    <span class="wallet-coin wallet-coin-3 absolute right-2 top-3 z-0 flex h-7 w-7 items-center justify-center rounded-full border-[3px] border-gold-100 bg-accent-300 text-[10px] font-bold text-navy shadow-sm">F</span>
+                    <img src="fincoin.png" alt="" class="wallet-coin wallet-coin-1 absolute left-2 top-2 z-0 h-8 w-8 rounded-full object-cover shadow-md">
+                    <img src="fincoin.png" alt="" class="wallet-coin wallet-coin-2 absolute left-9 top-0 z-0 h-8 w-8 rounded-full object-cover shadow-md">
+                    <img src="fincoin.png" alt="" class="wallet-coin wallet-coin-3 absolute right-2 top-3 z-0 h-8 w-8 rounded-full object-cover shadow-md">
                     <svg viewBox="0 0 104 64" class="absolute bottom-0 left-0 z-10 h-[62px] w-[102px] drop-shadow-lg"><path d="M12 14h76a8 8 0 0 1 8 8v30a8 8 0 0 1-8 8H12a8 8 0 0 1-8-8V22a8 8 0 0 1 8-8Z" fill="#dd7300"/><path d="M4 27h92v25a8 8 0 0 1-8 8H12a8 8 0 0 1-8-8Z" fill="#f28f1f"/><path d="M4 42h92v10a8 8 0 0 1-8 8H12a8 8 0 0 1-8-8Z" fill="#b96200" opacity=".72"/><path d="M69 32h31v18H69a9 9 0 0 1 0-18Z" fill="#fff4e6"/><circle cx="77" cy="41" r="3" fill="#dd7300"/></svg>
                   </div>
                 </div>
@@ -353,7 +353,7 @@
 
           <div class="mt-6 rounded-2xl border border-navy-100 bg-mist px-4 py-3.5 shadow-sm shadow-navy-900/[.03]">
             <div class="flex items-center gap-3">
-              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent-300 to-accent text-sm font-bold text-white shadow-md shadow-accent/20">F</span>
+              <img src="fincoin.png" alt="FinCoin" class="h-10 w-10 shrink-0 rounded-full object-cover shadow-md shadow-navy/15">
               <div class="min-w-0">
                 <span class="block text-xs font-medium text-navy-400">FinCoins included</span>
                 <strong class="mt-0.5 block text-[15px] leading-tight text-navy"><span class="tabular" data-counter="200">0</span> coins included</strong>
@@ -403,7 +403,7 @@
 
           <div class="mt-6 rounded-2xl border border-white/10 bg-white/[.08] px-4 py-3.5 shadow-inner shadow-white/[.03]">
             <div class="flex items-center gap-3">
-              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent-300 to-accent text-sm font-bold text-white shadow-md shadow-accent/25">F</span>
+              <img src="fincoin.png" alt="FinCoin" class="h-10 w-10 shrink-0 rounded-full object-cover shadow-md shadow-black/20">
               <div class="min-w-0">
                 <span class="block text-xs font-medium text-white/45">FinCoins included</span>
                 <strong class="mt-0.5 block text-[15px] leading-tight text-white"><span class="tabular" data-counter="500">0</span> coins / month</strong>
@@ -448,7 +448,7 @@
 
           <div class="mt-6 rounded-2xl border border-navy-100 bg-mist px-4 py-3.5 shadow-sm shadow-navy-900/[.03]">
             <div class="flex items-center gap-3">
-              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gold to-accent text-sm font-bold text-white shadow-md shadow-gold/25">F</span>
+              <img src="fincoin.png" alt="FinCoin" class="h-10 w-10 shrink-0 rounded-full object-cover shadow-md shadow-navy/15">
               <div class="min-w-0">
                 <span class="block text-xs font-medium text-navy-400">FinCoins included</span>
                 <strong class="mt-0.5 block text-[15px] leading-tight text-navy"><span class="tabular" data-counter="1000">0</span> coins / month</strong>
@@ -488,8 +488,8 @@
       <div class="grid lg:grid-cols-[auto_1fr_auto] gap-8 lg:gap-10 items-center">
 
         <div class="flex items-center gap-5">
-          <div class="coin-spin relative w-16 h-16 shrink-0 rounded-full bg-gradient-to-br from-accent-300 via-accent to-gold flex items-center justify-center shadow-lg shadow-accent-700/20 ring-4 ring-white">
-            <span class="text-white font-bold text-xl">F</span>
+          <div class="coin-spin relative w-16 h-16 shrink-0 overflow-hidden rounded-full shadow-lg shadow-navy-900/15 ring-4 ring-white">
+            <img src="fincoin.png" alt="FinCoin" class="h-full w-full rounded-full object-cover">
           </div>
           <div>
             <h2 class="text-2xl font-bold text-navy">What are FinCoins?</h2>
