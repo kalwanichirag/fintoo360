@@ -249,7 +249,7 @@
             <div class="journey-slide active absolute inset-0 p-5" data-journey-slide>
               <div class="ui-shell h-full rounded-2xl border border-navy-100 bg-white p-4 text-left">
                 <div class="ui-rise flex items-center justify-between"><div><span class="text-[.5625rem] font-bold tracking-wider text-accent">SECURE CHECKOUT</span><h3 class="mt-0.5 text-sm font-bold text-navy">Confirm your plan</h3></div><span class="rounded-full bg-navy-50 px-2 py-1 text-[.5625rem] font-semibold text-navy">Step 1 of 2</span></div>
-                <div class="ui-rise ui-delay-1 mt-4 flex items-center justify-between rounded-xl border border-navy-100 bg-mist p-3"><div><span class="block text-xs font-bold text-navy">Fintoo Pro</span><span class="mt-0.5 block text-[.625rem] text-navy-400">500 non-expiring FinCoins</span></div><div class="text-right"><span class="mr-1 text-xs font-medium text-navy-300 line-through">₹1,999</span><strong class="text-base text-navy">₹1,499</strong><span class="block text-[.5625rem] text-navy-400">per year · save 25%</span></div></div>
+                <div class="ui-rise ui-delay-1 mt-4 flex items-center justify-between rounded-xl border border-navy-100 bg-mist p-3"><div><span class="block text-xs font-bold text-navy">Fintoo Pro</span><span class="mt-0.5 block text-[.625rem] text-navy-400">500 FinCoins · valid for 1 year</span></div><div class="text-right"><span class="mr-1 text-xs font-medium text-navy-300 line-through">₹1,999</span><strong class="text-base text-navy">₹1,499</strong><span class="block text-[.5625rem] text-navy-400">per year · save 25%</span></div></div>
                 <div class="ui-rise ui-delay-2 mt-3 flex items-center gap-2 text-[.625rem] text-navy-400"><svg viewBox="0 0 24 24" class="h-3.5 w-3.5 text-navy" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>Encrypted payment ·•• 4242</div>
                 <div class="checkout-button ui-rise ui-delay-3 relative mt-4 flex items-center justify-center gap-2 rounded-xl bg-accent py-2.5 text-xs font-bold text-white"><span class="flex h-4 w-4 items-center justify-center rounded-full bg-white/20">✓</span>Activate Pro<span class="click-ripple absolute right-[4.75rem] top-1/2 h-5 w-5 -translate-y-1/2 rounded-full border-2 border-white"></span><svg class="demo-cursor absolute -bottom-3 right-12 z-20 h-7 w-7 drop-shadow-md" viewBox="0 0 28 28" aria-hidden="true"><path d="M5 3v19l5.4-5.2 3.8 8.2 4-1.9-3.8-7.9H22Z" fill="white" stroke="#042b62" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
               </div>
@@ -340,6 +340,11 @@
 <!-- ================= PRICING CARDS ================= -->
 <section id="pricing" class="relative pb-24 lg:pb-32">
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="mb-12 text-center">
+      <span class="inline-flex items-center gap-2 rounded-full border border-navy-200 bg-white px-3.5 py-1.5 text-xs font-bold uppercase tracking-[.14em] text-navy-600"><span class="h-1.5 w-1.5 rounded-full bg-accent"></span>Plans and benefits</span>
+      <h2 class="mt-4 text-3xl font-bold tracking-tight text-navy sm:text-4xl">Compare every plan at a glance</h2>
+      <p class="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-navy-500 sm:text-base">AI calculation data points are the financial inputs and scenarios used to compare outcomes and calculate your investment and retirement plan.</p>
+    </div>
     <div class="grid lg:grid-cols-3 gap-6 lg:gap-7 items-stretch">
 
       <!-- FREE -->
@@ -348,15 +353,15 @@
           <div class="plan-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-navy-50 to-navy-100 text-navy flex items-center justify-center shadow-sm">
             <svg viewBox="0 0 24 24" class="w-6 h-6 text-navy" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22 11 13 2 9 22 2Z"/></svg>
           </div>
-          <div class="mt-6 flex items-center gap-2.5"><h3 class="text-2xl font-bold text-navy">Free</h3><span class="rounded-full border border-navy-200 bg-navy-50 px-2.5 py-1 text-[.625rem] font-bold uppercase tracking-wide text-navy">Current plan</span></div>
-          <p class="mt-1.5 text-sm text-navy-500 leading-relaxed">Start your financial journey at zero cost.</p>
+          <div class="mt-6 flex items-center gap-2.5"><h3 class="text-2xl font-bold text-navy">Basic</h3><span class="rounded-full border border-navy-200 bg-navy-50 px-2.5 py-1 text-[.625rem] font-bold uppercase tracking-wide text-navy">Current plan</span></div>
+          <p class="mt-1.5 text-sm text-navy-500 leading-relaxed">Essential analysis to begin planning with confidence.</p>
 
           <div class="mt-7">
             <div class="flex items-start gap-1 text-navy">
               <span class="mt-1 text-xl font-semibold">₹</span>
               <span class="price-figure text-[3.5rem] font-bold">0</span>
             </div>
-            <p class="mt-2 text-sm text-navy-400">Free forever</p>
+            <p class="mt-2 text-sm text-navy-400">Basic plan · free forever</p>
           </div>
 
           <div class="mt-6 rounded-2xl border border-navy-100 bg-mist px-4 py-3.5 shadow-sm shadow-navy-900/[.03]">
@@ -364,15 +369,16 @@
               <img src="fincoin.png" alt="FinCoin" class="h-10 w-10 shrink-0 rounded-full object-cover shadow-md shadow-navy/15">
               <div class="min-w-0">
                 <span class="block text-xs font-medium text-navy-400">FinCoins included</span>
-                <strong class="mt-0.5 block text-[.9375rem] leading-tight text-navy"><span class="tabular" data-counter="200">0</span> coins · never expire</strong>
+                <strong class="mt-0.5 block text-[.9375rem] leading-tight text-navy"><span class="tabular" data-counter="200">0</span> coins · valid for 1 year</strong>
               </div>
             </div>
           </div>
 
-          <ul class="mt-7 space-y-3.5 text-[.9375rem] text-navy-700 flex-1">
+          <div class="mt-7 border-t border-navy-100 pt-5 text-xs font-bold uppercase tracking-[.12em] text-navy-400">Plan benefits</div>
+          <ul class="mt-4 space-y-3.5 text-[.9375rem] text-navy-700 flex-1">
             <li class="flex items-start gap-3">
               <svg viewBox="0 0 24 24" class="w-5 h-5 text-navy shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              <span><strong class="font-medium text-navy">1,000 AI calculation data points</strong><span class="mt-1 block text-xs leading-relaxed text-navy-400">Used to compare financial scenarios and calculate your investment and retirement outlook.</span></span>
+              <strong class="font-medium text-navy">1,000 AI calculation data points</strong>
             </li>
             <li class="flex items-start gap-3">
               <svg viewBox="0 0 24 24" class="w-5 h-5 text-navy shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
@@ -382,6 +388,13 @@
               <svg viewBox="0 0 24 24" class="w-5 h-5 text-navy shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
               Stock analysis
             </li>
+            <li class="flex items-start gap-3 text-navy-300"><span class="w-5 shrink-0 text-center">—</span><span>Additional financial goal</span></li>
+            <li class="flex items-start gap-3 text-navy-300"><span class="w-5 shrink-0 text-center">—</span><span>Debt restructuring guidance</span></li>
+            <li class="flex items-start gap-3 text-navy-300"><span class="w-5 shrink-0 text-center">—</span><span>Expense pattern analysis</span></li>
+            <li class="flex items-start gap-3 text-navy-300"><span class="w-5 shrink-0 text-center">—</span><span>Priority Fintoo team support</span></li>
+            <li class="flex items-start gap-3 text-navy-300"><span class="w-5 shrink-0 text-center">—</span><span>Tax optimisation insights</span></li>
+            <li class="flex items-start gap-3 text-navy-300"><span class="w-5 shrink-0 text-center">—</span><span>Time-bound financial action plan</span></li>
+            <li class="flex items-start gap-3 text-navy-300"><span class="w-5 shrink-0 text-center">—</span><span>Target retirement-age planning</span></li>
           </ul>
 
           <a href="#" class="mt-8 block text-center px-6 py-3.5 rounded-xl font-semibold text-navy border-2 border-navy-200 hover:bg-navy hover:text-white hover:border-navy transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2">
@@ -419,35 +432,37 @@
               <img src="fincoin.png" alt="FinCoin" class="h-10 w-10 shrink-0 rounded-full object-cover shadow-md shadow-black/20">
               <div class="min-w-0">
                 <span class="block text-xs font-medium text-white/45">FinCoins included</span>
-                <strong class="mt-0.5 block text-[.9375rem] leading-tight text-white"><span class="tabular" data-counter="500">0</span> coins · never expire</strong>
+                <strong class="mt-0.5 block text-[.9375rem] leading-tight text-white"><span class="tabular" data-counter="500">0</span> coins · valid for 1 year</strong>
               </div>
             </div>
           </div>
 
-          <ul class="mt-7 space-y-3.5 text-[.9375rem] text-white/85 flex-1">
+          <div class="mt-7 border-t border-white/15 pt-5 text-xs font-bold uppercase tracking-[.12em] text-white/45">Plan benefits</div>
+          <ul class="mt-4 space-y-3.5 text-[.9375rem] text-white/85 flex-1">
             <li class="flex items-start gap-3">
               <svg viewBox="0 0 24 24" class="w-5 h-5 text-accent-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              <strong class="font-semibold text-white">Everything in Free, plus:</strong>
+              <span><strong class="font-medium text-white">2,500 AI calculation data points</strong><span class="mt-1 block text-xs leading-relaxed text-white/55">More data points for deeper financial comparisons and projections.</span></span>
+            </li>
+            <li class="flex items-start gap-3"><svg viewBox="0 0 24 24" class="w-5 h-5 text-accent-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Mutual fund analysis</li>
+            <li class="flex items-start gap-3"><svg viewBox="0 0 24 24" class="w-5 h-5 text-accent-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Stock analysis</li>
+            <li class="flex items-start gap-3 text-white/30"><span class="w-5 shrink-0 text-center">—</span><span>Additional financial goal</span></li>
+            <li class="flex items-start gap-3">
+              <svg viewBox="0 0 24 24" class="w-5 h-5 text-accent-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Debt restructuring guidance
             </li>
             <li class="flex items-start gap-3">
               <svg viewBox="0 0 24 24" class="w-5 h-5 text-accent-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              <span><strong class="font-medium text-white">2,500 AI calculation data points total</strong><span class="mt-1 block text-xs leading-relaxed text-white/55">More data points for deeper financial comparisons and projections.</span></span>
+              Expense pattern analysis
+            </li>
+            <li class="flex items-start gap-3 text-white/30"><span class="w-5 shrink-0 text-center">—</span><span>Priority Fintoo team support</span></li>
+            <li class="flex items-start gap-3 text-white/30"><span class="w-5 shrink-0 text-center">—</span><span>Tax optimisation insights</span></li>
+            <li class="flex items-start gap-3">
+              <svg viewBox="0 0 24 24" class="w-5 h-5 text-accent-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Time-bound financial action plan
             </li>
             <li class="flex items-start gap-3">
               <svg viewBox="0 0 24 24" class="w-5 h-5 text-accent-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              Debt restructuring
-            </li>
-            <li class="flex items-start gap-3">
-              <svg viewBox="0 0 24 24" class="w-5 h-5 text-accent-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              Expense analysis
-            </li>
-            <li class="flex items-start gap-3">
-              <svg viewBox="0 0 24 24" class="w-5 h-5 text-accent-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              Timeline-wise plan of action
-            </li>
-            <li class="flex items-start gap-3">
-              <svg viewBox="0 0 24 24" class="w-5 h-5 text-accent-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              <span><strong class="font-medium text-white">Custom retirement-age planning</strong><span class="mt-1 block text-xs leading-relaxed text-white/55">Choose an earlier target age and get the investment and fund strategy needed to reach it.</span></span>
+              <span><strong class="font-medium text-white">Target retirement-age planning</strong><span class="mt-1 block text-xs leading-relaxed text-white/55">Set your preferred retirement age and receive the investment adjustments needed to pursue it.</span></span>
             </li>
           </ul>
 
@@ -481,32 +496,35 @@
               <img src="fincoin.png" alt="FinCoin" class="h-10 w-10 shrink-0 rounded-full object-cover shadow-md shadow-navy/15">
               <div class="min-w-0">
                 <span class="block text-xs font-medium text-navy-400">FinCoins included</span>
-                <strong class="mt-0.5 block text-[.9375rem] leading-tight text-navy"><span class="tabular" data-counter="1000">0</span> coins · never expire</strong>
+                <strong class="mt-0.5 block text-[.9375rem] leading-tight text-navy"><span class="tabular" data-counter="1000">0</span> coins · valid for 1 year</strong>
               </div>
             </div>
           </div>
 
-          <ul class="mt-7 space-y-3.5 text-[.9375rem] text-navy-700 flex-1">
+          <div class="mt-7 border-t border-navy-100 pt-5 text-xs font-bold uppercase tracking-[.12em] text-navy-400">Plan benefits</div>
+          <ul class="mt-4 space-y-3.5 text-[.9375rem] text-navy-700 flex-1">
             <li class="flex items-start gap-3">
               <svg viewBox="0 0 24 24" class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              <strong class="font-semibold text-navy">Everything in Pro, plus:</strong>
+              <strong class="font-medium text-navy">5,000 AI calculation data points</strong>
+            </li>
+            <li class="flex items-start gap-3"><svg viewBox="0 0 24 24" class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Mutual fund analysis</li>
+            <li class="flex items-start gap-3"><svg viewBox="0 0 24 24" class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Stock analysis</li>
+            <li class="flex items-start gap-3">
+              <svg viewBox="0 0 24 24" class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Add more financial goal
+            </li>
+            <li class="flex items-start gap-3"><svg viewBox="0 0 24 24" class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Debt restructuring guidance</li>
+            <li class="flex items-start gap-3"><svg viewBox="0 0 24 24" class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Expense pattern analysis</li>
+            <li class="flex items-start gap-3">
+              <svg viewBox="0 0 24 24" class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Priority Fintoo team support
             </li>
             <li class="flex items-start gap-3">
               <svg viewBox="0 0 24 24" class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              <span><strong class="font-medium text-navy">5,000 AI calculation data points total</strong><span class="mt-1 block text-xs leading-relaxed text-navy-400">Our highest analysis depth for more comprehensive projections.</span></span>
+              Tax optimisation insights
             </li>
-            <li class="flex items-start gap-3">
-              <svg viewBox="0 0 24 24" class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              Add one additional financial goal
-            </li>
-            <li class="flex items-start gap-3">
-              <svg viewBox="0 0 24 24" class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              Instant Fintoo team support
-            </li>
-            <li class="flex items-start gap-3">
-              <svg viewBox="0 0 24 24" class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-              Tax optimization
-            </li>
+            <li class="flex items-start gap-3"><svg viewBox="0 0 24 24" class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Time-bound financial action plan</li>
+            <li class="flex items-start gap-3"><svg viewBox="0 0 24 24" class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong class="font-medium text-navy">Target retirement-age planning</strong><span class="mt-1 block text-xs leading-relaxed text-navy-400">Set your preferred retirement age and receive the investment adjustments needed to pursue it.</span></span></li>
           </ul>
 
           <a href="#" class="mt-8 block text-center px-6 py-3.5 rounded-xl font-semibold text-navy border-2 border-gold/60 hover:bg-navy hover:text-white hover:border-navy transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2">
@@ -577,7 +595,7 @@
         </thead>
         <tbody class="divide-y divide-navy-100">
           <tr class="hover:bg-mist/50"><td class="sticky left-0 z-10 border-r border-navy-100 bg-white px-5 py-4 font-medium">Annual price</td><td class="px-5 py-4 text-center font-semibold">₹0</td><td class="bg-accent-50/60 px-5 py-4 text-center"><span class="block text-sm font-medium text-navy-300 line-through">₹1,999</span><strong class="text-accent">₹1,499</strong></td><td class="px-5 py-4 text-center"><span class="block text-sm font-medium text-navy-300 line-through">₹4,999</span><strong class="text-navy">₹2,999</strong></td></tr>
-          <tr class="hover:bg-mist/50"><td class="sticky left-0 z-10 border-r border-navy-100 bg-white px-5 py-4 font-medium">FinCoins <span class="block text-[.625rem] font-normal text-navy-400">Never expire</span></td><td class="px-5 py-4 text-center text-navy-500">200</td><td class="bg-accent-50/60 px-5 py-4 text-center font-bold text-accent">500</td><td class="px-5 py-4 text-center text-navy-500">1,000</td></tr>
+          <tr class="hover:bg-mist/50"><td class="sticky left-0 z-10 border-r border-navy-100 bg-white px-5 py-4 font-medium">FinCoins <span class="block text-[.625rem] font-normal text-navy-400">Valid for 1 year</span></td><td class="px-5 py-4 text-center text-navy-500">200</td><td class="bg-accent-50/60 px-5 py-4 text-center font-bold text-accent">500</td><td class="px-5 py-4 text-center text-navy-500">1,000</td></tr>
           <tr class="hover:bg-mist/50"><td class="sticky left-0 z-10 border-r border-navy-100 bg-white px-5 py-4 font-medium">Financial simulations</td><td class="px-5 py-4 text-center font-semibold">1,000</td><td class="bg-accent-50/60 px-5 py-4 text-center font-bold text-accent">2,500</td><td class="px-5 py-4 text-center font-semibold">5,000</td></tr>
           <tr class="hover:bg-mist/50"><td class="sticky left-0 z-10 border-r border-navy-100 bg-white px-5 py-4 font-medium">Mutual fund analysis</td><td class="px-5 py-4 text-center text-navy">✓</td><td class="bg-accent-50/60 px-5 py-4 text-center font-bold text-accent">✓</td><td class="px-5 py-4 text-center font-bold text-navy">✓</td></tr>
           <tr class="hover:bg-mist/50"><td class="sticky left-0 z-10 border-r border-navy-100 bg-white px-5 py-4 font-medium">Stock analysis</td><td class="px-5 py-4 text-center text-navy">✓</td><td class="bg-accent-50/60 px-5 py-4 text-center font-bold text-accent">✓</td><td class="px-5 py-4 text-center font-bold text-navy">✓</td></tr>
@@ -639,7 +657,7 @@
           Can I switch plans later?
           <svg viewBox="0 0 24 24" class="chevron w-5 h-5 text-navy-400 shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
-        <p class="faq-body pb-5 text-navy-600 leading-relaxed">Yes. You can move between Free, Pro and Max anytime — no lock-ins, you're always in control.</p>
+        <p class="faq-body pb-5 text-navy-600 leading-relaxed">Yes. You can move between Basic, Pro and Max whenever your planning needs change.</p>
       </details>
 
       <details class="group border border-navy-100 rounded-2xl px-6 py-1 open:bg-mist/60 open:border-navy-200 transition-colors">
@@ -655,7 +673,7 @@
           Which plan should I choose?
           <svg viewBox="0 0 24 24" class="chevron w-5 h-5 text-navy-400 shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
         </summary>
-        <p class="faq-body pb-5 text-navy-600 leading-relaxed">Start on Free for essential analysis. Move to Pro for more calculation depth and advanced planning, or choose Max for the highest data-point allowance, added goals and priority support.</p>
+        <p class="faq-body pb-5 text-navy-600 leading-relaxed">Start with Basic for essential analysis. Move to Pro for deeper calculations and advanced planning, or choose Max for the highest data-point allowance, an additional goal and priority support.</p>
       </details>
 
     </div>
@@ -674,9 +692,9 @@
         <p class="mt-3 text-white/70 max-w-xl mx-auto">Join Fintoo and let AI-powered insights guide every decision.</p>
         <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
           <a href="#pricing" class="px-8 py-3.5 rounded-xl font-bold text-white bg-accent hover:bg-accent-600 transition-all shadow-lg shadow-accent-700/30 hover:shadow-xl hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-200 focus-visible:ring-offset-2 focus-visible:ring-offset-navy">
-            Get Started Free
+            Get Started with Basic
           </a>
-          <span class="text-sm text-white/50">Free forever on the Free plan. Upgrade anytime.</span>
+          <span class="text-sm text-white/50">The Basic plan is free forever. Upgrade whenever you need deeper planning.</span>
         </div>
       </div>
     </div>
