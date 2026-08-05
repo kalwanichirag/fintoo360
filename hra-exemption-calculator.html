@@ -7,303 +7,170 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --navy:#042b62;
-    --orange:#dd7300;
-    --navy-05:#f4f6f9;
-    --navy-10:#e9edf3;
-    --navy-60:rgba(4,43,98,0.6);
-    --border:#e2e6ec;
-    --white:#ffffff;
-    --green:#0f8a4b;
-    font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,sans-serif;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:var(--white);color:var(--navy);font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased;}
-  a{color:inherit;text-decoration:none;}
-
-  header.site{display:flex;align-items:center;justify-content:space-between;padding:22px 64px;border-bottom:1px solid var(--border);}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px;color:var(--navy);}
-  .logo-mark{width:30px;height:30px;border-radius:8px;background:var(--navy);display:flex;align-items:center;justify-content:center;}
-  .logo-mark svg{width:16px;height:16px;}
-  nav.main{display:flex;gap:40px;}
-  nav.main a{font-size:15px;font-weight:500;color:var(--navy-60);padding-bottom:4px;border-bottom:2px solid transparent;}
-  nav.main a.active{color:var(--navy);border-bottom-color:var(--orange);}
-  .btn-advisor{background:var(--navy);color:#fff;font-weight:500;font-size:14px;padding:11px 22px;border-radius:24px;border:none;cursor:pointer;}
-
-  main{max-width:1128px;margin:0 auto;padding:0 32px;}
-
-  .crumb{font-size:13px;color:var(--navy-60);padding:24px 0 0;}
-  .crumb span{color:var(--navy);font-weight:500;}
-  .page-head{display:flex;align-items:flex-start;gap:16px;padding:20px 0 32px;}
-  .page-icon{width:52px;height:52px;border-radius:14px;background:#fdead6;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-  .page-icon svg{width:26px;height:26px;stroke:var(--orange);}
-  .page-head h1{font-size:34px;font-weight:700;letter-spacing:-0.01em;}
-  .page-head p{font-size:15px;color:var(--navy-60);margin-top:4px;}
-
-  .calc-card{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-bottom:28px;}
-  .calc-inputs{padding:40px;display:flex;flex-direction:column;gap:26px;}
-  .field label{display:block;font-size:14px;font-weight:500;color:var(--navy);margin-bottom:10px;}
-  .field-top{display:flex;align-items:center;justify-content:space-between;}
-  .amount-box{display:flex;align-items:center;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#fff;}
-  .amount-box span{padding:8px 10px;color:var(--navy-60);font-size:14px;border-right:1px solid var(--border);}
-  .amount-box input{border:none;outline:none;padding:8px 12px;font-size:14px;font-weight:600;color:var(--navy);width:100%;font-family:inherit;}
-  .field-note{font-size:12px;color:var(--navy-60);margin-top:8px;line-height:1.5;}
-  .city-toggle{display:flex;gap:8px;}
-  .city-toggle button{flex:1;padding:12px 10px;border-radius:8px;border:1px solid var(--border);background:#fff;color:var(--navy-60);font-size:13.5px;font-weight:600;cursor:pointer;font-family:inherit;text-align:left;}
-  .city-toggle button .sub{display:block;font-weight:400;font-size:11.5px;color:var(--navy-60);margin-top:2px;}
-  .city-toggle button.active{background:var(--navy);color:#fff;border-color:var(--navy);}
-  .city-toggle button.active .sub{color:rgba(255,255,255,0.7);}
-  hr.div{border:none;border-top:1px solid var(--border);margin:2px 0;}
-  .cta-invest{margin-top:auto;background:var(--navy);color:#fff;border:none;border-radius:28px;padding:15px 26px;font-size:15px;font-weight:500;display:inline-flex;align-items:center;gap:8px;cursor:pointer;align-self:flex-start;}
-
-  .calc-result{background:var(--navy-05);padding:40px;display:flex;flex-direction:column;}
-  .result-summary{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:24px;}
-  .result-stat{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:18px 16px;}
-  .result-stat.exempt{border-color:rgba(15,138,75,0.35);background:#f4fbf7;}
-  .result-stat.taxable{border-color:rgba(221,115,0,0.4);background:#fff8f1;}
-  .result-stat .result-label{font-size:12.5px;font-weight:600;line-height:1.35;color:var(--navy-60);min-height:34px;}
-  .result-stat .result-value{font-size:30px;line-height:1.1;margin:8px 0 5px;}
-  .result-stat.exempt .result-value{color:var(--green);}
-  .result-stat.taxable .result-value{color:var(--orange);}
-  .result-stat .result-sub{font-size:11.5px;margin:0;color:var(--navy-60);}
-  .result-label{font-size:14px;color:var(--navy-60);}
-  .result-value{font-size:38px;font-weight:700;margin:6px 0 4px;}
-  .result-sub{font-size:13px;color:var(--navy-60);margin-bottom:22px;}
-  .donut-row{display:flex;align-items:center;gap:24px;margin-bottom:24px;}
-  .donut-css{width:120px;height:120px;border-radius:50%;position:relative;flex-shrink:0;}
-  .donut-css::after{content:'';position:absolute;inset:18px;background:#fff;border-radius:50%;}
-  .donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1;}
-  .donut-center .pct{font-size:18px;font-weight:700;color:var(--navy);}
-  .donut-center .lbl{font-size:9.5px;color:var(--navy-60);text-align:center;}
-  .legend{display:flex;flex-direction:column;gap:10px;}
-  .legend-row{display:flex;align-items:center;justify-content:space-between;gap:28px;font-size:14px;}
-  .legend-row .dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:8px;}
-  .legend-row .lbl{color:var(--navy-60);display:flex;align-items:center;}
-  .legend-row .val{font-weight:600;}
-
-  .limb-list{display:flex;flex-direction:column;gap:12px;margin-bottom:8px;}
-  .limb-row{
-    background:#fff;border:1.5px solid var(--border);border-radius:12px;
-    padding:14px 16px;display:flex;justify-content:space-between;align-items:center;position:relative;
-  }
-  .limb-row.winner{border-color:var(--orange);}
-  .limb-row .badge{position:absolute;top:-10px;left:14px;background:var(--orange);color:#fff;font-size:10px;font-weight:700;letter-spacing:0.03em;padding:3px 9px;border-radius:20px;}
-  .limb-row .t{font-size:13px;color:var(--navy-60);}
-  .limb-row .v{font-size:15px;font-weight:700;}
-  .disclaimer{font-size:11.5px;color:var(--navy-60);margin-top:16px;line-height:1.5;}
-
-  .table-card{border:1px solid var(--border);border-radius:20px;padding:32px 40px;margin-bottom:28px;}
-  .table-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;}
-  .table-head h2{font-size:20px;font-weight:700;}
-  table{width:100%;border-collapse:collapse;}
-  thead th{text-align:right;font-size:12px;letter-spacing:0.04em;color:var(--navy-60);padding:8px 12px;border-bottom:1px solid var(--border);}
-  thead th:first-child{text-align:left;}
-  tbody td{padding:12px;font-size:14px;border-bottom:1px solid var(--navy-10);text-align:right;}
-  tbody td:first-child{text-align:left;color:var(--navy-60);}
-  tbody tr.total td{font-weight:700;color:var(--navy);border-top:1px solid var(--border);border-bottom:none;}
-  tbody tr.total td:first-child{color:var(--navy);}
-
-  .info-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;margin-bottom:28px;}
-  .info-card{border:1px solid var(--border);border-radius:20px;padding:32px 36px;}
-  .info-card h2{font-size:19px;font-weight:700;margin-bottom:14px;}
-  .info-card p{font-size:14.5px;color:var(--navy-60);line-height:1.7;margin-bottom:14px;}
-  .formula-box{background:var(--navy-05);border-radius:12px;padding:20px 22px;margin-top:18px;}
-  .formula-box .row{display:flex;align-items:baseline;gap:10px;font-size:14px;font-weight:600;margin-bottom:8px;}
-  .formula-box .row:last-child{margin-bottom:0;}
-  .formula-box .num{width:20px;height:20px;border-radius:50%;background:var(--orange);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-  .faq-item{border-bottom:1px solid var(--border);padding:14px 0;display:flex;justify-content:space-between;align-items:center;font-size:14.5px;font-weight:600;cursor:pointer;}
-  .faq-item:last-child{border-bottom:none;}
-  .faq-item span.plus{color:var(--orange);font-weight:700;font-size:18px;}
-
-  .related h2{font-size:20px;font-weight:700;margin-bottom:16px;}
-  .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:36px;}
-  .related-card{border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;}
-  .related-card .ic{width:38px;height:38px;border-radius:9px;background:#fdead6;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-  .related-card .ic svg{width:18px;height:18px;stroke:var(--orange);}
-  .related-card .t{font-size:14.5px;font-weight:700;}
-  .related-card .s{font-size:12.5px;color:var(--navy-60);margin-top:2px;}
-
-  .cta-banner{background:var(--navy);border-radius:20px;padding:44px 52px;display:flex;justify-content:space-between;align-items:center;color:#fff;margin-bottom:40px;overflow:hidden;position:relative;}
-  .cta-banner h3{font-size:26px;font-weight:700;line-height:1.3;max-width:420px;}
-  .cta-banner p{font-size:14px;color:rgba(255,255,255,0.7);margin-top:10px;max-width:420px;}
-  .cta-banner button{background:#fff;color:var(--navy);border:none;border-radius:24px;padding:14px 24px;font-weight:600;font-size:14.5px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;white-space:nowrap;}
-
-  footer{border-top:1px solid var(--border);padding:26px 0 40px;display:flex;justify-content:space-between;font-size:13px;color:var(--navy-60);}
-  footer .links{display:flex;gap:24px;}
-
-  @media(max-width:860px){
-    header.site{padding:18px 20px;}
-    nav.main{display:none;}
-    main{padding:0 20px;}
-    .calc-card{grid-template-columns:1fr;}
-    .result-summary{grid-template-columns:1fr;}
-    .info-grid{grid-template-columns:1fr;}
-    .related-grid{grid-template-columns:1fr;}
-    .cta-banner{flex-direction:column;align-items:flex-start;gap:20px;}
-  }
-</style>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="m-0 bg-white font-['Google_Sans','Roboto',-apple-system,BlinkMacSystemFont,sans-serif] text-[#042b62] antialiased">
 
-<header class="site">
-  <div class="logo">
-    <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12L11 5L20 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+<header class="site flex items-center justify-between border-b border-[#e2e6ec] px-16 py-[22px] max-[860px]:px-5 max-[860px]:py-[18px]">
+  <div class="logo flex items-center gap-2.5 text-xl font-bold text-[#042b62]">
+    <span class="logo-mark flex size-[30px] items-center justify-center rounded-lg bg-[#042b62]"><svg class="size-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12L11 5L20 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
     fintoo
   </div>
-  <nav class="main">
-    <a href="#">Invest</a>
-    <a href="#">Plan</a>
-    <a href="#">Learn</a>
-    <a href="tools.html" class="active">Tools</a>
+  <nav class="main flex gap-10 max-[860px]:hidden">
+    <a class="border-b-2 border-transparent pb-1 text-[15px] font-medium text-[#042b6299] no-underline" href="#">Invest</a>
+    <a class="border-b-2 border-transparent pb-1 text-[15px] font-medium text-[#042b6299] no-underline" href="#">Plan</a>
+    <a class="border-b-2 border-transparent pb-1 text-[15px] font-medium text-[#042b6299] no-underline" href="#">Learn</a>
+    <a href="tools.html" class="active border-b-2 border-[#dd7300] pb-1 text-[15px] font-medium text-[#042b62] no-underline">Tools</a>
   </nav>
-  <button class="btn-advisor">Talk to an advisor</button>
+  <button class="btn-advisor cursor-pointer rounded-3xl border-0 bg-[#042b62] px-[22px] py-[11px] text-sm font-medium text-white">Talk to an advisor</button>
 </header>
 
-<main>
-  <div class="crumb"><a href="tools.html">Tools</a> &nbsp;›&nbsp; <span>HRA Exemption Calculator</span></div>
+<main class="mx-auto max-w-[1128px] px-8 max-[860px]:px-5">
+  <div class="crumb pt-6 text-[13px] text-[#042b6299]"><a class="text-inherit no-underline" href="tools.html">Tools</a> &nbsp;›&nbsp; <span class="font-medium text-[#042b62]">HRA Exemption Calculator</span></div>
 
-  <div class="page-head">
-    <div class="page-icon">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7v10a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></svg>
+  <div class="page-head flex items-start gap-4 pb-8 pt-5">
+    <div class="page-icon flex size-[52px] shrink-0 items-center justify-center rounded-[14px] bg-[#fdead6]">
+      <svg class="size-[26px] stroke-[#dd7300]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-7 9 7v10a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></svg>
     </div>
     <div>
-      <h1>HRA Exemption Calculator</h1>
-      <p>Work out exactly how much of your HRA is exempt from income tax.</p>
+      <h1 class="text-[34px] font-bold tracking-[-0.01em]">HRA Exemption Calculator</h1>
+      <p class="mt-1 text-[15px] text-[#042b6299]">Work out exactly how much of your HRA is exempt from income tax.</p>
     </div>
   </div>
 
-  <section class="calc-card">
-    <div class="calc-inputs">
+  <section class="calc-card mb-7 grid grid-cols-2 overflow-hidden rounded-[20px] border border-[#e2e6ec] max-[860px]:grid-cols-1">
+    <div class="calc-inputs flex flex-col gap-[26px] p-10">
 
       <div class="field">
-        <div class="field-top">
-          <label>Basic salary received <span style="font-weight:400;color:var(--navy-60);font-size:12.5px;">(annual)</span></label>
-          <div class="amount-box"><span>₹</span><input type="text" id="basicInput" value="60,000"></div>
+        <div class="field-top flex items-center justify-between">
+          <label class="mb-2.5 block text-sm font-medium text-[#042b62]">Basic salary received <span class="text-[12.5px] font-normal text-[#042b6299]">(annual)</span></label>
+          <div class="amount-box flex items-center overflow-hidden rounded-lg border border-[#e2e6ec] bg-white"><span class="border-r border-[#e2e6ec] px-2.5 py-2 text-sm text-[#042b6299]">₹</span><input class="w-full border-0 px-3 py-2 font-[inherit] text-sm font-semibold text-[#042b62] outline-none" type="text" id="basicInput" value="60,000"></div>
         </div>
       </div>
 
       <div class="field">
-        <div class="field-top">
-          <label>Dearness allowance received <span style="font-weight:400;color:var(--navy-60);font-size:12.5px;">(annual; if part of retirement benefits)</span></label>
-          <div class="amount-box"><span>₹</span><input type="text" id="daInput" value="0"></div>
+        <div class="field-top flex items-center justify-between">
+          <label class="mb-2.5 block text-sm font-medium text-[#042b62]">Dearness allowance received <span class="text-[12.5px] font-normal text-[#042b6299]">(annual; if part of retirement benefits)</span></label>
+          <div class="amount-box flex items-center overflow-hidden rounded-lg border border-[#e2e6ec] bg-white"><span class="border-r border-[#e2e6ec] px-2.5 py-2 text-sm text-[#042b6299]">₹</span><input class="w-full border-0 px-3 py-2 font-[inherit] text-sm font-semibold text-[#042b62] outline-none" type="text" id="daInput" value="0"></div>
         </div>
       </div>
 
       <div class="field">
-        <div class="field-top">
-          <label>HRA received <span style="font-weight:400;color:var(--navy-60);font-size:12.5px;">(annual)</span></label>
-          <div class="amount-box"><span>₹</span><input type="text" id="hraInput" value="2,40,000"></div>
+        <div class="field-top flex items-center justify-between">
+          <label class="mb-2.5 block text-sm font-medium text-[#042b62]">HRA received <span class="text-[12.5px] font-normal text-[#042b6299]">(annual)</span></label>
+          <div class="amount-box flex items-center overflow-hidden rounded-lg border border-[#e2e6ec] bg-white"><span class="border-r border-[#e2e6ec] px-2.5 py-2 text-sm text-[#042b6299]">₹</span><input class="w-full border-0 px-3 py-2 font-[inherit] text-sm font-semibold text-[#042b62] outline-none" type="text" id="hraInput" value="2,40,000"></div>
         </div>
       </div>
 
       <div class="field">
-        <div class="field-top">
-          <label>Total rent paid <span style="font-weight:400;color:var(--navy-60);font-size:12.5px;">(annual)</span></label>
-          <div class="amount-box"><span>₹</span><input type="text" id="rentInput" value="1,80,000"></div>
+        <div class="field-top flex items-center justify-between">
+          <label class="mb-2.5 block text-sm font-medium text-[#042b62]">Total rent paid <span class="text-[12.5px] font-normal text-[#042b6299]">(annual)</span></label>
+          <div class="amount-box flex items-center overflow-hidden rounded-lg border border-[#e2e6ec] bg-white"><span class="border-r border-[#e2e6ec] px-2.5 py-2 text-sm text-[#042b6299]">₹</span><input class="w-full border-0 px-3 py-2 font-[inherit] text-sm font-semibold text-[#042b62] outline-none" type="text" id="rentInput" value="1,80,000"></div>
         </div>
       </div>
 
-      <hr class="div">
+      <hr class="div my-0.5 border-0 border-t border-[#e2e6ec]">
 
       <div class="field">
-        <label>City of residence</label>
-        <div class="city-toggle">
-          <button class="active" data-city="metro">Metro<span class="sub">Delhi, Mumbai, Kolkata, Chennai</span></button>
-          <button data-city="nonmetro">Non-metro<span class="sub">Any other city</span></button>
+        <label class="mb-2.5 block text-sm font-medium text-[#042b62]">City of residence</label>
+        <div class="city-toggle flex gap-2">
+          <button class="active flex-1 cursor-pointer rounded-lg border border-[#042b62] bg-[#042b62] px-2.5 py-3 text-left font-[inherit] text-[13.5px] font-semibold text-white" data-city="metro">Metro<span class="sub mt-0.5 block text-[11.5px] font-normal text-white/70">Delhi, Mumbai, Kolkata, Chennai</span></button>
+          <button class="flex-1 cursor-pointer rounded-lg border border-[#e2e6ec] bg-white px-2.5 py-3 text-left font-[inherit] text-[13.5px] font-semibold text-[#042b6299]" data-city="nonmetro">Non-metro<span class="sub mt-0.5 block text-[11.5px] font-normal text-[#042b6299]">Any other city</span></button>
         </div>
       </div>
 
     </div>
 
-    <div class="calc-result">
-      <div class="result-summary">
-        <div class="result-stat exempt">
-          <div class="result-label">Tax-free HRA<br>(annual)</div>
-          <div class="result-value" id="exemptAnnual">₹0</div>
-          <div class="result-sub"><span id="exemptMonthlySummary">₹0</span> per month</div>
+    <div class="calc-result flex flex-col bg-[#f4f6f9] p-10">
+      <div class="result-summary mb-6 grid grid-cols-2 gap-3 max-[860px]:grid-cols-1">
+        <div class="result-stat exempt rounded-[14px] border-[1.5px] border-[#0f8a4b59] bg-[#f4fbf7] px-4 py-[18px]">
+          <div class="result-label min-h-[34px] text-[12.5px] font-semibold leading-[1.35] text-[#042b6299]">Tax-free HRA<br>(annual)</div>
+          <div class="result-value my-2 text-[30px] font-bold leading-[1.1] text-[#0f8a4b]" id="exemptAnnual">₹0</div>
+          <div class="result-sub m-0 text-[11.5px] text-[#042b6299]"><span id="exemptMonthlySummary">₹0</span> per month</div>
         </div>
-        <div class="result-stat taxable">
-          <div class="result-label">HRA chargeable to tax<br>(annual)</div>
-          <div class="result-value" id="taxableAnnual">₹0</div>
-          <div class="result-sub"><span id="taxableMonthlySummary">₹0</span> per month</div>
-        </div>
-      </div>
-
-      <div class="donut-row">
-        <div class="donut-css" id="donutCss">
-          <div class="donut-center"><span class="pct" id="donutPct">0%</span><span class="lbl">OF HRA<br>EXEMPT</span></div>
-        </div>
-        <div class="legend">
-          <div class="legend-row"><span class="lbl"><span class="dot" style="background:#0f8a4b;"></span>Exempt HRA</span><span class="val" id="legExempt" style="color:var(--green);">₹0</span></div>
-          <div class="legend-row"><span class="lbl"><span class="dot" style="background:#dd7300;"></span>Taxable HRA</span><span class="val" id="legTaxable" style="color:var(--orange);">₹0</span></div>
+        <div class="result-stat taxable rounded-[14px] border-[1.5px] border-[#dd730066] bg-[#fff8f1] px-4 py-[18px]">
+          <div class="result-label min-h-[34px] text-[12.5px] font-semibold leading-[1.35] text-[#042b6299]">HRA chargeable to tax<br>(annual)</div>
+          <div class="result-value my-2 text-[30px] font-bold leading-[1.1] text-[#dd7300]" id="taxableAnnual">₹0</div>
+          <div class="result-sub m-0 text-[11.5px] text-[#042b6299]"><span id="taxableMonthlySummary">₹0</span> per month</div>
         </div>
       </div>
 
-      <div class="limb-list" id="limbList"></div>
+      <div class="donut-row mb-6 flex items-center gap-6">
+        <svg class="size-[120px] shrink-0" viewBox="0 0 120 120" id="donutCss" aria-label="Percentage of HRA exempt">
+          <circle cx="60" cy="60" r="48" fill="none" stroke="#dd7300" stroke-width="18"/>
+          <circle id="donutArc" cx="60" cy="60" r="48" fill="none" stroke="#0f8a4b" stroke-width="18" transform="rotate(-90 60 60)"/>
+          <text id="donutPct" x="60" y="58" text-anchor="middle" font-size="18" font-weight="700" fill="#042b62">0%</text>
+          <text x="60" y="72" text-anchor="middle" font-size="9.5" fill="#042b6299">OF HRA EXEMPT</text>
+        </svg>
+        <div class="legend flex flex-col gap-2.5">
+          <div class="legend-row flex items-center justify-between gap-7 text-sm"><span class="lbl flex items-center text-[#042b6299]"><span class="dot mr-2 inline-block size-[9px] rounded-full bg-[#0f8a4b]"></span>Exempt HRA</span><span class="val font-semibold text-[#0f8a4b]" id="legExempt">₹0</span></div>
+          <div class="legend-row flex items-center justify-between gap-7 text-sm"><span class="lbl flex items-center text-[#042b6299]"><span class="dot mr-2 inline-block size-[9px] rounded-full bg-[#dd7300]"></span>Taxable HRA</span><span class="val font-semibold text-[#dd7300]" id="legTaxable">₹0</span></div>
+        </div>
+      </div>
 
-      <div class="disclaimer">Illustrative only, per Section 10(13A) and Rule 2A. Assumes you're a salaried employee actually paying rent for a home you live in — self-occupied or employer-provided housing isn't eligible for HRA exemption.</div>
+      <div class="limb-list mb-2 flex flex-col gap-3" id="limbList"></div>
+
+      <div class="disclaimer mt-4 text-[11.5px] leading-normal text-[#042b6299]">Illustrative only, per Section 10(13A) and Rule 2A. Assumes you're a salaried employee actually paying rent for a home you live in — self-occupied or employer-provided housing isn't eligible for HRA exemption.</div>
     </div>
   </section>
 
-  <section class="table-card">
-    <div class="table-head"><h2>Annual computation</h2></div>
-    <table>
-      <thead><tr><th>PARTICULARS</th><th>MONTHLY</th><th>ANNUAL</th></tr></thead>
-      <tbody id="computationBody"></tbody>
+  <section class="table-card mb-7 rounded-[20px] border border-[#e2e6ec] px-10 py-8">
+    <div class="table-head mb-[18px] flex items-center justify-between"><h2 class="text-xl font-bold">Annual computation</h2></div>
+    <table class="w-full border-collapse">
+      <thead><tr><th class="border-b border-[#e2e6ec] px-3 py-2 text-left text-xs tracking-[0.04em] text-[#042b6299]">PARTICULARS</th><th class="border-b border-[#e2e6ec] px-3 py-2 text-right text-xs tracking-[0.04em] text-[#042b6299]">MONTHLY</th><th class="border-b border-[#e2e6ec] px-3 py-2 text-right text-xs tracking-[0.04em] text-[#042b6299]">ANNUAL</th></tr></thead>
+      <tbody class="[&_.total_td:first-child]:text-[#042b62] [&_.total_td]:border-b-0 [&_.total_td]:border-t [&_.total_td]:border-[#e2e6ec] [&_.total_td]:font-bold [&_td:first-child]:text-left [&_td:first-child]:text-[#042b6299] [&_td]:border-b [&_td]:border-[#e9edf3] [&_td]:p-3 [&_td]:text-right [&_td]:text-sm" id="computationBody"></tbody>
     </table>
   </section>
 
-  <section class="info-grid">
-    <div class="info-card">
-      <h2>How HRA exemption is calculated</h2>
-      <p>Your HRA exemption under Section 10(13A) is the <b>smallest</b> of three amounts — not the full HRA you receive, and not the full rent you pay. Whichever of the three limbs is lowest is what you actually get to claim as exempt; the rest of your HRA is added back to your taxable salary.</p>
-      <p>This only applies under the <b>old tax regime</b> — the new regime doesn't allow HRA exemption at all, so if you've opted for the new regime, your entire HRA is taxable regardless of rent paid.</p>
-      <div class="formula-box">
-        <div class="row"><span class="num">1</span><span>Actual HRA received from your employer</span></div>
-        <div class="row"><span class="num">2</span><span>Rent paid − 10% of (Basic + DA)</span></div>
-        <div class="row"><span class="num">3</span><span>50% of (Basic + DA) in a metro, 40% elsewhere</span></div>
+  <section class="info-grid mb-7 grid grid-cols-[1.3fr_1fr] gap-5 max-[860px]:grid-cols-1">
+    <div class="info-card rounded-[20px] border border-[#e2e6ec] px-9 py-8">
+      <h2 class="mb-3.5 text-[19px] font-bold">How HRA exemption is calculated</h2>
+      <p class="mb-3.5 text-[14.5px] leading-[1.7] text-[#042b6299]">Your HRA exemption under Section 10(13A) is the <b>smallest</b> of three amounts — not the full HRA you receive, and not the full rent you pay. Whichever of the three limbs is lowest is what you actually get to claim as exempt; the rest of your HRA is added back to your taxable salary.</p>
+      <p class="mb-3.5 text-[14.5px] leading-[1.7] text-[#042b6299]">This only applies under the <b>old tax regime</b> — the new regime doesn't allow HRA exemption at all, so if you've opted for the new regime, your entire HRA is taxable regardless of rent paid.</p>
+      <div class="formula-box mt-[18px] rounded-xl bg-[#f4f6f9] px-[22px] py-5">
+        <div class="row mb-2 flex items-baseline gap-2.5 text-sm font-semibold"><span class="num flex size-5 shrink-0 items-center justify-center rounded-full bg-[#dd7300] text-[11px] font-bold text-white">1</span><span>Actual HRA received from your employer</span></div>
+        <div class="row mb-2 flex items-baseline gap-2.5 text-sm font-semibold"><span class="num flex size-5 shrink-0 items-center justify-center rounded-full bg-[#dd7300] text-[11px] font-bold text-white">2</span><span>Rent paid − 10% of (Basic + DA)</span></div>
+        <div class="row flex items-baseline gap-2.5 text-sm font-semibold"><span class="num flex size-5 shrink-0 items-center justify-center rounded-full bg-[#dd7300] text-[11px] font-bold text-white">3</span><span>50% of (Basic + DA) in a metro, 40% elsewhere</span></div>
       </div>
     </div>
-    <div class="info-card">
-      <h2>Common questions</h2>
-      <div class="faq-item">Can I claim HRA if I don't pay rent?<span class="plus">+</span></div>
-      <div class="faq-item">Do I need rent receipts or a rent agreement?<span class="plus">+</span></div>
-      <div class="faq-item">Can I claim HRA and a home loan deduction together?<span class="plus">+</span></div>
-      <div class="faq-item">Does the new tax regime allow HRA exemption?<span class="plus">+</span></div>
+    <div class="info-card rounded-[20px] border border-[#e2e6ec] px-9 py-8">
+      <h2 class="mb-3.5 text-[19px] font-bold">Common questions</h2>
+      <div class="faq-item flex cursor-pointer items-center justify-between border-b border-[#e2e6ec] py-3.5 text-[14.5px] font-semibold">Can I claim HRA if I don't pay rent?<span class="plus text-lg font-bold text-[#dd7300]">+</span></div>
+      <div class="faq-item flex cursor-pointer items-center justify-between border-b border-[#e2e6ec] py-3.5 text-[14.5px] font-semibold">Do I need rent receipts or a rent agreement?<span class="plus text-lg font-bold text-[#dd7300]">+</span></div>
+      <div class="faq-item flex cursor-pointer items-center justify-between border-b border-[#e2e6ec] py-3.5 text-[14.5px] font-semibold">Can I claim HRA and a home loan deduction together?<span class="plus text-lg font-bold text-[#dd7300]">+</span></div>
+      <div class="faq-item flex cursor-pointer items-center justify-between py-3.5 text-[14.5px] font-semibold">Does the new tax regime allow HRA exemption?<span class="plus text-lg font-bold text-[#dd7300]">+</span></div>
     </div>
   </section>
 
   <section class="related">
-    <h2>Related calculators</h2>
-    <div class="related-grid">
-      <div class="related-card">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6l-1 4h6l-2 16H6L4 6h6L9 2z"/></svg></span>
-        <div><div class="t">Income Tax Calculator</div><div class="s">Old vs new regime, side by side</div></div>
+    <h2 class="mb-4 text-xl font-bold">Related calculators</h2>
+    <div class="related-grid mb-9 grid grid-cols-3 gap-4 max-[860px]:grid-cols-1">
+      <div class="related-card flex items-center gap-3.5 rounded-[14px] border border-[#e2e6ec] px-5 py-[18px]">
+        <span class="ic flex size-[38px] shrink-0 items-center justify-center rounded-[9px] bg-[#fdead6]"><svg class="size-[18px] stroke-[#dd7300]" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6l-1 4h6l-2 16H6L4 6h6L9 2z"/></svg></span>
+        <div><div class="t text-[14.5px] font-bold">Income Tax Calculator</div><div class="s mt-0.5 text-[12.5px] text-[#042b6299]">Old vs new regime, side by side</div></div>
       </div>
-      <div class="related-card">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>
-        <div><div class="t">Capital Gains Tax Calculator</div><div class="s">LTCG/STCG on equity, debt, property</div></div>
+      <div class="related-card flex items-center gap-3.5 rounded-[14px] border border-[#e2e6ec] px-5 py-[18px]">
+        <span class="ic flex size-[38px] shrink-0 items-center justify-center rounded-[9px] bg-[#fdead6]"><svg class="size-[18px] stroke-[#dd7300]" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span>
+        <div><div class="t text-[14.5px] font-bold">Capital Gains Tax Calculator</div><div class="s mt-0.5 text-[12.5px] text-[#042b6299]">LTCG/STCG on equity, debt, property</div></div>
       </div>
-      <div class="related-card">
-        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg></span>
-        <div><div class="t">SIP Calculator</div><div class="s">Monthly investing, projected</div></div>
+      <div class="related-card flex items-center gap-3.5 rounded-[14px] border border-[#e2e6ec] px-5 py-[18px]">
+        <span class="ic flex size-[38px] shrink-0 items-center justify-center rounded-[9px] bg-[#fdead6]"><svg class="size-[18px] stroke-[#dd7300]" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg></span>
+        <div><div class="t text-[14.5px] font-bold">SIP Calculator</div><div class="s mt-0.5 text-[12.5px] text-[#042b6299]">Monthly investing, projected</div></div>
       </div>
     </div>
   </section>
 
-  <section class="cta-banner">
+  <section class="cta-banner relative mb-10 flex items-center justify-between overflow-hidden rounded-[20px] bg-[#042b62] px-[52px] py-11 text-white max-[860px]:flex-col max-[860px]:items-start max-[860px]:gap-5">
     <div>
-      <h3>Not sure if the old regime works out better for you?</h3>
-      <p>A Fintoo advisor can run your full HRA, 80C, and other deductions against both regimes, at no extra cost to browse.</p>
+      <h3 class="max-w-[420px] text-[26px] font-bold leading-[1.3]">Not sure if the old regime works out better for you?</h3>
+      <p class="mt-2.5 max-w-[420px] text-sm text-white/70">A Fintoo advisor can run your full HRA, 80C, and other deductions against both regimes, at no extra cost to browse.</p>
     </div>
-    <button>Talk to an advisor →</button>
+    <button class="inline-flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-3xl border-0 bg-white px-6 py-3.5 text-[14.5px] font-semibold text-[#042b62]">Talk to an advisor →</button>
   </section>
 
-  <footer>
+  <footer class="flex justify-between border-t border-[#e2e6ec] pb-10 pt-[26px] text-[13px] text-[#042b6299]">
     <div>© 2026 Fintoo. SEBI-registered investment adviser.</div>
-    <div class="links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a></div>
+    <div class="links flex gap-6"><a class="text-inherit no-underline" href="#">Privacy</a><a class="text-inherit no-underline" href="#">Terms</a><a class="text-inherit no-underline" href="#">Contact</a></div>
   </footer>
 </main>
 
@@ -315,8 +182,18 @@ const parseNum = str => parseFloat(String(str).replace(/[^0-9.]/g,'')) || 0;
 let city = 'metro';
 document.querySelectorAll('.city-toggle button').forEach(btn=>{
   btn.addEventListener('click', ()=>{
-    document.querySelectorAll('.city-toggle button').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
+    document.querySelectorAll('.city-toggle button').forEach(b=>{
+      b.classList.remove('active', 'border-[#042b62]', 'bg-[#042b62]', 'text-white');
+      b.classList.add('border-[#e2e6ec]', 'bg-white', 'text-[#042b6299]');
+      const sub = b.querySelector('.sub');
+      sub.classList.remove('text-white/70');
+      sub.classList.add('text-[#042b6299]');
+    });
+    btn.classList.remove('border-[#e2e6ec]', 'bg-white', 'text-[#042b6299]');
+    btn.classList.add('active', 'border-[#042b62]', 'bg-[#042b62]', 'text-white');
+    const activeSub = btn.querySelector('.sub');
+    activeSub.classList.remove('text-[#042b6299]');
+    activeSub.classList.add('text-white/70');
     city = btn.dataset.city;
     render();
   });
@@ -332,7 +209,10 @@ document.querySelectorAll('.city-toggle button').forEach(btn=>{
 
 function drawDonut(exemptPct){
   const clamped = Math.max(0, Math.min(100, exemptPct));
-  $('donutCss').style.background = `conic-gradient(#0f8a4b 0% ${clamped}%, #dd7300 ${clamped}% 100%)`;
+  const circumference = 2*Math.PI*48;
+  const arc = $('donutArc');
+  arc.setAttribute('stroke-dasharray', circumference);
+  arc.setAttribute('stroke-dashoffset', circumference*(1-clamped/100));
   $('donutPct').textContent = Math.round(clamped)+'%';
 }
 
@@ -369,10 +249,10 @@ function render(){
   ];
   const minVal = Math.min(...limbs.map(l=>l.val));
   $('limbList').innerHTML = limbs.map(l=>`
-    <div class="limb-row ${l.val===minVal?'winner':''}">
-      ${l.val===minVal?'<span class="badge">LOWEST — THIS APPLIES</span>':''}
-      <span class="t">${l.label}</span>
-      <span class="v">${fmt(l.val)}</span>
+    <div class="limb-row relative flex items-center justify-between rounded-xl border-[1.5px] ${l.val===minVal?'winner border-[#dd7300]':'border-[#e2e6ec]'} bg-white px-4 py-3.5">
+      ${l.val===minVal?'<span class="badge absolute -top-2.5 left-3.5 rounded-[20px] bg-[#dd7300] px-[9px] py-[3px] text-[10px] font-bold tracking-[0.03em] text-white">LOWEST — THIS APPLIES</span>':''}
+      <span class="t text-[13px] text-[#042b6299]">${l.label}</span>
+      <span class="v text-[15px] font-bold">${fmt(l.val)}</span>
     </div>
   `).join('');
 

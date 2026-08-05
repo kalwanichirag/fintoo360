@@ -7,182 +7,39 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --navy:#042b62;
-    --orange:#dd7300;
-    --navy-05:#f4f6f9;
-    --navy-10:#e9edf3;
-    --navy-60:rgba(4,43,98,0.6);
-    --border:#e2e6ec;
-    --white:#ffffff;
-    --green:#0f8a4b;
-    --red:#c23b3b;
-    font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,sans-serif;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  body{background:var(--white);color:var(--navy);font-family:'Google Sans','Roboto',-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased;}
-  a{color:inherit;text-decoration:none;}
-
-  header.site{display:flex;align-items:center;justify-content:space-between;padding:22px 64px;border-bottom:1px solid var(--border);}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px;color:var(--navy);}
-  .logo-mark{width:30px;height:30px;border-radius:8px;background:var(--navy);display:flex;align-items:center;justify-content:center;}
-  .logo-mark svg{width:16px;height:16px;}
-  nav.main{display:flex;gap:40px;}
-  nav.main a{font-size:15px;font-weight:500;color:var(--navy-60);padding-bottom:4px;border-bottom:2px solid transparent;}
-  nav.main a.active{color:var(--navy);border-bottom-color:var(--orange);}
-  .btn-advisor{background:var(--navy);color:#fff;font-weight:500;font-size:14px;padding:11px 22px;border-radius:24px;border:none;cursor:pointer;}
-
-  main{max-width:1128px;margin:0 auto;padding:0 32px;}
-
-  .crumb{font-size:13px;color:var(--navy-60);padding:24px 0 0;}
-  .crumb span{color:var(--navy);font-weight:500;}
-  .page-head{display:flex;align-items:flex-start;gap:16px;padding:20px 0 32px;}
-  .page-icon{width:52px;height:52px;border-radius:14px;background:#fdead6;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-  .page-icon svg{width:26px;height:26px;stroke:var(--orange);}
-  .page-head h1{font-size:34px;font-weight:700;letter-spacing:-0.01em;display:flex;align-items:center;gap:10px;}
-  .popular-tag{font-size:11px;font-weight:700;letter-spacing:0.03em;background:#fdead6;color:var(--orange);padding:4px 10px;border-radius:20px;}
-  .page-head p{font-size:15px;color:var(--navy-60);margin-top:4px;}
-
-  .calc-card{display:grid;grid-template-columns:1fr 1.15fr;border:1px solid var(--border);border-radius:20px;overflow:hidden;margin-bottom:28px;}
-  .calc-inputs{padding:36px;display:flex;flex-direction:column;gap:22px;}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
-  .field label{display:block;font-size:13.5px;font-weight:500;color:var(--navy);margin-bottom:10px;}
-  .field-top{display:flex;align-items:center;justify-content:space-between;}
-  .amount-box{display:flex;align-items:center;border:1px solid var(--border);border-radius:8px;overflow:hidden;background:#fff;}
-  .amount-box span{padding:7px 9px;color:var(--navy-60);font-size:13.5px;border-right:1px solid var(--border);}
-  .amount-box input{border:none;outline:none;padding:7px 10px;font-size:13.5px;font-weight:600;color:var(--navy);width:100%;font-family:inherit;}
-  input[type=range]{-webkit-appearance:none;width:100%;height:4px;border-radius:4px;background:var(--navy-10);margin-top:12px;}
-  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid var(--orange);cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,0.2);}
-  input[type=range]::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--orange);cursor:pointer;}
-  .range-labels{display:flex;justify-content:space-between;font-size:11.5px;color:var(--navy-60);margin-top:6px;}
-  hr.div{border:none;border-top:1px solid var(--border);margin:2px 0;}
-  .sip-toggle{display:flex;gap:8px;}
-  .sip-toggle button{flex:1;padding:10px 8px;border-radius:8px;border:1px solid var(--border);background:#fff;color:var(--navy-60);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;}
-  .sip-toggle button.active{background:var(--navy);color:#fff;border-color:var(--navy);}
-  .stepup-field{display:none;}
-  .stepup-field.show{display:block;}
-  .cta-invest{margin-top:auto;background:var(--navy);color:#fff;border:none;border-radius:28px;padding:14px 24px;font-size:14.5px;font-weight:500;display:inline-flex;align-items:center;gap:8px;cursor:pointer;align-self:flex-start;}
-
-  .calc-result{background:var(--navy-05);padding:34px 38px;display:flex;flex-direction:column;}
-  .result-block{margin-bottom:18px;}
-  .result-label{font-size:13.5px;color:var(--navy-60);}
-  .result-value{font-size:30px;font-weight:700;margin-top:4px;}
-  .result-value.small{font-size:22px;}
-  .result-row{display:flex;gap:16px;margin-bottom:18px;}
-  .result-row .result-block{flex:1;margin-bottom:0;}
-  .sip-hero{
-    background:#fff;border:1.5px solid var(--orange);border-radius:14px;padding:18px 20px;margin-bottom:18px;
-  }
-  .sip-hero .lbl{font-size:13px;color:var(--navy-60);font-weight:500;}
-  .sip-hero .val{font-size:32px;font-weight:700;color:var(--navy);margin-top:2px;}
-  .sip-hero .val span{color:var(--orange);}
-  .sip-hero .note{font-size:12px;color:var(--navy-60);margin-top:6px;}
-  .donut-row{display:flex;align-items:center;gap:22px;margin-bottom:20px;}
-  .legend{display:flex;flex-direction:column;gap:9px;}
-  .legend-row{display:flex;align-items:center;justify-content:space-between;gap:24px;font-size:13.5px;}
-  .legend-row .dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:8px;}
-  .legend-row .lbl{color:var(--navy-60);display:flex;align-items:center;}
-  .legend-row .val{font-weight:600;}
-  .chart-foot{display:flex;justify-content:space-between;font-size:12px;color:var(--navy-60);margin-top:4px;}
-  .disclaimer{font-size:11.5px;color:var(--navy-60);margin-top:14px;line-height:1.5;}
-
-  .table-card{border:1px solid var(--border);border-radius:20px;padding:32px 40px;margin-bottom:28px;}
-  .table-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
-  .table-head h2{font-size:20px;font-weight:700;}
-  .table-head p{font-size:13.5px;color:var(--navy-60);margin-top:2px;}
-  .drawdown-flex{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:18px;align-items:start;}
-  .growth-table-wrap{max-height:230px;overflow-y:auto;}
-  table{width:100%;border-collapse:collapse;}
-  thead th{text-align:left;font-size:12px;letter-spacing:0.04em;color:var(--navy-60);padding:8px 10px;position:sticky;top:0;background:#fff;border-bottom:1px solid var(--border);}
-  thead th:not(:first-child){text-align:right;}
-  tbody td{padding:11px 10px;font-size:13.5px;border-bottom:1px solid var(--navy-10);}
-  tbody td:not(:first-child){text-align:right;font-weight:600;}
-  tbody td.gain{color:var(--green);}
-  tbody td.loss{color:var(--red);}
-
-  .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;}
-  .compare-card{background:#fff;border:1.5px solid var(--border);border-radius:14px;padding:20px;position:relative;}
-  .compare-card.winner{border-color:var(--orange);}
-  .compare-card .badge{position:absolute;top:-11px;left:14px;background:var(--orange);color:#fff;font-size:10.5px;font-weight:700;letter-spacing:0.03em;padding:3px 10px;border-radius:20px;}
-  .compare-card h3{font-size:13.5px;font-weight:600;color:var(--navy-60);margin-bottom:10px;}
-  .compare-row{display:flex;justify-content:space-between;font-size:13.5px;padding:6px 0;border-bottom:1px solid var(--navy-10);}
-  .compare-row:last-child{border-bottom:none;}
-  .compare-row .v{font-weight:700;}
-
-  .info-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;margin-bottom:28px;}
-  .info-card{border:1px solid var(--border);border-radius:20px;padding:32px 36px;}
-  .info-card h2{font-size:19px;font-weight:700;margin-bottom:14px;}
-  .info-card p{font-size:14.5px;color:var(--navy-60);line-height:1.7;margin-bottom:14px;}
-  .formula-box{background:var(--navy-05);border-radius:12px;padding:18px 20px;margin-top:14px;}
-  .formula-box .f{font-size:15px;font-weight:700;margin-bottom:8px;line-height:1.6;}
-  .formula-box .k{font-size:12.5px;color:var(--navy-60);display:flex;gap:16px;flex-wrap:wrap;}
-  .formula-box .k b{color:var(--navy);}
-  .faq-item{border-bottom:1px solid var(--border);padding:14px 0;display:flex;justify-content:space-between;align-items:center;font-size:14.5px;font-weight:600;cursor:pointer;}
-  .faq-item:last-child{border-bottom:none;}
-  .faq-item span.plus{color:var(--orange);font-weight:700;font-size:18px;}
-
-  .related h2{font-size:20px;font-weight:700;margin-bottom:16px;}
-  .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:36px;}
-  .related-card{border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:14px;}
-  .related-card .ic{width:38px;height:38px;border-radius:9px;background:#fdead6;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-  .related-card .ic svg{width:18px;height:18px;stroke:var(--orange);}
-  .related-card .t{font-size:14.5px;font-weight:700;}
-  .related-card .s{font-size:12.5px;color:var(--navy-60);margin-top:2px;}
-
-  .cta-banner{background:var(--navy);border-radius:20px;padding:44px 52px;display:flex;justify-content:space-between;align-items:center;color:#fff;margin-bottom:40px;overflow:hidden;position:relative;}
-  .cta-banner h3{font-size:26px;font-weight:700;line-height:1.3;max-width:420px;}
-  .cta-banner p{font-size:14px;color:rgba(255,255,255,0.7);margin-top:10px;max-width:420px;}
-  .cta-banner button{background:#fff;color:var(--navy);border:none;border-radius:24px;padding:14px 24px;font-weight:600;font-size:14.5px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;white-space:nowrap;}
-
-  footer{border-top:1px solid var(--border);padding:26px 0 40px;display:flex;justify-content:space-between;font-size:13px;color:var(--navy-60);}
-  footer .links{display:flex;gap:24px;}
-
-  @media(max-width:860px){
-    header.site{padding:18px 20px;}
-    nav.main{display:none;}
-    main{padding:0 20px;}
-    .calc-card{grid-template-columns:1fr;}
-    .info-grid{grid-template-columns:1fr;}
-    .related-grid{grid-template-columns:1fr;}
-    .drawdown-flex{grid-template-columns:1fr;}
-    .compare-grid{grid-template-columns:1fr;}
-    .cta-banner{flex-direction:column;align-items:flex-start;gap:20px;}
-    .grid2{grid-template-columns:1fr;}
-  }
-</style>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="m-0 bg-white font-['Google_Sans','Roboto',-apple-system,BlinkMacSystemFont,sans-serif] text-[#042b62] antialiased">
 
-<header class="site">
-  <div class="logo">
-    <span class="logo-mark"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12L11 5L20 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+<header class="site flex items-center justify-between border-b border-[#e2e6ec] px-16 py-[22px] max-[860px]:px-5 max-[860px]:py-[18px]">
+  <div class="logo flex items-center gap-2.5 text-xl font-bold text-[#042b62]">
+    <span class="logo-mark flex size-[30px] items-center justify-center rounded-lg bg-[#042b62]"><svg class="size-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12L11 5L20 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
     fintoo
   </div>
-  <nav class="main">
-    <a href="#">Invest</a>
-    <a href="#">Plan</a>
-    <a href="#">Learn</a>
-    <a href="#" class="active">Tools</a>
+  <nav class="main flex gap-10 max-[860px]:hidden">
+    <a class="border-b-2 border-transparent pb-1 text-[15px] font-medium text-[#042b6299] no-underline" href="#">Invest</a>
+    <a class="border-b-2 border-transparent pb-1 text-[15px] font-medium text-[#042b6299] no-underline" href="#">Plan</a>
+    <a class="border-b-2 border-transparent pb-1 text-[15px] font-medium text-[#042b6299] no-underline" href="#">Learn</a>
+    <a href="#" class="active border-b-2 border-[#dd7300] pb-1 text-[15px] font-medium text-[#042b62] no-underline">Tools</a>
   </nav>
-  <button class="btn-advisor">Talk to an advisor</button>
+  <button class="btn-advisor cursor-pointer rounded-3xl border-0 bg-[#042b62] px-[22px] py-[11px] text-sm font-medium text-white">Talk to an advisor</button>
 </header>
 
-<main>
-  <div class="crumb"><a href="tools.html">Tools</a> &nbsp;›&nbsp; <span>Retirement Calculator</span></div>
+<main class="mx-auto max-w-[1128px] px-8 max-[860px]:px-5">
+  <div class="crumb pt-6 text-[13px] text-[#042b6299]"><a class="text-inherit no-underline" href="tools.html">Tools</a> &nbsp;›&nbsp; <span class="font-medium text-[#042b62]">Retirement Calculator</span></div>
 
-  <div class="page-head">
-    <div class="page-icon">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4.5 8-11V5l-8-3-8 3v6c0 6.5 8 11 8 11z"/></svg>
+  <div class="page-head flex items-start gap-4 pb-8 pt-5">
+    <div class="page-icon flex size-[52px] shrink-0 items-center justify-center rounded-[14px] bg-[#fdead6]">
+      <svg class="size-[26px] stroke-[#dd7300]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4.5 8-11V5l-8-3-8 3v6c0 6.5 8 11 8 11z"/></svg>
     </div>
     <div>
-      <h1>Retirement Calculator <span class="popular-tag">POPULAR</span></h1>
-      <p>Check if your current savings rate gets you to the retirement corpus you'll need — and what to do if it doesn't.</p>
+      <h1 class="flex items-center gap-2.5 text-[34px] font-bold tracking-[-0.01em]">Retirement Calculator <span class="popular-tag rounded-[20px] bg-[#fdead6] px-2.5 py-1 text-[11px] font-bold tracking-[0.03em] text-[#dd7300]">POPULAR</span></h1>
+      <p class="mt-1 text-[15px] text-[#042b6299]">Check if your current savings rate gets you to the retirement corpus you'll need — and what to do if it doesn't.</p>
     </div>
   </div>
 
-  <section class="calc-card">
-    <div class="calc-inputs">
+  <section class="calc-card mb-7 grid grid-cols-[1fr_1.15fr] overflow-hidden rounded-[20px] border border-[#e2e6ec] max-[860px]:grid-cols-1">
+    <div class="calc-inputs flex flex-col gap-[22px] p-9 [&_.amount-box_input]:w-full [&_.amount-box_input]:border-0 [&_.amount-box_input]:px-2.5 [&_.amount-box_input]:py-[7px] [&_.amount-box_input]:font-[inherit] [&_.amount-box_input]:text-[13.5px] [&_.amount-box_input]:font-semibold [&_.amount-box_input]:text-[#042b62] [&_.amount-box_input]:outline-none [&_.amount-box_span]:border-r [&_.amount-box_span]:border-[#e2e6ec] [&_.amount-box_span]:px-[9px] [&_.amount-box_span]:py-[7px] [&_.amount-box_span]:text-[13.5px] [&_.amount-box_span]:text-[#042b6299] [&_.amount-box]:flex [&_.amount-box]:items-center [&_.amount-box]:overflow-hidden [&_.amount-box]:rounded-lg [&_.amount-box]:border [&_.amount-box]:border-[#e2e6ec] [&_.amount-box]:bg-white [&_.field-top]:flex [&_.field-top]:items-center [&_.field-top]:justify-between [&_.field_label]:mb-2.5 [&_.field_label]:block [&_.field_label]:text-[13.5px] [&_.field_label]:font-medium [&_.field_label]:text-[#042b62] [&_.grid2]:grid [&_.grid2]:grid-cols-2 [&_.grid2]:gap-[18px] max-[860px]:[&_.grid2]:grid-cols-1 [&_.range-labels]:mt-1.5 [&_.range-labels]:flex [&_.range-labels]:justify-between [&_.range-labels]:text-[11.5px] [&_.range-labels]:text-[#042b6299] [&_input[type=range]]:mt-3 [&_input[type=range]]:h-1 [&_input[type=range]]:w-full [&_input[type=range]]:cursor-pointer [&_input[type=range]]:appearance-none [&_input[type=range]]:rounded [&_input[type=range]]:bg-[#e9edf3] [&_input[type=range]::-moz-range-thumb]:size-3 [&_input[type=range]::-moz-range-thumb]:cursor-pointer [&_input[type=range]::-moz-range-thumb]:rounded-full [&_input[type=range]::-moz-range-thumb]:border-[3px] [&_input[type=range]::-moz-range-thumb]:border-[#dd7300] [&_input[type=range]::-moz-range-thumb]:bg-white [&_input[type=range]::-webkit-slider-thumb]:size-[18px] [&_input[type=range]::-webkit-slider-thumb]:cursor-pointer [&_input[type=range]::-webkit-slider-thumb]:appearance-none [&_input[type=range]::-webkit-slider-thumb]:rounded-full [&_input[type=range]::-webkit-slider-thumb]:border-[3px] [&_input[type=range]::-webkit-slider-thumb]:border-[#dd7300] [&_input[type=range]::-webkit-slider-thumb]:bg-white [&_input[type=range]::-webkit-slider-thumb]:shadow-[0_1px_3px_rgba(0,0,0,0.2)]">
 
       <div class="grid2">
         <div class="field">
@@ -204,7 +61,7 @@
         <div class="range-labels"><span>65</span><span>100</span></div>
       </div>
 
-      <hr class="div">
+      <hr class="div my-0.5 border-0 border-t border-[#e2e6ec]">
 
       <div class="field">
         <div class="field-top"><label>Current monthly expenses</label></div>
@@ -239,19 +96,19 @@
         </div>
       </div>
 
-      <hr class="div">
+      <hr class="div my-0.5 border-0 border-t border-[#e2e6ec]">
 
       <div class="field">
         <label>How do you want to invest?</label>
-        <div class="sip-toggle">
-          <button class="active" data-mode="flat">Flat SIP</button>
-          <button data-mode="stepup">Step-up SIP</button>
+        <div class="sip-toggle flex gap-2">
+          <button class="active flex-1 cursor-pointer rounded-lg border border-[#042b62] bg-[#042b62] px-2 py-2.5 font-[inherit] text-[13px] font-semibold text-white" data-mode="flat">Flat SIP</button>
+          <button class="flex-1 cursor-pointer rounded-lg border border-[#e2e6ec] bg-white px-2 py-2.5 font-[inherit] text-[13px] font-semibold text-[#042b6299]" data-mode="stepup">Step-up SIP</button>
         </div>
       </div>
 
-      <div class="field stepup-field" id="stepupField">
+      <div class="field stepup-field hidden" id="stepupField">
         <div class="field-top"><label>Annual step-up</label>
-          <div class="amount-box" style="width:70px;"><input type="text" id="stepupInput" value="10%"></div>
+          <div class="amount-box w-[70px]"><input type="text" id="stepupInput" value="10%"></div>
         </div>
         <input type="range" id="stepupRange" min="0" max="25" step="1" value="10">
         <div class="range-labels"><span>0%</span><span>25%</span></div>
@@ -259,111 +116,111 @@
 
     </div>
 
-    <div class="calc-result">
-      <div class="result-row">
-        <div class="result-block">
-          <div class="result-label">Monthly expense at retirement</div>
-          <div class="result-value small" id="futureExpense">₹0</div>
+    <div class="calc-result flex flex-col bg-[#f4f6f9] px-[38px] py-[34px]">
+      <div class="result-row mb-[18px] flex gap-4">
+        <div class="result-block flex-1">
+          <div class="result-label text-[13.5px] text-[#042b6299]">Monthly expense at retirement</div>
+          <div class="result-value small mt-1 text-[22px] font-bold" id="futureExpense">₹0</div>
         </div>
-        <div class="result-block">
-          <div class="result-label">Retirement corpus needed</div>
-          <div class="result-value small" id="corpusNeeded">₹0</div>
+        <div class="result-block flex-1">
+          <div class="result-label text-[13.5px] text-[#042b6299]">Retirement corpus needed</div>
+          <div class="result-value small mt-1 text-[22px] font-bold" id="corpusNeeded">₹0</div>
         </div>
       </div>
 
-      <div class="sip-hero">
-        <div class="lbl" id="sipHeroLabel">Flat monthly SIP needed, starting today</div>
-        <div class="val"><span id="sipNeeded">₹0</span></div>
-        <div class="note" id="sipNote">On top of what your current investments will grow into by retirement.</div>
+      <div class="sip-hero mb-[18px] rounded-[14px] border-[1.5px] border-[#dd7300] bg-white px-5 py-[18px]">
+        <div class="lbl text-[13px] font-medium text-[#042b6299]" id="sipHeroLabel">Flat monthly SIP needed, starting today</div>
+        <div class="val mt-0.5 text-[32px] font-bold text-[#042b62]"><span class="text-[#dd7300]" id="sipNeeded">₹0</span></div>
+        <div class="note mt-1.5 text-xs text-[#042b6299]" id="sipNote">On top of what your current investments will grow into by retirement.</div>
       </div>
 
-      <div class="donut-row">
+      <div class="donut-row mb-5 flex items-center gap-[22px]">
         <svg width="110" height="110" viewBox="0 0 120 120" id="donut">
           <circle cx="60" cy="60" r="48" fill="none" stroke="#e9edf3" stroke-width="16"/>
           <circle id="donutArc" cx="60" cy="60" r="48" fill="none" stroke="#dd7300" stroke-width="16" stroke-linecap="round" transform="rotate(-90 60 60)"/>
           <text id="donutPct" x="60" y="66" text-anchor="middle" font-size="17" font-weight="700" fill="#042b62" font-family="Google Sans, Roboto, sans-serif">0%</text>
         </svg>
-        <div class="legend">
-          <div class="legend-row"><span class="lbl"><span class="dot" style="background:#042b62;"></span>Current investments (grown)</span><span class="val" id="existingVal">₹0</span></div>
-          <div class="legend-row"><span class="lbl"><span class="dot" style="background:#dd7300;"></span>Built by new SIP</span><span class="val" id="sipBuiltVal" style="color:var(--orange);">₹0</span></div>
+        <div class="legend flex flex-col gap-[9px]">
+          <div class="legend-row flex items-center justify-between gap-6 text-[13.5px]"><span class="lbl flex items-center text-[#042b6299]"><span class="dot mr-2 inline-block size-[9px] rounded-full bg-[#042b62]"></span>Current investments (grown)</span><span class="val font-semibold" id="existingVal">₹0</span></div>
+          <div class="legend-row flex items-center justify-between gap-6 text-[13.5px]"><span class="lbl flex items-center text-[#042b6299]"><span class="dot mr-2 inline-block size-[9px] rounded-full bg-[#dd7300]"></span>Built by new SIP</span><span class="val font-semibold text-[#dd7300]" id="sipBuiltVal">₹0</span></div>
         </div>
       </div>
 
       <div class="chart-wrap">
         <svg id="growthChart" width="100%" height="130" viewBox="0 0 480 130" preserveAspectRatio="none"></svg>
-        <div class="chart-foot"><span>Age <span id="chartAgeStart">30</span></span><span id="chartAgeEnd">Age 60 · retirement</span></div>
+        <div class="chart-foot mt-1 flex justify-between text-xs text-[#042b6299]"><span>Age <span id="chartAgeStart">30</span></span><span id="chartAgeEnd">Age 60 · retirement</span></div>
       </div>
 
-      <div class="disclaimer">Illustrative only. Assumes returns and inflation stay constant every year — actual markets will vary. Not investment advice.</div>
+      <div class="disclaimer mt-3.5 text-[11.5px] leading-normal text-[#042b6299]">Illustrative only. Assumes returns and inflation stay constant every year — actual markets will vary. Not investment advice.</div>
     </div>
   </section>
 
-  <section class="table-card">
-    <div class="table-head">
+  <section class="table-card mb-7 rounded-[20px] border border-[#e2e6ec] px-10 py-8">
+    <div class="table-head mb-2 flex items-center justify-between">
       <div>
-        <h2>Will your corpus last?</h2>
-        <p>Corpus projected during retirement, drawing down your inflation-adjusted expenses each year.</p>
+        <h2 class="text-xl font-bold">Will your corpus last?</h2>
+        <p class="mt-0.5 text-[13.5px] text-[#042b6299]">Corpus projected during retirement, drawing down your inflation-adjusted expenses each year.</p>
       </div>
     </div>
-    <div class="drawdown-flex">
+    <div class="drawdown-flex mt-[18px] grid grid-cols-2 items-start gap-8 max-[860px]:grid-cols-1">
       <div>
         <svg id="drawdownChart" width="100%" height="180" viewBox="0 0 460 180" preserveAspectRatio="none"></svg>
-        <div class="chart-foot"><span id="drawdownAgeStart">Age 60</span><span id="drawdownAgeEnd">Age 85</span></div>
+        <div class="chart-foot mt-1 flex justify-between text-xs text-[#042b6299]"><span id="drawdownAgeStart">Age 60</span><span id="drawdownAgeEnd">Age 85</span></div>
       </div>
-      <div class="growth-table-wrap">
-        <table>
-          <thead><tr><th>AGE</th><th>WITHDRAWAL</th><th>YEAR-END CORPUS</th></tr></thead>
-          <tbody id="drawdownBody"></tbody>
+      <div class="growth-table-wrap max-h-[230px] overflow-y-auto">
+        <table class="w-full border-collapse">
+          <thead><tr><th class="sticky top-0 border-b border-[#e2e6ec] bg-white px-2.5 py-2 text-left text-xs tracking-[0.04em] text-[#042b6299]">AGE</th><th class="sticky top-0 border-b border-[#e2e6ec] bg-white px-2.5 py-2 text-right text-xs tracking-[0.04em] text-[#042b6299]">WITHDRAWAL</th><th class="sticky top-0 border-b border-[#e2e6ec] bg-white px-2.5 py-2 text-right text-xs tracking-[0.04em] text-[#042b6299]">YEAR-END CORPUS</th></tr></thead>
+          <tbody class="[&_.gain]:text-[#0f8a4b] [&_.loss]:text-[#c23b3b] [&_td:not(:first-child)]:text-right [&_td:not(:first-child)]:font-semibold [&_td]:border-b [&_td]:border-[#e9edf3] [&_td]:px-2.5 [&_td]:py-[11px] [&_td]:text-[13.5px]" id="drawdownBody"></tbody>
         </table>
       </div>
     </div>
   </section>
 
-  <section class="table-card">
-    <div class="table-head">
+  <section class="table-card mb-7 rounded-[20px] border border-[#e2e6ec] px-10 py-8">
+    <div class="table-head mb-2 flex items-center justify-between">
       <div>
-        <h2>Flat SIP vs Step-up SIP</h2>
-        <p>Two ways to reach the same corpus — compare the monthly outgo and total invested.</p>
+        <h2 class="text-xl font-bold">Flat SIP vs Step-up SIP</h2>
+        <p class="mt-0.5 text-[13.5px] text-[#042b6299]">Two ways to reach the same corpus — compare the monthly outgo and total invested.</p>
       </div>
     </div>
-    <div class="compare-grid">
-      <div class="compare-card" id="flatCompareCard">
-        <h3>Flat SIP</h3>
-        <div class="compare-row"><span>Monthly SIP (constant)</span><span class="v" id="cmpFlatSip">₹0</span></div>
-        <div class="compare-row"><span>Total invested</span><span class="v" id="cmpFlatInvested">₹0</span></div>
-        <div class="compare-row"><span>Corpus at retirement</span><span class="v" id="cmpFlatCorpus">₹0</span></div>
+    <div class="compare-grid mt-4 grid grid-cols-2 gap-3.5 max-[860px]:grid-cols-1">
+      <div class="compare-card relative rounded-[14px] border-[1.5px] border-[#e2e6ec] bg-white p-5" id="flatCompareCard">
+        <h3 class="mb-2.5 text-[13.5px] font-semibold text-[#042b6299]">Flat SIP</h3>
+        <div class="compare-row flex justify-between border-b border-[#e9edf3] py-1.5 text-[13.5px]"><span>Monthly SIP (constant)</span><span class="v font-bold" id="cmpFlatSip">₹0</span></div>
+        <div class="compare-row flex justify-between border-b border-[#e9edf3] py-1.5 text-[13.5px]"><span>Total invested</span><span class="v font-bold" id="cmpFlatInvested">₹0</span></div>
+        <div class="compare-row flex justify-between py-1.5 text-[13.5px]"><span>Corpus at retirement</span><span class="v font-bold" id="cmpFlatCorpus">₹0</span></div>
       </div>
-      <div class="compare-card" id="stepupCompareCard">
-        <h3>Step-up SIP</h3>
-        <div class="compare-row"><span>Starting monthly SIP</span><span class="v" id="cmpStepupSip">₹0</span></div>
-        <div class="compare-row"><span>Total invested</span><span class="v" id="cmpStepupInvested">₹0</span></div>
-        <div class="compare-row"><span>Corpus at retirement</span><span class="v" id="cmpStepupCorpus">₹0</span></div>
+      <div class="compare-card relative rounded-[14px] border-[1.5px] border-[#e2e6ec] bg-white p-5" id="stepupCompareCard">
+        <h3 class="mb-2.5 text-[13.5px] font-semibold text-[#042b6299]">Step-up SIP</h3>
+        <div class="compare-row flex justify-between border-b border-[#e9edf3] py-1.5 text-[13.5px]"><span>Starting monthly SIP</span><span class="v font-bold" id="cmpStepupSip">₹0</span></div>
+        <div class="compare-row flex justify-between border-b border-[#e9edf3] py-1.5 text-[13.5px]"><span>Total invested</span><span class="v font-bold" id="cmpStepupInvested">₹0</span></div>
+        <div class="compare-row flex justify-between py-1.5 text-[13.5px]"><span>Corpus at retirement</span><span class="v font-bold" id="cmpStepupCorpus">₹0</span></div>
       </div>
     </div>
   </section>
 
-  <section class="info-grid">
-    <div class="info-card">
-      <h2>How this calculator works</h2>
-      <p>Your monthly expenses are first inflated to what they'll cost at the age you retire. That future monthly expense is turned into a retirement corpus — a lump sum big enough to fund inflation-adjusted withdrawals every year from retirement until your life expectancy, assuming the leftover corpus keeps earning your post-retirement return.</p>
-      <p>Whatever your current investments will grow into by retirement is subtracted from that corpus. What's left is the gap a new SIP needs to close — shown either as one constant flat SIP, or as a smaller starting SIP that increases every year if you choose the step-up option.</p>
-      <div class="formula-box">
-        <div class="f">Corpus = W × [1 – (1+r)⁻ⁿ] / r × (1+r)</div>
-        <div class="k"><span><b>W</b> — expense in year 1 of retirement</span><span><b>r</b> — real return after inflation</span><span><b>n</b> — years in retirement</span></div>
+  <section class="info-grid mb-7 grid grid-cols-[1.3fr_1fr] gap-5 max-[860px]:grid-cols-1">
+    <div class="info-card rounded-[20px] border border-[#e2e6ec] px-9 py-8">
+      <h2 class="mb-3.5 text-[19px] font-bold">How this calculator works</h2>
+      <p class="mb-3.5 text-[14.5px] leading-[1.7] text-[#042b6299]">Your monthly expenses are first inflated to what they'll cost at the age you retire. That future monthly expense is turned into a retirement corpus — a lump sum big enough to fund inflation-adjusted withdrawals every year from retirement until your life expectancy, assuming the leftover corpus keeps earning your post-retirement return.</p>
+      <p class="mb-3.5 text-[14.5px] leading-[1.7] text-[#042b6299]">Whatever your current investments will grow into by retirement is subtracted from that corpus. What's left is the gap a new SIP needs to close — shown either as one constant flat SIP, or as a smaller starting SIP that increases every year if you choose the step-up option.</p>
+      <div class="formula-box mt-3.5 rounded-xl bg-[#f4f6f9] px-5 py-[18px]">
+        <div class="f mb-2 text-[15px] font-bold leading-[1.6]">Corpus = W × [1 – (1+r)⁻ⁿ] / r × (1+r)</div>
+        <div class="k flex flex-wrap gap-4 text-[12.5px] text-[#042b6299] [&_b]:text-[#042b62]"><span><b>W</b> — expense in year 1 of retirement</span><span><b>r</b> — real return after inflation</span><span><b>n</b> — years in retirement</span></div>
       </div>
     </div>
-    <div class="info-card">
-      <h2>Common questions</h2>
-      <div class="faq-item">What if my corpus runs out early?<span class="plus">+</span></div>
-      <div class="faq-item">Should I use pre-tax or post-tax returns?<span class="plus">+</span></div>
-      <div class="faq-item">Does this include a pension or NPS payout?<span class="plus">+</span></div>
-      <div class="faq-item">Flat SIP or step-up SIP — which should I pick?<span class="plus">+</span></div>
+    <div class="info-card rounded-[20px] border border-[#e2e6ec] px-9 py-8">
+      <h2 class="mb-3.5 text-[19px] font-bold">Common questions</h2>
+      <div class="faq-item flex cursor-pointer items-center justify-between border-b border-[#e2e6ec] py-3.5 text-[14.5px] font-semibold">What if my corpus runs out early?<span class="plus text-lg font-bold text-[#dd7300]">+</span></div>
+      <div class="faq-item flex cursor-pointer items-center justify-between border-b border-[#e2e6ec] py-3.5 text-[14.5px] font-semibold">Should I use pre-tax or post-tax returns?<span class="plus text-lg font-bold text-[#dd7300]">+</span></div>
+      <div class="faq-item flex cursor-pointer items-center justify-between border-b border-[#e2e6ec] py-3.5 text-[14.5px] font-semibold">Does this include a pension or NPS payout?<span class="plus text-lg font-bold text-[#dd7300]">+</span></div>
+      <div class="faq-item flex cursor-pointer items-center justify-between py-3.5 text-[14.5px] font-semibold">Flat SIP or step-up SIP — which should I pick?<span class="plus text-lg font-bold text-[#dd7300]">+</span></div>
     </div>
   </section>
 
   <section class="related">
-    <h2>Related calculators</h2>
-    <div class="related-grid">
+    <h2 class="mb-4 text-xl font-bold">Related calculators</h2>
+    <div class="related-grid mb-9 grid grid-cols-3 gap-4 max-[860px]:grid-cols-1 [&_.ic_svg]:size-[18px] [&_.ic_svg]:stroke-[#dd7300] [&_.ic]:flex [&_.ic]:size-[38px] [&_.ic]:shrink-0 [&_.ic]:items-center [&_.ic]:justify-center [&_.ic]:rounded-[9px] [&_.ic]:bg-[#fdead6] [&_.related-card]:flex [&_.related-card]:items-center [&_.related-card]:gap-3.5 [&_.related-card]:rounded-[14px] [&_.related-card]:border [&_.related-card]:border-[#e2e6ec] [&_.related-card]:px-5 [&_.related-card]:py-[18px] [&_.s]:mt-0.5 [&_.s]:text-[12.5px] [&_.s]:text-[#042b6299] [&_.t]:text-[14.5px] [&_.t]:font-bold">
       <div class="related-card">
         <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg></span>
         <div><div class="t">SIP Calculator</div><div class="s">Monthly investing, projected</div></div>
@@ -379,17 +236,17 @@
     </div>
   </section>
 
-  <section class="cta-banner">
+  <section class="cta-banner relative mb-10 flex items-center justify-between overflow-hidden rounded-[20px] bg-[#042b62] px-[52px] py-11 text-white max-[860px]:flex-col max-[860px]:items-start max-[860px]:gap-5">
     <div>
-      <h3>Turn this plan into an actual retirement portfolio.</h3>
-      <p>A Fintoo advisor can help you pick the funds, set up the SIP, and review it every year, at no extra cost to browse.</p>
+      <h3 class="max-w-[420px] text-[26px] font-bold leading-[1.3]">Turn this plan into an actual retirement portfolio.</h3>
+      <p class="mt-2.5 max-w-[420px] text-sm text-white/70">A Fintoo advisor can help you pick the funds, set up the SIP, and review it every year, at no extra cost to browse.</p>
     </div>
-    <button>Talk to an advisor →</button>
+    <button class="inline-flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-3xl border-0 bg-white px-6 py-3.5 text-[14.5px] font-semibold text-[#042b62]">Talk to an advisor →</button>
   </section>
 
-  <footer>
+  <footer class="flex justify-between border-t border-[#e2e6ec] pb-10 pt-[26px] text-[13px] text-[#042b6299]">
     <div>© 2026 Fintoo. SEBI-registered investment adviser.</div>
-    <div class="links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a></div>
+    <div class="links flex gap-6"><a class="text-inherit no-underline" href="#">Privacy</a><a class="text-inherit no-underline" href="#">Terms</a><a class="text-inherit no-underline" href="#">Contact</a></div>
   </footer>
 </main>
 
@@ -412,9 +269,14 @@ const els = {
 let mode = 'flat';
 document.querySelectorAll('.sip-toggle button').forEach(btn=>{
   btn.addEventListener('click', ()=>{
-    document.querySelectorAll('.sip-toggle button').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
+    document.querySelectorAll('.sip-toggle button').forEach(b=>{
+      b.classList.remove('active', 'border-[#042b62]', 'bg-[#042b62]', 'text-white');
+      b.classList.add('border-[#e2e6ec]', 'bg-white', 'text-[#042b6299]');
+    });
+    btn.classList.remove('border-[#e2e6ec]', 'bg-white', 'text-[#042b6299]');
+    btn.classList.add('active', 'border-[#042b62]', 'bg-[#042b62]', 'text-white');
     mode = btn.dataset.mode;
+    $('stepupField').classList.toggle('hidden', mode!=='stepup');
     $('stepupField').classList.toggle('show', mode==='stepup');
     render();
   });
@@ -616,11 +478,17 @@ function render(){
 
   const flatCard = document.getElementById('flatCompareCard');
   const stepupCard = document.getElementById('stepupCompareCard');
-  flatCard.classList.remove('winner'); stepupCard.classList.remove('winner');
+  flatCard.classList.remove('winner', 'border-[#dd7300]');
+  stepupCard.classList.remove('winner', 'border-[#dd7300]');
+  flatCard.classList.add('border-[#e2e6ec]');
+  stepupCard.classList.add('border-[#e2e6ec]');
   flatCard.querySelector('.badge')?.remove(); stepupCard.querySelector('.badge')?.remove();
   const activeCard = mode==='flat' ? flatCard : stepupCard;
-  activeCard.classList.add('winner');
-  const b = document.createElement('span'); b.className='badge'; b.textContent='SELECTED';
+  activeCard.classList.remove('border-[#e2e6ec]');
+  activeCard.classList.add('winner', 'border-[#dd7300]');
+  const b = document.createElement('span');
+  b.className='badge absolute -top-[11px] left-3.5 rounded-[20px] bg-[#dd7300] px-2.5 py-[3px] text-[10.5px] font-bold tracking-[0.03em] text-white';
+  b.textContent='SELECTED';
   activeCard.appendChild(b);
 
 }

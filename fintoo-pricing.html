@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing – Fintoo | Choose Your Robo Advisory Plan</title>
+<meta name="theme-color" content="#042b62">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23042b62'/%3E%3Ctext x='32' y='45' font-family='Arial' font-weight='700' font-size='36' fill='white' text-anchor='middle'%3EF%3C/text%3E%3C/svg%3E">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: { 50:'#eef3fb', 100:'#dbe6f5', 200:'#b3c9e8', 300:'#7fa1cf', 400:'#4c79b6', 600:'#0a3d80', DEFAULT:'#042b62', 700:'#042b62', 800:'#032249', 900:'#021c40' },
+          accent: { 50:'#fff4e6', 100:'#ffe3bf', 200:'#ffc785', 300:'#ffab4d', 400:'#f28f1f', DEFAULT:'#dd7300', 500:'#dd7300', 600:'#b96200', 700:'#944e00' },
+          gold: { DEFAULT:'#eeae4d', 100:'#fbe8c8', 600:'#c98a24' },
+          mist: { DEFAULT:'#f5f8fc' },
+        },
+        fontFamily: {
+          sans: ['"Google Sans Variable"', '"Google Sans"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+        },
+        borderRadius: { '4xl': '2rem' },
+      }
+    }
+  }
+</script>
+
+<style>
+  @font-face{
+    font-family:'Google Sans Variable';
+    font-style:normal;
+    font-display:swap;
+    font-weight:400 700;
+    src:url(https://cdn.jsdelivr.net/fontsource/fonts/google-sans:vf@5.3.1/latin-wght-normal.woff2) format(woff2) tech(variations);
+    unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+  }
+
+  html{ scroll-behavior:smooth; max-width:100%; overflow-x:hidden; }
+  body{
+    font-family:'Google Sans Variable','Google Sans',-apple-system,'Segoe UI',Roboto,sans-serif;
+    background:#ffffff;
+    max-width:100%;
+    overflow-x:hidden;
+  }
+  ::selection{ background:#dd7300; color:#ffffff; }
+  .tabular{ font-variant-numeric: tabular-nums; }
+  .price-figure{ font-variant-numeric:tabular-nums; letter-spacing:-.055em; line-height:.92; }
+
+  /* ---------- scroll-reveal ---------- */
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s cubic-bezier(.16,.84,.44,1), transform .8s cubic-bezier(.16,.84,.44,1); }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+
+  /* ---------- nav ---------- */
+  #nav{ transition:background-color .35s ease, box-shadow .35s ease, border-color .35s ease; }
+  #nav.scrolled{ box-shadow:0 8px 30px -18px rgba(4,43,98,.35); border-color:rgba(4,43,98,.08); }
+
+  /* ---------- animated product journey ---------- */
+  .journey-slide{ opacity:0; transition:opacity .32s ease; pointer-events:none; }
+  .journey-slide.active{ opacity:1; pointer-events:auto; }
+  .journey-slide.leaving{ opacity:0; }
+  .ui-shell{ box-shadow:0 18px 45px -28px rgba(4,43,98,.35); }
+
+  /* ---------- FAQ ---------- */
+  details > summary{ list-style:none; cursor:pointer; }
+  details > summary::-webkit-details-marker{ display:none; }
+  details[open] .chevron{ transform:rotate(180deg); }
+  .faq-body{ animation:faqIn .35s ease; }
+
+  /* ---------- reduced-motion-safe decorative motion ---------- */
+  @media (prefers-reduced-motion: no-preference){
+    .journey-slide.active .scene-pop{ animation:scenePop .7s ease-out both; transform-origin:center; }
+    .journey-slide.active .scene-draw{ stroke-dasharray:600; animation:sceneDraw 1.45s .22s ease-out both; }
+    .journey-slide.active .scene-coin{ animation:coinDrop .75s ease-out both; }
+    .journey-slide.active .scene-coin:nth-of-type(2){ animation-delay:.16s; }
+    .journey-slide.active .scene-coin:nth-of-type(3){ animation-delay:.3s; }
+    .journey-slide.active .scene-rocket{ animation:rocketRise 1.5s .25s ease-in-out both; }
+    .journey-slide.active .ui-rise{ animation:uiRise .65s ease-out both; }
+    .journey-slide.active .ui-delay-1{ animation-delay:.12s; }
+    .journey-slide.active .ui-delay-2{ animation-delay:.24s; }
+    .journey-slide.active .ui-delay-3{ animation-delay:.36s; }
+    .journey-slide.active .ui-fill{ animation:uiFill 1s .3s ease-out both; transform-origin:left; }
+    .journey-slide.active .ui-scan{ animation:uiScan 1.8s ease-in-out infinite; }
+    .journey-slide.active .demo-cursor{ animation:cursorAction 3.2s ease-in-out both; }
+    .journey-slide.active .checkout-button{ animation:buttonClick 3.2s ease-in-out both; }
+    .journey-slide.active .click-ripple{ animation:clickRipple 3.2s ease-out both; }
+    .journey-slide.active .success-ring{ animation:successRing .7s .18s ease-out both; transform-origin:center; }
+    .journey-slide.active .success-check{ stroke-dasharray:30; animation:successCheck .55s .5s ease-out both; }
+    .journey-slide.active .wallet-coin{ animation:walletCredit .72s cubic-bezier(.45,0,.72,1) both; transform-origin:center; }
+    .journey-slide.active .wallet-coin-1{ animation-delay:.25s; }
+    .journey-slide.active .wallet-coin-2{ animation-delay:.62s; }
+    .journey-slide.active .wallet-coin-3{ animation-delay:.99s; }
+    .journey-slide.active .wallet-balance{ animation:balanceReveal .55s 1.35s ease-out both; }
+    .float-a{ animation:floatY 7s ease-in-out infinite; }
+    .float-b{ animation:floatY 9s ease-in-out infinite 1.2s; }
+    .float-c{ animation:floatY 8s ease-in-out infinite .6s; }
+    .float-d{ animation:floatY 6.5s ease-in-out infinite 2s; }
+    .pro-card{ animation:glowPulse 4s ease-in-out infinite; }
+    .coin-spin{ animation:spinSlow 10s linear infinite; }
+    .ribbon-shimmer{ animation:shimmer 2.2s .8s ease-out 1; }
+    .max-card::before{ animation:foilSpin 7s linear infinite; }
+    .plan-icon{ animation:iconFloat 3.8s ease-in-out infinite; }
+    .plan-icon svg{ animation:iconPulse 3.8s ease-in-out infinite; }
+  }
+  @property --angle{ syntax:'<angle>'; inherits:false; initial-value:0deg; }
+
+  @keyframes scenePop{ from{ opacity:0; transform:translateY(10px) } to{ opacity:1; transform:translateY(0) } }
+  @keyframes sceneDraw{ from{ stroke-dashoffset:600 } to{ stroke-dashoffset:0 } }
+  @keyframes coinDrop{ from{ opacity:0; transform:translateY(-18px) } to{ opacity:1; transform:translateY(0) } }
+  @keyframes rocketRise{ from{ opacity:0; transform:translate(-18px,18px) rotate(-8deg) } to{ opacity:1; transform:translate(0,0) rotate(0) } }
+  @keyframes uiRise{ from{ opacity:0; transform:translateY(8px) } to{ opacity:1; transform:translateY(0) } }
+  @keyframes uiFill{ from{ transform:scaleX(0) } to{ transform:scaleX(1) } }
+  @keyframes uiScan{ 0%,100%{ transform:translateX(-25%); opacity:.2 } 50%{ transform:translateX(125%); opacity:.8 } }
+  @keyframes cursorAction{ 0%,18%{ opacity:0; transform:translate(58px,-54px) } 30%{ opacity:1 } 62%{ opacity:1; transform:translate(0,0) scale(1) } 69%{ transform:translate(0,0) scale(.86) } 76%{ opacity:1; transform:translate(0,0) scale(1) } 100%{ opacity:0; transform:translate(0,0) } }
+  @keyframes buttonClick{ 0%,60%{ transform:scale(1); filter:none } 68%{ transform:scale(.985); filter:brightness(.92) } 76%,100%{ transform:scale(1); filter:none } }
+  @keyframes clickRipple{ 0%,62%{ opacity:0; transform:scale(.2) } 68%{ opacity:.45 } 82%,100%{ opacity:0; transform:scale(2.5) } }
+  @keyframes successRing{ from{ opacity:0; transform:scale(.72) } to{ opacity:1; transform:scale(1) } }
+  @keyframes successCheck{ from{ stroke-dashoffset:30 } to{ stroke-dashoffset:0 } }
+  @keyframes walletCredit{ 0%{ opacity:0; transform:translateY(-54px) rotate(-8deg) } 18%{ opacity:1 } 100%{ opacity:1; transform:translateY(0) rotate(0) } }
+  @keyframes balanceReveal{ from{ opacity:0; transform:translateY(5px) } to{ opacity:1; transform:translateY(0) } }
+  @keyframes floatY{ 0%,100%{ transform:translateY(0) } 50%{ transform:translateY(-16px) } }
+  @keyframes spinSlow{ to{ transform:rotate(360deg) } }
+  @keyframes glowPulse{
+    0%,100%{ box-shadow:0 0 0 0 rgba(221,115,0,.32), 0 30px 60px -20px rgba(2,28,64,.55); }
+    50%{ box-shadow:0 0 0 12px rgba(221,115,0,0), 0 30px 70px -16px rgba(2,28,64,.65); }
+  }
+  @keyframes shimmer{
+    0%{ background-position:-150% 0; }
+    100%{ background-position:250% 0; }
+  }
+  @keyframes iconFloat{ 0%,100%{ transform:translateY(0) rotate(0) } 50%{ transform:translateY(-4px) rotate(2deg) } }
+  @keyframes iconPulse{ 0%,100%{ transform:scale(1) } 50%{ transform:scale(1.08) } }
+  @keyframes faqIn{ from{ opacity:0; transform:translateY(-6px); } to{ opacity:1; transform:translateY(0); } }
+
+  .ribbon-shimmer{
+    background-image:linear-gradient(110deg, transparent 20%, rgba(255,255,255,.55) 40%, transparent 60%);
+    background-size:200% 100%;
+  }
+
+  .max-card{ position:relative; }
+  .reveal:nth-child(2) .plan-icon,
+  .reveal:nth-child(2) .plan-icon svg{ animation-delay:.35s; }
+  .reveal:nth-child(3) .plan-icon,
+  .reveal:nth-child(3) .plan-icon svg{ animation-delay:.7s; }
+  .max-card::before{
+    content:'';
+    position:absolute; inset:0;
+    border-radius:inherit;
+    padding:1.5px;
+    background:conic-gradient(from var(--angle,0deg), #eeae4d, #dd7300, #f5d9a8, #042b62, #eeae4d);
+    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+    pointer-events:none;
+  }
+
+  .grid-fade{
+    background-image:
+      linear-gradient(rgba(4,43,98,.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(4,43,98,.055) 1px, transparent 1px);
+    background-size:44px 44px;
+    -webkit-mask-image:radial-gradient(ellipse 70% 55% at 50% 0%, #000 30%, transparent 75%);
+    mask-image:radial-gradient(ellipse 70% 55% at 50% 0%, #000 30%, transparent 75%);
+  }
+</style>
+</head>
+
+<body class="bg-white text-navy antialiased selection:bg-accent selection:text-white">
+
+<!-- ================= AMBIENT BACKGROUND ================= -->
+<div class="fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+  <div class="absolute inset-x-0 top-0 h-[640px] grid-fade"></div>
+  <div class="absolute -top-24 -right-32 w-[520px] h-[520px] rounded-full bg-navy-50 blur-3xl opacity-70"></div>
+  <div class="absolute top-64 -left-40 w-[420px] h-[420px] rounded-full bg-accent-50 blur-3xl opacity-60"></div>
+  <div class="float-a absolute top-[18%] left-[8%] w-2.5 h-2.5 rounded-full bg-accent-300/40"></div>
+  <div class="float-b absolute top-[30%] right-[12%] w-3 h-3 rounded-full bg-navy-200/50"></div>
+  <div class="float-c absolute top-[55%] left-[18%] w-2 h-2 rounded-full bg-gold/40"></div>
+  <div class="float-d absolute top-[12%] right-[30%] w-1.5 h-1.5 rounded-full bg-navy-300/50"></div>
+</div>
+
+<!-- ================= NAV ================= -->
+<nav id="nav" class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-transparent">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      <a href="#" class="flex items-center gap-2.5 shrink-0">
+        <span class="w-9 h-9 rounded-xl bg-navy text-white flex items-center justify-center font-bold text-lg">F</span>
+        <span class="text-xl font-bold tracking-tight text-navy">fintoo</span>
+      </a>
+
+      <div class="hidden lg:flex items-center gap-8 text-[15px] font-medium text-navy-800">
+        <a href="#" class="flex items-center gap-1 hover:text-accent transition-colors">Product
+          <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 mt-px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </a>
+        <a href="#" class="hover:text-accent transition-colors">Features</a>
+        <a href="#" class="flex items-center gap-1 hover:text-accent transition-colors">Solutions
+          <svg viewBox="0 0 24 24" class="w-3.5 h-3.5 mt-px" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </a>
+        <a href="#pricing" class="relative text-accent">Pricing
+          <span class="absolute -bottom-2 left-0 right-0 h-0.5 rounded-full bg-accent"></span>
+        </a>
+        <a href="#" class="hover:text-accent transition-colors">About Us</a>
+      </div>
+
+      <div class="hidden lg:flex items-center gap-3">
+        <a href="#" class="px-4 py-2.5 rounded-xl text-[15px] font-semibold text-navy hover:bg-navy-50 transition-colors">Log In</a>
+        <a href="#pricing" class="px-5 py-2.5 rounded-xl text-[15px] font-semibold bg-navy text-white hover:bg-navy-800 transition-all shadow-sm hover:shadow-md hover:shadow-navy-900/20">Get Started</a>
+      </div>
+
+      <button id="menuBtn" aria-label="Toggle menu" aria-expanded="false" class="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg text-navy hover:bg-navy-50">
+        <svg id="iconOpen" viewBox="0 0 24 24" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg id="iconClose" viewBox="0 0 24 24" class="w-6 h-6 hidden" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+
+    <div id="mobileMenu" class="hidden lg:hidden pb-6 border-t border-navy-100 pt-4">
+      <div class="flex flex-col gap-1 text-[15px] font-medium text-navy-800">
+        <a href="#" class="px-3 py-2.5 rounded-lg hover:bg-navy-50">Product</a>
+        <a href="#" class="px-3 py-2.5 rounded-lg hover:bg-navy-50">Features</a>
+        <a href="#" class="px-3 py-2.5 rounded-lg hover:bg-navy-50">Solutions</a>
+        <a href="#pricing" class="px-3 py-2.5 rounded-lg bg-accent-50 text-accent font-semibold">Pricing</a>
+        <a href="#" class="px-3 py-2.5 rounded-lg hover:bg-navy-50">About Us</a>
+      </div>
+      <div class="flex items-center gap-3 mt-4 px-3">
+        <a href="#" class="flex-1 text-center px-4 py-2.5 rounded-xl text-[15px] font-semibold border border-navy-200 text-navy">Log In</a>
+        <a href="#pricing" class="flex-1 text-center px-4 py-2.5 rounded-xl text-[15px] font-semibold bg-navy text-white">Get Started</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="relative pt-12 pb-20 lg:pt-20 lg:pb-28 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,1fr)_390px] lg:gap-12">
+
+      <div id="journeyStory" class="order-2 min-w-0 justify-self-center lg:-mt-8 lg:justify-self-end" style="width:min(390px, calc(100vw - 3rem))" aria-label="Animated plan benefits" aria-live="polite">
+        <div class="overflow-hidden rounded-[26px] border border-navy-100 bg-white/95 shadow-2xl shadow-navy-900/10 backdrop-blur-xl">
+          <div>
+            <div class="relative h-[300px] overflow-hidden rounded-2xl  bg-gradient-to-br from-mist to-white">
+            <div class="journey-slide active absolute inset-0 p-5" data-journey-slide>
+              <div class="ui-shell h-full rounded-2xl border border-navy-100 bg-white p-4 text-left">
+                <div class="ui-rise flex items-center justify-between"><div><span class="text-[9px] font-bold tracking-wider text-accent">SECURE CHECKOUT</span><h3 class="mt-0.5 text-sm font-bold text-navy">Confirm your plan</h3></div><span class="rounded-full bg-navy-50 px-2 py-1 text-[9px] font-semibold text-navy">Step 1 of 2</span></div>
+                <div class="ui-rise ui-delay-1 mt-4 flex items-center justify-between rounded-xl border border-navy-100 bg-mist p-3"><div><span class="block text-xs font-bold text-navy">Fintoo Pro</span><span class="mt-0.5 block text-[10px] text-navy-400">500 FinCoins included</span></div><div class="text-right"><strong class="text-base text-navy">₹1,499</strong><span class="block text-[9px] text-navy-400">per month</span></div></div>
+                <div class="ui-rise ui-delay-2 mt-3 flex items-center gap-2 text-[10px] text-navy-400"><svg viewBox="0 0 24 24" class="h-3.5 w-3.5 text-navy" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>Encrypted payment ·•• 4242</div>
+                <div class="checkout-button ui-rise ui-delay-3 relative mt-4 flex items-center justify-center gap-2 rounded-xl bg-accent py-2.5 text-xs font-bold text-white"><span class="flex h-4 w-4 items-center justify-center rounded-full bg-white/20">✓</span>Activate Pro<span class="click-ripple absolute right-[76px] top-1/2 h-5 w-5 -translate-y-1/2 rounded-full border-2 border-white"></span><svg class="demo-cursor absolute -bottom-3 right-12 z-20 h-7 w-7 drop-shadow-md" viewBox="0 0 28 28" aria-hidden="true"><path d="M5 3v19l5.4-5.2 3.8 8.2 4-1.9-3.8-7.9H22Z" fill="white" stroke="#042b62" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+              </div>
+            </div>
+
+            <div class="journey-slide absolute inset-0 p-5" data-journey-slide>
+              <div class="ui-shell h-full rounded-2xl border border-navy-100 bg-white p-4 text-left">
+                <div class="ui-rise flex items-center gap-3"><span class="success-ring flex h-10 w-10 items-center justify-center rounded-full bg-accent-50"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="#dd7300" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path class="success-check" d="m5 12 4 4L19 6"/></svg></span><div><span class="text-[9px] font-bold tracking-wider text-accent">PAYMENT SUCCESSFUL</span><h3 class="text-sm font-bold text-navy">Pro is now active</h3></div></div>
+                <div class="ui-rise ui-delay-1 mt-4 rounded-xl bg-navy px-4 py-3 text-white"><div class="flex items-center justify-between"><span class="text-xs font-semibold">Premium workspace</span><span class="rounded-full bg-accent px-2 py-0.5 text-[9px] font-bold">ACTIVE</span></div><p class="mt-1 text-[10px] text-white/55">Advanced planning suite unlocked</p></div>
+                <div class="mt-3 grid grid-cols-2 gap-2"><div class="ui-rise ui-delay-2 rounded-lg border border-navy-100 p-2.5"><span class="text-[10px] text-navy-400">AI simulations</span><strong class="mt-1 block text-xs text-navy">Unlocked ✓</strong></div><div class="ui-rise ui-delay-3 rounded-lg border border-navy-100 p-2.5"><span class="text-[10px] text-navy-400">Smart reports</span><strong class="mt-1 block text-xs text-navy">Unlocked ✓</strong></div></div>
+              </div>
+            </div>
+
+            <div class="journey-slide absolute inset-0 p-5" data-journey-slide>
+              <div class="ui-shell relative h-full overflow-hidden rounded-2xl border border-navy-100 bg-white p-4 text-left">
+                <div class="ui-rise"><span class="text-[9px] font-bold tracking-wider text-accent">FINCOIN WALLET</span><h3 class="mt-0.5 text-sm font-bold text-navy">Available balance</h3></div>
+                <div class="ui-rise ui-delay-1 mt-3 flex min-h-[112px] items-center justify-between overflow-hidden rounded-xl bg-gradient-to-r from-navy to-navy-600 px-4 py-3 text-white">
+                  <div class="wallet-balance relative z-10"><span class="text-[10px] text-white/55">Current balance</span><div class="mt-1 flex items-end gap-2"><strong class="text-3xl tracking-tight">500</strong><span class="pb-1 text-[10px] text-accent-200">FinCoins</span></div></div>
+                  <div class="relative h-[86px] w-[102px] shrink-0" aria-hidden="true">
+                    <span class="wallet-coin wallet-coin-1 absolute left-2 top-2 z-0 flex h-7 w-7 items-center justify-center rounded-full border-[3px] border-accent-200 bg-gold text-[10px] font-bold text-navy shadow-sm">F</span>
+                    <span class="wallet-coin wallet-coin-2 absolute left-9 top-0 z-0 flex h-7 w-7 items-center justify-center rounded-full border-[3px] border-accent-200 bg-accent text-[10px] font-bold text-white shadow-sm">F</span>
+                    <span class="wallet-coin wallet-coin-3 absolute right-2 top-3 z-0 flex h-7 w-7 items-center justify-center rounded-full border-[3px] border-gold-100 bg-accent-300 text-[10px] font-bold text-navy shadow-sm">F</span>
+                    <svg viewBox="0 0 104 64" class="absolute bottom-0 left-0 z-10 h-[62px] w-[102px] drop-shadow-lg"><path d="M12 14h76a8 8 0 0 1 8 8v30a8 8 0 0 1-8 8H12a8 8 0 0 1-8-8V22a8 8 0 0 1 8-8Z" fill="#dd7300"/><path d="M4 27h92v25a8 8 0 0 1-8 8H12a8 8 0 0 1-8-8Z" fill="#f28f1f"/><path d="M4 42h92v10a8 8 0 0 1-8 8H12a8 8 0 0 1-8-8Z" fill="#b96200" opacity=".72"/><path d="M69 32h31v18H69a9 9 0 0 1 0-18Z" fill="#fff4e6"/><circle cx="77" cy="41" r="3" fill="#dd7300"/></svg>
+                  </div>
+                </div>
+                <div class="ui-rise ui-delay-2 mt-3 flex items-center justify-between rounded-xl border border-navy-100 p-3"><div><span class="block text-xs font-semibold text-navy">Pro plan credit</span><span class="text-[9px] text-navy-400">Just now</span></div><strong class="text-sm text-accent">+500 F</strong></div>
+              </div>
+            </div>
+
+            <div class="journey-slide absolute inset-0 p-5" data-journey-slide>
+              <div class="ui-shell relative h-full overflow-hidden rounded-2xl border border-navy-100 bg-white p-4 text-left">
+                <div class="ui-scan absolute top-0 h-full w-20 bg-gradient-to-r from-transparent via-accent/10 to-transparent"></div>
+                <div class="ui-rise flex items-center justify-between"><div><span class="text-[9px] font-bold tracking-wider text-accent">AI PORTFOLIO REPORT</span><h3 class="mt-0.5 text-sm font-bold text-navy">Analysis complete</h3></div><span class="rounded-full bg-accent-50 px-2 py-1 text-[9px] font-bold text-accent">READY</span></div>
+                <div class="ui-rise ui-delay-1 mt-3 grid grid-cols-3 gap-2"><div class="rounded-lg bg-mist p-2"><span class="text-[9px] text-navy-400">Risk score</span><strong class="mt-1 block text-sm text-navy">7.2</strong></div><div class="rounded-lg bg-mist p-2"><span class="text-[9px] text-navy-400">Diversified</span><strong class="mt-1 block text-sm text-accent">Good</strong></div><div class="rounded-lg bg-mist p-2"><span class="text-[9px] text-navy-400">Actions</span><strong class="mt-1 block text-sm text-accent">3</strong></div></div>
+                <div class="ui-rise ui-delay-2 mt-3 rounded-xl border border-navy-100 p-3"><div class="flex justify-between text-[10px]"><span class="font-semibold text-navy">Recommended allocation</span><span class="text-navy-400">Balanced</span></div><div class="mt-2 h-2 overflow-hidden rounded-full bg-navy-50"><div class="ui-fill h-full w-[76%] rounded-full bg-gradient-to-r from-navy to-accent"></div></div><div class="mt-2 flex justify-between text-[9px] text-navy-400"><span>Equity 60%</span><span>Debt 30%</span><span>Gold 10%</span></div></div>
+              </div>
+            </div>
+
+            <div class="journey-slide absolute inset-0 p-5" data-journey-slide>
+              <div class="ui-shell h-full overflow-hidden rounded-2xl border border-navy-100 bg-white p-4 text-left">
+                <div class="ui-rise flex items-start justify-between"><div><span class="text-[9px] font-bold tracking-wider text-accent">PORTFOLIO PROJECTION</span><h3 class="mt-0.5 text-sm font-bold text-navy">Strategy on track</h3></div><span class="rounded-full bg-accent-50 px-2 py-1 text-[9px] font-bold text-accent">+18.4%</span></div>
+                <div class="ui-rise ui-delay-1 mt-3"><span class="text-[10px] text-navy-400">Projected portfolio value</span><strong class="mt-0.5 block text-2xl tracking-tight text-navy">₹12,84,500</strong></div>
+                <svg viewBox="0 0 300 95" class="ui-rise ui-delay-2 mt-1 h-24 w-full" aria-hidden="true"><defs><linearGradient id="growthFill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#dd7300" stop-opacity=".25"/><stop offset="1" stop-color="#dd7300" stop-opacity="0"/></linearGradient></defs><path d="M8 84C35 78 48 64 68 69s30 9 46-7 29-30 48-24 26 12 43-7 33-25 46-19 23 3 41-10V92H8Z" fill="url(#growthFill)"/><path class="scene-draw" d="M8 84C35 78 48 64 68 69s30 9 46-7 29-30 48-24 26 12 43-7 33-25 46-19 23 3 41-10" fill="none" stroke="#dd7300" stroke-width="4" stroke-linecap="round"/><circle cx="292" cy="2" r="5" fill="#dd7300"/></svg>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal order-1 min-w-0 max-w-3xl" style="max-width:min(48rem, calc(100vw - 3rem))">
+        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-navy-200 bg-white/70 text-xs font-bold tracking-[0.16em] text-navy-600 uppercase">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+          Pricing Plans
+        </span>
+
+        <h1 class="mt-6 text-[2rem] leading-[1.08] sm:text-5xl lg:text-6xl font-bold tracking-tight text-navy">
+          <span class="block whitespace-nowrap">Choose the plan that</span>
+          <span class="block bg-gradient-to-r from-navy via-navy-600 to-accent bg-clip-text text-transparent pb-1">powers your financial future</span>
+        </h1>
+
+        <p class="mt-6 text-base sm:text-xl text-navy-600/90 max-w-2xl leading-relaxed">
+          Our Robo Advisory AI tool gives you
+          <span class="font-semibold text-navy underline decoration-accent/50 decoration-2 underline-offset-4">smarter insights</span>
+          and
+          <span class="font-semibold text-navy bg-accent-50 rounded px-1.5 py-0.5">better decisions</span>.
+        </p>
+
+        <div class="mt-8 flex flex-nowrap gap-1.5 sm:flex-wrap sm:gap-3">
+          <div class="inline-flex whitespace-nowrap items-center gap-1 px-2 py-1.5 rounded-full bg-mist border border-navy-100 text-[9px] font-medium text-navy-700 sm:gap-2 sm:px-3.5 sm:py-2 sm:text-sm">
+            <svg viewBox="0 0 24 24" class="w-3 h-3 text-navy sm:h-4 sm:w-4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5Z"/><path d="m9 12 2 2 4-4"/></svg>
+            SEBI-Registered
+          </div>
+          <div class="inline-flex whitespace-nowrap items-center gap-1 px-2 py-1.5 rounded-full bg-mist border border-navy-100 text-[9px] font-medium text-navy-700 sm:gap-2 sm:px-3.5 sm:py-2 sm:text-sm">
+            <svg viewBox="0 0 24 24" class="w-3 h-3 text-navy sm:h-4 sm:w-4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6Z"/></svg>
+            AI Powered
+          </div>
+          <div class="inline-flex whitespace-nowrap items-center gap-1 px-2 py-1.5 rounded-full bg-mist border border-navy-100 text-[9px] font-medium text-navy-700 sm:gap-2 sm:px-3.5 sm:py-2 sm:text-sm">
+            <svg viewBox="0 0 24 24" class="w-3 h-3 text-navy sm:h-4 sm:w-4" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5Z"/></svg>
+            Bank-level Security
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= PRICING CARDS ================= -->
+<section id="pricing" class="relative pb-24 lg:pb-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid lg:grid-cols-3 gap-6 lg:gap-7 items-stretch">
+
+      <!-- FREE -->
+      <div class="reveal lg:mt-6">
+        <div class="h-full flex flex-col bg-white rounded-[28px] border-2 border-navy-100 p-8 transition-all duration-300 hover:border-navy-200 hover:shadow-xl hover:shadow-navy-900/5 hover:-translate-y-1.5">
+          <div class="plan-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-navy-50 to-navy-100 text-navy flex items-center justify-center shadow-sm">
+            <svg viewBox="0 0 24 24" class="w-6 h-6 text-navy" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22 11 13 2 9 22 2Z"/></svg>
+          </div>
+          <h3 class="mt-6 text-2xl font-bold text-navy">Free</h3>
+          <p class="mt-1.5 text-sm text-navy-500 leading-relaxed">Start your financial journey at zero cost.</p>
+
+          <div class="mt-7">
+            <div class="flex items-start gap-1 text-navy">
+              <span class="mt-1 text-xl font-semibold">₹</span>
+              <span class="price-figure text-[3.5rem] font-bold">0</span>
+            </div>
+            <p class="mt-2 text-sm text-navy-400">Free forever</p>
+          </div>
+
+          <div class="mt-6 rounded-2xl border border-navy-100 bg-mist px-4 py-3.5 shadow-sm shadow-navy-900/[.03]">
+            <div class="flex items-center gap-3">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent-300 to-accent text-sm font-bold text-white shadow-md shadow-accent/20">F</span>
+              <div class="min-w-0">
+                <span class="block text-xs font-medium text-navy-400">FinCoins included</span>
+                <strong class="mt-0.5 block text-[15px] leading-tight text-navy"><span class="tabular" data-counter="200">0</span> coins included</strong>
+              </div>
+            </div>
+          </div>
+
+          <ul class="mt-7 space-y-3.5 text-[15px] text-navy-700 flex-1">
+            <li class="flex items-start gap-3">
+              <svg viewBox="0 0 24 24" class="w-5 h-5 text-navy shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Uses Basic simulations
+            </li>
+            <li class="flex items-start gap-3">
+              <svg viewBox="0 0 24 24" class="w-5 h-5 text-navy shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Use on Web, iOS and Android
+            </li>
+          </ul>
+
+          <a href="#" class="mt-8 block text-center px-6 py-3.5 rounded-xl font-semibold text-navy border-2 border-navy-200 hover:bg-navy hover:text-white hover:border-navy transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2">
+            Get Started
+          </a>
+        </div>
+      </div>
+
+      <!-- PRO -->
+      <div class="reveal" style="transition-delay:120ms">
+        <div class="pro-card relative h-full flex flex-col bg-gradient-to-b from-navy to-navy-900 rounded-[28px] p-8 pt-9 shadow-2xl shadow-navy-900/30 lg:scale-[1.04]">
+          <span class="ribbon-shimmer absolute -top-4 left-1/2 -translate-x-1/2 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-accent text-white text-xs font-bold tracking-wide shadow-lg shadow-accent-700/30">
+            <svg viewBox="0 0 24 24" class="w-3.5 h-3.5" fill="currentColor"><path d="m12 2 2.9 6.6 7.1.7-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7-5.4-4.7 7.1-.7Z"/></svg>
+            MOST POPULAR
+          </span>
+
+          <div class="plan-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-accent/25 to-gold/10 flex items-center justify-center shadow-inner shadow-accent/10">
+            <svg viewBox="0 0 24 24" class="w-6 h-6 text-accent-300" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5 7 11l5-7 5 7 4-2.5-2 10.5H5L3 8.5Z"/><path d="M5 21h14"/></svg>
+          </div>
+          <h3 class="mt-6 text-2xl font-bold text-white">Pro</h3>
+          <p class="mt-1.5 text-sm text-white/60 leading-relaxed">More insights. Smarter simulations.</p>
+
+          <div class="mt-7">
+            <div class="flex items-start gap-1 text-white">
+              <span class="mt-1 text-xl font-semibold text-white/75">₹</span>
+              <span class="price-figure text-[3.5rem] font-bold">1,499</span>
+            </div>
+            <p class="mt-2 text-sm text-white/50">per month</p>
+            <p class="mt-1 text-sm text-accent-300 font-medium">Just ₹50 per day</p>
+          </div>
+
+          <div class="mt-6 rounded-2xl border border-white/10 bg-white/[.08] px-4 py-3.5 shadow-inner shadow-white/[.03]">
+            <div class="flex items-center gap-3">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent-300 to-accent text-sm font-bold text-white shadow-md shadow-accent/25">F</span>
+              <div class="min-w-0">
+                <span class="block text-xs font-medium text-white/45">FinCoins included</span>
+                <strong class="mt-0.5 block text-[15px] leading-tight text-white"><span class="tabular" data-counter="500">0</span> coins / month</strong>
+              </div>
+            </div>
+          </div>
+
+          <ul class="mt-7 space-y-3.5 text-[15px] text-white/85 flex-1">
+            <li class="flex items-start gap-3">
+              <svg viewBox="0 0 24 24" class="w-5 h-5 text-accent-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Everything on Free +
+            </li>
+            <li class="flex items-start gap-3">
+              <svg viewBox="0 0 24 24" class="w-5 h-5 text-accent-300 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Uses standard simulations
+            </li>
+          </ul>
+
+          <a href="#" class="mt-8 block text-center px-6 py-3.5 rounded-xl font-bold text-white bg-accent hover:bg-accent-600 transition-all shadow-lg shadow-accent-700/30 hover:shadow-xl hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-200 focus-visible:ring-offset-2 focus-visible:ring-offset-navy">
+            Go Pro
+          </a>
+        </div>
+      </div>
+
+      <!-- MAX -->
+      <div class="reveal lg:mt-6" style="transition-delay:220ms">
+        <div class="max-card h-full flex flex-col bg-white rounded-[28px] p-8 transition-all duration-300 hover:shadow-xl hover:shadow-gold/10 hover:-translate-y-1.5">
+          <div class="plan-icon w-14 h-14 rounded-2xl bg-gradient-to-br from-gold-100 to-accent-100 flex items-center justify-center shadow-sm shadow-gold/20">
+            <svg viewBox="0 0 24 24" class="w-6 h-6 text-gold-600" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9Z"/><path d="M2 9h20"/><path d="m9 3-3 6 6 12 6-12-3-6"/></svg>
+          </div>
+          <h3 class="mt-6 text-2xl font-bold text-navy">Max</h3>
+          <p class="mt-1.5 text-sm text-navy-500 leading-relaxed">Maximum power. Priority advantage.</p>
+
+          <div class="mt-7">
+            <div class="flex items-start gap-1 text-navy">
+              <span class="mt-1 text-xl font-semibold text-navy-500">₹</span>
+              <span class="price-figure text-[3.5rem] font-bold">4,999</span>
+            </div>
+            <p class="mt-2 text-sm text-navy-400">per month</p>
+            <p class="mt-1 text-sm text-gold-600 font-medium">Just ₹167 per day</p>
+          </div>
+
+          <div class="mt-6 rounded-2xl border border-navy-100 bg-mist px-4 py-3.5 shadow-sm shadow-navy-900/[.03]">
+            <div class="flex items-center gap-3">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-gold to-accent text-sm font-bold text-white shadow-md shadow-gold/25">F</span>
+              <div class="min-w-0">
+                <span class="block text-xs font-medium text-navy-400">FinCoins included</span>
+                <strong class="mt-0.5 block text-[15px] leading-tight text-navy"><span class="tabular" data-counter="1000">0</span> coins / month</strong>
+              </div>
+            </div>
+          </div>
+
+          <ul class="mt-7 space-y-3.5 text-[15px] text-navy-700 flex-1">
+            <li class="flex items-start gap-3">
+              <svg viewBox="0 0 24 24" class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Everything on Pro
+            </li>
+            <li class="flex items-start gap-3">
+              <svg viewBox="0 0 24 24" class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Uses premium simulations
+            </li>
+            <li class="flex items-start gap-3">
+              <svg viewBox="0 0 24 24" class="w-5 h-5 text-gold-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              Priority access at high traffic times
+            </li>
+          </ul>
+
+          <a href="#" class="mt-8 block text-center px-6 py-3.5 rounded-xl font-semibold text-navy border-2 border-gold/60 hover:bg-navy hover:text-white hover:border-navy transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2">
+            Go Max
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINCOINS EXPLAINER ================= -->
+<section class="pb-24 lg:pb-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="reveal relative overflow-hidden rounded-[28px] bg-mist border border-navy-100 px-7 py-10 sm:px-10 sm:py-12">
+      <div class="grid lg:grid-cols-[auto_1fr_auto] gap-8 lg:gap-10 items-center">
+
+        <div class="flex items-center gap-5">
+          <div class="coin-spin relative w-16 h-16 shrink-0 rounded-full bg-gradient-to-br from-accent-300 via-accent to-gold flex items-center justify-center shadow-lg shadow-accent-700/20 ring-4 ring-white">
+            <span class="text-white font-bold text-xl">F</span>
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold text-navy">What are FinCoins?</h2>
+            <p class="mt-2 text-navy-600 max-w-md leading-relaxed">FinCoins are tokens that power advanced AI simulations and insights in our Robo Advisory tool.</p>
+          </div>
+        </div>
+
+        <div class="hidden lg:flex items-center justify-center gap-3 text-sm font-semibold text-navy-600">
+          <span class="px-4 py-2 rounded-full bg-white border border-navy-100 whitespace-nowrap">Choose a plan</span>
+          <svg viewBox="0 0 24 24" class="w-5 h-5 text-navy-300 shrink-0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          <span class="px-4 py-2 rounded-full bg-white border border-navy-100 whitespace-nowrap">Collect FinCoins</span>
+          <svg viewBox="0 0 24 24" class="w-5 h-5 text-navy-300 shrink-0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg>
+          <span class="px-4 py-2.5 rounded-full bg-navy text-white whitespace-nowrap">Power AI insights</span>
+        </div>
+
+        <svg viewBox="0 0 120 100" class="hidden sm:block w-28 h-24 opacity-80 ml-auto" aria-hidden="true">
+          <circle cx="60" cy="50" r="6" fill="#dd7300"/>
+          <circle cx="20" cy="20" r="4" fill="#042b62"/>
+          <circle cx="100" cy="24" r="4" fill="#042b62"/>
+          <circle cx="14" cy="76" r="4" fill="#eeae4d"/>
+          <circle cx="104" cy="78" r="4" fill="#eeae4d"/>
+          <path d="M60 50 20 20M60 50 100 24M60 50 14 76M60 50 104 78" stroke="#042b62" stroke-opacity=".25" stroke-width="1.5"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="compare" class="reveal pb-24 lg:pb-32">
+  <div class="max-w-5xl mx-auto px-6 lg:px-8">
+    <div class="text-center mb-10 lg:mb-12">
+      <span class="inline-flex items-center gap-2 rounded-full border border-navy-200 bg-white px-3.5 py-1.5 text-xs font-bold uppercase tracking-[.14em] text-navy-600"><span class="h-1.5 w-1.5 rounded-full bg-accent"></span>Compare plans</span>
+      <h2 class="mt-4 text-3xl sm:text-4xl font-bold tracking-tight text-navy">Everything side by side</h2>
+      <p class="mt-3 text-sm sm:text-base text-navy-400">Find the right level of insight, support and simulation depth.</p>
+    </div>
+
+    <p class="mb-3 flex items-center gap-2 text-xs font-medium text-navy-400 sm:hidden"><svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M15 8l4 4-4 4"/></svg>Swipe to compare all plans</p>
+    <div class="overflow-x-auto rounded-2xl border border-navy-100 bg-white shadow-lg shadow-navy-900/5">
+      <table class="w-full min-w-[760px] text-sm text-navy">
+        <thead>
+          <tr class="bg-mist">
+            <th class="sticky left-0 z-20 w-[20%] md:w-[34%] md:min-w-[220px] border-r border-navy-100 bg-mist px-5 py-5 text-left font-semibold text-navy-500">Feature</th>
+            <th class="px-5 py-5 text-center font-semibold">Free</th>
+            <th class="bg-accent-50 px-5 py-5 text-center"><span class="inline-flex items-center gap-1.5 font-bold text-accent"><span class="h-1.5 w-1.5 rounded-full bg-accent"></span>Pro</span></th>
+            <th class="px-5 py-5 text-center font-semibold">Max</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-navy-100">
+          <tr class="hover:bg-mist/50"><td class="sticky left-0 z-10 border-r border-navy-100 bg-white px-5 py-4 font-medium">Monthly price</td><td class="px-5 py-4 text-center font-semibold">₹0</td><td class="bg-accent-50/60 px-5 py-4 text-center font-bold text-accent">₹1,499</td><td class="px-5 py-4 text-center font-semibold">₹4,999</td></tr>
+          <tr class="hover:bg-mist/50"><td class="sticky left-0 z-10 border-r border-navy-100 bg-white px-5 py-4 font-medium">FinCoins / month</td><td class="px-5 py-4 text-center text-navy-500">200</td><td class="bg-accent-50/60 px-5 py-4 text-center font-bold text-accent">500</td><td class="px-5 py-4 text-center text-navy-500">1,000</td></tr>
+          <tr class="hover:bg-mist/50"><td class="sticky left-0 z-10 border-r border-navy-100 bg-white px-5 py-4 font-medium">Portfolio simulations</td><td class="px-5 py-4 text-center text-navy-400">Basic</td><td class="bg-accent-50/60 px-5 py-4 text-center font-semibold text-accent">Advanced</td><td class="px-5 py-4 text-center text-navy-600">Unlimited depth</td></tr>
+          <tr class="hover:bg-mist/50"><td class="sticky left-0 z-10 border-r border-navy-100 bg-white px-5 py-4 font-medium">Tax optimisation</td><td class="px-5 py-4 text-center text-navy-200">—</td><td class="bg-accent-50/60 px-5 py-4 text-center"><svg viewBox="0 0 24 24" class="mx-auto h-5 w-5 text-accent" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></td><td class="px-5 py-4"><svg viewBox="0 0 24 24" class="mx-auto h-5 w-5 text-navy" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></td></tr>
+          <tr class="hover:bg-mist/50"><td class="sticky left-0 z-10 border-r border-navy-100 bg-white px-5 py-4 font-medium">Goal-based projections</td><td class="px-5 py-4 text-center text-navy-200">—</td><td class="bg-accent-50/60 px-5 py-4"><svg viewBox="0 0 24 24" class="mx-auto h-5 w-5 text-accent" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></td><td class="px-5 py-4"><svg viewBox="0 0 24 24" class="mx-auto h-5 w-5 text-navy" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></td></tr>
+          <tr class="hover:bg-mist/50"><td class="sticky left-0 z-10 border-r border-navy-100 bg-white px-5 py-4 font-medium">Dedicated relationship manager</td><td class="px-5 py-4 text-center text-navy-200">—</td><td class="bg-accent-50/60 px-5 py-4 text-center text-navy-200">—</td><td class="px-5 py-4"><svg viewBox="0 0 24 24" class="mx-auto h-5 w-5 text-navy" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></td></tr>
+          <tr class="hover:bg-mist/50"><td class="sticky left-0 z-10 border-r border-navy-100 bg-white px-5 py-4 font-medium">Advisory review calls</td><td class="px-5 py-4 text-center text-navy-200">—</td><td class="bg-accent-50/60 px-5 py-4 text-center text-navy-200">—</td><td class="px-5 py-4 text-center font-medium">Quarterly</td></tr>
+          <tr class="hover:bg-mist/50"><td class="sticky left-0 z-10 border-r border-navy-100 bg-white px-5 py-4 font-medium">Priority support</td><td class="px-5 py-4 text-center text-navy-200">—</td><td class="bg-accent-50/60 px-5 py-4"><svg viewBox="0 0 24 24" class="mx-auto h-5 w-5 text-accent" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></td><td class="px-5 py-4"><svg viewBox="0 0 24 24" class="mx-auto h-5 w-5 text-navy" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m5 12 4 4L19 6"/></svg></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TRUST TILES ================= -->
+<section id="trust" class="pb-24 lg:pb-32">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+      <div class="grid gap-2 md:grid-cols-3">
+        <article class="group rounded-[19px] border border-navy-100 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-navy-100 hover:shadow-xl hover:shadow-navy-900/10">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-navy-50 text-navy transition-colors group-hover:bg-navy group-hover:text-white"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3 5 6v5c0 4.3 2.8 8 7 10 4.2-2 7-5.7 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+          <h3 class="mt-5 text-base font-bold text-navy">256-bit Secure</h3><p class="mt-2 text-sm leading-relaxed text-navy-400">Bank-grade encryption protects every transaction and data point.</p>
+        </article>
+        <article class="group rounded-[19px] border border-navy-100 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent-100 hover:shadow-xl hover:shadow-accent/10">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-50 text-accent transition-colors group-hover:bg-accent group-hover:text-white"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M9 4.5A3.5 3.5 0 0 1 12 8v8a3.5 3.5 0 0 1-3 3.5M15 4.5A3.5 3.5 0 0 0 12 8M7 8a3 3 0 0 0 0 6M17 8a3 3 0 0 1 0 6M9 12h6"/></svg></div>
+          <h3 class="mt-5 text-base font-bold text-navy">SEBI AI Engine</h3><p class="mt-2 text-sm leading-relaxed text-navy-400">Every insight is powered by our SEBI-registered Robo Advisory algorithm.</p>
+        </article>
+        <article class="group rounded-[19px] border border-navy-100 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-navy-100 hover:shadow-xl hover:shadow-navy-900/10">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-navy-50 text-navy transition-colors group-hover:bg-navy group-hover:text-white"><svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 13a8 8 0 0 1 16 0M20 13v4a2 2 0 0 1-2 2h-2v-7h2a2 2 0 0 1 2 2M4 13v4a2 2 0 0 0 2 2h2v-7H6a2 2 0 0 0-2 2M16 19c0 1.1-.9 2-2 2h-2"/></svg></div>
+          <h3 class="mt-5 text-base font-bold text-navy">Premium Support</h3><p class="mt-2 text-sm leading-relaxed text-navy-400">Dedicated advisors and priority response for Pro and Max clients.</p>
+        </article>
+      </div>
+    
+  </div>
+</section>
+
+
+<!-- ================= FAQ ================= -->
+<section class="pb-24 lg:pb-32">
+  <div class="max-w-4xl mx-auto px-6 lg:px-8">
+    <div class="reveal text-center mb-10">
+      <h2 class="text-3xl font-bold text-navy">Common questions</h2>
+      <p class="mt-2 text-navy-500">Everything you need to know before you choose a plan.</p>
+    </div>
+
+    <div class="reveal space-y-3">
+
+      <details class="group border border-navy-100 rounded-2xl px-6 py-1 open:bg-mist/60 open:border-navy-200 transition-colors">
+        <summary class="flex items-center justify-between gap-4 py-4 font-semibold text-navy">
+          What are FinCoins?
+          <svg viewBox="0 0 24 24" class="chevron w-5 h-5 text-navy-400 shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <p class="faq-body pb-5 text-navy-600 leading-relaxed">FinCoins are tokens that power advanced AI simulations and insights in our Robo Advisory tool.</p>
+      </details>
+
+      <details class="group border border-navy-100 rounded-2xl px-6 py-1 open:bg-mist/60 open:border-navy-200 transition-colors">
+        <summary class="flex items-center justify-between gap-4 py-4 font-semibold text-navy">
+          Can I switch plans later?
+          <svg viewBox="0 0 24 24" class="chevron w-5 h-5 text-navy-400 shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <p class="faq-body pb-5 text-navy-600 leading-relaxed">Yes. You can move between Free, Pro and Max anytime — no lock-ins, you're always in control.</p>
+      </details>
+
+      <details class="group border border-navy-100 rounded-2xl px-6 py-1 open:bg-mist/60 open:border-navy-200 transition-colors">
+        <summary class="flex items-center justify-between gap-4 py-4 font-semibold text-navy">
+          Is my data safe with Fintoo?
+          <svg viewBox="0 0 24 24" class="chevron w-5 h-5 text-navy-400 shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <p class="faq-body pb-5 text-navy-600 leading-relaxed">Yes. Fintoo uses bank-level security to keep your data safe, so you can focus on your financial future.</p>
+      </details>
+
+      <details class="group border border-navy-100 rounded-2xl px-6 py-1 open:bg-mist/60 open:border-navy-200 transition-colors">
+        <summary class="flex items-center justify-between gap-4 py-4 font-semibold text-navy">
+          Which plan should I choose?
+          <svg viewBox="0 0 24 24" class="chevron w-5 h-5 text-navy-400 shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <p class="faq-body pb-5 text-navy-600 leading-relaxed">Start on Free to explore the basics. Move to Pro for smarter simulations, or Max for full priority access when you're ready to go all in.</p>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section class="pb-24 lg:pb-28">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="reveal relative overflow-hidden rounded-[32px] bg-gradient-to-br from-navy to-navy-900 px-8 py-14 sm:px-16 sm:py-16 text-center">
+      <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-accent/20 blur-3xl"></div>
+      <div class="absolute -bottom-24 -left-16 w-72 h-72 rounded-full bg-white/5 blur-3xl"></div>
+
+      <div class="relative">
+        <h2 class="text-3xl sm:text-4xl font-bold text-white">Ready to power your financial future?</h2>
+        <p class="mt-3 text-white/70 max-w-xl mx-auto">Join Fintoo and let AI-powered insights guide every decision.</p>
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#pricing" class="px-8 py-3.5 rounded-xl font-bold text-white bg-accent hover:bg-accent-600 transition-all shadow-lg shadow-accent-700/30 hover:shadow-xl hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-200 focus-visible:ring-offset-2 focus-visible:ring-offset-navy">
+            Get Started Free
+          </a>
+          <span class="text-sm text-white/50">Free forever on the Free plan. Upgrade anytime.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="border-t border-navy-100">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-8">
+      <div class="max-w-xs">
+        <div class="flex items-center gap-2.5">
+          <span class="w-8 h-8 rounded-lg bg-navy text-white flex items-center justify-center font-bold text-sm">F</span>
+          <span class="text-lg font-bold tracking-tight text-navy">fintoo</span>
+        </div>
+        <p class="mt-3 text-sm text-navy-500 leading-relaxed">AI-powered personal finance, made simple.</p>
+      </div>
+
+      <div class="flex flex-wrap gap-x-10 gap-y-3 text-sm text-navy-600 font-medium">
+        <a href="#" class="hover:text-accent transition-colors">Product</a>
+        <a href="#" class="hover:text-accent transition-colors">Features</a>
+        <a href="#pricing" class="hover:text-accent transition-colors">Pricing</a>
+        <a href="#" class="hover:text-accent transition-colors">About Us</a>
+      </div>
+    </div>
+
+    <div class="mt-10 pt-6 border-t border-navy-100 flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+      <p class="text-xs text-navy-400 leading-relaxed max-w-2xl">Fintoo is a SEBI-registered investment platform. Mutual fund investments are subject to market risks; please read all scheme-related documents carefully before investing.</p>
+      <p class="text-xs text-navy-400 whitespace-nowrap">© 2026 Fintoo. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // sticky nav shadow
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 8);
+  }, { passive: true });
+
+  // mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const iconOpen = document.getElementById('iconOpen');
+  const iconClose = document.getElementById('iconClose');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('hidden') === false;
+    menuBtn.setAttribute('aria-expanded', String(isOpen));
+    iconOpen.classList.toggle('hidden', isOpen);
+    iconClose.classList.toggle('hidden', !isOpen);
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
+    iconOpen.classList.remove('hidden');
+    iconClose.classList.add('hidden');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+
+  // scroll reveal
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // One-card animated product journey
+  const journeyStory = document.getElementById('journeyStory');
+  const journeySlides = journeyStory ? [...journeyStory.querySelectorAll('[data-journey-slide]')] : [];
+  let journeyIndex = 0;
+  let journeyTimer;
+
+  function showJourneyStep(nextIndex) {
+    const previous = journeySlides[journeyIndex];
+    previous.classList.remove('active');
+    previous.classList.add('leaving');
+    window.setTimeout(() => {
+      previous.classList.remove('leaving');
+      journeyIndex = nextIndex;
+      journeySlides[journeyIndex].classList.add('active');
+    }, 240);
+  }
+
+  function startJourney() {
+    if (reduceMotion || journeySlides.length < 2) return;
+    window.clearInterval(journeyTimer);
+    journeyTimer = window.setInterval(() => showJourneyStep((journeyIndex + 1) % journeySlides.length), 3200);
+  }
+
+  if (journeyStory) {
+    startJourney();
+    journeyStory.addEventListener('mouseenter', () => window.clearInterval(journeyTimer));
+    journeyStory.addEventListener('mouseleave', startJourney);
+    document.addEventListener('visibilitychange', () => document.hidden ? window.clearInterval(journeyTimer) : startJourney());
+  }
+
+  const revealEls = document.querySelectorAll('.reveal');
+  if (reduceMotion) {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => io.observe(el));
+  }
+
+  // FinCoins counters
+  const counters = document.querySelectorAll('[data-counter]');
+  function animateCounter(el) {
+    const target = parseInt(el.getAttribute('data-counter'), 10);
+    const duration = 1100;
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(eased * target).toLocaleString('en-IN');
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toLocaleString('en-IN');
+    }
+    requestAnimationFrame(tick);
+  }
+  if (reduceMotion) {
+    counters.forEach(el => el.textContent = parseInt(el.getAttribute('data-counter'), 10).toLocaleString('en-IN'));
+  } else {
+    const cio = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          cio.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    counters.forEach(el => cio.observe(el));
+  }
+
+  // FAQ: only one open at a time
+  document.querySelectorAll('details').forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open) {
+        document.querySelectorAll('details[open]').forEach(other => {
+          if (other !== d) other.open = false;
+        });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
