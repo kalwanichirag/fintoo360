@@ -24,7 +24,7 @@ img,svg{display:block;}
 a{color:inherit; text-decoration:none;}
 button{font-family:inherit; cursor:pointer; border:none;}
 input{font-family:inherit;}
-.wrap{max-width:1440px; margin:0 auto; padding:0 32px;}
+.wrap{max-width:1440px; margin:0 auto; padding:0 40px;}
 .eyebrow{font-family:var(--font-display); font-weight:700; font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--orange); margin-bottom:16px; display:flex; align-items:center; gap:10px;}
 .eyebrow::before{content:""; width:22px; height:2px; background:var(--orange); display:inline-block; border-radius:2px;}
 h1,h2,h3{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02em; line-height:1.05;}
@@ -44,13 +44,13 @@ h1,h2,h3{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02e
 .nav-cta:hover{background:var(--orange); transform:translateY(-1px);}
 
 /* HERO */
-.hero{position:relative; background:var(--navy); background:radial-gradient(ellipse 900px 600px at 78% 15%, var(--navy-mid) 0%, var(--navy) 55%, var(--navy-deep) 100%); color:var(--white); padding:64px 0; overflow:hidden;}
-.hero-grid{display:grid; grid-template-columns:minmax(0,1.08fr) minmax(360px,0.92fr); gap:64px; align-items:center; position:relative; z-index:2;}
+.hero{position:relative; background:var(--navy); background:radial-gradient(ellipse 900px 600px at 76% 24%, var(--navy-mid) 0%, var(--navy) 55%, var(--navy-deep) 100%); color:var(--white); padding:72px 0; overflow:hidden;}
+.hero-grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(420px,.9fr); gap:48px; align-items:center; position:relative; z-index:2;}
 .hero-eyebrow{display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14); padding:8px 16px 8px 12px; border-radius:100px; font-family:var(--font-display); font-weight:600; font-size:13px; color:var(--peach); margin-bottom:28px;}
 .hero-eyebrow .dot{width:7px; height:7px; border-radius:50%; background:var(--orange-light); box-shadow:0 0 0 3px rgba(255,146,72,0.25);}
-.hero h1{font-size:56px; color:var(--white); margin-bottom:10px;}
+.hero h1{font-size:clamp(54px,4.25vw,68px); max-width:680px; color:var(--white); margin-bottom:12px;}
 .hero h1 span{color:var(--orange-light);}
-.hero .subline{font-family:var(--font-display); font-weight:600; font-size:22px; color:var(--peach); margin-bottom:22px;}
+.hero .subline{font-family:var(--font-display); font-weight:600; font-size:clamp(21px,1.65vw,25px); color:var(--peach); margin-bottom:26px;}
 .hero p.desc{font-size:18px; line-height:1.65; color:rgba(255,255,255,0.72); max-width:520px; margin-bottom:36px;}
 .waitlist-form{display:flex; gap:10px; max-width:480px; margin-bottom:16px;}
 .waitlist-form input[type=email]{flex:1 1 0; width:100%; min-width:0; height:56px; border-radius:100px; border:1.5px solid rgba(255,255,255,0.18); background:rgba(255,255,255,0.07); color:var(--white); padding:0 22px; font-size:15px; outline:none; appearance:none; transition:border-color .2s ease, background .2s ease;}
@@ -72,12 +72,12 @@ h1,h2,h3{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02e
 .trust-row svg{width:15px; height:15px; stroke:var(--orange-light); flex-shrink:0;}
 
 /* HERO PHONE MOCKUP */
-.hero-visual{position:relative; display:flex; justify-content:center; align-items:center; height:600px;}
-.orb-ring{position:absolute; top:6%; right:2%; width:420px; height:420px; border-radius:50%; border:1px solid rgba(255,255,255,0.10);}
-.orb-ring::after{content:""; position:absolute; inset:38px; border-radius:50%; border:1px solid rgba(255,255,255,0.08);}
-.orb-glow{position:absolute; top:2%; right:-6%; width:460px; height:460px; border-radius:50%; background:radial-gradient(circle, rgba(255,146,72,0.30) 0%, rgba(221,115,0,0.10) 45%, transparent 72%); filter:blur(6px);}
+.hero-visual{position:relative; display:flex; justify-content:center; align-items:center; height:640px; isolation:isolate;}
+.orb-ring{position:absolute; z-index:0; top:50%; left:50%; width:470px; height:470px; transform:translate(-50%,-50%); border-radius:50%; border:1px solid rgba(255,255,255,0.12);}
+.orb-ring::after{content:""; position:absolute; inset:42px; border-radius:50%; border:1px solid rgba(255,255,255,0.08);}
+.orb-glow{position:absolute; z-index:0; top:50%; left:50%; width:520px; height:520px; transform:translate(-50%,-50%); border-radius:50%; background:radial-gradient(circle, rgba(255,146,72,0.30) 0%, rgba(221,115,0,0.10) 45%, transparent 72%); filter:blur(6px);}
 .phone{
-  --phone-width:280px;
+  --phone-width:300px;
   position:relative;
   z-index:3;
   width:var(--phone-width);
@@ -90,7 +90,7 @@ h1,h2,h3{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02e
     0 12px 28px rgba(0,0,0,0.32),
     inset 0 0 0 1px rgba(255,255,255,0.12),
     inset 0 0 0 3px rgba(0,0,0,0.72);
-  animation:float 6s ease-in-out infinite;
+  animation:none;
 }
 .phone::before{
   content:"";
@@ -125,7 +125,7 @@ h1,h2,h3{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02e
 .phone-screen.hero-app-screen{
   position:relative;
   padding:0;
-  height:560px;
+  height:590px;
   border:1px solid rgba(255,255,255,0.16);
   border-radius:33px;
   background:var(--linen);
@@ -283,7 +283,7 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
 
 /* Slightly larger type for the wider desktop layout */
 @media (min-width:1200px){
-  .hero h1{font-size:60px;}
+  .hero h1{font-size:68px;}
   .hero .subline{font-size:24px;}
   .hero p.desc{font-size:19px; max-width:560px;}
   .section-head{max-width:700px;}
@@ -302,7 +302,7 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
 @media (max-width:980px){
   .hero-grid, .anna-grid, .how-grid{grid-template-columns:1fr;}
   .hero{padding:64px 0;}
-  .hero-visual{height:560px; margin-top:24px;}
+  .hero-visual{height:580px; margin-top:24px;}
   .p-grid, .feat-grid{grid-template-columns:repeat(2,1fr);}
   .hero h1{font-size:42px;}
   .final-cta h2{font-size:32px;}
@@ -330,40 +330,38 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
   .anna-section h2{font-size:29px;}
   .float-chip{display:none;}
   .hero-visual{height:520px;}
+  .orb-ring{width:390px; height:390px;}
+  .orb-glow{width:430px; height:430px;}
   .phone{--phone-width:240px;}
   .phone-screen.hero-app-screen{height:480px;}
 }
+.hero-grid .logo{margin-bottom:24px; width:auto; height:36px;}
+.hero{min-height:100svh; display:flex; align-items:center;}
 </style>
 </head>
 <body>
 
-<nav class="nav" id="nav">
-  <div class="nav-inner">
-    <a class="logo" href="#waitlist" aria-label="Fintoo home">
-      <img src="https://www.fintoo.in/static/media/wp/Fintoologo_.svg" alt="Fintoo">
-    </a>
-    <a href="#waitlist" class="nav-cta">Login</a>
-  </div>
-</nav>
+
 
 <section class="hero" id="waitlist">
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <div class="hero-eyebrow"><span class="dot"></span>Launching 1 September 2026</div>
-        <h1>Celebrate your <span>financial freedom.</span></h1>
-        <div class="subline">Meet anna — your AI-powered personal CFO</div>
-        <p class="desc">One app for your net worth, goals, investments, insurance and tax — guided by AI, backed by 10 years of SEBI-registered advice. Get in before everyone else.</p>
+              <img src="https://www.fintoo.in/static/media/wp/Fintoowhitelogo_.svg" alt="Fintoo" class="logo">
 
-        <form class="waitlist-form" id="heroForm">
+        <h1>Celebrate <span>financial freedom.</span></h1>
+        <div class="subline">Fintoo's AI Personal CFO</div>
+        <!-- <p class="desc">One app for your net worth, goals, investments, insurance and tax — guided by AI, backed by 10 years of SEBI-registered advice. Get in before everyone else.</p> -->
+
+        <!-- <form class="waitlist-form" id="heroForm">
           <input type="email" placeholder="Enter your email address" required id="heroEmail">
           <button type="submit">Join waitlist <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-        </form>
-        <div class="success-msg" id="heroSuccess">
+        </form> -->
+        <!-- <div class="success-msg" id="heroSuccess">
           <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L19 7"/></svg></div>
           <span>You're on the list — we'll email you before 1 September.</span>
         </div>
-        <p class="form-note"> No spam, just one email on launch day.</p>
+        <p class="form-note"> No spam, just one email on launch day.</p> -->
 
         <div class="trust-row">
           <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/></svg>SEBI-registered advisor</div>
@@ -601,6 +599,7 @@ function bumpCounter(){
 
 function handleForm(formId, emailId, successId){
   const form = document.getElementById(formId);
+  if(!form) return;
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const email = document.getElementById(emailId).value.trim();
