@@ -50,7 +50,7 @@ h1,h2,h3{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02e
 .hero-eyebrow .dot{width:7px; height:7px; border-radius:50%; background:var(--orange-light); box-shadow:0 0 0 3px rgba(255,146,72,0.25);}
 .hero h1{font-size:clamp(54px,4.25vw,68px); color:var(--white); margin-bottom:12px;}
 .hero h1 span{color:var(--orange-light);}
-.hero .subline{font-family:var(--font-display); font-weight:600; font-size:clamp(21px,1.65vw,25px); color:var(--peach); margin-bottom:26px;}
+.hero .subline{font-family:var(--font-display); font-weight:600; font-size:clamp(25px,1.9vw,30px); color:var(--peach); margin-bottom:30px;}
 .hero p.desc{font-size:18px; line-height:1.65; color:rgba(255,255,255,0.72); max-width:520px; margin-bottom:36px;}
 .waitlist-form{display:flex; gap:10px; max-width:480px; margin-bottom:16px;}
 .waitlist-form input[type=email]{flex:1 1 0; width:100%; min-width:0; height:56px; border-radius:100px; border:1.5px solid rgba(255,255,255,0.18); background:rgba(255,255,255,0.07); color:var(--white); padding:0 22px; font-size:15px; outline:none; appearance:none; transition:border-color .2s ease, background .2s ease;}
@@ -68,16 +68,16 @@ h1,h2,h3{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02e
 .success-msg .check svg{width:12px; height:12px; stroke:var(--white);}
 .success-msg span{font-size:14.5px; color:var(--white); font-weight:500;}
 .trust-row{display:flex; gap:28px; flex-wrap:wrap; padding-top:8px;}
-.trust-row .item{display:flex; align-items:center; gap:9px; font-size:16px; color:rgba(255,255,255,0.72); font-weight:500;}
-.trust-row svg{width:17px; height:17px; stroke:var(--orange-light); flex-shrink:0;}
+.trust-row .item{display:flex; align-items:center; gap:10px; font-size:20px; color:rgba(255,255,255,0.76); font-weight:500;}
+.trust-row svg{width:19px; height:19px; stroke:var(--orange-light); flex-shrink:0;}
 
 /* HERO PHONE MOCKUP */
-.hero-visual{position:relative; display:flex; justify-content:center; align-items:center; height:640px; isolation:isolate;}
+.hero-visual{position:relative; display:flex; justify-content:center; align-items:center; height:660px; isolation:isolate;}
 .orb-ring{position:absolute; z-index:0; top:50%; left:50%; width:470px; height:470px; transform:translate(-50%,-50%); border-radius:50%; border:1px solid rgba(255,255,255,0.12);}
 .orb-ring::after{content:""; position:absolute; inset:42px; border-radius:50%; border:1px solid rgba(255,255,255,0.08);}
 .orb-glow{position:absolute; z-index:0; top:50%; left:50%; width:520px; height:520px; transform:translate(-50%,-50%); border-radius:50%; background:radial-gradient(circle, rgba(255,146,72,0.30) 0%, rgba(221,115,0,0.10) 45%, transparent 72%); filter:blur(6px);}
 .phone{
-  --phone-width:300px;
+  --phone-width:330px;
   position:relative;
   z-index:3;
   width:var(--phone-width);
@@ -125,7 +125,7 @@ h1,h2,h3{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02e
 .phone-screen.hero-app-screen{
   position:relative;
   padding:0;
-  height:590px;
+  height:620px;
   border:1px solid rgba(255,255,255,0.16);
   border-radius:33px;
   background:var(--linen);
@@ -284,7 +284,7 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
 /* Slightly larger type for the wider desktop layout */
 @media (min-width:1200px){
   .hero h1{font-size:68px;}
-  .hero .subline{font-size:24px;}
+  .hero .subline{font-size:31px;}
   .hero p.desc{font-size:19px; max-width:560px;}
   .section-head{max-width:700px;}
   .section-head p{font-size:18px;}
@@ -302,7 +302,9 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
 @media (max-width:980px){
   .hero-grid, .anna-grid, .how-grid{grid-template-columns:1fr;}
   .hero{padding:64px 0;}
-  .hero-visual{height:580px; margin-top:24px;}
+  .hero-visual{height:620px; margin-top:24px;}
+  .phone{--phone-width:300px;}
+  .phone-screen.hero-app-screen{height:570px;}
   .p-grid, .feat-grid{grid-template-columns:repeat(2,1fr);}
   .hero h1{font-size:42px; white-space:normal;}
   .final-cta h2{font-size:32px;}
@@ -329,11 +331,11 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
   .final-cta h2{font-size:26px;}
   .anna-section h2{font-size:29px;}
   .float-chip{display:none;}
-  .hero-visual{height:520px;}
-  .orb-ring{width:390px; height:390px;}
-  .orb-glow{width:430px; height:430px;}
-  .phone{--phone-width:240px;}
-  .phone-screen.hero-app-screen{height:480px;}
+  .hero-visual{height:570px;}
+  .orb-ring{width:430px; height:430px;}
+  .orb-glow{width:470px; height:470px;}
+  .phone{--phone-width:270px;}
+  .phone-screen.hero-app-screen{height:530px;}
 }
 .hero-grid .logo{margin-bottom:26px; width:auto; height:48px;}
 .hero{min-height:100svh; display:flex; align-items:center;}
@@ -353,7 +355,7 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
       <div>
               <img src="https://www.fintoo.in/static/media/wp/Fintoowhitelogo_.svg" alt="Fintoo" class="logo">
 
-        <h1>Celebrate <span>financial freedom.</span></h1>
+        <h1>Celebrate <span>Financial Freedom.</span></h1>
         <div class="subline">Fintoo's AI Personal CFO</div>
         <!-- <p class="desc">One app for your net worth, goals, investments, insurance and tax — guided by AI, backed by 10 years of SEBI-registered advice. Get in before everyone else.</p> -->
 
