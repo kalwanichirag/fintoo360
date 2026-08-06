@@ -48,7 +48,7 @@ h1,h2,h3{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02e
 .hero-grid{display:grid; grid-template-columns:minmax(0,1fr) minmax(420px,.9fr); gap:48px; align-items:center; position:relative; z-index:2;}
 .hero-eyebrow{display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14); padding:8px 16px 8px 12px; border-radius:100px; font-family:var(--font-display); font-weight:600; font-size:13px; color:var(--peach); margin-bottom:28px;}
 .hero-eyebrow .dot{width:7px; height:7px; border-radius:50%; background:var(--orange-light); box-shadow:0 0 0 3px rgba(255,146,72,0.25);}
-.hero h1{font-size:clamp(54px,4.25vw,68px); max-width:680px; color:var(--white); margin-bottom:12px;}
+.hero h1{font-size:clamp(54px,4.25vw,68px); color:var(--white); margin-bottom:12px;}
 .hero h1 span{color:var(--orange-light);}
 .hero .subline{font-family:var(--font-display); font-weight:600; font-size:clamp(21px,1.65vw,25px); color:var(--peach); margin-bottom:26px;}
 .hero p.desc{font-size:18px; line-height:1.65; color:rgba(255,255,255,0.72); max-width:520px; margin-bottom:36px;}
@@ -68,8 +68,8 @@ h1,h2,h3{font-family:var(--font-display); font-weight:800; letter-spacing:-0.02e
 .success-msg .check svg{width:12px; height:12px; stroke:var(--white);}
 .success-msg span{font-size:14.5px; color:var(--white); font-weight:500;}
 .trust-row{display:flex; gap:28px; flex-wrap:wrap; padding-top:8px;}
-.trust-row .item{display:flex; align-items:center; gap:8px; font-size:13.5px; color:rgba(255,255,255,0.62); font-weight:500;}
-.trust-row svg{width:15px; height:15px; stroke:var(--orange-light); flex-shrink:0;}
+.trust-row .item{display:flex; align-items:center; gap:9px; font-size:16px; color:rgba(255,255,255,0.72); font-weight:500;}
+.trust-row svg{width:17px; height:17px; stroke:var(--orange-light); flex-shrink:0;}
 
 /* HERO PHONE MOCKUP */
 .hero-visual{position:relative; display:flex; justify-content:center; align-items:center; height:640px; isolation:isolate;}
@@ -304,14 +304,14 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
   .hero{padding:64px 0;}
   .hero-visual{height:580px; margin-top:24px;}
   .p-grid, .feat-grid{grid-template-columns:repeat(2,1fr);}
-  .hero h1{font-size:42px;}
+  .hero h1{font-size:42px; white-space:normal;}
   .final-cta h2{font-size:32px;}
   .trust-strip .wrap{justify-content:flex-start;}
 }
 @media (max-width:640px){
   .wrap{padding:0 20px;}
   .section{padding:72px 0;}
-  .hero h1{font-size:33px;}
+  .hero h1{font-size:33px; white-space:normal;}
   .hero{padding:48px 0;}
   .hero .subline{font-size:18px;}
   .waitlist-form{flex-direction:column; width:100%; max-width:none;}
@@ -335,8 +335,12 @@ footer{background:var(--navy-deep); color:rgba(255,255,255,0.5); padding:56px 0 
   .phone{--phone-width:240px;}
   .phone-screen.hero-app-screen{height:480px;}
 }
-.hero-grid .logo{margin-bottom:24px; width:auto; height:36px;}
+.hero-grid .logo{margin-bottom:26px; width:auto; height:48px;}
 .hero{min-height:100svh; display:flex; align-items:center;}
+@media (min-width:1300px){
+  .hero-grid{grid-template-columns:minmax(0,1.15fr) minmax(420px,.85fr); gap:32px;}
+  .hero h1{font-size:58px; white-space:nowrap;}
+}
 </style>
 </head>
 <body>
