@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="dark light" />
+<title>Fintoo AI — Your financial life, finally thinking as one</title>
+<meta name="description" content="Fintoo AI turns fragmented financial information into one clear, intelligent view. Join the early access waitlist." />
+<meta property="og:title" content="Fintoo AI — Your financial life, finally thinking as one" />
+<meta property="og:description" content="One intelligent view of everything you own, owe, and are working toward. Private beta opening soon." />
+<meta property="og:type" content="website" />
+
+<script>
+  // Apply the saved/system theme before paint so the page never flashes.
+  (function () {
+    const savedTheme = localStorage.getItem('fintoo-theme');
+    const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    document.documentElement.dataset.theme = savedTheme || (systemPrefersLight ? 'light' : 'dark');
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700;800&family=Google+Sans+Code:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          void: '#050f22',
+          midnight: '#0a1a34',
+          panel: '#0d1526',
+          ice: '#eef4ff',
+          steel: '#8592b0',
+          orange: { DEFAULT: '#dd7300', dim: '#8f4c00' },
+          navy: '#042b62',
+        },
+        fontFamily: {
+          display: ['"Google Sans"', 'system-ui', 'sans-serif'],
+          body: ['"Google Sans"', 'system-ui', 'sans-serif'],
+          mono: ['"Google Sans Code"', 'ui-monospace', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
+
+<!-- GSAP core + free bonus plugins (Observer, ScrollTrigger, SplitText) -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/Observer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+
+<style>
+  /* ============ Design tokens ============ */
+  :root {
+    --void: #050f22;
+    --midnight: #0a1a34;
+    --navy: #042b62;
+    --panel: #0d1526;
+    --ice: #eef4ff;
+    --steel: #8592b0;
+    --orange: #dd7300;
+    --line: rgba(60, 110, 180, 0.18);
+    color-scheme: dark;
+  }
+
+  :root[data-theme="light"] {
+    --void: #f4f7fc; --midnight: #e8eff8; --navy: #174c8f; --panel: #ffffff;
+    --ice: #0b2148; --steel: #4c6282; --orange: #e77918;
+    --line: rgba(23, 76, 143, 0.22); color-scheme: light;
+  }
+
+  * { -webkit-tap-highlight-color: transparent; }
+  /* One continuous gradient for the entire document — not per-section
+     fills — so there is never a seam where one section's background
+     meets the next. Every section below is transparent and lets this
+     single backdrop show through. */
+  html{
+    background: linear-gradient(180deg,
+      #0c2a58 0%, #0a2148 8%, #081c40 18%, #0a1a34 30%,
+      #0d2247 42%, #0a1a34 54%, #071c3e 66%, #071229 80%,
+      #050f22 92%, #030814 100%);
+    transition: background .35s ease;
+  }
+  html[data-theme="light"]{
+    background:
+      radial-gradient(circle at 82% 8%, rgba(56,132,224,.15), transparent 30rem),
+      radial-gradient(circle at 8% 30%, rgba(246,134,56,.09), transparent 28rem),
+      linear-gradient(180deg, #fbfcff 0%, #f1f6fc 38%, #f8fafc 72%, #eef4fb 100%);
+  }
+  body{ background: transparent; }
+  .bg-void, .bg-midnight{ background: transparent !important; }
+  body {
+    font-family: 'Google Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--ice);
+    overflow-x: hidden;
+  }
+  ::selection { background: rgba(221,115,0,.28); color: #fff; }
+
+  .font-mono-ui { font-family: 'Google Sans Code', ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+  /* ============ Accessibility ============ */
+  .skip-link{
+    position:fixed; top:-100%; left:1rem; z-index:100;
+    background:var(--orange); color:#04121a; font-weight:600;
+    padding:.6rem 1rem; border-radius:.5rem; transition:top .2s ease;
+  }
+  .skip-link:focus{ top:1rem; }
+  :focus-visible{ outline:2px solid var(--orange); outline-offset:3px; border-radius:2px; }
+  .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+  /* ============ Reveal / clip utility (from supplied GSAP source) ============ */
+  .reveal-heading .clip-text{ overflow:hidden; padding-bottom:.05em; }
+  .reveal-heading .word{ will-change: transform; }
+
+  /* ============ Grid + noise atmosphere ============ */
+  .grid-texture{
+    background-image:
+      linear-gradient(to right, rgba(60,110,180,.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(60,110,180,.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(70% 60% at 50% 30%, black 30%, transparent 85%);
+            mask-image: radial-gradient(70% 60% at 50% 30%, black 30%, transparent 85%);
+  }
+  .grain-overlay{ position:fixed; inset:0; z-index:60; pointer-events:none; opacity:.05; mix-blend-mode:overlay; }
+  .grain-overlay svg{ width:100%; height:100%; }
+
+  /* ============ Glass + glow components ============ */
+  .glass{
+    background: linear-gradient(160deg, rgba(20,60,130,.14), rgba(4,20,45,.06));
+    border: 1px solid var(--line);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .badge{
+    display:inline-flex; align-items:center; gap:.55rem; border-radius:9999px;
+    border:1px solid rgba(70,120,200,.3); background:rgba(20,60,130,.14);
+    padding:.45rem .95rem .45rem .7rem; font-family:'Google Sans Code',monospace;
+    font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--steel);
+  }
+  .dot-live{ position:relative; display:inline-block; width:7px; height:7px; border-radius:9999px; background:var(--orange); }
+  .dot-live::after{
+    content:''; position:absolute; inset:-4px; border-radius:9999px; border:1px solid var(--orange);
+    animation: pulse-ring 2.2s cubic-bezier(.3,.6,.4,1) infinite;
+  }
+  @keyframes pulse-ring{ 0%{ opacity:.9; transform:scale(.6);} 100%{ opacity:0; transform:scale(1.9);} }
+
+  /* Solid color, not a background-clip gradient: the heading is split into
+     per-character spans by GSAP SplitText for the reveal animation, which
+     breaks gradient text-clipping (the gradient has no single text node left
+     to clip to). A solid color survives that restructuring correctly. */
+  .text-gradient{ color: var(--orange); }
+
+  .btn-primary{
+    display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+    background: linear-gradient(95deg, var(--orange), #ffab54);
+    color:#04121a; font-weight:600; font-size:.92rem;
+    padding:.95rem 1.5rem; border-radius:.85rem; white-space:nowrap;
+    box-shadow: 0 0 0 1px rgba(221,115,0,.25), 0 16px 40px -14px rgba(221,115,0,.65);
+    transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+  }
+  .btn-primary:hover{ transform: translateY(-1px); box-shadow: 0 0 0 1px rgba(221,115,0,.4), 0 20px 46px -12px rgba(221,115,0,.8); }
+  .btn-primary:disabled{ opacity:.6; cursor:default; transform:none; }
+
+  .input-field{
+    background: rgba(20,60,130,.1); border:1px solid var(--line); color:var(--ice);
+    padding:.95rem 1.1rem; border-radius:.85rem; font-size:.95rem;
+    transition: border-color .2s ease, background .2s ease;
+  }
+  .input-field::placeholder{ color:#5c6a89; }
+  .input-field:focus{ border-color: rgba(221,115,0,.55); background: rgba(221,115,0,.05); outline:none; }
+  .input-field:invalid[data-touched="true"]{ border-color: rgba(255,110,110,.55); }
+
+  .link-secondary{ display:inline-flex; align-items:center; gap:.4rem; color:var(--ice); font-size:.9rem; font-weight:500; border-bottom:1px solid rgba(140,160,200,.3); padding-bottom:2px; transition:border-color .2s ease, color .2s ease; }
+  .link-secondary:hover{ border-color: var(--orange); color: var(--orange); }
+
+  .counter-pill{
+    display:inline-flex; align-items:center; gap:.6rem; font-size:.82rem; color:var(--steel);
+  }
+  .counter-pill strong{ font-family:'Google Sans Code',monospace; color:var(--ice); font-weight:500; }
+
+  .form-status{ min-height:1.25rem; }
+  .form-status[data-state="error"]{ color:#ff9b9b; }
+  .form-status[data-state="success"]{ color:var(--orange); }
+  .form-status[data-state="duplicate"]{ color:#ffd27a; }
+  .form-status[data-state="loading"]{ color:var(--steel); }
+
+  /* ============ Hero live network background ============ */
+  #hero-network{ z-index:0; opacity:.9; }
+
+  /* ============ Ambient orbs ============ */
+  .ambient-orb{ position:absolute; border-radius:9999px; filter: blur(60px); opacity:.35; }
+  @keyframes float-slow{ 0%,100%{ transform:translate3d(0,0,0);} 50%{ transform:translate3d(0,-26px,0);} }
+  .animate-float{ animation: float-slow 10s ease-in-out infinite; }
+  .animate-float-delay{ animation: float-slow 12s ease-in-out infinite; animation-delay:-4s; }
+
+  /* ============ Hero orb SVG ============ */
+  .orbit-group{ transform-origin: 300px 300px; animation: orbit-spin 46s linear infinite; }
+  .orbit-group-rev{ transform-origin: 300px 300px; animation: orbit-spin 60s linear infinite reverse; }
+  @keyframes orbit-spin{ to{ transform: rotate(360deg); } }
+  .fragment-icon{ transform-box: fill-box; transform-origin:center; animation: orbit-spin 46s linear infinite reverse; }
+  .core-pulse{ animation: core-pulse 4.5s ease-in-out infinite; transform-box:fill-box; transform-origin:center; }
+  @keyframes core-pulse{ 0%,100%{ transform:scale(1); opacity:1;} 50%{ transform:scale(1.06); opacity:.85;} }
+
+  /* ============ Device frame ============ */
+  .device-frame{
+    width:min(300px,74vw); aspect-ratio: 9/19.3; border-radius:2.6rem;
+    border:1px solid rgba(70,120,200,.25);
+    background: linear-gradient(165deg, rgba(10,35,80,.96), rgba(5,7,13,.98));
+    box-shadow: 0 40px 90px -24px rgba(0,0,0,.75), inset 0 0 0 1px rgba(255,255,255,.03);
+    padding:.55rem; position:relative;
+  }
+  .device-frame::before{
+    content:''; position:absolute; top:.6rem; left:50%; transform:translateX(-50%);
+    width:32%; height:.8rem; border-radius:999px; background:#000; z-index:5;
+  }
+  .device-screen{
+    position:relative; height:100%; width:100%; border-radius:2.15rem; overflow:hidden;
+    background: radial-gradient(120% 70% at 50% 0%, rgba(221,115,0,.1), transparent 60%), var(--midnight);
+    padding:1.5rem 1.05rem 1.1rem;
+  }
+  .preview-screen{ position:absolute; inset:0; }
+
+  .progress-bar{ height:5px; border-radius:9999px; background:rgba(140,160,200,.14); overflow:hidden; }
+  .progress-bar > span{ display:block; height:100%; border-radius:9999px; background:linear-gradient(90deg,var(--orange),#ffab54); }
+
+  .preview-tick{ height:3px; flex:1; border-radius:9999px; background:rgba(140,160,200,.18); transition: background .3s ease; }
+  .preview-tick.is-active{ background: linear-gradient(90deg,var(--orange),#ffab54); }
+  .preview-item{ opacity:.4; transition: opacity .35s ease; }
+  .preview-item.is-active{ opacity:1; }
+
+  /* ============ Fragment cards (problem section) ============ */
+  .glow-border{ position:relative; isolation:isolate; }
+  .glow-border::before{
+    content:''; position:absolute; inset:0; border-radius:inherit; padding:1px;
+    background:linear-gradient(135deg, rgba(255,255,255,.22), rgba(221,115,0,.32) 45%, rgba(120,158,214,.18));
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor; mask-composite:exclude;
+    pointer-events:none;
+  }
+  .fragment-card{
+    display:flex; flex-direction:column; gap:.5rem; border-radius:1.1rem; padding:.95rem 1.05rem;
+    background: linear-gradient(160deg, rgba(255,255,255,.055), rgba(255,255,255,.012));
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 1px 0 rgba(255,255,255,.05) inset, 0 24px 40px -28px rgba(0,0,0,.7);
+  }
+  .fragment-card.glow-border::before{
+    background:linear-gradient(135deg, rgba(255,255,255,.16), rgba(var(--frag-tint,221,115,0),.28) 50%, rgba(255,255,255,.03));
+  }
+  .frag-icon{
+    display:inline-flex; height:24px; width:24px; align-items:center; justify-content:center;
+    border-radius:.55rem; color: rgb(var(--frag-tint,221,115,0));
+    background: rgba(var(--frag-tint,221,115,0),.14); border:1px solid rgba(var(--frag-tint,221,115,0),.28);
+  }
+  .frag-label{ font-size:11px; color:var(--steel); letter-spacing:.01em; }
+  .frag-value{ font-family:'Google Sans Code',monospace; font-size:14px; font-weight:500; color:var(--ice); font-variant-numeric:tabular-nums; }
+  .frag-sub{ color:var(--steel); font-weight:400; }
+
+
+  .feature-card{
+    display:flex; flex-direction:column; overflow:hidden; border-radius:1.75rem;
+    background: linear-gradient(180deg, rgba(20,60,130,.16), rgba(4,20,45,.4));
+    border:1px solid rgba(255,255,255,.07);
+    transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+  }
+  .feature-card:hover{
+    transform: translateY(-6px);
+    border-color: rgba(221,115,0,.4);
+    box-shadow: 0 30px 60px -30px rgba(221,115,0,.35);
+  }
+  .fc-copy{ padding: 2.1rem 2rem .25rem; text-align:center; }
+
+  /* ============ Trust cards ============ */
+  .trust-card{
+    display:flex; gap:1rem; align-items:flex-start; border-radius:1.4rem; padding:1.5rem;
+    background: linear-gradient(160deg, rgba(20,60,130,.14), rgba(4,20,45,.32));
+    border:1px solid rgba(255,255,255,.07);
+    transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+  }
+  .trust-card:hover{
+    transform: translateY(-4px);
+    border-color: rgba(221,115,0,.35);
+    box-shadow: 0 24px 50px -30px rgba(221,115,0,.35);
+  }
+  .trust-icon{
+    display:flex; height:40px; width:40px; flex-shrink:0; align-items:center; justify-content:center;
+    border-radius:.85rem; color:var(--orange);
+    background: rgba(221,115,0,.12); border:1px solid rgba(221,115,0,.25);
+  }
+  .trust-card.trust-pledge{
+    background: linear-gradient(120deg, rgba(221,115,0,.12), rgba(4,20,45,.4));
+    border-color: rgba(221,115,0,.3);
+  }
+  .trust-card.trust-pledge .trust-icon{ background: var(--orange); color:#04121a; border-color:transparent; }
+
+  .fc-eyebrow{ display:block; font-family:'Google Sans Code',monospace; font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--steel); }
+  .fc-title{ margin-top:.65rem; font-family:'Google Sans',sans-serif; font-weight:700; font-size:1.45rem; line-height:1.2; color:var(--ice); }
+  .fc-desc{ margin:.6rem auto 0; max-width:30ch; font-size:.875rem; line-height:1.55; color:var(--steel); }
+  .fc-visual{
+    margin-top:auto; padding: 1.5rem 1.25rem 0; display:flex; align-items:flex-end;
+    justify-content:center; min-height:200px;
+  }
+  .fc-visual svg{ width:100%; height:auto; max-width:230px; overflow:visible; }
+  .mini-card{ filter: drop-shadow(0 20px 30px rgba(0,0,0,.35)); }
+
+  /* Card 1 — AI-powered insights: pulsing sparkle + typing dots */
+  .mini-spark{ transform-box: fill-box; transform-origin:center; animation: mini-spark-pulse 3s ease-in-out infinite; }
+  @keyframes mini-spark-pulse{ 0%,100%{ transform:scale(1) rotate(0deg); opacity:1; } 50%{ transform:scale(1.18) rotate(8deg); opacity:.85; } }
+  .mini-dot{ animation: mini-dot-blink 1.4s ease-in-out infinite; }
+  .mini-dot:nth-child(2){ animation-delay:.18s; }
+  .mini-dot:nth-child(3){ animation-delay:.36s; }
+  @keyframes mini-dot-blink{ 0%,100%{ opacity:.25; } 50%{ opacity:1; } }
+
+  /* Card 2 — Unified dashboard: equalizer bars */
+  .mini-bar{ transform-box: fill-box; transform-origin:bottom; animation: mini-bar-grow 2.2s ease-in-out infinite; }
+  .mini-bar:nth-child(1){ animation-delay:0s; }
+  .mini-bar:nth-child(2){ animation-delay:.25s; }
+  .mini-bar:nth-child(3){ animation-delay:.5s; }
+  .mini-bar:nth-child(4){ animation-delay:.75s; }
+  @keyframes mini-bar-grow{ 0%,100%{ transform:scaleY(.45); } 50%{ transform:scaleY(1); } }
+
+  /* Card 3 — Smart goal planning: filling progress ring */
+  .mini-ring{ animation: mini-ring-fill 3.4s ease-in-out infinite; transform-origin:center; }
+  @keyframes mini-ring-fill{ 0%{ stroke-dashoffset:163; } 55%{ stroke-dashoffset:47; } 100%{ stroke-dashoffset:163; } }
+  .mini-ring-dot{ animation: mini-ring-dot-orbit 3.4s ease-in-out infinite; transform-box: fill-box; transform-origin:center; }
+  @keyframes mini-ring-dot-orbit{ 0%,100%{ opacity:0; } 45%,55%{ opacity:1; } }
+
+  /* Card 4 — Spending intelligence: donut highlight sweep */
+  .mini-donut-seg{ transition: opacity .3s ease; }
+  .mini-donut-highlight{ animation: mini-donut-pulse 2.6s ease-in-out infinite; transform-box: fill-box; transform-origin:center; }
+  @keyframes mini-donut-pulse{ 0%,100%{ opacity:.55; } 50%{ opacity:1; } }
+
+  /* Card 5 — Next-best actions: nudging arrow */
+  .mini-arrow{ animation: mini-arrow-nudge 1.6s ease-in-out infinite; }
+  @keyframes mini-arrow-nudge{ 0%,100%{ transform:translateX(0); } 50%{ transform:translateX(5px); } }
+
+  /* Card 6 — Proactive alerts: pulse ring ping */
+  .mini-ping{ transform-box: fill-box; transform-origin:center; animation: mini-ping-ring 2.2s cubic-bezier(.3,.6,.4,1) infinite; }
+  @keyframes mini-ping-ring{ 0%{ transform:scale(.6); opacity:.9; } 100%{ transform:scale(2.1); opacity:0; } }
+  .mini-bell{ transform-box: fill-box; transform-origin:top center; animation: mini-bell-ring 2.6s ease-in-out infinite; }
+  @keyframes mini-bell-ring{ 0%,80%,100%{ transform:rotate(0deg); } 84%{ transform:rotate(10deg); } 88%{ transform:rotate(-9deg); } 92%{ transform:rotate(6deg); } 96%{ transform:rotate(-4deg); } }
+
+  @media (prefers-reduced-motion: reduce){
+    .mini-spark, .mini-dot, .mini-bar, .mini-ring, .mini-ring-dot, .mini-donut-highlight, .mini-arrow, .mini-ping, .mini-bell{
+      animation: none !important;
+    }
+  }
+
+  /* ============ Custom cursor ============ */
+  @media (pointer:fine){
+    body.cursor-ready, body.cursor-ready a, body.cursor-ready button, body.cursor-ready input{ cursor:none; }
+  }
+  .cursor-dot, .cursor-ring{ position:fixed; top:0; left:0; z-index:80; pointer-events:none; border-radius:9999px; will-change:transform; }
+  .cursor-dot{ width:6px; height:6px; background:var(--orange); box-shadow:0 0 12px var(--orange); transform:translate(-50%,-50%); }
+  .cursor-ring{ width:34px; height:34px; border:1px solid rgba(221,115,0,.5); transform:translate(-50%,-50%); transition: width .25s ease, height .25s ease, border-color .25s ease, background-color .25s ease; }
+  .cursor-ring.is-active{ width:54px; height:54px; background:rgba(221,115,0,.08); border-color:rgba(221,115,0,.85); }
+
+  /* ============ Nav ============ */
+  #site-nav{ transition: transform .4s ease, background .3s ease; }
+
+  /* ============ Theme switch ============ */
+  .theme-switch{
+    position:relative; display:inline-flex; width:3.25rem; height:1.85rem; flex:none;
+    align-items:center; border-radius:999px; padding:.2rem; color:#f7a54c;
+    background:rgba(6,20,44,.72); border:1px solid rgba(112,160,220,.28);
+    box-shadow:inset 0 1px 5px rgba(0,0,0,.25); transition:background .3s ease,border-color .3s ease;
+  }
+  .theme-switch__thumb{
+    display:grid; width:1.35rem; height:1.35rem; place-items:center; border-radius:50%;
+    background:#102f5e; box-shadow:0 3px 10px rgba(0,0,0,.3);
+    transform:translateX(0); transition:transform .3s cubic-bezier(.2,.8,.2,1),background .3s ease;
+  }
+  .theme-switch svg{ position:absolute; width:.75rem; height:.75rem; }
+  .theme-switch .sun-icon{ left:.49rem; opacity:0; }
+  .theme-switch .moon-icon{ right:.48rem; opacity:1; }
+  html[data-theme="light"] .theme-switch{ background:#e7eef8; border-color:rgba(31,76,139,.2); color:#174c8f; }
+  html[data-theme="light"] .theme-switch__thumb{ transform:translateX(1.38rem); background:#fff; }
+  html[data-theme="light"] .theme-switch .sun-icon{ opacity:1; }
+  html[data-theme="light"] .theme-switch .moon-icon{ opacity:0; }
+
+  /* Soft, high-contrast surfaces for light mode. */
+  html[data-theme="light"] #site-nav{ background:rgba(248,251,255,.82) !important; border-color:rgba(31,76,139,.1); }
+  html[data-theme="light"] .grid-texture{ opacity:.72; }
+  html[data-theme="light"] .grain-overlay{ opacity:.025; }
+  html[data-theme="light"] .ambient-orb{ display:none !important; }
+  html[data-theme="light"] .glass,
+  html[data-theme="light"] .trust-card,
+  html[data-theme="light"] .fragment-card{ background:#fff; border-color:rgba(23,76,143,.2); box-shadow:0 20px 45px -30px rgba(11,45,92,.42); }
+  html[data-theme="light"] .feature-card{
+    background:linear-gradient(155deg,#ffffff 0%,#f1f5fb 55%,#e6eef8 100%);
+    border-color:rgba(23,76,143,.22);
+    box-shadow:0 18px 42px -26px rgba(11,45,92,.5),inset 0 3px 0 rgba(23,76,143,.07);
+  }
+  html[data-theme="light"] .feature-card:hover{
+    border-color:rgba(231,121,24,.5);
+    box-shadow:0 24px 52px -28px rgba(11,45,92,.55),0 12px 32px -24px rgba(231,121,24,.45);
+  }
+  html[data-theme="light"] .fc-visual svg{
+    filter:drop-shadow(0 15px 18px rgba(11,45,92,.15));
+  }
+  html[data-theme="light"] #features{
+    background:linear-gradient(180deg,rgba(225,235,248,.55),rgba(247,250,254,.3),rgba(225,235,248,.55)) !important;
+  }
+  html[data-theme="light"] .trust-card.trust-pledge{ background:linear-gradient(120deg,rgba(231,121,24,.1),rgba(255,255,255,.82)); }
+  html[data-theme="light"] .input-field{ background:rgba(255,255,255,.8); color:var(--ice); }
+  html[data-theme="light"] .input-field::placeholder{ color:#8190a6; }
+  html[data-theme="light"] .badge{ background:rgba(255,255,255,.58); }
+  html[data-theme="light"] footer{ border-color:rgba(31,76,139,.1); }
+  /* Tailwind emits these brand utilities as fixed colors, so explicitly
+     remap them in light mode instead of relying on the CSS tokens alone. */
+  html[data-theme="light"] .text-ice,
+  html[data-theme="light"] .text-ice\/90{ color:var(--ice) !important; }
+  html[data-theme="light"] .hover\:text-ice:hover{ color:var(--ice) !important; }
+  html[data-theme="light"] .device-screen{ background:radial-gradient(120% 70% at 50% 0%,rgba(231,121,24,.08),transparent 60%),#f8fbff; }
+  html[data-theme="light"] .device-screen .bg-white\/5{ background:rgba(23,76,143,.045) !important; }
+  html[data-theme="light"] .device-screen .border-white\/5,
+  html[data-theme="light"] .device-screen .border-white\/10{ border-color:rgba(23,76,143,.12) !important; }
+  html[data-theme="light"] header svg[aria-label="Fintoo AI"] .st1,
+  html[data-theme="light"] footer svg[aria-label="Fintoo AI"] .st1{ fill:#10254a; }
+
+  /* ============ Reduced motion safety net ============ */
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body class="bg-void font-body antialiased">
+
+<a href="#join" class="skip-link">Skip to waitlist</a>
+
+<!-- Grain overlay (decorative) -->
+<div class="grain-overlay" aria-hidden="true">
+  <svg width="100%" height="100%">
+    <filter id="grainFilter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="noise" />
+      <feColorMatrix in="noise" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.5 0" />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#grainFilter)"></rect>
+  </svg>
+</div>
+
+<!-- ============ NAV ============ -->
+<header id="site-nav" class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-void/70 backdrop-blur-md">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-10">
+    <a href="#hero" class="flex items-center">
+      <svg class="h-6 w-auto sm:h-7" role="img" aria-label="Fintoo AI" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 2011.8 416.7"> <defs> <style> .st0 { fill: #1f2f60; } .st1 { fill: #fff; } .st2 { fill: #f68638; } .st3 { fill: #5b3c2f; } .st4 { fill: #f68522; } </style> </defs> <rect class="st4" x="1567.9" y="68.3" width="314.9" height="278.4" rx="41.9" ry="41.9"/> <g> <path class="st1" d="M1726.7,257.9h-58.1l-1.2,3.7c-4.8,14.3-18.2,23.8-33.3,23.8h-14.5s42.7-118,42.7-118c8.2-22.7,29.7-37.8,53.8-37.8h3.8s56.4,155.8,56.4,155.8h-15c-15,0-28.4-9.6-33.3-23.8l-1.2-3.7ZM1714.1,220.3l-11.7-34.7c-1.5-4.6-8-4.5-9.5,0l-14.4,42.9h29.7c4.3,0,7.3-4.2,5.9-8.2Z"/> <path class="st1" d="M1831.2,129.6v123.2c0,18-14.6,32.5-32.5,32.5h-5.4v-123.2c0-18,14.6-32.5,32.5-32.5h5.4Z"/> </g> <g> <path class="st0" d="M195.1,236.1h58.5c14.5,0,26.3-11.7,26.3-26.1v-23.7h-58.5c-14.5,0-26.3,11.7-26.3,26.1v23.7Z"/> <path class="st0" d="M186.5,69.4c-31.8,0-57.5,25.6-57.5,57.1v215.4h2.8c31,0,56.3-23.7,58.8-53.9v-104.4c0-.4,0-.7.2-1v-31.8c0-17.5,14.2-31.6,31.8-31.6h15.6c27.3,0,49.4-22,49.4-49.1v-.9h-101.1Z"/> </g> <path class="st0" d="M347.3,342h-8.6V124.2c0-30.3,24.7-54.8,55.2-54.8h6.6v219.8c0,29.2-23.8,52.8-53.2,52.8Z"/> <path class="st0" d="M648,342h-6l-113-171.3c-6.6-10-11.2-17.6-13.8-22.6h-.8c1,9.6,1.5,24.3,1.5,44.1v100.5c0,27.2-22.2,49.3-49.6,49.3h-8.8v-209.4c0-34.9,28.5-63.2,63.6-63.2h2.9l108.8,165.9c5,7.5,9.6,14.9,13.8,22.2h.8c-1-6.3-1.5-18.8-1.5-37.4v-100.9c0-27.5,22.4-49.8,50.1-49.8h8.2v216.6c0,30.9-25.2,56-56.3,56Z"/> <path class="st0" d="M908.8,119.4h-36v166.5c0,31-25.3,56.1-56.5,56.1h-5.5V119.4h-77.9v-8c0-23.2,18.9-42,42.2-42h175.8v8c0,23.2-18.9,42-42.2,42Z"/> <path class="st0" d="M1395.9,346.7c-39.3,0-71.3-12.7-96-38.1-24.7-25.4-37.1-58.5-37.1-99.3s12.6-77.9,37.7-104.6c25.1-26.6,58.4-39.9,99.9-39.9s70.8,12.7,95,38.2c24.2,25.5,36.2,59.1,36.2,100.7s-12.5,77.4-37.6,103.6c-25.1,26.2-57.7,39.3-98,39.3ZM1398.6,117.7c-21.7,0-38.9,8.1-51.6,24.2-12.8,16.2-19.1,37.5-19.1,64.2s6.4,48.3,19.1,64.1c12.8,15.7,29.5,23.6,50.1,23.6s38.2-7.6,50.7-22.9c12.5-15.3,18.7-36.5,18.7-63.6s-6.1-50.2-18.2-66c-12.1-15.7-28.7-23.6-49.7-23.6Z"/> <g> <g> <path class="st0" d="M1102.7,63.9v.3c-.4.8-2.9.7-3.6.3,0,.2-.2.2-.3,0,0-.1,0-.4,0-.6h3.9Z"/> <path class="st2" d="M1102.7,64.2c2.7,0,5.4,0,8.1.3,70.1,5.3,112.8,61.2,115.4,129,.1,3.5-.1,7.1,0,10.6-10.4.2-20.9.1-31.3.3-6.7.1-13.6.5-20.4.6-3.5,0-8.7.4-11.9,0-.3,0-.5,0-.7-.3l-.4-.7c.9-38.4-17.1-83.9-61.3-86-.7,0-1.1-.2-1.2-.8l-.5-50.4c0-.7.3-1.6.5-2.2,1.1-.5,2.4-.3,3.6-.3Z"/> <path class="st3" d="M1099.1,64.5l.5,52.8c11,.7,21.9,3.8,31,10.1,22.8,15.9,30.6,45.9,31.6,72.4,0,1.5.2,3.5-.3,4.8l-18.5-17.5c-.7-8.5-1.1-16.9-3.1-25.3-4.3-18.4-15.3-36-34.3-41.6-4-1.2-8-1.5-12.1-2.3-.2-13.8-.5-27.5-.4-41.3,1.1-4.2,4-8.3,5.2-12.3h.3Z"/> </g> <path class="st0" d="M1158.6,215.5c-1.3,22.9-7.4,41.1-18.5,54.6-12.5,15.3-29.4,22.9-50.7,22.9s-37.4-7.9-50.1-23.6c-12.8-15.7-19.1-37.1-19.1-64.1s6.4-48,19.1-64.2c11.7-14.8,27.1-22.8,46.2-24v-52.9c-38.1,1.5-69,14.7-92.7,39.8-25.1,26.6-37.7,61.5-37.7,104.6s12.4,73.9,37.1,99.3c24.7,25.4,56.7,38.1,96,38.1s73-13.1,98-39.3c22.6-23.7,35-54.1,37.2-91.2h-64.9Z"/> </g> </svg>
+    </a>
+    <nav aria-label="Primary" class="hidden items-center gap-8 font-mono-ui text-xs uppercase tracking-widest text-steel md:flex">
+      <a href="#preview" class="transition-colors hover:text-ice">Preview</a>
+      <a href="#features" class="transition-colors hover:text-ice">Features</a>
+      <a href="#trust" class="transition-colors hover:text-ice">Privacy</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <button id="theme-toggle" class="theme-switch" type="button" role="switch" aria-checked="false" aria-label="Switch to light mode" title="Switch color theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3.5" fill="currentColor"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span class="theme-switch__thumb" aria-hidden="true"></span>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 15.2A8.5 8.5 0 118.8 4a7 7 0 0011.2 11.2z" fill="currentColor"/></svg>
+      </button>
+      <a href="#join" class="hidden rounded-full border border-orange/40 bg-orange/10 px-4 py-2 text-xs font-medium tracking-wide text-ice transition-colors hover:bg-orange/20 sm:inline-flex">Join waitlist</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ 1. HERO ============ -->
+  <section id="hero" class="relative flex min-h-[100svh] items-center overflow-hidden bg-void pb-16 pt-32" aria-label="Introduction">
+    <div class="pointer-events-none absolute inset-0 grid-texture" aria-hidden="true"></div>
+    <canvas id="hero-network" class="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
+    <div class="ambient-orb animate-float bg-navy/60" style="width:26rem;height:26rem;top:-6rem;right:-6rem;" aria-hidden="true"></div>
+    <div class="ambient-orb animate-float-delay bg-orange/30" style="width:20rem;height:20rem;bottom:-4rem;left:-4rem;" aria-hidden="true"></div>
+
+    <div class="relative mx-auto grid w-full max-w-7xl gap-16 px-6 sm:px-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+      <div>
+        <span id="hero-badge" class="badge"><span class="dot-live"></span> Private beta opening soon</span>
+
+        <h1 id="hero-heading" class="reveal-heading mt-6 font-display text-[2.6rem] font-semibold leading-[1.08] text-ice sm:text-6xl lg:text-[4.1rem]">
+          Your financial life, <span class="text-gradient">finally thinking</span> as one.
+        </h1>
+
+        <p id="hero-sub" class="mt-6 max-w-lg text-lg leading-relaxed text-steel">
+          Fintoo AI turns fragmented financial information into clear, personalized decisions — one intelligent view of everything you own, owe, and are working toward.
+        </p>
+
+        <form id="hero-form" data-waitlist class="mt-9 max-w-md" novalidate>
+          <div class="flex flex-col gap-3 sm:flex-row">
+            <label for="hero-email" class="sr-only">Email address</label>
+            <input id="hero-email" name="email" type="email" required placeholder="you@email.com" autocomplete="email" class="input-field flex-1" />
+            <button type="submit" class="btn-primary">
+              <span data-label>Join the Waitlist</span>
+            </button>
+          </div>
+          <p class="mt-3 text-xs text-steel">Free to join. No spam. Early members get priority access.</p>
+          <p data-status role="status" aria-live="polite" class="form-status mt-2 text-sm"></p>
+        </form>
+
+        <div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
+          <a href="#preview" class="link-secondary" data-cursor-hover>
+            Preview the experience
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v16m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <div id="hero-counter" class="counter-pill">
+            <span class="dot-live"></span>
+            <strong data-count-to="2847">0</strong> people on the early access list
+          </div>
+        </div>
+      </div>
+
+      <!-- Orb + phone composition -->
+      <div class="relative mx-auto aspect-square w-full max-w-[540px]">
+        <svg id="hero-orb" viewBox="0 0 600 600" class="absolute inset-0 h-full w-full" aria-hidden="true">
+          <defs>
+            <radialGradient id="coreGradient" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ffe3c2" />
+              <stop offset="45%" stop-color="var(--orange)" />
+              <stop offset="100%" stop-color="var(--orange)" />
+            </radialGradient>
+            <filter id="coreGlow" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur stdDeviation="14" result="blur" />
+              <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+            </filter>
+          </defs>
+
+          <circle cx="300" cy="300" r="230" fill="none" stroke="rgba(140,160,200,.14)" stroke-width="1" />
+          <circle cx="300" cy="300" r="170" fill="none" stroke="rgba(140,160,200,.14)" stroke-width="1" stroke-dasharray="2 8" />
+
+          <g class="orbit-group">
+            <g class="fragment-icon" transform="translate(300,70)"><circle r="20" fill="var(--midnight)" stroke="rgba(140,160,200,.3)" /><path d="M-7,-2 L0,-8 L7,-2 M-7,-2 V7 H7 V-2" stroke="var(--orange)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" /></g>
+            <g class="fragment-icon" transform="translate(510,220)"><circle r="20" fill="var(--midnight)" stroke="rgba(140,160,200,.3)" /><path d="M-7,7 V-3 M-2,7 V-7 M3,7 V0 M8,7 V-5" stroke="var(--orange)" stroke-width="1.6" fill="none" stroke-linecap="round" /></g>
+            <g class="fragment-icon" transform="translate(440,470)"><circle r="20" fill="var(--midnight)" stroke="rgba(140,160,200,.3)" /><text x="0" y="4" text-anchor="middle" fill="var(--orange)" font-family="Google Sans Code" font-size="13">₹</text></g>
+            <g class="fragment-icon" transform="translate(160,470)"><circle r="20" fill="var(--midnight)" stroke="rgba(140,160,200,.3)" /><path d="M0,-8 L7,-4 V4 L0,8 L-7,4 V-4 Z" stroke="var(--orange)" stroke-width="1.4" fill="none" stroke-linejoin="round" /></g>
+            <g class="fragment-icon" transform="translate(90,220)"><circle r="20" fill="var(--midnight)" stroke="rgba(140,160,200,.3)" /><circle r="7" fill="none" stroke="var(--orange)" stroke-width="1.6" /><circle r="1.6" fill="var(--orange)" /></g>
+          </g>
+
+          <circle cx="300" cy="300" r="72" fill="url(#coreGradient)" filter="url(#coreGlow)" class="core-pulse" />
+        </svg>
+
+        <div id="hero-phone" class="device-frame absolute bottom-0 right-0 translate-y-4">
+          <div class="device-screen font-body">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-[11px] text-steel">Good evening</p>
+                <p class="text-sm font-medium text-ice">Aditi Rao</p>
+              </div>
+              <div class="h-8 w-8 rounded-full bg-gradient-to-br from-orange to-navy"></div>
+            </div>
+            <p class="mt-5 text-[11px] uppercase tracking-widest text-steel font-mono-ui">Net worth</p>
+            <p class="mt-1 font-display text-3xl font-semibold text-ice">₹1.84 Cr</p>
+            <svg viewBox="0 0 200 48" class="mt-2 w-full" preserveAspectRatio="none" aria-hidden="true">
+              <polyline points="0,36 25,30 50,33 75,20 100,24 125,12 150,16 175,6 200,10" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <div class="mt-5 grid grid-cols-2 gap-2">
+              <div class="rounded-xl border border-white/5 bg-white/5 p-3">
+                <p class="text-[10px] text-steel">Assets</p>
+                <p class="mt-1 font-mono-ui text-sm text-ice">₹2.10 Cr</p>
+              </div>
+              <div class="rounded-xl border border-white/5 bg-white/5 p-3">
+                <p class="text-[10px] text-steel">This month</p>
+                <p class="mt-1 font-mono-ui text-sm text-orange">+2.4%</p>
+              </div>
+            </div>
+            <div class="mt-4 rounded-xl border border-orange/25 bg-orange/[.06] p-3">
+              <p class="text-[11px] leading-snug text-ice/90">Equity allocation drifted <span class="text-orange">8% above</span> target this quarter.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. THE PROBLEM ============ -->
+  <section id="problem" class="relative overflow-hidden bg-midnight" aria-labelledby="problem-heading">
+    <div class="pointer-events-none absolute inset-0 grid-texture opacity-60" aria-hidden="true"></div>
+    <div class="ambient-orb" style="width:24rem;height:24rem;top:-8rem;left:-10rem;background:var(--navy);opacity:.55;" aria-hidden="true"></div>
+    <div class="ambient-orb" style="width:22rem;height:22rem;bottom:-10rem;right:-8rem;background:var(--orange);opacity:.16;" aria-hidden="true"></div>
+
+    <div id="problem-pin" class="relative mx-auto max-w-7xl px-6 py-24 sm:px-10 sm:py-28 lg:grid lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-10">
+      <div class="mx-auto max-w-xl text-center lg:mx-0 lg:max-w-md lg:text-left">
+        <span class="badge">The problem</span>
+        <h2 id="problem-heading" class="reveal-heading mt-6 font-display text-3xl font-semibold leading-tight text-ice sm:text-5xl">
+          Your money lives in a dozen different places.
+        </h2>
+        <p class="mt-5 text-lg text-steel">
+          A banking app here. A broker there. A spreadsheet nobody opens anymore. Keep scrolling — watch it become one app.
+        </p>
+      </div>
+
+      <div id="fragments-field" class="relative mx-auto flex h-[70svh] min-h-[480px] w-full max-w-xl items-center lg:mx-0 lg:max-w-none">
+        <div class="fragment-card glow-border absolute" style="top:6%; left:3%; width:186px; --frag-tint:221,115,0;" data-shift="-70,-46">
+          <span class="frag-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M4 10l8-6 8 6M5 10v9h14v-9M10 19v-6h4v6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <p class="frag-label">Bank accounts</p>
+          <p class="frag-value">3 linked <span class="frag-sub">· ₹6.2L</span></p>
+        </div>
+        <div class="fragment-card glow-border absolute" style="top:4%; right:5%; width:196px; --frag-tint:120,158,214;" data-shift="70,-42">
+          <span class="frag-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M4 18l5-6 4 4 7-9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 7h5v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <p class="frag-label">Mutual funds</p>
+          <p class="frag-value">₹34.6L <span class="frag-sub">· 11 folios</span></p>
+        </div>
+        <div class="fragment-card glow-border absolute" style="top:38%; left:8%; width:196px; --frag-tint:221,115,0;" data-shift="-95,6">
+          <span class="frag-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M4 20V10m6 10V4m6 16v-7m6 7V8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+          <p class="frag-label">Stocks &amp; F&amp;O</p>
+          <p class="frag-value">2 <span class="frag-sub">brokers</span></p>
+        </div>
+        <div class="fragment-card glow-border absolute" style="top:36%; right:10%; width:196px; --frag-tint:120,158,214;" data-shift="100,10">
+          <span class="frag-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
+          <p class="frag-label">Insurance</p>
+          <p class="frag-value">4 <span class="frag-sub">policies</span></p>
+        </div>
+        <div class="fragment-card glow-border absolute" style="bottom:8%; left:4%; width:196px; --frag-tint:221,115,0;" data-shift="-60,60">
+          <span class="frag-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="15" rx="2.5" stroke="currentColor" stroke-width="1.7"/><path d="M4 10h16M9 3v4M15 3v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+          <p class="frag-label">Loans &amp; EMIs</p>
+          <p class="frag-value">₹18,400 <span class="frag-sub">/ mo</span></p>
+        </div>
+        <div class="fragment-card glow-border absolute" style="bottom:6%; right:2%; width:216px; --frag-tint:120,158,214;" data-shift="80,56">
+          <span class="frag-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 21V4m0 0h12l-3 4 3 4H5" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
+          <p class="frag-label">Goals</p>
+          <p class="frag-value text-[13px] leading-snug">Written down once, forgotten</p>
+        </div>
+
+        <div id="convergence-glow" class="pointer-events-none absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-0" style="background:var(--orange); box-shadow:0 0 0 0 rgba(221,115,0,.9);" aria-hidden="true"></div>
+
+        <div id="unified-card" class="glow-border device-frame absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0" style="box-shadow:0 40px 100px -20px rgba(221,115,0,.45);">
+          <div class="device-screen font-body">
+            <div class="uc-piece flex items-center gap-3">
+              <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-orange to-navy" style="box-shadow:0 0 0 1px rgba(221,115,0,.35), 0 10px 24px -8px rgba(221,115,0,.6);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <circle cx="12" cy="12" r="3" fill="#fff"/>
+                  <circle cx="12" cy="12" r="8.5" stroke="#fff" stroke-opacity=".55" stroke-width="1.3" stroke-dasharray="2.5 4.5"/>
+                </svg>
+              </div>
+              <div class="min-w-0">
+                <p class="truncate font-display text-sm font-semibold text-ice">Fintoo AI</p>
+                <p class="flex items-center gap-1.5 text-[10px] text-steel"><span class="dot-live"></span> All accounts · live</p>
+              </div>
+            </div>
+            <p class="uc-piece mt-5 text-[11px] uppercase tracking-widest text-steel font-mono-ui">Net worth</p>
+            <p id="uc-networth-wrap" class="mt-1 font-display text-3xl font-semibold text-ice">₹<span id="uc-networth-num">0.00</span> Cr</p>
+            <svg viewBox="0 0 200 48" class="uc-piece mt-2 w-full" preserveAspectRatio="none" aria-hidden="true">
+              <polyline id="uc-sparkline" points="0,36 25,30 50,33 75,20 100,24 125,12 150,16 175,6 200,10" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <div class="mt-5 grid grid-cols-2 gap-2">
+              <div class="uc-piece rounded-xl border border-white/5 bg-white/5 p-3">
+                <p class="text-[10px] text-steel">Assets</p>
+                <p class="mt-1 font-mono-ui text-sm text-ice">₹2.10 Cr</p>
+              </div>
+              <div class="uc-piece rounded-xl border border-white/5 bg-white/5 p-3">
+                <p class="text-[10px] text-steel">This month</p>
+                <p class="mt-1 font-mono-ui text-sm text-orange">+2.4%</p>
+              </div>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <span class="uc-tag rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] text-steel">Bank</span>
+              <span class="uc-tag rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] text-steel">Mutual funds</span>
+              <span class="uc-tag rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] text-steel">Stocks</span>
+              <span class="uc-tag rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] text-steel">Insurance</span>
+              <span class="uc-tag rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] text-steel">Loans</span>
+              <span class="uc-tag rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] text-steel">Goals</span>
+            </div>
+            <div class="uc-piece mt-4 rounded-xl border border-orange/25 bg-orange/[.06] p-3">
+              <p class="text-[11px] leading-snug text-ice/90">One app. Everything you own, owe, and are working toward.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. INTERACTIVE APP PREVIEW ============ -->
+  <section id="preview" class="relative overflow-hidden bg-void" aria-labelledby="preview-heading">
+    <div class="ambient-orb" style="width:26rem;height:26rem;top:-10rem;left:-8rem;background:var(--navy);opacity:.6;" aria-hidden="true"></div>
+    <div class="ambient-orb" style="width:24rem;height:24rem;top:20%;right:-10rem;background:var(--orange);opacity:.14;" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-5xl px-6 pt-28 pb-6 text-center sm:px-10">
+      <span class="badge">Inside the app</span>
+      <h2 id="preview-heading" class="reveal-heading mt-6 font-display text-3xl font-semibold leading-tight text-ice sm:text-5xl">
+        One interface. Everything that matters.
+      </h2>
+      <p class="mt-5 text-lg text-steel">Scroll to move through it. Every screen below is a real preview of what early members open first.</p>
+    </div>
+
+    <div id="preview-pin" class="relative">
+      <div class="mx-auto grid min-h-screen max-w-6xl items-center gap-14 px-6 py-16 sm:px-10 lg:grid-cols-2">
+        <div class="relative mx-auto">
+          <div class="device-frame">
+            <div class="device-screen">
+              <!-- Screen 1: AI financial overview -->
+              <div class="preview-screen font-body" data-screen="0">
+                <div class="flex items-center justify-between">
+                  <div><p class="text-[11px] text-steel">Good evening</p><p class="text-sm font-medium text-ice">Aditi Rao</p></div>
+                  <div class="h-8 w-8 rounded-full bg-gradient-to-br from-orange to-navy"></div>
+                </div>
+                <p class="mt-5 text-[11px] uppercase tracking-widest text-steel font-mono-ui">Net worth</p>
+                <p class="mt-1 font-display text-3xl font-semibold text-ice">₹1.84 Cr</p>
+                <div class="mt-5 grid grid-cols-2 gap-2">
+                  <div class="rounded-xl border border-white/5 bg-white/5 p-3"><p class="text-[10px] text-steel">Assets</p><p class="mt-1 font-mono-ui text-sm text-ice">₹2.10 Cr</p></div>
+                  <div class="rounded-xl border border-white/5 bg-white/5 p-3"><p class="text-[10px] text-steel">Liabilities</p><p class="mt-1 font-mono-ui text-sm text-ice">₹26.0 L</p></div>
+                </div>
+                <div class="mt-4 rounded-xl border border-orange/25 bg-orange/[.06] p-3"><p class="text-[11px] leading-snug text-ice/90">Everything you hold, in one connected view.</p></div>
+              </div>
+              <!-- Screen 2: Personalized insights -->
+              <div class="preview-screen font-body" data-screen="1">
+                <p class="text-[11px] uppercase tracking-widest text-steel font-mono-ui">Insights</p>
+                <p class="mt-1 font-display text-lg font-semibold text-ice">3 things worth knowing</p>
+                <div class="mt-4 space-y-3">
+                  <div class="rounded-xl border border-white/5 bg-white/5 p-3"><p class="text-[11px] text-ice/90">On track to hit your Europe goal <span class="text-orange">3 months early</span>.</p></div>
+                  <div class="rounded-xl border border-white/5 bg-white/5 p-3"><p class="text-[11px] text-ice/90"><span class="text-orange">₹4.2L</span> idle in savings could work harder.</p></div>
+                  <div class="rounded-xl border border-white/5 bg-white/5 p-3"><p class="text-[11px] text-ice/90">Term insurance renewal due in <span class="text-orange">12 days</span>.</p></div>
+                </div>
+              </div>
+              <!-- Screen 3: Goal planning -->
+              <div class="preview-screen font-body" data-screen="2">
+                <p class="text-[11px] uppercase tracking-widest text-steel font-mono-ui">Goals</p>
+                <div class="mt-4 space-y-4">
+                  <div><div class="flex justify-between text-[11px] text-ice/90"><span>Retirement</span><span class="font-mono-ui text-steel">₹68L / ₹2.4Cr</span></div><div class="progress-bar mt-2"><span style="width:28%"></span></div></div>
+                  <div><div class="flex justify-between text-[11px] text-ice/90"><span>Child's education</span><span class="font-mono-ui text-steel">₹9L / ₹40L</span></div><div class="progress-bar mt-2"><span style="width:22%"></span></div></div>
+                  <div><div class="flex justify-between text-[11px] text-ice/90"><span>Europe trip '27</span><span class="font-mono-ui text-steel">₹3.1L / ₹4L</span></div><div class="progress-bar mt-2"><span style="width:78%"></span></div></div>
+                </div>
+              </div>
+              <!-- Screen 4: Spending intelligence -->
+              <div class="preview-screen font-body" data-screen="3">
+                <p class="text-[11px] uppercase tracking-widest text-steel font-mono-ui">This month's spending</p>
+                <div class="mt-4 space-y-2.5">
+                  <div class="flex items-center gap-2"><span class="w-24 text-[11px] text-steel">Rent</span><div class="progress-bar flex-1"><span style="width:32%"></span></div><span class="w-8 text-right text-[11px] font-mono-ui text-ice">32%</span></div>
+                  <div class="flex items-center gap-2"><span class="w-24 text-[11px] text-steel">Investments</span><div class="progress-bar flex-1"><span style="width:24%"></span></div><span class="w-8 text-right text-[11px] font-mono-ui text-ice">24%</span></div>
+                  <div class="flex items-center gap-2"><span class="w-24 text-[11px] text-steel">Dining</span><div class="progress-bar flex-1"><span style="width:11%"></span></div><span class="w-8 text-right text-[11px] font-mono-ui text-ice">11%</span></div>
+                </div>
+                <div class="mt-4 rounded-xl border border-orange/25 bg-orange/[.06] p-3"><p class="text-[11px] text-ice/90">Dining is up <span class="text-orange">18%</span> vs last month.</p></div>
+              </div>
+              <!-- Screen 5: Portfolio overview -->
+              <div class="preview-screen font-body" data-screen="4">
+                <p class="text-[11px] uppercase tracking-widest text-steel font-mono-ui">Portfolio</p>
+                <div class="mt-4 space-y-2.5">
+                  <div class="flex justify-between rounded-xl border border-white/5 bg-white/5 p-2.5"><span class="text-[11px] text-ice/90">Nifty 50 Index Fund</span><span class="font-mono-ui text-[11px] text-orange">+12.2%</span></div>
+                  <div class="flex justify-between rounded-xl border border-white/5 bg-white/5 p-2.5"><span class="text-[11px] text-ice/90">HDFC Flexicap</span><span class="font-mono-ui text-[11px] text-orange">+9.8%</span></div>
+                  <div class="flex justify-between rounded-xl border border-white/5 bg-white/5 p-2.5"><span class="text-[11px] text-ice/90">Direct Equity (12)</span><span class="font-mono-ui text-[11px] text-orange">+15.1%</span></div>
+                  <div class="flex justify-between rounded-xl border border-white/5 bg-white/5 p-2.5"><span class="text-[11px] text-ice/90">US Tech ETF</span><span class="font-mono-ui text-[11px] text-orange">+6.4%</span></div>
+                </div>
+              </div>
+              <!-- Screen 6: Conversational assistant (locked preview) -->
+              <div class="preview-screen font-body" data-screen="5">
+                <div class="flex items-center justify-between">
+                  <p class="text-[11px] uppercase tracking-widest text-steel font-mono-ui">Assistant</p>
+                  <span class="rounded-full border border-orange/40 bg-orange/10 px-2 py-0.5 text-[9px] uppercase tracking-widest text-orange">Coming soon</span>
+                </div>
+                <div class="relative mt-4 space-y-2.5">
+                  <div class="ml-auto max-w-[80%] rounded-2xl rounded-tr-sm bg-white/10 p-2.5"><p class="text-[11px] text-ice/90">How much can I invest extra this month?</p></div>
+                  <div class="max-w-[80%] rounded-2xl rounded-tl-sm border border-orange/25 bg-orange/[.06] p-2.5"><p class="text-[11px] text-ice/90">Based on this month's spending, about ₹32,000 is available without touching your goals.</p></div>
+                  <div class="absolute inset-0 -m-2 rounded-2xl backdrop-blur-sm" style="background:rgba(5,7,13,.4);"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <ol class="space-y-5">
+            <li class="preview-item" data-item="0"><p class="font-mono-ui text-xs text-steel">01</p><h3 class="mt-1 font-display text-xl font-semibold text-ice">AI financial overview</h3><p class="mt-1 text-sm text-steel">See your whole financial life at a glance.</p></li>
+            <li class="preview-item" data-item="1"><p class="font-mono-ui text-xs text-steel">02</p><h3 class="mt-1 font-display text-xl font-semibold text-ice">Personalized insights</h3><p class="mt-1 text-sm text-steel">Insights, not just numbers.</p></li>
+            <li class="preview-item" data-item="2"><p class="font-mono-ui text-xs text-steel">03</p><h3 class="mt-1 font-display text-xl font-semibold text-ice">Goal planning</h3><p class="mt-1 text-sm text-steel">Plans that adjust as life does.</p></li>
+            <li class="preview-item" data-item="3"><p class="font-mono-ui text-xs text-steel">04</p><h3 class="mt-1 font-display text-xl font-semibold text-ice">Spending intelligence</h3><p class="mt-1 text-sm text-steel">Know where it's actually going.</p></li>
+            <li class="preview-item" data-item="4"><p class="font-mono-ui text-xs text-steel">05</p><h3 class="mt-1 font-display text-xl font-semibold text-ice">Portfolio overview</h3><p class="mt-1 text-sm text-steel">Every holding, one screen.</p></li>
+            <li class="preview-item" data-item="5"><p class="font-mono-ui text-xs text-steel">06</p><h3 class="mt-1 font-display text-xl font-semibold text-ice">Conversational assistant</h3><p class="mt-1 text-sm text-steel">Ask it anything about your money.</p></li>
+          </ol>
+          <div class="mt-8 flex gap-1.5" id="preview-ticks" aria-hidden="true">
+            <span class="preview-tick"></span><span class="preview-tick"></span><span class="preview-tick"></span>
+            <span class="preview-tick"></span><span class="preview-tick"></span><span class="preview-tick"></span>
+          </div>
+          <p class="mt-4 text-xs text-steel">Interface shown is illustrative — features and data are for preview purposes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. FEATURE CONSTELLATION ============ -->
+  <section id="features" class="relative overflow-hidden bg-midnight py-28 sm:py-36" aria-labelledby="features-heading">
+    <div class="ambient-orb animate-float bg-orange/25" style="width:22rem;height:22rem;top:10%;left:50%;transform:translateX(-50%);" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-3xl px-6 text-center sm:px-10">
+      <span class="badge">What it does</span>
+      <h2 id="features-heading" class="reveal-heading mt-6 font-display text-3xl font-semibold leading-tight text-ice sm:text-5xl">
+        Built to think alongside your money.
+      </h2>
+    </div>
+
+    <div class="relative mx-auto mt-16 grid max-w-6xl gap-5 px-6 sm:grid-cols-2 sm:px-10 lg:grid-cols-3">
+
+      <!-- 1. AI-powered insights -->
+      <div class="feature-card">
+        <div class="fc-copy">
+          <span class="fc-eyebrow">Always learning</span>
+          <h3 class="fc-title">AI-powered insights</h3>
+          <p class="fc-desc">Patterns in your finances you'd never spot on your own, surfaced automatically.</p>
+        </div>
+        <div class="fc-visual">
+          <svg class="mini-card" viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="208" height="178" rx="20" fill="var(--panel)" stroke="rgba(255,255,255,.08)"/>
+            <circle cx="26" cy="28" r="4" fill="rgba(255,255,255,.15)"/>
+            <circle cx="40" cy="28" r="4" fill="rgba(255,255,255,.15)"/>
+            <rect x="20" y="50" width="70" height="8" rx="4" fill="rgba(255,255,255,.12)"/>
+            <g class="mini-spark">
+              <path d="M170 40l5.2 12.8L188 58l-12.8 5.2L170 76l-5.2-12.8L152 58l12.8-5.2L170 40z" fill="var(--orange)"/>
+            </g>
+            <rect x="20" y="90" width="180" height="66" rx="14" fill="rgba(221,115,0,.08)" stroke="rgba(221,115,0,.25)"/>
+            <text x="34" y="116" font-family="Google Sans" font-size="11" fill="var(--ice)" opacity=".9">Dining spend is trending</text>
+            <text x="34" y="132" font-family="Google Sans" font-size="11" fill="var(--ice)" opacity=".9">18% above your usual.</text>
+            <circle class="mini-dot" cx="34" cy="146" r="3" fill="var(--orange)"/>
+            <circle class="mini-dot" cx="46" cy="146" r="3" fill="var(--orange)"/>
+            <circle class="mini-dot" cx="58" cy="146" r="3" fill="var(--orange)"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 2. Unified dashboard -->
+      <div class="feature-card">
+        <div class="fc-copy">
+          <span class="fc-eyebrow">One connected view</span>
+          <h3 class="fc-title">Unified dashboard</h3>
+          <p class="fc-desc">Every account, fund, and policy — one connected view, updated continuously.</p>
+        </div>
+        <div class="fc-visual">
+          <svg class="mini-card" viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="208" height="178" rx="20" fill="var(--panel)" stroke="rgba(255,255,255,.08)"/>
+            <text x="20" y="34" font-family="Google Sans Code" font-size="9" letter-spacing="1" fill="var(--steel)">ALL ACCOUNTS</text>
+            <text x="20" y="56" font-family="Google Sans" font-weight="600" font-size="20" fill="var(--ice)">₹1.84 Cr</text>
+            <g>
+              <rect class="mini-bar" x="20" y="76" width="14" height="70" rx="4" fill="var(--orange)" opacity=".9"/>
+              <rect class="mini-bar" x="42" y="76" width="14" height="70" rx="4" fill="var(--orange)" opacity=".7"/>
+              <rect class="mini-bar" x="64" y="76" width="14" height="70" rx="4" fill="var(--orange)" opacity=".9"/>
+              <rect class="mini-bar" x="86" y="76" width="14" height="70" rx="4" fill="var(--orange)" opacity=".6"/>
+            </g>
+            <rect x="118" y="90" width="82" height="56" rx="12" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.08)"/>
+            <text x="130" y="112" font-family="Google Sans" font-size="9" fill="var(--steel)">Bank · MF</text>
+            <text x="130" y="126" font-family="Google Sans" font-size="9" fill="var(--steel)">Stocks · Loans</text>
+            <circle cx="130" cy="136" r="3" fill="var(--orange)"/>
+            <text x="140" y="139" font-family="Google Sans" font-size="8" fill="var(--ice)">Live sync</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 3. Smart goal planning -->
+      <div class="feature-card">
+        <div class="fc-copy">
+          <span class="fc-eyebrow">Set once, adjusts always</span>
+          <h3 class="fc-title">Smart goal planning</h3>
+          <p class="fc-desc">Set a goal once. Fintoo AI keeps the plan realistic as your life changes.</p>
+        </div>
+        <div class="fc-visual">
+          <svg class="mini-card" viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="208" height="178" rx="20" fill="var(--panel)" stroke="rgba(255,255,255,.08)"/>
+            <text x="20" y="32" font-family="Google Sans Code" font-size="9" letter-spacing="1" fill="var(--steel)">EUROPE TRIP '27</text>
+            <g transform="translate(58,100)">
+              <circle r="34" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="8"/>
+              <circle class="mini-ring" r="34" fill="none" stroke="var(--orange)" stroke-width="8" stroke-linecap="round"
+                stroke-dasharray="213.6" stroke-dashoffset="163" transform="rotate(-90)"/>
+              <circle class="mini-ring-dot" cx="34" cy="0" r="4" fill="var(--ice)"/>
+            </g>
+            <text x="20" y="150" font-family="Google Sans" font-size="10" fill="var(--ice)">₹3.1L <tspan fill="var(--steel)">of ₹4L</tspan></text>
+            <text x="120" y="90" font-family="Google Sans" font-size="9" fill="var(--steel)">On track to</text>
+            <text x="120" y="103" font-family="Google Sans" font-size="9" fill="var(--steel)">finish</text>
+            <text x="120" y="120" font-family="Google Sans" font-weight="600" font-size="13" fill="var(--orange)">3 months</text>
+            <text x="120" y="135" font-family="Google Sans" font-size="9" fill="var(--steel)">early</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 4. Spending intelligence -->
+      <div class="feature-card">
+        <div class="fc-copy">
+          <span class="fc-eyebrow">Know where it goes</span>
+          <h3 class="fc-title">Spending intelligence</h3>
+          <p class="fc-desc">Understand where your money actually goes, not just where you meant it to.</p>
+        </div>
+        <div class="fc-visual">
+          <svg class="mini-card" viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="208" height="178" rx="20" fill="var(--panel)" stroke="rgba(255,255,255,.08)"/>
+            <g transform="translate(60,88)">
+              <circle r="38" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="16"/>
+              <circle class="mini-donut-seg mini-donut-highlight" r="38" fill="none" stroke="var(--orange)" stroke-width="16"
+                stroke-dasharray="70 168.7" stroke-dashoffset="0" transform="rotate(-90)"/>
+              <circle class="mini-donut-seg" r="38" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="16"
+                stroke-dasharray="45 168.7" stroke-dashoffset="-70" transform="rotate(-90)"/>
+              <circle class="mini-donut-seg" r="38" fill="none" stroke="var(--navy)" stroke-width="16"
+                stroke-dasharray="30 168.7" stroke-dashoffset="-115" transform="rotate(-90)"/>
+            </g>
+            <g font-family="Google Sans" font-size="9" fill="var(--steel)">
+              <rect x="122" y="60" width="7" height="7" rx="2" fill="var(--orange)"/>
+              <text x="134" y="67">Rent · 32%</text>
+              <rect x="122" y="80" width="7" height="7" rx="2" fill="rgba(255,255,255,.5)"/>
+              <text x="134" y="87">Invest · 24%</text>
+              <rect x="122" y="100" width="7" height="7" rx="2" fill="var(--navy)"/>
+              <text x="134" y="107">Dining · 11%</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 5. Next-best actions -->
+      <div class="feature-card">
+        <div class="fc-copy">
+          <span class="fc-eyebrow">Never generic</span>
+          <h3 class="fc-title">Next-best actions</h3>
+          <p class="fc-desc">Clear, specific suggestions — never generic advice.</p>
+        </div>
+        <div class="fc-visual">
+          <svg class="mini-card" viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="208" height="178" rx="20" fill="var(--panel)" stroke="rgba(255,255,255,.08)"/>
+            <rect x="20" y="26" width="180" height="46" rx="12" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.08)"/>
+            <text x="32" y="46" font-family="Google Sans" font-size="10" fill="var(--ice)">₹4.2L idle in savings</text>
+            <text x="32" y="60" font-family="Google Sans" font-size="10" fill="var(--steel)">could work harder.</text>
+            <rect x="20" y="86" width="180" height="46" rx="12" fill="rgba(221,115,0,.1)" stroke="rgba(221,115,0,.3)"/>
+            <text x="32" y="106" font-family="Google Sans" font-size="10" fill="var(--ice)">Move to a liquid fund</text>
+            <g class="mini-arrow" transform="translate(178,110)">
+              <path d="M0,0 L10,0 M5,-5 L10,0 L5,5" stroke="var(--orange)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <text x="32" y="122" font-family="Google Sans" font-size="10" fill="var(--steel)">— earn ~4% more.</text>
+            <rect x="20" y="146" width="120" height="18" rx="9" fill="rgba(255,255,255,.04)"/>
+            <rect x="20" y="146" width="72" height="18" rx="9" fill="var(--orange)"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 6. Proactive alerts -->
+      <div class="feature-card">
+        <div class="fc-copy">
+          <span class="fc-eyebrow">Before you have to ask</span>
+          <h3 class="fc-title">Proactive alerts</h3>
+          <p class="fc-desc">Get told about the opportunity before you have to go looking for it.</p>
+        </div>
+        <div class="fc-visual">
+          <svg class="mini-card" viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="208" height="178" rx="20" fill="var(--panel)" stroke="rgba(255,255,255,.08)"/>
+            <g transform="translate(110,72)">
+              <circle class="mini-ping" r="16" fill="none" stroke="var(--orange)" stroke-width="1.6"/>
+              <g class="mini-bell">
+                <path d="M0,-16c8,0,13,6,13,15v10l6,7H-19l6-7v-10c0-9,5-15,13-15z" fill="var(--orange)"/>
+                <path d="M-6,16a6,6 0 0 0 12,0" fill="none" stroke="var(--orange)" stroke-width="2"/>
+              </g>
+            </g>
+            <rect x="24" y="120" width="172" height="46" rx="12" fill="rgba(221,115,0,.08)" stroke="rgba(221,115,0,.25)"/>
+            <text x="36" y="140" font-family="Google Sans" font-size="10" fill="var(--ice)">Term insurance renewal</text>
+            <text x="36" y="154" font-family="Google Sans" font-size="10" fill="var(--orange)">due in 12 days</text>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============ 5. HOW IT THINKS ============ -->
+  <section id="how-it-thinks" class="relative overflow-hidden bg-void py-28 sm:py-36" aria-labelledby="thinks-heading">
+    <div class="ambient-orb" style="width:24rem;height:24rem;top:-8rem;right:-8rem;background:var(--navy);opacity:.55;" aria-hidden="true"></div>
+    <div class="ambient-orb" style="width:22rem;height:22rem;bottom:-10rem;left:-8rem;background:var(--orange);opacity:.15;" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-3xl px-6 text-center sm:px-10">
+      <span class="badge">How it thinks</span>
+      <h2 id="thinks-heading" class="reveal-heading mt-6 font-display text-3xl font-semibold leading-tight text-ice sm:text-5xl">
+        Three steps. No jargon.
+      </h2>
+    </div>
+
+    <div class="relative mx-auto mt-20 max-w-5xl px-6 sm:px-10">
+      <svg viewBox="0 0 800 40" class="absolute left-0 right-0 top-8 hidden w-full lg:block" preserveAspectRatio="none" aria-hidden="true">
+        <path id="flow-path" d="M60,20 H740" stroke="url(#flowGrad)" stroke-width="2" stroke-linecap="round" fill="none" />
+        <defs><linearGradient id="flowGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="var(--orange)"/><stop offset="100%" stop-color="#ffab54"/></linearGradient></defs>
+      </svg>
+
+      <div class="grid gap-10 lg:grid-cols-3">
+        <div class="flow-step glass relative z-10 rounded-2xl p-6">
+          <span class="font-mono-ui text-xs text-orange">01</span>
+          <h3 class="mt-3 font-display text-lg font-semibold text-ice">Connect what you already have</h3>
+          <p class="mt-2 text-sm leading-relaxed text-steel">Securely link accounts, funds, and policies — or add them by hand.</p>
+        </div>
+        <div class="flow-step glass relative z-10 rounded-2xl p-6">
+          <span class="font-mono-ui text-xs text-orange">02</span>
+          <h3 class="mt-3 font-display text-lg font-semibold text-ice">Fintoo AI makes sense of it</h3>
+          <p class="mt-2 text-sm leading-relaxed text-steel">It organizes, cross-references, and understands your full financial picture.</p>
+        </div>
+        <div class="flow-step glass relative z-10 rounded-2xl p-6">
+          <span class="font-mono-ui text-xs text-orange">03</span>
+          <h3 class="mt-3 font-display text-lg font-semibold text-ice">You get clarity, not clutter</h3>
+          <p class="mt-2 text-sm leading-relaxed text-steel">Personalized insights and next steps, explained in plain language.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. TRUST & PRIVACY ============ -->
+  <section id="trust" class="relative overflow-hidden bg-midnight py-28 sm:py-36" aria-labelledby="trust-heading">
+    <div class="pointer-events-none absolute inset-0 grid-texture opacity-40" aria-hidden="true"></div>
+    <div class="ambient-orb" style="width:24rem;height:24rem;top:-8rem;left:-10rem;background:var(--navy);opacity:.55;" aria-hidden="true"></div>
+    <div class="ambient-orb" style="width:22rem;height:22rem;bottom:-8rem;right:-6rem;background:var(--orange);opacity:.15;" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-6xl px-6 sm:px-10">
+      <div class="max-w-xl">
+        <span class="badge">Privacy &amp; trust</span>
+        <h2 id="trust-heading" class="reveal-heading mt-6 font-display text-3xl font-semibold leading-tight text-ice sm:text-5xl">
+          Finance runs on trust. We know.
+        </h2>
+      </div>
+
+      <div class="mt-14 grid gap-5 sm:grid-cols-2">
+        <div class="trust-card">
+          <span class="trust-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><h3 class="font-display text-base font-semibold text-ice">Privacy-first by design</h3><p class="mt-1.5 text-sm leading-relaxed text-steel">Your data is used to help you, not to sell to anyone else.</p></div>
+        </div>
+        <div class="trust-card">
+          <span class="trust-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="8" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M11 12h10M17 8v8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+          <div><h3 class="font-display text-base font-semibold text-ice">You control what's connected</h3><p class="mt-1.5 text-sm leading-relaxed text-steel">Link or unlink any account at any time.</p></div>
+        </div>
+        <div class="trust-card">
+          <span class="trust-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 11V7a4 4 0 018 0v4" stroke="currentColor" stroke-width="1.7"/></svg></span>
+          <div><h3 class="font-display text-base font-semibold text-ice">Security as a first requirement</h3><p class="mt-1.5 text-sm leading-relaxed text-steel">Not an afterthought bolted on before launch.</p></div>
+        </div>
+        <div class="trust-card">
+          <span class="trust-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/></svg></span>
+          <div><h3 class="font-display text-base font-semibold text-ice">Transparent recommendations</h3><p class="mt-1.5 text-sm leading-relaxed text-steel">Every suggestion comes with a reason, not a black box.</p></div>
+        </div>
+        <div class="trust-card trust-pledge sm:col-span-2">
+          <span class="trust-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M6 6l12 12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
+          <div><h3 class="font-display text-base font-semibold text-ice">We don't sell your financial data. Ever.</h3><p class="mt-1.5 text-sm leading-relaxed text-steel">Full privacy and security details will be published before public launch.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. FINAL CTA ============ -->
+  <section id="join" class="relative overflow-hidden bg-void py-28 sm:py-36" aria-labelledby="join-heading">
+    <div class="pointer-events-none absolute inset-0 grid-texture" aria-hidden="true"></div>
+    <div class="ambient-orb animate-float bg-orange/40" style="width:30rem;height:30rem;top:50%;left:50%;transform:translate(-50%,-50%);" aria-hidden="true"></div>
+
+    <div class="relative mx-auto max-w-2xl px-6 text-center sm:px-10">
+      <h2 class="reveal-heading font-display text-3xl font-semibold leading-tight text-ice sm:text-5xl">
+        See what your money could <span class="text-gradient">do next.</span>
+      </h2>
+      <p class="mt-5 text-lg text-steel">Early access is limited and opens in stages. Join now to be first in line.</p>
+
+      <form id="final-form" data-waitlist class="mx-auto mt-9 max-w-md" novalidate>
+        <div class="flex flex-col gap-3 sm:flex-row">
+          <label for="final-email" class="sr-only">Email address</label>
+          <input id="final-email" name="email" type="email" required placeholder="you@email.com" autocomplete="email" class="input-field flex-1" />
+          <button type="submit" class="btn-primary">
+            <span data-label>Join the Waitlist</span>
+          </button>
+        </div>
+        <p class="mt-3 text-xs text-steel">Free to join. No spam. Unsubscribe anytime.</p>
+        <p data-status role="status" aria-live="polite" class="form-status mt-2 text-sm"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="relative border-t border-white/5 bg-void py-14">
+  <div class="mx-auto max-w-7xl px-6 sm:px-10">
+    <div class="flex flex-col gap-10 sm:flex-row sm:justify-between">
+      <div>
+        <a href="#hero" class="flex items-center">
+          <svg class="h-7 w-auto" role="img" aria-label="Fintoo AI" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 2011.8 416.7"> <defs> <style> .st0 { fill: #1f2f60; } .st1 { fill: #fff; } .st2 { fill: #f68638; } .st3 { fill: #5b3c2f; } .st4 { fill: #f68522; } </style> </defs> <rect class="st4" x="1567.9" y="68.3" width="314.9" height="278.4" rx="41.9" ry="41.9"/> <g> <path class="st1" d="M1726.7,257.9h-58.1l-1.2,3.7c-4.8,14.3-18.2,23.8-33.3,23.8h-14.5s42.7-118,42.7-118c8.2-22.7,29.7-37.8,53.8-37.8h3.8s56.4,155.8,56.4,155.8h-15c-15,0-28.4-9.6-33.3-23.8l-1.2-3.7ZM1714.1,220.3l-11.7-34.7c-1.5-4.6-8-4.5-9.5,0l-14.4,42.9h29.7c4.3,0,7.3-4.2,5.9-8.2Z"/> <path class="st1" d="M1831.2,129.6v123.2c0,18-14.6,32.5-32.5,32.5h-5.4v-123.2c0-18,14.6-32.5,32.5-32.5h5.4Z"/> </g> <g> <path class="st0" d="M195.1,236.1h58.5c14.5,0,26.3-11.7,26.3-26.1v-23.7h-58.5c-14.5,0-26.3,11.7-26.3,26.1v23.7Z"/> <path class="st0" d="M186.5,69.4c-31.8,0-57.5,25.6-57.5,57.1v215.4h2.8c31,0,56.3-23.7,58.8-53.9v-104.4c0-.4,0-.7.2-1v-31.8c0-17.5,14.2-31.6,31.8-31.6h15.6c27.3,0,49.4-22,49.4-49.1v-.9h-101.1Z"/> </g> <path class="st0" d="M347.3,342h-8.6V124.2c0-30.3,24.7-54.8,55.2-54.8h6.6v219.8c0,29.2-23.8,52.8-53.2,52.8Z"/> <path class="st0" d="M648,342h-6l-113-171.3c-6.6-10-11.2-17.6-13.8-22.6h-.8c1,9.6,1.5,24.3,1.5,44.1v100.5c0,27.2-22.2,49.3-49.6,49.3h-8.8v-209.4c0-34.9,28.5-63.2,63.6-63.2h2.9l108.8,165.9c5,7.5,9.6,14.9,13.8,22.2h.8c-1-6.3-1.5-18.8-1.5-37.4v-100.9c0-27.5,22.4-49.8,50.1-49.8h8.2v216.6c0,30.9-25.2,56-56.3,56Z"/> <path class="st0" d="M908.8,119.4h-36v166.5c0,31-25.3,56.1-56.5,56.1h-5.5V119.4h-77.9v-8c0-23.2,18.9-42,42.2-42h175.8v8c0,23.2-18.9,42-42.2,42Z"/> <path class="st0" d="M1395.9,346.7c-39.3,0-71.3-12.7-96-38.1-24.7-25.4-37.1-58.5-37.1-99.3s12.6-77.9,37.7-104.6c25.1-26.6,58.4-39.9,99.9-39.9s70.8,12.7,95,38.2c24.2,25.5,36.2,59.1,36.2,100.7s-12.5,77.4-37.6,103.6c-25.1,26.2-57.7,39.3-98,39.3ZM1398.6,117.7c-21.7,0-38.9,8.1-51.6,24.2-12.8,16.2-19.1,37.5-19.1,64.2s6.4,48.3,19.1,64.1c12.8,15.7,29.5,23.6,50.1,23.6s38.2-7.6,50.7-22.9c12.5-15.3,18.7-36.5,18.7-63.6s-6.1-50.2-18.2-66c-12.1-15.7-28.7-23.6-49.7-23.6Z"/> <g> <g> <path class="st0" d="M1102.7,63.9v.3c-.4.8-2.9.7-3.6.3,0,.2-.2.2-.3,0,0-.1,0-.4,0-.6h3.9Z"/> <path class="st2" d="M1102.7,64.2c2.7,0,5.4,0,8.1.3,70.1,5.3,112.8,61.2,115.4,129,.1,3.5-.1,7.1,0,10.6-10.4.2-20.9.1-31.3.3-6.7.1-13.6.5-20.4.6-3.5,0-8.7.4-11.9,0-.3,0-.5,0-.7-.3l-.4-.7c.9-38.4-17.1-83.9-61.3-86-.7,0-1.1-.2-1.2-.8l-.5-50.4c0-.7.3-1.6.5-2.2,1.1-.5,2.4-.3,3.6-.3Z"/> <path class="st3" d="M1099.1,64.5l.5,52.8c11,.7,21.9,3.8,31,10.1,22.8,15.9,30.6,45.9,31.6,72.4,0,1.5.2,3.5-.3,4.8l-18.5-17.5c-.7-8.5-1.1-16.9-3.1-25.3-4.3-18.4-15.3-36-34.3-41.6-4-1.2-8-1.5-12.1-2.3-.2-13.8-.5-27.5-.4-41.3,1.1-4.2,4-8.3,5.2-12.3h.3Z"/> </g> <path class="st0" d="M1158.6,215.5c-1.3,22.9-7.4,41.1-18.5,54.6-12.5,15.3-29.4,22.9-50.7,22.9s-37.4-7.9-50.1-23.6c-12.8-15.7-19.1-37.1-19.1-64.1s6.4-48,19.1-64.2c11.7-14.8,27.1-22.8,46.2-24v-52.9c-38.1,1.5-69,14.7-92.7,39.8-25.1,26.6-37.7,61.5-37.7,104.6s12.4,73.9,37.1,99.3c24.7,25.4,56.7,38.1,96,38.1s73-13.1,98-39.3c22.6-23.7,35-54.1,37.2-91.2h-64.9Z"/> </g> </svg>
+        </a>
+        <p class="mt-3 max-w-xs text-sm text-steel">An early-access initiative from Fintoo.</p>
+      </div>
+      <div class="flex gap-16">
+        <div>
+          <p class="font-mono-ui text-xs uppercase tracking-widest text-steel">Product</p>
+          <ul class="mt-3 space-y-2 text-sm text-steel">
+            <li><a href="#preview" class="hover:text-ice">Preview</a></li>
+            <li><a href="#features" class="hover:text-ice">Features</a></li>
+            <li><a href="#trust" class="hover:text-ice">Privacy</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-mono-ui text-xs uppercase tracking-widest text-steel">Legal</p>
+          <!-- Placeholder legal links — replace with real Privacy Policy / Terms URLs before launch -->
+          <ul class="mt-3 space-y-2 text-sm text-steel">
+            <li><a href="#" class="hover:text-ice">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-ice">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="mt-12 flex flex-col-reverse items-center justify-between gap-6 border-t border-white/5 pt-8 sm:flex-row">
+      <p class="text-xs text-steel">© 2026 Fintoo AI. All rights reserved.</p>
+      <!-- Placeholder social links -->
+      <div class="flex gap-4">
+        <a href="#" aria-label="Fintoo AI on X" class="text-steel hover:text-ice"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.9l-5.4-6.6L4.4 22H1.3l8.1-9.3L1 2h7l4.9 6z"/></svg></a>
+        <a href="#" aria-label="Fintoo AI on LinkedIn" class="text-steel hover:text-ice"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 8.98h4v12H3v-12zm7 0h3.8v1.64h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v6.32h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96v5.7h-4v-12z"/></svg></a>
+        <a href="#" aria-label="Fintoo AI on Instagram" class="text-steel hover:text-ice"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.7 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.21.6 1.76 1.15.55.55.89 1.1 1.15 1.76.25.64.42 1.37.47 2.43C21.99 8.94 22 9.3 22 12s-.01 3.06-.06 4.12c-.06 1.06-.22 1.79-.47 2.43-.26.66-.6 1.21-1.15 1.76-.55.55-1.1.89-1.76 1.15-.64.25-1.37.42-2.43.47C15.06 21.99 14.7 22 12 22s-3.06-.01-4.12-.06c-1.06-.06-1.79-.22-2.43-.47a4.9 4.9 0 01-1.76-1.15 4.9 4.9 0 01-1.15-1.76c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.7 2 12s.01-3.06.06-4.12c.06-1.06.22-1.79.47-2.43.26-.66.6-1.21 1.15-1.76A4.9 4.9 0 015.44.54c.64-.25 1.37-.42 2.43-.47C8.94.01 9.3 0 12 0zm0 5.4A6.6 6.6 0 1012 18.6 6.6 6.6 0 0012 5.4zm0 2A4.6 4.6 0 1112 16.6 4.6 4.6 0 0112 7.4zm5.8-2.7a1.14 1.14 0 110 2.28 1.14 1.14 0 010-2.28z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  const themeToggle = document.getElementById('theme-toggle');
+
+  function syncThemeControl() {
+    const isLight = document.documentElement.dataset.theme === 'light';
+    themeToggle?.setAttribute('aria-checked', String(isLight));
+    themeToggle?.setAttribute('aria-label', `Switch to ${isLight ? 'dark' : 'light'} mode`);
+  }
+
+  themeToggle?.addEventListener('click', () => {
+    const nextTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+    document.documentElement.dataset.theme = nextTheme;
+    localStorage.setItem('fintoo-theme', nextTheme);
+    syncThemeControl();
+  });
+  syncThemeControl();
+
+  gsap.registerPlugin(ScrollTrigger, Observer, SplitText);
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ============================================================
+     Hero live network — a depth-layered node/connection field that
+     answers to the cursor, meant to read as "quietly intelligent"
+     infrastructure rather than decoration: a few nodes act as hubs
+     that hold a soft orange glow, links strengthen near the pointer,
+     and signal pulses occasionally travel between connected nodes.
+     ============================================================ */
+  (function initHeroNetwork() {
+    const canvas = document.getElementById('hero-network');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const section = document.getElementById('hero');
+    if (!section) return;
+
+    let width = 0, height = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let nodes = [];
+    let pulses = [];
+    let tickers = [];
+    let candles = [];
+    let equityPoints = [];
+    let rafId = null;
+    const pointer = { x: null, y: null, tx: 0, ty: 0 };
+
+    const NAVY_LIGHT = '120,158,214';
+    const ORANGE = '221,115,0';
+    const LINK_DIST = 170;
+    const POINTER_RADIUS = 220;
+    const TICKER_POOL = ['₹1.84 Cr', 'NIFTY 50 ▲', 'MF +18.2%', 'SENSEX ▲', 'Gold ₹71,240', 'SIP +12%', 'Equity ▲ 8%', 'Debt · stable', 'XIRR 14.6%', 'Portfolio ▲'];
+
+    function resize() {
+      const rect = section.getBoundingClientRect();
+      width = rect.width; height = rect.height;
+      canvas.width = width * dpr; canvas.height = height * dpr;
+      canvas.style.width = width + 'px'; canvas.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      seedNodes();
+      seedTickers();
+      seedCandles();
+      seedEquityLine();
+    }
+
+    function seedNodes() {
+      const count = width < 640 ? 34 : width < 1100 ? 52 : 66;
+      nodes = Array.from({ length: count }, (_, i) => {
+        const depth = 0.45 + Math.random() * 0.55; // 0.45 (far) – 1 (near)
+        return {
+          x: Math.random() * width,
+          y: Math.random() * height,
+          ox: 0, oy: 0, // parallax offset, eased toward target each frame
+          vx: (Math.random() - 0.5) * 0.12 * depth,
+          vy: (Math.random() - 0.5) * 0.12 * depth,
+          depth,
+          r: (Math.random() * 1.1 + 0.7) * depth,
+          hub: i % 11 === 0,
+          pulse: Math.random() * Math.PI * 2,
+        };
+      });
+    }
+
+    // Faint upward-trending equity curve — a quiet "the market goes up
+    // over time" watermark that sits behind the node network.
+    function seedEquityLine() {
+      const segs = 9;
+      equityPoints = [];
+      let y = height * 0.72;
+      for (let i = 0; i <= segs; i++) {
+        const x = (width / segs) * i;
+        y += (Math.random() - 0.62) * height * 0.09;
+        y = Math.max(height * 0.12, Math.min(height * 0.82, y));
+        equityPoints.push({ x, y });
+      }
+    }
+
+    function drawEquityLine(alphaMul) {
+      if (equityPoints.length < 2) return;
+      ctx.beginPath();
+      ctx.moveTo(equityPoints[0].x, equityPoints[0].y);
+      for (let i = 1; i < equityPoints.length; i++) {
+        const p0 = equityPoints[i - 1], p1 = equityPoints[i];
+        const mx = (p0.x + p1.x) / 2, my = (p0.y + p1.y) / 2;
+        ctx.quadraticCurveTo(p0.x, p0.y, mx, my);
+      }
+      const last = equityPoints[equityPoints.length - 1];
+      ctx.lineTo(last.x, last.y);
+      const grad = ctx.createLinearGradient(0, 0, 0, height);
+      grad.addColorStop(0, `rgba(${ORANGE},${0.1 * alphaMul})`);
+      grad.addColorStop(1, `rgba(${ORANGE},0)`);
+      ctx.lineTo(last.x, height);
+      ctx.lineTo(equityPoints[0].x, height);
+      ctx.closePath();
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.moveTo(equityPoints[0].x, equityPoints[0].y);
+      for (let i = 1; i < equityPoints.length; i++) {
+        const p0 = equityPoints[i - 1], p1 = equityPoints[i];
+        const mx = (p0.x + p1.x) / 2, my = (p0.y + p1.y) / 2;
+        ctx.quadraticCurveTo(p0.x, p0.y, mx, my);
+      }
+      ctx.strokeStyle = `rgba(${ORANGE},${0.22 * alphaMul})`;
+      ctx.lineWidth = 1.4;
+      ctx.stroke();
+    }
+
+    // A quiet cluster of candlesticks low in the scene — reads as a
+    // live price chart ticking away in the background, brand-toned
+    // (orange for up candles, steel-blue for down) rather than red/green.
+    function seedCandles() {
+      const count = width < 640 ? 10 : width < 1100 ? 16 : 20;
+      const baseY = height * 0.86;
+      candles = Array.from({ length: count }, (_, i) => {
+        const up = Math.random() > 0.42;
+        return {
+          x: width * 0.06 + i * (width * 0.9) / count,
+          baseY,
+          bodyH: 10 + Math.random() * 34,
+          wickH: 8 + Math.random() * 22,
+          up,
+          phase: Math.random() * Math.PI * 2,
+          speed: 0.006 + Math.random() * 0.008,
+        };
+      });
+    }
+
+    function drawCandles(t) {
+      for (const c of candles) {
+        const breathe = Math.sin(t * c.speed + c.phase) * 6;
+        const bodyH = Math.max(6, c.bodyH + breathe);
+        const color = c.up ? ORANGE : NAVY_LIGHT;
+        const y = c.baseY - bodyH;
+        ctx.globalAlpha = 0.16;
+        ctx.strokeStyle = `rgb(${color})`;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(c.x, c.baseY - bodyH - c.wickH * 0.4);
+        ctx.lineTo(c.x, c.baseY + c.wickH * 0.3);
+        ctx.stroke();
+        ctx.fillStyle = `rgb(${color})`;
+        ctx.fillRect(c.x - 3, y, 6, bodyH);
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    // Small financial data glyphs drifting slowly upward, like ambient
+    // market-ticker mist — reinforces "this is a finance product".
+    function seedTickers() {
+      const count = width < 640 ? 5 : width < 1100 ? 8 : 11;
+      tickers = Array.from({ length: count }, () => spawnTicker(Math.random() * height));
+    }
+    function spawnTicker(startY) {
+      return {
+        x: width * 0.08 + Math.random() * width * 0.86,
+        y: startY,
+        vy: -(0.09 + Math.random() * 0.14),
+        text: TICKER_POOL[(Math.random() * TICKER_POOL.length) | 0],
+        alpha: 0,
+        life: 0,
+        maxLife: 900 + Math.random() * 500,
+      };
+    }
+    function drawTickers() {
+      ctx.font = '11px "Google Sans Code", monospace';
+      ctx.textBaseline = 'middle';
+      for (const tck of tickers) {
+        tck.life += 1;
+        tck.y += tck.vy;
+        const fadeIn = Math.min(1, tck.life / 90);
+        const fadeOut = Math.min(1, (tck.maxLife - tck.life) / 120);
+        tck.alpha = Math.max(0, Math.min(fadeIn, fadeOut)) * 0.32;
+        ctx.fillStyle = `rgba(${NAVY_LIGHT},${tck.alpha})`;
+        ctx.fillText(tck.text, tck.x, tck.y);
+        if (tck.life > tck.maxLife || tck.y < -20) {
+          Object.assign(tck, spawnTicker(height + 20));
+        }
+      }
+    }
+
+    function maybeSpawnPulse() {
+      if (reduceMotion || nodes.length < 2 || Math.random() > 0.012) return;
+      const hubs = nodes.filter((n) => n.hub);
+      const a = (hubs.length && Math.random() < 0.7 ? hubs : nodes)[(Math.random() * (hubs.length && Math.random() < 0.7 ? hubs.length : nodes.length)) | 0];
+      let best = null, bestD = LINK_DIST;
+      for (const b of nodes) {
+        if (b === a) continue;
+        const d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (d < bestD) { bestD = d; best = b; }
+      }
+      if (best) pulses.push({ a, b: best, t: 0 });
+    }
+
+    function step() {
+      ctx.clearRect(0, 0, width, height);
+
+      // finance backdrop layer — equity curve + quiet candlestick strip,
+      // both sit behind the node network so they read as ambient depth
+      drawEquityLine(1);
+      drawCandles(performance.now() * 0.05);
+
+      // pointer easing — the whole field drifts gently toward the cursor,
+      // stronger for nearer (higher-depth) nodes, giving a subtle parallax
+      pointer.tx += (( pointer.x ?? width / 2) - pointer.tx) * 0.04;
+      pointer.ty += (( pointer.y ?? height / 2) - pointer.ty) * 0.04;
+      const px = pointer.x, py = pointer.y;
+
+      // links
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const a = nodes[i], b = nodes[j];
+          const ax = a.x + a.ox, ay = a.y + a.oy, bx = b.x + b.ox, by = b.y + b.oy;
+          const d = Math.hypot(ax - bx, ay - by);
+          if (d < LINK_DIST) {
+            let alpha = (1 - d / LINK_DIST) * 0.14 * ((a.depth + b.depth) / 2);
+            if (px !== null) {
+              const mx = (ax + bx) / 2, my = (ay + by) / 2;
+              const pd = Math.hypot(mx - px, my - py);
+              if (pd < POINTER_RADIUS) alpha += (1 - pd / POINTER_RADIUS) * 0.35;
+            }
+            ctx.strokeStyle = `rgba(${NAVY_LIGHT},${Math.min(alpha, 0.5)})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(ax, ay);
+            ctx.lineTo(bx, by);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // nodes
+      for (const n of nodes) {
+        n.pulse += 0.018;
+        if (!reduceMotion) {
+          n.x += n.vx; n.y += n.vy;
+          if (n.x < 0 || n.x > width) n.vx *= -1;
+          if (n.y < 0 || n.y > height) n.vy *= -1;
+          if (px !== null) {
+            const d = Math.hypot(n.x - px, n.y - py);
+            const targetOx = d < POINTER_RADIUS ? ((n.x - px) / (d || 1)) * (POINTER_RADIUS - d) * 0.06 * n.depth : 0;
+            const targetOy = d < POINTER_RADIUS ? ((n.y - py) / (d || 1)) * (POINTER_RADIUS - d) * 0.06 * n.depth : 0;
+            n.ox += (targetOx - n.ox) * 0.08;
+            n.oy += (targetOy - n.oy) * 0.08;
+          } else {
+            n.ox *= 0.94; n.oy *= 0.94;
+          }
+        }
+        const x = n.x + n.ox, y = n.y + n.oy;
+        const baseGlow = (n.hub ? 0.55 : 0.32) + Math.sin(n.pulse) * (n.hub ? 0.3 : 0.16);
+        const color = n.hub ? ORANGE : NAVY_LIGHT;
+        ctx.beginPath();
+        ctx.arc(x, y, n.hub ? n.r + 0.9 : n.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${color},${baseGlow})`;
+        if (n.hub) { ctx.shadowColor = `rgba(${ORANGE},.55)`; ctx.shadowBlur = 6; }
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+
+      // travelling signal pulses along live links
+      maybeSpawnPulse();
+      pulses = pulses.filter((p) => p.t < 1);
+      for (const p of pulses) {
+        p.t += 0.011;
+        const x = p.a.x + p.a.ox + (p.b.x + p.b.ox - (p.a.x + p.a.ox)) * p.t;
+        const y = p.a.y + p.a.oy + (p.b.y + p.b.oy - (p.a.y + p.a.oy)) * p.t;
+        const fade = Math.sin(p.t * Math.PI);
+        ctx.beginPath();
+        ctx.arc(x, y, 1.9, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${ORANGE},${fade * 0.95})`;
+        ctx.shadowColor = `rgba(${ORANGE},${fade * 0.85})`;
+        ctx.shadowBlur = 9;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+
+      // ambient market-ticker glyphs drift on top, above the network
+      drawTickers();
+
+      rafId = requestAnimationFrame(step);
+    }
+
+    function drawStaticFrame() {
+      ctx.clearRect(0, 0, width, height);
+      drawEquityLine(1);
+      drawCandles(0);
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const a = nodes[i], b = nodes[j];
+          const d = Math.hypot(a.x - b.x, a.y - b.y);
+          if (d < LINK_DIST) {
+            ctx.strokeStyle = `rgba(${NAVY_LIGHT},${(1 - d / LINK_DIST) * 0.14})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          }
+        }
+      }
+      for (const n of nodes) {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.hub ? n.r + 0.9 : n.r, 0, Math.PI * 2);
+        ctx.fillStyle = n.hub ? `rgba(${ORANGE},.55)` : `rgba(${NAVY_LIGHT},.32)`;
+        ctx.fill();
+      }
+    }
+
+    resize();
+
+    if (reduceMotion) {
+      drawStaticFrame();
+    } else {
+      step();
+      section.addEventListener('pointermove', (e) => {
+        const rect = section.getBoundingClientRect();
+        pointer.x = e.clientX - rect.left;
+        pointer.y = e.clientY - rect.top;
+      });
+      section.addEventListener('pointerleave', () => { pointer.x = null; pointer.y = null; });
+      window.addEventListener('resize', () => {
+        cancelAnimationFrame(rafId);
+        resize();
+        step();
+      });
+    }
+  })();
+
+  /* ============================================================
+     Custom cursor — additive glow, native cursor stays available
+     for touch/keyboard users; only activates after a real
+     pointermove on a fine-pointer device.
+     ============================================================ */
+  if (window.matchMedia('(pointer:fine)').matches && !reduceMotion) {
+    const dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    const ring = document.createElement('div');
+    ring.className = 'cursor-ring';
+    document.body.append(dot, ring);
+
+    let mx = 0, my = 0, rx = 0, ry = 0, active = false;
+    window.addEventListener('pointermove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      if (!active) { active = true; document.body.classList.add('cursor-ready'); }
+      dot.style.transform = 'translate(' + mx + 'px,' + my + 'px) translate(-50%,-50%)';
+    });
+    gsap.ticker.add(() => {
+      rx += (mx - rx) * 0.18;
+      ry += (my - ry) * 0.18;
+      ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px) translate(-50%,-50%)';
+    });
+    document.querySelectorAll('a, button, input, [data-cursor-hover]').forEach((el) => {
+      el.addEventListener('mouseenter', () => ring.classList.add('is-active'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('is-active'));
+    });
+  }
+
+  /* ============================================================
+     Section-heading reveal grammar — direct descendant of the
+     supplied source's SplitText + stagger-from-random treatment.
+     Applied once, on scroll, to every `.reveal-heading`.
+     ============================================================ */
+  function revealHeading(el) {
+    if (!el._split) {
+      el._split = new SplitText(el, { type: 'chars,words,lines', linesClass: 'clip-text' });
+    }
+    if (reduceMotion) {
+      gsap.set(el._split.chars, { autoAlpha: 1, yPercent: 0 });
+      return;
+    }
+    gsap.fromTo(
+      el._split.chars,
+      { autoAlpha: 0, yPercent: 130 },
+      { autoAlpha: 1, yPercent: 0, duration: 1, ease: 'power2', stagger: { each: 0.018, from: 'random' } }
+    );
+  }
+
+  const headings = gsap.utils.toArray('.reveal-heading');
+  headings.forEach((h) => {
+    if (h.id === 'hero-heading') return; // hero heading is handled by the load timeline below
+    ScrollTrigger.create({
+      trigger: h,
+      start: 'top 82%',
+      once: true,
+      onEnter: () => revealHeading(h),
+    });
+  });
+
+  /* ============================================================
+     Hero load sequence
+     ============================================================ */
+  const heroEls = {
+    badge: '#hero-badge',
+    sub: '#hero-sub',
+    form: '#hero-form',
+    fragments: '#hero-orb .fragment-icon',
+    core: '#hero-orb .core-pulse',
+    phone: '#hero-phone',
+    counter: '#hero-counter',
+  };
+
+  if (reduceMotion) {
+    revealHeading(document.getElementById('hero-heading'));
+    gsap.set([heroEls.badge, heroEls.sub, heroEls.form, heroEls.phone, heroEls.counter], { autoAlpha: 1, y: 0 });
+    gsap.set(heroEls.fragments, { autoAlpha: 1, scale: 1 });
+    gsap.set(heroEls.core, { autoAlpha: 1, scale: 1 });
+  } else {
+    const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    heroTl
+      .from(heroEls.badge, { autoAlpha: 0, y: -14, duration: 0.6 })
+      .call(() => revealHeading(document.getElementById('hero-heading')), null, '-=0.15')
+      .from(heroEls.sub, { autoAlpha: 0, y: 16, duration: 0.7 }, '-=0.45')
+      .from(heroEls.form, { autoAlpha: 0, y: 16, duration: 0.7 }, '-=0.5')
+      .from(heroEls.fragments, { autoAlpha: 0, scale: 0.3, stagger: 0.07, duration: 0.6, ease: 'back.out(1.7)' }, '-=0.9')
+      .from(heroEls.core, { autoAlpha: 0, scale: 0, duration: 0.7, ease: 'back.out(1.6)' }, '-=0.6')
+      .from(heroEls.phone, { autoAlpha: 0, y: 40, scale: 0.94, duration: 0.9 }, '-=0.45')
+      .from(heroEls.counter, { autoAlpha: 0, y: 10, duration: 0.5 }, '-=0.3');
+  }
+
+  /* ============================================================
+     Early-access counter — count-up on scroll into view
+     ============================================================ */
+  document.querySelectorAll('[data-count-to]').forEach((el) => {
+    const target = parseInt(el.getAttribute('data-count-to'), 10) || 0;
+    const proxy = { val: 0 };
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 90%',
+      once: true,
+      onEnter: () => {
+        gsap.to(proxy, {
+          val: target,
+          duration: reduceMotion ? 0.01 : 1.6,
+          ease: 'power1.out',
+          onUpdate: () => { el.textContent = Math.round(proxy.val).toLocaleString('en-IN'); },
+        });
+      },
+    });
+  });
+
+  /* ============================================================
+     Nav hide / show on scroll direction — Observer, reused
+     directly from the supplied source's onUp/onDown pattern.
+     ============================================================ */
+  const nav = document.getElementById('site-nav');
+  let navHidden = false;
+  Observer.create({
+    type: 'wheel,touch,pointer',
+    tolerance: 10,
+    onDown: () => {
+      if (!navHidden && window.scrollY > 120) {
+        navHidden = true;
+        gsap.to(nav, { yPercent: -100, duration: 0.4, ease: 'power2.in', overwrite: true });
+      }
+    },
+    onUp: () => {
+      if (navHidden) {
+        navHidden = false;
+        gsap.to(nav, { yPercent: 0, duration: 0.4, ease: 'power2.out', overwrite: true });
+      }
+    },
+  });
+
+  /* ============================================================
+     Problem section — pinned scroll: fragments get pulled apart
+     and pulled inward, spin down into a point of light, and the
+     Fintoo AI app boots up on-screen piece by piece. Driven by
+     scroll position (scrubbed), so it plays forward and backward.
+     ============================================================ */
+  const fragmentCards = gsap.utils.toArray('.fragment-card');
+  if (fragmentCards.length) {
+    const unifiedCard = document.getElementById('unified-card');
+    const glow = document.getElementById('convergence-glow');
+    const ucPieces = gsap.utils.toArray('.uc-piece');
+    const ucTags = gsap.utils.toArray('.uc-tag');
+    const networthEl = document.getElementById('uc-networth-num');
+    const networthWrap = document.getElementById('uc-networth-wrap');
+    const sparkline = document.getElementById('uc-sparkline');
+
+    gsap.set(fragmentCards, { x: 0, y: 0, scale: 1, rotation: 0, opacity: 1, filter: 'blur(0px)' });
+    gsap.set(unifiedCard, { opacity: 0, scale: 0.5, rotation: -8, transformOrigin: '50% 50%' });
+    gsap.set(glow, { opacity: 0, scale: 1, boxShadow: '0 0 0 0 rgba(221,115,0,0)' });
+    gsap.set(ucPieces, { opacity: 0, y: 14 });
+    gsap.set(ucTags, { opacity: 0, y: 8, scale: 0.85 });
+    gsap.set(networthWrap, { opacity: 0, y: 10 });
+
+    let sparkLength = 60;
+    if (sparkline && sparkline.getTotalLength) {
+      try { sparkLength = sparkline.getTotalLength(); } catch (e) { /* noop */ }
+      gsap.set(sparkline, { strokeDasharray: sparkLength, strokeDashoffset: sparkLength });
+    }
+    const networthProxy = { v: 0 };
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#problem-pin',
+        start: 'top top',
+        end: '+=' + (reduceMotion ? 200 : 3600),
+        pin: true,
+        anticipatePin: 1,
+        scrub: 0.55,
+      },
+    });
+
+    const rotations = [-16, 12, -9, 14, -12, 9];
+    fragmentCards.forEach((card, i) => {
+      const [dx, dy] = (card.dataset.shift || '0,0').split(',').map(Number);
+      const t0 = i * 0.06;
+      // wind-up: a small outward "breath" before getting pulled in
+      tl.to(card, { y: '-=8', scale: 1.04, duration: 0.08, ease: 'power1.out' }, t0)
+        // pulled inward, spinning down and dissolving into blur
+        .to(card, { x: dx * -1, y: dy * -1, scale: 0.28, rotation: rotations[i % rotations.length], filter: 'blur(7px)', duration: 0.5, ease: 'power2.in' }, t0 + 0.08)
+        .to(card, { opacity: 0, duration: 0.16, ease: 'power1.in' }, t0 + 0.36);
+    });
+
+    // A point of light gathers the fragments' energy, then bursts.
+    tl.to(glow, { opacity: 1, scale: 2.4, duration: 0.22, ease: 'power2.out' }, 0.68)
+      .to(glow, { boxShadow: '0 0 70px 30px rgba(221,115,0,.55)', scale: 9, duration: 0.34, ease: 'power2.out' }, 0.86)
+      .to(glow, { opacity: 0, duration: 0.16 }, 1.02);
+
+    // The app materialises out of the flash with a confident overshoot.
+    tl.to(unifiedCard, { opacity: 1, scale: 1, rotation: 0, duration: 0.55, ease: 'back.out(1.8)' }, 0.92);
+
+    // Boot sequence: the screen fills in piece by piece, like the
+    // app is actually loading your data in real time.
+    const boot = 1.3;
+    if (ucPieces[0]) tl.to(ucPieces[0], { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, boot);
+    if (ucPieces[1]) tl.to(ucPieces[1], { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' }, boot + 0.12);
+    if (networthWrap) tl.to(networthWrap, { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' }, boot + 0.16);
+    tl.to(networthProxy, {
+      v: 1.84, duration: 0.5, ease: 'power1.out',
+      onUpdate: () => { if (networthEl) networthEl.textContent = networthProxy.v.toFixed(2); },
+    }, boot + 0.18);
+    if (ucPieces[2]) tl.to(ucPieces[2], { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, boot + 0.3);
+    if (sparkline) tl.to(sparkline, { strokeDashoffset: 0, duration: 0.55, ease: 'power2.out' }, boot + 0.34);
+    [3, 4].forEach((idx, k) => {
+      if (ucPieces[idx]) tl.to(ucPieces[idx], { opacity: 1, y: 0, duration: 0.28, ease: 'power2.out' }, boot + 0.62 + k * 0.09);
+    });
+    tl.to(ucTags, { opacity: 1, y: 0, scale: 1, duration: 0.28, stagger: 0.045, ease: 'back.out(2.2)' }, boot + 0.86);
+    if (ucPieces[5]) tl.to(ucPieces[5], { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, boot + 1.12);
+
+    // brief hold so the resolved state registers before the pin releases
+    tl.to({}, { duration: 0.3 });
+  }
+
+
+  /* ============================================================
+     Interactive app preview — pinned, scroll-scrubbed screen swap
+     ============================================================ */
+  const screens = gsap.utils.toArray('.preview-screen');
+  const items = gsap.utils.toArray('.preview-item');
+  const ticks = gsap.utils.toArray('.preview-tick');
+  let activeScreen = 0;
+
+  if (screens.length) {
+    gsap.set(screens, { autoAlpha: 0, yPercent: 6 });
+    gsap.set(screens[0], { autoAlpha: 1, yPercent: 0 });
+    items.forEach((it, i) => it.classList.toggle('is-active', i === 0));
+    if (ticks[0]) ticks[0].classList.add('is-active');
+
+    function setScreen(i) {
+      if (i === activeScreen) return;
+      const dir = i > activeScreen ? 1 : -1;
+      gsap.to(screens[activeScreen], { autoAlpha: 0, yPercent: -6 * dir, duration: reduceMotion ? 0.01 : 0.45, ease: 'power2.inOut' });
+      gsap.fromTo(screens[i], { autoAlpha: 0, yPercent: 6 * dir }, { autoAlpha: 1, yPercent: 0, duration: reduceMotion ? 0.01 : 0.45, ease: 'power2.inOut' });
+      if (items[activeScreen]) items[activeScreen].classList.remove('is-active');
+      if (items[i]) items[i].classList.add('is-active');
+      if (ticks[activeScreen]) ticks[activeScreen].classList.remove('is-active');
+      if (ticks[i]) ticks[i].classList.add('is-active');
+      activeScreen = i;
+    }
+
+    ScrollTrigger.create({
+      trigger: '#preview-pin',
+      start: 'top top',
+      end: () => '+=' + screens.length * 850,
+      pin: true,
+      scrub: 0.5,
+      onUpdate: (self) => {
+        const idx = Math.min(screens.length - 1, Math.floor(self.progress * screens.length));
+        setScreen(idx);
+      },
+    });
+  }
+
+  /* ============================================================
+     How it thinks — SVG connector line draw
+     ============================================================ */
+  const flowPath = document.getElementById('flow-path');
+  if (flowPath) {
+    const len = flowPath.getTotalLength();
+    gsap.set(flowPath, { strokeDasharray: len, strokeDashoffset: len });
+    gsap.to(flowPath, {
+      strokeDashoffset: 0,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#how-it-thinks',
+        start: 'top 70%',
+        end: 'bottom 60%',
+        scrub: reduceMotion ? false : 0.6,
+      },
+    });
+  }
+
+  /* ============================================================
+     Generic scroll-reveal for cards / steps
+     ============================================================ */
+  gsap.utils.toArray('.feature-card').forEach((card, i) => {
+    gsap.from(card, {
+      autoAlpha: 0,
+      y: 30,
+      duration: reduceMotion ? 0.01 : 0.7,
+      delay: reduceMotion ? 0 : (i % 3) * 0.08,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: card, start: 'top 88%', once: true },
+    });
+  });
+  gsap.utils.toArray('.flow-step').forEach((step, i) => {
+    gsap.from(step, {
+      autoAlpha: 0,
+      y: 24,
+      duration: reduceMotion ? 0.01 : 0.6,
+      delay: reduceMotion ? 0 : i * 0.12,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: step, start: 'top 88%', once: true },
+    });
+  });
+
+  /* ============================================================
+     Waitlist forms — validation, loading, success, error,
+     duplicate-submission states. Wire the fetch() call below
+     to a real endpoint before launch.
+     ============================================================ */
+  function initWaitlistForm(form) {
+    const emailInput = form.querySelector('input[type="email"]');
+    const button = form.querySelector('button[type="submit"]');
+    const label = button.querySelector('[data-label]');
+    const status = form.querySelector('[data-status]');
+    const submitted = new Set();
+
+    function setStatus(state, message) {
+      status.dataset.state = state;
+      status.textContent = message;
+    }
+
+    emailInput.addEventListener('blur', () => emailInput.setAttribute('data-touched', 'true'));
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+
+      if (!email || !emailInput.checkValidity()) {
+        setStatus('error', 'Enter a valid email address.');
+        emailInput.setAttribute('data-touched', 'true');
+        emailInput.focus();
+        return;
+      }
+      if (submitted.has(email.toLowerCase())) {
+        setStatus('duplicate', "You're already on the list.");
+        return;
+      }
+
+      setStatus('loading', 'Adding you to the list…');
+      button.disabled = true;
+      const originalLabel = label.textContent;
+      label.textContent = 'Joining…';
+
+      try {
+        // PLACEHOLDER — replace with the real waitlist API endpoint:
+        // await fetch('/api/waitlist', {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({ email }),
+        // });
+        await new Promise((resolve) => setTimeout(resolve, 900));
+
+        submitted.add(email.toLowerCase());
+        setStatus('success', "You're on the list. We'll be in touch soon.");
+        form.reset();
+        emailInput.removeAttribute('data-touched');
+      } catch (err) {
+        setStatus('error', 'Something went wrong. Please try again.');
+      } finally {
+        button.disabled = false;
+        label.textContent = originalLabel;
+      }
+    });
+  }
+  document.querySelectorAll('form[data-waitlist]').forEach(initWaitlistForm);
+
+  /* ============================================================
+     Recalculate on load / resize
+     ============================================================ */
+  window.addEventListener('load', () => ScrollTrigger.refresh());
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 200);
+  });
+})();
+</script>
+</body>
+</html>
