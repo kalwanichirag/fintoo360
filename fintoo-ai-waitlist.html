@@ -3,21 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<meta name="color-scheme" content="dark light" />
+<meta name="color-scheme" content="light" />
 <title>Fintoo AI — Your financial life, finally thinking as one</title>
 <meta name="description" content="Fintoo AI turns fragmented financial information into one clear, intelligent view. Join the early access waitlist." />
 <meta property="og:title" content="Fintoo AI — Your financial life, finally thinking as one" />
 <meta property="og:description" content="One intelligent view of everything you own, owe, and are working toward. Private beta opening soon." />
 <meta property="og:type" content="website" />
-
-<script>
-  // Apply the saved/system theme before paint so the page never flashes.
-  (function () {
-    const savedTheme = localStorage.getItem('fintoo-theme');
-    const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-    document.documentElement.dataset.theme = savedTheme || (systemPrefersLight ? 'light' : 'dark');
-  })();
-</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,13 +20,13 @@
     theme: {
       extend: {
         colors: {
-          void: '#050f22',
-          midnight: '#0a1a34',
-          panel: '#0d1526',
-          ice: '#eef4ff',
-          steel: '#8592b0',
-          orange: { DEFAULT: '#dd7300', dim: '#8f4c00' },
-          navy: '#042b62',
+          void: '#f4f7fc',
+          midnight: '#e8eff8',
+          panel: '#ffffff',
+          ice: '#0b2148',
+          steel: '#4c6282',
+          orange: { DEFAULT: '#e77918', dim: '#8f4c00' },
+          navy: '#174c8f',
         },
         fontFamily: {
           display: ['"Google Sans"', 'system-ui', 'sans-serif'],
@@ -56,21 +47,15 @@
 <style>
   /* ============ Design tokens ============ */
   :root {
-    --void: #050f22;
-    --midnight: #0a1a34;
-    --navy: #042b62;
-    --panel: #0d1526;
-    --ice: #eef4ff;
-    --steel: #8592b0;
-    --orange: #dd7300;
-    --line: rgba(60, 110, 180, 0.18);
-    color-scheme: dark;
-  }
-
-  :root[data-theme="light"] {
-    --void: #f4f7fc; --midnight: #e8eff8; --navy: #174c8f; --panel: #ffffff;
-    --ice: #0b2148; --steel: #4c6282; --orange: #e77918;
-    --line: rgba(23, 76, 143, 0.22); color-scheme: light;
+    --void: #f4f7fc;
+    --midnight: #e8eff8;
+    --navy: #174c8f;
+    --panel: #ffffff;
+    --ice: #0b2148;
+    --steel: #4c6282;
+    --orange: #e77918;
+    --line: rgba(23, 76, 143, 0.22);
+    color-scheme: light;
   }
 
   * { -webkit-tap-highlight-color: transparent; }
@@ -79,17 +64,11 @@
      meets the next. Every section below is transparent and lets this
      single backdrop show through. */
   html{
-    background: linear-gradient(180deg,
-      #0c2a58 0%, #0a2148 8%, #081c40 18%, #0a1a34 30%,
-      #0d2247 42%, #0a1a34 54%, #071c3e 66%, #071229 80%,
-      #050f22 92%, #030814 100%);
-    transition: background .35s ease;
-  }
-  html[data-theme="light"]{
     background:
       radial-gradient(circle at 82% 8%, rgba(56,132,224,.15), transparent 30rem),
       radial-gradient(circle at 8% 30%, rgba(246,134,56,.09), transparent 28rem),
       linear-gradient(180deg, #fbfcff 0%, #f1f6fc 38%, #f8fafc 72%, #eef4fb 100%);
+    transition: background .35s ease;
   }
   body{ background: transparent; }
   .bg-void, .bg-midnight{ background: transparent !important; }
@@ -114,7 +93,7 @@
 
   /* ============ Reveal / clip utility (from supplied GSAP source) ============ */
   .reveal-heading .clip-text{ overflow:hidden; padding-bottom:.05em; }
-  .reveal-heading .word{ will-change: transform; }
+  .reveal-heading .clip-text > div{ will-change: transform; }
 
 @media (min-width: 1079.999px) {
   html {
@@ -133,20 +112,22 @@
     background-size: 64px 64px;
     -webkit-mask-image: radial-gradient(70% 60% at 50% 30%, black 30%, transparent 85%);
             mask-image: radial-gradient(70% 60% at 50% 30%, black 30%, transparent 85%);
+    opacity:.72;
   }
-  .grain-overlay{ position:fixed; inset:0; z-index:60; pointer-events:none; opacity:.05; mix-blend-mode:overlay; }
+  .grain-overlay{ position:fixed; inset:0; z-index:60; pointer-events:none; opacity:.025; mix-blend-mode:overlay; }
   .grain-overlay svg{ width:100%; height:100%; }
 
   /* ============ Glass + glow components ============ */
   .glass{
-    background: linear-gradient(160deg, rgba(20,60,130,.14), rgba(4,20,45,.06));
+    background: #fff;
     border: 1px solid var(--line);
+    box-shadow: 0 20px 45px -30px rgba(11,45,92,.42);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
   }
   .badge{
     display:inline-flex; align-items:center; gap:.55rem; border-radius:9999px;
-    border:1px solid rgba(70,120,200,.3); background:rgba(20,60,130,.14);
+    border:1px solid rgba(70,120,200,.3); background:rgba(255,255,255,.58);
     padding:.45rem .95rem .45rem .7rem; font-family:'Google Sans Code',monospace;
     font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--steel);
   }
@@ -158,9 +139,9 @@
   @keyframes pulse-ring{ 0%{ opacity:.9; transform:scale(.6);} 100%{ opacity:0; transform:scale(1.9);} }
 
   /* Solid color, not a background-clip gradient: the heading is split into
-     per-character spans by GSAP SplitText for the reveal animation, which
-     breaks gradient text-clipping (the gradient has no single text node left
-     to clip to). A solid color survives that restructuring correctly. */
+     line-wrapper divs by GSAP SplitText for the reveal animation, which can
+     break gradient text-clipping across the split. A solid color survives
+     that restructuring correctly. */
   .text-gradient{ color: var(--orange); }
 
   .btn-primary{
@@ -175,11 +156,11 @@
   .btn-primary:disabled{ opacity:.6; cursor:default; transform:none; }
 
   .input-field{
-    background: rgba(20,60,130,.1); border:1px solid var(--line); color:var(--ice);
+    background: rgba(255,255,255,.8); border:1px solid var(--line); color:var(--ice);
     padding:.95rem 1.1rem; border-radius:.85rem; font-size:.95rem;
     transition: border-color .2s ease, background .2s ease;
   }
-  .input-field::placeholder{ color:#5c6a89; }
+  .input-field::placeholder{ color:#8190a6; }
   .input-field:focus{ border-color: rgba(221,115,0,.55); background: rgba(221,115,0,.05); outline:none; }
   .input-field:invalid[data-touched="true"]{ border-color: rgba(255,110,110,.55); }
 
@@ -201,7 +182,7 @@
   #hero-network{ z-index:0; opacity:.9; }
 
   /* ============ Ambient orbs ============ */
-  .ambient-orb{ position:absolute; border-radius:9999px; filter: blur(60px); opacity:.35; }
+  .ambient-orb{ position:absolute; border-radius:9999px; filter: blur(60px); opacity:.35; display:none; }
   @keyframes float-slow{ 0%,100%{ transform:translate3d(0,0,0);} 50%{ transform:translate3d(0,-26px,0);} }
   .animate-float{ animation: float-slow 10s ease-in-out infinite; }
   .animate-float-delay{ animation: float-slow 12s ease-in-out infinite; animation-delay:-4s; }
@@ -228,9 +209,12 @@
   }
   .device-screen{
     position:relative; height:100%; width:100%; border-radius:2.15rem; overflow:hidden;
-    background: radial-gradient(120% 70% at 50% 0%, rgba(221,115,0,.1), transparent 60%), var(--midnight);
+    background: radial-gradient(120% 70% at 50% 0%, rgba(231,121,24,.08), transparent 60%), #f8fbff;
     padding:1.5rem 1.05rem 1.1rem;
   }
+  .device-screen .bg-white\/5{ background:rgba(23,76,143,.045) !important; }
+  .device-screen .border-white\/5,
+  .device-screen .border-white\/10{ border-color:rgba(23,76,143,.12) !important; }
   .preview-screen{ position:absolute; inset:0; }
 
   .progress-bar{ height:5px; border-radius:9999px; background:rgba(140,160,200,.14); overflow:hidden; }
@@ -252,9 +236,9 @@
   }
   .fragment-card{
     display:flex; flex-direction:column; gap:.5rem; border-radius:1.1rem; padding:.95rem 1.05rem;
-    background: linear-gradient(160deg, rgba(255,255,255,.055), rgba(255,255,255,.012));
+    background: #fff; border:1px solid rgba(23,76,143,.2);
     backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    box-shadow: 0 1px 0 rgba(255,255,255,.05) inset, 0 24px 40px -28px rgba(0,0,0,.7);
+    box-shadow: 0 20px 45px -30px rgba(11,45,92,.42);
   }
   .fragment-card.glow-border::before{
     background:linear-gradient(135deg, rgba(255,255,255,.16), rgba(var(--frag-tint,221,115,0),.28) 50%, rgba(255,255,255,.03));
@@ -271,22 +255,23 @@
 
   .feature-card{
     display:flex; flex-direction:column; overflow:hidden; border-radius:1.75rem;
-    background: linear-gradient(180deg, rgba(20,60,130,.16), rgba(4,20,45,.4));
-    border:1px solid rgba(255,255,255,.07);
+    background:linear-gradient(155deg,#ffffff 0%,#f1f5fb 55%,#e6eef8 100%);
+    border:1px solid rgba(23,76,143,.22);
+    box-shadow:0 18px 42px -26px rgba(11,45,92,.5),inset 0 3px 0 rgba(23,76,143,.07);
     transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
   }
   .feature-card:hover{
     transform: translateY(-6px);
-    border-color: rgba(221,115,0,.4);
-    box-shadow: 0 30px 60px -30px rgba(221,115,0,.35);
+    border-color:rgba(231,121,24,.5);
+    box-shadow:0 24px 52px -28px rgba(11,45,92,.55),0 12px 32px -24px rgba(231,121,24,.45);
   }
   .fc-copy{ padding: 2.1rem 2rem .25rem; text-align:center; }
 
   /* ============ Trust cards ============ */
   .trust-card{
     display:flex; gap:1rem; align-items:flex-start; border-radius:1.4rem; padding:1.5rem;
-    background: linear-gradient(160deg, rgba(20,60,130,.14), rgba(4,20,45,.32));
-    border:1px solid rgba(255,255,255,.07);
+    background: #fff; border:1px solid rgba(23,76,143,.2);
+    box-shadow: 0 20px 45px -30px rgba(11,45,92,.42);
     transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
   }
   .trust-card:hover{
@@ -300,7 +285,7 @@
     background: rgba(221,115,0,.12); border:1px solid rgba(221,115,0,.25);
   }
   .trust-card.trust-pledge{
-    background: linear-gradient(120deg, rgba(221,115,0,.12), rgba(4,20,45,.4));
+    background: linear-gradient(120deg,rgba(231,121,24,.1),rgba(255,255,255,.82));
     border-color: rgba(221,115,0,.3);
   }
   .trust-card.trust-pledge .trust-icon{ background: var(--orange); color:#04121a; border-color:transparent; }
@@ -312,7 +297,7 @@
     margin-top:auto; padding: 1.5rem 1.25rem 0; display:flex; align-items:flex-end;
     justify-content:center; min-height:200px;
   }
-  .fc-visual svg{ width:100%; height:auto; max-width:230px; overflow:visible; }
+  .fc-visual svg{ width:100%; height:auto; max-width:230px; overflow:visible; filter:drop-shadow(0 15px 18px rgba(11,45,92,.15)); }
   .mini-card{ filter: drop-shadow(0 20px 30px rgba(0,0,0,.35)); }
 
   /* Card 1 — AI-powered insights: pulsing sparkle + typing dots */
@@ -368,67 +353,14 @@
   .cursor-ring.is-active{ width:54px; height:54px; background:rgba(221,115,0,.08); border-color:rgba(221,115,0,.85); }
 
   /* ============ Nav ============ */
-  #site-nav{ transition: transform .4s ease, background .3s ease; }
+  #site-nav{ transition: transform .4s ease, background .3s ease; background:rgba(248,251,255,.82) !important; border-color:rgba(31,76,139,.1); }
 
-  /* ============ Theme switch ============ */
-  .theme-switch{
-    position:relative; display:inline-flex; width:3.25rem; height:1.85rem; flex:none;
-    align-items:center; border-radius:999px; padding:.2rem; color:#f7a54c;
-    background:rgba(6,20,44,.72); border:1px solid rgba(112,160,220,.28);
-    box-shadow:inset 0 1px 5px rgba(0,0,0,.25); transition:background .3s ease,border-color .3s ease;
-  }
-  .theme-switch__thumb{
-    display:grid; width:1.35rem; height:1.35rem; place-items:center; border-radius:50%;
-    background:#102f5e; box-shadow:0 3px 10px rgba(0,0,0,.3);
-    transform:translateX(0); transition:transform .3s cubic-bezier(.2,.8,.2,1),background .3s ease;
-  }
-  .theme-switch svg{ position:absolute; width:.75rem; height:.75rem; }
-  .theme-switch .sun-icon{ left:.49rem; opacity:0; }
-  .theme-switch .moon-icon{ right:.48rem; opacity:1; }
-  html[data-theme="light"] .theme-switch{ background:#e7eef8; border-color:rgba(31,76,139,.2); color:#174c8f; }
-  html[data-theme="light"] .theme-switch__thumb{ transform:translateX(1.38rem); background:#fff; }
-  html[data-theme="light"] .theme-switch .sun-icon{ opacity:1; }
-  html[data-theme="light"] .theme-switch .moon-icon{ opacity:0; }
+  footer{ border-color:rgba(31,76,139,.1) !important; }
 
-  /* Soft, high-contrast surfaces for light mode. */
-  html[data-theme="light"] #site-nav{ background:rgba(248,251,255,.82) !important; border-color:rgba(31,76,139,.1); }
-  html[data-theme="light"] .grid-texture{ opacity:.72; }
-  html[data-theme="light"] .grain-overlay{ opacity:.025; }
-  html[data-theme="light"] .ambient-orb{ display:none !important; }
-  html[data-theme="light"] .glass,
-  html[data-theme="light"] .trust-card,
-  html[data-theme="light"] .fragment-card{ background:#fff; border-color:rgba(23,76,143,.2); box-shadow:0 20px 45px -30px rgba(11,45,92,.42); }
-  html[data-theme="light"] .feature-card{
-    background:linear-gradient(155deg,#ffffff 0%,#f1f5fb 55%,#e6eef8 100%);
-    border-color:rgba(23,76,143,.22);
-    box-shadow:0 18px 42px -26px rgba(11,45,92,.5),inset 0 3px 0 rgba(23,76,143,.07);
-  }
-  html[data-theme="light"] .feature-card:hover{
-    border-color:rgba(231,121,24,.5);
-    box-shadow:0 24px 52px -28px rgba(11,45,92,.55),0 12px 32px -24px rgba(231,121,24,.45);
-  }
-  html[data-theme="light"] .fc-visual svg{
-    filter:drop-shadow(0 15px 18px rgba(11,45,92,.15));
-  }
-  html[data-theme="light"] #features{
-    background:linear-gradient(180deg,rgba(225,235,248,.55),rgba(247,250,254,.3),rgba(225,235,248,.55)) !important;
-  }
-  html[data-theme="light"] .trust-card.trust-pledge{ background:linear-gradient(120deg,rgba(231,121,24,.1),rgba(255,255,255,.82)); }
-  html[data-theme="light"] .input-field{ background:rgba(255,255,255,.8); color:var(--ice); }
-  html[data-theme="light"] .input-field::placeholder{ color:#8190a6; }
-  html[data-theme="light"] .badge{ background:rgba(255,255,255,.58); }
-  html[data-theme="light"] footer{ border-color:rgba(31,76,139,.1); }
-  /* Tailwind emits these brand utilities as fixed colors, so explicitly
-     remap them in light mode instead of relying on the CSS tokens alone. */
-  html[data-theme="light"] .text-ice,
-  html[data-theme="light"] .text-ice\/90{ color:var(--ice) !important; }
-  html[data-theme="light"] .hover\:text-ice:hover{ color:var(--ice) !important; }
-  html[data-theme="light"] .device-screen{ background:radial-gradient(120% 70% at 50% 0%,rgba(231,121,24,.08),transparent 60%),#f8fbff; }
-  html[data-theme="light"] .device-screen .bg-white\/5{ background:rgba(23,76,143,.045) !important; }
-  html[data-theme="light"] .device-screen .border-white\/5,
-  html[data-theme="light"] .device-screen .border-white\/10{ border-color:rgba(23,76,143,.12) !important; }
-  html[data-theme="light"] header svg[aria-label="Fintoo AI"] .st1,
-  html[data-theme="light"] footer svg[aria-label="Fintoo AI"] .st1{ fill:#10254a; }
+  #features{ background:linear-gradient(180deg,rgba(225,235,248,.55),rgba(247,250,254,.3),rgba(225,235,248,.55)) !important; }
+
+  header svg[aria-label="Fintoo AI"] .st1,
+  footer svg[aria-label="Fintoo AI"] .st1{ fill:#10254a; }
 
   /* ============ Reduced motion safety net ============ */
   @media (prefers-reduced-motion: reduce){
@@ -464,11 +396,6 @@
       <a href="#trust" class="transition-colors hover:text-ice">Privacy</a>
     </nav>
     <div class="flex items-center gap-3">
-      <button id="theme-toggle" class="theme-switch" type="button" role="switch" aria-checked="false" aria-label="Switch to light mode" title="Switch color theme">
-        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3.5" fill="currentColor"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        <span class="theme-switch__thumb" aria-hidden="true"></span>
-        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 15.2A8.5 8.5 0 118.8 4a7 7 0 0011.2 11.2z" fill="currentColor"/></svg>
-      </button>
       <a href="#join" class="hidden rounded-full border border-orange/40 bg-orange/10 px-4 py-2 text-xs font-medium tracking-wide text-ice transition-colors hover:bg-orange/20 sm:inline-flex">Join waitlist</a>
     </div>
   </div>
@@ -1103,22 +1030,6 @@
 
 <script>
 (function () {
-  const themeToggle = document.getElementById('theme-toggle');
-
-  function syncThemeControl() {
-    const isLight = document.documentElement.dataset.theme === 'light';
-    themeToggle?.setAttribute('aria-checked', String(isLight));
-    themeToggle?.setAttribute('aria-label', `Switch to ${isLight ? 'dark' : 'light'} mode`);
-  }
-
-  themeToggle?.addEventListener('click', () => {
-    const nextTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
-    document.documentElement.dataset.theme = nextTheme;
-    localStorage.setItem('fintoo-theme', nextTheme);
-    syncThemeControl();
-  });
-  syncThemeControl();
-
   gsap.registerPlugin(ScrollTrigger, Observer, SplitText);
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1475,22 +1386,23 @@
   }
 
   /* ============================================================
-     Section-heading reveal grammar — direct descendant of the
-     supplied source's SplitText + stagger-from-random treatment.
+     Section-heading reveal grammar — each wrapped line (i.e. each
+     visual sentence segment) slides up as one unit, staggered line
+     by line, rather than animating individual characters.
      Applied once, on scroll, to every `.reveal-heading`.
      ============================================================ */
   function revealHeading(el) {
     if (!el._split) {
-      el._split = new SplitText(el, { type: 'chars,words,lines', linesClass: 'clip-text' });
+      el._split = new SplitText(el, { type: 'lines', linesClass: 'clip-text' });
     }
     if (reduceMotion) {
-      gsap.set(el._split.chars, { autoAlpha: 1, yPercent: 0 });
+      gsap.set(el._split.lines, { autoAlpha: 1, yPercent: 0 });
       return;
     }
     gsap.fromTo(
-      el._split.chars,
+      el._split.lines,
       { autoAlpha: 0, yPercent: 130 },
-      { autoAlpha: 1, yPercent: 0, duration: 1, ease: 'power2', stagger: { each: 0.018, from: 'random' } }
+      { autoAlpha: 1, yPercent: 0, duration: 0.9, ease: 'power3.out', stagger: 0.14 }
     );
   }
 
