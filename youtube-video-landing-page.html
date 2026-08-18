@@ -37,62 +37,23 @@
         fontFamily: {
           sans: ['"Google Sans"', '"Product Sans"', 'Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif']
         },
-        maxWidth: { shell: '1180px' }
+        maxWidth: { shell: '1180px' },
+        keyframes: {
+          marquee: {
+            from: { transform: 'translateX(0)' },
+            to: { transform: 'translateX(-50%)' }
+          }
+        },
+        animation: {
+          marquee: 'marquee 32s linear infinite'
+        }
       }
     }
   }
 </script>
-<style>
-  html { scroll-behavior: smooth; }
-  body { -webkit-font-smoothing: antialiased; }
-
-  /* ── Accordion ─────────────────────────────── */
-  .faq-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .32s ease; }
-  .faq-item.open .faq-panel { grid-template-rows: 1fr; }
-  .faq-panel > div { overflow: hidden; }
-  .faq-item.open .faq-chevron { transform: rotate(180deg); }
-
-  /* ── Marquee ───────────────────────────────── */
-  .marquee { display: flex; width: max-content; animation: slide 32s linear infinite; }
-  .marquee-wrap:hover .marquee { animation-play-state: paused; }
-  @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-  /* ── Timeline rail ─────────────────────────── */
-  .rail-item .rail-dot { transition: all .3s ease; }
-  .rail-item.active .rail-dot { background:#042b62; color:#fff; border-color:#042b62; box-shadow:0 0 0 6px rgba(4,43,98,.08); }
-  .rail-item.active .rail-title { color:#042b62; }
-  .rail-item:not(.active) .rail-body { color:#94a3b8; }
-
-  /* ── Slider ────────────────────────────────── */
-  .slides { display: flex; transition: transform .5s cubic-bezier(.4,0,.2,1); }
-  .no-scrollbar::-webkit-scrollbar { display: none; }
-
-  /* ── Subtle pattern for goals band ─────────── */
-  .pattern {
-    background-color: #f4f7fb;
-    background-image:
-      radial-gradient(circle at 1px 1px, rgba(4,43,98,.07) 1px, transparent 0);
-    background-size: 22px 22px;
-  }
-
-  .field:focus { outline: none; border-color:#042b62; box-shadow: 0 0 0 3px rgba(4,43,98,.10); }
-  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
-    outline: 2px solid #dd7300; outline-offset: 2px;
-  }
-
-  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
-  .reveal.in { opacity: 1; transform: none; }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .marquee { animation: none; }
-    .reveal { opacity: 1; transform: none; transition: none; }
-    .slides, .faq-panel { transition: none; }
-  }
-</style>
 </head>
 
-<body class="font-sans text-slate-600 bg-white antialiased pb-16 lg:pb-0">
+<body class="scroll-smooth overflow-x-hidden font-sans text-slate-600 bg-white antialiased pb-16 lg:pb-0 [&_a:focus-visible]:outline [&_a:focus-visible]:outline-2 [&_a:focus-visible]:outline-orange [&_a:focus-visible]:outline-offset-2 [&_button:focus-visible]:outline [&_button:focus-visible]:outline-2 [&_button:focus-visible]:outline-orange [&_button:focus-visible]:outline-offset-2 [&_input:focus-visible]:outline [&_input:focus-visible]:outline-2 [&_input:focus-visible]:outline-orange [&_input:focus-visible]:outline-offset-2 [&_select:focus-visible]:outline [&_select:focus-visible]:outline-2 [&_select:focus-visible]:outline-orange [&_select:focus-visible]:outline-offset-2 motion-reduce:scroll-auto">
 
 <!-- ══════════ HEADER ══════════ -->
 <header class="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-hair">
@@ -106,7 +67,7 @@
         height="35"
       />
     </a>
-    <a href="tel:+919699800600" class="flex items-center gap-2 text-[13px] font-medium text-slate-500 hover:text-navy transition">
+    <a href="tel:+919699800600" class="flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-navy transition">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
@@ -119,12 +80,12 @@
 <!-- ══════════ HERO ══════════ -->
 <section class="bg-white">
   <div class="max-w-7xl mx-auto px-5 pt-8 pb-12 lg:pt-12 lg:pb-16">
-    <div class="grid lg:grid-cols-[1fr_380px] gap-8 lg:gap-12 items-start">
+    <div class="grid lg:grid-cols-3 gap-8 lg:gap-12 items-start">
 
       <!-- Left: video + pitch -->
-      <div>
+      <div class="min-w-0 lg:col-span-2">
         <!-- Video card -->
-        <div class="relative rounded-xl overflow-hidden bg-navy-900 aspect-video shadow-[0_18px_50px_-24px_rgba(4,43,98,.55)]">
+        <div class="relative rounded-xl overflow-hidden bg-navy-900 aspect-video shadow-xl">
           <div class="absolute inset-0 bg-[radial-gradient(120%_100%_at_20%_0%,#0a3d80_0%,#042b62_45%,#021b3f_100%)]"></div>
           <div class="absolute inset-x-0 top-0 p-4 flex items-center gap-2.5">
             <span class="w-7 h-7 rounded-full bg-white grid place-items-center shrink-0">
@@ -134,8 +95,8 @@
               </svg>
             </span>
             <div class="leading-tight">
-              <p class="text-white text-[13px] font-semibold">Financial Planning with Fintoo</p>
-              <p class="text-white/55 text-[11px]">Fintoo · 0:21</p>
+              <p class="text-white text-sm font-semibold">Financial Planning with Fintoo</p>
+              <p class="text-white/55 text-xs">Fintoo · 0:21</p>
             </div>
           </div>
           <button type="button" class="absolute inset-0 grid place-items-center group" aria-label="Play the Fintoo financial planning video">
@@ -144,10 +105,10 @@
             </span>
           </button>
           <div class="absolute inset-x-0 bottom-0 px-4 pb-4">
-            <p class="text-white/85 text-[12px] sm:text-[13px] font-medium bg-black/35 inline-block rounded px-2 py-1">
+            <p class="text-white/85 text-xs sm:text-sm font-medium bg-black/35 inline-block rounded px-2 py-1">
               फाइनेंशियल प्लानिंग आपका काम आसान करे
             </p>
-            <div class="mt-2.5 h-[3px] rounded-full bg-white/25 overflow-hidden">
+            <div class="mt-2.5 h-1 rounded-full bg-white/25 overflow-hidden">
               <div class="h-full w-1/4 bg-orange rounded-full"></div>
             </div>
           </div>
@@ -155,62 +116,134 @@
 
         <!-- Pitch -->
         <div class="mt-7">
-          <span class="inline-block text-[12px] font-semibold text-navy bg-navy-100 rounded-md px-2.5 py-1">
+          <span class="inline-block text-xs font-semibold text-navy bg-navy-100 rounded-md px-2.5 py-1">
             Free consultation
           </span>
-          <h1 class="mt-4 text-[27px] sm:text-[34px] lg:text-[38px] leading-[1.15] font-bold text-navy tracking-tight">
+          <h1 class="mt-4 text-3xl sm:text-4xl lg:text-4xl leading-[1.15] font-bold text-navy tracking-tight">
             Expert financial planning<br class="hidden sm:block" />
             <span class="text-orange">with a SEBI-registered Investment Advisor</span>
           </h1>
-          <p class="mt-4 text-[14.5px] leading-relaxed text-slate-500 max-w-xl">
+          <p class="mt-4 text-sm leading-relaxed text-slate-500 max-w-xl">
             Start with a free consultation. Fintoo pairs an AI-powered planning engine with a human advisor,
             so you get a plan built around your income, goals and tax situation — not a product pitch.
             Talk to us about investments, mutual funds, retirement or tax.
           </p>
+
+          <!-- Trust badges -->
+          <div class="relative mt-6 h-14 w-full max-w-full overflow-hidden sm:hidden" aria-label="Fintoo achievements">
+            <div class="absolute inset-y-0 left-0 flex w-max motion-safe:animate-marquee hover:[animation-play-state:paused]">
+              <div class="flex shrink-0 items-center gap-3 pr-3">
+                <div class="flex items-center gap-2 whitespace-nowrap rounded-xl border border-navy-100 bg-navy-50 px-3 py-2.5">
+                  <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white text-orange shadow-sm" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                  </span>
+                  <strong class="text-lg leading-none text-navy">10+</strong>
+                  <span class="text-xs font-semibold text-slate-500">Years of expertise</span>
+                </div>
+                <div class="flex items-center gap-2 whitespace-nowrap rounded-xl border border-navy-100 bg-navy-50 px-3 py-2.5">
+                  <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white text-orange shadow-sm" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/><path d="m3 7 6-4 6 5 6-4"/></svg>
+                  </span>
+                  <strong class="text-lg leading-none text-navy">5,000+ CR</strong>
+                  <span class="text-xs font-semibold text-slate-500">AUT</span>
+                </div>
+                <div class="flex items-center gap-2 whitespace-nowrap rounded-xl border border-navy-100 bg-navy-50 px-3 py-2.5">
+                  <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white text-orange shadow-sm" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  </span>
+                  <strong class="text-lg leading-none text-navy">500+</strong>
+                  <span class="text-xs font-semibold text-slate-500">Happy families</span>
+                </div>
+              </div>
+              <div class="flex shrink-0 items-center gap-3 pr-3" aria-hidden="true">
+                <div class="flex items-center gap-2 whitespace-nowrap rounded-xl border border-navy-100 bg-navy-50 px-3 py-2.5"><span class="grid h-8 w-8 place-items-center rounded-full bg-white text-orange shadow-sm"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><strong class="text-lg leading-none text-navy">10+</strong><span class="text-xs font-semibold text-slate-500">Years of expertise</span></div>
+                <div class="flex items-center gap-2 whitespace-nowrap rounded-xl border border-navy-100 bg-navy-50 px-3 py-2.5"><span class="grid h-8 w-8 place-items-center rounded-full bg-white text-orange shadow-sm"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/><path d="m3 7 6-4 6 5 6-4"/></svg></span><strong class="text-lg leading-none text-navy">5,000+ CR</strong><span class="text-xs font-semibold text-slate-500">AUT</span></div>
+                <div class="flex items-center gap-2 whitespace-nowrap rounded-xl border border-navy-100 bg-navy-50 px-3 py-2.5"><span class="grid h-8 w-8 place-items-center rounded-full bg-white text-orange shadow-sm"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><strong class="text-lg leading-none text-navy">500+</strong><span class="text-xs font-semibold text-slate-500">Happy families</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 hidden max-w-xl grid-cols-3 gap-3 sm:grid" aria-label="Fintoo achievements">
+            <div class="flex min-h-24 flex-col items-center justify-center gap-1.5 rounded-xl border border-navy-100 bg-navy-50 px-2 py-3 text-center">
+              <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white text-orange shadow-sm" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+                </svg>
+              </span>
+              <div>
+                <p class="whitespace-nowrap text-lg sm:text-xl font-bold leading-none text-navy">10+</p>
+                <p class="mt-1 text-xs font-semibold leading-tight text-slate-500">Years of expertise</p>
+              </div>
+            </div>
+
+            <div class="flex min-h-24 flex-col items-center justify-center gap-1.5 rounded-xl border border-navy-100 bg-navy-50 px-2 py-3 text-center">
+              <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white text-orange shadow-sm" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/><path d="m3 7 6-4 6 5 6-4"/>
+                </svg>
+              </span>
+              <div>
+                <p class="whitespace-nowrap text-lg sm:text-xl font-bold leading-none text-navy">5,000+ CR</p>
+                <p class="mt-1 text-xs font-semibold leading-tight text-slate-500">AUT</p>
+              </div>
+            </div>
+
+            <div class="flex min-h-24 flex-col items-center justify-center gap-1.5 rounded-xl border border-navy-100 bg-navy-50 px-2 py-3 text-center">
+              <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white text-orange shadow-sm" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </span>
+              <div>
+                <p class="whitespace-nowrap text-lg sm:text-xl font-bold leading-none text-navy">500+</p>
+                <p class="mt-1 text-xs font-semibold leading-tight text-slate-500">Happy families</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Right: lead form -->
       <div id="register" class="lg:sticky lg:top-20 scroll-mt-20">
-        <div class="rounded-xl border border-hair bg-white p-5 sm:p-6 shadow-[0_14px_44px_-22px_rgba(4,43,98,.32)]">
+        <div class="rounded-xl border border-hair bg-white p-5 sm:p-6 shadow-xl">
 
           <!-- Step indicator -->
           <div class="flex items-center justify-between mb-5" id="stepHead">
-            <h2 class="text-navy font-bold text-[17px]">Book your free call</h2>
-            <span id="stepCount" class="text-[11px] font-semibold text-slate-400 tracking-wide">STEP 1 OF 2</span>
+            <h2 class="text-navy font-bold text-lg">Book your free call</h2>
+            <span id="stepCount" class="text-xs font-semibold text-slate-400 tracking-wide">STEP 1 OF 2</span>
           </div>
 
           <form id="leadForm" novalidate>
             <!-- Step 1 -->
             <div data-step="1" class="space-y-4">
               <div>
-                <label for="fullName" class="block text-[12.5px] font-semibold text-slate-700 mb-1.5">Full name <span class="text-orange">*</span></label>
+                <label for="fullName" class="block text-sm font-semibold text-slate-700 mb-1.5">Full name <span class="text-orange">*</span></label>
                 <input id="fullName" name="fullName" type="text" autocomplete="name" placeholder="Enter your full name"
-                  class="field w-full rounded-lg border border-hair bg-mist/60 px-3.5 py-2.5 text-[14px] placeholder:text-slate-400 transition" />
-                <p class="err hidden mt-1 text-[11.5px] text-red-600"></p>
+                  class="w-full rounded-lg border border-hair bg-mist/60 px-3.5 py-2.5 text-sm placeholder:text-slate-400 transition focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy/10" />
+                <p class="err hidden mt-1 text-xs text-red-600"></p>
               </div>
 
               <div>
-                <label for="phone" class="block text-[12.5px] font-semibold text-slate-700 mb-1.5">Phone number <span class="text-orange">*</span></label>
+                <label for="phone" class="block text-sm font-semibold text-slate-700 mb-1.5">Phone number <span class="text-orange">*</span></label>
                 <div class="flex gap-2">
-                  <span class="shrink-0 inline-flex items-center gap-1.5 rounded-lg border border-hair bg-mist/60 px-3 text-[14px] text-slate-600">
+                  <span class="shrink-0 inline-flex items-center gap-1.5 rounded-lg border border-hair bg-mist/60 px-3 text-sm text-slate-600">
                     <span aria-hidden="true">🇮🇳</span> +91
                   </span>
                   <input id="phone" name="phone" type="tel" inputmode="numeric" maxlength="10" placeholder="10-digit mobile number"
-                    class="field w-full rounded-lg border border-hair bg-mist/60 px-3.5 py-2.5 text-[14px] placeholder:text-slate-400 transition" />
+                    class="w-full rounded-lg border border-hair bg-mist/60 px-3.5 py-2.5 text-sm placeholder:text-slate-400 transition focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy/10" />
                 </div>
-                <p class="err hidden mt-1 text-[11.5px] text-red-600"></p>
+                <p class="err hidden mt-1 text-xs text-red-600"></p>
               </div>
 
               <div>
-                <label for="email" class="block text-[12.5px] font-semibold text-slate-700 mb-1.5">Email <span class="text-orange">*</span></label>
+                <label for="email" class="block text-sm font-semibold text-slate-700 mb-1.5">Email <span class="text-orange">*</span></label>
                 <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com"
-                  class="field w-full rounded-lg border border-hair bg-mist/60 px-3.5 py-2.5 text-[14px] placeholder:text-slate-400 transition" />
-                <p class="err hidden mt-1 text-[11.5px] text-red-600"></p>
+                  class="w-full rounded-lg border border-hair bg-mist/60 px-3.5 py-2.5 text-sm placeholder:text-slate-400 transition focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy/10" />
+                <p class="err hidden mt-1 text-xs text-red-600"></p>
               </div>
 
               <button type="button" id="nextBtn"
-                class="w-full rounded-lg bg-orange hover:bg-orange-600 text-white font-semibold text-[14.5px] py-3 transition">
+                class="w-full rounded-lg bg-orange hover:bg-orange-600 text-white font-semibold text-sm py-3 transition">
                 Next
               </button>
             </div>
@@ -218,9 +251,9 @@
             <!-- Step 2 -->
             <div data-step="2" class="space-y-4 hidden">
               <div>
-                <label for="income" class="block text-[12.5px] font-semibold text-slate-700 mb-1.5">Annual income</label>
+                <label for="income" class="block text-sm font-semibold text-slate-700 mb-1.5">Annual income</label>
                 <select id="income" name="income"
-                  class="field w-full rounded-lg border border-hair bg-mist/60 px-3.5 py-2.5 text-[14px] text-slate-600 transition">
+                  class="w-full rounded-lg border border-hair bg-mist/60 px-3.5 py-2.5 text-sm text-slate-600 transition focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy/10">
                   <option value="">Select option</option>
                   <option>Below ₹10 lakh</option>
                   <option>₹10 – 25 lakh</option>
@@ -231,34 +264,34 @@
               </div>
 
               <div>
-                <label for="callTime" class="block text-[12.5px] font-semibold text-slate-700 mb-1.5">Preferred time to call <span class="text-slate-400 font-normal">(optional)</span></label>
+                <label for="callTime" class="block text-sm font-semibold text-slate-700 mb-1.5">Preferred time to call <span class="text-slate-400 font-normal">(optional)</span></label>
                 <input id="callTime" name="callTime" type="datetime-local"
-                  class="field w-full rounded-lg border border-hair bg-mist/60 px-3.5 py-2.5 text-[14px] text-slate-600 transition" />
+                  class="w-full rounded-lg border border-hair bg-mist/60 px-3.5 py-2.5 text-sm text-slate-600 transition focus:border-navy focus:outline-none focus:ring-2 focus:ring-navy/10" />
               </div>
 
               <div>
-                <span class="block text-[12.5px] font-semibold text-slate-700 mb-1.5">What do you need help with?</span>
+                <span class="block text-sm font-semibold text-slate-700 mb-1.5">What do you need help with?</span>
                 <div class="flex flex-wrap gap-2" id="topicChips">
-                  <button type="button" data-chip class="rounded-full border border-hair px-3 py-1.5 text-[12.5px] text-slate-600 hover:border-navy-200 transition">Investments</button>
-                  <button type="button" data-chip class="rounded-full border border-hair px-3 py-1.5 text-[12.5px] text-slate-600 hover:border-navy-200 transition">Retirement</button>
-                  <button type="button" data-chip class="rounded-full border border-hair px-3 py-1.5 text-[12.5px] text-slate-600 hover:border-navy-200 transition">Tax saving</button>
-                  <button type="button" data-chip class="rounded-full border border-hair px-3 py-1.5 text-[12.5px] text-slate-600 hover:border-navy-200 transition">NRI advisory</button>
+                  <button type="button" data-chip class="rounded-full border border-hair px-3 py-1.5 text-sm text-slate-600 hover:border-navy-200 transition">Investments</button>
+                  <button type="button" data-chip class="rounded-full border border-hair px-3 py-1.5 text-sm text-slate-600 hover:border-navy-200 transition">Retirement</button>
+                  <button type="button" data-chip class="rounded-full border border-hair px-3 py-1.5 text-sm text-slate-600 hover:border-navy-200 transition">Tax saving</button>
+                  <button type="button" data-chip class="rounded-full border border-hair px-3 py-1.5 text-sm text-slate-600 hover:border-navy-200 transition">NRI advisory</button>
                 </div>
               </div>
 
-              <label class="flex items-start gap-2.5 text-[11.5px] leading-relaxed text-slate-500">
+              <label class="flex items-start gap-2.5 text-xs leading-relaxed text-slate-500">
                 <input type="checkbox" id="consent" class="mt-0.5 accent-[#042b62] w-3.5 h-3.5" />
                 <span>I agree to be contacted by Fintoo about my consultation, including on WhatsApp.</span>
               </label>
-              <p id="consentErr" class="err hidden text-[11.5px] text-red-600"></p>
+              <p id="consentErr" class="err hidden text-xs text-red-600"></p>
 
               <div class="flex gap-2.5">
                 <button type="button" id="backBtn"
-                  class="shrink-0 rounded-lg border border-hair px-4 text-[14px] font-semibold text-slate-600 hover:border-navy-200 transition">
+                  class="shrink-0 rounded-lg border border-hair px-4 text-sm font-semibold text-slate-600 hover:border-navy-200 transition">
                   Back
                 </button>
                 <button type="submit"
-                  class="w-full rounded-lg bg-navy hover:bg-navy-600 text-white font-semibold text-[14.5px] py-3 transition">
+                  class="w-full rounded-lg bg-navy hover:bg-navy-600 text-white font-semibold text-sm py-3 transition">
                   Book my free call
                 </button>
               </div>
@@ -271,14 +304,14 @@
                   <path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
-              <h3 class="mt-4 text-navy font-bold text-[17px]">You're on the list</h3>
-              <p class="mt-2 text-[13.5px] text-slate-500 leading-relaxed">
+              <h3 class="mt-4 text-navy font-bold text-lg">You're on the list</h3>
+              <p class="mt-2 text-sm text-slate-500 leading-relaxed">
                 A Fintoo advisor will call you within one working day. Keep your income and investment details handy so the first call goes further.
               </p>
             </div>
           </form>
 
-          <p class="mt-4 pt-4 border-t border-hair text-[11px] text-slate-400 leading-relaxed">
+          <p class="mt-4 pt-4 border-t border-hair text-xs text-slate-400 leading-relaxed">
             Your details stay private. No spam, no cold selling — one advisor, one call.
           </p>
         </div>
@@ -288,380 +321,150 @@
   </div>
 </section>
 
-<!-- ══════════ WHY PLANNING ══════════ -->
-<section class="bg-mist border-y border-hair">
-  <div class="max-w-7xl mx-auto px-5 py-14 lg:py-16">
-    <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-      <div class="reveal">
-        <h2 class="text-[24px] sm:text-[28px] font-bold text-navy leading-tight tracking-tight">
-          Why financial planning?<br />
-          <span class="text-orange">Your guided roadmap to wealth</span>
-        </h2>
-        <p class="mt-4 text-[14.5px] leading-relaxed text-slate-500 max-w-lg">
-          In a market full of noise, how do you know you're on the right path? A Fintoo advisor doesn't just
-          manage your money — they show you the route from where you are today to where you want to be.
-        </p>
 
-        <ul class="mt-6 space-y-3.5">
-          <li class="flex gap-3 items-start">
-            <svg class="mt-0.5 shrink-0" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle cx="12" cy="12" r="10" fill="#e3ecf8"/><path d="M8 12.2l2.8 2.8L16 9.6" stroke="#042b62" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="text-[14px] text-slate-600">Fund your biggest goals — a home, your child's education, an early retirement</span>
-          </li>
-          <li class="flex gap-3 items-start">
-            <svg class="mt-0.5 shrink-0" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle cx="12" cy="12" r="10" fill="#e3ecf8"/><path d="M8 12.2l2.8 2.8L16 9.6" stroke="#042b62" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="text-[14px] text-slate-600">Cut the guesswork out of investing and stop reacting to every market swing</span>
-          </li>
-          <li class="flex gap-3 items-start">
-            <svg class="mt-0.5 shrink-0" width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle cx="12" cy="12" r="10" fill="#e3ecf8"/><path d="M8 12.2l2.8 2.8L16 9.6" stroke="#042b62" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <span class="text-[14px] text-slate-600">Make tax, insurance and investment decisions that work together, not against each other</span>
-          </li>
-        </ul>
-
-        <a href="#register" class="mt-7 inline-flex items-center gap-2 rounded-lg bg-navy hover:bg-navy-600 text-white font-semibold text-[14px] px-6 py-3 transition">
-          Join Fintoo now
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-      </div>
-
-      <!-- Second video card -->
-      <div class="reveal relative rounded-xl overflow-hidden aspect-video shadow-[0_18px_50px_-26px_rgba(4,43,98,.5)]">
-        <div class="absolute inset-0 bg-[radial-gradient(120%_100%_at_80%_10%,#0a3d80_0%,#042b62_50%,#021b3f_100%)]"></div>
-        <div class="absolute inset-x-0 top-0 p-4 flex items-center gap-2.5">
-          <span class="w-7 h-7 rounded-full bg-white grid place-items-center shrink-0">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4 19 L12 3 L20 19" stroke="#042b62" stroke-width="3" stroke-linejoin="round"/>
-              <path d="M8.5 12.5 H16" stroke="#dd7300" stroke-width="3" stroke-linecap="round"/>
-            </svg>
-          </span>
-          <div class="leading-tight">
-            <p class="text-white text-[13px] font-semibold">Goal-based planning | Fintoo</p>
-            <p class="text-white/55 text-[11px]">Fintoo · 0:44</p>
-          </div>
-        </div>
-        <div class="absolute inset-0 grid place-items-center">
-          <p class="text-center px-6">
-            <span class="block text-orange font-extrabold tracking-tight text-[30px] sm:text-[40px] leading-none">PERSONALISED</span>
-            <span class="block text-white font-extrabold tracking-tight text-[30px] sm:text-[40px] leading-none">GOALS</span>
-          </p>
-        </div>
-        <button type="button" class="absolute inset-0 grid place-items-center group" aria-label="Play the goal-based planning video">
-          <span class="w-16 h-11 rounded-lg bg-white/95 grid place-items-center transition group-hover:bg-white group-hover:scale-105 shadow-lg">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#042b62" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-          </span>
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ THE FINTOO DIFFERENCE ══════════ -->
-<section class="bg-white">
-  <div class="max-w-7xl mx-auto px-5 py-14 lg:py-16">
-    <span class="inline-block text-[12px] font-semibold text-navy bg-navy-100 rounded-md px-2.5 py-1">The Fintoo difference</span>
-    <h2 class="mt-4 text-[24px] sm:text-[29px] font-bold text-navy leading-tight tracking-tight max-w-3xl">
-      Partner with a Fintoo advisor <span class="text-orange">for a secure tomorrow</span>
-    </h2>
-
-    <div class="mt-9 grid lg:grid-cols-2 gap-9 lg:gap-14 items-center">
-      <!-- Image slot -->
-      <div class="reveal relative rounded-xl overflow-hidden aspect-[4/3] bg-navy-50 border border-hair">
-        <div class="absolute inset-0 bg-[linear-gradient(150deg,#e3ecf8_0%,#f4f7fb_50%,#fff7ed_100%)]"></div>
-        <div class="absolute inset-0 grid place-items-center px-8 text-center">
-          <div>
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#042b62" stroke-width="1.4" class="mx-auto opacity-50" aria-hidden="true">
-              <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="m21 15-5-5L5 21"/>
-            </svg>
-            <p class="mt-3 text-[12.5px] text-navy/50 font-medium">Advisor + client photo goes here<br />(1200 × 900)</p>
-          </div>
-        </div>
-        <!-- floating stat -->
-        <div class="absolute left-4 bottom-4 rounded-lg bg-white/95 backdrop-blur border border-hair px-4 py-3 shadow-lg">
-          <p class="text-navy font-bold text-[19px] leading-none">500+</p>
-          <p class="text-[11.5px] text-slate-500 mt-1">Happy Families</p>
-        </div>
-      </div>
-
-      <!-- Rail -->
-      <div class="relative">
-        <span class="absolute left-[15px] top-3 bottom-3 w-px bg-hair" aria-hidden="true"></span>
-        <ul class="space-y-7">
-          <li class="rail-item flex gap-4 cursor-pointer">
-            <span class="rail-dot relative z-10 shrink-0 w-8 h-8 rounded-full bg-white border border-hair text-slate-400 grid place-items-center">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 20V10M18 20V4M6 20v-4" stroke-linecap="round"/></svg>
-            </span>
-            <div>
-              <h3 class="rail-title font-semibold text-[15px] text-slate-800 transition-colors">AI-powered, personalised plans</h3>
-              <p class="rail-body mt-1.5 text-[13.5px] leading-relaxed text-slate-500 transition-colors">
-                Our engine reads your income, spends, existing portfolio and goals, then your advisor turns it into a plan you can actually follow.
-              </p>
-            </div>
-          </li>
-          <li class="rail-item flex gap-4 cursor-pointer">
-            <span class="rail-dot relative z-10 shrink-0 w-8 h-8 rounded-full bg-white border border-hair text-slate-400 grid place-items-center">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" stroke-linejoin="round"/></svg>
-            </span>
-            <div>
-              <h3 class="rail-title font-semibold text-[15px] text-slate-800 transition-colors">SEBI-registered advice</h3>
-              <p class="rail-body mt-1.5 text-[13.5px] leading-relaxed text-slate-500 transition-colors">
-                Fintoo is a SEBI-registered Investment Advisor. You get advice you can hold us to, from certified planners — never a commission-led product push.
-              </p>
-            </div>
-          </li>
-          <li class="rail-item flex gap-4 cursor-pointer">
-            <span class="rail-dot relative z-10 shrink-0 w-8 h-8 rounded-full bg-white border border-hair text-slate-400 grid place-items-center">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 4v3M16 4v3" stroke-linecap="round"/></svg>
-            </span>
-            <div>
-              <h3 class="rail-title font-semibold text-[15px] text-slate-800 transition-colors">Your whole financial life, one place</h3>
-              <p class="rail-body mt-1.5 text-[13.5px] leading-relaxed text-slate-500 transition-colors">
-                Mutual funds, equity, insurance, tax and retirement tracked on a single dashboard — with your advisor reviewing it alongside you.
-              </p>
-            </div>
-          </li>
-          <li class="rail-item active flex gap-4 cursor-pointer">
-            <span class="rail-dot relative z-10 shrink-0 w-8 h-8 rounded-full bg-white border border-hair text-slate-400 grid place-items-center">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 17l6-6 4 4 7-7" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 8h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-            <div>
-              <h3 class="rail-title font-semibold text-[15px] text-slate-800 transition-colors">A decade of proof</h3>
-              <p class="rail-body mt-1.5 text-[13.5px] leading-relaxed text-slate-500 transition-colors">
-                Since 2015 we've advised 500+ families — resident Indians, NRIs and HNIs — across 180+ corporate partnerships.
-              </p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ GOALS / SERVICES ══════════ -->
-<section class="pattern border-y border-hair">
-  <div class="max-w-7xl mx-auto px-5 py-14 lg:py-16">
-    <h2 class="text-center text-[24px] sm:text-[29px] font-bold text-navy tracking-tight">
-      Your financial goals, <span class="text-orange">our expert plans.</span>
-    </h2>
-
-    <div class="mt-9 grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-      <!-- card -->
-      <article class="reveal rounded-xl bg-white border border-hair p-5 hover:border-navy-200 hover:shadow-[0_14px_38px_-24px_rgba(4,43,98,.4)] transition">
-        <span class="w-9 h-9 rounded-lg bg-navy-50 grid place-items-center">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#042b62" stroke-width="1.8" aria-hidden="true"><path d="M4 5h7v14H4zM13 5h7v14h-7z" stroke-linejoin="round"/></svg>
-        </span>
-        <h3 class="mt-3.5 font-semibold text-[15px] text-slate-800">Financial planning</h3>
-        <p class="mt-2 text-[13px] leading-relaxed text-slate-500">
-          One comprehensive plan that ties your income, savings, goals and risk cover together.
-        </p>
-      </article>
-
-      <article class="reveal rounded-xl bg-white border border-hair p-5 hover:border-navy-200 hover:shadow-[0_14px_38px_-24px_rgba(4,43,98,.4)] transition">
-        <span class="w-9 h-9 rounded-lg bg-orange-50 grid place-items-center">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#dd7300" stroke-width="1.8" aria-hidden="true"><path d="M4 18 L9.5 12 L13 15 L20 7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 7h5v5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        <h3 class="mt-3.5 font-semibold text-[15px] text-slate-800">Investment planning</h3>
-        <p class="mt-2 text-[13px] leading-relaxed text-slate-500">
-          A portfolio built for your risk appetite — direct mutual funds, equity, debt and global assets.
-        </p>
-      </article>
-
-      <article class="reveal rounded-xl bg-white border border-hair p-5 hover:border-navy-200 hover:shadow-[0_14px_38px_-24px_rgba(4,43,98,.4)] transition">
-        <span class="w-9 h-9 rounded-lg bg-navy-50 grid place-items-center">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#042b62" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.2"/></svg>
-        </span>
-        <h3 class="mt-3.5 font-semibold text-[15px] text-slate-800">Goal planning</h3>
-        <p class="mt-2 text-[13px] leading-relaxed text-slate-500">
-          A house, a sabbatical, a wedding — we price the goal, then build the SIP that gets you there.
-        </p>
-      </article>
-
-      <article class="reveal rounded-xl bg-white border border-hair p-5 hover:border-navy-200 hover:shadow-[0_14px_38px_-24px_rgba(4,43,98,.4)] transition">
-        <span class="w-9 h-9 rounded-lg bg-navy-50 grid place-items-center">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#042b62" stroke-width="1.8" aria-hidden="true"><path d="M3 8l9-4 9 4-9 4-9-4Z" stroke-linejoin="round"/><path d="M7 10.5V16c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5v-5.5" stroke-linecap="round"/></svg>
-        </span>
-        <h3 class="mt-3.5 font-semibold text-[15px] text-slate-800">Children's education</h3>
-        <p class="mt-2 text-[13px] leading-relaxed text-slate-500">
-          Fund a world-class education for your child without borrowing against your own retirement.
-        </p>
-      </article>
-
-      <article class="reveal rounded-xl bg-white border border-hair p-5 hover:border-navy-200 hover:shadow-[0_14px_38px_-24px_rgba(4,43,98,.4)] transition">
-        <span class="w-9 h-9 rounded-lg bg-orange-50 grid place-items-center">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#dd7300" stroke-width="1.8" aria-hidden="true"><path d="M5 20V10M12 20V5M19 20v-7" stroke-linecap="round"/></svg>
-        </span>
-        <h3 class="mt-3.5 font-semibold text-[15px] text-slate-800">Retirement planning</h3>
-        <p class="mt-2 text-[13px] leading-relaxed text-slate-500">
-          Know your retirement number, then build the corpus and withdrawal plan to match it.
-        </p>
-      </article>
-
-      <article class="reveal rounded-xl bg-white border border-hair p-5 hover:border-navy-200 hover:shadow-[0_14px_38px_-24px_rgba(4,43,98,.4)] transition">
-        <span class="w-9 h-9 rounded-lg bg-navy-50 grid place-items-center">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#042b62" stroke-width="1.8" aria-hidden="true"><path d="M7 17 17 7" stroke-linecap="round"/><circle cx="8.2" cy="8.2" r="2.2"/><circle cx="15.8" cy="15.8" r="2.2"/></svg>
-        </span>
-        <h3 class="mt-3.5 font-semibold text-[15px] text-slate-800">Tax planning</h3>
-        <p class="mt-2 text-[13px] leading-relaxed text-slate-500">
-          Old regime or new, capital gains or ESOPs — keep more of what you earn, legally.
-        </p>
-      </article>
-    </div>
-
-    <div class="mt-9 text-center">
-      <a href="#register" class="inline-flex items-center gap-2 rounded-lg bg-orange hover:bg-orange-600 text-white font-semibold text-[14px] px-7 py-3 transition">
-        Book a free consultation
-      </a>
-    </div>
-  </div>
-</section>
 
 <!-- ══════════ FAQ ══════════ -->
-<section class="bg-white">
+<!-- <section class="bg-white">
   <div class="max-w-7xl mx-auto px-5 py-14 lg:py-16 max-w-3xl">
-    <span class="inline-block text-[12px] font-semibold text-navy bg-navy-100 rounded-md px-2.5 py-1">FAQs</span>
-    <h2 class="mt-4 text-[24px] sm:text-[28px] font-bold text-navy tracking-tight">Frequently asked questions</h2>
+    <span class="inline-block text-xs font-semibold text-navy bg-navy-100 rounded-md px-2.5 py-1">FAQs</span>
+    <h2 class="mt-4 text-2xl sm:text-3xl font-bold text-navy tracking-tight">Frequently asked questions</h2>
 
     <div class="mt-7 space-y-2.5" id="faqList">
-      <!-- items injected below in markup -->
+
       <div class="faq-item rounded-lg border border-hair bg-mist/60 overflow-hidden">
         <button type="button" class="faq-btn w-full flex items-center justify-between gap-4 text-left px-4 py-3.5" aria-expanded="false">
-          <span class="text-[14px] font-medium text-slate-800">What is financial planning, and how does Fintoo help?</span>
+          <span class="text-sm font-medium text-slate-800">What is financial planning, and how does Fintoo help?</span>
           <svg class="faq-chevron shrink-0 transition-transform" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div class="faq-panel"><div><p class="px-4 pb-4 text-[13.5px] leading-relaxed text-slate-500">
+        <div class="faq-panel"><div><p class="px-4 pb-4 text-sm leading-relaxed text-slate-500">
           Financial planning maps every rupee you earn to a purpose — emergencies, goals, tax, retirement. Fintoo's AI engine analyses your cash flow and portfolio, and a SEBI-registered advisor turns that analysis into a plan you review with them every quarter.
         </p></div></div>
       </div>
 
       <div class="faq-item rounded-lg border border-hair bg-mist/60 overflow-hidden">
         <button type="button" class="faq-btn w-full flex items-center justify-between gap-4 text-left px-4 py-3.5" aria-expanded="false">
-          <span class="text-[14px] font-medium text-slate-800">How soon will an advisor call me?</span>
+          <span class="text-sm font-medium text-slate-800">How soon will an advisor call me?</span>
           <svg class="faq-chevron shrink-0 transition-transform" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div class="faq-panel"><div><p class="px-4 pb-4 text-[13.5px] leading-relaxed text-slate-500">
+        <div class="faq-panel"><div><p class="px-4 pb-4 text-sm leading-relaxed text-slate-500">
           Within one working day of your form submission. If you pick a preferred slot, we'll call you then instead.
         </p></div></div>
       </div>
 
       <div class="faq-item rounded-lg border border-hair bg-mist/60 overflow-hidden">
         <button type="button" class="faq-btn w-full flex items-center justify-between gap-4 text-left px-4 py-3.5" aria-expanded="false">
-          <span class="text-[14px] font-medium text-slate-800">Is the first consultation really free?</span>
+          <span class="text-sm font-medium text-slate-800">Is the first consultation really free?</span>
           <svg class="faq-chevron shrink-0 transition-transform" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div class="faq-panel"><div><p class="px-4 pb-4 text-[13.5px] leading-relaxed text-slate-500">
+        <div class="faq-panel"><div><p class="px-4 pb-4 text-sm leading-relaxed text-slate-500">
           Yes. The first call costs nothing and carries no obligation. If you decide to go ahead, your advisor will walk you through Fintoo's advisory fees before anything is charged.
         </p></div></div>
       </div>
 
       <div class="faq-item rounded-lg border border-hair bg-mist/60 overflow-hidden">
         <button type="button" class="faq-btn w-full flex items-center justify-between gap-4 text-left px-4 py-3.5" aria-expanded="false">
-          <span class="text-[14px] font-medium text-slate-800">Is my data safe with Fintoo?</span>
+          <span class="text-sm font-medium text-slate-800">Is my data safe with Fintoo?</span>
           <svg class="faq-chevron shrink-0 transition-transform" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div class="faq-panel"><div><p class="px-4 pb-4 text-[13.5px] leading-relaxed text-slate-500">
+        <div class="faq-panel"><div><p class="px-4 pb-4 text-sm leading-relaxed text-slate-500">
           Your data is encrypted in transit and at rest, and is never sold or shared with third parties for marketing. Only your assigned advisory team can see your plan.
         </p></div></div>
       </div>
 
       <div class="faq-item rounded-lg border border-hair bg-mist/60 overflow-hidden">
         <button type="button" class="faq-btn w-full flex items-center justify-between gap-4 text-left px-4 py-3.5" aria-expanded="false">
-          <span class="text-[14px] font-medium text-slate-800">Can NRIs use Fintoo?</span>
+          <span class="text-sm font-medium text-slate-800">Can NRIs use Fintoo?</span>
           <svg class="faq-chevron shrink-0 transition-transform" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div class="faq-panel"><div><p class="px-4 pb-4 text-[13.5px] leading-relaxed text-slate-500">
+        <div class="faq-panel"><div><p class="px-4 pb-4 text-sm leading-relaxed text-slate-500">
           Yes. We advise NRIs on NRE/NRO investments, repatriation, DTAA and India-side tax filing, and we schedule calls around your time zone.
         </p></div></div>
       </div>
 
       <div class="faq-item rounded-lg border border-hair bg-mist/60 overflow-hidden">
         <button type="button" class="faq-btn w-full flex items-center justify-between gap-4 text-left px-4 py-3.5" aria-expanded="false">
-          <span class="text-[14px] font-medium text-slate-800">How do you pick the advisor I'll work with?</span>
+          <span class="text-sm font-medium text-slate-800">How do you pick the advisor I'll work with?</span>
           <svg class="faq-chevron shrink-0 transition-transform" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div class="faq-panel"><div><p class="px-4 pb-4 text-[13.5px] leading-relaxed text-slate-500">
+        <div class="faq-panel"><div><p class="px-4 pb-4 text-sm leading-relaxed text-slate-500">
           We match you on what you need help with and how complex your finances are — a salaried first-time investor and a business owner with ESOPs get different specialists.
         </p></div></div>
       </div>
 
       <div class="faq-item rounded-lg border border-hair bg-mist/60 overflow-hidden">
         <button type="button" class="faq-btn w-full flex items-center justify-between gap-4 text-left px-4 py-3.5" aria-expanded="false">
-          <span class="text-[14px] font-medium text-slate-800">Why work with an advisor when I can invest myself?</span>
+          <span class="text-sm font-medium text-slate-800">Why work with an advisor when I can invest myself?</span>
           <svg class="faq-chevron shrink-0 transition-transform" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div class="faq-panel"><div><p class="px-4 pb-4 text-[13.5px] leading-relaxed text-slate-500">
+        <div class="faq-panel"><div><p class="px-4 pb-4 text-sm leading-relaxed text-slate-500">
           Picking funds is the easy part. An advisor sizes your goals correctly, keeps your asset allocation honest, plans the tax around exits, and stops you selling in a bad month.
         </p></div></div>
       </div>
 
       <div class="faq-item rounded-lg border border-hair bg-mist/60 overflow-hidden">
         <button type="button" class="faq-btn w-full flex items-center justify-between gap-4 text-left px-4 py-3.5" aria-expanded="false">
-          <span class="text-[14px] font-medium text-slate-800">Is this only for high-net-worth individuals?</span>
+          <span class="text-sm font-medium text-slate-800">Is this only for high-net-worth individuals?</span>
           <svg class="faq-chevron shrink-0 transition-transform" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div class="faq-panel"><div><p class="px-4 pb-4 text-[13.5px] leading-relaxed text-slate-500">
+        <div class="faq-panel"><div><p class="px-4 pb-4 text-sm leading-relaxed text-slate-500">
           No. We advise salaried professionals starting their first SIP as well as HNI and UHNI families — the plan scales to the situation.
         </p></div></div>
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- ══════════ MEDIA MENTIONS ══════════ -->
-<section class="bg-mist border-y border-hair py-11 overflow-hidden">
+<!-- <section class="bg-mist border-y border-hair py-11 overflow-hidden">
   <div class="text-center">
-    <span class="inline-block text-[12px] font-semibold text-navy bg-navy-100 rounded-md px-2.5 py-1">Media mentions</span>
+    <span class="inline-block text-xs font-semibold text-navy bg-navy-100 rounded-md px-2.5 py-1">Media mentions</span>
   </div>
   <div class="marquee-wrap mt-7 relative">
     <div class="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-mist to-transparent z-10"></div>
     <div class="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-mist to-transparent z-10"></div>
     <div class="marquee gap-10 sm:gap-16 items-center text-slate-400">
-      <span class="text-[15px] sm:text-[17px] font-semibold whitespace-nowrap">The Economic Times</span>
-      <span class="text-[15px] sm:text-[17px] font-semibold whitespace-nowrap">Business Standard</span>
-      <span class="text-[15px] sm:text-[17px] font-semibold whitespace-nowrap">Mint</span>
-      <span class="text-[15px] sm:text-[17px] font-semibold whitespace-nowrap">Moneycontrol</span>
-      <span class="text-[15px] sm:text-[17px] font-semibold whitespace-nowrap">CNBC-TV18</span>
-      <span class="text-[15px] sm:text-[17px] font-semibold whitespace-nowrap">Zee Business</span>
-      <span class="text-[15px] sm:text-[17px] font-semibold whitespace-nowrap" aria-hidden="true">The Economic Times</span>
-      <span class="text-[15px] sm:text-[17px] font-semibold whitespace-nowrap" aria-hidden="true">Business Standard</span>
-      <span class="text-[15px] sm:text-[17px] font-semibold whitespace-nowrap" aria-hidden="true">Mint</span>
-      <span class="text-[15px] sm:text-[17px] font-semibold whitespace-nowrap" aria-hidden="true">Moneycontrol</span>
-      <span class="text-[15px] sm:text-[17px] font-semibold whitespace-nowrap" aria-hidden="true">CNBC-TV18</span>
-      <span class="text-[15px] sm:text-[17px] font-semibold whitespace-nowrap" aria-hidden="true">Zee Business</span>
+      <span class="text-sm sm:text-lg font-semibold whitespace-nowrap">The Economic Times</span>
+      <span class="text-sm sm:text-lg font-semibold whitespace-nowrap">Business Standard</span>
+      <span class="text-sm sm:text-lg font-semibold whitespace-nowrap">Mint</span>
+      <span class="text-sm sm:text-lg font-semibold whitespace-nowrap">Moneycontrol</span>
+      <span class="text-sm sm:text-lg font-semibold whitespace-nowrap">CNBC-TV18</span>
+      <span class="text-sm sm:text-lg font-semibold whitespace-nowrap">Zee Business</span>
+      <span class="text-sm sm:text-lg font-semibold whitespace-nowrap" aria-hidden="true">The Economic Times</span>
+      <span class="text-sm sm:text-lg font-semibold whitespace-nowrap" aria-hidden="true">Business Standard</span>
+      <span class="text-sm sm:text-lg font-semibold whitespace-nowrap" aria-hidden="true">Mint</span>
+      <span class="text-sm sm:text-lg font-semibold whitespace-nowrap" aria-hidden="true">Moneycontrol</span>
+      <span class="text-sm sm:text-lg font-semibold whitespace-nowrap" aria-hidden="true">CNBC-TV18</span>
+      <span class="text-sm sm:text-lg font-semibold whitespace-nowrap" aria-hidden="true">Zee Business</span>
     </div>
   </div>
-</section>
+</section> -->
 
 <!-- ══════════ TESTIMONIALS ══════════ -->
-<section class="bg-white">
+<!-- <section class="bg-white">
   <div class="max-w-7xl mx-auto px-5 py-14 lg:py-16">
-    <span class="inline-block text-[12px] font-semibold text-navy bg-navy-100 rounded-md px-2.5 py-1">Testimonials</span>
-    <h2 class="mt-4 text-[24px] sm:text-[28px] font-bold text-navy tracking-tight">What our clients say</h2>
-    <p class="mt-2 text-[14px] text-slate-500">People who have planned their money with Fintoo.</p>
+    <span class="inline-block text-xs font-semibold text-navy bg-navy-100 rounded-md px-2.5 py-1">Testimonials</span>
+    <h2 class="mt-4 text-2xl sm:text-3xl font-bold text-navy tracking-tight">What our clients say</h2>
+    <p class="mt-2 text-sm text-slate-500">People who have planned their money with Fintoo.</p>
 
     <div class="mt-8 relative">
       <div class="overflow-hidden rounded-xl">
         <div class="slides" id="slides">
-          <!-- slide -->
           <div class="min-w-full sm:min-w-[50%] px-0 sm:pr-4">
             <div class="grid sm:grid-cols-2 rounded-xl border border-hair overflow-hidden h-full">
-              <div class="aspect-[4/3] sm:aspect-auto sm:min-h-[230px] bg-[linear-gradient(150deg,#e3ecf8,#f4f7fb)] grid place-items-center">
+              <div class="aspect-[4/3] sm:aspect-auto sm:min-h-56 bg-[linear-gradient(150deg,#e3ecf8,#f4f7fb)] grid place-items-center">
                 <span class="w-11 h-11 rounded-full bg-white/80 grid place-items-center">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="#042b62" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
                 </span>
               </div>
               <div class="p-5 flex flex-col justify-between bg-mist/60">
-                <p class="text-[15px] leading-snug font-medium text-slate-800">
+                <p class="text-sm leading-snug font-medium text-slate-800">
                   Fintoo feels like family. Over eight years I've watched my portfolio grow and diversify, and I genuinely want to see them grow too.
                 </p>
                 <div class="mt-5 flex items-center gap-2.5">
-                  <span class="w-8 h-8 rounded-full bg-navy-100 grid place-items-center text-navy text-[12px] font-bold">VS</span>
+                  <span class="w-8 h-8 rounded-full bg-navy-100 grid place-items-center text-navy text-xs font-bold">VS</span>
                   <div class="leading-tight">
-                    <p class="text-[13px] font-semibold text-slate-800">Vivek S.</p>
-                    <p class="text-[11.5px] text-slate-500">Senior General Manager</p>
+                    <p class="text-sm font-semibold text-slate-800">Vivek S.</p>
+                    <p class="text-xs text-slate-500">Senior General Manager</p>
                   </div>
                 </div>
               </div>
@@ -670,20 +473,20 @@
 
           <div class="min-w-full sm:min-w-[50%] px-0 sm:px-2">
             <div class="grid sm:grid-cols-2 rounded-xl border border-hair overflow-hidden h-full">
-              <div class="aspect-[4/3] sm:aspect-auto sm:min-h-[230px] bg-[linear-gradient(150deg,#ffedd5,#f4f7fb)] grid place-items-center">
+              <div class="aspect-[4/3] sm:aspect-auto sm:min-h-56 bg-[linear-gradient(150deg,#ffedd5,#f4f7fb)] grid place-items-center">
                 <span class="w-11 h-11 rounded-full bg-white/80 grid place-items-center">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="#dd7300" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
                 </span>
               </div>
               <div class="p-5 flex flex-col justify-between bg-mist/60">
-                <p class="text-[15px] leading-snug font-medium text-slate-800">
+                <p class="text-sm leading-snug font-medium text-slate-800">
                   I moved to Dubai in 2019 and my India investments were a mess. Fintoo untangled the tax side and now I get one clear review call every quarter.
                 </p>
                 <div class="mt-5 flex items-center gap-2.5">
-                  <span class="w-8 h-8 rounded-full bg-orange-100 grid place-items-center text-orange-700 text-[12px] font-bold">RM</span>
+                  <span class="w-8 h-8 rounded-full bg-orange-100 grid place-items-center text-orange-700 text-xs font-bold">RM</span>
                   <div class="leading-tight">
-                    <p class="text-[13px] font-semibold text-slate-800">Rahul M.</p>
-                    <p class="text-[11.5px] text-slate-500">NRI client, UAE</p>
+                    <p class="text-sm font-semibold text-slate-800">Rahul M.</p>
+                    <p class="text-xs text-slate-500">NRI client, UAE</p>
                   </div>
                 </div>
               </div>
@@ -692,20 +495,20 @@
 
           <div class="min-w-full sm:min-w-[50%] px-0 sm:pl-4">
             <div class="grid sm:grid-cols-2 rounded-xl border border-hair overflow-hidden h-full">
-              <div class="aspect-[4/3] sm:aspect-auto sm:min-h-[230px] bg-[linear-gradient(150deg,#e3ecf8,#fff7ed)] grid place-items-center">
+              <div class="aspect-[4/3] sm:aspect-auto sm:min-h-56 bg-[linear-gradient(150deg,#e3ecf8,#fff7ed)] grid place-items-center">
                 <span class="w-11 h-11 rounded-full bg-white/80 grid place-items-center">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="#042b62" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
                 </span>
               </div>
               <div class="p-5 flex flex-col justify-between bg-mist/60">
-                <p class="text-[15px] leading-snug font-medium text-slate-800">
+                <p class="text-sm leading-snug font-medium text-slate-800">
                   I came in for tax saving and left with an actual retirement number. That one call changed how I think about my salary.
                 </p>
                 <div class="mt-5 flex items-center gap-2.5">
-                  <span class="w-8 h-8 rounded-full bg-navy-100 grid place-items-center text-navy text-[12px] font-bold">AK</span>
+                  <span class="w-8 h-8 rounded-full bg-navy-100 grid place-items-center text-navy text-xs font-bold">AK</span>
                   <div class="leading-tight">
-                    <p class="text-[13px] font-semibold text-slate-800">Anjali K.</p>
-                    <p class="text-[11.5px] text-slate-500">Product Manager, Bengaluru</p>
+                    <p class="text-sm font-semibold text-slate-800">Anjali K.</p>
+                    <p class="text-xs text-slate-500">Product Manager, Bengaluru</p>
                   </div>
                 </div>
               </div>
@@ -724,14 +527,14 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 
 
 <!-- ══════════ STICKY BOTTOM BAR ══════════ -->
-<div class="fixed bottom-0 inset-x-0 z-40 bg-navy text-white">
+<!-- <div class="fixed bottom-0 inset-x-0 z-40 bg-navy text-white">
   <div class="max-w-7xl mx-auto px-5 py-2.5 flex items-center justify-between gap-4">
-    <ul class="flex items-center gap-4 sm:gap-7 overflow-x-auto no-scrollbar text-[12px] sm:text-[13px] font-medium" style="scrollbar-width:none">
+    <ul class="flex items-center gap-4 sm:gap-7 overflow-x-auto text-xs sm:text-sm font-medium [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       <li class="flex items-center gap-1.5 whitespace-nowrap">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dd7300" stroke-width="2.6" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         SEBI registered Investment Advisor
@@ -745,11 +548,11 @@
         500+ families advised
       </li>
     </ul>
-    <a href="#register" class="shrink-0 rounded-md bg-white text-navy font-semibold text-[13px] px-4 sm:px-5 py-2 hover:bg-navy-100 transition">
+    <a href="#register" class="shrink-0 rounded-md bg-white text-navy font-semibold text-sm px-4 sm:px-5 py-2 hover:bg-navy-100 transition">
       Join Fintoo now
     </a>
   </div>
-</div>
+</div> -->
 
 <script>
 (function () {
