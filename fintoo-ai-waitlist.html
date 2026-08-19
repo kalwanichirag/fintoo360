@@ -12,7 +12,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700;800&family=Google+Sans+Code:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700;800&family=Google+Sans+Code:wght@400;500;600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -144,6 +144,32 @@
      that restructuring correctly. */
   .text-gradient{ color: var(--orange); }
 
+  .hero-rotator{
+    display:inline-block; min-height:1.08em; overflow:hidden; vertical-align:bottom;
+    color:var(--orange); white-space:nowrap;
+  }
+  .hero-rotator-word{ display:inline-block; will-change:transform,opacity; }
+  #hero-heading{
+    font-family:'Inter Tight','Helvetica Neue',Arial,sans-serif !important;
+    font-weight:500;
+    letter-spacing:-.055em;
+  }
+  .hero-mockup-stack{
+    position:relative; width:min(520px,100%); height:min(68vh,650px);
+    margin:auto; justify-self:center; align-self:center;
+  }
+  .hero-mockup{
+    position:absolute; left:50%; bottom:0; height:94%; width:auto; object-fit:contain;
+    filter:drop-shadow(0 30px 28px rgba(10,30,62,.28)); transform-origin:50% 100%;
+  }
+  .hero-mockup-back-left{ z-index:1; opacity:.48; transform:translateX(-82%) scale(.82) rotate(-5deg); }
+  .hero-mockup-back-right{ z-index:1; opacity:.48; transform:translateX(-18%) scale(.82) rotate(5deg); }
+  .hero-mockup-front{ z-index:3; transform:translateX(-50%); }
+  @media(max-width:767px){
+    .hero-mockup-stack{ height:min(58vh,520px); }
+    .hero-mockup{ height:90%; }
+  }
+
   .btn-primary{
     display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
     background: linear-gradient(95deg, var(--orange), #ffab54);
@@ -178,8 +204,40 @@
   .form-status[data-state="duplicate"]{ color:#ffd27a; }
   .form-status[data-state="loading"]{ color:var(--steel); }
 
-  /* ============ Hero live network background ============ */
-  #hero-network{ z-index:0; opacity:.9; }
+  /* ============ Clean hero background ============ */
+  #hero{
+    isolation:isolate;
+    background:
+      radial-gradient(circle at 12% 18%,rgba(50,126,215,.13),transparent 25rem),
+      radial-gradient(circle at 90% 75%,rgba(231,121,24,.07),transparent 22rem),
+      linear-gradient(180deg,#f8fbff,#edf4fc) !important;
+  }
+  #hero::before{ display:none; }
+  #hero::after{
+    content:''; position:absolute; z-index:0; left:0; right:0; bottom:0; height:1px;
+    background:linear-gradient(90deg,transparent,rgba(23,76,143,.14),rgba(231,121,24,.2),transparent);
+  }
+  #hero > .grid-texture{ display:none; }
+  #hero .hero-actions{ margin-top:2rem; }
+  .hero-cross{ --hero-edge:max(24px,calc((100vw - 80rem)/2)); position:absolute; inset:0; z-index:0; pointer-events:none; }
+  .hero-cross::before{
+    content:''; position:absolute; top:0; bottom:8%; left:var(--hero-edge); width:1px;
+    background:linear-gradient(to bottom,transparent,rgba(23,76,143,.16) 12%,rgba(23,76,143,.08) 78%,transparent);
+  }
+  .hero-cross::after{
+    content:''; position:absolute; top:7rem; left:var(--hero-edge); right:var(--hero-edge); height:1px;
+    background:linear-gradient(to right,rgba(23,76,143,.16),rgba(23,76,143,.07) 64%,transparent);
+  }
+  .hero-cross-star{
+    position:absolute; top:7rem; left:var(--hero-edge); width:22px; height:22px;
+    transform:translate(-50%,-50%); background:linear-gradient(135deg,#ffad5f,var(--orange));
+    clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);
+    filter:drop-shadow(0 0 8px rgba(231,121,24,.3));
+  }
+  @media(max-width:767px){
+    .hero-cross{ --hero-edge:20px; }
+    .hero-cross::after,.hero-cross-star{ top:6.5rem; }
+  }
 
   /* ============ Ambient orbs ============ */
   .ambient-orb{ position:absolute; border-radius:9999px; filter: blur(60px); opacity:.35; display:none; }
@@ -187,71 +245,114 @@
   .animate-float{ animation: float-slow 10s ease-in-out infinite; }
   .animate-float-delay{ animation: float-slow 12s ease-in-out infinite; animation-delay:-4s; }
 
-  /* ============ Hero orb SVG ============ */
-  .orbit-group{ transform-origin: 300px 300px; animation: orbit-spin 46s linear infinite; }
-  .orbit-group-rev{ transform-origin: 300px 300px; animation: orbit-spin 60s linear infinite reverse; }
-  @keyframes orbit-spin{ to{ transform: rotate(360deg); } }
-  .fragment-icon{ transform-box: fill-box; transform-origin:center; animation: orbit-spin 46s linear infinite reverse; }
-  .core-pulse{ animation: core-pulse 4.5s ease-in-out infinite; transform-box:fill-box; transform-origin:center; }
-  @keyframes core-pulse{ 0%,100%{ transform:scale(1); opacity:1;} 50%{ transform:scale(1.06); opacity:.85;} }
-
-  /* ============ Device frame ============ */
-  .device-frame{
-    width:min(300px,74vw); aspect-ratio: 9/19.3; border-radius:2.6rem;
-    border:1px solid rgba(70,120,200,.25);
-    background: linear-gradient(165deg, rgba(10,35,80,.96), rgba(5,7,13,.98));
-    box-shadow: 0 40px 90px -24px rgba(0,0,0,.75), inset 0 0 0 1px rgba(255,255,255,.03);
-    padding:.55rem; position:relative;
+  /* ============ Real product preview carousel ============ */
+  #preview{
+    display:flex; min-height:100svh; align-items:center; isolation:isolate;
+    padding-top:clamp(2rem,4vh,3.5rem) !important;
+    padding-bottom:clamp(2rem,4vh,3.5rem) !important;
+    background:
+      radial-gradient(circle at 18% 72%, rgba(28,105,196,.42), transparent 31rem),
+      radial-gradient(circle at 82% 18%, rgba(42,125,219,.24), transparent 27rem),
+      radial-gradient(circle at 65% 82%, rgba(231,121,24,.09), transparent 22rem),
+      linear-gradient(135deg, #03152f 0%, #062552 48%, #041b3d 100%) !important;
   }
-  .device-frame::before{
-    content:''; position:absolute; top:.6rem; left:50%; transform:translateX(-50%);
-    width:32%; height:.8rem; border-radius:999px; background:#000; z-index:5;
+  #preview::before{
+    content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(133,181,236,.045) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(133,181,236,.045) 1px,transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:linear-gradient(to bottom,transparent,black 18%,black 82%,transparent);
+            mask-image:linear-gradient(to bottom,transparent,black 18%,black 82%,transparent);
   }
-  .device-screen{
-    position:relative; height:100%; width:100%; border-radius:2.15rem; overflow:hidden;
-    background: radial-gradient(120% 70% at 50% 0%, rgba(231,121,24,.08), transparent 60%), #f8fbff;
-    padding:1.5rem 1.05rem 1.1rem;
+  #preview::after{
+    content:''; position:absolute; inset:1.25rem; z-index:-1; pointer-events:none;
+    border:1px solid rgba(137,185,240,.1); border-radius:2rem;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
   }
-  .device-screen .bg-white\/5{ background:rgba(23,76,143,.045) !important; }
-  .device-screen .border-white\/5,
-  .device-screen .border-white\/10{ border-color:rgba(23,76,143,.12) !important; }
-  .preview-screen{ position:absolute; inset:0; }
-
-  .progress-bar{ height:5px; border-radius:9999px; background:rgba(140,160,200,.14); overflow:hidden; }
-  .progress-bar > span{ display:block; height:100%; border-radius:9999px; background:linear-gradient(90deg,var(--orange),#ffab54); }
-
-  .preview-tick{ height:3px; flex:1; border-radius:9999px; background:rgba(140,160,200,.18); transition: background .3s ease; }
-  .preview-tick.is-active{ background: linear-gradient(90deg,var(--orange),#ffab54); }
-  .preview-item{ opacity:.4; transition: opacity .35s ease; }
-  .preview-item.is-active{ opacity:1; }
-
-  /* ============ Fragment cards (problem section) ============ */
-  .glow-border{ position:relative; isolation:isolate; }
-  .glow-border::before{
-    content:''; position:absolute; inset:0; border-radius:inherit; padding:1px;
-    background:linear-gradient(135deg, rgba(255,255,255,.22), rgba(221,115,0,.32) 45%, rgba(120,158,214,.18));
-    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite:xor; mask-composite:exclude;
-    pointer-events:none;
+  #preview > .relative{ width:100%; z-index:1; }
+  #preview .badge{ color:#a9c8ed; border-color:rgba(132,181,237,.35); background:rgba(8,35,75,.55); box-shadow:inset 0 1px rgba(255,255,255,.05); }
+  #preview-heading{ color:#f5f9ff; text-shadow:0 8px 30px rgba(0,0,0,.2); }
+  #preview-heading + p{ color:#aac2e0; }
+  #preview .preview-title{ color:#f4f8ff; }
+  #preview .preview-description,
+  #preview .preview-number,
+  #preview .preview-progress + p{ color:#9eb8d8; }
+  #preview .preview-progress button{ background:rgba(151,191,237,.2); }
+  #preview .preview-progress button::after{ background:linear-gradient(90deg,#ee7d1b,#ffad5f); }
+  .preview-showcase{
+    display:grid; grid-template-columns:minmax(280px,.88fr) minmax(320px,1.12fr);
+    align-items:center; gap:clamp(2.5rem,7vw,7rem); min-height:0;
+    margin-top:clamp(1.5rem,3vh,2.5rem) !important;
   }
-  .fragment-card{
-    display:flex; flex-direction:column; gap:.5rem; border-radius:1.1rem; padding:.95rem 1.05rem;
-    background: #fff; border:1px solid rgba(23,76,143,.2);
-    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    box-shadow: 0 20px 45px -30px rgba(11,45,92,.42);
+  .preview-visual{ position:relative; display:grid; place-items:center; min-height:0; }
+  .preview-visual::before{
+    content:''; position:absolute; width:min(34rem,90%); aspect-ratio:1; border-radius:50%;
+    background:radial-gradient(circle,rgba(80,157,244,.3),rgba(45,111,190,.12) 45%,transparent 72%);
+    filter:blur(8px); transform:translateY(4%);
   }
-  .fragment-card.glow-border::before{
-    background:linear-gradient(135deg, rgba(255,255,255,.16), rgba(var(--frag-tint,221,115,0),.28) 50%, rgba(255,255,255,.03));
+  .preview-mockup-stage{ position:relative; width:min(460px,86vw); height:clamp(420px,55vh,570px); }
+  .preview-mockup{
+    position:absolute; top:50%; left:50%; width:auto; max-width:min(330px,68vw); height:100%; object-fit:contain;
+    filter:drop-shadow(0 34px 30px rgba(0,5,18,.58));
+    opacity:0; visibility:hidden; transform:translate(-50%,-50%) scale(.82);
+    transition:transform .6s cubic-bezier(.22,1,.36,1), opacity .45s ease, filter .45s ease;
   }
-  .frag-icon{
-    display:inline-flex; height:24px; width:24px; align-items:center; justify-content:center;
-    border-radius:.55rem; color: rgb(var(--frag-tint,221,115,0));
-    background: rgba(var(--frag-tint,221,115,0),.14); border:1px solid rgba(var(--frag-tint,221,115,0),.28);
+  .preview-mockup.is-prev,
+  .preview-mockup.is-next{ opacity:.48; visibility:visible; z-index:1; filter:drop-shadow(0 22px 22px rgba(0,5,18,.36)); }
+  .preview-mockup.is-prev{ transform:translate(-72%,-52%) scale(.84) rotate(-4deg); }
+  .preview-mockup.is-next{ transform:translate(-28%,-48%) scale(.84) rotate(4deg); }
+  .preview-mockup.is-active{ opacity:1; visibility:visible; z-index:3; transform:translate(-50%,-50%) scale(1); }
+  .preview-copy{ max-width:36rem; }
+  .preview-list{ position:relative; min-height:8.5rem; }
+  .preview-item{
+    position:absolute; inset:0; display:grid; grid-template-columns:2.3rem 1fr; align-content:center; column-gap:1rem;
+    width:100%; padding:.8rem 0; border-radius:.8rem; text-align:left; cursor:pointer;
+    opacity:0; visibility:hidden; pointer-events:none; transform:translateY(14px);
+    transition:opacity .35s ease, transform .4s ease, visibility .35s ease;
   }
-  .frag-label{ font-size:11px; color:var(--steel); letter-spacing:.01em; }
-  .frag-value{ font-family:'Google Sans Code',monospace; font-size:14px; font-weight:500; color:var(--ice); font-variant-numeric:tabular-nums; }
-  .frag-sub{ color:var(--steel); font-weight:400; }
-
+  .preview-item.is-active{
+    opacity:1; visibility:visible; pointer-events:auto; transform:none;
+    padding:1rem 1rem 1rem 1.65rem;
+    background:linear-gradient(90deg,rgba(66,139,226,.14),rgba(66,139,226,.035) 62%,transparent);
+    border:none;
+    box-shadow:none;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+  .preview-item.is-active::before{
+    content:''; position:absolute; top:.9rem; bottom:.9rem; left:0; width:3px; border-radius:99px;
+    background:linear-gradient(180deg,#ffad5f,var(--orange));
+    box-shadow:0 0 18px rgba(231,121,24,.42);
+  }
+  .preview-number{ grid-row:1 / span 2; padding-top:.22rem; color:#7390b5; }
+  .preview-title{ font-family:'Google Sans',system-ui,sans-serif; font-size:1.35rem; font-weight:600; line-height:1.25; color:var(--ice); }
+  .preview-description{ margin-top:.3rem; font-size:.95rem; line-height:1.5; color:var(--steel); }
+  .preview-progress{ display:flex; gap:.45rem; margin-top:2rem; }
+  .preview-progress button{ position:relative; flex:1; height:3px; overflow:hidden; border-radius:99px; background:rgba(23,76,143,.13); }
+  .preview-progress button::after{ content:''; position:absolute; inset:0; background:var(--orange); transform:scaleX(0); transform-origin:left; }
+  .preview-progress button.is-active::after{ transform:scaleX(1); transition:transform 5s linear; }
+  .preview-progress button.is-complete::after{ transform:scaleX(1); }
+  @media (max-width:767px){
+    #preview{ padding-top:1.5rem !important; padding-bottom:1.5rem !important; }
+    #preview-heading{ font-size:clamp(1.75rem,7vw,2.25rem); }
+    #preview-heading + p{ margin-top:.75rem; font-size:.95rem; line-height:1.45; }
+    .preview-showcase{ grid-template-columns:1fr; gap:.75rem; min-height:0; margin-top:1rem !important; }
+    .preview-visual{ min-height:0; }
+    .preview-mockup-stage{ width:100%; height:clamp(300px,43vh,420px); }
+    .preview-mockup{ width:auto; max-width:62vw; height:100%; }
+    .preview-copy{ width:100%; }
+    .preview-list{ min-height:7.5rem; }
+    .preview-item{ padding:.5rem 0; }
+    .preview-item.is-active{ padding:.8rem .75rem .8rem 1.25rem; }
+    .preview-title{ font-size:1.2rem; }
+    .preview-description{ font-size:.85rem; }
+    .preview-progress{ margin-top:.5rem; }
+    .preview-progress + p{ margin-top:.65rem; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .preview-progress button.is-active::after{ transition:none; }
+  }
 
   .feature-card{
     display:flex; flex-direction:column; overflow:hidden; border-radius:1.75rem;
@@ -267,29 +368,55 @@
   }
   .fc-copy{ padding: 2.1rem 2rem .25rem; text-align:center; }
 
-  /* ============ Trust cards ============ */
-  .trust-card{
-    display:flex; gap:1rem; align-items:flex-start; border-radius:1.4rem; padding:1.5rem;
-    background: #fff; border:1px solid rgba(23,76,143,.2);
-    box-shadow: 0 20px 45px -30px rgba(11,45,92,.42);
-    transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+  /* ============ Clarity + trust, unified ============ */
+  .clarity-trust-section{
+    padding:clamp(5rem,9vw,8rem) 0;
+    background:
+      radial-gradient(circle at 12% 18%,rgba(50,126,215,.13),transparent 25rem),
+      radial-gradient(circle at 90% 75%,rgba(231,121,24,.07),transparent 22rem),
+      linear-gradient(180deg,#f8fbff,#edf4fc);
   }
-  .trust-card:hover{
-    transform: translateY(-4px);
-    border-color: rgba(221,115,0,.35);
-    box-shadow: 0 24px 50px -30px rgba(221,115,0,.35);
+  .clarity-intro{ display:grid; grid-template-columns:minmax(0,1.15fr) minmax(280px,.65fr); gap:clamp(2rem,8vw,8rem); align-items:end; }
+  .clarity-promise{ padding:0 0 .4rem 1.35rem; border-left:2px solid var(--orange); }
+  .clarity-promise-label{ font-family:'Google Sans Code',monospace; font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--orange); }
+  .journey-rail{ position:relative; display:grid; grid-template-columns:repeat(3,1fr); margin-top:clamp(3rem,6vw,5rem); }
+  .journey-rail::before{ content:''; position:absolute; top:1.55rem; left:8%; right:8%; height:1px; background:linear-gradient(90deg,var(--orange),rgba(23,76,143,.28)); }
+  .journey-step{ position:relative; padding:0 clamp(1rem,2.5vw,2rem); }
+  .journey-step:first-child{ padding-left:0; }
+  .journey-step:last-child{ padding-right:0; }
+  .journey-number{ position:relative; z-index:1; display:grid; place-items:center; width:3.1rem; height:3.1rem; border-radius:50%; background:#fff; border:1px solid rgba(231,121,24,.42); box-shadow:0 0 0 8px #f4f8fd,0 12px 28px -18px rgba(11,45,92,.7); color:var(--orange); font-family:'Google Sans Code',monospace; font-size:.72rem; }
+  .journey-step h3{ margin-top:1.5rem; max-width:18rem; font-size:1.08rem; font-weight:650; color:var(--ice); }
+  .journey-step p{ margin-top:.55rem; max-width:20rem; font-size:.88rem; line-height:1.65; color:var(--steel); }
+  .trust-ribbon{ position:relative; overflow:hidden; margin-top:clamp(3rem,6vw,5rem); padding:clamp(1.5rem,3vw,2.25rem); border-radius:1.75rem; background:linear-gradient(110deg,#061a39,#0b3977); border:1px solid rgba(84,149,224,.25); box-shadow:0 28px 65px -42px rgba(4,25,58,.8); }
+  .trust-ribbon::after{ content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle at 100% 0,rgba(67,145,235,.3),transparent 24rem); }
+  .trust-ribbon-head{ position:relative; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:2rem; padding-bottom:1.25rem; border-bottom:1px solid rgba(255,255,255,.11); }
+  .trust-ribbon-head h3{ color:#fff; font-size:clamp(1.35rem,2.3vw,2rem); font-weight:600; }
+  .trust-pledge{ display:flex; align-items:center; gap:.65rem; flex-shrink:0; color:#fff; font-size:.82rem; font-weight:600; }
+  .trust-pledge-icon{ display:grid; place-items:center; width:2rem; height:2rem; border-radius:50%; color:#07182f; background:var(--orange); }
+  .trust-points{ position:relative; z-index:1; display:grid; grid-template-columns:repeat(4,1fr); margin-top:1.25rem; }
+  .trust-point{ display:flex; gap:.7rem; align-items:flex-start; padding:0 1.15rem; border-right:1px solid rgba(255,255,255,.1); }
+  .trust-point:first-child{ padding-left:0; }
+  .trust-point:last-child{ padding-right:0; border-right:0; }
+  .trust-point svg{ flex:0 0 auto; margin-top:.15rem; color:var(--orange); }
+  .trust-point h4{ color:#f4f8ff; font-size:.82rem; font-weight:600; }
+  .trust-point p{ margin-top:.25rem; color:#a9c1df; font-size:.72rem; line-height:1.45; }
+  @media(max-width:800px){
+    .clarity-intro{ grid-template-columns:1fr; gap:1.5rem; }
+    .journey-rail{ grid-template-columns:1fr; gap:1.75rem; }
+    .journey-rail::before{ top:1.5rem; bottom:1.5rem; left:1.55rem; right:auto; width:1px; height:auto; }
+    .journey-step,.journey-step:first-child,.journey-step:last-child{ padding:0 0 0 4.5rem; }
+    .journey-number{ position:absolute; left:0; top:0; }
+    .journey-step h3{ margin-top:0; }
+    .trust-ribbon-head{ align-items:flex-start; flex-direction:column; gap:1rem; }
+    .trust-points{ grid-template-columns:1fr 1fr; gap:1.25rem 0; }
+    .trust-point:nth-child(2){ border-right:0; }
+    .trust-point:nth-child(3){ padding-left:0; }
   }
-  .trust-icon{
-    display:flex; height:40px; width:40px; flex-shrink:0; align-items:center; justify-content:center;
-    border-radius:.85rem; color:var(--orange);
-    background: rgba(221,115,0,.12); border:1px solid rgba(221,115,0,.25);
+  @media(max-width:500px){
+    .trust-points{ grid-template-columns:1fr; gap:1rem; }
+    .trust-point,.trust-point:nth-child(3){ padding:0 0 1rem; border-right:0; border-bottom:1px solid rgba(255,255,255,.09); }
+    .trust-point:last-child{ padding-bottom:0; border-bottom:0; }
   }
-  .trust-card.trust-pledge{
-    background: linear-gradient(120deg,rgba(231,121,24,.1),rgba(255,255,255,.82));
-    border-color: rgba(221,115,0,.3);
-  }
-  .trust-card.trust-pledge .trust-icon{ background: var(--orange); color:#04121a; border-color:transparent; }
-
   .fc-eyebrow{ display:block; font-family:'Google Sans Code',monospace; font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--steel); }
   .fc-title{ margin-top:.65rem; font-family:'Google Sans',sans-serif; font-weight:700; font-size:1.45rem; line-height:1.2; color:var(--ice); }
   .fc-desc{ margin:.6rem auto 0; max-width:30ch; font-size:.875rem; line-height:1.55; color:var(--steel); }
@@ -367,6 +494,46 @@
     *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
     html{ scroll-behavior:auto; }
   }
+
+  /* ============ Observer-powered full-page section transitions ============ */
+  @media (prefers-reduced-motion: no-preference){
+    html.is-section-slider,
+    html.is-section-slider body{ height:100%; overflow:hidden; scroll-behavior:auto; }
+    html.is-section-slider main{ position:fixed; inset:0; overflow:hidden; }
+    html.is-section-slider main > section{
+      position:absolute !important; inset:0; width:100%; height:100svh;
+      min-height:100svh !important; padding-top:clamp(5.5rem,8vh,7rem) !important;
+      padding-bottom:clamp(2rem,4vh,3.5rem) !important;
+      visibility:hidden; opacity:0; overflow:hidden !important;
+    }
+    html.is-section-slider .outer,
+    html.is-section-slider .inner{ width:100%; height:100%; overflow:hidden; }
+    html.is-section-slider .inner{ position:relative; display:flex; align-items:center; }
+    html.is-section-slider .inner > *{ width:100%; }
+    html.is-section-slider #hero .inner{ align-items:center; }
+    html.is-section-slider #preview .inner > .relative{ z-index:1; }
+    html.is-section-slider #how-it-thinks{ padding-top:5.25rem !important; }
+    html.is-section-slider #how-it-thinks .inner{ overflow-y:auto; scrollbar-width:none; }
+    html.is-section-slider #how-it-thinks .inner::-webkit-scrollbar{ display:none; }
+    html.is-section-slider #how-it-thinks .clarity-intro{ margin-top:auto; }
+    html.is-section-slider #how-it-thinks .trust-ribbon{ margin-bottom:auto; }
+    html.is-section-slider footer{ display:none; }
+  }
+  @media (max-width:768px) and (prefers-reduced-motion: no-preference){
+    html.is-section-slider main > section{
+      padding-top:5rem !important;
+      padding-bottom:1.25rem !important;
+    }
+    html.is-section-slider .inner{
+      align-items:flex-start;
+      overflow-x:hidden;
+      overflow-y:auto;
+      overscroll-behavior:contain;
+      -webkit-overflow-scrolling:touch;
+    }
+    html.is-section-slider #hero .inner{ align-items:flex-start; }
+    html.is-section-slider #join .inner{ align-items:center; }
+  }
 </style>
 </head>
 <body class="bg-void font-body antialiased">
@@ -406,35 +573,27 @@
   <!-- ============ 1. HERO ============ -->
   <section id="hero" class="relative flex min-h-[100svh] items-center overflow-hidden bg-void pb-16 pt-32" aria-label="Introduction">
     <div class="pointer-events-none absolute inset-0 grid-texture" aria-hidden="true"></div>
-    <canvas id="hero-network" class="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
+    <div class="hero-cross" aria-hidden="true"><span class="hero-cross-star"></span></div>
     <div class="ambient-orb animate-float bg-navy/60" style="width:26rem;height:26rem;top:-6rem;right:-6rem;" aria-hidden="true"></div>
     <div class="ambient-orb animate-float-delay bg-orange/30" style="width:20rem;height:20rem;bottom:-4rem;left:-4rem;" aria-hidden="true"></div>
 
-    <div class="relative mx-auto grid w-full max-w-7xl gap-16 px-6 sm:px-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+    <div class="hero-layout relative mx-auto grid w-full max-w-7xl gap-10 px-6 sm:px-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-6">
       <div>
-        <span id="hero-badge" class="badge"><span class="dot-live"></span> Private beta opening soon</span>
+        <span id="hero-badge" class="badge"><span class="dot-live"></span> Launching 1 September</span>
 
-        <h1 id="hero-heading" class="reveal-heading mt-6 font-display text-[2.6rem] font-semibold leading-[1.08] text-ice sm:text-6xl lg:text-[4.1rem]">
-          Your financial life, <span class="text-gradient">finally thinking</span> as one.
+        <h1 id="hero-heading" class="mt-6 font-display text-[2.6rem] font-semibold leading-[1.08] text-ice sm:text-6xl lg:text-[4.1rem]">
+          One AI app, built around your <span class="hero-rotator" aria-hidden="true"><span id="hero-rotating-word" class="hero-rotator-word">goals.</span></span>
+          <span class="sr-only">goals, mutual funds, retirement, investments, and expense tracking.</span>
         </h1>
 
         <p id="hero-sub" class="mt-6 max-w-lg text-lg leading-relaxed text-steel">
-          Fintoo AI turns fragmented financial information into clear, personalized decisions — one intelligent view of everything you own, owe, and are working toward.
+          Fintoo AI brings your investments, financial goals, and retirement plans together—then turns them into clear, personalized next steps.
         </p>
 
-        <form id="hero-form" data-waitlist class="mt-9 max-w-md" novalidate>
-          <div class="flex flex-col gap-3 sm:flex-row">
-            <label for="hero-email" class="sr-only">Email address</label>
-            <input id="hero-email" name="email" type="email" required placeholder="you@email.com" autocomplete="email" class="input-field flex-1" />
-            <button type="submit" class="btn-primary">
-              <span data-label>Join the Waitlist</span>
-            </button>
-          </div>
-          <p class="mt-3 text-xs text-steel">Free to join. No spam. Early members get priority access.</p>
-          <p data-status role="status" aria-live="polite" class="form-status mt-2 text-sm"></p>
-        </form>
-
-        <div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
+        <div id="hero-cta" class="mt-9 flex flex-wrap items-center gap-4">
+          <a href="#join" class="btn-primary text-white" data-cursor-hover>Join the Waitlist</a>
+        </div>
+        <div class="hero-actions flex flex-wrap items-center gap-x-8 gap-y-4">
           <a href="#preview" class="link-secondary" data-cursor-hover>
             Preview the experience
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v16m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -446,272 +605,62 @@
         </div>
       </div>
 
-      <!-- Orb + phone composition -->
-      <div class="relative mx-auto aspect-square w-full max-w-[540px]">
-        <svg id="hero-orb" viewBox="0 0 600 600" class="absolute inset-0 h-full w-full" aria-hidden="true">
-          <defs>
-            <radialGradient id="coreGradient" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#ffe3c2" />
-              <stop offset="45%" stop-color="var(--orange)" />
-              <stop offset="100%" stop-color="var(--orange)" />
-            </radialGradient>
-            <filter id="coreGlow" x="-60%" y="-60%" width="220%" height="220%">
-              <feGaussianBlur stdDeviation="14" result="blur" />
-              <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-            </filter>
-          </defs>
-
-          <circle cx="300" cy="300" r="230" fill="none" stroke="rgba(140,160,200,.14)" stroke-width="1" />
-          <circle cx="300" cy="300" r="170" fill="none" stroke="rgba(140,160,200,.14)" stroke-width="1" stroke-dasharray="2 8" />
-
-          <g class="orbit-group">
-            <g class="fragment-icon" transform="translate(300,70)"><circle r="20" fill="var(--midnight)" stroke="rgba(140,160,200,.3)" /><path d="M-7,-2 L0,-8 L7,-2 M-7,-2 V7 H7 V-2" stroke="var(--orange)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" /></g>
-            <g class="fragment-icon" transform="translate(510,220)"><circle r="20" fill="var(--midnight)" stroke="rgba(140,160,200,.3)" /><path d="M-7,7 V-3 M-2,7 V-7 M3,7 V0 M8,7 V-5" stroke="var(--orange)" stroke-width="1.6" fill="none" stroke-linecap="round" /></g>
-            <g class="fragment-icon" transform="translate(440,470)"><circle r="20" fill="var(--midnight)" stroke="rgba(140,160,200,.3)" /><text x="0" y="4" text-anchor="middle" fill="var(--orange)" font-family="Google Sans Code" font-size="13">₹</text></g>
-            <g class="fragment-icon" transform="translate(160,470)"><circle r="20" fill="var(--midnight)" stroke="rgba(140,160,200,.3)" /><path d="M0,-8 L7,-4 V4 L0,8 L-7,4 V-4 Z" stroke="var(--orange)" stroke-width="1.4" fill="none" stroke-linejoin="round" /></g>
-            <g class="fragment-icon" transform="translate(90,220)"><circle r="20" fill="var(--midnight)" stroke="rgba(140,160,200,.3)" /><circle r="7" fill="none" stroke="var(--orange)" stroke-width="1.6" /><circle r="1.6" fill="var(--orange)" /></g>
-          </g>
-
-          <circle cx="300" cy="300" r="72" fill="url(#coreGradient)" filter="url(#coreGlow)" class="core-pulse" />
-        </svg>
-
-        <div id="hero-phone" class="device-frame absolute bottom-0 right-0 translate-y-4">
-          <div class="device-screen font-body">
-            <div class="flex items-center justify-between">
-              <div>
-                <p class="text-[11px] text-steel">Good evening</p>
-                <p class="text-sm font-medium text-ice">Aditi Rao</p>
-              </div>
-              <div class="h-8 w-8 rounded-full bg-gradient-to-br from-orange to-navy"></div>
-            </div>
-            <p class="mt-5 text-[11px] uppercase tracking-widest text-steel font-mono-ui">Net worth</p>
-            <p class="mt-1 font-display text-3xl font-semibold text-ice">₹1.84 Cr</p>
-            <svg viewBox="0 0 200 48" class="mt-2 w-full" preserveAspectRatio="none" aria-hidden="true">
-              <polyline points="0,36 25,30 50,33 75,20 100,24 125,12 150,16 175,6 200,10" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <div class="mt-5 grid grid-cols-2 gap-2">
-              <div class="rounded-xl border border-white/5 bg-white/5 p-3">
-                <p class="text-[10px] text-steel">Assets</p>
-                <p class="mt-1 font-mono-ui text-sm text-ice">₹2.10 Cr</p>
-              </div>
-              <div class="rounded-xl border border-white/5 bg-white/5 p-3">
-                <p class="text-[10px] text-steel">This month</p>
-                <p class="mt-1 font-mono-ui text-sm text-orange">+2.4%</p>
-              </div>
-            </div>
-            <div class="mt-4 rounded-xl border border-orange/25 bg-orange/[.06] p-3">
-              <p class="text-[11px] leading-snug text-ice/90">Equity allocation drifted <span class="text-orange">8% above</span> target this quarter.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 2. THE PROBLEM ============ -->
-  <section id="problem" class="relative overflow-hidden bg-midnight" aria-labelledby="problem-heading">
-    <div class="pointer-events-none absolute inset-0 grid-texture opacity-60" aria-hidden="true"></div>
-    <div class="ambient-orb" style="width:24rem;height:24rem;top:-8rem;left:-10rem;background:var(--navy);opacity:.55;" aria-hidden="true"></div>
-    <div class="ambient-orb" style="width:22rem;height:22rem;bottom:-10rem;right:-8rem;background:var(--orange);opacity:.16;" aria-hidden="true"></div>
-
-    <div id="problem-pin" class="relative mx-auto max-w-7xl px-6 py-24 sm:px-10 sm:py-28 lg:grid lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-10">
-      <div class="mx-auto max-w-xl text-center lg:mx-0 lg:max-w-md lg:text-left">
-        <span class="badge">The problem</span>
-        <h2 id="problem-heading" class="reveal-heading mt-6 font-display text-3xl font-semibold leading-tight text-ice sm:text-5xl">
-          Your money lives in a dozen different places.
-        </h2>
-        <p class="mt-5 text-lg text-steel">
-          A banking app here. A broker there. A spreadsheet nobody opens anymore. Keep scrolling — watch it become one app.
-        </p>
-      </div>
-
-      <div id="fragments-field" class="relative mx-auto flex h-[70svh] min-h-[480px] w-full max-w-xl items-center lg:mx-0 lg:max-w-none">
-        <div class="fragment-card glow-border absolute" style="top:6%; left:3%; width:186px; --frag-tint:221,115,0;" data-shift="-70,-46">
-          <span class="frag-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M4 10l8-6 8 6M5 10v9h14v-9M10 19v-6h4v6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <p class="frag-label">Bank accounts</p>
-          <p class="frag-value">3 linked <span class="frag-sub">· ₹6.2L</span></p>
-        </div>
-        <div class="fragment-card glow-border absolute" style="top:4%; right:5%; width:196px; --frag-tint:120,158,214;" data-shift="70,-42">
-          <span class="frag-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M4 18l5-6 4 4 7-9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 7h5v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <p class="frag-label">Mutual funds</p>
-          <p class="frag-value">₹34.6L <span class="frag-sub">· 11 folios</span></p>
-        </div>
-        <div class="fragment-card glow-border absolute" style="top:38%; left:8%; width:196px; --frag-tint:221,115,0;" data-shift="-95,6">
-          <span class="frag-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M4 20V10m6 10V4m6 16v-7m6 7V8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-          <p class="frag-label">Stocks &amp; F&amp;O</p>
-          <p class="frag-value">2 <span class="frag-sub">brokers</span></p>
-        </div>
-        <div class="fragment-card glow-border absolute" style="top:36%; right:10%; width:196px; --frag-tint:120,158,214;" data-shift="100,10">
-          <span class="frag-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
-          <p class="frag-label">Insurance</p>
-          <p class="frag-value">4 <span class="frag-sub">policies</span></p>
-        </div>
-        <div class="fragment-card glow-border absolute" style="bottom:8%; left:4%; width:196px; --frag-tint:221,115,0;" data-shift="-60,60">
-          <span class="frag-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="15" rx="2.5" stroke="currentColor" stroke-width="1.7"/><path d="M4 10h16M9 3v4M15 3v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-          <p class="frag-label">Loans &amp; EMIs</p>
-          <p class="frag-value">₹18,400 <span class="frag-sub">/ mo</span></p>
-        </div>
-        <div class="fragment-card glow-border absolute" style="bottom:6%; right:2%; width:216px; --frag-tint:120,158,214;" data-shift="80,56">
-          <span class="frag-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 21V4m0 0h12l-3 4 3 4H5" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></span>
-          <p class="frag-label">Goals</p>
-          <p class="frag-value text-[13px] leading-snug">Written down once, forgotten</p>
-        </div>
-
-        <div id="convergence-glow" class="pointer-events-none absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-0" style="background:var(--orange); box-shadow:0 0 0 0 rgba(221,115,0,.9);" aria-hidden="true"></div>
-
-        <div id="unified-card" class="glow-border device-frame absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0" style="box-shadow:0 40px 100px -20px rgba(221,115,0,.45);">
-          <div class="device-screen font-body">
-            <div class="uc-piece flex items-center gap-3">
-              <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-orange to-navy" style="box-shadow:0 0 0 1px rgba(221,115,0,.35), 0 10px 24px -8px rgba(221,115,0,.6);">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <circle cx="12" cy="12" r="3" fill="#fff"/>
-                  <circle cx="12" cy="12" r="8.5" stroke="#fff" stroke-opacity=".55" stroke-width="1.3" stroke-dasharray="2.5 4.5"/>
-                </svg>
-              </div>
-              <div class="min-w-0">
-                <p class="truncate font-display text-sm font-semibold text-ice">Fintoo AI</p>
-                <p class="flex items-center gap-1.5 text-[10px] text-steel"><span class="dot-live"></span> All accounts · live</p>
-              </div>
-            </div>
-            <p class="uc-piece mt-5 text-[11px] uppercase tracking-widest text-steel font-mono-ui">Net worth</p>
-            <p id="uc-networth-wrap" class="mt-1 font-display text-3xl font-semibold text-ice">₹<span id="uc-networth-num">0.00</span> Cr</p>
-            <svg viewBox="0 0 200 48" class="uc-piece mt-2 w-full" preserveAspectRatio="none" aria-hidden="true">
-              <polyline id="uc-sparkline" points="0,36 25,30 50,33 75,20 100,24 125,12 150,16 175,6 200,10" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-            <div class="mt-5 grid grid-cols-2 gap-2">
-              <div class="uc-piece rounded-xl border border-white/5 bg-white/5 p-3">
-                <p class="text-[10px] text-steel">Assets</p>
-                <p class="mt-1 font-mono-ui text-sm text-ice">₹2.10 Cr</p>
-              </div>
-              <div class="uc-piece rounded-xl border border-white/5 bg-white/5 p-3">
-                <p class="text-[10px] text-steel">This month</p>
-                <p class="mt-1 font-mono-ui text-sm text-orange">+2.4%</p>
-              </div>
-            </div>
-            <div class="mt-4 flex flex-wrap gap-1.5">
-              <span class="uc-tag rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] text-steel">Bank</span>
-              <span class="uc-tag rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] text-steel">Mutual funds</span>
-              <span class="uc-tag rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] text-steel">Stocks</span>
-              <span class="uc-tag rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] text-steel">Insurance</span>
-              <span class="uc-tag rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] text-steel">Loans</span>
-              <span class="uc-tag rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] text-steel">Goals</span>
-            </div>
-            <div class="uc-piece mt-4 rounded-xl border border-orange/25 bg-orange/[.06] p-3">
-              <p class="text-[11px] leading-snug text-ice/90">One app. Everything you own, owe, and are working toward.</p>
-            </div>
-          </div>
-        </div>
+      <!-- Real app mockups -->
+      <div id="hero-mockups" class="hero-visual hero-mockup-stack">
+        <img class="hero-mockup hero-mockup-back-left" src="assets/fintoo-ai-preview/financial-wellness-score.png" alt="" aria-hidden="true" />
+        <img class="hero-mockup hero-mockup-back-right" src="assets/fintoo-ai-preview/retirement-planning.png" alt="" aria-hidden="true" />
+        <img class="hero-mockup hero-mockup-front" src="assets/fintoo-ai-preview/net-worth-tracker.png" alt="Fintoo AI net worth and investment dashboard" />
       </div>
     </div>
   </section>
 
   <!-- ============ 3. INTERACTIVE APP PREVIEW ============ -->
-  <section id="preview" class="relative overflow-hidden bg-void" aria-labelledby="preview-heading">
+  <section id="preview" class="relative overflow-hidden bg-void py-24 sm:py-32" aria-labelledby="preview-heading">
     <div class="ambient-orb" style="width:26rem;height:26rem;top:-10rem;left:-8rem;background:var(--navy);opacity:.6;" aria-hidden="true"></div>
     <div class="ambient-orb" style="width:24rem;height:24rem;top:20%;right:-10rem;background:var(--orange);opacity:.14;" aria-hidden="true"></div>
-    <div class="relative mx-auto max-w-5xl px-6 pt-28 pb-6 text-center sm:px-10">
-      <span class="badge">Inside the app</span>
-      <h2 id="preview-heading" class="reveal-heading mt-6 font-display text-3xl font-semibold leading-tight text-ice sm:text-5xl">
-        One interface. Everything that matters.
-      </h2>
-      <p class="mt-5 text-lg text-steel">Scroll to move through it. Every screen below is a real preview of what early members open first.</p>
-    </div>
 
-    <div id="preview-pin" class="relative">
-      <div class="mx-auto grid min-h-screen max-w-6xl items-center gap-14 px-6 py-16 sm:px-10 lg:grid-cols-2">
-        <div class="relative mx-auto">
-          <div class="device-frame">
-            <div class="device-screen">
-              <!-- Screen 1: AI financial overview -->
-              <div class="preview-screen font-body" data-screen="0">
-                <div class="flex items-center justify-between">
-                  <div><p class="text-[11px] text-steel">Good evening</p><p class="text-sm font-medium text-ice">Aditi Rao</p></div>
-                  <div class="h-8 w-8 rounded-full bg-gradient-to-br from-orange to-navy"></div>
-                </div>
-                <p class="mt-5 text-[11px] uppercase tracking-widest text-steel font-mono-ui">Net worth</p>
-                <p class="mt-1 font-display text-3xl font-semibold text-ice">₹1.84 Cr</p>
-                <div class="mt-5 grid grid-cols-2 gap-2">
-                  <div class="rounded-xl border border-white/5 bg-white/5 p-3"><p class="text-[10px] text-steel">Assets</p><p class="mt-1 font-mono-ui text-sm text-ice">₹2.10 Cr</p></div>
-                  <div class="rounded-xl border border-white/5 bg-white/5 p-3"><p class="text-[10px] text-steel">Liabilities</p><p class="mt-1 font-mono-ui text-sm text-ice">₹26.0 L</p></div>
-                </div>
-                <div class="mt-4 rounded-xl border border-orange/25 bg-orange/[.06] p-3"><p class="text-[11px] leading-snug text-ice/90">Everything you hold, in one connected view.</p></div>
-              </div>
-              <!-- Screen 2: Personalized insights -->
-              <div class="preview-screen font-body" data-screen="1">
-                <p class="text-[11px] uppercase tracking-widest text-steel font-mono-ui">Insights</p>
-                <p class="mt-1 font-display text-lg font-semibold text-ice">3 things worth knowing</p>
-                <div class="mt-4 space-y-3">
-                  <div class="rounded-xl border border-white/5 bg-white/5 p-3"><p class="text-[11px] text-ice/90">On track to hit your Europe goal <span class="text-orange">3 months early</span>.</p></div>
-                  <div class="rounded-xl border border-white/5 bg-white/5 p-3"><p class="text-[11px] text-ice/90"><span class="text-orange">₹4.2L</span> idle in savings could work harder.</p></div>
-                  <div class="rounded-xl border border-white/5 bg-white/5 p-3"><p class="text-[11px] text-ice/90">Term insurance renewal due in <span class="text-orange">12 days</span>.</p></div>
-                </div>
-              </div>
-              <!-- Screen 3: Goal planning -->
-              <div class="preview-screen font-body" data-screen="2">
-                <p class="text-[11px] uppercase tracking-widest text-steel font-mono-ui">Goals</p>
-                <div class="mt-4 space-y-4">
-                  <div><div class="flex justify-between text-[11px] text-ice/90"><span>Retirement</span><span class="font-mono-ui text-steel">₹68L / ₹2.4Cr</span></div><div class="progress-bar mt-2"><span style="width:28%"></span></div></div>
-                  <div><div class="flex justify-between text-[11px] text-ice/90"><span>Child's education</span><span class="font-mono-ui text-steel">₹9L / ₹40L</span></div><div class="progress-bar mt-2"><span style="width:22%"></span></div></div>
-                  <div><div class="flex justify-between text-[11px] text-ice/90"><span>Europe trip '27</span><span class="font-mono-ui text-steel">₹3.1L / ₹4L</span></div><div class="progress-bar mt-2"><span style="width:78%"></span></div></div>
-                </div>
-              </div>
-              <!-- Screen 4: Spending intelligence -->
-              <div class="preview-screen font-body" data-screen="3">
-                <p class="text-[11px] uppercase tracking-widest text-steel font-mono-ui">This month's spending</p>
-                <div class="mt-4 space-y-2.5">
-                  <div class="flex items-center gap-2"><span class="w-24 text-[11px] text-steel">Rent</span><div class="progress-bar flex-1"><span style="width:32%"></span></div><span class="w-8 text-right text-[11px] font-mono-ui text-ice">32%</span></div>
-                  <div class="flex items-center gap-2"><span class="w-24 text-[11px] text-steel">Investments</span><div class="progress-bar flex-1"><span style="width:24%"></span></div><span class="w-8 text-right text-[11px] font-mono-ui text-ice">24%</span></div>
-                  <div class="flex items-center gap-2"><span class="w-24 text-[11px] text-steel">Dining</span><div class="progress-bar flex-1"><span style="width:11%"></span></div><span class="w-8 text-right text-[11px] font-mono-ui text-ice">11%</span></div>
-                </div>
-                <div class="mt-4 rounded-xl border border-orange/25 bg-orange/[.06] p-3"><p class="text-[11px] text-ice/90">Dining is up <span class="text-orange">18%</span> vs last month.</p></div>
-              </div>
-              <!-- Screen 5: Portfolio overview -->
-              <div class="preview-screen font-body" data-screen="4">
-                <p class="text-[11px] uppercase tracking-widest text-steel font-mono-ui">Portfolio</p>
-                <div class="mt-4 space-y-2.5">
-                  <div class="flex justify-between rounded-xl border border-white/5 bg-white/5 p-2.5"><span class="text-[11px] text-ice/90">Nifty 50 Index Fund</span><span class="font-mono-ui text-[11px] text-orange">+12.2%</span></div>
-                  <div class="flex justify-between rounded-xl border border-white/5 bg-white/5 p-2.5"><span class="text-[11px] text-ice/90">HDFC Flexicap</span><span class="font-mono-ui text-[11px] text-orange">+9.8%</span></div>
-                  <div class="flex justify-between rounded-xl border border-white/5 bg-white/5 p-2.5"><span class="text-[11px] text-ice/90">Direct Equity (12)</span><span class="font-mono-ui text-[11px] text-orange">+15.1%</span></div>
-                  <div class="flex justify-between rounded-xl border border-white/5 bg-white/5 p-2.5"><span class="text-[11px] text-ice/90">US Tech ETF</span><span class="font-mono-ui text-[11px] text-orange">+6.4%</span></div>
-                </div>
-              </div>
-              <!-- Screen 6: Conversational assistant (locked preview) -->
-              <div class="preview-screen font-body" data-screen="5">
-                <div class="flex items-center justify-between">
-                  <p class="text-[11px] uppercase tracking-widest text-steel font-mono-ui">Assistant</p>
-                  <span class="rounded-full border border-orange/40 bg-orange/10 px-2 py-0.5 text-[9px] uppercase tracking-widest text-orange">Coming soon</span>
-                </div>
-                <div class="relative mt-4 space-y-2.5">
-                  <div class="ml-auto max-w-[80%] rounded-2xl rounded-tr-sm bg-white/10 p-2.5"><p class="text-[11px] text-ice/90">How much can I invest extra this month?</p></div>
-                  <div class="max-w-[80%] rounded-2xl rounded-tl-sm border border-orange/25 bg-orange/[.06] p-2.5"><p class="text-[11px] text-ice/90">Based on this month's spending, about ₹32,000 is available without touching your goals.</p></div>
-                  <div class="absolute inset-0 -m-2 rounded-2xl backdrop-blur-sm" style="background:rgba(5,7,13,.4);"></div>
-                </div>
-              </div>
-            </div>
+    <div class="relative mx-auto max-w-6xl px-6 sm:px-10">
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="badge">Inside the app</span>
+        <h2 id="preview-heading" class="reveal-heading capitalize mt-6 font-display text-3xl font-semibold leading-tight text-ice sm:text-5xl">
+          our whole financial life, finally in focus.
+        </h2>
+        <p class="mt-5 text-lg text-steel">From where you stand today to where you want to go, see every decision with greater clarity.</p>
+      </div>
+
+      <div class="preview-showcase mt-10 sm:mt-16">
+        <div class="preview-visual" aria-live="polite">
+          <div class="preview-mockup-stage">
+            <img class="preview-mockup is-active" data-screen="0" src="assets/fintoo-ai-preview/financial-wellness-score.png" alt="Fintoo financial wellness score screen" />
+            <img class="preview-mockup" data-screen="1" src="assets/fintoo-ai-preview/net-worth-tracker.png" alt="Fintoo net worth tracker screen" loading="lazy" />
+            <img class="preview-mockup" data-screen="2" src="assets/fintoo-ai-preview/smart-goal-planning.png" alt="Fintoo smart goal planning screen" loading="lazy" />
+            <img class="preview-mockup" data-screen="3" src="assets/fintoo-ai-preview/retirement-planning.png" alt="Fintoo retirement planning screen" loading="lazy" />
+            <img class="preview-mockup" data-screen="4" src="assets/fintoo-ai-preview/mutual-fund-health.png" alt="Fintoo mutual fund health screen" loading="lazy" />
           </div>
         </div>
 
-        <div>
-          <ol class="space-y-5">
-            <li class="preview-item" data-item="0"><p class="font-mono-ui text-xs text-steel">01</p><h3 class="mt-1 font-display text-xl font-semibold text-ice">AI financial overview</h3><p class="mt-1 text-sm text-steel">See your whole financial life at a glance.</p></li>
-            <li class="preview-item" data-item="1"><p class="font-mono-ui text-xs text-steel">02</p><h3 class="mt-1 font-display text-xl font-semibold text-ice">Personalized insights</h3><p class="mt-1 text-sm text-steel">Insights, not just numbers.</p></li>
-            <li class="preview-item" data-item="2"><p class="font-mono-ui text-xs text-steel">03</p><h3 class="mt-1 font-display text-xl font-semibold text-ice">Goal planning</h3><p class="mt-1 text-sm text-steel">Plans that adjust as life does.</p></li>
-            <li class="preview-item" data-item="3"><p class="font-mono-ui text-xs text-steel">04</p><h3 class="mt-1 font-display text-xl font-semibold text-ice">Spending intelligence</h3><p class="mt-1 text-sm text-steel">Know where it's actually going.</p></li>
-            <li class="preview-item" data-item="4"><p class="font-mono-ui text-xs text-steel">05</p><h3 class="mt-1 font-display text-xl font-semibold text-ice">Portfolio overview</h3><p class="mt-1 text-sm text-steel">Every holding, one screen.</p></li>
-            <li class="preview-item" data-item="5"><p class="font-mono-ui text-xs text-steel">06</p><h3 class="mt-1 font-display text-xl font-semibold text-ice">Conversational assistant</h3><p class="mt-1 text-sm text-steel">Ask it anything about your money.</p></li>
+        <div class="preview-copy">
+          <ol class="preview-list" aria-label="Fintoo app features">
+            <li><button type="button" class="preview-item is-active" data-item="0" aria-current="true"><span class="preview-number font-mono-ui text-xs">01</span><span class="preview-title">Know your financial wellness score</span><span class="preview-description">See how financially healthy you are, what’s working, and exactly where you can improve.</span></button></li>
+            <li><button type="button" class="preview-item" data-item="1"><span class="preview-number font-mono-ui text-xs">02</span><span class="preview-title">See your complete net worth</span><span class="preview-description">Bring your assets and liabilities together in one clear, always-connected view.</span></button></li>
+            <li><button type="button" class="preview-item" data-item="2"><span class="preview-number font-mono-ui text-xs">03</span><span class="preview-title">Plan smarter goals</span><span class="preview-description">Turn life goals into practical plans and stay on track as your priorities evolve.</span></button></li>
+            <li><button type="button" class="preview-item" data-item="3"><span class="preview-number font-mono-ui text-xs">04</span><span class="preview-title">Retire with greater confidence</span><span class="preview-description">Understand when you can retire and the corpus your current choices can build.</span></button></li>
+            <li><button type="button" class="preview-item" data-item="4"><span class="preview-number font-mono-ui text-xs">05</span><span class="preview-title">Check your mutual fund health</span><span class="preview-description">Spot strong, steady, slipping, and declining funds before they affect your goals.</span></button></li>
           </ol>
-          <div class="mt-8 flex gap-1.5" id="preview-ticks" aria-hidden="true">
-            <span class="preview-tick"></span><span class="preview-tick"></span><span class="preview-tick"></span>
-            <span class="preview-tick"></span><span class="preview-tick"></span><span class="preview-tick"></span>
+
+          <div class="preview-progress" aria-label="Choose a preview slide">
+            <button type="button" class="is-active" data-dot="0" aria-label="Show financial wellness score"></button>
+            <button type="button" data-dot="1" aria-label="Show net worth tracker"></button>
+            <button type="button" data-dot="2" aria-label="Show smart goal planning"></button>
+            <button type="button" data-dot="3" aria-label="Show retirement planning"></button>
+            <button type="button" data-dot="4" aria-label="Show mutual fund health"></button>
           </div>
           <p class="mt-4 text-xs text-steel">Interface shown is illustrative — features and data are for preview purposes.</p>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- ============ 4. FEATURE CONSTELLATION ============ -->
-  <section id="features" class="relative overflow-hidden bg-midnight py-28 sm:py-36" aria-labelledby="features-heading">
+  <!-- <section id="features" class="relative overflow-hidden bg-midnight py-28 sm:py-36" aria-labelledby="features-heading">
     <div class="ambient-orb animate-float bg-orange/25" style="width:22rem;height:22rem;top:10%;left:50%;transform:translateX(-50%);" aria-hidden="true"></div>
     <div class="relative mx-auto max-w-3xl px-6 text-center sm:px-10">
       <span class="badge">What it does</span>
@@ -722,7 +671,6 @@
 
     <div class="relative mx-auto mt-16 grid max-w-6xl gap-5 px-6 sm:grid-cols-2 sm:px-10 lg:grid-cols-3">
 
-      <!-- 1. AI-powered insights -->
       <div class="feature-card">
         <div class="fc-copy">
           <span class="fc-eyebrow">Always learning</span>
@@ -748,7 +696,6 @@
         </div>
       </div>
 
-      <!-- 2. Unified dashboard -->
       <div class="feature-card">
         <div class="fc-copy">
           <span class="fc-eyebrow">One connected view</span>
@@ -775,7 +722,6 @@
         </div>
       </div>
 
-      <!-- 3. Smart goal planning -->
       <div class="feature-card">
         <div class="fc-copy">
           <span class="fc-eyebrow">Set once, adjusts always</span>
@@ -801,7 +747,6 @@
         </div>
       </div>
 
-      <!-- 4. Spending intelligence -->
       <div class="feature-card">
         <div class="fc-copy">
           <span class="fc-eyebrow">Know where it goes</span>
@@ -832,7 +777,6 @@
         </div>
       </div>
 
-      <!-- 5. Next-best actions -->
       <div class="feature-card">
         <div class="fc-copy">
           <span class="fc-eyebrow">Never generic</span>
@@ -857,7 +801,6 @@
         </div>
       </div>
 
-      <!-- 6. Proactive alerts -->
       <div class="feature-card">
         <div class="fc-copy">
           <span class="fc-eyebrow">Before you have to ask</span>
@@ -882,104 +825,101 @@
       </div>
 
     </div>
-  </section>
+  </section> -->
 
 
-  <!-- ============ 5. HOW IT THINKS ============ -->
-  <section id="how-it-thinks" class="relative overflow-hidden bg-void py-28 sm:py-36" aria-labelledby="thinks-heading">
-    <div class="ambient-orb" style="width:24rem;height:24rem;top:-8rem;right:-8rem;background:var(--navy);opacity:.55;" aria-hidden="true"></div>
-    <div class="ambient-orb" style="width:22rem;height:22rem;bottom:-10rem;left:-8rem;background:var(--orange);opacity:.15;" aria-hidden="true"></div>
-    <div class="relative mx-auto max-w-3xl px-6 text-center sm:px-10">
-      <span class="badge">How it thinks</span>
-      <h2 id="thinks-heading" class="reveal-heading mt-6 font-display text-3xl font-semibold leading-tight text-ice sm:text-5xl">
-        Three steps. No jargon.
-      </h2>
-    </div>
-
-    <div class="relative mx-auto mt-20 max-w-5xl px-6 sm:px-10">
-      <svg viewBox="0 0 800 40" class="absolute left-0 right-0 top-8 hidden w-full lg:block" preserveAspectRatio="none" aria-hidden="true">
-        <path id="flow-path" d="M60,20 H740" stroke="url(#flowGrad)" stroke-width="2" stroke-linecap="round" fill="none" />
-        <defs><linearGradient id="flowGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="var(--orange)"/><stop offset="100%" stop-color="#ffab54"/></linearGradient></defs>
-      </svg>
-
-      <div class="grid gap-10 lg:grid-cols-3">
-        <div class="flow-step glass relative z-10 rounded-2xl p-6">
-          <span class="font-mono-ui text-xs text-orange">01</span>
-          <h3 class="mt-3 font-display text-lg font-semibold text-ice">Connect what you already have</h3>
-          <p class="mt-2 text-sm leading-relaxed text-steel">Securely link accounts, funds, and policies — or add them by hand.</p>
-        </div>
-        <div class="flow-step glass relative z-10 rounded-2xl p-6">
-          <span class="font-mono-ui text-xs text-orange">02</span>
-          <h3 class="mt-3 font-display text-lg font-semibold text-ice">Fintoo AI makes sense of it</h3>
-          <p class="mt-2 text-sm leading-relaxed text-steel">It organizes, cross-references, and understands your full financial picture.</p>
-        </div>
-        <div class="flow-step glass relative z-10 rounded-2xl p-6">
-          <span class="font-mono-ui text-xs text-orange">03</span>
-          <h3 class="mt-3 font-display text-lg font-semibold text-ice">You get clarity, not clutter</h3>
-          <p class="mt-2 text-sm leading-relaxed text-steel">Personalized insights and next steps, explained in plain language.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ 6. TRUST & PRIVACY ============ -->
-  <section id="trust" class="relative overflow-hidden bg-midnight py-28 sm:py-36" aria-labelledby="trust-heading">
-    <div class="pointer-events-none absolute inset-0 grid-texture opacity-40" aria-hidden="true"></div>
-    <div class="ambient-orb" style="width:24rem;height:24rem;top:-8rem;left:-10rem;background:var(--navy);opacity:.55;" aria-hidden="true"></div>
-    <div class="ambient-orb" style="width:22rem;height:22rem;bottom:-8rem;right:-6rem;background:var(--orange);opacity:.15;" aria-hidden="true"></div>
+  <!-- ============ 5. HOW IT THINKS + TRUST ============ -->
+  <section id="how-it-thinks" class="clarity-trust-section relative overflow-hidden" aria-labelledby="thinks-heading">
     <div class="relative mx-auto max-w-6xl px-6 sm:px-10">
-      <div class="max-w-xl">
-        <span class="badge">Privacy &amp; trust</span>
-        <h2 id="trust-heading" class="reveal-heading mt-6 font-display text-3xl font-semibold leading-tight text-ice sm:text-5xl">
-          Finance runs on trust. We know.
-        </h2>
+      <div class="clarity-intro">
+        <div>
+          <span class="badge">How it works</span>
+          <h2 id="thinks-heading" class="reveal-heading capitalize mt-6 max-w-3xl font-display text-3xl font-semibold leading-tight text-ice sm:text-5xl">
+            From connected finances to confident decisions.
+          </h2>
+        </div>
+        <div class="clarity-promise">
+          <p class="clarity-promise-label">The Fintoo promise</p>
+          <p class="mt-2 font-display text-xl font-semibold text-ice">Clear guidance. Your control.</p>
+          <p class="mt-2 text-sm leading-relaxed text-steel">Fintoo AI makes your financial picture useful without making it less private.</p>
+        </div>
       </div>
 
-      <div class="mt-14 grid gap-5 sm:grid-cols-2">
-        <div class="trust-card">
-          <span class="trust-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <div><h3 class="font-display text-base font-semibold text-ice">Privacy-first by design</h3><p class="mt-1.5 text-sm leading-relaxed text-steel">Your data is used to help you, not to sell to anyone else.</p></div>
-        </div>
-        <div class="trust-card">
-          <span class="trust-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="8" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M11 12h10M17 8v8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-          <div><h3 class="font-display text-base font-semibold text-ice">You control what's connected</h3><p class="mt-1.5 text-sm leading-relaxed text-steel">Link or unlink any account at any time.</p></div>
-        </div>
-        <div class="trust-card">
-          <span class="trust-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 11V7a4 4 0 018 0v4" stroke="currentColor" stroke-width="1.7"/></svg></span>
-          <div><h3 class="font-display text-base font-semibold text-ice">Security as a first requirement</h3><p class="mt-1.5 text-sm leading-relaxed text-steel">Not an afterthought bolted on before launch.</p></div>
-        </div>
-        <div class="trust-card">
-          <span class="trust-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/></svg></span>
-          <div><h3 class="font-display text-base font-semibold text-ice">Transparent recommendations</h3><p class="mt-1.5 text-sm leading-relaxed text-steel">Every suggestion comes with a reason, not a black box.</p></div>
-        </div>
-        <div class="trust-card trust-pledge sm:col-span-2">
-          <span class="trust-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M6 6l12 12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span>
-          <div><h3 class="font-display text-base font-semibold text-ice">We don't sell your financial data. Ever.</h3><p class="mt-1.5 text-sm leading-relaxed text-steel">Full privacy and security details will be published before public launch.</p></div>
-        </div>
+      <div class="journey-rail" aria-label="How Fintoo AI works">
+        <article class="journey-step flow-step">
+          <span class="journey-number">01</span>
+          <h3>Connect what you already have</h3>
+          <p>Securely link accounts, funds, and policies—or add them manually.</p>
+        </article>
+        <article class="journey-step flow-step">
+          <span class="journey-number">02</span>
+          <h3>Fintoo AI builds the full picture</h3>
+          <p>It organizes and cross-references everything, so your finances finally make sense together.</p>
+        </article>
+        <article class="journey-step flow-step">
+          <span class="journey-number">03</span>
+          <h3>You get clarity, not clutter</h3>
+          <p>Receive personalized insights and practical next steps in plain language.</p>
+        </article>
       </div>
+
+      <aside id="trust" class="trust-ribbon" aria-labelledby="trust-heading">
+        <div class="trust-ribbon-head">
+          <div>
+            <p class="font-mono-ui text-[.68rem] uppercase tracking-[.16em] text-orange">Privacy &amp; trust</p>
+            <h3 id="trust-heading" class="mt-2">Built to understand your money—not exploit it.</h3>
+          </div>
+          <div class="trust-pledge">
+            <span class="trust-pledge-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M6 6l12 12" stroke="currentColor" stroke-width="1.8"/></svg></span>
+            <span>We never sell your financial data.</span>
+          </div>
+        </div>
+
+        <div class="trust-points">
+          <article class="trust-point">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z" stroke="currentColor" stroke-width="1.7"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.7"/></svg>
+            <div><h4>Privacy-first</h4><p>Your data works for you alone.</p></div>
+          </article>
+          <article class="trust-point">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="8" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M11 12h10M17 8v8" stroke="currentColor" stroke-width="1.7"/></svg>
+            <div><h4>You stay in control</h4><p>Link or unlink anything, anytime.</p></div>
+          </article>
+          <article class="trust-point">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 11V7a4 4 0 018 0v4" stroke="currentColor" stroke-width="1.7"/></svg>
+            <div><h4>Security from day one</h4><p>Designed in, never bolted on.</p></div>
+          </article>
+          <article class="trust-point">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/></svg>
+            <div><h4>Transparent guidance</h4><p>Every suggestion includes a reason.</p></div>
+          </article>
+        </div>
+      </aside>
     </div>
   </section>
-
   <!-- ============ 7. FINAL CTA ============ -->
   <section id="join" class="relative overflow-hidden bg-void py-28 sm:py-36" aria-labelledby="join-heading">
     <div class="pointer-events-none absolute inset-0 grid-texture" aria-hidden="true"></div>
     <div class="ambient-orb animate-float bg-orange/40" style="width:30rem;height:30rem;top:50%;left:50%;transform:translate(-50%,-50%);" aria-hidden="true"></div>
 
     <div class="relative mx-auto max-w-2xl px-6 text-center sm:px-10">
-      <h2 class="reveal-heading font-display text-3xl font-semibold leading-tight text-ice sm:text-5xl">
+      <h2 class="reveal-heading font-display text-3xl capitalize font-semibold leading-tight text-ice sm:text-5xl">
         See what your money could <span class="text-gradient">do next.</span>
       </h2>
-      <p class="mt-5 text-lg text-steel">Early access is limited and opens in stages. Join now to be first in line.</p>
+      <p class="mt-5 text-lg text-steel">Fintoo AI launches on 1 September. Join the waitlist for updates and priority access.</p>
 
-      <form id="final-form" data-waitlist class="mx-auto mt-9 max-w-md" novalidate>
-        <div class="flex flex-col gap-3 sm:flex-row">
+      <form id="final-form" data-waitlist class="mx-auto mt-9 max-w-xl" novalidate>
+        <div class="grid gap-3 sm:grid-cols-2">
+          <label for="final-name" class="sr-only">Full name</label>
+          <input id="final-name" name="name" type="text" required placeholder="Full name" autocomplete="name" class="input-field w-full" />
           <label for="final-email" class="sr-only">Email address</label>
-          <input id="final-email" name="email" type="email" required placeholder="you@email.com" autocomplete="email" class="input-field flex-1" />
-          <button type="submit" class="btn-primary">
+          <input id="final-email" name="email" type="email" required placeholder="Email address" autocomplete="email" class="input-field w-full" />
+          <label for="final-phone" class="sr-only">Phone number, optional</label>
+          <input id="final-phone" name="phone" type="tel" placeholder="Phone number (optional)" autocomplete="tel" class="input-field w-full" />
+          <button type="submit" class="btn-primary w-full">
             <span data-label>Join the Waitlist</span>
           </button>
         </div>
-        <p class="mt-3 text-xs text-steel">Free to join. No spam. Unsubscribe anytime.</p>
+        <p class="mt-3 text-xs text-steel">Free to join. No spam. Your phone number is optional.</p>
         <p data-status role="status" aria-live="polite" class="form-status mt-2 text-sm"></p>
       </form>
     </div>
@@ -1033,328 +973,6 @@
   gsap.registerPlugin(ScrollTrigger, Observer, SplitText);
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ============================================================
-     Hero live network — a depth-layered node/connection field that
-     answers to the cursor, meant to read as "quietly intelligent"
-     infrastructure rather than decoration: a few nodes act as hubs
-     that hold a soft orange glow, links strengthen near the pointer,
-     and signal pulses occasionally travel between connected nodes.
-     ============================================================ */
-  (function initHeroNetwork() {
-    const canvas = document.getElementById('hero-network');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const section = document.getElementById('hero');
-    if (!section) return;
-
-    let width = 0, height = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
-    let nodes = [];
-    let pulses = [];
-    let tickers = [];
-    let candles = [];
-    let equityPoints = [];
-    let rafId = null;
-    const pointer = { x: null, y: null, tx: 0, ty: 0 };
-
-    const NAVY_LIGHT = '120,158,214';
-    const ORANGE = '221,115,0';
-    const LINK_DIST = 170;
-    const POINTER_RADIUS = 220;
-    const TICKER_POOL = ['₹1.84 Cr', 'NIFTY 50 ▲', 'MF +18.2%', 'SENSEX ▲', 'Gold ₹71,240', 'SIP +12%', 'Equity ▲ 8%', 'Debt · stable', 'XIRR 14.6%', 'Portfolio ▲'];
-
-    function resize() {
-      const rect = section.getBoundingClientRect();
-      width = rect.width; height = rect.height;
-      canvas.width = width * dpr; canvas.height = height * dpr;
-      canvas.style.width = width + 'px'; canvas.style.height = height + 'px';
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      seedNodes();
-      seedTickers();
-      seedCandles();
-      seedEquityLine();
-    }
-
-    function seedNodes() {
-      const count = width < 640 ? 34 : width < 1100 ? 52 : 66;
-      nodes = Array.from({ length: count }, (_, i) => {
-        const depth = 0.45 + Math.random() * 0.55; // 0.45 (far) – 1 (near)
-        return {
-          x: Math.random() * width,
-          y: Math.random() * height,
-          ox: 0, oy: 0, // parallax offset, eased toward target each frame
-          vx: (Math.random() - 0.5) * 0.12 * depth,
-          vy: (Math.random() - 0.5) * 0.12 * depth,
-          depth,
-          r: (Math.random() * 1.1 + 0.7) * depth,
-          hub: i % 11 === 0,
-          pulse: Math.random() * Math.PI * 2,
-        };
-      });
-    }
-
-    // Faint upward-trending equity curve — a quiet "the market goes up
-    // over time" watermark that sits behind the node network.
-    function seedEquityLine() {
-      const segs = 9;
-      equityPoints = [];
-      let y = height * 0.72;
-      for (let i = 0; i <= segs; i++) {
-        const x = (width / segs) * i;
-        y += (Math.random() - 0.62) * height * 0.09;
-        y = Math.max(height * 0.12, Math.min(height * 0.82, y));
-        equityPoints.push({ x, y });
-      }
-    }
-
-    function drawEquityLine(alphaMul) {
-      if (equityPoints.length < 2) return;
-      ctx.beginPath();
-      ctx.moveTo(equityPoints[0].x, equityPoints[0].y);
-      for (let i = 1; i < equityPoints.length; i++) {
-        const p0 = equityPoints[i - 1], p1 = equityPoints[i];
-        const mx = (p0.x + p1.x) / 2, my = (p0.y + p1.y) / 2;
-        ctx.quadraticCurveTo(p0.x, p0.y, mx, my);
-      }
-      const last = equityPoints[equityPoints.length - 1];
-      ctx.lineTo(last.x, last.y);
-      const grad = ctx.createLinearGradient(0, 0, 0, height);
-      grad.addColorStop(0, `rgba(${ORANGE},${0.1 * alphaMul})`);
-      grad.addColorStop(1, `rgba(${ORANGE},0)`);
-      ctx.lineTo(last.x, height);
-      ctx.lineTo(equityPoints[0].x, height);
-      ctx.closePath();
-      ctx.fillStyle = grad;
-      ctx.fill();
-
-      ctx.beginPath();
-      ctx.moveTo(equityPoints[0].x, equityPoints[0].y);
-      for (let i = 1; i < equityPoints.length; i++) {
-        const p0 = equityPoints[i - 1], p1 = equityPoints[i];
-        const mx = (p0.x + p1.x) / 2, my = (p0.y + p1.y) / 2;
-        ctx.quadraticCurveTo(p0.x, p0.y, mx, my);
-      }
-      ctx.strokeStyle = `rgba(${ORANGE},${0.22 * alphaMul})`;
-      ctx.lineWidth = 1.4;
-      ctx.stroke();
-    }
-
-    // A quiet cluster of candlesticks low in the scene — reads as a
-    // live price chart ticking away in the background, brand-toned
-    // (orange for up candles, steel-blue for down) rather than red/green.
-    function seedCandles() {
-      const count = width < 640 ? 10 : width < 1100 ? 16 : 20;
-      const baseY = height * 0.86;
-      candles = Array.from({ length: count }, (_, i) => {
-        const up = Math.random() > 0.42;
-        return {
-          x: width * 0.06 + i * (width * 0.9) / count,
-          baseY,
-          bodyH: 10 + Math.random() * 34,
-          wickH: 8 + Math.random() * 22,
-          up,
-          phase: Math.random() * Math.PI * 2,
-          speed: 0.006 + Math.random() * 0.008,
-        };
-      });
-    }
-
-    function drawCandles(t) {
-      for (const c of candles) {
-        const breathe = Math.sin(t * c.speed + c.phase) * 6;
-        const bodyH = Math.max(6, c.bodyH + breathe);
-        const color = c.up ? ORANGE : NAVY_LIGHT;
-        const y = c.baseY - bodyH;
-        ctx.globalAlpha = 0.16;
-        ctx.strokeStyle = `rgb(${color})`;
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(c.x, c.baseY - bodyH - c.wickH * 0.4);
-        ctx.lineTo(c.x, c.baseY + c.wickH * 0.3);
-        ctx.stroke();
-        ctx.fillStyle = `rgb(${color})`;
-        ctx.fillRect(c.x - 3, y, 6, bodyH);
-        ctx.globalAlpha = 1;
-      }
-    }
-
-    // Small financial data glyphs drifting slowly upward, like ambient
-    // market-ticker mist — reinforces "this is a finance product".
-    function seedTickers() {
-      const count = width < 640 ? 5 : width < 1100 ? 8 : 11;
-      tickers = Array.from({ length: count }, () => spawnTicker(Math.random() * height));
-    }
-    function spawnTicker(startY) {
-      return {
-        x: width * 0.08 + Math.random() * width * 0.86,
-        y: startY,
-        vy: -(0.09 + Math.random() * 0.14),
-        text: TICKER_POOL[(Math.random() * TICKER_POOL.length) | 0],
-        alpha: 0,
-        life: 0,
-        maxLife: 900 + Math.random() * 500,
-      };
-    }
-    function drawTickers() {
-      ctx.font = '11px "Google Sans Code", monospace';
-      ctx.textBaseline = 'middle';
-      for (const tck of tickers) {
-        tck.life += 1;
-        tck.y += tck.vy;
-        const fadeIn = Math.min(1, tck.life / 90);
-        const fadeOut = Math.min(1, (tck.maxLife - tck.life) / 120);
-        tck.alpha = Math.max(0, Math.min(fadeIn, fadeOut)) * 0.32;
-        ctx.fillStyle = `rgba(${NAVY_LIGHT},${tck.alpha})`;
-        ctx.fillText(tck.text, tck.x, tck.y);
-        if (tck.life > tck.maxLife || tck.y < -20) {
-          Object.assign(tck, spawnTicker(height + 20));
-        }
-      }
-    }
-
-    function maybeSpawnPulse() {
-      if (reduceMotion || nodes.length < 2 || Math.random() > 0.012) return;
-      const hubs = nodes.filter((n) => n.hub);
-      const a = (hubs.length && Math.random() < 0.7 ? hubs : nodes)[(Math.random() * (hubs.length && Math.random() < 0.7 ? hubs.length : nodes.length)) | 0];
-      let best = null, bestD = LINK_DIST;
-      for (const b of nodes) {
-        if (b === a) continue;
-        const d = Math.hypot(a.x - b.x, a.y - b.y);
-        if (d < bestD) { bestD = d; best = b; }
-      }
-      if (best) pulses.push({ a, b: best, t: 0 });
-    }
-
-    function step() {
-      ctx.clearRect(0, 0, width, height);
-
-      // finance backdrop layer — equity curve + quiet candlestick strip,
-      // both sit behind the node network so they read as ambient depth
-      drawEquityLine(1);
-      drawCandles(performance.now() * 0.05);
-
-      // pointer easing — the whole field drifts gently toward the cursor,
-      // stronger for nearer (higher-depth) nodes, giving a subtle parallax
-      pointer.tx += (( pointer.x ?? width / 2) - pointer.tx) * 0.04;
-      pointer.ty += (( pointer.y ?? height / 2) - pointer.ty) * 0.04;
-      const px = pointer.x, py = pointer.y;
-
-      // links
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const a = nodes[i], b = nodes[j];
-          const ax = a.x + a.ox, ay = a.y + a.oy, bx = b.x + b.ox, by = b.y + b.oy;
-          const d = Math.hypot(ax - bx, ay - by);
-          if (d < LINK_DIST) {
-            let alpha = (1 - d / LINK_DIST) * 0.14 * ((a.depth + b.depth) / 2);
-            if (px !== null) {
-              const mx = (ax + bx) / 2, my = (ay + by) / 2;
-              const pd = Math.hypot(mx - px, my - py);
-              if (pd < POINTER_RADIUS) alpha += (1 - pd / POINTER_RADIUS) * 0.35;
-            }
-            ctx.strokeStyle = `rgba(${NAVY_LIGHT},${Math.min(alpha, 0.5)})`;
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(ax, ay);
-            ctx.lineTo(bx, by);
-            ctx.stroke();
-          }
-        }
-      }
-
-      // nodes
-      for (const n of nodes) {
-        n.pulse += 0.018;
-        if (!reduceMotion) {
-          n.x += n.vx; n.y += n.vy;
-          if (n.x < 0 || n.x > width) n.vx *= -1;
-          if (n.y < 0 || n.y > height) n.vy *= -1;
-          if (px !== null) {
-            const d = Math.hypot(n.x - px, n.y - py);
-            const targetOx = d < POINTER_RADIUS ? ((n.x - px) / (d || 1)) * (POINTER_RADIUS - d) * 0.06 * n.depth : 0;
-            const targetOy = d < POINTER_RADIUS ? ((n.y - py) / (d || 1)) * (POINTER_RADIUS - d) * 0.06 * n.depth : 0;
-            n.ox += (targetOx - n.ox) * 0.08;
-            n.oy += (targetOy - n.oy) * 0.08;
-          } else {
-            n.ox *= 0.94; n.oy *= 0.94;
-          }
-        }
-        const x = n.x + n.ox, y = n.y + n.oy;
-        const baseGlow = (n.hub ? 0.55 : 0.32) + Math.sin(n.pulse) * (n.hub ? 0.3 : 0.16);
-        const color = n.hub ? ORANGE : NAVY_LIGHT;
-        ctx.beginPath();
-        ctx.arc(x, y, n.hub ? n.r + 0.9 : n.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${color},${baseGlow})`;
-        if (n.hub) { ctx.shadowColor = `rgba(${ORANGE},.55)`; ctx.shadowBlur = 6; }
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-
-      // travelling signal pulses along live links
-      maybeSpawnPulse();
-      pulses = pulses.filter((p) => p.t < 1);
-      for (const p of pulses) {
-        p.t += 0.011;
-        const x = p.a.x + p.a.ox + (p.b.x + p.b.ox - (p.a.x + p.a.ox)) * p.t;
-        const y = p.a.y + p.a.oy + (p.b.y + p.b.oy - (p.a.y + p.a.oy)) * p.t;
-        const fade = Math.sin(p.t * Math.PI);
-        ctx.beginPath();
-        ctx.arc(x, y, 1.9, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${ORANGE},${fade * 0.95})`;
-        ctx.shadowColor = `rgba(${ORANGE},${fade * 0.85})`;
-        ctx.shadowBlur = 9;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-
-      // ambient market-ticker glyphs drift on top, above the network
-      drawTickers();
-
-      rafId = requestAnimationFrame(step);
-    }
-
-    function drawStaticFrame() {
-      ctx.clearRect(0, 0, width, height);
-      drawEquityLine(1);
-      drawCandles(0);
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const a = nodes[i], b = nodes[j];
-          const d = Math.hypot(a.x - b.x, a.y - b.y);
-          if (d < LINK_DIST) {
-            ctx.strokeStyle = `rgba(${NAVY_LIGHT},${(1 - d / LINK_DIST) * 0.14})`;
-            ctx.lineWidth = 1;
-            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-          }
-        }
-      }
-      for (const n of nodes) {
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.hub ? n.r + 0.9 : n.r, 0, Math.PI * 2);
-        ctx.fillStyle = n.hub ? `rgba(${ORANGE},.55)` : `rgba(${NAVY_LIGHT},.32)`;
-        ctx.fill();
-      }
-    }
-
-    resize();
-
-    if (reduceMotion) {
-      drawStaticFrame();
-    } else {
-      step();
-      section.addEventListener('pointermove', (e) => {
-        const rect = section.getBoundingClientRect();
-        pointer.x = e.clientX - rect.left;
-        pointer.y = e.clientY - rect.top;
-      });
-      section.addEventListener('pointerleave', () => { pointer.x = null; pointer.y = null; });
-      window.addEventListener('resize', () => {
-        cancelAnimationFrame(rafId);
-        resize();
-        step();
-      });
-    }
-  })();
 
   /* ============================================================
      Custom cursor — additive glow, native cursor stays available
@@ -1423,29 +1041,38 @@
   const heroEls = {
     badge: '#hero-badge',
     sub: '#hero-sub',
-    form: '#hero-form',
-    fragments: '#hero-orb .fragment-icon',
-    core: '#hero-orb .core-pulse',
-    phone: '#hero-phone',
+    cta: '#hero-cta',
+    phone: '#hero-mockups',
     counter: '#hero-counter',
   };
 
   if (reduceMotion) {
-    revealHeading(document.getElementById('hero-heading'));
-    gsap.set([heroEls.badge, heroEls.sub, heroEls.form, heroEls.phone, heroEls.counter], { autoAlpha: 1, y: 0 });
-    gsap.set(heroEls.fragments, { autoAlpha: 1, scale: 1 });
-    gsap.set(heroEls.core, { autoAlpha: 1, scale: 1 });
+    gsap.set(['#hero-heading', heroEls.badge, heroEls.sub, heroEls.cta, heroEls.phone, heroEls.counter], { autoAlpha: 1, y: 0 });
   } else {
     const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
     heroTl
       .from(heroEls.badge, { autoAlpha: 0, y: -14, duration: 0.6 })
-      .call(() => revealHeading(document.getElementById('hero-heading')), null, '-=0.15')
+      .from('#hero-heading', { autoAlpha: 0, y: 24, duration: 0.85 }, '-=0.2')
       .from(heroEls.sub, { autoAlpha: 0, y: 16, duration: 0.7 }, '-=0.45')
-      .from(heroEls.form, { autoAlpha: 0, y: 16, duration: 0.7 }, '-=0.5')
-      .from(heroEls.fragments, { autoAlpha: 0, scale: 0.3, stagger: 0.07, duration: 0.6, ease: 'back.out(1.7)' }, '-=0.9')
-      .from(heroEls.core, { autoAlpha: 0, scale: 0, duration: 0.7, ease: 'back.out(1.6)' }, '-=0.6')
+      .from(heroEls.cta, { autoAlpha: 0, y: 16, duration: 0.7 }, '-=0.5')
       .from(heroEls.phone, { autoAlpha: 0, y: 40, scale: 0.94, duration: 0.9 }, '-=0.45')
       .from(heroEls.counter, { autoAlpha: 0, y: 10, duration: 0.5 }, '-=0.3');
+  }
+
+  const rotatingWord = document.getElementById('hero-rotating-word');
+  const rotatingWords = ['goals.', 'mutual funds.', 'retirement.', 'investments.', 'expense tracking.'];
+  let rotatingWordIndex = 0;
+  if (rotatingWord && !reduceMotion) {
+    window.setInterval(() => {
+      gsap.to(rotatingWord, {
+        autoAlpha: 0, y: -20, duration: .3, ease: 'power2.in',
+        onComplete: () => {
+          rotatingWordIndex = (rotatingWordIndex + 1) % rotatingWords.length;
+          rotatingWord.textContent = rotatingWords[rotatingWordIndex];
+          gsap.fromTo(rotatingWord, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: .38, ease: 'power2.out' });
+        },
+      });
+    }, 2200);
   }
 
   /* ============================================================
@@ -1475,7 +1102,7 @@
      ============================================================ */
   const nav = document.getElementById('site-nav');
   let navHidden = false;
-  Observer.create({
+  const navObserver = Observer.create({
     type: 'wheel,touch,pointer',
     tolerance: 10,
     onDown: () => {
@@ -1493,127 +1120,60 @@
   });
 
   /* ============================================================
-     Problem section — pinned scroll: fragments get pulled apart
-     and pulled inward, spin down into a point of light, and the
-     Fintoo AI app boots up on-screen piece by piece. Driven by
-     scroll position (scrubbed), so it plays forward and backward.
+     Interactive app preview — real mockup carousel
      ============================================================ */
-  const fragmentCards = gsap.utils.toArray('.fragment-card');
-  if (fragmentCards.length) {
-    const unifiedCard = document.getElementById('unified-card');
-    const glow = document.getElementById('convergence-glow');
-    const ucPieces = gsap.utils.toArray('.uc-piece');
-    const ucTags = gsap.utils.toArray('.uc-tag');
-    const networthEl = document.getElementById('uc-networth-num');
-    const networthWrap = document.getElementById('uc-networth-wrap');
-    const sparkline = document.getElementById('uc-sparkline');
+  const preview = document.getElementById('preview');
+  if (preview) {
+    const screens = Array.from(preview.querySelectorAll('.preview-mockup'));
+    const items = Array.from(preview.querySelectorAll('.preview-item'));
+    const dots = Array.from(preview.querySelectorAll('[data-dot]'));
+    let activeScreen = 0;
+    let autoplayTimer;
 
-    gsap.set(fragmentCards, { x: 0, y: 0, scale: 1, rotation: 0, opacity: 1, filter: 'blur(0px)' });
-    gsap.set(unifiedCard, { opacity: 0, scale: 0.5, rotation: -8, transformOrigin: '50% 50%' });
-    gsap.set(glow, { opacity: 0, scale: 1, boxShadow: '0 0 0 0 rgba(221,115,0,0)' });
-    gsap.set(ucPieces, { opacity: 0, y: 14 });
-    gsap.set(ucTags, { opacity: 0, y: 8, scale: 0.85 });
-    gsap.set(networthWrap, { opacity: 0, y: 10 });
+    function setScreen(index, restart = true) {
+      const next = (index + screens.length) % screens.length;
+      const previous = (next - 1 + screens.length) % screens.length;
+      const following = (next + 1) % screens.length;
 
-    let sparkLength = 60;
-    if (sparkline && sparkline.getTotalLength) {
-      try { sparkLength = sparkline.getTotalLength(); } catch (e) { /* noop */ }
-      gsap.set(sparkline, { strokeDasharray: sparkLength, strokeDashoffset: sparkLength });
-    }
-    const networthProxy = { v: 0 };
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: '#problem-pin',
-        start: 'top top',
-        end: '+=' + (reduceMotion ? 200 : 3600),
-        pin: true,
-        anticipatePin: 1,
-        scrub: 0.55,
-      },
-    });
-
-    const rotations = [-16, 12, -9, 14, -12, 9];
-    fragmentCards.forEach((card, i) => {
-      const [dx, dy] = (card.dataset.shift || '0,0').split(',').map(Number);
-      const t0 = i * 0.06;
-      // wind-up: a small outward "breath" before getting pulled in
-      tl.to(card, { y: '-=8', scale: 1.04, duration: 0.08, ease: 'power1.out' }, t0)
-        // pulled inward, spinning down and dissolving into blur
-        .to(card, { x: dx * -1, y: dy * -1, scale: 0.28, rotation: rotations[i % rotations.length], filter: 'blur(7px)', duration: 0.5, ease: 'power2.in' }, t0 + 0.08)
-        .to(card, { opacity: 0, duration: 0.16, ease: 'power1.in' }, t0 + 0.36);
-    });
-
-    // A point of light gathers the fragments' energy, then bursts.
-    tl.to(glow, { opacity: 1, scale: 2.4, duration: 0.22, ease: 'power2.out' }, 0.68)
-      .to(glow, { boxShadow: '0 0 70px 30px rgba(221,115,0,.55)', scale: 9, duration: 0.34, ease: 'power2.out' }, 0.86)
-      .to(glow, { opacity: 0, duration: 0.16 }, 1.02);
-
-    // The app materialises out of the flash with a confident overshoot.
-    tl.to(unifiedCard, { opacity: 1, scale: 1, rotation: 0, duration: 0.55, ease: 'back.out(1.8)' }, 0.92);
-
-    // Boot sequence: the screen fills in piece by piece, like the
-    // app is actually loading your data in real time.
-    const boot = 1.3;
-    if (ucPieces[0]) tl.to(ucPieces[0], { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, boot);
-    if (ucPieces[1]) tl.to(ucPieces[1], { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' }, boot + 0.12);
-    if (networthWrap) tl.to(networthWrap, { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' }, boot + 0.16);
-    tl.to(networthProxy, {
-      v: 1.84, duration: 0.5, ease: 'power1.out',
-      onUpdate: () => { if (networthEl) networthEl.textContent = networthProxy.v.toFixed(2); },
-    }, boot + 0.18);
-    if (ucPieces[2]) tl.to(ucPieces[2], { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, boot + 0.3);
-    if (sparkline) tl.to(sparkline, { strokeDashoffset: 0, duration: 0.55, ease: 'power2.out' }, boot + 0.34);
-    [3, 4].forEach((idx, k) => {
-      if (ucPieces[idx]) tl.to(ucPieces[idx], { opacity: 1, y: 0, duration: 0.28, ease: 'power2.out' }, boot + 0.62 + k * 0.09);
-    });
-    tl.to(ucTags, { opacity: 1, y: 0, scale: 1, duration: 0.28, stagger: 0.045, ease: 'back.out(2.2)' }, boot + 0.86);
-    if (ucPieces[5]) tl.to(ucPieces[5], { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, boot + 1.12);
-
-    // brief hold so the resolved state registers before the pin releases
-    tl.to({}, { duration: 0.3 });
-  }
-
-
-  /* ============================================================
-     Interactive app preview — pinned, scroll-scrubbed screen swap
-     ============================================================ */
-  const screens = gsap.utils.toArray('.preview-screen');
-  const items = gsap.utils.toArray('.preview-item');
-  const ticks = gsap.utils.toArray('.preview-tick');
-  let activeScreen = 0;
-
-  if (screens.length) {
-    gsap.set(screens, { autoAlpha: 0, yPercent: 6 });
-    gsap.set(screens[0], { autoAlpha: 1, yPercent: 0 });
-    items.forEach((it, i) => it.classList.toggle('is-active', i === 0));
-    if (ticks[0]) ticks[0].classList.add('is-active');
-
-    function setScreen(i) {
-      if (i === activeScreen) return;
-      const dir = i > activeScreen ? 1 : -1;
-      gsap.to(screens[activeScreen], { autoAlpha: 0, yPercent: -6 * dir, duration: reduceMotion ? 0.01 : 0.45, ease: 'power2.inOut' });
-      gsap.fromTo(screens[i], { autoAlpha: 0, yPercent: 6 * dir }, { autoAlpha: 1, yPercent: 0, duration: reduceMotion ? 0.01 : 0.45, ease: 'power2.inOut' });
-      if (items[activeScreen]) items[activeScreen].classList.remove('is-active');
-      if (items[i]) items[i].classList.add('is-active');
-      if (ticks[activeScreen]) ticks[activeScreen].classList.remove('is-active');
-      if (ticks[i]) ticks[i].classList.add('is-active');
-      activeScreen = i;
+      screens.forEach((screen, i) => {
+        screen.classList.toggle('is-active', i === next);
+        screen.classList.toggle('is-prev', i === previous);
+        screen.classList.toggle('is-next', i === following);
+        screen.setAttribute('aria-hidden', i === next ? 'false' : 'true');
+      });
+      items.forEach((item, i) => {
+        item.classList.toggle('is-active', i === next);
+        if (i === next) item.setAttribute('aria-current', 'true');
+        else item.removeAttribute('aria-current');
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === next);
+        dot.classList.toggle('is-complete', i < next);
+      });
+      activeScreen = next;
+      if (restart) startAutoplay();
     }
 
-    ScrollTrigger.create({
-      trigger: '#preview-pin',
-      start: 'top top',
-      end: () => '+=' + screens.length * 850,
-      pin: true,
-      scrub: 0.5,
-      onUpdate: (self) => {
-        const idx = Math.min(screens.length - 1, Math.floor(self.progress * screens.length));
-        setScreen(idx);
-      },
-    });
-  }
+    function startAutoplay() {
+      window.clearTimeout(autoplayTimer);
+      if (!reduceMotion) autoplayTimer = window.setTimeout(() => setScreen(activeScreen + 1), 5000);
+    }
 
+    items.forEach((item, i) => item.addEventListener('click', () => setScreen(i)));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => setScreen(i)));
+    preview.addEventListener('mouseenter', () => window.clearTimeout(autoplayTimer));
+    preview.addEventListener('mouseleave', startAutoplay);
+    preview.addEventListener('focusin', () => window.clearTimeout(autoplayTimer));
+    preview.addEventListener('focusout', startAutoplay);
+
+    setScreen(0, false);
+
+    const previewObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) startAutoplay();
+      else window.clearTimeout(autoplayTimer);
+    }, { threshold: .25 });
+    previewObserver.observe(preview);
+  }
   /* ============================================================
      How it thinks — SVG connector line draw
      ============================================================ */
@@ -1663,6 +1223,7 @@
      to a real endpoint before launch.
      ============================================================ */
   function initWaitlistForm(form) {
+    const nameInput = form.querySelector('input[name="name"]');
     const emailInput = form.querySelector('input[type="email"]');
     const button = form.querySelector('button[type="submit"]');
     const label = button.querySelector('[data-label]');
@@ -1680,6 +1241,13 @@
       e.preventDefault();
       const email = emailInput.value.trim();
 
+      if (!form.checkValidity()) {
+        const invalidField = form.querySelector(':invalid');
+        setStatus('error', invalidField === emailInput ? 'Enter a valid email address.' : 'Enter your full name.');
+        invalidField?.setAttribute('data-touched', 'true');
+        invalidField?.focus();
+        return;
+      }
       if (!email || !emailInput.checkValidity()) {
         setStatus('error', 'Enter a valid email address.');
         emailInput.setAttribute('data-touched', 'true');
@@ -1701,7 +1269,7 @@
         // await fetch('/api/waitlist', {
         //   method: 'POST',
         //   headers: { 'Content-Type': 'application/json' },
-        //   body: JSON.stringify({ email }),
+        //   body: JSON.stringify({ name: nameInput.value.trim(), email, phone: form.elements.phone.value.trim() }),
         // });
         await new Promise((resolve) => setTimeout(resolve, 900));
 
@@ -1718,6 +1286,217 @@
     });
   }
   document.querySelectorAll('form[data-waitlist]').forEach(initWaitlistForm);
+
+  /* ============================================================
+     Full-page Observer transitions — based on the supplied GSAP
+     pattern. Desktop wheels, swipes, pointer drags, arrow keys,
+     and the existing anchor links all move between panels.
+     ============================================================ */
+  const sectionSliderQuery = window.matchMedia('(prefers-reduced-motion: no-preference)');
+  if (sectionSliderQuery.matches) {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+    document.documentElement.classList.add('is-section-slider');
+
+    const sections = gsap.utils.toArray('#main > section');
+    const outerWrappers = [];
+    const innerWrappers = [];
+
+    sections.forEach((section) => {
+      const outer = document.createElement('div');
+      const inner = document.createElement('div');
+      outer.className = 'outer';
+      inner.className = 'inner';
+      inner.append(...section.childNodes);
+      outer.append(inner);
+      section.append(outer);
+      outerWrappers.push(outer);
+      innerWrappers.push(inner);
+    });
+
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    navObserver.kill();
+    gsap.killTweensOf(sections.flatMap((section) => Array.from(section.querySelectorAll('*'))));
+    gsap.set(sections.flatMap((section) => Array.from(section.querySelectorAll('.reveal-heading, .flow-step, #hero-heading, #hero-badge, #hero-sub, #hero-cta, #hero-mockups, #hero-counter'))), {
+      clearProps: 'opacity,visibility,transform',
+    });
+
+    const headings = sections.map((section) => section.querySelector('h1, h2'));
+    const splitHeadings = headings.map((heading) => {
+      if (!heading) return null;
+      if (heading._split) heading._split.revert();
+      return new SplitText(heading, { type: 'lines', linesClass: 'clip-text' });
+    });
+    const panelVisuals = sections.map((section) =>
+      section.querySelector('.hero-visual, .preview-visual, .trust-ribbon, form')
+    );
+    const panelContent = sections.map((section) => {
+      const selectors = {
+        hero: '#hero-badge, #hero-sub, #hero-cta, .hero-actions',
+        preview: '.badge, #preview-heading + p, .preview-copy',
+        'how-it-thinks': '.badge, .clarity-promise, .journey-step',
+        join: 'h2 + p',
+      };
+      return gsap.utils.toArray(selectors[section.id] || '', section);
+    });
+
+    let currentIndex = -1;
+    let animating = false;
+    const wrap = gsap.utils.wrap(0, sections.length);
+
+    gsap.set([outerWrappers, innerWrappers], { yPercent: 0 });
+    gsap.set(sections, { autoAlpha: 0, yPercent: 100 });
+
+    function gotoSection(index, direction = 1) {
+      index = wrap(index);
+      if (animating || index === currentIndex) return;
+      animating = true;
+
+      const fromTop = direction === -1;
+      const dFactor = fromTop ? -1 : 1;
+      const timeline = gsap.timeline({
+        defaults: { duration: 1.25, ease: 'power1.inOut' },
+        onComplete: () => { animating = false; },
+      });
+
+      if (currentIndex >= 0) {
+        gsap.set(sections[currentIndex], { zIndex: 0 });
+        timeline
+          .to(sections[currentIndex], { yPercent: -100 * dFactor }, 0)
+          .set(sections[currentIndex], { autoAlpha: 0 });
+        timeline.to(
+          [...panelContent[currentIndex], panelVisuals[currentIndex]].filter(Boolean),
+          { autoAlpha: 0, y: -24 * dFactor, duration: 0.45, ease: 'power2.in', stagger: 0.025 },
+          0
+        );
+      }
+
+      gsap.set(sections[index], { autoAlpha: 1, zIndex: 1 });
+      timeline.fromTo(
+        sections[index],
+        { yPercent: 100 * dFactor },
+        { yPercent: 0 },
+        0
+      );
+      if (splitHeadings[index]) {
+        timeline.fromTo(
+          splitHeadings[index].lines,
+          { autoAlpha: 0, yPercent: 150 * dFactor },
+          {
+            autoAlpha: 1,
+            yPercent: 0,
+            duration: 1,
+            ease: 'power2',
+            stagger: 0.14,
+          },
+          0.2
+        );
+      }
+      if (panelContent[index].length) {
+        timeline.fromTo(
+          panelContent[index],
+          { autoAlpha: 0, y: 38 * dFactor },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            stagger: 0.1,
+          },
+          0.3
+        );
+      }
+      if (panelVisuals[index]) {
+        timeline.fromTo(
+          panelVisuals[index],
+          { autoAlpha: 0, y: 70 * dFactor, scale: 0.94 },
+          { autoAlpha: 1, y: 0, scale: 1, duration: 1.05, ease: 'power3.out' },
+          0.18
+        );
+      }
+
+      currentIndex = index;
+      history.replaceState(null, '', '#' + sections[index].id);
+    }
+
+    const isMobileSlider = window.matchMedia('(max-width: 768px)').matches;
+
+    function canChangeSection(direction) {
+      const scroller = innerWrappers[currentIndex];
+      if (!scroller || scroller.scrollHeight <= scroller.clientHeight + 2) return true;
+      if (direction > 0) {
+        return scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - 2;
+      }
+      return scroller.scrollTop <= 2;
+    }
+
+    Observer.create({
+      target: window,
+      type: 'wheel,touch,pointer',
+      wheelSpeed: -1,
+      onDown: () => !animating && canChangeSection(-1) && gotoSection(currentIndex - 1, -1),
+      onUp: () => !animating && canChangeSection(1) && gotoSection(currentIndex + 1, 1),
+      tolerance: 10,
+      preventDefault: !isMobileSlider,
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (['ArrowDown', 'PageDown', ' '].includes(event.key)) {
+        event.preventDefault();
+        gotoSection(currentIndex + 1, 1);
+      } else if (['ArrowUp', 'PageUp'].includes(event.key)) {
+        event.preventDefault();
+        gotoSection(currentIndex - 1, -1);
+      } else if (event.key === 'Home') {
+        event.preventDefault();
+        gotoSection(0, -1);
+      } else if (event.key === 'End') {
+        event.preventDefault();
+        gotoSection(sections.length - 1, 1);
+      }
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const target = document.querySelector(link.getAttribute('href'));
+        const targetSection = target?.closest('#main > section');
+        const targetIndex = sections.indexOf(targetSection);
+        if (targetIndex < 0) return;
+        event.preventDefault();
+        gotoSection(targetIndex, targetIndex < currentIndex ? -1 : 1);
+      });
+    });
+
+    const hashTarget = window.location.hash ? document.querySelector(window.location.hash) : null;
+    const initialSection = hashTarget?.closest('#main > section');
+    const hashIndex = sections.indexOf(initialSection);
+    const initialIndex = hashIndex >= 0 ? hashIndex : 0;
+
+    // Never play an off-screen entrance on first load/reload. The selected
+    // panel starts fully rendered; animation begins with the first interaction.
+    gsap.set(sections, { autoAlpha: 0, yPercent: 100, zIndex: 0 });
+    gsap.set(sections[initialIndex], { autoAlpha: 1, yPercent: 0, zIndex: 1 });
+    if (splitHeadings[initialIndex]) {
+      gsap.fromTo(
+        splitHeadings[initialIndex].lines,
+        { autoAlpha: 0, yPercent: 100 },
+        { autoAlpha: 1, yPercent: 0, duration: 0.85, ease: 'power3.out', stagger: 0.12 }
+      );
+    }
+    gsap.fromTo(
+      panelContent[initialIndex],
+      { autoAlpha: 0, y: 32 },
+      { autoAlpha: 1, y: 0, duration: 0.75, delay: 0.15, ease: 'power3.out', stagger: 0.09 }
+    );
+    if (panelVisuals[initialIndex]) {
+      gsap.fromTo(
+        panelVisuals[initialIndex],
+        { autoAlpha: 0, y: 55, scale: 0.95 },
+        { autoAlpha: 1, y: 0, scale: 1, duration: 1, delay: 0.08, ease: 'power3.out' }
+      );
+    }
+    currentIndex = initialIndex;
+  }
 
   /* ============================================================
      Recalculate on load / resize
