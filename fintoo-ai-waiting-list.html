@@ -1,0 +1,1803 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light" />
+<title>Fintoo AI — Your financial life, finally thinking as one</title>
+<meta name="description" content="Fintoo AI turns fragmented financial information into one clear, intelligent view. Join the early access waitlist." />
+<meta property="og:title" content="Fintoo AI — Your financial life, finally thinking as one" />
+<meta property="og:description" content="One intelligent view of everything you own, owe, and are working toward. Private beta opening soon." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700;800&family=Google+Sans+Code:wght@400;500;600&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          void: '#f4f7fc',
+          midnight: '#e8eff8',
+          panel: '#ffffff',
+          ice: '#0b2148',
+          steel: '#4c6282',
+          orange: { DEFAULT: '#e77918', dim: '#8f4c00' },
+          navy: '#174c8f',
+        },
+        fontFamily: {
+          display: ['"Google Sans"', 'system-ui', 'sans-serif'],
+          body: ['"Google Sans"', 'system-ui', 'sans-serif'],
+          mono: ['"Google Sans Code"', 'ui-monospace', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
+
+<!-- GSAP core + free bonus plugins (Observer, ScrollTrigger, SplitText) -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/Observer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+
+<style>
+  /* ============ Design tokens ============ */
+  :root {
+    --void: #f4f7fc;
+    --midnight: #e8eff8;
+    --navy: #174c8f;
+    --panel: #ffffff;
+    --ice: #0b2148;
+    --steel: #4c6282;
+    --orange: #e77918;
+    --line: rgba(23, 76, 143, 0.22);
+    color-scheme: light;
+  }
+
+  * { -webkit-tap-highlight-color: transparent; }
+  /* One continuous gradient for the entire document — not per-section
+     fills — so there is never a seam where one section's background
+     meets the next. Every section below is transparent and lets this
+     single backdrop show through. */
+  html{
+    background:
+      radial-gradient(circle at 82% 8%, rgba(56,132,224,.15), transparent 30rem),
+      radial-gradient(circle at 8% 30%, rgba(246,134,56,.09), transparent 28rem),
+      linear-gradient(180deg, #fbfcff 0%, #f1f6fc 38%, #f8fafc 72%, #eef4fb 100%);
+    transition: background .35s ease;
+  }
+  body{ background: transparent; }
+  .bg-void, .bg-midnight{ background: transparent !important; }
+  .bg-void, .bg-midnight{ background: transparent !important; }
+  body {
+    font-family: 'Google Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--ice);
+    overflow-x: hidden;
+  }
+  ::selection { background: rgba(221,115,0,.28); color: #fff; }
+
+  .font-mono-ui { font-family: 'Google Sans Code', ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+  /* ============ Accessibility ============ */
+  .skip-link{
+    position:fixed; top:-100%; left:1rem; z-index:100;
+    background:var(--orange); color:#04121a; font-weight:600;
+    padding:.6rem 1rem; border-radius:.5rem; transition:top .2s ease;
+  }
+  .skip-link:focus{ top:1rem; }
+  :focus-visible{ outline:2px solid var(--orange); outline-offset:3px; border-radius:2px; }
+  .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+  /* ============ Reveal / clip utility (from supplied GSAP source) ============ */
+  .reveal-heading .clip-text{ overflow:hidden; padding-bottom:.05em; }
+  .reveal-heading .clip-text > div{ will-change: transform; }
+
+@media (min-width: 1079.999px) {
+  html {
+    font-size: 0.9vw;
+  }
+  html .womoneya-page {
+    font-size: 0.9vw;
+  }
+}
+
+  /* ============ Grid + noise atmosphere ============ */
+  .grid-texture{
+    background-image:
+      linear-gradient(to right, rgba(60,110,180,.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(60,110,180,.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(70% 60% at 50% 30%, black 30%, transparent 85%);
+            mask-image: radial-gradient(70% 60% at 50% 30%, black 30%, transparent 85%);
+    opacity:.72;
+  }
+  .grain-overlay{ position:fixed; inset:0; z-index:60; pointer-events:none; opacity:.025; mix-blend-mode:overlay; }
+  .grain-overlay svg{ width:100%; height:100%; }
+
+  /* ============ Glass + glow components ============ */
+  .glass{
+    background: #fff;
+    border: 1px solid var(--line);
+    box-shadow: 0 20px 45px -30px rgba(11,45,92,.42);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+  .badge{
+    display:inline-flex; align-items:center; gap:.55rem; border-radius:9999px;
+    border:1px solid rgba(70,120,200,.3); background:rgba(255,255,255,.58);
+    padding:.45rem .95rem .45rem .7rem; font-family:'Google Sans Code',monospace;
+    font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--steel);
+  }
+  .dot-live{ position:relative; display:inline-block; width:7px; height:7px; border-radius:9999px; background:var(--orange); }
+  .dot-live::after{
+    content:''; position:absolute; inset:-4px; border-radius:9999px; border:1px solid var(--orange);
+    animation: pulse-ring 2.2s cubic-bezier(.3,.6,.4,1) infinite;
+  }
+  @keyframes pulse-ring{ 0%{ opacity:.9; transform:scale(.6);} 100%{ opacity:0; transform:scale(1.9);} }
+
+  /* Solid color, not a background-clip gradient: the heading is split into
+     line-wrapper divs by GSAP SplitText for the reveal animation, which can
+     break gradient text-clipping across the split. A solid color survives
+     that restructuring correctly. */
+  .text-gradient{ color: var(--orange); }
+
+  .hero-rotator{
+    display:inline-block; min-height:1.08em; overflow:hidden; vertical-align:bottom;
+    color:var(--orange); white-space:nowrap;
+  }
+  .hero-rotator-word{ display:inline-block; will-change:transform,opacity; }
+  #hero-heading{
+    font-family:'Inter Tight','Helvetica Neue',Arial,sans-serif !important;
+    font-weight:500;
+    letter-spacing:-.055em;
+  }
+  .hero-app-animation{
+    position:relative; width:min(520px,100%); height:min(68vh,650px);
+    margin:auto; justify-self:center; align-self:center; overflow:visible;
+    background:transparent; isolation:isolate;
+  }
+  .hero-app-phone{
+    position:absolute; z-index:4; left:50%; top:50%; width:min(292px,66%);
+    aspect-ratio:360/730; padding:7px; border-radius:48px;
+    background:linear-gradient(145deg,#5f5265 0%,#1a191c 15%,#090a0b 78%,#8c768e 100%);
+    box-shadow:0 28px 55px -24px rgba(10,30,62,.55),inset 0 0 0 2px rgba(224,198,226,.45);
+    transform:translate(-50%,-50%) scale(.16); opacity:0;
+    animation:hero-phone-build 15.75s cubic-bezier(.22,.75,.2,1) infinite;
+  }
+  .hero-app-screen{
+    position:relative; width:100%; height:100%; overflow:hidden; border-radius:41px;
+    background:#f4f4f4; box-shadow:inset 0 0 0 1px rgba(255,255,255,.8);
+  }
+  .hero-app-dashboard{
+    position:absolute; top:0; left:0; width:100%; height:auto; max-width:none;
+    transform:translateY(0); opacity:0; will-change:transform,opacity;
+    animation:hero-dashboard-scroll 15.75s cubic-bezier(.65,0,.35,1) infinite;
+  }
+  .hero-phone-logo{
+    position:absolute; z-index:12; left:50%; top:50%; display:block; width:138px; height:auto;
+    transform:translate(-50%,-50%) scale(.72); opacity:0; white-space:nowrap;
+    filter:drop-shadow(0 8px 15px rgba(11,45,92,.18));
+    animation:hero-phone-logo-reveal 15.75s cubic-bezier(.22,.75,.2,1) infinite;
+  }
+  @keyframes hero-phone-logo-reveal{
+    0%,27%{ opacity:0; transform:translate(-50%,-50%) scale(.72); }
+    31%,38%{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+    43%,100%{ opacity:0; transform:translate(-50%,-50%) scale(1.1); }
+  }
+  .hero-app-island{
+    position:absolute; z-index:7; top:15px; left:50%; width:34%; height:25px;
+    transform:translateX(-50%); border-radius:999px; background:#171719;
+    box-shadow:inset -2px -2px 4px rgba(255,255,255,.08);
+  }
+  .hero-app-island::after{
+    content:''; position:absolute; right:8px; top:7px; width:10px; height:10px;
+    border-radius:50%; background:radial-gradient(circle at 45% 45%,#2389d3 0 12%,#102c43 26%,#090a0b 58%);
+  }
+  .hero-app-chip{
+    --x:0px; --y:0px; position:absolute; z-index:2; left:50%; top:50%;
+    display:flex; align-items:center; gap:8px; padding:9px 13px; border-radius:9px;
+    border:1px solid rgba(23,76,143,.1); background:#fff;
+    color:var(--ice); font:600 12px/1 'Google Sans',sans-serif; letter-spacing:0;
+    white-space:nowrap; box-shadow:0 8px 20px rgba(11,45,92,.13); opacity:0;
+    transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(.7);
+    animation:hero-chip-flight 15.75s cubic-bezier(.22,.75,.2,1) infinite;
+    animation-delay:var(--delay,0s);
+  }
+  .hero-app-chip svg{
+    width:16px; height:16px; padding:0; flex:none; color:var(--navy);
+    border:0; border-radius:0; background:none; box-shadow:none;
+  }
+  .hero-app-chip:nth-of-type(even) svg{ color:var(--orange); background:none; border:0; box-shadow:none; }
+  .hero-app-chip:nth-of-type(odd){ --tilt:-.5deg; }
+  .hero-app-chip:nth-of-type(even){ --tilt:.5deg; }
+  .hero-app-card{
+    position:absolute; z-index:8; left:50%; top:50%; width:154px; height:var(--card-h,104px);
+    border-radius:10px; border:1px solid rgba(23,76,143,.12); background:#f4f4f4;
+    box-shadow:0 14px 35px rgba(11,45,92,.18); opacity:0; overflow:hidden;
+    transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(.52);
+    animation:hero-card-assemble 15.75s cubic-bezier(.22,.75,.2,1) infinite;
+    animation-delay:var(--card-delay,0s);
+  }
+  .hero-app-card svg,.hero-app-card > img{ display:block; width:100%; height:100%; object-fit:contain; }
+  @keyframes hero-chip-flight{
+    0%,3%{ opacity:0; transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y) + 12px)) scale(.62) rotate(var(--tilt,0deg)); }
+    8%,22%{ opacity:1; transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1) rotate(var(--tilt,0deg)); }
+    31%,100%{ opacity:0; transform:translate(-50%,-50%) scale(.22); }
+  }
+  @keyframes hero-card-assemble{
+    0%,23%{ opacity:0; transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(.48); }
+    26%,31%{ opacity:1; transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1); }
+    36%{ opacity:1; transform:translate(-50%,-50%) scale(.42); filter:blur(0); }
+    38%,100%{ opacity:0; transform:translate(-50%,-50%) scale(.28); filter:blur(1px); }
+  }
+  @keyframes hero-phone-build{
+    0%,25%{ opacity:0; transform:translate(-50%,-50%) scale(.72); }
+    30%{ opacity:.22; transform:translate(-50%,-50%) scale(.9); }
+    39%,94%{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+    100%{ opacity:0; transform:translate(-50%,-50%) scale(.94); }
+  }
+  @keyframes hero-dashboard-scroll{
+    0%,37%{ opacity:0; transform:translateY(0) scale(.96); }
+    42%{ opacity:1; transform:translateY(0) scale(1); }
+    52%{ opacity:1; transform:translateY(-10%) scale(1); }
+    68%{ opacity:1; transform:translateY(-35%) scale(1); }
+    84%,94%{ opacity:1; transform:translateY(-69%) scale(1); }
+    100%{ opacity:0; transform:translateY(0) scale(.98); }
+  }
+  @media(max-width:767px){
+    .hero-app-animation{ height:min(49vh,450px); }
+    .hero-app-phone{ width:min(220px,58vw); border-radius:38px; padding:6px; }
+    .hero-app-screen{ border-radius:32px; }
+    .hero-app-chip{ gap:6px; padding:7px 9px; border-radius:7px; font-size:9px; }
+    .hero-app-chip svg{ width:13px; height:13px; padding:0; }
+    .hero-app-card{ width:124px; height:84px; }
+    .hero-app-card:nth-of-type(odd){ --x:-125px !important; }
+    .hero-app-card:nth-of-type(even){ --x:125px !important; }
+  }
+  @media(prefers-reduced-motion:reduce){
+    .hero-app-phone{ opacity:1; transform:translate(-50%,-50%) scale(1); animation:none; }
+    .hero-app-dashboard{ animation:none; opacity:1; }
+    .hero-app-chip,.hero-app-card{ display:none; }
+  }
+
+  /* The duplicated concept page plays the app assembly once, then hands the
+     dashboard to the ID-driven in-app sequence below. */
+  .hero-app-chip,.hero-app-card{ animation-iteration-count:1; animation-fill-mode:forwards; }
+  .hero-app-phone{ animation:hero-phone-build-once 6.2s cubic-bezier(.22,.75,.2,1) forwards; }
+  .hero-phone-logo{ animation:hero-phone-logo-once 6.2s cubic-bezier(.22,.75,.2,1) forwards; }
+  .hero-app-dashboard{ animation:none; opacity:0; transform:translateY(0); }
+  @keyframes hero-phone-build-once{
+    0%,63%{ opacity:0; transform:translate(-50%,-50%) scale(.72); }
+    78%{ opacity:.25; transform:translate(-50%,-50%) scale(.9); }
+    100%{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+  }
+  @keyframes hero-phone-logo-once{
+    0%,66%{ opacity:0; transform:translate(-50%,-50%) scale(.72); }
+    75%,88%{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+    100%{ opacity:0; transform:translate(-50%,-50%) scale(1.08); }
+  }
+
+  .btn-primary{
+    display:inline-flex; align-items:center; justify-content:center; gap:.5rem;
+    background: linear-gradient(95deg, var(--orange), #ffab54);
+    color:#04121a; font-weight:600; font-size:.92rem;
+    padding:.95rem 1.5rem; border-radius:.85rem; white-space:nowrap;
+    box-shadow: 0 0 0 1px rgba(221,115,0,.25), 0 16px 40px -14px rgba(221,115,0,.65);
+    transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease;
+  }
+  .btn-primary:hover{ transform: translateY(-1px); box-shadow: 0 0 0 1px rgba(221,115,0,.4), 0 20px 46px -12px rgba(221,115,0,.8); }
+  .btn-primary:disabled{ opacity:.6; cursor:default; transform:none; }
+
+  .input-field{
+    background: rgba(255,255,255,.8); border:1px solid var(--line); color:var(--ice);
+    padding:.95rem 1.1rem; border-radius:.85rem; font-size:.95rem;
+    transition: border-color .2s ease, background .2s ease;
+  }
+  .input-field::placeholder{ color:#8190a6; }
+  .input-field:focus{ border-color: rgba(221,115,0,.55); background: rgba(221,115,0,.05); outline:none; }
+  .input-field:invalid[data-touched="true"]{ border-color: rgba(255,110,110,.55); }
+
+  .link-secondary{ display:inline-flex; align-items:center; gap:.4rem; color:var(--ice); font-size:.9rem; font-weight:500; border-bottom:1px solid rgba(140,160,200,.3); padding-bottom:2px; transition:border-color .2s ease, color .2s ease; }
+  .link-secondary:hover{ border-color: var(--orange); color: var(--orange); }
+
+  .counter-pill{
+    display:inline-flex; align-items:center; gap:.6rem; font-size:.82rem; color:var(--steel);
+  }
+  .counter-pill strong{ font-family:'Google Sans Code',monospace; color:var(--ice); font-weight:500; }
+
+  .form-status{ min-height:1.25rem; }
+  .form-status[data-state="error"]{ color:#ff9b9b; }
+  .form-status[data-state="success"]{ color:var(--orange); }
+  .form-status[data-state="duplicate"]{ color:#ffd27a; }
+  .form-status[data-state="loading"]{ color:var(--steel); }
+
+  /* ============ Clean hero background ============ */
+  #hero{
+    isolation:isolate;
+    background:#fff !important;
+  }
+  #hero::before{ display:none; }
+  #hero::after{
+    content:''; position:absolute; z-index:0; left:0; right:0; bottom:0; height:1px;
+    background:linear-gradient(90deg,transparent,rgba(23,76,143,.14),rgba(231,121,24,.2),transparent);
+  }
+  #hero > .grid-texture{ display:none; }
+  #hero .hero-actions{ margin-top:2rem; }
+  .hero-cross{ --hero-edge:max(24px,calc((100vw - 80rem)/2)); position:absolute; inset:0; z-index:0; pointer-events:none; }
+  .hero-cross::before{
+    content:''; position:absolute; top:0; bottom:8%; left:var(--hero-edge); width:1px;
+    background:linear-gradient(to bottom,transparent,rgba(23,76,143,.16) 12%,rgba(23,76,143,.08) 78%,transparent);
+  }
+  .hero-cross::after{
+    content:''; position:absolute; top:7rem; left:var(--hero-edge); right:var(--hero-edge); height:1px;
+    background:linear-gradient(to right,rgba(23,76,143,.16),rgba(23,76,143,.07) 64%,transparent);
+  }
+  .hero-cross-star{
+    position:absolute; top:7rem; left:var(--hero-edge); width:22px; height:22px;
+    transform:translate(-50%,-50%); background:linear-gradient(135deg,#ffad5f,var(--orange));
+    clip-path:polygon(50% 0,61% 39%,100% 50%,61% 61%,50% 100%,39% 61%,0 50%,39% 39%);
+    filter:drop-shadow(0 0 8px rgba(231,121,24,.3));
+  }
+  @media(max-width:767px){
+    .hero-cross{ --hero-edge:20px; }
+    .hero-cross::after,.hero-cross-star{ top:6.5rem; }
+  }
+
+  /* ============ Ambient orbs ============ */
+  .ambient-orb{ position:absolute; border-radius:9999px; filter: blur(60px); opacity:.35; display:none; }
+  @keyframes float-slow{ 0%,100%{ transform:translate3d(0,0,0);} 50%{ transform:translate3d(0,-26px,0);} }
+  .animate-float{ animation: float-slow 10s ease-in-out infinite; }
+  .animate-float-delay{ animation: float-slow 12s ease-in-out infinite; animation-delay:-4s; }
+
+  /* ============ Real product preview carousel ============ */
+  #preview{
+    display:flex; min-height:100svh; align-items:center; isolation:isolate;
+    padding-top:clamp(2rem,4vh,3.5rem) !important;
+    padding-bottom:clamp(2rem,4vh,3.5rem) !important;
+    background:
+      radial-gradient(circle at 18% 72%, rgba(28,105,196,.42), transparent 31rem),
+      radial-gradient(circle at 82% 18%, rgba(42,125,219,.24), transparent 27rem),
+      radial-gradient(circle at 65% 82%, rgba(231,121,24,.09), transparent 22rem),
+      linear-gradient(135deg, #03152f 0%, #062552 48%, #041b3d 100%) !important;
+  }
+  #preview::before{
+    content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(133,181,236,.045) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(133,181,236,.045) 1px,transparent 1px);
+    background-size:64px 64px;
+    -webkit-mask-image:linear-gradient(to bottom,transparent,black 18%,black 82%,transparent);
+            mask-image:linear-gradient(to bottom,transparent,black 18%,black 82%,transparent);
+  }
+  #preview::after{
+    content:''; position:absolute; inset:1.25rem; z-index:-1; pointer-events:none;
+    border:1px solid rgba(137,185,240,.1); border-radius:2rem;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  #preview > .relative{ width:100%; z-index:1; }
+  #preview .badge{ color:#a9c8ed; border-color:rgba(132,181,237,.35); background:rgba(8,35,75,.55); box-shadow:inset 0 1px rgba(255,255,255,.05); }
+  #preview-heading{ color:#f5f9ff; text-shadow:0 8px 30px rgba(0,0,0,.2); }
+  #preview-heading + p{ color:#aac2e0; }
+  #preview .preview-title{ color:#f4f8ff; }
+  #preview .preview-description,
+  #preview .preview-number,
+  #preview .preview-progress + p{ color:#9eb8d8; }
+  #preview .preview-progress button{ background:rgba(151,191,237,.2); }
+  #preview .preview-progress button::after{ background:linear-gradient(90deg,#ee7d1b,#ffad5f); }
+  .preview-showcase{
+    display:grid; grid-template-columns:minmax(280px,.88fr) minmax(320px,1.12fr);
+    align-items:center; gap:clamp(2.5rem,7vw,7rem); min-height:0;
+    margin-top:clamp(1.5rem,3vh,2.5rem) !important;
+  }
+  .preview-visual{ position:relative; display:grid; place-items:center; min-height:0; }
+  .preview-visual::before{
+    content:''; position:absolute; width:min(34rem,90%); aspect-ratio:1; border-radius:50%;
+    background:radial-gradient(circle,rgba(80,157,244,.3),rgba(45,111,190,.12) 45%,transparent 72%);
+    filter:blur(8px); transform:translateY(4%);
+  }
+  .preview-mockup-stage{ position:relative; width:min(460px,86vw); height:clamp(420px,55vh,570px); }
+  .preview-mockup{
+    position:absolute; top:50%; left:50%; width:auto; max-width:min(330px,68vw); height:100%; object-fit:contain;
+    filter:drop-shadow(0 34px 30px rgba(0,5,18,.58));
+    opacity:0; visibility:hidden; transform:translate(-50%,-50%) scale(.82);
+    transition:transform .6s cubic-bezier(.22,1,.36,1), opacity .45s ease, filter .45s ease;
+  }
+  .preview-mockup.is-prev,
+  .preview-mockup.is-next{ opacity:.48; visibility:visible; z-index:1; filter:drop-shadow(0 22px 22px rgba(0,5,18,.36)); }
+  .preview-mockup.is-prev{ transform:translate(-72%,-52%) scale(.84) rotate(-4deg); }
+  .preview-mockup.is-next{ transform:translate(-28%,-48%) scale(.84) rotate(4deg); }
+  .preview-mockup.is-active{ opacity:1; visibility:visible; z-index:3; transform:translate(-50%,-50%) scale(1); }
+  .preview-copy{ max-width:36rem; }
+  .preview-list{ position:relative; min-height:8.5rem; }
+  .preview-item{
+    position:absolute; inset:0; display:grid; grid-template-columns:2.3rem 1fr; align-content:center; column-gap:1rem;
+    width:100%; padding:.8rem 0; border-radius:.8rem; text-align:left; cursor:pointer;
+    opacity:0; visibility:hidden; pointer-events:none; transform:translateY(14px);
+    transition:opacity .35s ease, transform .4s ease, visibility .35s ease;
+  }
+  .preview-item.is-active{
+    opacity:1; visibility:visible; pointer-events:auto; transform:none;
+    padding:1rem 1rem 1rem 1.65rem;
+    background:linear-gradient(90deg,rgba(66,139,226,.14),rgba(66,139,226,.035) 62%,transparent);
+    border:none;
+    box-shadow:none;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+  }
+  .preview-item.is-active::before{
+    content:''; position:absolute; top:.9rem; bottom:.9rem; left:0; width:3px; border-radius:99px;
+    background:linear-gradient(180deg,#ffad5f,var(--orange));
+    box-shadow:0 0 18px rgba(231,121,24,.42);
+  }
+  .preview-number{ grid-row:1 / span 2; padding-top:.22rem; color:#7390b5; }
+  .preview-title{ font-family:'Google Sans',system-ui,sans-serif; font-size:1.35rem; font-weight:600; line-height:1.25; color:var(--ice); }
+  .preview-description{ margin-top:.3rem; font-size:.95rem; line-height:1.5; color:var(--steel); }
+  .preview-progress{ display:flex; gap:.45rem; margin-top:2rem; }
+  .preview-progress button{ position:relative; flex:1; height:3px; overflow:hidden; border-radius:99px; background:rgba(23,76,143,.13); }
+  .preview-progress button::after{ content:''; position:absolute; inset:0; background:var(--orange); transform:scaleX(0); transform-origin:left; }
+  .preview-progress button.is-active::after{ transform:scaleX(1); transition:transform 5s linear; }
+  .preview-progress button.is-complete::after{ transform:scaleX(1); }
+  @media (max-width:767px){
+    #preview{ padding-top:1.5rem !important; padding-bottom:1.5rem !important; }
+    #preview-heading{ font-size:clamp(1.75rem,7vw,2.25rem); }
+    #preview-heading + p{ margin-top:.75rem; font-size:.95rem; line-height:1.45; }
+    .preview-showcase{ grid-template-columns:1fr; gap:.75rem; min-height:0; margin-top:1rem !important; }
+    .preview-visual{ min-height:0; }
+    .preview-mockup-stage{ width:100%; height:clamp(300px,43vh,420px); }
+    .preview-mockup{ width:auto; max-width:62vw; height:100%; }
+    .preview-copy{ width:100%; }
+    .preview-list{ min-height:7.5rem; }
+    .preview-item{ padding:.5rem 0; }
+    .preview-item.is-active{ padding:.8rem .75rem .8rem 1.25rem; }
+    .preview-title{ font-size:1.2rem; }
+    .preview-description{ font-size:.85rem; }
+    .preview-progress{ margin-top:.5rem; }
+    .preview-progress + p{ margin-top:.65rem; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .preview-progress button.is-active::after{ transition:none; }
+  }
+
+  .feature-card{
+    display:flex; flex-direction:column; overflow:hidden; border-radius:1.75rem;
+    background:linear-gradient(155deg,#ffffff 0%,#f1f5fb 55%,#e6eef8 100%);
+    border:1px solid rgba(23,76,143,.22);
+    box-shadow:0 18px 42px -26px rgba(11,45,92,.5),inset 0 3px 0 rgba(23,76,143,.07);
+    transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+  }
+  .feature-card:hover{
+    transform: translateY(-6px);
+    border-color:rgba(231,121,24,.5);
+    box-shadow:0 24px 52px -28px rgba(11,45,92,.55),0 12px 32px -24px rgba(231,121,24,.45);
+  }
+  .fc-copy{ padding: 2.1rem 2rem .25rem; text-align:center; }
+
+  /* ============ Clarity + trust, unified ============ */
+  .clarity-trust-section{
+    padding:clamp(5rem,9vw,8rem) 0;
+    background:
+      radial-gradient(circle at 12% 18%,rgba(50,126,215,.13),transparent 25rem),
+      radial-gradient(circle at 90% 75%,rgba(231,121,24,.07),transparent 22rem),
+      linear-gradient(180deg,#f8fbff,#edf4fc);
+  }
+  .clarity-intro{ display:grid; grid-template-columns:minmax(0,1.15fr) minmax(280px,.65fr); gap:clamp(2rem,8vw,8rem); align-items:end; }
+  .clarity-promise{ padding:0 0 .4rem 1.35rem; border-left:2px solid var(--orange); }
+  .clarity-promise-label{ font-family:'Google Sans Code',monospace; font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--orange); }
+  .journey-rail{ position:relative; display:grid; grid-template-columns:repeat(3,1fr); margin-top:clamp(3rem,6vw,5rem); }
+  .journey-rail::before{ content:''; position:absolute; top:1.55rem; left:8%; right:8%; height:1px; background:linear-gradient(90deg,var(--orange),rgba(23,76,143,.28)); }
+  .journey-step{ position:relative; padding:0 clamp(1rem,2.5vw,2rem); }
+  .journey-step:first-child{ padding-left:0; }
+  .journey-step:last-child{ padding-right:0; }
+  .journey-number{ position:relative; z-index:1; display:grid; place-items:center; width:3.1rem; height:3.1rem; border-radius:50%; background:#fff; border:1px solid rgba(231,121,24,.42); box-shadow:0 0 0 8px #f4f8fd,0 12px 28px -18px rgba(11,45,92,.7); color:var(--orange); font-family:'Google Sans Code',monospace; font-size:.72rem; }
+  .journey-step h3{ margin-top:1.5rem; max-width:18rem; font-size:1.08rem; font-weight:650; color:var(--ice); }
+  .journey-step p{ margin-top:.55rem; max-width:20rem; font-size:.88rem; line-height:1.65; color:var(--steel); }
+  .trust-ribbon{ position:relative; overflow:hidden; margin-top:clamp(3rem,6vw,5rem); padding:clamp(1.5rem,3vw,2.25rem); border-radius:1.75rem; background:linear-gradient(110deg,#061a39,#0b3977); border:1px solid rgba(84,149,224,.25); box-shadow:0 28px 65px -42px rgba(4,25,58,.8); }
+  .trust-ribbon::after{ content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle at 100% 0,rgba(67,145,235,.3),transparent 24rem); }
+  .trust-ribbon-head{ position:relative; z-index:1; display:flex; align-items:center; justify-content:space-between; gap:2rem; padding-bottom:1.25rem; border-bottom:1px solid rgba(255,255,255,.11); }
+  .trust-ribbon-head h3{ color:#fff; font-size:clamp(1.35rem,2.3vw,2rem); font-weight:600; }
+  .trust-pledge{ display:flex; align-items:center; gap:.65rem; flex-shrink:0; color:#fff; font-size:.82rem; font-weight:600; }
+  .trust-pledge-icon{ display:grid; place-items:center; width:2rem; height:2rem; border-radius:50%; color:#07182f; background:var(--orange); }
+  .trust-points{ position:relative; z-index:1; display:grid; grid-template-columns:repeat(4,1fr); margin-top:1.25rem; }
+  .trust-point{ display:flex; gap:.7rem; align-items:flex-start; padding:0 1.15rem; border-right:1px solid rgba(255,255,255,.1); }
+  .trust-point:first-child{ padding-left:0; }
+  .trust-point:last-child{ padding-right:0; border-right:0; }
+  .trust-point svg{ flex:0 0 auto; margin-top:.15rem; color:var(--orange); }
+  .trust-point h4{ color:#f4f8ff; font-size:.82rem; font-weight:600; }
+  .trust-point p{ margin-top:.25rem; color:#a9c1df; font-size:.72rem; line-height:1.45; }
+  @media(max-width:800px){
+    .clarity-intro{ grid-template-columns:1fr; gap:1.5rem; }
+    .journey-rail{ grid-template-columns:1fr; gap:1.75rem; }
+    .journey-rail::before{ top:1.5rem; bottom:1.5rem; left:1.55rem; right:auto; width:1px; height:auto; }
+    .journey-step,.journey-step:first-child,.journey-step:last-child{ padding:0 0 0 4.5rem; }
+    .journey-number{ position:absolute; left:0; top:0; }
+    .journey-step h3{ margin-top:0; }
+    .trust-ribbon-head{ align-items:flex-start; flex-direction:column; gap:1rem; }
+    .trust-points{ grid-template-columns:1fr 1fr; gap:1.25rem 0; }
+    .trust-point:nth-child(2){ border-right:0; }
+    .trust-point:nth-child(3){ padding-left:0; }
+  }
+  @media(max-width:500px){
+    .trust-points{ grid-template-columns:1fr; gap:1rem; }
+    .trust-point,.trust-point:nth-child(3){ padding:0 0 1rem; border-right:0; border-bottom:1px solid rgba(255,255,255,.09); }
+    .trust-point:last-child{ padding-bottom:0; border-bottom:0; }
+  }
+  .fc-eyebrow{ display:block; font-family:'Google Sans Code',monospace; font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--steel); }
+  .fc-title{ margin-top:.65rem; font-family:'Google Sans',sans-serif; font-weight:700; font-size:1.45rem; line-height:1.2; color:var(--ice); }
+  .fc-desc{ margin:.6rem auto 0; max-width:30ch; font-size:.875rem; line-height:1.55; color:var(--steel); }
+  .fc-visual{
+    margin-top:auto; padding: 1.5rem 1.25rem 0; display:flex; align-items:flex-end;
+    justify-content:center; min-height:200px;
+  }
+  .fc-visual svg{ width:100%; height:auto; max-width:230px; overflow:visible; filter:drop-shadow(0 15px 18px rgba(11,45,92,.15)); }
+  .mini-card{ filter: drop-shadow(0 20px 30px rgba(0,0,0,.35)); }
+
+  /* Card 1 — AI-powered insights: pulsing sparkle + typing dots */
+  .mini-spark{ transform-box: fill-box; transform-origin:center; animation: mini-spark-pulse 3s ease-in-out infinite; }
+  @keyframes mini-spark-pulse{ 0%,100%{ transform:scale(1) rotate(0deg); opacity:1; } 50%{ transform:scale(1.18) rotate(8deg); opacity:.85; } }
+  .mini-dot{ animation: mini-dot-blink 1.4s ease-in-out infinite; }
+  .mini-dot:nth-child(2){ animation-delay:.18s; }
+  .mini-dot:nth-child(3){ animation-delay:.36s; }
+  @keyframes mini-dot-blink{ 0%,100%{ opacity:.25; } 50%{ opacity:1; } }
+
+  /* Card 2 — Unified dashboard: equalizer bars */
+  .mini-bar{ transform-box: fill-box; transform-origin:bottom; animation: mini-bar-grow 2.2s ease-in-out infinite; }
+  .mini-bar:nth-child(1){ animation-delay:0s; }
+  .mini-bar:nth-child(2){ animation-delay:.25s; }
+  .mini-bar:nth-child(3){ animation-delay:.5s; }
+  .mini-bar:nth-child(4){ animation-delay:.75s; }
+  @keyframes mini-bar-grow{ 0%,100%{ transform:scaleY(.45); } 50%{ transform:scaleY(1); } }
+
+  /* Card 3 — Smart goal planning: filling progress ring */
+  .mini-ring{ animation: mini-ring-fill 3.4s ease-in-out infinite; transform-origin:center; }
+  @keyframes mini-ring-fill{ 0%{ stroke-dashoffset:163; } 55%{ stroke-dashoffset:47; } 100%{ stroke-dashoffset:163; } }
+  .mini-ring-dot{ animation: mini-ring-dot-orbit 3.4s ease-in-out infinite; transform-box: fill-box; transform-origin:center; }
+  @keyframes mini-ring-dot-orbit{ 0%,100%{ opacity:0; } 45%,55%{ opacity:1; } }
+
+  /* Card 4 — Spending intelligence: donut highlight sweep */
+  .mini-donut-seg{ transition: opacity .3s ease; }
+  .mini-donut-highlight{ animation: mini-donut-pulse 2.6s ease-in-out infinite; transform-box: fill-box; transform-origin:center; }
+  @keyframes mini-donut-pulse{ 0%,100%{ opacity:.55; } 50%{ opacity:1; } }
+
+  /* Card 5 — Next-best actions: nudging arrow */
+  .mini-arrow{ animation: mini-arrow-nudge 1.6s ease-in-out infinite; }
+  @keyframes mini-arrow-nudge{ 0%,100%{ transform:translateX(0); } 50%{ transform:translateX(5px); } }
+
+  /* Card 6 — Proactive alerts: pulse ring ping */
+  .mini-ping{ transform-box: fill-box; transform-origin:center; animation: mini-ping-ring 2.2s cubic-bezier(.3,.6,.4,1) infinite; }
+  @keyframes mini-ping-ring{ 0%{ transform:scale(.6); opacity:.9; } 100%{ transform:scale(2.1); opacity:0; } }
+  .mini-bell{ transform-box: fill-box; transform-origin:top center; animation: mini-bell-ring 2.6s ease-in-out infinite; }
+  @keyframes mini-bell-ring{ 0%,80%,100%{ transform:rotate(0deg); } 84%{ transform:rotate(10deg); } 88%{ transform:rotate(-9deg); } 92%{ transform:rotate(6deg); } 96%{ transform:rotate(-4deg); } }
+
+  @media (prefers-reduced-motion: reduce){
+    .mini-spark, .mini-dot, .mini-bar, .mini-ring, .mini-ring-dot, .mini-donut-highlight, .mini-arrow, .mini-ping, .mini-bell{
+      animation: none !important;
+    }
+  }
+
+  /* ============ Custom cursor ============ */
+  @media (pointer:fine){
+    body.cursor-ready, body.cursor-ready a, body.cursor-ready button, body.cursor-ready input{ cursor:none; }
+  }
+  .cursor-dot, .cursor-ring{ position:fixed; top:0; left:0; z-index:80; pointer-events:none; border-radius:9999px; will-change:transform; }
+  .cursor-dot{ width:6px; height:6px; background:var(--orange); box-shadow:0 0 12px var(--orange); transform:translate(-50%,-50%); }
+  .cursor-ring{ width:34px; height:34px; border:1px solid rgba(221,115,0,.5); transform:translate(-50%,-50%); transition: width .25s ease, height .25s ease, border-color .25s ease, background-color .25s ease; }
+  .cursor-ring.is-active{ width:54px; height:54px; background:rgba(221,115,0,.08); border-color:rgba(221,115,0,.85); }
+
+  /* ============ Nav ============ */
+  #site-nav{ transition: transform .4s ease, background .3s ease; background:rgba(248,251,255,.82) !important; border-color:rgba(31,76,139,.1); }
+
+  footer{ border-color:rgba(31,76,139,.1) !important; }
+
+  #features{ background:linear-gradient(180deg,rgba(225,235,248,.55),rgba(247,250,254,.3),rgba(225,235,248,.55)) !important; }
+
+  header svg[aria-label="Fintoo AI"] .st1,
+  footer svg[aria-label="Fintoo AI"] .st1{ fill:#10254a; }
+
+  /* ============ Reduced motion safety net ============ */
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+    html{ scroll-behavior:auto; }
+  }
+
+  /* ============ Observer-powered full-page section transitions ============ */
+  @media (prefers-reduced-motion: no-preference){
+    html.is-section-slider,
+    html.is-section-slider body{ height:100%; overflow:hidden; scroll-behavior:auto; }
+    html.is-section-slider main{ position:fixed; inset:0; overflow:hidden; }
+    html.is-section-slider main > section{
+      position:absolute !important; inset:0; width:100%; height:100svh;
+      min-height:100svh !important; padding-top:clamp(5.5rem,8vh,7rem) !important;
+      padding-bottom:clamp(2rem,4vh,3.5rem) !important;
+      visibility:hidden; opacity:0; overflow:hidden !important;
+    }
+    html.is-section-slider .outer,
+    html.is-section-slider .inner{ width:100%; height:100%; overflow:hidden; }
+    html.is-section-slider .inner{ position:relative; display:flex; align-items:center; }
+    html.is-section-slider .inner > *{ width:100%; }
+    html.is-section-slider #hero .inner{ align-items:center; }
+    html.is-section-slider #preview .inner > .relative{ z-index:1; }
+    html.is-section-slider #how-it-thinks{ padding-top:5.25rem !important; }
+    html.is-section-slider #how-it-thinks .inner{ overflow-y:auto; scrollbar-width:none; }
+    html.is-section-slider #how-it-thinks .inner::-webkit-scrollbar{ display:none; }
+    html.is-section-slider #how-it-thinks .clarity-intro{ margin-top:auto; }
+    html.is-section-slider #how-it-thinks .trust-ribbon{ margin-bottom:auto; }
+    html.is-section-slider footer{ display:none; }
+  }
+  @media (max-width:768px) and (prefers-reduced-motion: no-preference){
+    html.is-section-slider main > section{
+      padding-top:5rem !important;
+      padding-bottom:1.25rem !important;
+    }
+    html.is-section-slider .inner{
+      align-items:flex-start;
+      overflow-x:hidden;
+      overflow-y:auto;
+      overscroll-behavior:contain;
+      -webkit-overflow-scrolling:touch;
+    }
+    html.is-section-slider #hero .inner{ align-items:flex-start; }
+    html.is-section-slider #join .inner{ align-items:center; }
+  }
+</style>
+</head>
+<body class="bg-void font-body antialiased">
+
+<a href="#join" class="skip-link">Skip to waitlist</a>
+
+<!-- Grain overlay (decorative) -->
+<div class="grain-overlay" aria-hidden="true">
+  <svg width="100%" height="100%">
+    <filter id="grainFilter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="noise" />
+      <feColorMatrix in="noise" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.5 0" />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#grainFilter)"></rect>
+  </svg>
+</div>
+
+<!-- ============ NAV ============ -->
+<header id="site-nav" class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-void/70 backdrop-blur-md">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-10">
+    <a href="#hero" class="flex items-center">
+      <svg class="h-6 w-auto sm:h-7" role="img" aria-label="Fintoo AI" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 2011.8 416.7"> <defs> <style> .st0 { fill: #1f2f60; } .st1 { fill: #fff; } .st2 { fill: #f68638; } .st3 { fill: #5b3c2f; } .st4 { fill: #f68522; } </style> </defs> <rect class="st4" x="1567.9" y="68.3" width="314.9" height="278.4" rx="41.9" ry="41.9"/> <g> <path class="st1" d="M1726.7,257.9h-58.1l-1.2,3.7c-4.8,14.3-18.2,23.8-33.3,23.8h-14.5s42.7-118,42.7-118c8.2-22.7,29.7-37.8,53.8-37.8h3.8s56.4,155.8,56.4,155.8h-15c-15,0-28.4-9.6-33.3-23.8l-1.2-3.7ZM1714.1,220.3l-11.7-34.7c-1.5-4.6-8-4.5-9.5,0l-14.4,42.9h29.7c4.3,0,7.3-4.2,5.9-8.2Z"/> <path class="st1" d="M1831.2,129.6v123.2c0,18-14.6,32.5-32.5,32.5h-5.4v-123.2c0-18,14.6-32.5,32.5-32.5h5.4Z"/> </g> <g> <path class="st0" d="M195.1,236.1h58.5c14.5,0,26.3-11.7,26.3-26.1v-23.7h-58.5c-14.5,0-26.3,11.7-26.3,26.1v23.7Z"/> <path class="st0" d="M186.5,69.4c-31.8,0-57.5,25.6-57.5,57.1v215.4h2.8c31,0,56.3-23.7,58.8-53.9v-104.4c0-.4,0-.7.2-1v-31.8c0-17.5,14.2-31.6,31.8-31.6h15.6c27.3,0,49.4-22,49.4-49.1v-.9h-101.1Z"/> </g> <path class="st0" d="M347.3,342h-8.6V124.2c0-30.3,24.7-54.8,55.2-54.8h6.6v219.8c0,29.2-23.8,52.8-53.2,52.8Z"/> <path class="st0" d="M648,342h-6l-113-171.3c-6.6-10-11.2-17.6-13.8-22.6h-.8c1,9.6,1.5,24.3,1.5,44.1v100.5c0,27.2-22.2,49.3-49.6,49.3h-8.8v-209.4c0-34.9,28.5-63.2,63.6-63.2h2.9l108.8,165.9c5,7.5,9.6,14.9,13.8,22.2h.8c-1-6.3-1.5-18.8-1.5-37.4v-100.9c0-27.5,22.4-49.8,50.1-49.8h8.2v216.6c0,30.9-25.2,56-56.3,56Z"/> <path class="st0" d="M908.8,119.4h-36v166.5c0,31-25.3,56.1-56.5,56.1h-5.5V119.4h-77.9v-8c0-23.2,18.9-42,42.2-42h175.8v8c0,23.2-18.9,42-42.2,42Z"/> <path class="st0" d="M1395.9,346.7c-39.3,0-71.3-12.7-96-38.1-24.7-25.4-37.1-58.5-37.1-99.3s12.6-77.9,37.7-104.6c25.1-26.6,58.4-39.9,99.9-39.9s70.8,12.7,95,38.2c24.2,25.5,36.2,59.1,36.2,100.7s-12.5,77.4-37.6,103.6c-25.1,26.2-57.7,39.3-98,39.3ZM1398.6,117.7c-21.7,0-38.9,8.1-51.6,24.2-12.8,16.2-19.1,37.5-19.1,64.2s6.4,48.3,19.1,64.1c12.8,15.7,29.5,23.6,50.1,23.6s38.2-7.6,50.7-22.9c12.5-15.3,18.7-36.5,18.7-63.6s-6.1-50.2-18.2-66c-12.1-15.7-28.7-23.6-49.7-23.6Z"/> <g> <g> <path class="st0" d="M1102.7,63.9v.3c-.4.8-2.9.7-3.6.3,0,.2-.2.2-.3,0,0-.1,0-.4,0-.6h3.9Z"/> <path class="st2" d="M1102.7,64.2c2.7,0,5.4,0,8.1.3,70.1,5.3,112.8,61.2,115.4,129,.1,3.5-.1,7.1,0,10.6-10.4.2-20.9.1-31.3.3-6.7.1-13.6.5-20.4.6-3.5,0-8.7.4-11.9,0-.3,0-.5,0-.7-.3l-.4-.7c.9-38.4-17.1-83.9-61.3-86-.7,0-1.1-.2-1.2-.8l-.5-50.4c0-.7.3-1.6.5-2.2,1.1-.5,2.4-.3,3.6-.3Z"/> <path class="st3" d="M1099.1,64.5l.5,52.8c11,.7,21.9,3.8,31,10.1,22.8,15.9,30.6,45.9,31.6,72.4,0,1.5.2,3.5-.3,4.8l-18.5-17.5c-.7-8.5-1.1-16.9-3.1-25.3-4.3-18.4-15.3-36-34.3-41.6-4-1.2-8-1.5-12.1-2.3-.2-13.8-.5-27.5-.4-41.3,1.1-4.2,4-8.3,5.2-12.3h.3Z"/> </g> <path class="st0" d="M1158.6,215.5c-1.3,22.9-7.4,41.1-18.5,54.6-12.5,15.3-29.4,22.9-50.7,22.9s-37.4-7.9-50.1-23.6c-12.8-15.7-19.1-37.1-19.1-64.1s6.4-48,19.1-64.2c11.7-14.8,27.1-22.8,46.2-24v-52.9c-38.1,1.5-69,14.7-92.7,39.8-25.1,26.6-37.7,61.5-37.7,104.6s12.4,73.9,37.1,99.3c24.7,25.4,56.7,38.1,96,38.1s73-13.1,98-39.3c22.6-23.7,35-54.1,37.2-91.2h-64.9Z"/> </g> </svg>
+    </a>
+    <nav aria-label="Primary" class="hidden items-center gap-8 font-mono-ui text-xs uppercase tracking-widest text-steel md:flex">
+      <a href="#preview" class="transition-colors hover:text-ice">Preview</a>
+      <a href="#features" class="transition-colors hover:text-ice">Features</a>
+      <a href="#trust" class="transition-colors hover:text-ice">Privacy</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="#join" class="hidden rounded-full border border-orange/40 bg-orange/10 px-4 py-2 text-xs font-medium tracking-wide text-ice transition-colors hover:bg-orange/20 sm:inline-flex">Join waitlist</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ 1. HERO ============ -->
+  <section id="hero" class="relative flex min-h-[100svh] items-center overflow-hidden bg-void pb-16 pt-32" aria-label="Introduction">
+    <div class="pointer-events-none absolute inset-0 grid-texture" aria-hidden="true"></div>
+    <div class="hero-cross" aria-hidden="true"><span class="hero-cross-star"></span></div>
+    <div class="ambient-orb animate-float bg-navy/60" style="width:26rem;height:26rem;top:-6rem;right:-6rem;" aria-hidden="true"></div>
+    <div class="ambient-orb animate-float-delay bg-orange/30" style="width:20rem;height:20rem;bottom:-4rem;left:-4rem;" aria-hidden="true"></div>
+
+    <div class="hero-layout relative mx-auto grid w-full max-w-7xl gap-10 px-6 sm:px-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-6">
+      <div>
+        <span id="hero-badge" class="badge"><span class="dot-live"></span> Launching 1 September</span>
+
+        <h1 id="hero-heading" class="mt-6 font-display text-[2.6rem] font-semibold leading-[1.08] text-ice sm:text-6xl lg:text-[4.1rem]">
+          One AI app, built around your <span class="hero-rotator" aria-hidden="true"><span id="hero-rotating-word" class="hero-rotator-word">goals.</span></span>
+          <span class="sr-only">goals, mutual funds, retirement, investments, and expense tracking.</span>
+        </h1>
+
+        <p id="hero-sub" class="mt-6 max-w-lg text-lg leading-relaxed text-steel">
+          Fintoo AI brings your investments, financial goals, and retirement plans together—then turns them into clear, personalized next steps.
+        </p>
+
+        <div id="hero-cta" class="mt-9 flex flex-wrap items-center gap-4">
+          <a href="#join" class="btn-primary text-white" data-cursor-hover>Join the Waitlist</a>
+        </div>
+        <div class="hero-actions flex flex-wrap items-center gap-x-8 gap-y-4">
+          <a href="#preview" class="link-secondary" data-cursor-hover>
+            Preview the experience
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v16m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <div id="hero-counter" class="counter-pill">
+            <span class="dot-live"></span>
+            <strong data-count-to="2847">0</strong> people on the early access list
+          </div>
+        </div>
+      </div>
+
+      <!-- Native SVG/CSS recreation of the Fintoo app assembly animation -->
+      <div id="hero-mockups" class="hero-visual hero-app-animation" role="img" aria-label="Fintoo AI dashboard assembling from your complete financial picture">
+        <svg class="sr-only" aria-hidden="true">
+          <symbol id="asset-icon-mf" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="currentColor" opacity=".18"/><path d="M12 4v8h8M7.2 17.8A8 8 0 0 1 12 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+          <symbol id="asset-icon-stocks" viewBox="0 0 24 24"><path d="M4 18V6m0 12h16M7 15l4-4 3 2 5-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+          <symbol id="asset-icon-fd" viewBox="0 0 24 24"><path d="M3 9h18L12 4 3 9Zm2 2v7m5-7v7m4-7v7m5-7v7M3 20h18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+          <symbol id="asset-icon-bonds" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="14" rx="2" fill="currentColor" opacity=".15"/><path d="M8 9h8M8 13h5m3 2v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+          <symbol id="asset-icon-card" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M7 15h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+          <symbol id="asset-icon-loan" viewBox="0 0 24 24"><circle cx="15" cy="8" r="4" fill="currentColor" opacity=".18"/><path d="M15 5v6m-2-4h4M3 15h5l2 2h5l5-3m-17-1h6l2 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+          <symbol id="asset-icon-other" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1" fill="currentColor" opacity=".3"/><rect x="14" y="4" width="6" height="6" rx="1" fill="currentColor"/><rect x="4" y="14" width="6" height="6" rx="1" fill="currentColor"/><rect x="14" y="14" width="6" height="6" rx="1" fill="currentColor" opacity=".3"/></symbol>
+          <symbol id="asset-icon-gold" viewBox="0 0 24 24"><path d="m6 9 2-4h8l2 4 2 9H4l2-9Z" fill="currentColor" opacity=".22"/><path d="M6 9h12M9 13h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+          <symbol id="asset-icon-goals" viewBox="0 0 24 24"><circle cx="11" cy="13" r="7" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="11" cy="13" r="3" fill="currentColor"/><path d="m14 10 6-6m-3 0h3v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+          <symbol id="asset-icon-retirement" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 16 0c-2-1.5-4-1.5-6 0-2-1.5-4-1.5-6 0-1.4-1-2.7-1.3-4 0Z" fill="currentColor" opacity=".22"/><path d="M12 5v13c0 2-3 2-3 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+          <symbol id="asset-icon-insurance" viewBox="0 0 24 24"><path d="m12 3 8 3v5c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-3Z" fill="currentColor" opacity=".18"/><path d="m8.5 12 2.2 2.2 4.8-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+          <symbol id="asset-icon-savings" viewBox="0 0 24 24"><path d="M5 12c0-4 3-6 7-6 3 0 5 1 6 3h3v5h-2c-.5 1.5-1.5 2.5-3 3v3h-3v-2H9v2H6v-3c-1.3-1-2-2.7-2-5h1Z" fill="currentColor" opacity=".22"/><circle cx="14.5" cy="10" r="1" fill="currentColor"/><path d="M9 8h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+          <symbol id="asset-icon-invest" viewBox="0 0 24 24"><path d="M4 18 9 13l3 3 7-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 7h4v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+          <symbol id="asset-icon-family" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3" fill="currentColor" opacity=".3"/><circle cx="16.5" cy="9" r="2.5" fill="currentColor"/><path d="M3.5 19c.5-4 2.5-6 5.5-6s5 2 5.5 6m0-5c3 0 5 1.7 5.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+        </svg>
+        <span class="hero-app-chip" style="--x:-145px;--y:-190px;--delay:0s;--chip:#e46aaa"><svg><use href="#asset-icon-mf"/></svg>Mutual Funds</span>
+        <span class="hero-app-chip" style="--x:-118px;--y:-125px;--delay:.12s;--chip:#4d86dc"><svg><use href="#asset-icon-stocks"/></svg>Stocks</span>
+        <span class="hero-app-chip" style="--x:-150px;--y:-58px;--delay:.24s;--chip:#4dbf82"><svg><use href="#asset-icon-fd"/></svg>Fixed Deposits</span>
+        <span class="hero-app-chip" style="--x:-125px;--y:10px;--delay:.36s;--chip:#7764d7"><svg><use href="#asset-icon-bonds"/></svg>Bonds</span>
+        <span class="hero-app-chip" style="--x:-144px;--y:78px;--delay:.48s;--chip:#7898df"><svg><use href="#asset-icon-card"/></svg>Credit Card</span>
+        <span class="hero-app-chip" style="--x:-112px;--y:144px;--delay:.6s;--chip:#806ed4"><svg><use href="#asset-icon-loan"/></svg>Loans</span>
+        <span class="hero-app-chip" style="--x:125px;--y:-215px;--delay:.15s;--chip:#4db7b4"><svg><use href="#asset-icon-other"/></svg>Other Assets</span>
+        <span class="hero-app-chip" style="--x:92px;--y:-165px;--delay:.27s;--chip:#e5b54e"><svg><use href="#asset-icon-gold"/></svg>Gold</span>
+        <span class="hero-app-chip" style="--x:146px;--y:-105px;--delay:.39s;--chip:#ec9d31"><svg><use href="#asset-icon-goals"/></svg>Goals</span>
+        <span class="hero-app-chip" style="--x:115px;--y:-45px;--delay:.51s;--chip:#6669c9"><svg><use href="#asset-icon-retirement"/></svg>Retirement</span>
+        <span class="hero-app-chip" style="--x:148px;--y:18px;--delay:.63s;--chip:#e46aaa"><svg><use href="#asset-icon-insurance"/></svg>Insurance</span>
+        <span class="hero-app-chip" style="--x:110px;--y:78px;--delay:.75s;--chip:#e6bb62"><svg><use href="#asset-icon-savings"/></svg>Savings</span>
+        <span class="hero-app-chip" style="--x:145px;--y:138px;--delay:.87s;--chip:#e48b35"><svg><use href="#asset-icon-invest"/></svg>Investments</span>
+        <span class="hero-app-chip" style="--x:92px;--y:198px;--delay:.99s;--chip:#7496d2"><svg><use href="#asset-icon-family"/></svg>Family</span>
+        <span class="hero-app-card" style="--x:-142px;--y:-128px;--card-h:102px;--card-delay:0s"><img src="assets/fintoo-ai-features/net-worth.svg" alt=""/></span>
+        <span class="hero-app-card" style="--x:142px;--y:-128px;--card-h:76px;--card-delay:.14s"><img src="assets/fintoo-ai-features/my-assets.svg" alt=""/></span>
+        <span class="hero-app-card" style="--x:-162px;--y:-42px;--card-h:30px;--card-delay:.28s"><img src="assets/fintoo-ai-features/liabilities.svg" alt=""/></span>
+        <span class="hero-app-card" style="--x:162px;--y:-28px;--card-h:114px;--card-delay:.42s"><img src="assets/fintoo-ai-features/ai-insights.svg" alt=""/></span>
+        <span class="hero-app-card" style="--x:-162px;--y:48px;--card-h:90px;--card-delay:.56s"><img src="assets/fintoo-ai-features/goals.svg" alt=""/></span>
+        <span class="hero-app-card" style="--x:162px;--y:76px;--card-h:151px;--card-delay:.7s"><img src="assets/fintoo-ai-features/spends.svg" alt=""/></span>
+        <span class="hero-app-card" style="--x:-142px;--y:142px;--card-h:72px;--card-delay:.84s"><img src="assets/fintoo-ai-features/insurance.svg" alt=""/></span>
+        <span class="hero-app-card" style="--x:142px;--y:162px;--card-h:120px;--card-delay:.98s"><img src="assets/fintoo-ai-features/tools.svg" alt=""/></span>
+        <div class="hero-app-phone">
+          <div class="hero-app-screen">
+            <object id="hero-dashboard-svg" class="hero-app-dashboard" data="assets/fintoo-ai-dashboard-hero-sequence.svg" type="image/svg+xml" width="360" height="2868" aria-label="Animated Fintoo AI dashboard"></object>
+          </div>
+          <span class="hero-app-island" aria-hidden="true"></span>
+        </div>
+        <img class="hero-phone-logo" src="assets/fintoo-ai-logo.svg" alt="" aria-hidden="true" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. INTERACTIVE APP PREVIEW ============ -->
+  <section id="preview" class="relative overflow-hidden bg-void py-24 sm:py-32" aria-labelledby="preview-heading">
+    <div class="ambient-orb" style="width:26rem;height:26rem;top:-10rem;left:-8rem;background:var(--navy);opacity:.6;" aria-hidden="true"></div>
+    <div class="ambient-orb" style="width:24rem;height:24rem;top:20%;right:-10rem;background:var(--orange);opacity:.14;" aria-hidden="true"></div>
+
+    <div class="relative mx-auto max-w-6xl px-6 sm:px-10">
+      <div class="mx-auto max-w-3xl text-center">
+        <span class="badge">Inside the app</span>
+        <h2 id="preview-heading" class="reveal-heading capitalize mt-6 font-display text-3xl font-semibold leading-tight text-ice sm:text-5xl">
+          our whole financial life, finally in focus.
+        </h2>
+        <p class="mt-5 text-lg text-steel">From where you stand today to where you want to go, see every decision with greater clarity.</p>
+      </div>
+
+      <div class="preview-showcase mt-10 sm:mt-16">
+        <div class="preview-visual" aria-live="polite">
+          <div class="preview-mockup-stage">
+            <img class="preview-mockup is-active" data-screen="0" src="assets/fintoo-ai-preview/financial-wellness-score.png" alt="Fintoo financial wellness score screen" />
+            <img class="preview-mockup" data-screen="1" src="assets/fintoo-ai-preview/net-worth-tracker.png" alt="Fintoo net worth tracker screen" loading="lazy" />
+            <img class="preview-mockup" data-screen="2" src="assets/fintoo-ai-preview/smart-goal-planning.png" alt="Fintoo smart goal planning screen" loading="lazy" />
+            <img class="preview-mockup" data-screen="3" src="assets/fintoo-ai-preview/retirement-planning.png" alt="Fintoo retirement planning screen" loading="lazy" />
+            <img class="preview-mockup" data-screen="4" src="assets/fintoo-ai-preview/mutual-fund-health.png" alt="Fintoo mutual fund health screen" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="preview-copy">
+          <ol class="preview-list" aria-label="Fintoo app features">
+            <li><button type="button" class="preview-item is-active" data-item="0" aria-current="true"><span class="preview-number font-mono-ui text-xs">01</span><span class="preview-title">Know your financial wellness score</span><span class="preview-description">See how financially healthy you are, what’s working, and exactly where you can improve.</span></button></li>
+            <li><button type="button" class="preview-item" data-item="1"><span class="preview-number font-mono-ui text-xs">02</span><span class="preview-title">See your complete net worth</span><span class="preview-description">Bring your assets and liabilities together in one clear, always-connected view.</span></button></li>
+            <li><button type="button" class="preview-item" data-item="2"><span class="preview-number font-mono-ui text-xs">03</span><span class="preview-title">Plan smarter goals</span><span class="preview-description">Turn life goals into practical plans and stay on track as your priorities evolve.</span></button></li>
+            <li><button type="button" class="preview-item" data-item="3"><span class="preview-number font-mono-ui text-xs">04</span><span class="preview-title">Retire with greater confidence</span><span class="preview-description">Understand when you can retire and the corpus your current choices can build.</span></button></li>
+            <li><button type="button" class="preview-item" data-item="4"><span class="preview-number font-mono-ui text-xs">05</span><span class="preview-title">Check your mutual fund health</span><span class="preview-description">Spot strong, steady, slipping, and declining funds before they affect your goals.</span></button></li>
+          </ol>
+
+          <div class="preview-progress" aria-label="Choose a preview slide">
+            <button type="button" class="is-active" data-dot="0" aria-label="Show financial wellness score"></button>
+            <button type="button" data-dot="1" aria-label="Show net worth tracker"></button>
+            <button type="button" data-dot="2" aria-label="Show smart goal planning"></button>
+            <button type="button" data-dot="3" aria-label="Show retirement planning"></button>
+            <button type="button" data-dot="4" aria-label="Show mutual fund health"></button>
+          </div>
+          <p class="mt-4 text-xs text-steel">Interface shown is illustrative — features and data are for preview purposes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- <section id="features" class="relative overflow-hidden bg-midnight py-28 sm:py-36" aria-labelledby="features-heading">
+    <div class="ambient-orb animate-float bg-orange/25" style="width:22rem;height:22rem;top:10%;left:50%;transform:translateX(-50%);" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-3xl px-6 text-center sm:px-10">
+      <span class="badge">What it does</span>
+      <h2 id="features-heading" class="reveal-heading mt-6 font-display text-3xl font-semibold leading-tight text-ice sm:text-5xl">
+        Built to think alongside your money.
+      </h2>
+    </div>
+
+    <div class="relative mx-auto mt-16 grid max-w-6xl gap-5 px-6 sm:grid-cols-2 sm:px-10 lg:grid-cols-3">
+
+      <div class="feature-card">
+        <div class="fc-copy">
+          <span class="fc-eyebrow">Always learning</span>
+          <h3 class="fc-title">AI-powered insights</h3>
+          <p class="fc-desc">Patterns in your finances you'd never spot on your own, surfaced automatically.</p>
+        </div>
+        <div class="fc-visual">
+          <svg class="mini-card" viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="208" height="178" rx="20" fill="var(--panel)" stroke="rgba(255,255,255,.08)"/>
+            <circle cx="26" cy="28" r="4" fill="rgba(255,255,255,.15)"/>
+            <circle cx="40" cy="28" r="4" fill="rgba(255,255,255,.15)"/>
+            <rect x="20" y="50" width="70" height="8" rx="4" fill="rgba(255,255,255,.12)"/>
+            <g class="mini-spark">
+              <path d="M170 40l5.2 12.8L188 58l-12.8 5.2L170 76l-5.2-12.8L152 58l12.8-5.2L170 40z" fill="var(--orange)"/>
+            </g>
+            <rect x="20" y="90" width="180" height="66" rx="14" fill="rgba(221,115,0,.08)" stroke="rgba(221,115,0,.25)"/>
+            <text x="34" y="116" font-family="Google Sans" font-size="11" fill="var(--ice)" opacity=".9">Dining spend is trending</text>
+            <text x="34" y="132" font-family="Google Sans" font-size="11" fill="var(--ice)" opacity=".9">18% above your usual.</text>
+            <circle class="mini-dot" cx="34" cy="146" r="3" fill="var(--orange)"/>
+            <circle class="mini-dot" cx="46" cy="146" r="3" fill="var(--orange)"/>
+            <circle class="mini-dot" cx="58" cy="146" r="3" fill="var(--orange)"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="fc-copy">
+          <span class="fc-eyebrow">One connected view</span>
+          <h3 class="fc-title">Unified dashboard</h3>
+          <p class="fc-desc">Every account, fund, and policy — one connected view, updated continuously.</p>
+        </div>
+        <div class="fc-visual">
+          <svg class="mini-card" viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="208" height="178" rx="20" fill="var(--panel)" stroke="rgba(255,255,255,.08)"/>
+            <text x="20" y="34" font-family="Google Sans Code" font-size="9" letter-spacing="1" fill="var(--steel)">ALL ACCOUNTS</text>
+            <text x="20" y="56" font-family="Google Sans" font-weight="600" font-size="20" fill="var(--ice)">₹1.84 Cr</text>
+            <g>
+              <rect class="mini-bar" x="20" y="76" width="14" height="70" rx="4" fill="var(--orange)" opacity=".9"/>
+              <rect class="mini-bar" x="42" y="76" width="14" height="70" rx="4" fill="var(--orange)" opacity=".7"/>
+              <rect class="mini-bar" x="64" y="76" width="14" height="70" rx="4" fill="var(--orange)" opacity=".9"/>
+              <rect class="mini-bar" x="86" y="76" width="14" height="70" rx="4" fill="var(--orange)" opacity=".6"/>
+            </g>
+            <rect x="118" y="90" width="82" height="56" rx="12" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.08)"/>
+            <text x="130" y="112" font-family="Google Sans" font-size="9" fill="var(--steel)">Bank · MF</text>
+            <text x="130" y="126" font-family="Google Sans" font-size="9" fill="var(--steel)">Stocks · Loans</text>
+            <circle cx="130" cy="136" r="3" fill="var(--orange)"/>
+            <text x="140" y="139" font-family="Google Sans" font-size="8" fill="var(--ice)">Live sync</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="fc-copy">
+          <span class="fc-eyebrow">Set once, adjusts always</span>
+          <h3 class="fc-title">Smart goal planning</h3>
+          <p class="fc-desc">Set a goal once. Fintoo AI keeps the plan realistic as your life changes.</p>
+        </div>
+        <div class="fc-visual">
+          <svg class="mini-card" viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="208" height="178" rx="20" fill="var(--panel)" stroke="rgba(255,255,255,.08)"/>
+            <text x="20" y="32" font-family="Google Sans Code" font-size="9" letter-spacing="1" fill="var(--steel)">EUROPE TRIP '27</text>
+            <g transform="translate(58,100)">
+              <circle r="34" fill="none" stroke="rgba(255,255,255,.1)" stroke-width="8"/>
+              <circle class="mini-ring" r="34" fill="none" stroke="var(--orange)" stroke-width="8" stroke-linecap="round"
+                stroke-dasharray="213.6" stroke-dashoffset="163" transform="rotate(-90)"/>
+              <circle class="mini-ring-dot" cx="34" cy="0" r="4" fill="var(--ice)"/>
+            </g>
+            <text x="20" y="150" font-family="Google Sans" font-size="10" fill="var(--ice)">₹3.1L <tspan fill="var(--steel)">of ₹4L</tspan></text>
+            <text x="120" y="90" font-family="Google Sans" font-size="9" fill="var(--steel)">On track to</text>
+            <text x="120" y="103" font-family="Google Sans" font-size="9" fill="var(--steel)">finish</text>
+            <text x="120" y="120" font-family="Google Sans" font-weight="600" font-size="13" fill="var(--orange)">3 months</text>
+            <text x="120" y="135" font-family="Google Sans" font-size="9" fill="var(--steel)">early</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="fc-copy">
+          <span class="fc-eyebrow">Know where it goes</span>
+          <h3 class="fc-title">Spending intelligence</h3>
+          <p class="fc-desc">Understand where your money actually goes, not just where you meant it to.</p>
+        </div>
+        <div class="fc-visual">
+          <svg class="mini-card" viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="208" height="178" rx="20" fill="var(--panel)" stroke="rgba(255,255,255,.08)"/>
+            <g transform="translate(60,88)">
+              <circle r="38" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="16"/>
+              <circle class="mini-donut-seg mini-donut-highlight" r="38" fill="none" stroke="var(--orange)" stroke-width="16"
+                stroke-dasharray="70 168.7" stroke-dashoffset="0" transform="rotate(-90)"/>
+              <circle class="mini-donut-seg" r="38" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="16"
+                stroke-dasharray="45 168.7" stroke-dashoffset="-70" transform="rotate(-90)"/>
+              <circle class="mini-donut-seg" r="38" fill="none" stroke="var(--navy)" stroke-width="16"
+                stroke-dasharray="30 168.7" stroke-dashoffset="-115" transform="rotate(-90)"/>
+            </g>
+            <g font-family="Google Sans" font-size="9" fill="var(--steel)">
+              <rect x="122" y="60" width="7" height="7" rx="2" fill="var(--orange)"/>
+              <text x="134" y="67">Rent · 32%</text>
+              <rect x="122" y="80" width="7" height="7" rx="2" fill="rgba(255,255,255,.5)"/>
+              <text x="134" y="87">Invest · 24%</text>
+              <rect x="122" y="100" width="7" height="7" rx="2" fill="var(--navy)"/>
+              <text x="134" y="107">Dining · 11%</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="fc-copy">
+          <span class="fc-eyebrow">Never generic</span>
+          <h3 class="fc-title">Next-best actions</h3>
+          <p class="fc-desc">Clear, specific suggestions — never generic advice.</p>
+        </div>
+        <div class="fc-visual">
+          <svg class="mini-card" viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="208" height="178" rx="20" fill="var(--panel)" stroke="rgba(255,255,255,.08)"/>
+            <rect x="20" y="26" width="180" height="46" rx="12" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.08)"/>
+            <text x="32" y="46" font-family="Google Sans" font-size="10" fill="var(--ice)">₹4.2L idle in savings</text>
+            <text x="32" y="60" font-family="Google Sans" font-size="10" fill="var(--steel)">could work harder.</text>
+            <rect x="20" y="86" width="180" height="46" rx="12" fill="rgba(221,115,0,.1)" stroke="rgba(221,115,0,.3)"/>
+            <text x="32" y="106" font-family="Google Sans" font-size="10" fill="var(--ice)">Move to a liquid fund</text>
+            <g class="mini-arrow" transform="translate(178,110)">
+              <path d="M0,0 L10,0 M5,-5 L10,0 L5,5" stroke="var(--orange)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <text x="32" y="122" font-family="Google Sans" font-size="10" fill="var(--steel)">— earn ~4% more.</text>
+            <rect x="20" y="146" width="120" height="18" rx="9" fill="rgba(255,255,255,.04)"/>
+            <rect x="20" y="146" width="72" height="18" rx="9" fill="var(--orange)"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="fc-copy">
+          <span class="fc-eyebrow">Before you have to ask</span>
+          <h3 class="fc-title">Proactive alerts</h3>
+          <p class="fc-desc">Get told about the opportunity before you have to go looking for it.</p>
+        </div>
+        <div class="fc-visual">
+          <svg class="mini-card" viewBox="0 0 220 190" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="6" width="208" height="178" rx="20" fill="var(--panel)" stroke="rgba(255,255,255,.08)"/>
+            <g transform="translate(110,72)">
+              <circle class="mini-ping" r="16" fill="none" stroke="var(--orange)" stroke-width="1.6"/>
+              <g class="mini-bell">
+                <path d="M0,-16c8,0,13,6,13,15v10l6,7H-19l6-7v-10c0-9,5-15,13-15z" fill="var(--orange)"/>
+                <path d="M-6,16a6,6 0 0 0 12,0" fill="none" stroke="var(--orange)" stroke-width="2"/>
+              </g>
+            </g>
+            <rect x="24" y="120" width="172" height="46" rx="12" fill="rgba(221,115,0,.08)" stroke="rgba(221,115,0,.25)"/>
+            <text x="36" y="140" font-family="Google Sans" font-size="10" fill="var(--ice)">Term insurance renewal</text>
+            <text x="36" y="154" font-family="Google Sans" font-size="10" fill="var(--orange)">due in 12 days</text>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </section> -->
+
+
+  <!-- ============ 5. HOW IT THINKS + TRUST ============ -->
+  <section id="how-it-thinks" class="clarity-trust-section relative overflow-hidden" aria-labelledby="thinks-heading">
+    <div class="relative mx-auto max-w-6xl px-6 sm:px-10">
+      <div class="clarity-intro">
+        <div>
+          <span class="badge">How it works</span>
+          <h2 id="thinks-heading" class="reveal-heading capitalize mt-6 max-w-3xl font-display text-3xl font-semibold leading-tight text-ice sm:text-5xl">
+            From connected finances to confident decisions.
+          </h2>
+        </div>
+        <div class="clarity-promise">
+          <p class="clarity-promise-label">The Fintoo promise</p>
+          <p class="mt-2 font-display text-xl font-semibold text-ice">Clear guidance. Your control.</p>
+          <p class="mt-2 text-sm leading-relaxed text-steel">Fintoo AI makes your financial picture useful without making it less private.</p>
+        </div>
+      </div>
+
+      <div class="journey-rail" aria-label="How Fintoo AI works">
+        <article class="journey-step flow-step">
+          <span class="journey-number">01</span>
+          <h3>Connect what you already have</h3>
+          <p>Securely link accounts, funds, and policies—or add them manually.</p>
+        </article>
+        <article class="journey-step flow-step">
+          <span class="journey-number">02</span>
+          <h3>Fintoo AI builds the full picture</h3>
+          <p>It organizes and cross-references everything, so your finances finally make sense together.</p>
+        </article>
+        <article class="journey-step flow-step">
+          <span class="journey-number">03</span>
+          <h3>You get clarity, not clutter</h3>
+          <p>Receive personalized insights and practical next steps in plain language.</p>
+        </article>
+      </div>
+
+      <aside id="trust" class="trust-ribbon" aria-labelledby="trust-heading">
+        <div class="trust-ribbon-head">
+          <div>
+            <p class="font-mono-ui text-[.68rem] uppercase tracking-[.16em] text-orange">Privacy &amp; trust</p>
+            <h3 id="trust-heading" class="mt-2">Built to understand your money—not exploit it.</h3>
+          </div>
+          <div class="trust-pledge">
+            <span class="trust-pledge-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M6 6l12 12" stroke="currentColor" stroke-width="1.8"/></svg></span>
+            <span>We never sell your financial data.</span>
+          </div>
+        </div>
+
+        <div class="trust-points">
+          <article class="trust-point">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z" stroke="currentColor" stroke-width="1.7"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.7"/></svg>
+            <div><h4>Privacy-first</h4><p>Your data works for you alone.</p></div>
+          </article>
+          <article class="trust-point">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="8" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M11 12h10M17 8v8" stroke="currentColor" stroke-width="1.7"/></svg>
+            <div><h4>You stay in control</h4><p>Link or unlink anything, anytime.</p></div>
+          </article>
+          <article class="trust-point">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 11V7a4 4 0 018 0v4" stroke="currentColor" stroke-width="1.7"/></svg>
+            <div><h4>Security from day one</h4><p>Designed in, never bolted on.</p></div>
+          </article>
+          <article class="trust-point">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/></svg>
+            <div><h4>Transparent guidance</h4><p>Every suggestion includes a reason.</p></div>
+          </article>
+        </div>
+      </aside>
+    </div>
+  </section>
+  <!-- ============ 7. FINAL CTA ============ -->
+  <section id="join" class="relative overflow-hidden bg-void py-28 sm:py-36" aria-labelledby="join-heading">
+    <div class="pointer-events-none absolute inset-0 grid-texture" aria-hidden="true"></div>
+    <div class="ambient-orb animate-float bg-orange/40" style="width:30rem;height:30rem;top:50%;left:50%;transform:translate(-50%,-50%);" aria-hidden="true"></div>
+
+    <div class="relative mx-auto max-w-2xl px-6 text-center sm:px-10">
+      <h2 class="reveal-heading font-display text-3xl capitalize font-semibold leading-tight text-ice sm:text-5xl">
+        See what your money could <span class="text-gradient">do next.</span>
+      </h2>
+      <p class="mt-5 text-lg text-steel">Fintoo AI launches on 1 September. Join the waitlist for updates and priority access.</p>
+
+      <form id="final-form" data-waitlist class="mx-auto mt-9 max-w-xl" novalidate>
+        <div class="grid gap-3 sm:grid-cols-2">
+          <label for="final-name" class="sr-only">Full name</label>
+          <input id="final-name" name="name" type="text" required placeholder="Full name" autocomplete="name" class="input-field w-full" />
+          <label for="final-email" class="sr-only">Email address</label>
+          <input id="final-email" name="email" type="email" required placeholder="Email address" autocomplete="email" class="input-field w-full" />
+          <label for="final-phone" class="sr-only">Phone number, optional</label>
+          <input id="final-phone" name="phone" type="tel" placeholder="Phone number (optional)" autocomplete="tel" class="input-field w-full" />
+          <button type="submit" class="btn-primary w-full">
+            <span data-label>Join the Waitlist</span>
+          </button>
+        </div>
+        <p class="mt-3 text-xs text-steel">Free to join. No spam. Your phone number is optional.</p>
+        <p data-status role="status" aria-live="polite" class="form-status mt-2 text-sm"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="relative border-t border-white/5 bg-void py-14">
+  <div class="mx-auto max-w-7xl px-6 sm:px-10">
+    <div class="flex flex-col gap-10 sm:flex-row sm:justify-between">
+      <div>
+        <a href="#hero" class="flex items-center">
+          <svg class="h-7 w-auto" role="img" aria-label="Fintoo AI" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 2011.8 416.7"> <defs> <style> .st0 { fill: #1f2f60; } .st1 { fill: #fff; } .st2 { fill: #f68638; } .st3 { fill: #5b3c2f; } .st4 { fill: #f68522; } </style> </defs> <rect class="st4" x="1567.9" y="68.3" width="314.9" height="278.4" rx="41.9" ry="41.9"/> <g> <path class="st1" d="M1726.7,257.9h-58.1l-1.2,3.7c-4.8,14.3-18.2,23.8-33.3,23.8h-14.5s42.7-118,42.7-118c8.2-22.7,29.7-37.8,53.8-37.8h3.8s56.4,155.8,56.4,155.8h-15c-15,0-28.4-9.6-33.3-23.8l-1.2-3.7ZM1714.1,220.3l-11.7-34.7c-1.5-4.6-8-4.5-9.5,0l-14.4,42.9h29.7c4.3,0,7.3-4.2,5.9-8.2Z"/> <path class="st1" d="M1831.2,129.6v123.2c0,18-14.6,32.5-32.5,32.5h-5.4v-123.2c0-18,14.6-32.5,32.5-32.5h5.4Z"/> </g> <g> <path class="st0" d="M195.1,236.1h58.5c14.5,0,26.3-11.7,26.3-26.1v-23.7h-58.5c-14.5,0-26.3,11.7-26.3,26.1v23.7Z"/> <path class="st0" d="M186.5,69.4c-31.8,0-57.5,25.6-57.5,57.1v215.4h2.8c31,0,56.3-23.7,58.8-53.9v-104.4c0-.4,0-.7.2-1v-31.8c0-17.5,14.2-31.6,31.8-31.6h15.6c27.3,0,49.4-22,49.4-49.1v-.9h-101.1Z"/> </g> <path class="st0" d="M347.3,342h-8.6V124.2c0-30.3,24.7-54.8,55.2-54.8h6.6v219.8c0,29.2-23.8,52.8-53.2,52.8Z"/> <path class="st0" d="M648,342h-6l-113-171.3c-6.6-10-11.2-17.6-13.8-22.6h-.8c1,9.6,1.5,24.3,1.5,44.1v100.5c0,27.2-22.2,49.3-49.6,49.3h-8.8v-209.4c0-34.9,28.5-63.2,63.6-63.2h2.9l108.8,165.9c5,7.5,9.6,14.9,13.8,22.2h.8c-1-6.3-1.5-18.8-1.5-37.4v-100.9c0-27.5,22.4-49.8,50.1-49.8h8.2v216.6c0,30.9-25.2,56-56.3,56Z"/> <path class="st0" d="M908.8,119.4h-36v166.5c0,31-25.3,56.1-56.5,56.1h-5.5V119.4h-77.9v-8c0-23.2,18.9-42,42.2-42h175.8v8c0,23.2-18.9,42-42.2,42Z"/> <path class="st0" d="M1395.9,346.7c-39.3,0-71.3-12.7-96-38.1-24.7-25.4-37.1-58.5-37.1-99.3s12.6-77.9,37.7-104.6c25.1-26.6,58.4-39.9,99.9-39.9s70.8,12.7,95,38.2c24.2,25.5,36.2,59.1,36.2,100.7s-12.5,77.4-37.6,103.6c-25.1,26.2-57.7,39.3-98,39.3ZM1398.6,117.7c-21.7,0-38.9,8.1-51.6,24.2-12.8,16.2-19.1,37.5-19.1,64.2s6.4,48.3,19.1,64.1c12.8,15.7,29.5,23.6,50.1,23.6s38.2-7.6,50.7-22.9c12.5-15.3,18.7-36.5,18.7-63.6s-6.1-50.2-18.2-66c-12.1-15.7-28.7-23.6-49.7-23.6Z"/> <g> <g> <path class="st0" d="M1102.7,63.9v.3c-.4.8-2.9.7-3.6.3,0,.2-.2.2-.3,0,0-.1,0-.4,0-.6h3.9Z"/> <path class="st2" d="M1102.7,64.2c2.7,0,5.4,0,8.1.3,70.1,5.3,112.8,61.2,115.4,129,.1,3.5-.1,7.1,0,10.6-10.4.2-20.9.1-31.3.3-6.7.1-13.6.5-20.4.6-3.5,0-8.7.4-11.9,0-.3,0-.5,0-.7-.3l-.4-.7c.9-38.4-17.1-83.9-61.3-86-.7,0-1.1-.2-1.2-.8l-.5-50.4c0-.7.3-1.6.5-2.2,1.1-.5,2.4-.3,3.6-.3Z"/> <path class="st3" d="M1099.1,64.5l.5,52.8c11,.7,21.9,3.8,31,10.1,22.8,15.9,30.6,45.9,31.6,72.4,0,1.5.2,3.5-.3,4.8l-18.5-17.5c-.7-8.5-1.1-16.9-3.1-25.3-4.3-18.4-15.3-36-34.3-41.6-4-1.2-8-1.5-12.1-2.3-.2-13.8-.5-27.5-.4-41.3,1.1-4.2,4-8.3,5.2-12.3h.3Z"/> </g> <path class="st0" d="M1158.6,215.5c-1.3,22.9-7.4,41.1-18.5,54.6-12.5,15.3-29.4,22.9-50.7,22.9s-37.4-7.9-50.1-23.6c-12.8-15.7-19.1-37.1-19.1-64.1s6.4-48,19.1-64.2c11.7-14.8,27.1-22.8,46.2-24v-52.9c-38.1,1.5-69,14.7-92.7,39.8-25.1,26.6-37.7,61.5-37.7,104.6s12.4,73.9,37.1,99.3c24.7,25.4,56.7,38.1,96,38.1s73-13.1,98-39.3c22.6-23.7,35-54.1,37.2-91.2h-64.9Z"/> </g> </svg>
+        </a>
+        <p class="mt-3 max-w-xs text-sm text-steel">An early-access initiative from Fintoo.</p>
+      </div>
+      <div class="flex gap-16">
+        <div>
+          <p class="font-mono-ui text-xs uppercase tracking-widest text-steel">Product</p>
+          <ul class="mt-3 space-y-2 text-sm text-steel">
+            <li><a href="#preview" class="hover:text-ice">Preview</a></li>
+            <li><a href="#features" class="hover:text-ice">Features</a></li>
+            <li><a href="#trust" class="hover:text-ice">Privacy</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="font-mono-ui text-xs uppercase tracking-widest text-steel">Legal</p>
+          <!-- Placeholder legal links — replace with real Privacy Policy / Terms URLs before launch -->
+          <ul class="mt-3 space-y-2 text-sm text-steel">
+            <li><a href="#" class="hover:text-ice">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-ice">Terms</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="mt-12 flex flex-col-reverse items-center justify-between gap-6 border-t border-white/5 pt-8 sm:flex-row">
+      <p class="text-xs text-steel">© 2026 Fintoo AI. All rights reserved.</p>
+      <!-- Placeholder social links -->
+      <div class="flex gap-4">
+        <a href="#" aria-label="Fintoo AI on X" class="text-steel hover:text-ice"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.9l-5.4-6.6L4.4 22H1.3l8.1-9.3L1 2h7l4.9 6z"/></svg></a>
+        <a href="#" aria-label="Fintoo AI on LinkedIn" class="text-steel hover:text-ice"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 8.98h4v12H3v-12zm7 0h3.8v1.64h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1v6.32h-4v-5.6c0-1.34-.02-3.06-1.87-3.06-1.87 0-2.16 1.46-2.16 2.96v5.7h-4v-12z"/></svg></a>
+        <a href="#" aria-label="Fintoo AI on Instagram" class="text-steel hover:text-ice"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.7 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.21.6 1.76 1.15.55.55.89 1.1 1.15 1.76.25.64.42 1.37.47 2.43C21.99 8.94 22 9.3 22 12s-.01 3.06-.06 4.12c-.06 1.06-.22 1.79-.47 2.43-.26.66-.6 1.21-1.15 1.76-.55.55-1.1.89-1.76 1.15-.64.25-1.37.42-2.43.47C15.06 21.99 14.7 22 12 22s-3.06-.01-4.12-.06c-1.06-.06-1.79-.22-2.43-.47a4.9 4.9 0 01-1.76-1.15 4.9 4.9 0 01-1.15-1.76c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.7 2 12s.01-3.06.06-4.12c.06-1.06.22-1.79.47-2.43.26-.66.6-1.21 1.15-1.76A4.9 4.9 0 015.44.54c.64-.25 1.37-.42 2.43-.47C8.94.01 9.3 0 12 0zm0 5.4A6.6 6.6 0 1012 18.6 6.6 6.6 0 0012 5.4zm0 2A4.6 4.6 0 1112 16.6 4.6 4.6 0 0112 7.4zm5.8-2.7a1.14 1.14 0 110 2.28 1.14 1.14 0 010-2.28z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  gsap.registerPlugin(ScrollTrigger, Observer, SplitText);
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ID-driven animation inside the supplied dashboard SVG. */
+  const dashboardObject = document.getElementById('hero-dashboard-svg');
+  if (dashboardObject && !reduceMotion) {
+    let dashboardSequenceStarted = false;
+    const startDashboardSequence = () => {
+      if (dashboardSequenceStarted) return;
+      const svgDoc = dashboardObject.contentDocument;
+      const svgRoot = svgDoc && svgDoc.documentElement;
+      if (!svgRoot) return;
+      dashboardSequenceStarted = true;
+
+      const byId = (id) => svgDoc.getElementById(id);
+      const netWorth = byId('Net worth Breakdown');
+      const netGraph = byId('Graph (With Invest)');
+      const assets = byId('My Assets + Ai Nudge');
+      const aiMessage = byId('AI nudge');
+      const liabilities = byId('My Liabilities');
+      const stableBadge = byId('Chips - Dashboard_3');
+      const goals = byId('Goals');
+      const goalBadges = [byId('Chip - Assets'), byId('Chip - Assets_2')].filter(Boolean);
+      const spends = byId('Spends + Ai Nudge');
+      const spendBadge = byId('Chip - Assets_3');
+      const spendGraph = byId('Graph (With Invest)_3');
+      const insurance = byId('Insurance');
+      const coveredBadges = [byId('Chips - Insurance'), byId('Chips - Insurance_2')].filter(Boolean);
+      const tools = byId('Tools');
+      const toolCards = [
+        byId('Refer and Earn Container'), byId('Refer and Earn Container_2'),
+        byId('Refer and Earn Container_3'), byId('Refer and Earn Container_4')
+      ].filter(Boolean);
+      const revealItems = [aiMessage, stableBadge, spendBadge, ...goalBadges, ...coveredBadges, ...toolCards].filter(Boolean);
+
+      gsap.set(dashboardObject, { autoAlpha: 0 });
+      gsap.set(revealItems, { autoAlpha: 0, y: 10 });
+      gsap.set([netGraph, spendGraph].filter(Boolean), {
+        scaleX: 0, transformOrigin: 'left center', transformBox: 'fill-box'
+      });
+
+      const screen = dashboardObject.parentElement;
+      const scrollToCard = (card, duration = 1.15) => {
+        if (!card) return gsap.to({}, { duration });
+        const viewBox = svgRoot.viewBox.baseVal;
+        const renderedWidth = dashboardObject.offsetWidth;
+        const scale = renderedWidth / viewBox.width;
+        const cardBox = card.getBBox();
+        const renderedHeight = viewBox.height * scale;
+        const desiredY = (screen.clientHeight - cardBox.height * scale) / 2;
+        const y = Math.max(screen.clientHeight - renderedHeight, Math.min(0, desiredY - cardBox.y * scale));
+        return gsap.to(dashboardObject, { y, duration, ease: 'power2.inOut' });
+      };
+
+      const sequence = gsap.timeline({ repeat: -1, repeatDelay: 2.5, delay: 6.1 });
+      sequence
+        .set(dashboardObject, { autoAlpha: 1, y: 0 })
+        .call(() => scrollToCard(netWorth, 1.1))
+        .to({}, { duration: 1.15 })
+        .to(netGraph, { scaleX: 1, duration: 1.7, ease: 'power2.out' })
+        .to({}, { duration: .65 })
+        .call(() => scrollToCard(assets))
+        .to({}, { duration: 1.2 })
+        .to(aiMessage, { autoAlpha: 1, y: 0, duration: .65, ease: 'back.out(1.4)' })
+        .to({}, { duration: .75 })
+        .call(() => scrollToCard(liabilities))
+        .to({}, { duration: 1.2 })
+        .to(stableBadge, { autoAlpha: 1, y: 0, scale: 1, duration: .6, ease: 'back.out(1.7)' })
+        .to({}, { duration: .75 })
+        .call(() => scrollToCard(goals))
+        .to({}, { duration: 1.2 })
+        .to(goalBadges, { autoAlpha: 1, y: 0, duration: .55, stagger: .22 })
+        .to({}, { duration: .8 })
+        .call(() => scrollToCard(spends))
+        .to({}, { duration: 1.2 })
+        .to(spendBadge, { autoAlpha: 1, y: 0, duration: .5 })
+        .to(spendGraph, { scaleX: 1, duration: 1.35, ease: 'power2.out' }, '-=.2')
+        .to({}, { duration: .75 })
+        .call(() => scrollToCard(insurance))
+        .to({}, { duration: 1.2 })
+        .to(coveredBadges, { autoAlpha: 1, y: 0, duration: .55, stagger: .22 })
+        .to({}, { duration: .8 })
+        .call(() => scrollToCard(tools))
+        .to({}, { duration: 1.2 })
+        .to(toolCards, { autoAlpha: 1, y: 0, scale: 1, duration: .5, stagger: .28, ease: 'back.out(1.35)' })
+        .to({}, { duration: 1.8 })
+        .set(revealItems, { autoAlpha: 0, y: 10 })
+        .set([netGraph, spendGraph].filter(Boolean), { scaleX: 0 })
+        .to(dashboardObject, { autoAlpha: 0, duration: .35 });
+    };
+    /* The duplicated SVG owns its badge/graph reveals. The parent page owns
+       only the vertical camera movement, so playback is identical on file://
+       previews, Live Server, and production hosting. */
+    /* file:// previews can render an <object> while denying access to its
+       contentDocument. Keep the scroll story working with SVG coordinates. */
+    window.setTimeout(() => {
+      if (dashboardSequenceStarted) return;
+      dashboardSequenceStarted = true;
+      const screen = dashboardObject.parentElement;
+      const yFor = (svgY) => {
+        /* offsetWidth is intentionally used here. getBoundingClientRect()
+           includes transforms applied to the hero/phone and made later cards
+           stop too low in the viewport. */
+        const scale = dashboardObject.offsetWidth / 360;
+        const fullHeight = 2868 * scale;
+        const centered = (screen.clientHeight / 2) - (svgY * scale);
+        return Math.max(screen.clientHeight - fullHeight, Math.min(0, centered));
+      };
+      gsap.set(dashboardObject, { autoAlpha: 0, y: 0 });
+      gsap.timeline({ delay: 5.35, repeat: -1 })
+        .set(dashboardObject, { autoAlpha: 1 })
+        .call(() => setHeroWord('net worth.'))
+        .to(dashboardObject, { y: yFor(723), duration: 1.15, ease: 'power2.inOut' })
+        .to({}, { duration: 2 })
+        .call(() => setHeroWord('assets.'))
+        .to(dashboardObject, { y: yFor(955), duration: 1.1, ease: 'power2.inOut' })
+        .to({}, { duration: 1.7 })
+        .call(() => setHeroWord('liabilities.'))
+        .to(dashboardObject, { y: yFor(1097), duration: 1.1, ease: 'power2.inOut' })
+        .to({}, { duration: 1.7 })
+        .call(() => setHeroWord('goals.'))
+        .to(dashboardObject, { y: yFor(1539), duration: 1.1, ease: 'power2.inOut' })
+        .to({}, { duration: 2 })
+        .call(() => setHeroWord('spending.'))
+        .to(dashboardObject, { y: yFor(1845), duration: 1.1, ease: 'power2.inOut' })
+        .to({}, { duration: 2.2 })
+        .call(() => setHeroWord('insurance.'))
+        .to(dashboardObject, { y: yFor(2130), duration: 1.1, ease: 'power2.inOut' })
+        .to({}, { duration: 2 })
+        .call(() => setHeroWord('financial tools.'))
+        .to(dashboardObject, { y: yFor(2319), duration: 1.1, ease: 'power2.inOut' })
+        .to({}, { duration: 3.8 })
+        .to(dashboardObject, { autoAlpha: 0, duration: .35, ease: 'power1.out' })
+        .set(dashboardObject, { y: 0 })
+        .to(dashboardObject, { autoAlpha: 1, duration: .35, ease: 'power1.in' });
+    }, 750);
+  }
+
+  /* ============================================================
+     Custom cursor — additive glow, native cursor stays available
+     for touch/keyboard users; only activates after a real
+     pointermove on a fine-pointer device.
+     ============================================================ */
+  if (window.matchMedia('(pointer:fine)').matches && !reduceMotion) {
+    const dot = document.createElement('div');
+    dot.className = 'cursor-dot';
+    const ring = document.createElement('div');
+    ring.className = 'cursor-ring';
+    document.body.append(dot, ring);
+
+    let mx = 0, my = 0, rx = 0, ry = 0, active = false;
+    window.addEventListener('pointermove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      if (!active) { active = true; document.body.classList.add('cursor-ready'); }
+      dot.style.transform = 'translate(' + mx + 'px,' + my + 'px) translate(-50%,-50%)';
+    });
+    gsap.ticker.add(() => {
+      rx += (mx - rx) * 0.18;
+      ry += (my - ry) * 0.18;
+      ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px) translate(-50%,-50%)';
+    });
+    document.querySelectorAll('a, button, input, [data-cursor-hover]').forEach((el) => {
+      el.addEventListener('mouseenter', () => ring.classList.add('is-active'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('is-active'));
+    });
+  }
+
+  /* ============================================================
+     Section-heading reveal grammar — each wrapped line (i.e. each
+     visual sentence segment) slides up as one unit, staggered line
+     by line, rather than animating individual characters.
+     Applied once, on scroll, to every `.reveal-heading`.
+     ============================================================ */
+  function revealHeading(el) {
+    if (!el._split) {
+      el._split = new SplitText(el, { type: 'lines', linesClass: 'clip-text' });
+    }
+    if (reduceMotion) {
+      gsap.set(el._split.lines, { autoAlpha: 1, yPercent: 0 });
+      return;
+    }
+    gsap.fromTo(
+      el._split.lines,
+      { autoAlpha: 0, yPercent: 130 },
+      { autoAlpha: 1, yPercent: 0, duration: 0.9, ease: 'power3.out', stagger: 0.14 }
+    );
+  }
+
+  const headings = gsap.utils.toArray('.reveal-heading');
+  headings.forEach((h) => {
+    if (h.id === 'hero-heading') return; // hero heading is handled by the load timeline below
+    ScrollTrigger.create({
+      trigger: h,
+      start: 'top 82%',
+      once: true,
+      onEnter: () => revealHeading(h),
+    });
+  });
+
+  /* ============================================================
+     Hero load sequence
+     ============================================================ */
+  const heroEls = {
+    badge: '#hero-badge',
+    sub: '#hero-sub',
+    cta: '#hero-cta',
+    phone: '#hero-mockups',
+    counter: '#hero-counter',
+  };
+
+  if (reduceMotion) {
+    gsap.set(['#hero-heading', heroEls.badge, heroEls.sub, heroEls.cta, heroEls.phone, heroEls.counter], { autoAlpha: 1, y: 0 });
+  } else {
+    const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    heroTl
+      .from(heroEls.badge, { autoAlpha: 0, y: -14, duration: 0.6 })
+      .from('#hero-heading', { autoAlpha: 0, y: 24, duration: 0.85 }, '-=0.2')
+      .from(heroEls.sub, { autoAlpha: 0, y: 16, duration: 0.7 }, '-=0.45')
+      .from(heroEls.cta, { autoAlpha: 0, y: 16, duration: 0.7 }, '-=0.5')
+      .from(heroEls.phone, { autoAlpha: 0, y: 40, scale: 0.94, duration: 0.9 }, '-=0.45')
+      .from(heroEls.counter, { autoAlpha: 0, y: 10, duration: 0.5 }, '-=0.3');
+  }
+
+  const rotatingWord = document.getElementById('hero-rotating-word');
+  function setHeroWord(nextWord) {
+    if (!rotatingWord || rotatingWord.textContent === nextWord) return;
+    if (reduceMotion) {
+      rotatingWord.textContent = nextWord;
+      return;
+    }
+    gsap.killTweensOf(rotatingWord);
+    gsap.to(rotatingWord, {
+      autoAlpha: 0, y: -16, duration: .28, ease: 'power2.in',
+      onComplete: () => {
+        rotatingWord.textContent = nextWord;
+        gsap.fromTo(
+          rotatingWord,
+          { autoAlpha: 0, y: 16 },
+          { autoAlpha: 1, y: 0, duration: .34, ease: 'power2.out' }
+        );
+      },
+    });
+  }
+
+  /* ============================================================
+     Early-access counter — count-up on scroll into view
+     ============================================================ */
+  document.querySelectorAll('[data-count-to]').forEach((el) => {
+    const target = parseInt(el.getAttribute('data-count-to'), 10) || 0;
+    const proxy = { val: 0 };
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 90%',
+      once: true,
+      onEnter: () => {
+        gsap.to(proxy, {
+          val: target,
+          duration: reduceMotion ? 0.01 : 1.6,
+          ease: 'power1.out',
+          onUpdate: () => { el.textContent = Math.round(proxy.val).toLocaleString('en-IN'); },
+        });
+      },
+    });
+  });
+
+  /* ============================================================
+     Nav hide / show on scroll direction — Observer, reused
+     directly from the supplied source's onUp/onDown pattern.
+     ============================================================ */
+  const nav = document.getElementById('site-nav');
+  let navHidden = false;
+  const navObserver = Observer.create({
+    type: 'wheel,touch,pointer',
+    tolerance: 10,
+    onDown: () => {
+      if (!navHidden && window.scrollY > 120) {
+        navHidden = true;
+        gsap.to(nav, { yPercent: -100, duration: 0.4, ease: 'power2.in', overwrite: true });
+      }
+    },
+    onUp: () => {
+      if (navHidden) {
+        navHidden = false;
+        gsap.to(nav, { yPercent: 0, duration: 0.4, ease: 'power2.out', overwrite: true });
+      }
+    },
+  });
+
+  /* ============================================================
+     Interactive app preview — real mockup carousel
+     ============================================================ */
+  const preview = document.getElementById('preview');
+  if (preview) {
+    const screens = Array.from(preview.querySelectorAll('.preview-mockup'));
+    const items = Array.from(preview.querySelectorAll('.preview-item'));
+    const dots = Array.from(preview.querySelectorAll('[data-dot]'));
+    let activeScreen = 0;
+    let autoplayTimer;
+
+    function setScreen(index, restart = true) {
+      const next = (index + screens.length) % screens.length;
+      const previous = (next - 1 + screens.length) % screens.length;
+      const following = (next + 1) % screens.length;
+
+      screens.forEach((screen, i) => {
+        screen.classList.toggle('is-active', i === next);
+        screen.classList.toggle('is-prev', i === previous);
+        screen.classList.toggle('is-next', i === following);
+        screen.setAttribute('aria-hidden', i === next ? 'false' : 'true');
+      });
+      items.forEach((item, i) => {
+        item.classList.toggle('is-active', i === next);
+        if (i === next) item.setAttribute('aria-current', 'true');
+        else item.removeAttribute('aria-current');
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === next);
+        dot.classList.toggle('is-complete', i < next);
+      });
+      activeScreen = next;
+      if (restart) startAutoplay();
+    }
+
+    function startAutoplay() {
+      window.clearTimeout(autoplayTimer);
+      if (!reduceMotion) autoplayTimer = window.setTimeout(() => setScreen(activeScreen + 1), 5000);
+    }
+
+    items.forEach((item, i) => item.addEventListener('click', () => setScreen(i)));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => setScreen(i)));
+    preview.addEventListener('mouseenter', () => window.clearTimeout(autoplayTimer));
+    preview.addEventListener('mouseleave', startAutoplay);
+    preview.addEventListener('focusin', () => window.clearTimeout(autoplayTimer));
+    preview.addEventListener('focusout', startAutoplay);
+
+    setScreen(0, false);
+
+    const previewObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) startAutoplay();
+      else window.clearTimeout(autoplayTimer);
+    }, { threshold: .25 });
+    previewObserver.observe(preview);
+  }
+  /* ============================================================
+     How it thinks — SVG connector line draw
+     ============================================================ */
+  const flowPath = document.getElementById('flow-path');
+  if (flowPath) {
+    const len = flowPath.getTotalLength();
+    gsap.set(flowPath, { strokeDasharray: len, strokeDashoffset: len });
+    gsap.to(flowPath, {
+      strokeDashoffset: 0,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#how-it-thinks',
+        start: 'top 70%',
+        end: 'bottom 60%',
+        scrub: reduceMotion ? false : 0.6,
+      },
+    });
+  }
+
+  /* ============================================================
+     Generic scroll-reveal for cards / steps
+     ============================================================ */
+  gsap.utils.toArray('.feature-card').forEach((card, i) => {
+    gsap.from(card, {
+      autoAlpha: 0,
+      y: 30,
+      duration: reduceMotion ? 0.01 : 0.7,
+      delay: reduceMotion ? 0 : (i % 3) * 0.08,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: card, start: 'top 88%', once: true },
+    });
+  });
+  gsap.utils.toArray('.flow-step').forEach((step, i) => {
+    gsap.from(step, {
+      autoAlpha: 0,
+      y: 24,
+      duration: reduceMotion ? 0.01 : 0.6,
+      delay: reduceMotion ? 0 : i * 0.12,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: step, start: 'top 88%', once: true },
+    });
+  });
+
+  /* ============================================================
+     Waitlist forms — validation, loading, success, error,
+     duplicate-submission states. Wire the fetch() call below
+     to a real endpoint before launch.
+     ============================================================ */
+  function initWaitlistForm(form) {
+    const nameInput = form.querySelector('input[name="name"]');
+    const emailInput = form.querySelector('input[type="email"]');
+    const button = form.querySelector('button[type="submit"]');
+    const label = button.querySelector('[data-label]');
+    const status = form.querySelector('[data-status]');
+    const submitted = new Set();
+
+    function setStatus(state, message) {
+      status.dataset.state = state;
+      status.textContent = message;
+    }
+
+    emailInput.addEventListener('blur', () => emailInput.setAttribute('data-touched', 'true'));
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = emailInput.value.trim();
+
+      if (!form.checkValidity()) {
+        const invalidField = form.querySelector(':invalid');
+        setStatus('error', invalidField === emailInput ? 'Enter a valid email address.' : 'Enter your full name.');
+        invalidField?.setAttribute('data-touched', 'true');
+        invalidField?.focus();
+        return;
+      }
+      if (!email || !emailInput.checkValidity()) {
+        setStatus('error', 'Enter a valid email address.');
+        emailInput.setAttribute('data-touched', 'true');
+        emailInput.focus();
+        return;
+      }
+      if (submitted.has(email.toLowerCase())) {
+        setStatus('duplicate', "You're already on the list.");
+        return;
+      }
+
+      setStatus('loading', 'Adding you to the list…');
+      button.disabled = true;
+      const originalLabel = label.textContent;
+      label.textContent = 'Joining…';
+
+      try {
+        // PLACEHOLDER — replace with the real waitlist API endpoint:
+        // await fetch('/api/waitlist', {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify({ name: nameInput.value.trim(), email, phone: form.elements.phone.value.trim() }),
+        // });
+        await new Promise((resolve) => setTimeout(resolve, 900));
+
+        submitted.add(email.toLowerCase());
+        setStatus('success', "You're on the list. We'll be in touch soon.");
+        form.reset();
+        emailInput.removeAttribute('data-touched');
+      } catch (err) {
+        setStatus('error', 'Something went wrong. Please try again.');
+      } finally {
+        button.disabled = false;
+        label.textContent = originalLabel;
+      }
+    });
+  }
+  document.querySelectorAll('form[data-waitlist]').forEach(initWaitlistForm);
+
+  /* ============================================================
+     Full-page Observer transitions — based on the supplied GSAP
+     pattern. Desktop wheels, swipes, pointer drags, arrow keys,
+     and the existing anchor links all move between panels.
+     ============================================================ */
+  const sectionSliderQuery = window.matchMedia('(prefers-reduced-motion: no-preference)');
+  if (sectionSliderQuery.matches) {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+    document.documentElement.classList.add('is-section-slider');
+
+    const sections = gsap.utils.toArray('#main > section');
+    const outerWrappers = [];
+    const innerWrappers = [];
+
+    sections.forEach((section) => {
+      const outer = document.createElement('div');
+      const inner = document.createElement('div');
+      outer.className = 'outer';
+      inner.className = 'inner';
+      inner.append(...section.childNodes);
+      outer.append(inner);
+      section.append(outer);
+      outerWrappers.push(outer);
+      innerWrappers.push(inner);
+    });
+
+    ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    navObserver.kill();
+    gsap.killTweensOf(sections.flatMap((section) => Array.from(section.querySelectorAll('*'))));
+    gsap.set(sections.flatMap((section) => Array.from(section.querySelectorAll('.reveal-heading, .flow-step, #hero-heading, #hero-badge, #hero-sub, #hero-cta, #hero-mockups, #hero-counter'))), {
+      clearProps: 'opacity,visibility,transform',
+    });
+
+    const headings = sections.map((section) => section.querySelector('h1, h2'));
+    const splitHeadings = headings.map((heading) => {
+      if (!heading) return null;
+      if (heading._split) heading._split.revert();
+      return new SplitText(heading, { type: 'lines', linesClass: 'clip-text' });
+    });
+    const panelVisuals = sections.map((section) =>
+      section.querySelector('.hero-visual, .preview-visual, .trust-ribbon, form')
+    );
+    const panelContent = sections.map((section) => {
+      const selectors = {
+        hero: '#hero-badge, #hero-sub, #hero-cta, .hero-actions',
+        preview: '.badge, #preview-heading + p, .preview-copy',
+        'how-it-thinks': '.badge, .clarity-promise, .journey-step',
+        join: 'h2 + p',
+      };
+      return gsap.utils.toArray(selectors[section.id] || '', section);
+    });
+
+    let currentIndex = -1;
+    let animating = false;
+    const wrap = gsap.utils.wrap(0, sections.length);
+
+    gsap.set([outerWrappers, innerWrappers], { yPercent: 0 });
+    gsap.set(sections, { autoAlpha: 0, yPercent: 100 });
+
+    function gotoSection(index, direction = 1) {
+      index = wrap(index);
+      if (animating || index === currentIndex) return;
+      animating = true;
+
+      const fromTop = direction === -1;
+      const dFactor = fromTop ? -1 : 1;
+      const timeline = gsap.timeline({
+        defaults: { duration: 1.25, ease: 'power1.inOut' },
+        onComplete: () => { animating = false; },
+      });
+
+      if (currentIndex >= 0) {
+        gsap.set(sections[currentIndex], { zIndex: 0 });
+        timeline
+          .to(sections[currentIndex], { yPercent: -100 * dFactor }, 0)
+          .set(sections[currentIndex], { autoAlpha: 0 });
+        timeline.to(
+          [...panelContent[currentIndex], panelVisuals[currentIndex]].filter(Boolean),
+          { autoAlpha: 0, y: -24 * dFactor, duration: 0.45, ease: 'power2.in', stagger: 0.025 },
+          0
+        );
+      }
+
+      gsap.set(sections[index], { autoAlpha: 1, zIndex: 1 });
+      timeline.fromTo(
+        sections[index],
+        { yPercent: 100 * dFactor },
+        { yPercent: 0 },
+        0
+      );
+      if (splitHeadings[index]) {
+        timeline.fromTo(
+          splitHeadings[index].lines,
+          { autoAlpha: 0, yPercent: 150 * dFactor },
+          {
+            autoAlpha: 1,
+            yPercent: 0,
+            duration: 1,
+            ease: 'power2',
+            stagger: 0.14,
+          },
+          0.2
+        );
+      }
+      if (panelContent[index].length) {
+        timeline.fromTo(
+          panelContent[index],
+          { autoAlpha: 0, y: 38 * dFactor },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            stagger: 0.1,
+          },
+          0.3
+        );
+      }
+      if (panelVisuals[index]) {
+        timeline.fromTo(
+          panelVisuals[index],
+          { autoAlpha: 0, y: 70 * dFactor, scale: 0.94 },
+          { autoAlpha: 1, y: 0, scale: 1, duration: 1.05, ease: 'power3.out' },
+          0.18
+        );
+      }
+
+      currentIndex = index;
+      history.replaceState(null, '', '#' + sections[index].id);
+    }
+
+    const isMobileSlider = window.matchMedia('(max-width: 768px)').matches;
+
+    function canChangeSection(direction) {
+      const scroller = innerWrappers[currentIndex];
+      if (!scroller || scroller.scrollHeight <= scroller.clientHeight + 2) return true;
+      if (direction > 0) {
+        return scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - 2;
+      }
+      return scroller.scrollTop <= 2;
+    }
+
+    Observer.create({
+      target: window,
+      type: 'wheel,touch,pointer',
+      wheelSpeed: -1,
+      onDown: () => !animating && canChangeSection(-1) && gotoSection(currentIndex - 1, -1),
+      onUp: () => !animating && canChangeSection(1) && gotoSection(currentIndex + 1, 1),
+      tolerance: 10,
+      preventDefault: !isMobileSlider,
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (['ArrowDown', 'PageDown', ' '].includes(event.key)) {
+        event.preventDefault();
+        gotoSection(currentIndex + 1, 1);
+      } else if (['ArrowUp', 'PageUp'].includes(event.key)) {
+        event.preventDefault();
+        gotoSection(currentIndex - 1, -1);
+      } else if (event.key === 'Home') {
+        event.preventDefault();
+        gotoSection(0, -1);
+      } else if (event.key === 'End') {
+        event.preventDefault();
+        gotoSection(sections.length - 1, 1);
+      }
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const target = document.querySelector(link.getAttribute('href'));
+        const targetSection = target?.closest('#main > section');
+        const targetIndex = sections.indexOf(targetSection);
+        if (targetIndex < 0) return;
+        event.preventDefault();
+        gotoSection(targetIndex, targetIndex < currentIndex ? -1 : 1);
+      });
+    });
+
+    const hashTarget = window.location.hash ? document.querySelector(window.location.hash) : null;
+    const initialSection = hashTarget?.closest('#main > section');
+    const hashIndex = sections.indexOf(initialSection);
+    const initialIndex = hashIndex >= 0 ? hashIndex : 0;
+
+    // Never play an off-screen entrance on first load/reload. The selected
+    // panel starts fully rendered; animation begins with the first interaction.
+    gsap.set(sections, { autoAlpha: 0, yPercent: 100, zIndex: 0 });
+    gsap.set(sections[initialIndex], { autoAlpha: 1, yPercent: 0, zIndex: 1 });
+    if (splitHeadings[initialIndex]) {
+      gsap.fromTo(
+        splitHeadings[initialIndex].lines,
+        { autoAlpha: 0, yPercent: 100 },
+        { autoAlpha: 1, yPercent: 0, duration: 0.85, ease: 'power3.out', stagger: 0.12 }
+      );
+    }
+    gsap.fromTo(
+      panelContent[initialIndex],
+      { autoAlpha: 0, y: 32 },
+      { autoAlpha: 1, y: 0, duration: 0.75, delay: 0.15, ease: 'power3.out', stagger: 0.09 }
+    );
+    if (panelVisuals[initialIndex]) {
+      gsap.fromTo(
+        panelVisuals[initialIndex],
+        { autoAlpha: 0, y: 55, scale: 0.95 },
+        { autoAlpha: 1, y: 0, scale: 1, duration: 1, delay: 0.08, ease: 'power3.out' }
+      );
+    }
+    currentIndex = initialIndex;
+  }
+
+  /* ============================================================
+     Recalculate on load / resize
+     ============================================================ */
+  window.addEventListener('load', () => ScrollTrigger.refresh());
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 200);
+  });
+})();
+</script>
+</body>
+</html>
