@@ -72,6 +72,7 @@
   }
   body{ background: transparent; }
   .bg-void, .bg-midnight{ background: transparent !important; }
+  .bg-void, .bg-midnight{ background: transparent !important; }
   body {
     font-family: 'Google Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
     color: var(--ice);
@@ -183,9 +184,9 @@
     animation:hero-phone-logo-reveal 15.75s cubic-bezier(.22,.75,.2,1) infinite;
   }
   @keyframes hero-phone-logo-reveal{
-    0%,31%{ opacity:0; transform:translate(-50%,-50%) scale(.72); }
-    35%,41%{ opacity:1; transform:translate(-50%,-50%) scale(1); }
-    46%,100%{ opacity:0; transform:translate(-50%,-50%) scale(1.1); }
+    0%,27%{ opacity:0; transform:translate(-50%,-50%) scale(.72); }
+    31%,38%{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+    43%,100%{ opacity:0; transform:translate(-50%,-50%) scale(1.1); }
   }
   .hero-app-island{
     position:absolute; z-index:7; top:15px; left:50%; width:34%; height:25px;
@@ -228,29 +229,25 @@
     31%,100%{ opacity:0; transform:translate(-50%,-50%) scale(.22); }
   }
   @keyframes hero-card-assemble{
-    0%,6%{ opacity:0; transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y) + 10px)) scale(.82); }
-    10%,23%{ opacity:1; transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1); filter:blur(0); }
-    30%{ opacity:1; transform:translate(-50%,-50%) scale(.42); filter:blur(0); }
-    34%,100%{ opacity:0; transform:translate(-50%,-50%) scale(.28); filter:blur(1px); }
+    0%,23%{ opacity:0; transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(.48); }
+    26%,31%{ opacity:1; transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) scale(1); }
+    36%{ opacity:1; transform:translate(-50%,-50%) scale(.42); filter:blur(0); }
+    38%,100%{ opacity:0; transform:translate(-50%,-50%) scale(.28); filter:blur(1px); }
   }
   @keyframes hero-phone-build{
-    0%{ opacity:0; transform:translate(-50%,-50%) scale(.9); }
-    4%{ opacity:1; transform:translate(-50%,-50%) scale(1); }
-    4%,94%{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+    0%,25%{ opacity:0; transform:translate(-50%,-50%) scale(.72); }
+    30%{ opacity:.22; transform:translate(-50%,-50%) scale(.9); }
+    39%,94%{ opacity:1; transform:translate(-50%,-50%) scale(1); }
     100%{ opacity:0; transform:translate(-50%,-50%) scale(.94); }
   }
   @keyframes hero-dashboard-scroll{
-    0%,43%{ opacity:0; transform:translateY(0) scale(.96); }
-    48%{ opacity:1; transform:translateY(0) scale(1); }
-    60%{ opacity:1; transform:translateY(-10%) scale(1); }
-    75%{ opacity:1; transform:translateY(-35%) scale(1); }
-    89%,94%{ opacity:1; transform:translateY(-69%) scale(1); }
+    0%,37%{ opacity:0; transform:translateY(0) scale(.96); }
+    42%{ opacity:1; transform:translateY(0) scale(1); }
+    52%{ opacity:1; transform:translateY(-10%) scale(1); }
+    68%{ opacity:1; transform:translateY(-35%) scale(1); }
+    84%,94%{ opacity:1; transform:translateY(-69%) scale(1); }
     100%{ opacity:0; transform:translateY(0) scale(.98); }
   }
-
-  /* Keep the dashboard-card merge and logo reveal, but remove the small
-     floating category badges surrounding them. */
-  .hero-app-chip{ display:none; }
   @media(max-width:767px){
     .hero-app-animation{ height:min(49vh,450px); }
     .hero-app-phone{ width:min(220px,58vw); border-radius:38px; padding:6px; }
@@ -258,13 +255,30 @@
     .hero-app-chip{ gap:6px; padding:7px 9px; border-radius:7px; font-size:9px; }
     .hero-app-chip svg{ width:13px; height:13px; padding:0; }
     .hero-app-card{ width:124px; height:84px; }
-    .hero-app-card:nth-of-type(odd){ --x:-76px !important; }
-    .hero-app-card:nth-of-type(even){ --x:76px !important; }
+    .hero-app-card:nth-of-type(odd){ --x:-125px !important; }
+    .hero-app-card:nth-of-type(even){ --x:125px !important; }
   }
   @media(prefers-reduced-motion:reduce){
     .hero-app-phone{ opacity:1; transform:translate(-50%,-50%) scale(1); animation:none; }
-    .hero-app-dashboard{ animation:none; }
+    .hero-app-dashboard{ animation:none; opacity:1; }
     .hero-app-chip,.hero-app-card{ display:none; }
+  }
+
+  /* The duplicated concept page plays the app assembly once, then hands the
+     dashboard to the ID-driven in-app sequence below. */
+  .hero-app-chip,.hero-app-card{ animation-iteration-count:1; animation-fill-mode:forwards; }
+  .hero-app-phone{ animation:hero-phone-build-once 6.2s cubic-bezier(.22,.75,.2,1) forwards; }
+  .hero-phone-logo{ animation:hero-phone-logo-once 6.2s cubic-bezier(.22,.75,.2,1) forwards; }
+  .hero-app-dashboard{ animation:none; opacity:0; transform:translateY(0); }
+  @keyframes hero-phone-build-once{
+    0%,63%{ opacity:0; transform:translate(-50%,-50%) scale(.72); }
+    78%{ opacity:.25; transform:translate(-50%,-50%) scale(.9); }
+    100%{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+  }
+  @keyframes hero-phone-logo-once{
+    0%,66%{ opacity:0; transform:translate(-50%,-50%) scale(.72); }
+    75%,88%{ opacity:1; transform:translate(-50%,-50%) scale(1); }
+    100%{ opacity:0; transform:translate(-50%,-50%) scale(1.08); }
   }
 
   .btn-primary{
@@ -731,17 +745,17 @@
         <span class="hero-app-chip" style="--x:110px;--y:78px;--delay:.75s;--chip:#e6bb62"><svg><use href="#asset-icon-savings"/></svg>Savings</span>
         <span class="hero-app-chip" style="--x:145px;--y:138px;--delay:.87s;--chip:#e48b35"><svg><use href="#asset-icon-invest"/></svg>Investments</span>
         <span class="hero-app-chip" style="--x:92px;--y:198px;--delay:.99s;--chip:#7496d2"><svg><use href="#asset-icon-family"/></svg>Family</span>
-        <span class="hero-app-card" style="--x:-92px;--y:-150px;--card-h:102px;--card-delay:0s"><img src="assets/fintoo-ai-features/net-worth.svg" alt=""/></span>
-        <span class="hero-app-card" style="--x:92px;--y:-150px;--card-h:76px;--card-delay:.1s"><img src="assets/fintoo-ai-features/my-assets.svg" alt=""/></span>
-        <span class="hero-app-card" style="--x:-92px;--y:-50px;--card-h:30px;--card-delay:.2s"><img src="assets/fintoo-ai-features/liabilities.svg" alt=""/></span>
-        <span class="hero-app-card" style="--x:92px;--y:-50px;--card-h:114px;--card-delay:.3s"><img src="assets/fintoo-ai-features/ai-insights.svg" alt=""/></span>
-        <span class="hero-app-card" style="--x:-92px;--y:50px;--card-h:90px;--card-delay:.4s"><img src="assets/fintoo-ai-features/goals.svg" alt=""/></span>
-        <span class="hero-app-card" style="--x:92px;--y:50px;--card-h:151px;--card-delay:.5s"><img src="assets/fintoo-ai-features/spends.svg" alt=""/></span>
-        <span class="hero-app-card" style="--x:-92px;--y:150px;--card-h:72px;--card-delay:.6s"><img src="assets/fintoo-ai-features/insurance.svg" alt=""/></span>
-        <span class="hero-app-card" style="--x:92px;--y:150px;--card-h:120px;--card-delay:.7s"><img src="assets/fintoo-ai-features/tools.svg" alt=""/></span>
+        <span class="hero-app-card" style="--x:-142px;--y:-128px;--card-h:102px;--card-delay:0s"><img src="assets/fintoo-ai-features/net-worth.svg" alt=""/></span>
+        <span class="hero-app-card" style="--x:142px;--y:-128px;--card-h:76px;--card-delay:.14s"><img src="assets/fintoo-ai-features/my-assets.svg" alt=""/></span>
+        <span class="hero-app-card" style="--x:-162px;--y:-42px;--card-h:30px;--card-delay:.28s"><img src="assets/fintoo-ai-features/liabilities.svg" alt=""/></span>
+        <span class="hero-app-card" style="--x:162px;--y:-28px;--card-h:114px;--card-delay:.42s"><img src="assets/fintoo-ai-features/ai-insights.svg" alt=""/></span>
+        <span class="hero-app-card" style="--x:-162px;--y:48px;--card-h:90px;--card-delay:.56s"><img src="assets/fintoo-ai-features/goals.svg" alt=""/></span>
+        <span class="hero-app-card" style="--x:162px;--y:76px;--card-h:151px;--card-delay:.7s"><img src="assets/fintoo-ai-features/spends.svg" alt=""/></span>
+        <span class="hero-app-card" style="--x:-142px;--y:142px;--card-h:72px;--card-delay:.84s"><img src="assets/fintoo-ai-features/insurance.svg" alt=""/></span>
+        <span class="hero-app-card" style="--x:142px;--y:162px;--card-h:120px;--card-delay:.98s"><img src="assets/fintoo-ai-features/tools.svg" alt=""/></span>
         <div class="hero-app-phone">
           <div class="hero-app-screen">
-            <img class="hero-app-dashboard" src="assets/fintoo-ai-dashboard.svg" alt="" />
+            <object id="hero-dashboard-svg" class="hero-app-dashboard" data="assets/fintoo-ai-dashboard-hero-sequence.svg" type="image/svg+xml" width="360" height="2868" aria-label="Animated Fintoo AI dashboard"></object>
           </div>
           <span class="hero-app-island" aria-hidden="true"></span>
         </div>
@@ -1110,6 +1124,141 @@
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ID-driven animation inside the supplied dashboard SVG. */
+  const dashboardObject = document.getElementById('hero-dashboard-svg');
+  if (dashboardObject && !reduceMotion) {
+    let dashboardSequenceStarted = false;
+    const startDashboardSequence = () => {
+      if (dashboardSequenceStarted) return;
+      const svgDoc = dashboardObject.contentDocument;
+      const svgRoot = svgDoc && svgDoc.documentElement;
+      if (!svgRoot) return;
+      dashboardSequenceStarted = true;
+
+      const byId = (id) => svgDoc.getElementById(id);
+      const netWorth = byId('Net worth Breakdown');
+      const netGraph = byId('Graph (With Invest)');
+      const assets = byId('My Assets + Ai Nudge');
+      const aiMessage = byId('AI nudge');
+      const liabilities = byId('My Liabilities');
+      const stableBadge = byId('Chips - Dashboard_3');
+      const goals = byId('Goals');
+      const goalBadges = [byId('Chip - Assets'), byId('Chip - Assets_2')].filter(Boolean);
+      const spends = byId('Spends + Ai Nudge');
+      const spendBadge = byId('Chip - Assets_3');
+      const spendGraph = byId('Graph (With Invest)_3');
+      const insurance = byId('Insurance');
+      const coveredBadges = [byId('Chips - Insurance'), byId('Chips - Insurance_2')].filter(Boolean);
+      const tools = byId('Tools');
+      const toolCards = [
+        byId('Refer and Earn Container'), byId('Refer and Earn Container_2'),
+        byId('Refer and Earn Container_3'), byId('Refer and Earn Container_4')
+      ].filter(Boolean);
+      const revealItems = [aiMessage, stableBadge, spendBadge, ...goalBadges, ...coveredBadges, ...toolCards].filter(Boolean);
+
+      gsap.set(dashboardObject, { autoAlpha: 0 });
+      gsap.set(revealItems, { autoAlpha: 0, y: 10 });
+      gsap.set([netGraph, spendGraph].filter(Boolean), {
+        scaleX: 0, transformOrigin: 'left center', transformBox: 'fill-box'
+      });
+
+      const screen = dashboardObject.parentElement;
+      const scrollToCard = (card, duration = 1.15) => {
+        if (!card) return gsap.to({}, { duration });
+        const viewBox = svgRoot.viewBox.baseVal;
+        const renderedWidth = dashboardObject.offsetWidth;
+        const scale = renderedWidth / viewBox.width;
+        const cardBox = card.getBBox();
+        const renderedHeight = viewBox.height * scale;
+        const desiredY = (screen.clientHeight - cardBox.height * scale) / 2;
+        const y = Math.max(screen.clientHeight - renderedHeight, Math.min(0, desiredY - cardBox.y * scale));
+        return gsap.to(dashboardObject, { y, duration, ease: 'power2.inOut' });
+      };
+
+      const sequence = gsap.timeline({ repeat: -1, repeatDelay: 2.5, delay: 6.1 });
+      sequence
+        .set(dashboardObject, { autoAlpha: 1, y: 0 })
+        .call(() => scrollToCard(netWorth, 1.1))
+        .to({}, { duration: 1.15 })
+        .to(netGraph, { scaleX: 1, duration: 1.7, ease: 'power2.out' })
+        .to({}, { duration: .65 })
+        .call(() => scrollToCard(assets))
+        .to({}, { duration: 1.2 })
+        .to(aiMessage, { autoAlpha: 1, y: 0, duration: .65, ease: 'back.out(1.4)' })
+        .to({}, { duration: .75 })
+        .call(() => scrollToCard(liabilities))
+        .to({}, { duration: 1.2 })
+        .to(stableBadge, { autoAlpha: 1, y: 0, scale: 1, duration: .6, ease: 'back.out(1.7)' })
+        .to({}, { duration: .75 })
+        .call(() => scrollToCard(goals))
+        .to({}, { duration: 1.2 })
+        .to(goalBadges, { autoAlpha: 1, y: 0, duration: .55, stagger: .22 })
+        .to({}, { duration: .8 })
+        .call(() => scrollToCard(spends))
+        .to({}, { duration: 1.2 })
+        .to(spendBadge, { autoAlpha: 1, y: 0, duration: .5 })
+        .to(spendGraph, { scaleX: 1, duration: 1.35, ease: 'power2.out' }, '-=.2')
+        .to({}, { duration: .75 })
+        .call(() => scrollToCard(insurance))
+        .to({}, { duration: 1.2 })
+        .to(coveredBadges, { autoAlpha: 1, y: 0, duration: .55, stagger: .22 })
+        .to({}, { duration: .8 })
+        .call(() => scrollToCard(tools))
+        .to({}, { duration: 1.2 })
+        .to(toolCards, { autoAlpha: 1, y: 0, scale: 1, duration: .5, stagger: .28, ease: 'back.out(1.35)' })
+        .to({}, { duration: 1.8 })
+        .set(revealItems, { autoAlpha: 0, y: 10 })
+        .set([netGraph, spendGraph].filter(Boolean), { scaleX: 0 })
+        .to(dashboardObject, { autoAlpha: 0, duration: .35 });
+    };
+    /* The duplicated SVG owns its badge/graph reveals. The parent page owns
+       only the vertical camera movement, so playback is identical on file://
+       previews, Live Server, and production hosting. */
+    /* file:// previews can render an <object> while denying access to its
+       contentDocument. Keep the scroll story working with SVG coordinates. */
+    window.setTimeout(() => {
+      if (dashboardSequenceStarted) return;
+      dashboardSequenceStarted = true;
+      const screen = dashboardObject.parentElement;
+      const yFor = (svgY) => {
+        /* offsetWidth is intentionally used here. getBoundingClientRect()
+           includes transforms applied to the hero/phone and made later cards
+           stop too low in the viewport. */
+        const scale = dashboardObject.offsetWidth / 360;
+        const fullHeight = 2868 * scale;
+        const centered = (screen.clientHeight / 2) - (svgY * scale);
+        return Math.max(screen.clientHeight - fullHeight, Math.min(0, centered));
+      };
+      gsap.set(dashboardObject, { autoAlpha: 0, y: 0 });
+      gsap.timeline({ delay: 5.35, repeat: -1 })
+        .set(dashboardObject, { autoAlpha: 1 })
+        .call(() => setHeroWord('net worth.'))
+        .to(dashboardObject, { y: yFor(723), duration: 1.15, ease: 'power2.inOut' })
+        .to({}, { duration: 2 })
+        .call(() => setHeroWord('assets.'))
+        .to(dashboardObject, { y: yFor(955), duration: 1.1, ease: 'power2.inOut' })
+        .to({}, { duration: 1.7 })
+        .call(() => setHeroWord('liabilities.'))
+        .to(dashboardObject, { y: yFor(1097), duration: 1.1, ease: 'power2.inOut' })
+        .to({}, { duration: 1.7 })
+        .call(() => setHeroWord('goals.'))
+        .to(dashboardObject, { y: yFor(1539), duration: 1.1, ease: 'power2.inOut' })
+        .to({}, { duration: 2 })
+        .call(() => setHeroWord('spending.'))
+        .to(dashboardObject, { y: yFor(1845), duration: 1.1, ease: 'power2.inOut' })
+        .to({}, { duration: 2.2 })
+        .call(() => setHeroWord('insurance.'))
+        .to(dashboardObject, { y: yFor(2130), duration: 1.1, ease: 'power2.inOut' })
+        .to({}, { duration: 2 })
+        .call(() => setHeroWord('financial tools.'))
+        .to(dashboardObject, { y: yFor(2319), duration: 1.1, ease: 'power2.inOut' })
+        .to({}, { duration: 3.8 })
+        .to(dashboardObject, { autoAlpha: 0, duration: .35, ease: 'power1.out' })
+        .set(dashboardObject, { y: 0 })
+        .to(dashboardObject, { autoAlpha: 1, duration: .35, ease: 'power1.in' });
+    }, 750);
+  }
+
   /* ============================================================
      Custom cursor — additive glow, native cursor stays available
      for touch/keyboard users; only activates after a real
@@ -1196,19 +1345,24 @@
   }
 
   const rotatingWord = document.getElementById('hero-rotating-word');
-  const rotatingWords = ['goals.', 'mutual funds.', 'retirement.', 'investments.', 'expense tracking.'];
-  let rotatingWordIndex = 0;
-  if (rotatingWord && !reduceMotion) {
-    window.setInterval(() => {
-      gsap.to(rotatingWord, {
-        autoAlpha: 0, y: -20, duration: .3, ease: 'power2.in',
-        onComplete: () => {
-          rotatingWordIndex = (rotatingWordIndex + 1) % rotatingWords.length;
-          rotatingWord.textContent = rotatingWords[rotatingWordIndex];
-          gsap.fromTo(rotatingWord, { autoAlpha: 0, y: 20 }, { autoAlpha: 1, y: 0, duration: .38, ease: 'power2.out' });
-        },
-      });
-    }, 2200);
+  function setHeroWord(nextWord) {
+    if (!rotatingWord || rotatingWord.textContent === nextWord) return;
+    if (reduceMotion) {
+      rotatingWord.textContent = nextWord;
+      return;
+    }
+    gsap.killTweensOf(rotatingWord);
+    gsap.to(rotatingWord, {
+      autoAlpha: 0, y: -16, duration: .28, ease: 'power2.in',
+      onComplete: () => {
+        rotatingWord.textContent = nextWord;
+        gsap.fromTo(
+          rotatingWord,
+          { autoAlpha: 0, y: 16 },
+          { autoAlpha: 1, y: 0, duration: .34, ease: 'power2.out' }
+        );
+      },
+    });
   }
 
   /* ============================================================

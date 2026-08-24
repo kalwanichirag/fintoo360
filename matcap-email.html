@@ -1,0 +1,111 @@
+<!--
+  ============================================================
+  DELIVERABILITY FIXES APPLIED — READ BEFORE SENDING
+  ============================================================
+  1. List-Unsubscribe / List-Unsubscribe-Post headers below now
+     use a REAL, working URL structure. Replace
+     https://matcap.global/unsubscribe?id={{subscriber_id}}
+     with your actual one-click unsubscribe endpoint. Both the
+     mailto: and https: forms are included, as Gmail/Yahoo's
+     one-click unsubscribe spec (Feb 2024) expects both to work.
+  2. The visible "Unsubscribe" link in the HTML footer now points
+     to the same real URL — no more placeholder text.
+  3. A physical postal mailing address has been added to the
+     footer (CAN-SPAM / most ESP policy requirement). Replace the
+     bracketed placeholder with your real registered business
+     address.
+  4. The hero banner image reference has been changed to a path
+     on your OWN sending domain (matcap.global or a CDN you
+     control) instead of an unrelated third-party domain
+     (blog.fintoo.in). Upload the image asset there and update
+     the src.
+  5. NOTE ON MIME STRUCTURE: this file is the HTML *part* of your
+     email only. Your Email Service Provider (ESP) or sending
+     script must wrap this HTML inside a proper
+     multipart/alternative MIME message, with a real text/plain
+     part BEFORE this HTML part, both separated by the boundary
+     string — not as an HTML comment. Most ESPs (SendGrid, SES,
+     Mailgun, Postmark, your ESP's campaign builder) generate this
+     automatically if you paste this HTML into their "HTML body"
+     field and let them auto-generate the plain-text version —
+     do that rather than hand-rolling the MIME envelope again.
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="x-apple-disable-message-reformatting">
+<title>MATCAP Weekly Global Report</title>
+<style>
+body,table,td,a{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}
+table,td{mso-table-lspace:0;mso-table-rspace:0}img{-ms-interpolation-mode:bicubic;border:0;outline:none;text-decoration:none;display:block}
+table{border-collapse:collapse!important}body{margin:0!important;padding:0!important;width:100%!important}
+.container,.px{box-sizing:border-box}.market-table td{padding:8px 5px}.market-table td[align=right]{white-space:nowrap}.copy{text-align:justify;text-justify:inter-word}
+@media screen and (max-width:699px){.container{width:100%!important;max-width:100%!important}.px{padding-left:24px!important;padding-right:24px!important}.hero{padding:34px 24px 30px!important}.hero-title{font-size:30px!important;line-height:35px!important}.section-title{font-size:22px!important;line-height:28px!important}.market-table{font-size:9px!important;line-height:13px!important;table-layout:fixed!important}.market-table td{padding-left:3px!important;padding-right:3px!important}.market-head{font-size:6px!important;letter-spacing:.3px!important}.stock-logo{width:52px!important}.stock-copy{padding-left:11px!important}.metric-value{font-size:18px!important}}
+</style>
+</head>
+<body style="margin:0;padding:0;background:#f3f3f3"><center style="width:100%;background:#f3f3f3">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#f3f3f3" role="presentation"><tr><td align="center">
+<table class="container" width="640" border="0" cellspacing="0" cellpadding="0" bgcolor="#fffdf0" role="presentation" style="width:100%;max-width:640px;font-family:Arial,Helvetica,sans-serif;color:#2b2b2b">
+
+<!-- Preheader (hidden, improves inbox preview text — also helps avoid looking like a "blank preview" spam pattern) -->
+<tr><td style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:#fffdf0">Markets, rates, and the week's biggest company moves — inside your MATCAP briefing.</td></tr>
+
+<!-- REPLACE with an image hosted on your own domain/CDN, e.g. https://matcap.global/assets/weekly/2026-08-24-hero.png -->
+<tr><td align="center" style="padding:0"><img src="https://matcap.global/assets/weekly/2026-08-24-hero.png" width="640" alt="MATCAP Weekly Global Report - 24 August 2026" style="width:100%;max-width:640px;height:auto"></td></tr>
+
+
+<tr><td class="px copy" style="padding:22px 48px 18px;font-size:13px;line-height:21px;color:#222">Global equities ended the week broadly lower as long-dated government bond yields hit multi-decade highs and firm oil prices kept inflation concerns in focus. The S&amp;P 500 fell 1.4% and the Nasdaq Composite 2.1%, snapping a three-week run, while the Nikkei 225 shed 3.9% and European benchmarks were mostly softer. Hong Kong bucked the trend, with the Hang Seng Index up 3.6%, and healthcare outperformed globally after Moderna and Merck reported positive late-stage cancer vaccine data.</td></tr>
+
+<tr><td align="center" class="px" style="padding:8px 74px 28px"><table width="430" border="0" cellspacing="0" cellpadding="0" role="presentation" style="width:100%;max-width:430px">
+<tr><td width="50%" align="center" style="padding:11px 8px 17px;border-right:1px solid #e3ddcf;border-bottom:1px solid #e3ddcf"><div class="metric-value" style="font-size:22px;line-height:27px;color:#c0392b;font-weight:700">5.2%+</div><div style="font-size:8px;line-height:11px;text-transform:uppercase">U.S. 30-Year<br>Treasury Yield</div></td><td width="50%" align="center" style="padding:11px 8px 17px;border-bottom:1px solid #e3ddcf"><div class="metric-value" style="font-size:22px;line-height:27px;color:#c0392b;font-weight:700">33%</div><div style="font-size:8px;line-height:11px;text-transform:uppercase">September Fed Cut<br>Implied Odds</div></td></tr>
+<tr><td width="50%" align="center" style="padding:17px 8px 11px;border-right:1px solid #e3ddcf"><div class="metric-value" style="font-size:22px;line-height:27px;color:#4b0d79;font-weight:700">$89</div><div style="font-size:8px;line-height:11px;text-transform:uppercase">Brent Crude<br>Per Barrel</div></td><td width="50%" align="center" style="padding:17px 8px 11px"><div class="metric-value" style="font-size:22px;line-height:27px;color:#198754;font-weight:700">174%</div><div style="font-size:8px;line-height:11px;text-transform:uppercase">Moderna<br>Weekly Catalyst</div></td></tr>
+</table></td></tr>
+
+<tr><td height="1" bgcolor="#eee8d9"></td></tr><tr><td class="px" style="padding:22px 48px 10px"><div class="section-title" style="font-size:22px;line-height:29px;color:#4b0d79;font-weight:700">Global Market Performance</div></td></tr>
+<tr><td class="px" style="padding:0 48px 24px"><table class="market-table" width="544" border="0" cellspacing="0" cellpadding="0" role="presentation" style="width:100%;table-layout:fixed;font-size:9px;line-height:14px;color:#353535">
+<tr><td class="market-head" width="30%" style="font-size:7px;color:#777067;letter-spacing:.5px">INDEX</td><td class="market-head" width="16%" align="right">21-AUG-26</td><td class="market-head" width="16%" align="right">14-AUG-26</td><td class="market-head" width="16%" align="right">31-DEC-25</td><td class="market-head" width="11%" align="right">WK %</td><td class="market-head" width="11%" align="right">YTD %</td></tr>
+<tr><td colspan="6" style="padding:4px 7px;background:#4b0d79;color:#fff;font-size:8px;font-weight:700;letter-spacing:1px">UNITED STATES</td></tr>
+<tr style="border-bottom:1px solid #ede8dc"><td>S&amp;P 500</td><td align="right">7,674.4</td><td align="right">7,785.8</td><td align="right">6,845.5</td><td align="right" style="color:#c0392b;font-weight:700">-1.4%</td><td align="right" style="color:#198754;font-weight:700">12.1%</td></tr>
+<tr style="border-bottom:1px solid #ede8dc"><td>Nasdaq Composite</td><td align="right">26,180.5</td><td align="right">26,729.2</td><td align="right">23,242.0</td><td align="right" style="color:#c0392b;font-weight:700">-2.1%</td><td align="right" style="color:#198754;font-weight:700">12.6%</td></tr>
+<tr><td colspan="6" style="padding:4px 7px;background:#4b0d79;color:#fff;font-size:8px;font-weight:700;letter-spacing:1px">EUROPE</td></tr>
+<tr style="border-bottom:1px solid #ede8dc"><td>FTSE 100 Index</td><td align="right">10,816.6</td><td align="right">10,750.1</td><td align="right">9,931.4</td><td align="right" style="color:#198754;font-weight:700">0.6%</td><td align="right" style="color:#198754;font-weight:700">8.9%</td></tr>
+<tr style="border-bottom:1px solid #ede8dc"><td>DAX PERFORMANCE-INDEX</td><td align="right">26,136.6</td><td align="right">26,440.3</td><td align="right">24,539.3</td><td align="right" style="color:#c0392b;font-weight:700">-1.1%</td><td align="right" style="color:#198754;font-weight:700">6.5%</td></tr>
+<tr style="border-bottom:1px solid #ede8dc"><td>CAC 40</td><td align="right">8,484.4</td><td align="right">8,636.8</td><td align="right">8,149.5</td><td align="right" style="color:#c0392b;font-weight:700">-1.8%</td><td align="right" style="color:#198754;font-weight:700">4.1%</td></tr>
+<tr style="border-bottom:1px solid #ede8dc"><td>STOXX Europe 600</td><td align="right">654.2</td><td align="right">657.9</td><td align="right">596.1</td><td align="right" style="color:#c0392b;font-weight:700">-0.6%</td><td align="right" style="color:#198754;font-weight:700">9.7%</td></tr>
+<tr><td colspan="6" style="padding:4px 7px;background:#4b0d79;color:#fff;font-size:8px;font-weight:700;letter-spacing:1px">ASIA PACIFIC</td></tr>
+<tr style="border-bottom:1px solid #ede8dc"><td>Nikkei 225</td><td align="right">66,016.4</td><td align="right">68,713.8</td><td align="right">51,832.8</td><td align="right" style="color:#c0392b;font-weight:700">-3.9%</td><td align="right" style="color:#198754;font-weight:700">27.4%</td></tr>
+<tr style="border-bottom:1px solid #ede8dc"><td>KOSPI</td><td align="right">6,913.0</td><td align="right">6,977.9</td><td align="right">4,309.6</td><td align="right" style="color:#c0392b;font-weight:700">-0.9%</td><td align="right" style="color:#198754;font-weight:700">60.4%</td></tr>
+<tr style="border-bottom:1px solid #ede8dc"><td>Hang Seng Index</td><td align="right">26,009.5</td><td align="right">25,116.9</td><td align="right">25,630.5</td><td align="right" style="color:#198754;font-weight:700">3.6%</td><td align="right" style="color:#198754;font-weight:700">1.5%</td></tr>
+<tr style="border-bottom:1px solid #ede8dc"><td>TAIEX</td><td align="right">45,224.3</td><td align="right">45,811.0</td><td align="right">28,963.6</td><td align="right" style="color:#c0392b;font-weight:700">-1.3%</td><td align="right" style="color:#198754;font-weight:700">56.1%</td></tr>
+<tr style="border-bottom:1px solid #ede8dc"><td>NIFTY 50</td><td align="right">24,252.0</td><td align="right">24,366.0</td><td align="right">26,129.6</td><td align="right" style="color:#c0392b;font-weight:700">-0.5%</td><td align="right" style="color:#c0392b;font-weight:700">-7.2%</td></tr>
+</table></td></tr>
+
+<tr><td height="1" bgcolor="#eee8d9"></td></tr><tr><td class="px" style="padding:22px 48px 12px"><div class="section-title" style="font-size:22px;line-height:29px;color:#4b0d79;font-weight:700">Global Economic News</div></td></tr>
+<tr><td class="px" style="padding:0 48px 28px;font-size:11px;line-height:18px;color:#746f67">
+<div style="color:#252525;font-weight:700;margin-bottom:4px">Global bond sell-off pushes yields to multi-decade highs:</div><div class="copy">The 30-year U.S. Treasury yield rose above 5.2%, its highest in close to two decades, and the 10-year reached roughly 4.70%, with Germany&rsquo;s 10-year Bund at 3.22%, a level last seen in 2011. The Treasury&rsquo;s move to at least double buybacks of 10- to 30-year debt brought only temporary relief.</div>
+<div style="height:18px"></div><div style="color:#252525;font-weight:700;margin-bottom:4px">July FOMC minutes signal a hawkish tilt:</div><div class="copy">Minutes released on Wednesday showed Federal Reserve officials see scope for higher rates if inflation fails to ease, with three policymakers dissenting in favour of a July hike. Futures cut the implied odds of a September cut to about 33% and moved to price a hike by December.</div>
+<div style="height:18px"></div><div style="color:#252525;font-weight:700;margin-bottom:4px">U.S.&ndash;Iran tensions keep oil elevated:</div><div class="copy">Crude posted a weekly gain, with Brent near $89 a barrel, after Washington pledged tougher sanctions on Tehran and a possible naval response over access through the Strait of Hormuz. Offsetting this, Friday&rsquo;s preliminary S&amp;P Global Composite PMI came in at 56.04, the highest since March 2022.</div>
+</td></tr>
+
+<tr><td height="1" bgcolor="#eee8d9"></td></tr><tr><td class="px" style="padding:22px 48px 14px"><div class="section-title" style="font-size:22px;line-height:29px;color:#4b0d79;font-weight:700">Company Specific News</div></td></tr>
+<tr><td class="px" style="padding:0 48px 30px"><table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
+<tr><td class="stock-logo" width="48" valign="top" bgcolor="#d8f5d4" style="border-radius:10px"><div style="color:#198754;font-size:8px;line-height:12px;font-weight:700;text-align:center;padding:10px 3px">MRNA</div></td><td class="stock-copy" valign="top" style="padding-left:14px"><div style="font-size:8px;line-height:13px;color:#198754">First Phase 3 win for an mRNA cancer vaccine</div><div style="font-size:11px;line-height:17px;font-weight:700;padding-top:3px">Moderna surges 174% on first Phase 3 win for an mRNA cancer vaccine:</div><div class="copy" style="font-size:10px;line-height:17px;color:#746f67;padding-top:3px">Moderna and Merck said intismeran, a personalised mRNA vaccine given with Keytruda, met both endpoints in a trial of more than 1,000 high-risk melanoma patients, reducing recurrence and spread. Moderna closed Wednesday up roughly 177% at $174.38, and RBC Capital raised its price target to $130 from $45. An FDA submission is planned, with further oncology readouts due over the next one to two years; Merck and Pfizer also gained.</div></td></tr>
+<tr><td colspan="2" height="18" style="border-bottom:1px solid #eee8d9"></td></tr><tr><td colspan="2" height="18"></td></tr>
+<tr><td class="stock-logo" width="48" valign="top" bgcolor="#d8f5d4" style="border-radius:10px"><div style="color:#198754;font-size:8px;line-height:12px;font-weight:700;text-align:center;padding:10px 3px">DE</div></td><td class="stock-copy" valign="top" style="padding-left:14px"><div style="font-size:8px;line-height:13px;color:#198754">Full-year net income: $4.75&ndash;$5.0 billion</div><div style="font-size:11px;line-height:17px;font-weight:700;padding-top:3px">Deere beats on third-quarter earnings and lifts full-year outlook:</div><div class="copy" style="font-size:10px;line-height:17px;color:#746f67;padding-top:3px">Net income rose to $1.38 billion from $1.29 billion a year earlier, on revenues up 5% to $12.6 billion. Construction and forestry sales jumped 18% and small agriculture and turf 12%, offsetting a 6% decline in production and precision agriculture. Full-year net income is guided to $4.75&ndash;$5.0 billion.</div></td></tr>
+<tr><td colspan="2" height="18" style="border-bottom:1px solid #eee8d9"></td></tr><tr><td colspan="2" height="18"></td></tr>
+<tr><td class="stock-logo" width="48" valign="top" bgcolor="#d8f5d4" style="border-radius:10px"><div style="color:#198754;font-size:8px;line-height:12px;font-weight:700;text-align:center;padding:10px 3px">KR TECH</div></td><td class="stock-copy" valign="top" style="padding-left:14px"><div style="font-size:8px;line-height:13px;color:#198754">SK Hynix almost 13% &bull; Samsung Electronics 9.5%</div><div style="font-size:11px;line-height:17px;font-weight:700;padding-top:3px">Korean memory names spark a one-day Asian tech rally:</div><div class="copy" style="font-size:10px;line-height:17px;color:#746f67;padding-top:3px">SK Hynix rose almost 13% and Samsung Electronics 9.5% on Thursday on renewed AI-driven memory demand, lifting the KOSPI 5.9% and triggering a buy-side sidecar on the Korea Exchange. The move pared but did not reverse the index&rsquo;s weekly loss.</div></td></tr>
+</table></td></tr>
+
+<tr><td bgcolor="#461276" style="padding:28px 48px 32px"><div style="font-size:15px;line-height:22px;color:#fff;font-weight:700;margin-bottom:12px">Important Legal Disclaimer &mdash; General Informational Distribution Only</div><div style="height:1px;background:#7c4da0;margin-bottom:14px"></div><div class="copy" style="font-size:8px;line-height:14px;color:#9b7bbb">This market note has been prepared by Matcap Global solely for informational and educational purposes for individual wealth management clients. It does not constitute investment advice, a financial recommendation, or an offer to buy, sell, or hold any specific security, financial product, or currency instrument. Before making any investment decisions or altering your portfolio strategy, please consult directly with your dedicated Matcap Global Wealth Advisor to evaluate suitability based on your personal financial profile, goals, and risk parameters.</div></td></tr>
+</table></td></tr>
+
+<!-- Footer: physical mailing address (required) + working unsubscribe link -->
+<tr><td align="center" style="padding:18px 30px 6px;background:#f7f3ef;font:11px/1.5 Arial,sans-serif;color:#9a9a9a">
+Matcap Global &nbsp;|&nbsp; [Street Address, City, State, ZIP, Country] &nbsp;|&nbsp; You are receiving this because you subscribed to MATCAP Weekly updates.
+</td></tr>
+<tr><td align="center" style="padding:6px 30px 20px;background:#f7f3ef"><a href="https://matcap.global/unsubscribe?id={{subscriber_id}}" target="_blank" style="font:13px/1.4 Arial,sans-serif;color:#9a9a9a;text-decoration:none">Unsubscribe</a></td></tr></table>
+</center></body></html>
