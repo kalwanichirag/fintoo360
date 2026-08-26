@@ -50,6 +50,20 @@ tailwind.config = {
   }
 }
 </script>
+<style>
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  #sticky-cta {
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+</style>
 </head>
 
 <body class="bg-porcelain font-sans text-ink antialiased selection:bg-ember selection:text-white">
@@ -72,7 +86,7 @@ tailwind.config = {
   <div class="pointer-events-none absolute left-1/2 top-[-18%] h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(4,43,98,0.95),transparent_65%)] blur-3xl motion-safe:animate-drift"></div>
   <div class="pointer-events-none absolute right-[-28%] top-[35%] h-[26rem] w-[26rem] rounded-full bg-[radial-gradient(circle,rgba(221,115,0,0.24),transparent_68%)] blur-3xl"></div>
 
-  <div class="relative mx-auto w-full max-w-6xl px-5 pb-16 pt-14 sm:px-8 sm:pt-20 lg:grid lg:grid-cols-12 lg:gap-14 lg:pb-24 lg:pt-24">
+  <div class="relative mx-auto w-full max-w-6xl px-5 pb-14 pt-14 sm:px-8 sm:py-16 lg:grid lg:grid-cols-12 lg:gap-14 lg:py-16">
 
     <div class="lg:col-span-6 lg:pt-4" data-reveal>
       <p class="text-xs font-medium uppercase tracking-[0.28em] text-ember">Coming soon · invite only</p>
@@ -119,7 +133,7 @@ tailwind.config = {
 
 <!-- ══ 02 · DAY ONE + INVESTMENT — LIGHT ══ -->
 <section class="bg-porcelain">
-  <div class="mx-auto w-full max-w-6xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto w-full max-w-6xl px-5 pb-12 pt-6 sm:px-8 sm:pb-24 sm:pt-10 lg:pb-28 lg:pt-12">
 
     <div class="max-w-2xl" data-reveal>
       <p class="text-xs font-medium uppercase tracking-[0.28em] text-ember">What opens on day one</p>
@@ -131,7 +145,7 @@ tailwind.config = {
       </p>
     </div>
 
-    <div class="mt-14 lg:grid lg:grid-cols-12 lg:items-center lg:gap-12" data-reveal>
+    <div class="mt-10 sm:mt-14 lg:grid lg:grid-cols-12 lg:items-center lg:gap-12" data-reveal>
       <div class="lg:col-span-5">
         <div class="flex flex-wrap items-center gap-3">
           <span class="text-xs font-medium tabular-nums tracking-[0.2em] text-ink/35">01</span>
@@ -151,7 +165,7 @@ tailwind.config = {
         </ul>
       </div>
 
-      <div class="mt-10 lg:col-span-7 lg:mt-0">
+      <div class="mt-8 sm:mt-10 lg:col-span-7 lg:mt-0">
         <div class="relative mx-auto w-[16rem] sm:w-[18rem] lg:w-[19rem]">
           <div class="pointer-events-none absolute inset-x-[-25%] top-[10%] h-[65%] rounded-full bg-[radial-gradient(ellipse,rgba(4,43,98,0.22),transparent_70%)] blur-3xl"></div>
 <img src="assets/fintoo-ai-preview/mutual-fund-health.png"
@@ -166,7 +180,7 @@ tailwind.config = {
 <section class="relative overflow-hidden bg-ink text-white">
   <div class="pointer-events-none absolute left-1/2 top-[-20%] h-[30rem] w-[30rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(4,43,98,0.85),transparent_66%)] blur-3xl motion-safe:animate-drift"></div>
 
-  <div class="relative mx-auto w-full max-w-6xl px-5 py-20 sm:px-8 lg:grid lg:grid-cols-12 lg:items-center lg:gap-12 lg:py-28" data-reveal>
+  <div class="relative mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 sm:py-20 lg:grid lg:grid-cols-12 lg:items-center lg:gap-12 lg:py-28" data-reveal>
     <div class="lg:col-span-7 lg:order-2">
       <div class="flex flex-wrap items-center gap-3">
         <span class="text-xs font-medium tabular-nums tracking-[0.2em] text-white/30">02</span>
@@ -186,7 +200,7 @@ tailwind.config = {
       </dl>
     </div>
 
-    <div class="mt-10 lg:col-span-5 lg:order-1 lg:mt-0">
+    <div class="mt-8 sm:mt-10 lg:col-span-5 lg:order-1 lg:mt-0">
       <div class="relative mx-auto w-[16rem] sm:w-[18rem] lg:w-[19rem]">
         <div class="pointer-events-none absolute inset-x-[-25%] top-[10%] h-[65%] rounded-full bg-[radial-gradient(ellipse,rgba(221,115,0,0.24),transparent_70%)] blur-3xl"></div>
 <img src="assets/fintoo-ai-preview/smart-goal-planning.png"
@@ -198,7 +212,7 @@ tailwind.config = {
 
 <!-- ══ 04 · RETIREMENT — LIGHT ══ -->
 <section class="bg-porcelain">
-  <div class="mx-auto w-full max-w-6xl px-5 py-20 sm:px-8 lg:grid lg:grid-cols-12 lg:items-center lg:gap-12 lg:py-28" data-reveal>
+  <div class="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 sm:py-20 lg:grid lg:grid-cols-12 lg:items-center lg:gap-12 lg:py-28" data-reveal>
     <div class="lg:col-span-5">
       <div class="flex flex-wrap items-center gap-3">
         <span class="text-xs font-medium tabular-nums tracking-[0.2em] text-ink/35">03</span>
@@ -229,7 +243,7 @@ tailwind.config = {
       </div>
     </div>
 
-    <div class="mt-10 lg:col-span-7 lg:mt-0">
+    <div class="mt-8 sm:mt-10 lg:col-span-7 lg:mt-0">
       <div class="relative mx-auto w-[16rem] sm:w-[18rem] lg:w-[19rem]">
         <div class="pointer-events-none absolute inset-x-[-25%] top-[10%] h-[65%] rounded-full bg-[radial-gradient(ellipse,rgba(15,157,143,0.22),transparent_70%)] blur-3xl"></div>
         <img src="assets/fintoo-ai-preview/retirement-planning.png" alt="Fintoo AI retirement planning mobile screen"
@@ -243,7 +257,7 @@ tailwind.config = {
 <section class="relative overflow-hidden bg-ink text-white">
   <div class="pointer-events-none absolute bottom-[-25%] left-1/2 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(221,115,0,0.18),transparent_66%)] blur-3xl"></div>
 
-  <div class="relative mx-auto w-full max-w-6xl px-5 py-20 sm:px-8 lg:grid lg:grid-cols-12 lg:items-center lg:gap-12 lg:py-28" data-reveal>
+  <div class="relative mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 sm:py-20 lg:grid lg:grid-cols-12 lg:items-center lg:gap-12 lg:py-28" data-reveal>
     <div class="lg:col-span-7 lg:order-2">
       <div class="flex flex-wrap items-center gap-3">
         <span class="text-xs font-medium tabular-nums tracking-[0.2em] text-white/30">04</span>
@@ -256,14 +270,14 @@ tailwind.config = {
       <p class="mt-3 max-w-xl text-base leading-relaxed text-white/60">
         Assets, liabilities, insurance and goals come together into a single net-worth view. Then Fintoo AI pins Today's Priority — the one action most worth taking now, with the reasoning attached.
       </p>
-      <div class="mt-7 grid max-w-lg gap-4 border-t border-white/10 pt-6 sm:grid-cols-3">
-        <div><p class="text-xs uppercase tracking-[0.14em] text-white/40">Net worth</p><p class="mt-1 text-xl font-medium tabular-nums text-signal">₹46.75 L</p></div>
-        <div><p class="text-xs uppercase tracking-[0.14em] text-white/40">Assets</p><p class="mt-1 text-xl font-medium tabular-nums">₹85.6 L</p></div>
-        <div><p class="text-xs uppercase tracking-[0.14em] text-white/40">Liabilities</p><p class="mt-1 text-xl font-medium tabular-nums">₹38.9 L</p></div>
+      <div class="mt-7 grid max-w-lg grid-cols-3 gap-2 border-t border-white/10 pt-5 sm:gap-4 sm:pt-6">
+        <div class="min-w-0"><p class="truncate text-[10px] uppercase tracking-[0.1em] text-white/40 sm:text-xs sm:tracking-[0.14em]">Net worth</p><p class="mt-1 whitespace-nowrap text-base font-medium tabular-nums text-signal sm:text-xl">₹46.75 L</p></div>
+        <div class="min-w-0"><p class="truncate text-[10px] uppercase tracking-[0.1em] text-white/40 sm:text-xs sm:tracking-[0.14em]">Assets</p><p class="mt-1 whitespace-nowrap text-base font-medium tabular-nums sm:text-xl">₹85.6 L</p></div>
+        <div class="min-w-0"><p class="truncate text-[10px] uppercase tracking-[0.1em] text-white/40 sm:text-xs sm:tracking-[0.14em]">Liabilities</p><p class="mt-1 whitespace-nowrap text-base font-medium tabular-nums sm:text-xl">₹38.9 L</p></div>
       </div>
     </div>
 
-    <div class="mt-10 lg:col-span-5 lg:order-1 lg:mt-0">
+    <div class="mt-8 sm:mt-10 lg:col-span-5 lg:order-1 lg:mt-0">
       <div class="relative mx-auto w-[16rem] sm:w-[18rem] lg:w-[19rem]">
         <div class="pointer-events-none absolute inset-x-[-25%] top-[10%] h-[65%] rounded-full bg-[radial-gradient(ellipse,rgba(4,43,98,0.9),transparent_70%)] blur-3xl"></div>
 <img src="assets/fintoo-ai-preview/net-worth-tracker.png" alt=""
@@ -275,7 +289,7 @@ tailwind.config = {
 
 <!-- ══ 06 · FAMILY + TRUST — LIGHT ══ -->
 <section class="bg-porcelain">
-  <div class="mx-auto w-full max-w-6xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 sm:py-20 lg:py-28">
 
     <div class="lg:grid lg:grid-cols-12 lg:items-center lg:gap-12" data-reveal>
       <div class="lg:col-span-5">
@@ -297,7 +311,7 @@ tailwind.config = {
         </ul>
       </div>
 
-      <div class="mt-10 lg:col-span-7 lg:mt-0">
+      <div class="mt-8 sm:mt-10 lg:col-span-7 lg:mt-0">
         <div class="relative mx-auto w-[16rem] sm:w-[18rem] lg:w-[19rem]">
           <div class="pointer-events-none absolute inset-x-[-25%] top-[10%] h-[65%] rounded-full bg-[radial-gradient(ellipse,rgba(4,43,98,0.2),transparent_70%)] blur-3xl"></div>
 <img src="assets/fintoo-ai-preview/family-dashboard.png" alt=""
@@ -313,7 +327,7 @@ tailwind.config = {
 <section id="join" class="relative overflow-hidden bg-ink text-white">
   <div class="pointer-events-none absolute left-1/2 top-[-14%] h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(4,43,98,0.95),transparent_66%)] blur-3xl motion-safe:animate-drift"></div>
 
-  <div class="relative mx-auto w-full max-w-3xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="relative mx-auto w-full max-w-3xl px-5 py-12 sm:px-8 sm:py-20 lg:py-28">
 
     <div data-reveal>
       <p class="text-xs font-medium uppercase tracking-[0.28em] text-ember">Ask Fintoo AI</p>
@@ -371,11 +385,7 @@ tailwind.config = {
             </div>
           </div>
 
-          <div class="flex flex-wrap gap-2" aria-label="Suggested questions">
-            <button type="button" class="rounded-full border border-ink/10 bg-white px-3 py-2 text-xs text-ink/55 shadow-sm transition hover:border-ember/50 hover:text-ink">Where did last month go?</button>
-            <button type="button" class="rounded-full border border-ink/10 bg-white px-3 py-2 text-xs text-ink/55 shadow-sm transition hover:border-ember/50 hover:text-ink">Is my emergency fund enough?</button>
-            <button type="button" class="rounded-full border border-ink/10 bg-white px-3 py-2 text-xs text-ink/55 shadow-sm transition hover:border-ember/50 hover:text-ink">Which SIP should I stop?</button>
-          </div>
+      
 
         </div>
       </div>
@@ -393,31 +403,24 @@ tailwind.config = {
 
     <form data-form class="mt-10" novalidate data-reveal>
       <div class="grid gap-3 sm:grid-cols-2">
-        <div>
-          <label for="join-email" class="mb-2 block text-sm text-white/55">Email address</label>
-          <input id="join-email" type="email" required placeholder="you@email.com"
+        <div class="sm:col-span-2">
+          <label for="join-name" class="mb-2 block text-sm text-white/55">Name</label>
+          <input id="join-name" name="name" type="text" required autocomplete="name" placeholder="Your name"
             class="w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3.5 text-base text-white placeholder:text-white/35 focus:border-ember focus:outline-none focus:ring-2 focus:ring-ember/40">
         </div>
         <div>
-          <label for="join-mobile" class="mb-2 block text-sm text-white/55">Mobile number</label>
-          <input id="join-mobile" type="tel" inputmode="numeric" placeholder="+91 98XXX XXXXX"
+          <label for="join-email" class="mb-2 block text-sm text-white/55">Email address</label>
+          <input id="join-email" name="email" type="email" required autocomplete="email" placeholder="you@email.com"
+            class="w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3.5 text-base text-white placeholder:text-white/35 focus:border-ember focus:outline-none focus:ring-2 focus:ring-ember/40">
+        </div>
+        <div>
+          <label for="join-mobile" class="mb-2 block text-sm text-white/55">Phone <span class="text-white/35">(optional)</span></label>
+          <input id="join-mobile" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98XXX XXXXX"
             class="w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3.5 text-base text-white placeholder:text-white/35 focus:border-ember focus:outline-none focus:ring-2 focus:ring-ember/40">
         </div>
       </div>
 
-      <fieldset class="mt-7">
-        <legend class="mb-3 text-sm text-white/55">What should Fintoo AI fix for you first?</legend>
-        <div class="flex flex-wrap gap-2.5">
-          <label><input type="radio" name="focus" value="funds" class="peer sr-only"><span class="block cursor-pointer rounded-full border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white/70 transition hover:border-white/30 peer-checked:border-ember peer-checked:bg-ember/15 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-ember">Sorting out my mutual funds</span></label>
-          <label><input type="radio" name="focus" value="spending" class="peer sr-only"><span class="block cursor-pointer rounded-full border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white/70 transition hover:border-white/30 peer-checked:border-ember peer-checked:bg-ember/15 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-ember">Finding money in my spending</span></label>
-          <label><input type="radio" name="focus" value="goal" class="peer sr-only"><span class="block cursor-pointer rounded-full border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white/70 transition hover:border-white/30 peer-checked:border-ember peer-checked:bg-ember/15 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-ember">Hitting a goal on time</span></label>
-          <label><input type="radio" name="focus" value="retirement" class="peer sr-only"><span class="block cursor-pointer rounded-full border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white/70 transition hover:border-white/30 peer-checked:border-ember peer-checked:bg-ember/15 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-ember">Knowing when I can retire</span></label>
-          <label><input type="radio" name="focus" value="family" class="peer sr-only"><span class="block cursor-pointer rounded-full border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white/70 transition hover:border-white/30 peer-checked:border-ember peer-checked:bg-ember/15 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-ember">Planning with my family</span></label>
-          <label><input type="radio" name="focus" value="all" class="peer sr-only"><span class="block cursor-pointer rounded-full border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-white/70 transition hover:border-white/30 peer-checked:border-ember peer-checked:bg-ember/15 peer-checked:text-white peer-focus-visible:ring-2 peer-focus-visible:ring-ember">All of it, honestly</span></label>
-        </div>
-      </fieldset>
-
-      <button type="submit" class="mt-8 w-full rounded-2xl bg-ember px-6 py-4 text-base font-medium text-white transition hover:bg-ember/85 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70">
+      <button type="submit" class="mt-5 w-full rounded-2xl bg-ember px-6 py-4 text-base font-medium text-white transition hover:bg-ember/85 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70">
         Join the waitlist
       </button>
       <p data-form-msg class="mt-3 text-center text-sm text-white/45">We'll email once, when your invite is live.</p>
@@ -427,11 +430,11 @@ tailwind.config = {
 </section>
 
 <!-- ══ STICKY MOBILE CTA ══ -->
-<div id="sticky-cta" class="fixed inset-x-0 bottom-0 z-40 translate-y-full border-t border-white/10 bg-ink/90 px-4 py-3 backdrop-blur-xl transition-transform duration-300 lg:hidden">
-  <div class="flex items-center gap-3">
+<div id="sticky-cta" class="fixed bottom-0 left-0 right-0 z-40 w-full max-w-full translate-y-full overflow-hidden border-t border-white/10 bg-ink/90 px-4 py-3 backdrop-blur-xl transition-transform duration-300 lg:hidden">
+  <div class="mx-auto flex w-full min-w-0 max-w-md items-center gap-3">
     <div class="min-w-0 flex-1">
-      <p class="truncate text-sm font-medium text-white">Get your score first</p>
-      <p class="truncate text-xs text-white/45">Invites in small batches</p>
+      <p class="truncate text-sm font-medium text-white">Join the Fintoo AI Waitlist</p>
+      <p class="truncate text-xs text-white/45">Experience the future of financial planning</p>
     </div>
     <a href="#join" class="shrink-0 rounded-full bg-ember px-5 py-2.5 text-sm font-medium text-white">Join</a>
   </div>
@@ -568,9 +571,17 @@ tailwind.config = {
   document.querySelectorAll('[data-form]').forEach(function (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      var name = form.querySelector('input[name="name"]');
       var email = form.querySelector('input[type="email"]');
       var msg = form.querySelector('[data-form-msg]');
       var value = (email && email.value || '').trim();
+      if (name && !name.value.trim()) {
+        msg.textContent = 'Please enter your name.';
+        msg.classList.remove('text-white/45', 'text-signal');
+        msg.classList.add('text-ember');
+        name.focus();
+        return;
+      }
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
         msg.textContent = 'Enter a valid email address so we can send your invite.';
         msg.classList.remove('text-white/45', 'text-signal');
