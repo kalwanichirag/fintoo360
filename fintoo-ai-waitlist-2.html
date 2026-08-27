@@ -597,6 +597,90 @@
   header svg[aria-label="Fintoo AI"] .st1,
   footer svg[aria-label="Fintoo AI"] .st1{ fill:#10254a; }
 
+  /* ============ Compact mobile layout ============ */
+  @media (max-width:640px){
+    #site-nav > div{ padding:.75rem 1.25rem; }
+    #site-nav img{ height:1.65rem; }
+
+    #hero{
+      min-height:auto;
+      padding-top:5.75rem;
+      padding-bottom:2.5rem;
+    }
+    #hero .hero-layout{ gap:1.25rem; padding-left:1.25rem; padding-right:1.25rem; }
+    #hero .hero-layout > div:first-child{ order:2; }
+    #hero-mockups{ order:1; }
+    #hero .badge{ padding:.35rem .7rem .35rem .55rem; font-size:.6rem; }
+    #hero-heading{ margin-top:1.15rem; font-size:2.15rem; line-height:1.04; }
+    #hero-sub{ margin-top:1rem; font-size:.95rem; line-height:1.55; }
+    #hero-cta{ margin-top:1.35rem; }
+    #hero .hero-actions{ margin-top:1.25rem; gap:.8rem 1.25rem; }
+    .btn-primary{ padding:.78rem 1.15rem; border-radius:.75rem; font-size:.82rem; }
+    .link-secondary{ font-size:.8rem; }
+    .counter-pill{ gap:.45rem; font-size:.72rem; }
+    .hero-cross::after,.hero-cross-star{ top:5.1rem; }
+    .hero-app-animation{ height:22rem; margin-bottom:.5rem; }
+    .hero-app-phone{ width:min(180px,52vw); padding:5px; border-radius:31px; }
+    .hero-app-screen{ border-radius:26px; }
+    .hero-app-island{ top:10px; height:18px; }
+    .hero-app-chip{ padding:5px 7px; font-size:7px; }
+    .hero-app-chip svg{ width:10px; height:10px; }
+    .hero-app-card{ width:98px; height:66px; }
+
+    #preview{
+      min-height:auto;
+      padding-top:3rem !important;
+      padding-bottom:3rem !important;
+    }
+    #preview::after{ inset:.65rem; border-radius:1.25rem; }
+    #preview > .relative{ padding-left:1.25rem; padding-right:1.25rem; }
+    #preview .badge{ padding:.35rem .7rem; font-size:.6rem; }
+    #preview-heading{ margin-top:1rem; font-size:1.75rem; line-height:1.1; }
+    #preview-heading + p{ margin-top:.65rem; font-size:.85rem; line-height:1.45; }
+    .preview-showcase{ gap:.6rem; margin-top:1rem !important; }
+    .preview-mockup-stage{ height:16rem; }
+    .preview-mockup{ max-width:52vw; }
+    .preview-list{ min-height:6.25rem; }
+    .preview-item.is-active{ padding:.65rem .6rem .65rem 1rem; }
+    .preview-item.is-active::before{ top:.65rem; bottom:.65rem; }
+    .preview-title{ font-size:1rem; }
+    .preview-description{ font-size:.76rem; line-height:1.4; }
+    .preview-progress + p{ font-size:.66rem; line-height:1.4; }
+
+    .clarity-trust-section{ padding:3rem 0; }
+    .clarity-trust-section > .relative{ padding-left:1.25rem; padding-right:1.25rem; }
+    .clarity-intro{ gap:1.1rem; }
+    #thinks-heading{ margin-top:1rem; font-size:1.75rem; line-height:1.12; }
+    .clarity-promise{ padding-left:1rem; }
+    .clarity-promise .text-xl{ font-size:1rem; }
+    .clarity-promise .text-sm{ font-size:.78rem; line-height:1.5; }
+    .journey-rail{ gap:1.15rem; margin-top:2rem; }
+    .journey-rail::before{ top:1.2rem; bottom:1.2rem; left:1.2rem; }
+    .journey-step,.journey-step:first-child,.journey-step:last-child{ padding-left:3.4rem; }
+    .journey-number{ width:2.4rem; height:2.4rem; box-shadow:0 0 0 5px #f4f8fd; font-size:.62rem; }
+    .journey-step h3{ font-size:.92rem; line-height:1.35; }
+    .journey-step p{ margin-top:.3rem; font-size:.75rem; line-height:1.45; }
+    .trust-ribbon{ margin-top:2rem; padding:1.25rem; border-radius:1.35rem; }
+    .trust-ribbon-head{ gap:.75rem; padding-bottom:1rem; }
+    .trust-ribbon-head h3{ font-size:1.15rem; line-height:1.3; }
+    .trust-pledge{ font-size:.74rem; }
+    .trust-pledge-icon{ width:1.75rem; height:1.75rem; }
+    .trust-points{ gap:.7rem; margin-top:1rem; }
+    .trust-point,.trust-point:nth-child(3){ padding-bottom:.7rem; gap:.55rem; }
+    .trust-point h4{ font-size:.76rem; }
+    .trust-point p{ margin-top:.15rem; font-size:.66rem; }
+
+    #join{ padding-top:3.5rem; padding-bottom:3.5rem; }
+    #join > .relative{ padding-left:1.25rem; padding-right:1.25rem; }
+    #join h2{ font-size:1.75rem; line-height:1.15; }
+    #join h2 + p{ margin-top:.85rem; font-size:.88rem; line-height:1.5; }
+    #final-form{ margin-top:1.5rem; }
+    #final-form > .grid{ gap:.6rem; }
+    .input-field{ padding:.75rem .9rem; border-radius:.7rem; font-size:.82rem; }
+    #final-form .btn-primary{ min-height:2.75rem; }
+    #final-form > p{ margin-top:.6rem; font-size:.65rem; }
+  }
+
   /* ============ Reduced motion safety net ============ */
   @media (prefers-reduced-motion: reduce){
     *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
