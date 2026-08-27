@@ -1,5 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 1143 360 267" width="360" height="267" fill="none"><g id="AI insights">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 1143 360 267" width="360" height="267" fill="none">
+<style>[id="AI insight_2"] > path:first-child { fill-opacity:1 !important; }</style>
+<g id="AI insights">
 <g id="Frame 1984079445">
 <g id="AI insight" filter="url(#filter16_i_2001_2116)">
 <path d="M92 1215.78C92 1209.92 92 1207 93.1399 1204.76C94.1426 1202.79 95.7425 1201.19 97.7103 1200.19C99.9475 1199.05 102.876 1199.05 108.733 1199.05H326.267C332.124 1199.05 335.052 1199.05 337.29 1200.19C339.258 1201.19 340.857 1202.79 341.86 1204.76C343 1207 343 1209.92 343 1215.78V1350.2C343 1356.06 343 1358.98 341.86 1361.22C340.857 1363.19 339.258 1364.79 337.29 1365.79C335.052 1366.93 332.124 1366.93 326.267 1366.93H108.733C102.876 1366.93 99.9475 1366.93 97.7103 1365.79C95.7425 1364.79 94.1426 1363.19 93.1399 1361.22C92 1358.98 92 1356.06 92 1350.2V1215.78Z" fill="url(#paint16_linear_2001_2116)" fill-opacity="0.6" />
