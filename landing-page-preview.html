@@ -9,57 +9,91 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Google Sans', 'Product Sans', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    @media (min-width: 1079.999px) {
+  html {
+    font-size: 0.9vw;
+  }
+  html .womoneya-page {
+    font-size: 0.9vw;
+  }
+}
+  </style>
 </head>
 
-<body class="min-h-screen bg-slate-100 bg-[radial-gradient(circle_at_8%_0%,rgba(255,126,38,0.14),transparent_28rem),radial-gradient(circle_at_92%_8%,rgba(40,101,235,0.13),transparent_34rem)] px-4 py-10 text-slate-950 antialiased md:px-8 md:py-14 font-['Google_Sans','Product_Sans',Inter,Arial,sans-serif]">
-  <div aria-hidden="true" class="pointer-events-none fixed inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.055)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.055)_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:linear-gradient(to_bottom,black,transparent_88%)]"></div>
+<body class="min-h-screen overflow-x-hidden bg-slate-100 px-4 py-10 font-sans text-slate-950 antialiased md:px-8 md:py-14">
+  <div aria-hidden="true" class="pointer-events-none fixed inset-0 overflow-hidden">
+    <div class="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-orange-200 opacity-50 blur-3xl"></div>
+    <div class="absolute -right-32 top-0 h-96 w-96 rounded-full bg-blue-200 opacity-50 blur-3xl"></div>
+    <div class="absolute inset-0 grid grid-cols-12 opacity-30">
+      <span class="border-r border-slate-400"></span><span class="border-r border-slate-400"></span><span class="border-r border-slate-400"></span><span class="border-r border-slate-400"></span>
+      <span class="border-r border-slate-400"></span><span class="border-r border-slate-400"></span><span class="border-r border-slate-400"></span><span class="border-r border-slate-400"></span>
+      <span class="border-r border-slate-400"></span><span class="border-r border-slate-400"></span><span class="border-r border-slate-400"></span><span class="border-r border-slate-400"></span>
+    </div>
+    <div class="absolute inset-0 grid grid-rows-6 opacity-30">
+      <span class="border-b border-slate-400"></span><span class="border-b border-slate-400"></span><span class="border-b border-slate-400"></span>
+      <span class="border-b border-slate-400"></span><span class="border-b border-slate-400"></span><span class="border-b border-slate-400"></span>
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-100/40 to-slate-100"></div>
+  </div>
 
   <main class="relative mx-auto max-w-6xl">
     <img src="assets/fintoo-ai-logo.svg" alt="Fintoo AI" class="mb-8 h-8 w-auto md:mb-10 md:h-10">
 
-    <h1 class="mb-10 whitespace-nowrap text-[clamp(1.75rem,5.3vw,4.5rem)] font-semibold leading-none tracking-[-0.055em] md:mb-12">
+    <h1 class="mb-10 whitespace-nowrap text-3xl font-semibold leading-none tracking-tight sm:text-5xl md:mb-12 lg:text-6xl">
       Fintoo AI App landing pages
     </h1>
 
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      <a href="https://fintoo360.vercel.app/fintoo-ai-waitlist-1.html" target="_blank" rel="noopener" class="group relative aspect-[16/10] overflow-hidden rounded-2xl border border-slate-900/10 bg-white shadow-[0_12px_35px_rgba(7,17,31,0.08)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(7,17,31,0.16)] focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
-        <img src="previews/fintoo-ai-waitlist-1.png" alt="Fintoo AI Waitlist v1 page preview" class="h-full w-full object-cover object-top transition duration-700 group-hover:scale-[1.04]">
+      <a href="https://fintoo360.vercel.app/fintoo-ai-waitlist-1.html" target="_blank" rel="noopener" class="group relative aspect-video overflow-hidden rounded-2xl border border-slate-900/10 bg-white shadow-xl transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
+        <img src="previews/fintoo-ai-waitlist-1.png" alt="Fintoo AI Waitlist v1 page preview" class="h-full w-full object-cover object-top transition duration-700 group-hover:scale-105">
         <span class="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-slate-950/80 to-transparent"></span>
         <span class="absolute bottom-4 left-4 rounded-full border border-white/20 bg-slate-950/70 px-3.5 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-xl">Fintoo AI — Waitlist v1</span>
       </a>
 
-      <a href="https://fintoo360.vercel.app/fintoo-ai-waitlist-2.html" target="_blank" rel="noopener" class="group relative aspect-[16/10] overflow-hidden rounded-2xl border border-slate-900/10 bg-white shadow-[0_12px_35px_rgba(7,17,31,0.08)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(7,17,31,0.16)] focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
-        <img src="previews/fintoo-ai-waitlist-2.png" alt="Fintoo AI Waitlist v2 page preview" class="h-full w-full object-cover object-top transition duration-700 group-hover:scale-[1.04]">
+      <a href="https://fintoo360.vercel.app/fintoo-ai-waitlist-2.html" target="_blank" rel="noopener" class="group relative aspect-video overflow-hidden rounded-2xl border border-slate-900/10 bg-white shadow-xl transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
+        <img src="previews/fintoo-ai-waitlist-2.png" alt="Fintoo AI Waitlist v2 page preview" class="h-full w-full object-cover object-top transition duration-700 group-hover:scale-105">
         <span class="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-slate-950/80 to-transparent"></span>
         <span class="absolute bottom-4 left-4 rounded-full border border-white/20 bg-slate-950/70 px-3.5 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-xl">Fintoo AI — Waitlist v2</span>
       </a>
 
-      <a href="https://www.fintoo.in/fintoo-ai-app" target="_blank" rel="noopener" class="group relative aspect-[16/10] overflow-hidden rounded-2xl border border-slate-900/10 bg-white shadow-[0_12px_35px_rgba(7,17,31,0.08)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(7,17,31,0.16)] focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
-        <img src="previews/fintoo-ai-app.png" alt="Fintoo AI App page preview" class="h-full w-full object-cover object-top transition duration-700 group-hover:scale-[1.04]">
+      <a href="https://www.fintoo.in/fintoo-ai-app" target="_blank" rel="noopener" class="group relative aspect-video overflow-hidden rounded-2xl border border-slate-900/10 bg-white shadow-xl transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
+        <img src="previews/fintoo-ai-app.png" alt="Fintoo AI App page preview" class="h-full w-full object-cover object-top transition duration-700 group-hover:scale-105">
         <span class="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-slate-950/80 to-transparent"></span>
         <span class="absolute bottom-4 left-4 rounded-full border border-white/20 bg-slate-950/70 px-3.5 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-xl">Fintoo AI App</span>
       </a>
 
-      <a href="https://www.fintoo.in/answers-to-your-money" target="_blank" rel="noopener" class="group relative aspect-[16/10] overflow-hidden rounded-2xl border border-slate-900/10 bg-white shadow-[0_12px_35px_rgba(7,17,31,0.08)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(7,17,31,0.16)] focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
-        <img src="previews/answers-to-your-money.png" alt="Answers to your money page preview" class="h-full w-full object-cover object-top transition duration-700 group-hover:scale-[1.04]">
+      <a href="https://www.fintoo.in/answers-to-your-money" target="_blank" rel="noopener" class="group relative aspect-video overflow-hidden rounded-2xl border border-slate-900/10 bg-white shadow-xl transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
+        <img src="previews/answers-to-your-money.png" alt="Answers to your money page preview" class="h-full w-full object-cover object-top transition duration-700 group-hover:scale-105">
         <span class="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-slate-950/80 to-transparent"></span>
         <span class="absolute bottom-4 left-4 rounded-full border border-white/20 bg-slate-950/70 px-3.5 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-xl">Answers to your money</span>
       </a>
 
-      <a href="https://www.fintoo.in/waiting-list" target="_blank" rel="noopener" class="group relative aspect-[16/10] overflow-hidden rounded-2xl border border-slate-900/10 bg-white shadow-[0_12px_35px_rgba(7,17,31,0.08)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(7,17,31,0.16)] focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
-        <img src="previews/waiting-list.png" alt="Waiting list page preview" class="h-full w-full object-cover object-top transition duration-700 group-hover:scale-[1.04]">
+      <a href="https://www.fintoo.in/waiting-list" target="_blank" rel="noopener" class="group relative aspect-video overflow-hidden rounded-2xl border border-slate-900/10 bg-white shadow-xl transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
+        <img src="previews/waiting-list.png" alt="Waiting list page preview" class="h-full w-full object-cover object-top transition duration-700 group-hover:scale-105">
         <span class="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-slate-950/80 to-transparent"></span>
         <span class="absolute bottom-4 left-4 rounded-full border border-white/20 bg-slate-950/70 px-3.5 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-xl">Waiting list</span>
       </a>
 
-      <a href="https://www.fintoo.in/financial-clarity-score" target="_blank" rel="noopener" class="group relative aspect-[16/10] overflow-hidden rounded-2xl border border-slate-900/10 bg-white shadow-[0_12px_35px_rgba(7,17,31,0.08)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(7,17,31,0.16)] focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
-        <img src="previews/financial-clarity-score.png" alt="Financial clarity score page preview" class="h-full w-full object-cover object-top transition duration-700 group-hover:scale-[1.04]">
+      <a href="https://www.fintoo.in/financial-clarity-score" target="_blank" rel="noopener" class="group relative aspect-video overflow-hidden rounded-2xl border border-slate-900/10 bg-white shadow-xl transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
+        <img src="previews/financial-clarity-score.png" alt="Financial clarity score page preview" class="h-full w-full object-cover object-top transition duration-700 group-hover:scale-105">
         <span class="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-slate-950/80 to-transparent"></span>
         <span class="absolute bottom-4 left-4 rounded-full border border-white/20 bg-slate-950/70 px-3.5 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-xl">Financial clarity score</span>
       </a>
 
-      <a href="https://www.fintoo.in/waitlist" target="_blank" rel="noopener" class="group relative aspect-[16/10] overflow-hidden rounded-2xl border border-slate-900/10 bg-white shadow-[0_12px_35px_rgba(7,17,31,0.08)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(7,17,31,0.16)] focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
-        <img src="previews/waitlist.png" alt="Waitlist page preview" class="h-full w-full object-cover object-top transition duration-700 group-hover:scale-[1.04]">
+      <a href="https://www.fintoo.in/waitlist" target="_blank" rel="noopener" class="group relative aspect-video overflow-hidden rounded-2xl border border-slate-900/10 bg-white shadow-xl transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
+        <img src="previews/waitlist.png" alt="Waitlist page preview" class="h-full w-full object-cover object-top transition duration-700 group-hover:scale-105">
         <span class="absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-slate-950/80 to-transparent"></span>
         <span class="absolute bottom-4 left-4 rounded-full border border-white/20 bg-slate-950/70 px-3.5 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-xl">Waitlist</span>
       </a>
