@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fintoo Landing Page Library</title>
+  <meta name="description" content="Fintoo landing page campaign library">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] } } } };
+  </script>
+  <style>
+    html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+    .page-card[hidden] { display: none; }
+    @media (min-width: 1079.999px) { html { font-size: 0.9vw; } }
+  </style>
+</head>
+
+<body class="min-h-screen bg-slate-100 px-4 py-6 font-sans text-slate-950 antialiased sm:px-6 sm:py-10 md:px-8 md:py-14">
+  <div aria-hidden="true" class="pointer-events-none fixed inset-0 overflow-hidden">
+    <div class="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-orange-200 opacity-50 blur-3xl"></div>
+    <div class="absolute -right-32 top-0 h-96 w-96 rounded-full bg-blue-200 opacity-50 blur-3xl"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-100/40 to-slate-100"></div>
+  </div>
+
+  <main class="relative mx-auto w-full max-w-6xl">
+    <img src="assets/fintoo-ai-logo.svg" alt="Fintoo" class="mb-6 h-8 w-auto sm:mb-8 md:h-10">
+
+    <div class="mb-7 flex flex-col gap-5 sm:mb-10 md:mb-12 md:flex-row md:items-end md:justify-between">
+      <div>
+        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-orange-600">Campaign library</p>
+        <h1 class="max-w-3xl text-2xl font-semibold leading-[1.05] tracking-tight lg:text-5xl">Landing page library</h1>
+      </div>
+
+      <div id="filters" class="flex flex-wrap gap-2" role="group" aria-label="Filter landing pages">
+        <button type="button" data-filter="all" aria-pressed="true" class="filter-btn rounded-full bg-slate-950 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition">All <span data-count="all"></span></button>
+        <button type="button" data-filter="financial" aria-pressed="false" class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">All FP <span data-count="financial"></span></button>
+        <button type="button" data-filter="ai" aria-pressed="false" class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">AI App <span data-count="ai"></span></button>
+        <button type="button" data-filter="calendly" aria-pressed="false" class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">FP with Calendly <span data-count="calendly"></span></button>
+        <button type="button" data-filter="otp" aria-pressed="false" class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">FP with OTP <span data-count="otp"></span></button>
+        <button type="button" data-filter="itr" aria-pressed="false" class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">ITR <span data-count="itr"></span></button>
+        <button type="button" data-filter="development" aria-pressed="false" class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">Under Development <span data-count="development"></span></button>
+      </div>
+    </div>
+
+    <div id="page-grid" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+    <p id="empty-state" class="hidden rounded-2xl border border-slate-200 bg-white p-8 text-center text-sm text-slate-500">No pages match this filter.</p>
+  </main>
+
+  <script>
+    const pages = [
+      { name: 'Financial Advice', path: '/financial-advice', type: 'calendly' },
+      { name: 'Financial Planning', path: '/financial-planning', type: 'calendly' },
+      { name: 'Financial Planning Services', note: 'YouTube video landing page', path: '/financial-planning-services', type: 'calendly' },
+      { name: 'Investment Planning', path: '/investment-planning', type: 'calendly' },
+      { name: 'Investment Planning (Updated)', path: '/investmentplanning', type: 'calendly' },
+      { name: 'Investment Strategy', path: '/investment-strategy', type: 'calendly' },
+      { name: 'Personal Financial Planning', path: '/personal-financial-planning', type: 'calendly' },
+      { name: 'Portfolio Management Services', path: '/portfolio-management-services', type: 'calendly' },
+      { name: 'Retirement Planner', path: '/retirement-planner', type: 'calendly' },
+      { name: 'Retirement Planning', path: '/retirement-planning', type: 'calendly' },
+      { name: 'Wealth Management for Indians and NRIs', path: '/wealth-management-for-indians-and-nri', type: 'calendly' },
+      { name: 'Wealth Management for NRI/HNI', path: '/wealth-management-for-nri-hni', type: 'calendly' },
+      { name: 'Financial Planning Strategy', path: '/financial-planning-strategy', type: 'otp' },
+      { name: 'Financial Strategy', path: '/financial-strategy', type: 'otp' },
+      { name: 'Investment Advice', path: '/investment-advice', type: 'otp' },
+      { name: 'Personal Financial Strategy', path: '/personal-financial-strategy', type: 'otp' },
+      { name: 'Retirement Strategy', path: '/retirement-strategy', type: 'otp' },
+      { name: 'Wealth Management Strategy for Indians and NRIs', path: '/wealth-management-strategy-for-indians-and-nri', type: 'otp' },
+      { name: 'Private Wealth', path: '/private-wealth', type: 'otp' },
+      { name: 'Executive Wealth', path: '/executive-wealth', type: 'otp' },
+      { name: 'GFF', path: '/gff', type: 'otp' },
+      { name: 'ITR Filing Corporate', path: '/itr-filing-corporate', type: 'itr' },
+      { name: 'ITR Filing Partnerships', path: '/itr-filing-partnerships', type: 'itr' },
+      { name: 'ITR Filing Retail', note: 'Calendly only', path: '/itr-file-retail', type: 'calendly' },
+      { name: 'ITR Filing Retail', note: 'No pricing', path: '/itr-filing-retail', type: 'itr' },
+      { name: 'ITR Filing Retail Plans', path: '/itr-filing-retail-plans', type: 'itr' },
+      { name: 'Fintoo AI — Waitlist v1', path: '/fintoo-ai-waitlist', category: 'ai', image: 'previews/fintoo-ai-waitlist-1.png' },
+      { name: 'Fintoo AI — Waitlist v2', url: 'https://fintoo360.vercel.app/fintoo-ai-waitlist-2.html', category: 'ai', status: 'development', image: 'previews/fintoo-ai-waitlist-2.png' },
+      { name: 'Fintoo AI App', path: '/fintoo-ai-app', category: 'ai', image: 'previews/fintoo-ai-app.png' },
+      { name: 'Answers to Your Money', path: '/answers-to-your-money', category: 'ai', image: 'previews/answers-to-your-money.png' },
+      { name: 'Waiting List', path: '/waiting-list', category: 'ai', image: 'previews/waiting-list.png' },
+      { name: 'Financial Clarity Score', path: '/financial-clarity-score', category: 'ai', image: 'previews/financial-clarity-score.png' },
+      { name: 'Waitlist', path: '/waitlist', category: 'ai', image: 'previews/waitlist.png' }
+    ].map(page => ({ category: 'financial', status: 'live', ...page }));
+
+    const badgeStyles = {
+      calendly: 'bg-blue-100 text-blue-700', otp: 'bg-violet-100 text-violet-700',
+      itr: 'bg-slate-200 text-slate-700', ai: 'bg-cyan-100 text-cyan-700'
+    };
+    const badgeLabels = { calendly: 'Calendly', otp: 'OTP', itr: 'ITR', ai: 'AI App' };
+    const grid = document.getElementById('page-grid');
+
+    pages.forEach(page => {
+      const url = page.url || `https://www.fintoo.in${page.path}`;
+      const screenshot = page.image || `assets/financial-page-previews/${page.path.slice(1)}.png`;
+      const badgeType = page.category === 'ai' ? 'ai' : page.type;
+      const card = document.createElement('a');
+      card.href = url;
+      card.target = '_blank';
+      card.rel = 'noopener';
+      card.dataset.category = page.category;
+      card.dataset.type = page.type || '';
+      card.dataset.status = page.status;
+      card.className = 'page-card group relative flex flex-col overflow-hidden rounded-2xl border border-slate-900/10 bg-white shadow-xl transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2';
+      card.innerHTML = `
+        <span class="relative block aspect-[16/10] overflow-hidden border-b border-slate-200 bg-slate-200">
+          <img src="${screenshot}" alt="Screenshot of ${page.name}" loading="lazy" class="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.03]">
+          <span aria-hidden="true" class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent opacity-0 transition group-hover:opacity-100"></span>
+        </span>
+        <span class="relative flex flex-1 flex-col p-5">
+          <span class="mb-4 flex flex-wrap gap-1.5 text-[10px] font-semibold uppercase tracking-wide">
+            <span class="rounded-full ${page.status === 'development' ? 'bg-amber-400 text-amber-950' : 'bg-emerald-500 text-white'} px-2 py-1 shadow-sm">${page.status === 'development' ? 'Development' : 'Live'}</span>
+            ${page.status === 'live' ? '<span class="rounded-full bg-slate-100 px-2 py-1 text-slate-700 shadow-sm">Ready for ads</span>' : ''}
+            <span class="rounded-full px-2 py-1 ${badgeStyles[badgeType]}">${badgeLabels[badgeType]}</span>
+          </span>
+          <span class="mt-auto">
+            <span class="block text-xl font-semibold leading-snug text-slate-950">${page.name}</span>
+            ${page.note ? `<span class="mt-1 block text-xs text-slate-500">${page.note}</span>` : ''}
+            <span class="mt-3 block truncate text-xs text-slate-400">${url.replace(/^https?:\/\//, '')}</span>
+          </span>
+        </span>`;
+      grid.appendChild(card);
+    });
+
+    const matches = (page, filter) => filter === 'all' || page.category === filter || page.type === filter || page.status === filter;
+    document.querySelectorAll('[data-count]').forEach(count => {
+      const filter = count.dataset.count;
+      count.textContent = `(${pages.filter(page => matches(page, filter)).length})`;
+    });
+
+    const buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(button => button.addEventListener('click', () => {
+      const filter = button.dataset.filter;
+      let visible = 0;
+      buttons.forEach(item => {
+        const active = item === button;
+        item.setAttribute('aria-pressed', active);
+        item.classList.toggle('bg-slate-950', active);
+        item.classList.toggle('text-white', active);
+        item.classList.toggle('border', !active);
+        item.classList.toggle('border-slate-300', !active);
+        item.classList.toggle('bg-white/80', !active);
+        item.classList.toggle('text-slate-700', !active);
+      });
+      document.querySelectorAll('.page-card').forEach((card, index) => {
+        const show = matches(pages[index], filter);
+        card.hidden = !show;
+        if (show) visible += 1;
+      });
+      document.getElementById('empty-state').classList.toggle('hidden', visible !== 0);
+    }));
+  </script>
+</body>
+</html>
