@@ -15,6 +15,9 @@
   <style>
     html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
     .page-card[hidden] { display: none; }
+    #filters { scrollbar-width: none; }
+    #filters::-webkit-scrollbar { display: none; }
+    .filter-btn { flex: none; }
     @media (min-width: 1079.999px) { html { font-size: 0.9vw; } }
   </style>
 </head>
@@ -35,7 +38,7 @@
         <h1 class="max-w-3xl text-2xl font-semibold leading-[1.05] tracking-tight lg:text-5xl">Landing page library</h1>
       </div>
 
-      <div id="filters" class="flex flex-wrap gap-2" role="group" aria-label="Filter landing pages">
+      <div id="filters" class="flex w-full min-w-0 flex-nowrap gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0 md:w-auto" role="group" aria-label="Filter landing pages">
         <button type="button" data-filter="all" aria-pressed="true" class="filter-btn rounded-full bg-slate-950 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition">All <span data-count="all"></span></button>
         <button type="button" data-filter="financial" aria-pressed="false" class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">All FP <span data-count="financial"></span></button>
         <button type="button" data-filter="ai" aria-pressed="false" class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">AI App <span data-count="ai"></span></button>
@@ -52,9 +55,15 @@
 
   <script>
     const pages = [
+                  { name: 'Financial Planning Services',  path: '/financial-planning-services', type: 'calendly' },
+
+      { name: 'Private Wealth', path: '/private-wealth', type: 'otp' },
+      { name: 'Executive Wealth', path: '/executive-wealth', type: 'otp' },
+      { name: 'GFF', path: '/gff', type: 'otp' },
+      { name: 'Wealth Management for NRI/HNI', path: '/wealth-management-for-nri-hni', type: 'calendly' },
+
       { name: 'Financial Advice', path: '/financial-advice', type: 'calendly' },
       { name: 'Financial Planning', path: '/financial-planning', type: 'calendly' },
-      { name: 'Financial Planning Services', note: 'YouTube video landing page', path: '/financial-planning-services', type: 'calendly' },
       { name: 'Investment Planning', path: '/investment-planning', type: 'calendly' },
       { name: 'Investment Planning (Updated)', path: '/investmentplanning', type: 'calendly' },
       { name: 'Investment Strategy', path: '/investment-strategy', type: 'calendly' },
@@ -63,16 +72,13 @@
       { name: 'Retirement Planner', path: '/retirement-planner', type: 'calendly' },
       { name: 'Retirement Planning', path: '/retirement-planning', type: 'calendly' },
       { name: 'Wealth Management for Indians and NRIs', path: '/wealth-management-for-indians-and-nri', type: 'calendly' },
-      { name: 'Wealth Management for NRI/HNI', path: '/wealth-management-for-nri-hni', type: 'calendly' },
+             { name: 'Wealth Management Strategy for Indians and NRIs', path: '/wealth-management-strategy-for-indians-and-nri', type: 'otp' },
+
       { name: 'Financial Planning Strategy', path: '/financial-planning-strategy', type: 'otp' },
       { name: 'Financial Strategy', path: '/financial-strategy', type: 'otp' },
       { name: 'Investment Advice', path: '/investment-advice', type: 'otp' },
       { name: 'Personal Financial Strategy', path: '/personal-financial-strategy', type: 'otp' },
       { name: 'Retirement Strategy', path: '/retirement-strategy', type: 'otp' },
-      { name: 'Wealth Management Strategy for Indians and NRIs', path: '/wealth-management-strategy-for-indians-and-nri', type: 'otp' },
-      { name: 'Private Wealth', path: '/private-wealth', type: 'otp' },
-      { name: 'Executive Wealth', path: '/executive-wealth', type: 'otp' },
-      { name: 'GFF', path: '/gff', type: 'otp' },
       { name: 'ITR Filing Corporate', path: '/itr-filing-corporate', type: 'itr' },
       { name: 'ITR Filing Partnerships', path: '/itr-filing-partnerships', type: 'itr' },
       { name: 'ITR Filing Retail', note: 'Calendly only', path: '/itr-file-retail', type: 'calendly' },
