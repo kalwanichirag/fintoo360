@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio · Fintoo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['"Google Sans"', '"Product Sans"', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
+        },
+        colors: {
+          navy: {
+            DEFAULT: '#042b62',
+            50:  '#f2f6fb',
+            100: '#e5edf7',
+            200: '#c6d8ec',
+            300: '#96b6da',
+            400: '#5c8cc1',
+            500: '#2f66a4',
+            600: '#124d88',
+            700: '#083a6f',
+            800: '#042b62',
+            900: '#03204a'
+          }
+        },
+        keyframes: {
+          riseIn: {
+            '0%':   { opacity: '0', transform: 'translateY(0.5rem)' },
+            '100%': { opacity: '1', transform: 'translateY(0)' }
+          }
+        },
+        animation: {
+          riseIn: 'riseIn 0.25s ease-out both'
+        }
+      }
+    }
+  }
+</script>
+<style>
+  :root { color-scheme: light; }
+  body { background: radial-gradient(circle at 82% 0%, #e4efff 0, transparent 28rem), #f5f7fb; }
+  .portfolio-donut { background: conic-gradient(#4f8cff 0 36%, #19b394 36% 61%, #f4b740 61% 80%, #a477ff 80% 93%, #dbe5f3 93% 100%); }
+  .soft-grid { background-image: linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px); background-size: 28px 28px; }
+  @media (min-width: 1079.999px) {
+  html {
+    font-size: 0.9vw;
+  }
+  html .womoneya-page {
+    font-size: 0.9vw;
+  }
+}
+</style>
+</head>
+
+<body class="overflow-x-hidden bg-slate-100 font-sans text-slate-900 antialiased">
+
+<!-- ══════════════════ HEADER (unchanged) ══════════════════ -->
+<header class="sticky top-0 z-40 bg-white border-b border-slate-200">
+  <div class="mx-auto flex h-16 max-w-[110rem] items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
+    <a href="#" class="flex items-center gap-1 text-2xl font-bold tracking-tight text-navy">
+      FINT<span class="relative">O<span class="absolute -top-1 left-0 h-1.5 w-3 rounded-full bg-navy-400"></span></span>O
+    </a>
+
+    <nav class="hidden items-center gap-6 text-sm font-medium text-navy xl:flex">
+      <button class="flex items-center gap-1 hover:text-navy-500">Advisory
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="flex items-center gap-1 hover:text-navy-500">Invest
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="flex items-center gap-1 hover:text-navy-500">Tax
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <a href="#" class="hover:text-navy-500">Pricing</a>
+      <button class="flex items-center gap-1 hover:text-navy-500">Knowledge Base
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <a href="#" class="hover:text-navy-500">Womoneya 3.0</a>
+    </nav>
+
+    <div class="flex items-center gap-3 text-navy">
+      <button aria-label="Home" class="rounded-full p-2 hover:bg-navy-50">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10.5 12 3l9 7.5M5.5 9.5V20h13V9.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button aria-label="Support" class="rounded-full p-2 hover:bg-navy-50">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 13v-1a8 8 0 1 1 16 0v1M4 13h2.5a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-5Zm16 0h-2.5a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1H19a1 1 0 0 0 1-1v-5Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button aria-label="Cart" class="relative rounded-full p-2 hover:bg-navy-50">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h16l-1.2 10.2a2 2 0 0 1-2 1.8H7.2a2 2 0 0 1-2-1.8L4 8Zm4 0V6.5a4 4 0 1 1 8 0V8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="absolute right-0 top-0 flex h-4 w-4 items-center justify-center rounded-full bg-navy text-[0.6rem] font-semibold text-white">3</span>
+      </button>
+      <button class="flex items-center gap-1 rounded-full px-2 py-1 text-sm font-medium hover:bg-navy-50">Family
+        <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mx-auto flex max-w-[110rem] gap-6 px-4 py-6 sm:px-6 lg:px-8">
+
+  <!-- ══════════════════ SIDEBAR (unchanged) ══════════════════ -->
+  <aside class="sticky top-24 hidden h-fit w-[16.5rem] shrink-0 lg:block">
+    <nav class="overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200">
+      <a href="#" class="flex items-center gap-3 border-b border-slate-100 px-5 py-4 text-sm font-medium text-slate-600 hover:bg-navy-50/60 hover:text-navy">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10m5 10V4m5 16v-7m5 7V8" stroke-linecap="round"/></svg>Dashboard
+      </a>
+      <a href="#" class="flex items-center gap-3 border-b border-slate-100 px-5 py-4 text-sm font-medium text-slate-600 hover:bg-navy-50/60 hover:text-navy">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h9l3 3v15H6z" stroke-linejoin="round"/><path d="M9 9h6M9 13h6M9 17h4" stroke-linecap="round"/></svg>Data Gathering
+      </a>
+      <a href="#" aria-current="page" class="relative flex items-center gap-3 border-b border-slate-100 bg-navy-50 px-5 py-4 text-sm font-semibold text-navy">
+        <span class="absolute inset-y-2 left-0 w-1 rounded-r-full bg-navy"></span>
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8h18v11H3z" stroke-linejoin="round"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" stroke-linecap="round"/></svg>Portfolio
+      </a>
+      <a href="#" class="flex items-center gap-3 border-b border-slate-100 px-5 py-4 text-sm font-medium text-slate-600 hover:bg-navy-50/60 hover:text-navy">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 3h7l4 4v14H7z" stroke-linejoin="round"/><path d="M10 12h5M10 16h3" stroke-linecap="round"/></svg>Report
+      </a>
+      <a href="#" class="flex items-center gap-3 border-b border-slate-100 px-5 py-4 text-sm font-medium text-slate-600 hover:bg-navy-50/60 hover:text-navy">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h13l-3-3M20 16H7l3 3" stroke-linecap="round" stroke-linejoin="round"/></svg>Transaction
+      </a>
+      <a href="#" class="flex items-center gap-3 bg-navy-50/50 px-5 py-4 text-sm font-medium text-navy">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3 1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8L12 3Z" stroke-linejoin="round"/></svg>
+        <span class="truncate">Financial Independence</span>
+        <span class="ml-auto rounded-md bg-navy px-1.5 py-0.5 text-[0.6rem] font-bold tracking-wide text-white">NEW</span>
+      </a>
+    </nav>
+
+    <div class="mt-4 rounded-2xl bg-white p-5 ring-1 ring-slate-200">
+      <div class="flex items-center gap-2 text-sm font-medium text-slate-500">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18" stroke-linecap="round"/></svg>
+        Plan expiry date
+      </div>
+      <p class="mt-1 text-base font-semibold text-navy">14th November, 2026</p>
+    </div>
+
+    <div class="mt-4 overflow-hidden rounded-2xl bg-navy-900 p-5 text-white">
+      <svg class="h-5 w-5 text-navy-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m12 3 1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8L12 3Z" stroke-linejoin="round"/></svg>
+      <h3 class="mt-3 text-base font-semibold leading-snug">Financial Independence with AI</h3>
+      <p class="mt-2 text-sm leading-relaxed text-navy-200">AI-powered insights to help you retire wealthy and worry-free.</p>
+      <button class="mt-4 w-full rounded-xl bg-white px-4 py-2.5 text-sm font-semibold text-navy transition hover:bg-navy-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70">Explore now</button>
+    </div>
+  </aside>
+
+  <!-- ══════════════════ MAIN ══════════════════ -->
+  <main class="min-w-0 flex-1">
+
+    <div class="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-navy-400">
+          Wealth command centre <span class="h-1 w-1 rounded-full bg-navy-300"></span> Updated just now
+        </div>
+        <h1 class="mt-1 text-2xl font-semibold tracking-tight text-navy sm:text-3xl">Good evening, Khushboo</h1>
+        <p class="mt-1 text-sm text-slate-500">Here’s what changed across your family portfolio.</p>
+      </div>
+      <div class="flex flex-wrap items-center gap-2">
+        <button class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-semibold text-navy shadow-sm sm:px-4">
+          <span class="flex h-6 w-6 items-center justify-center rounded-full bg-navy text-[0.65rem] text-white">KF</span>
+          Family portfolio
+          <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <button class="inline-flex items-center gap-2 rounded-xl bg-navy px-3 py-2.5 text-sm font-semibold text-white shadow-sm sm:px-4">+ Add investment</button>
+      </div>
+    </div>
+
+    <!-- ───────── VIEW: PORTFOLIO ───────── -->
+    <section id="view-portfolio">
+
+      <!-- Wealth snapshot -->
+      <div class="soft-grid overflow-hidden rounded-[2rem] bg-[#071d3f] text-white shadow-[0_18px_55px_-30px_rgba(4,43,98,.65)]">
+        <div class="grid lg:grid-cols-[1.45fr_.75fr]">
+          <div class="p-6 sm:p-8 lg:p-10">
+            <div class="flex items-center gap-2 text-sm text-blue-200">
+              Total net worth
+              <span class="rounded-full border border-white/10 bg-white/10 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider">Family</span>
+            </div>
+            <div class="mt-3 flex flex-wrap items-end gap-x-4 gap-y-2">
+              <span class="whitespace-nowrap text-4xl font-semibold tracking-[-0.04em] tabular-nums sm:text-6xl">₹&nbsp;13.89 CR</span>
+              <span class="mb-1 inline-flex items-center gap-1 rounded-full bg-emerald-400/15 px-2.5 py-1 text-sm font-semibold text-emerald-300">↑ 8.4% <span class="font-normal text-blue-200">1Y</span></span>
+            </div>
+            <p class="mt-3 max-w-xl text-sm leading-relaxed text-blue-100/80">Your wealth grew by <span class="font-semibold text-white">₹ 1.08 CR</span> in the last 12 months. Real estate and government schemes contributed most.</p>
+
+            <div class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+              <div class="rounded-2xl border border-white/10 bg-white/[0.07] p-4"><p class="text-xs text-blue-200">Invested</p><p class="mt-1 text-lg font-semibold tabular-nums">₹ 8.91 CR</p></div>
+              <div class="rounded-2xl border border-white/10 bg-white/[0.07] p-4"><p class="text-xs text-blue-200">Total gain</p><p class="mt-1 text-lg font-semibold tabular-nums text-emerald-300">₹ 4.98 CR</p></div>
+              <div class="rounded-2xl border border-white/10 bg-white/[0.07] p-4"><p class="text-xs text-blue-200">Day change</p><p class="mt-1 text-lg font-semibold tabular-nums text-emerald-300">+₹ 42.6 K</p></div>
+              <div class="rounded-2xl border border-white/10 bg-white/[0.07] p-4"><p class="text-xs text-blue-200">Overall XIRR</p><p class="mt-1 text-lg font-semibold tabular-nums">12.8%</p></div>
+            </div>
+          </div>
+
+          <div class="border-t border-white/10 bg-white/[0.035] p-6 sm:p-8 lg:border-l lg:border-t-0">
+            <div class="flex items-center justify-between gap-3"><p class="text-sm font-semibold">Asset allocation</p><button class="hidden text-xs font-medium text-blue-200 hover:text-white sm:block">View analysis →</button></div>
+            <div class="mt-6 flex flex-col items-center justify-center gap-7 sm:flex-row">
+              <div class="portfolio-donut relative h-36 w-36 shrink-0 rounded-full">
+                <div class="absolute inset-[1.15rem] flex flex-col items-center justify-center rounded-full bg-[#10294d]"><span class="text-xs text-blue-200">Assets</span><span class="text-xl font-semibold">11</span></div>
+              </div>
+              <div class="space-y-3 text-xs">
+                <p class="flex items-center gap-2"><span class="h-2.5 w-2.5 rounded-full bg-[#4f8cff]"></span><span class="text-blue-200">Real estate</span><b class="ml-auto pl-5">36%</b></p>
+                <p class="flex items-center gap-2"><span class="h-2.5 w-2.5 rounded-full bg-[#19b394]"></span><span class="text-blue-200">Govt. schemes</span><b class="ml-auto pl-5">25%</b></p>
+                <p class="flex items-center gap-2"><span class="h-2.5 w-2.5 rounded-full bg-[#f4b740]"></span><span class="text-blue-200">Unlisted/AIF</span><b class="ml-auto pl-5">19%</b></p>
+                <p class="flex items-center gap-2"><span class="h-2.5 w-2.5 rounded-full bg-[#a477ff]"></span><span class="text-blue-200">Others</span><b class="ml-auto pl-5">20%</b></p>
+              </div>
+            </div>
+            <div class="mt-6 rounded-2xl border border-amber-300/20 bg-amber-300/10 p-4 text-xs leading-relaxed text-amber-100"><span class="font-semibold text-amber-300">Concentration watch:</span> 61% of your wealth is in illiquid assets.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI briefing -->
+      <div class="mt-5 grid gap-3 xl:grid-cols-[1.1fr_1fr_1fr]">
+        <div class="rounded-2xl bg-gradient-to-br from-indigo-600 to-navy p-5 text-white shadow-sm">
+          <div class="flex items-center gap-2"><span class="flex h-8 w-8 items-center justify-center rounded-xl bg-white/15">✦</span><div><p class="text-sm font-semibold">Fintoo AI briefing</p><p class="text-[0.68rem] text-indigo-200">3 insights from your portfolio</p></div></div>
+          <p class="mt-4 text-sm leading-relaxed text-indigo-50">You’re growing steadily, but liquidity is lower than ideal for your family profile.</p>
+          <button class="mt-4 text-xs font-semibold text-white">Review full analysis →</button>
+        </div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div class="flex items-start gap-3"><span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-600">!</span><div><p class="text-xs font-semibold uppercase tracking-wider text-amber-600">Needs attention</p><p class="mt-1 text-sm font-semibold text-navy">Build a larger liquidity buffer</p><p class="mt-1 text-xs leading-relaxed text-slate-500">Liquid assets are only 7%; your target range is 10–15%.</p></div></div><button class="mt-4 text-xs font-semibold text-navy">See suggested move →</button></div>
+        <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div class="flex items-start gap-3"><span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">↗</span><div><p class="text-xs font-semibold uppercase tracking-wider text-emerald-600">Opportunity</p><p class="mt-1 text-sm font-semibold text-navy">Three ELSS funds overlap</p><p class="mt-1 text-xs leading-relaxed text-slate-500">Consolidating could simplify tracking without changing your equity exposure.</p></div></div><button class="mt-4 text-xs font-semibold text-navy">Compare funds →</button></div>
+      </div>
+
+      <!-- Asset class navigator -->
+      <div class="mt-5 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <div class="flex items-center justify-between border-b border-slate-100 px-5 py-4 sm:px-6"><div><h2 class="text-base font-semibold text-navy">Explore by asset class</h2><p class="mt-0.5 text-xs text-slate-500">Select a category to review holdings and performance</p></div><span class="hidden rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-500 sm:block">11 categories</span></div>
+        <div id="assetRail" class="flex gap-2 overflow-x-auto px-4 py-3 sm:px-6 [scrollbar-width:none]"></div>
+      </div>
+
+      <!-- Asset panel -->
+      <div id="assetPanel" class="mt-6"></div>
+    </section>
+
+    <!-- ───────── VIEW: FUND DETAIL ───────── -->
+    <section id="view-fund" class="hidden animate-riseIn">
+      <div class="mb-5 flex items-center justify-between">
+        <button onclick="showPortfolio()" class="inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-navy transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-navy/40">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back to portfolio
+        </button>
+        <p class="text-sm text-slate-500">Investor <span class="font-semibold text-navy">Khushboo</span></p>
+      </div>
+      <div id="fundDetail"></div>
+    </section>
+
+    <!-- ───────── VIEW: FORMS ───────── -->
+    <section id="view-form" class="hidden animate-riseIn">
+      <button onclick="showPortfolio()" class="mb-5 inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-navy transition hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-navy/40">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to portfolio
+      </button>
+      <div id="formHost"></div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ══════════════════ FOOTER (unchanged) ══════════════════ -->
+<footer class="mt-10 bg-navy-800 text-white">
+  <div class="mx-auto grid max-w-[110rem] gap-10 px-6 py-14 lg:grid-cols-[20rem_1fr] lg:px-8">
+    <div>
+      <div class="flex items-center gap-1 text-3xl font-bold tracking-tight">
+        FINT<span class="relative">O<span class="absolute -top-1 left-0 h-1.5 w-3.5 rounded-full bg-navy-300"></span></span>O
+      </div>
+      <p class="mt-5 text-sm text-navy-100">+91-9699 800 600</p>
+      <p class="mt-1 text-sm text-navy-100">online@fintoo.in</p>
+      <div class="mt-5 flex gap-2">
+        <a href="#" aria-label="Twitter" class="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 hover:bg-white/20"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 3H22l-7 8 8.2 10h-6.4l-5-6.1L6 21H3l7.5-8.6L2.6 3H9l4.5 5.6L18.9 3Z"/></svg></a>
+        <a href="#" aria-label="Facebook" class="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 hover:bg-white/20"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8.2c0-.9.3-1.5 1.5-1.5H17V4.1c-.3 0-1.3-.1-2.4-.1-2.4 0-4.1 1.5-4.1 4.2V10H8v3h2.5v8h3Z"/></svg></a>
+        <a href="#" aria-label="LinkedIn" class="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 hover:bg-white/20"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6.9 8.5v11.6H3.4V8.5h3.5ZM5.2 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4Zm5.1 5.5h3.4v1.6c.5-.9 1.7-1.9 3.6-1.9 3.1 0 3.8 2 3.8 4.7v6.2h-3.5v-5.5c0-1.4-.3-2.6-1.8-2.6s-2 1.2-2 2.5v5.6h-3.5V8.5Z"/></svg></a>
+        <a href="#" aria-label="Instagram" class="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 hover:bg-white/20"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17" cy="7" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="YouTube" class="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 hover:bg-white/20"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2c-.2-1-1-1.7-2-1.9C17.9 5 12 5 12 5s-5.9 0-7.6.3c-1 .2-1.8.9-2 1.9C2 9 2 12 2 12s0 3 .4 4.8c.2 1 1 1.7 2 1.9C6.1 19 12 19 12 19s5.9 0 7.6-.3c1-.2 1.8-.9 2-1.9.4-1.8.4-4.8.4-4.8s0-3-.4-4.8ZM10 15V9l5.2 3L10 15Z"/></svg></a>
+      </div>
+    </div>
+
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+      <div>
+        <h4 class="text-base font-semibold">Advisory</h4>
+        <ul class="mt-4 space-y-2.5 text-sm text-navy-100">
+          <li><a href="#" class="hover:text-white">Financial Planning</a></li>
+          <li><a href="#" class="hover:text-white">Retirement Planning</a></li>
+          <li><a href="#" class="hover:text-white">Investment Planning</a></li>
+          <li><a href="#" class="hover:text-white">Tax Planning</a></li>
+          <li><a href="#" class="hover:text-white">Risk Management</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-base font-semibold">Invest</h4>
+        <ul class="mt-4 space-y-2.5 text-sm text-navy-100">
+          <li><a href="#" class="hover:text-white">Mutual Fund</a></li>
+          <li><a href="#" class="hover:text-white">Bond</a></li>
+          <li><a href="#" class="hover:text-white">Domestic Equity</a></li>
+          <li><a href="#" class="hover:text-white">International Equity</a></li>
+          <li><a href="#" class="hover:text-white">IPO</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-base font-semibold">Tax</h4>
+        <ul class="mt-4 space-y-2.5 text-sm text-navy-100">
+          <li><a href="#" class="hover:text-white">NRI Taxation</a></li>
+          <li><a href="#" class="hover:text-white">Notices</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-base font-semibold">About Us</h4>
+        <ul class="mt-4 space-y-2.5 text-sm text-navy-100">
+          <li><a href="#" class="hover:text-white">Safety Shield (Data Privacy)</a></li>
+          <li><a href="#" class="hover:text-white">About Us</a></li>
+          <li><a href="#" class="hover:text-white">Contact Us</a></li>
+        </ul>
+        <div class="mt-5 space-y-2">
+          <a href="#" class="flex w-40 items-center gap-2 rounded-lg bg-black px-3 py-2">
+            <svg class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M4 3.5v17l13-8.5-13-8.5Z"/></svg>
+            <span class="text-left leading-tight"><span class="block text-[0.55rem] text-slate-300">GET IT ON</span><span class="block text-xs font-semibold">Google Play</span></span>
+          </a>
+          <a href="#" class="flex w-40 items-center gap-2 rounded-lg bg-black px-3 py-2">
+            <svg class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.2-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .8 1.1 1.7 2.3 2.9 2.2 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.2-2.6 0 0-2.4-.9-2.4-3.4ZM14.2 5.5c.6-.8 1-1.9.9-3-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.8-.9 2.9 1 .1 2-.5 2.7-1.3Z"/></svg>
+            <span class="text-left leading-tight"><span class="block text-[0.55rem] text-slate-300">Available on the</span><span class="block text-xs font-semibold">App Store</span></span>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-base font-semibold">Others</h4>
+        <ul class="mt-4 space-y-2.5 text-sm text-navy-100">
+          <li><a href="#" class="hover:text-white">Tools &amp; Calculators</a></li>
+          <li><a href="#" class="hover:text-white">Partner With Us</a></li>
+          <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+          <li><a href="#" class="hover:text-white">Terms and Conditions</a></li>
+          <li><a href="#" class="hover:text-white">Grievance Mechanism</a></li>
+          <li><a href="#" class="hover:text-white">Complaints Status</a></li>
+          <li><a href="#" class="hover:text-white">Access Online Dispute Resolution (ODR) Portal</a></li>
+          <li><a href="#" class="hover:text-white">Investor Charter</a></li>
+          <li><a href="#" class="hover:text-white">Compliance Audit Status</a></li>
+          <li><a href="#" class="hover:text-white">Help Center</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="mx-auto max-w-[110rem] space-y-4 px-6 py-8 text-xs leading-relaxed text-navy-200 lg:px-8">
+      <p>Fintoo Wealth Private Limited (Brand Name - Fintoo.in, Fintoo app, Fintoo) makes no warranties or representations, express or implied, on products and services offered through the platform. It accepts no liability for any damages or losses, however, caused in connection with the use of, or on the reliance of its advisory or related services. Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs. Performance and returns of any investment portfolio can neither be predicted nor guaranteed. Investments made on advisory are subject to market risks, read all scheme related documents carefully.</p>
+      <p>© Fintoo Wealth Private Limited [SEBI RIA Registration No: INA000020031] [BASL Membership ID: 2252] [Type of Registration: Non-Individual] [Validity of registration: March 26,2025-Perpetual] [Address: Fintoo Wealth Private Limited, B/309, Dynasty Business park, Opp Sangam Cinema, Andheri (East), J B Nagar, Mumbai, Maharashtra 400059] [CIN - U66301MH2023PTC414206] [GST No : 27AAFCF7114E1ZV] [Principal Officer details : Mr. Mihir Shah (mihir.shah@fintoo.in)] [Compliance Officer details : Mrs. Nisha Harchekar (nisha.harchekar@fintoo.in)] [Corresponding SEBI regional/local office: Plot No. C 4-A , G Block, Near Bank of India, Bandra Kurla Complex,Bandra East, Mumbai, Maharashtra 400051]</p>
+      <p class="text-center text-navy-300">Copyright © 2026 Fintoo. All rights reserved</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================ ICONS ============================ */
+const ico = {
+  scale: '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 4v16M7 20h10M12 6 5 9m7-3 7 3M2.5 15a2.5 2.5 0 0 0 5 0L5 9l-2.5 6Zm14 0a2.5 2.5 0 0 0 5 0L19 9l-2.5 6Z" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  home:  '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 10.5 12 3l9 7.5M5.5 9.5V20h13V9.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  spark: '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m12 3 1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8L12 3Z" stroke-linejoin="round"/></svg>',
+  gold:  '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 16h6l2-4H7l-2 4Zm8 0h6l2-4h-6l-2 4ZM9 12h6l2-4h-6l-2 4Z" stroke-linejoin="round"/></svg>',
+  drop:  '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3s6 6.4 6 10.4A6 6 0 0 1 6 13.4C6 9.4 12 3 12 3Z" stroke-linejoin="round"/></svg>',
+  grid:  '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>',
+  up:    '<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 19V5m0 0-6 6m6-6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  down:  '<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 5v14m0 0 6-6m-6 6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  chev:  '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 5 7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  refresh:'<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M20 11a8 8 0 1 0-.8 4.5M20 5v6h-6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  filter:'<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 6h16M7 12h10M10 18h4" stroke-linecap="round"/></svg>',
+  plus:  '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg>',
+  edit:  '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20h4l10-10-4-4L4 16v4Zm10.5-13.5 3 3" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  trash: '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M9 7V5h6v2m-8 0 1 13h8l1-13M10 11v6M14 11v6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  dots:  '<svg class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg>',
+  cal:   '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18" stroke-linecap="round"/></svg>',
+  txn:   '<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h13l-3-3M20 16H7l3 3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+
+/* ============================ DATA ============================ */
+const FUNDS = [
+  {n:'Parag Parikh Flexi Cap Fund - Direct Plan Growth', tags:['Purchase'], m:'Khushboo', folio:'15568509', nav:'91.1767', units:'2341.477', cur:'2,13,488.15', inv:'1,99,990.00', gain:'13,498.15', day:'1,139.60', dpct:'0.54%', neg:false, xirr:'3.3',
+   cat:'Equity', risk:'Very High Risk Equity', star:4, avgnav:'85.412',
+   txns:[{d:'23-08-2024', a:'₹ 1,99,990.00', nav:'85.41', t:'Purchase', u:'2341.477'}]},
+  {n:'HDFC Balanced Adv Dir Gr', tags:['Purchase','External'], m:'Khushboo', folio:'27186332', nav:'572.286', units:'364.565', cur:'2,08,635.45', inv:'1,99,990.00', gain:'8,645.45', day:'242.80', dpct:'0.12%', neg:false, xirr:'2.13',
+   cat:'Hybrid', risk:'Very High Risk Equity', star:4, avgnav:'548.57',
+   txns:[{d:'23-08-2024', a:'₹ 1,99,990.00', nav:'548.57', t:'Purchase', u:'364.565'}]},
+  {n:'Quant ELSS Tax Saver Dir Gr', tags:['Purchase','External'], m:'Khushboo', folio:'51021624495', nav:'468.1062', units:'283.457', cur:'1,32,687.98', inv:'79,996.00', gain:'52,691.98', day:'262.54', dpct:'0.2%', neg:false, xirr:'16.34',
+   cat:'Equity', risk:'Very High Risk Equity', star:4, avgnav:'282.22',
+   txns:[{d:'23-08-2024', a:'₹ 79,996.00', nav:'282.22', t:'Purchase', u:'283.457'}]},
+  {n:'Mirae Asset ELSS Tax Saver Dir Gr', tags:['Purchase','External'], m:'Khushboo', folio:'77763270926', nav:'58.329', units:'1831.805', cur:'1,06,847.35', inv:'74,996.25', gain:'31,851.10', day:'236.30', dpct:'0.22%', neg:false, xirr:'12.79',
+   cat:'Equity', risk:'Very High Risk Equity', star:4, avgnav:'40.94',
+   txns:[{d:'23-08-2024', a:'₹ 74,996.25', nav:'40.94', t:'Purchase', u:'1831.805'}]},
+  {n:'Parag Parikh ELSS Tax Saver Dir Gr', tags:['Purchase','External'], m:'Khushboo', folio:'13210146', nav:'31.9577', units:'3244.104', cur:'1,03,674.10', inv:'74,996.25', gain:'28,677.85', day:'479.15', dpct:'0.46%', neg:false, xirr:'11.05',
+   cat:'Equity', risk:'Very High Risk Equity', star:4, avgnav:'23.12',
+   txns:[{d:'23-08-2024', a:'₹ 74,996.25', nav:'23.12', t:'Purchase', u:'3244.104'}]},
+  {n:'Nippon India Small Cap Dir Gr', tags:['SIP','External'], m:'Khushboo', folio:'477317462356', nav:'210.6366', units:'423.221', cur:'89,145.83', inv:'77,496.28', gain:'11,649.55', day:'62.04', dpct:'0.07%', neg:false, xirr:'11.08',
+   cat:'Equity', risk:'Very High Risk Equity', star:4, avgnav:'183.11',
+   txns:[{d:'23-08-2024', a:'₹ 77,496.28', nav:'183.11', t:'SIP', u:'423.221'}]},
+  {n:'HDFC Large & Mid Cap Dir Gr', tags:['SIP','External'], m:'Khushboo', folio:'27186332', nav:'374.345', units:'226.481', cur:'84,782.03', inv:'77,496.28', gain:'7,285.75', day:'64.55', dpct:'0.08%', neg:false, xirr:'7.03',
+   cat:'Equity', risk:'Very High Risk Equity', star:4, avgnav:'342.18',
+   txns:[{d:'23-08-2024', a:'₹ 77,496.28', nav:'342.18', t:'SIP', u:'226.481'}]},
+  {n:'Nippon India Multi Cap Dir Gr', tags:['SIP','External'], m:'Khushboo', folio:'477317462356', nav:'336.5437', units:'249.412', cur:'83,938.04', inv:'77,496.28', gain:'6,441.76', day:'78.89', dpct:'-0.09%', neg:true, xirr:'6.23',
+   cat:'Equity', risk:'Very High Risk Equity', star:4, avgnav:'310.72',
+   txns:[{d:'23-08-2024', a:'₹ 77,496.28', nav:'310.72', t:'SIP', u:'249.412'}]},
+  {n:'Quant ELSS Tax Save rGr', tags:['Purchase','External'], m:'Khushboo', folio:'51010506204', nav:'413.7584', units:'72.596', cur:'30,037.20', inv:'14,999.25', gain:'15,037.95', day:'58.68', dpct:'0.2%', neg:false, xirr:'16.66',
+   cat:'Equity', risk:'Very High Risk Equity', star:4, avgnav:'206.61',
+   txns:[{d:'23-08-2024', a:'₹ 14,999.25', nav:'206.61', t:'Purchase', u:'72.596'}]},
+  {n:'Bandhan ELSS - Tax saver Dir Gr', tags:['Purchase','External'], m:'Khushboo', folio:'4225817', nav:'181.555', units:'147.367', cur:'26,755.22', inv:'19,999.00', gain:'6,756.22', day:'72.95', dpct:'0.27%', neg:false, xirr:'11.02',
+   cat:'Equity', risk:'Very High Risk Equity', star:4, avgnav:'135.71',
+   txns:[{d:'23-08-2024', a:'₹ 19,999.00', nav:'135.71', t:'Purchase', u:'147.367'}]},
+  {n:'Mirae Asset ELSS Tax Saver Reg Gr', tags:['Purchase','External'], m:'Khushboo', folio:'77754618811', nav:'51.009', units:'511.78', cur:'26,105.39', inv:'14,999.25', gain:'11,106.14', day:'55.79', dpct:'0.21%', neg:false, xirr:'13.08',
+   cat:'Equity', risk:'Very High Risk Equity', star:4, avgnav:'29.31',
+   txns:[{d:'23-08-2024', a:'₹ 14,999.25', nav:'29.31', t:'Purchase', u:'511.78'}]},
+  {n:'Aditya BSL ELSS Tax Saver Gr', tags:['Redemption','External'], m:'Khushboo', folio:'1036235584', nav:'62.39', units:'165.137', cur:'10,302.90', inv:'5,000.00', gain:'5,302.90', day:'19.82', dpct:'0.19%', neg:false, xirr:'9.42',
+   cat:'Equity', risk:'Very High Risk Equity', star:4, avgnav:'30.28',
+   txns:[{d:'23-08-2024', a:'₹ 5,000.00', nav:'30.28', t:'Redemption', u:'165.137'}]},
+  {n:'Tata Aggressive Hybrid Reg IDCW-R', tags:['Purchase','External'], m:'Khushboo', folio:'7765034', nav:'79.1828', units:'2.936', cur:'232.48', inv:'229.99', gain:'2.49', day:'0.30', dpct:'0.13%', neg:false, xirr:'0.31',
+   cat:'Hybrid', risk:'Very High Risk Equity', star:4, avgnav:'78.33',
+   txns:[{d:'23-08-2024', a:'₹ 229.99', nav:'78.33', t:'Purchase', u:'2.936'}]}
+];
+
+const ASSETS = [
+  {id:'mf',        label:'Mutual Fund',         icon:ico.scale},
+  {id:'stocks',    label:'Stocks',              icon:ico.scale},
+  {id:'us',        label:'US Equity',           icon:ico.scale},
+  {id:'unlisted',  label:'Unlisted/AIF Equity', icon:ico.scale},
+  {id:'fd',        label:'FD / Bonds',          icon:ico.scale},
+  {id:'govt',      label:'Govt. Scheme',        icon:ico.scale},
+  {id:'realestate',label:'Real Estate',         icon:ico.home},
+  {id:'alternate', label:'Alternate',           icon:ico.spark},
+  {id:'gold',      label:'Gold',                icon:ico.gold},
+  {id:'liquid',    label:'Liquid',              icon:ico.drop},
+  {id:'others',    label:'Others',              icon:ico.grid}
+];
+
+/* ============================ PRIMITIVES ============================ */
+const btnPrimary  = 'inline-flex items-center justify-center gap-2 rounded-xl bg-navy px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-navy-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-navy/40 focus-visible:ring-offset-2';
+const btnOutline  = 'inline-flex items-center justify-center gap-2 rounded-xl border border-navy-200 bg-white px-4 py-2.5 text-sm font-semibold text-navy transition hover:border-navy-300 hover:bg-navy-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-navy/40 focus-visible:ring-offset-2';
+const iconBtn     = 'inline-flex h-9 w-9 items-center justify-center rounded-lg text-navy-500 transition hover:bg-navy-50 hover:text-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-navy/40';
+
+function compactINR(value){
+  const amount = Number(String(value).replace(/[₹,\s]/g, ''));
+  if (!Number.isFinite(amount) || Math.abs(amount) <= 9999) return value;
+
+  const absolute = Math.abs(amount);
+  const [divisor, suffix] = absolute >= 10000000
+    ? [10000000, 'CR']
+    : absolute >= 100000
+      ? [100000, 'L']
+      : [1000, 'K'];
+  const compact = (amount / divisor).toFixed(2).replace(/\.00$/, '').replace(/(\.\d)0$/, '$1');
+  return `${compact} ${suffix}`;
+}
+
+function compactCurrencyMarkup(markup){
+  return markup.replace(/₹(?:&nbsp;|\s)*([\d,]+(?:\.\d+)?)/g, (_, amount) => `₹ ${compactINR(amount)}`);
+}
+
+function stat(s){
+  return `<div class="px-5 py-4">
+      <p class="text-xs font-medium text-slate-500">${s.label}</p>
+      <p class="mt-1.5 whitespace-nowrap text-lg font-semibold tabular-nums ${s.tone||'text-navy'}">${s.value}</p>
+      ${s.sub ? `<p class="mt-0.5 whitespace-nowrap text-xs tabular-nums text-slate-500">${s.sub}</p>` : ''}
+    </div>`;
+}
+function statStrip(stats, right){
+  return `<div class="flex flex-col gap-4 rounded-2xl bg-white p-1.5 ring-1 ring-slate-200 xl:flex-row xl:items-center xl:justify-between">
+      <div class="grid flex-1 grid-cols-2 divide-slate-100 sm:grid-cols-3 sm:divide-x lg:grid-cols-4 xl:grid-cols-none xl:auto-cols-max xl:grid-flow-col xl:justify-between">
+        ${stats.map(stat).join('')}
+      </div>
+      ${right ? `<div class="flex items-center justify-end gap-3 px-4 pb-3 xl:pb-0">${right}</div>` : ''}
+    </div>`;
+}
+function delta(value, pct, neg){
+  const tone = neg ? 'text-rose-600' : 'text-emerald-600';
+  return `<span class="inline-flex items-center gap-1 ${tone} tabular-nums">${neg?ico.down:ico.up}₹ ${value}${pct?` (${pct})`:''}</span>`;
+}
+function xirrChip(v, neg){
+  return `<span class="inline-flex items-center gap-1 rounded-lg bg-navy-50 px-2.5 py-1 text-sm font-semibold tabular-nums text-navy">${v}%</span>`;
+}
+function chip(text){
+  return `<span class="rounded-md bg-navy-50 px-2 py-0.5 text-xs font-medium text-navy-600">${text}</span>`;
+}
+function initials(name){
+  return name.replace(/[^A-Za-z ]/g,'').split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();
+}
+function sectionHead(title, sub, right){
+  return `<div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 px-5 py-4 sm:px-6">
+      <div>
+        <h2 class="text-base font-semibold text-navy">${title}</h2>
+        ${sub?`<p class="mt-0.5 text-xs text-slate-500">${sub}</p>`:''}
+      </div>
+      ${right||''}
+    </div>`;
+}
+
+/* ============================ TABLE RENDERER ============================ */
+function table(cfg){
+  const cols = cfg.columns;
+  const head = cols.map(c=>`<th scope="col" class="whitespace-nowrap px-4 py-3 text-xs font-medium text-slate-500 ${c.align==='right'?'text-right':'text-left'}">${c.label}</th>`).join('')
+    + (cfg.rowActions?`<th scope="col" class="w-24 px-4 py-3"><span class="sr-only">Actions</span></th>`:'');
+
+  const body = cfg.rows.map(r=>{
+    const cells = r.map((cell,i)=>`<td class="whitespace-nowrap px-4 py-4 text-sm ${cols[i].align==='right'?'text-right':'text-left'} ${cols[i].cls||'text-slate-700'}">${cell}</td>`).join('');
+    const actions = cfg.rowActions ? `<td class="px-4 py-4 text-right">
+        <div class="flex items-center justify-end gap-1">
+          ${cfg.rowActions.includes('edit')?`<button onclick="openForm('${cfg.formKey}')" aria-label="Edit" class="${iconBtn}">${ico.edit}</button>`:''}
+          <button aria-label="Delete" class="${iconBtn} hover:bg-rose-50 hover:text-rose-600">${ico.trash}</button>
+        </div></td>` : '';
+    return `<tr class="transition hover:bg-navy-50/40">${cells}${actions}</tr>`;
+  }).join('');
+
+  return `<div class="overflow-x-auto">
+      <table class="w-full min-w-[52rem] border-collapse">
+        <thead class="bg-slate-50/80"><tr>${head}</tr></thead>
+        <tbody class="divide-y divide-slate-100">${body}</tbody>
+      </table>
+    </div>`;
+}
+
+function emptyState(label){
+  return `<div class="rounded-2xl bg-white px-6 py-20 text-center ring-1 ring-slate-200">
+      <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-navy-50 text-navy">${ico.grid}</div>
+      <h3 class="mt-4 text-base font-semibold text-navy">No ${label.toLowerCase()} holdings yet</h3>
+      <p class="mx-auto mt-1 max-w-sm text-sm text-slate-500">Add your existing ${label.toLowerCase()} assets to see them alongside the rest of your portfolio.</p>
+      <button class="${btnPrimary} mt-6">${ico.plus} Add ${label.toLowerCase()}</button>
+    </div>`;
+}
+
+/* ============================ PANELS ============================ */
+function panelMF(){
+  const stats = [
+    {label:'Total funds', value:'13'},
+    {label:'Active SIP', value:'3', sub:'₹ 7,499.64'},
+    {label:'Invested', value:'₹ 9,17,684.83'},
+    {label:'Total fund value', value:'₹ 11,16,632.12'},
+    {label:'Returns', value:'₹ 1,98,947.29', tone:'text-emerald-600'},
+    {label:'Day change', value:`<span class="inline-flex items-center gap-1 text-emerald-600">${ico.up}₹ 2,615.63</span>`, sub:'0.23%'},
+    {label:'XIRR', value:`<span class="inline-flex items-center gap-1 text-emerald-600">${ico.up}9%</span>`}
+  ];
+  const right = `<div class="text-right">
+      <button class="${btnPrimary}">${ico.refresh} Refresh</button>
+      <p class="mt-1.5 text-xs text-slate-500">Last updated 27-08-2026</p>
+    </div>`;
+
+  const rows = FUNDS.map((f,i)=>`
+    <button onclick="openFund(${i})" class="group grid w-full grid-cols-1 items-center gap-4 px-5 py-5 text-left transition hover:bg-navy-50/40 focus:outline-none focus-visible:bg-navy-50 sm:px-6 lg:grid-cols-[minmax(0,1fr)_9rem_10rem_5rem_2rem]">
+      <div class="flex min-w-0 items-start gap-3.5">
+        <span class="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-navy-50 text-xs font-bold text-navy">${initials(f.n)}</span>
+        <div class="min-w-0">
+          <div class="flex flex-wrap items-center gap-1.5">
+            ${f.tags.map(chip).join('')}
+            <span class="text-xs font-semibold text-navy-500">${f.m}</span>
+          </div>
+          <p class="mt-1 truncate text-sm font-semibold text-navy">${f.n}</p>
+          <p class="mt-1 text-xs tabular-nums text-slate-500">Folio ${f.folio} &nbsp;·&nbsp; NAV ${f.nav} &nbsp;·&nbsp; ${f.units} units</p>
+        </div>
+      </div>
+
+      <div class="lg:text-right">
+        <p class="text-sm font-semibold tabular-nums text-navy">₹ ${f.cur}</p>
+        <p class="mt-0.5 text-xs tabular-nums text-slate-500">₹ ${f.inv} invested</p>
+      </div>
+
+      <div class="lg:text-right">
+        <p class="text-sm font-semibold tabular-nums text-emerald-600">₹ ${f.gain}</p>
+        <p class="mt-0.5 text-xs tabular-nums ${f.neg?'text-rose-600':'text-slate-500'}">${f.neg?'-':''}₹ ${f.day} (${f.dpct})</p>
+      </div>
+
+      <div class="lg:text-right">${xirrChip(f.xirr)}</div>
+
+      <span class="hidden justify-end text-navy-300 transition group-hover:text-navy lg:flex">${ico.chev}</span>
+    </button>`).join('');
+
+  return statStrip(stats, right) + `
+    <div class="mt-5 overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200">
+      ${sectionHead('Funds', '13 holdings · sorted by current value',
+        `<div class="flex items-center gap-2">
+          <button class="${btnOutline}">${ico.filter} Sort &amp; filter</button>
+        </div>`)}
+      <div class="hidden grid-cols-[minmax(0,1fr)_9rem_10rem_5rem_2rem] gap-4 border-b border-slate-100 bg-slate-50/80 px-6 py-3 text-xs font-medium text-slate-500 lg:grid">
+        <span>Fund</span><span class="text-right">Current value</span><span class="text-right">Gain · day change</span><span class="text-right">XIRR</span><span></span>
+      </div>
+      <div class="divide-y divide-slate-100">${rows}</div>
+    </div>`;
+}
+
+function panelStocks(){
+  const stats = [
+    {label:'Total stocks', value:'1'},
+    {label:'Current value', value:'₹ 1,821.00'},
+    {label:'1 day change', value:`<span class="inline-flex items-center gap-1 text-rose-600">${ico.down}₹ 45.00</span>`, sub:'2.41%'}
+  ];
+  const right = `<div class="text-right">
+      <button class="${btnPrimary}">${ico.refresh} Refresh</button>
+      <p class="mt-1.5 text-xs text-slate-500">Last updated 16-07-2026</p>
+    </div>`;
+
+  const nameCell = `<div class="flex items-center gap-3">
+      <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-navy-50 text-[0.65rem] font-bold text-navy">TS</span>
+      <div>
+        <p class="text-sm font-semibold text-navy">TATA STEEL LIMITED</p>
+        <p class="mt-0.5 text-xs text-slate-500">Metals &amp; Mining - Iron &amp; Steel/Interm. Products &nbsp;·&nbsp; <span class="tabular-nums">₹ 186.50</span> &nbsp;·&nbsp; <span class="inline-flex items-center gap-0.5 tabular-nums text-rose-600">${ico.down}2.41%</span></p>
+      </div>
+    </div>`;
+
+  return statStrip(stats, right) + `
+    <div class="mt-5 overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200">
+      ${sectionHead('Stocks', '1 holding', `<button class="${btnOutline}">${ico.filter} Sort &amp; filter</button>`)}
+      ${table({
+        columns:[{label:'Stock name'},{label:'No. of shares', align:'right'},{label:'Current value', align:'right', cls:'font-semibold text-navy tabular-nums'}],
+        rows:[[nameCell, '<span class="tabular-nums">10</span>', '₹ 1,821.00']],
+        rowActions:'delete'
+      })}
+    </div>`;
+}
+
+function panelUS(){
+  const stats = [
+    {label:'Total US equity', value:'1'},
+    {label:'Invested value', value:'₹ 1,100.00'},
+    {label:'Current value', value:'₹ 1,685.00'},
+    {label:'Today gain/loss', value:'₹ 585.00', tone:'text-emerald-600'}
+  ];
+  const right = `<button class="${btnPrimary}">${ico.plus} Add</button>`;
+
+  const nameCell = `<div class="flex items-center gap-3">
+      <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-navy-50 text-navy">${ico.scale}</span>
+      <p class="text-sm font-semibold text-navy">DIREXION DAILY AAPL BEAR 1X</p>
+    </div>`;
+
+  return statStrip(stats, right) + `
+    <div class="mt-5 overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200">
+      ${sectionHead('US equity', '1 holding')}
+      ${table({
+        formKey:'us',
+        columns:[{label:'Stock/ETF name'},{label:'Member name'},{label:'Invested value', align:'right', cls:'tabular-nums'},{label:'Current value', align:'right', cls:'font-semibold text-navy tabular-nums'},{label:'No. of shares', align:'right', cls:'tabular-nums'},{label:'Total returns', align:'right'}],
+        rows:[[nameCell,'Self','₹ 1,100.00','₹ 1,685.00','100','<span class="font-semibold tabular-nums text-emerald-600">53.18 %</span>']],
+        rowActions:'edit-delete'
+      })}
+    </div>`;
+}
+
+function panelUnlisted(){
+  const stats = [
+    {label:'Total unlisted/AIF equity', value:'9'},
+    {label:'Invested value', value:'₹ 1,48,06,481.00'},
+    {label:'Current value', value:'₹ 2,14,40,711.00'},
+    {label:'Today gain/loss', value:'₹ 66,34,230.00', tone:'text-emerald-600'}
+  ];
+  const right = `<button onclick="openForm('aif')" class="${btnPrimary}">${ico.plus} Add</button>`;
+
+  const name = `<div class="flex items-center gap-3">
+      <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-navy-50 text-navy">${ico.scale}</span>
+      <p class="text-sm font-semibold text-navy">AIF</p>
+    </div>`;
+
+  const data = [
+    ['₹ 1,23,450.00','₹ 1,33,450.00','10','₹ 1,33,450.00'],
+    ['₹ 1.00','₹ 1.00','–','₹ 1.00'],
+    ['₹ 10.00','₹ 20.00','–','₹ 20.00'],
+    ['₹ 10.00','₹ 20.00','–','₹ 20.00'],
+    ['₹ 10.00','₹ 20.00','–','₹ 20.00'],
+    ['₹ 1,33,45,600.00','₹ 1,99,66,300.00','10','₹ 1,99,66,300.00']
+  ];
+
+  return statStrip(stats, right) + `
+    <div class="mt-5 overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200">
+      ${sectionHead('Unlisted &amp; AIF equity', '9 holdings')}
+      ${table({
+        formKey:'aif',
+        columns:[{label:'Equity name'},{label:'Member name'},{label:'Invested value', align:'right', cls:'tabular-nums'},{label:'Current value', align:'right', cls:'font-semibold text-navy tabular-nums'},{label:'No. of shares', align:'right', cls:'tabular-nums'},{label:'Total returns', align:'right', cls:'tabular-nums text-emerald-600 font-semibold'}],
+        rows:data.map(d=>[name,'Self',d[0],d[1],d[2],d[3]]),
+        rowActions:'edit-delete'
+      })}
+    </div>`;
+}
+
+function panelFD(){
+  const stats = [
+    {label:'Total FDs &amp; bonds', value:'7'},
+    {label:'Invested value', value:'₹ 27,02,000'},
+    {label:'Maturity value', value:'₹ 30,18,022.65'}
+  ];
+  const right = `<button onclick="openForm('fd')" class="${btnPrimary}">${ico.plus} Add FD &amp; bonds</button>`;
+
+  const asset = n => `<div class="flex items-center gap-3">
+      <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-navy-50 text-navy">${ico.scale}</span>
+      <p class="text-sm font-semibold text-navy">${n}</p>
+    </div>`;
+
+  const rows = [
+    [asset('Abu Dhabi Commercial Bank'),'0','7.1%','₹ 2,000.00','₹ 2,010.35','04/05/2026','01/06/2026'],
+    [asset('Ahmedabad Mercantile Cooperative Bank'),'4','9.6%','₹ 7,00,000.00','₹ 7,02,738.70','01/05/2022','26/05/2026'],
+    [asset('Fixed Deposit'),'2','7.3%','₹ 1,00,000.00','₹ 1,15,768.20','01/11/2025','30/11/2027'],
+    [asset('Gratuity'),'–','–%','–','₹ 50,000.00','–','–'],
+    [asset('Fixed Deposit'),'14','5.85%','₹ 2,00,000.00','₹ 4,47,505.40','01/09/2024','01/11/2038']
+  ];
+
+  return statStrip(stats, right) + `
+    <div class="mt-5 overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200">
+      ${sectionHead('Fixed deposits &amp; bonds', '7 assets')}
+      ${table({
+        formKey:'fd',
+        columns:[{label:'Name of asset'},{label:'Tenure (year)', align:'right', cls:'tabular-nums'},{label:'Interest rate', align:'right', cls:'tabular-nums'},{label:'Invested value', align:'right', cls:'tabular-nums'},{label:'Maturity value', align:'right', cls:'font-semibold text-navy tabular-nums'},{label:'Start date', align:'right', cls:'tabular-nums'},{label:'Maturity date', align:'right', cls:'tabular-nums'}],
+        rows, rowActions:'edit-delete'
+      })}
+    </div>`;
+}
+
+function panelGovt(){
+  const stats = [
+    {label:'Total schemes', value:'7'},
+    {label:'Invested value', value:'₹ 1,22,72,800'},
+    {label:'Current value', value:'₹ 1,47,78,402.51'}
+  ];
+  const right = `<button onclick="openForm('govt')" class="${btnPrimary}">${ico.plus} Add existing scheme</button>`;
+
+  const asset = n => `<div class="flex items-center gap-3">
+      <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-navy-50 text-navy">${ico.scale}</span>
+      <p class="text-sm font-semibold text-navy">${n}</p>
+    </div>`;
+
+  const rows = [
+    [asset('Sukanya Samriddhi Yojana'),'12%','Quarterly','–','₹ 1,00,000.00','₹ 1,48,000.00','16/07/2030','20/07/2034'],
+    [asset('Sukanya Samriddhi Yojana'),'–','Yearly','₹ 1,000.00','₹ 1,000.00','₹ 26,380.00','–','17/10/2052'],
+    [asset('Post Office Schemes'),'6.05%','One time','₹ 1,20,00,000.00','₹ 1,31,98,632.74','₹ 2,20,40,259.83','16/01/2025','26/05/2035'],
+    [asset('PPF'),'8.8%','Monthly','₹ 1,800.00','₹ 1,20,000.00','₹ 20,58,470.00','–','17/10/2052'],
+    [asset('NSC'),'3.45%','One time','₹ 20,000.00','₹ 20,284.34','₹ 20,425.04','01/04/2026','13/11/2026'],
+    [asset('NSC'),'6.8%','Monthly','₹ 1,00,000.00','₹ 1,05,609.43','₹ 2,69,690.67','01/11/2025','30/11/2040']
+  ];
+
+  return statStrip(stats, right) + `
+    <div class="mt-5 overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200">
+      ${sectionHead('Government schemes', '7 schemes')}
+      ${table({
+        formKey:'govt',
+        columns:[{label:'Name of asset'},{label:'Interest rate', align:'right', cls:'tabular-nums'},{label:'Frequency'},{label:'Invested value', align:'right', cls:'tabular-nums'},{label:'Current value', align:'right', cls:'font-semibold text-navy tabular-nums'},{label:'Maturity value', align:'right', cls:'tabular-nums'},{label:'Start date', align:'right', cls:'tabular-nums'},{label:'Maturity date', align:'right', cls:'tabular-nums'}],
+        rows, rowActions:'edit-delete'
+      })}
+    </div>`;
+}
+
+function panelRealEstate(){
+  const stats = [
+    {label:'No. of properties', value:'4'},
+    {label:'Purchased value', value:'₹ 99,00,000'},
+    {label:'Current value', value:'₹ 4,99,00,000'}
+  ];
+  const right = `<button onclick="openForm('realestate')" class="${btnPrimary}">${ico.plus} Add real estate</button>`;
+
+  const prop = n => `<div class="flex items-center gap-3">
+      <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-navy-50 text-navy">${ico.home}</span>
+      <p class="text-sm font-semibold text-navy">${n}</p>
+    </div>`;
+
+  const rows = [
+    [prop('Flat'),'Self','Self-Occupied','₹ 4,50,000.00','₹ 6,50,000.00','<span class="tabular-nums text-emerald-600">₹ 2,00,000.00</span>','<span class="font-semibold tabular-nums text-emerald-600">44.44 %</span>'],
+    [prop('Agriculture Land'),'Self','Self-Occupied','₹ 4,50,000.00','₹ 4,50,000.00','–','<span class="font-semibold tabular-nums text-slate-500">0.00 %</span>'],
+    [prop('Flat at jaipur'),'Self','Self-Occupied','₹ 65,00,000.00','₹ 2,54,00,000.00','<span class="tabular-nums text-emerald-600">₹ 1,89,00,000.00</span>','<span class="font-semibold tabular-nums text-emerald-600">290.77 %</span>'],
+    [prop('Flat at bhatinda'),'Andeep Singh','Self-Occupied','₹ 25,00,000.00','₹ 2,34,00,000.00','<span class="tabular-nums text-emerald-600">₹ 2,09,00,000.00</span>','<span class="font-semibold tabular-nums text-emerald-600">836.00 %</span>']
+  ];
+
+  return statStrip(stats, right) + `
+    <div class="mt-5 overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200">
+      ${sectionHead('Real estate', '4 properties')}
+      ${table({
+        formKey:'realestate',
+        columns:[{label:'Name of property'},{label:'Member name'},{label:'Type of property'},{label:'Purchased value', align:'right', cls:'tabular-nums'},{label:'Current value', align:'right', cls:'font-semibold text-navy tabular-nums'},{label:'Returns', align:'right'},{label:'Absolute returns', align:'right'}],
+        rows, rowActions:'edit-delete'
+      })}
+    </div>`;
+}
+
+const PANELS = {
+  mf: panelMF, stocks: panelStocks, us: panelUS, unlisted: panelUnlisted,
+  fd: panelFD, govt: panelGovt, realestate: panelRealEstate,
+  alternate: ()=>emptyState('Alternate'), gold: ()=>emptyState('Gold'),
+  liquid: ()=>emptyState('Liquid'), others: ()=>emptyState('Others')
+};
+
+/* ============================ FUND DETAIL ============================ */
+function fundDetail(f){
+  const stars = Array.from({length:5}, (_,i)=>
+    `<svg class="h-3.5 w-3.5 ${i<f.star?'text-navy':'text-navy-200'}" viewBox="0 0 24 24" fill="currentColor"><path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8L12 3.5Z"/></svg>`).join('');
+
+  const stats = [
+    {label:'Invested', value:`₹ ${f.inv}`},
+    {label:'Avg NAV', value:f.avgnav},
+    {label:'Units', value:f.units},
+    {label:'Current value', value:`₹ ${f.cur}`},
+    {label:'Returns', value:`₹ ${f.gain}`, tone:'text-emerald-600'},
+    {label:'XIRR', value:`<span class="inline-flex items-center gap-1 text-emerald-600">${ico.up}${f.xirr}%</span>`}
+  ];
+
+  return `
+  <div class="overflow-hidden rounded-3xl bg-white ring-1 ring-slate-200">
+    <div class="flex flex-col gap-5 border-b border-slate-100 p-6 lg:flex-row lg:items-start lg:justify-between">
+      <div class="flex min-w-0 items-start gap-4">
+        <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-navy-50 text-sm font-bold text-navy">${initials(f.n)}</span>
+        <div class="min-w-0">
+          <h1 class="text-xl font-semibold leading-snug text-navy">${f.n}</h1>
+          <div class="mt-2.5 flex flex-wrap items-center gap-x-2 gap-y-2 text-xs text-slate-500">
+            ${chip(f.cat)} ${chip(f.risk)}
+            <span class="flex items-center gap-1 rounded-md bg-navy-50 px-2 py-0.5 text-navy-600">Rating ${stars}</span>
+            <span class="tabular-nums">Folio ${f.folio}</span>
+            <span class="tabular-nums">NAV ${f.nav}</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex shrink-0 items-center gap-2">
+        <button class="${btnPrimary}">Invest more</button>
+        <button class="${btnOutline}">Redeem</button>
+        <button class="${btnOutline}">Switch</button>
+        <button aria-label="More actions" class="${iconBtn}">${ico.dots}</button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 divide-x divide-y divide-slate-100 sm:grid-cols-3 lg:grid-cols-6 lg:divide-y-0">
+      ${stats.map(stat).join('')}
+    </div>
+  </div>
+
+  <div class="mt-5 overflow-hidden rounded-2xl bg-white ring-1 ring-slate-200">
+    <div class="flex items-center gap-2 border-b border-slate-100 px-5 py-4 sm:px-6">
+      <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-navy-50 text-navy">${ico.txn}</span>
+      <h2 class="text-base font-semibold text-navy">Transactions</h2>
+    </div>
+    ${table({
+      columns:[{label:'Date', cls:'tabular-nums'},{label:'Amount', align:'right', cls:'font-semibold text-navy tabular-nums'},{label:'Avg NAV', align:'right', cls:'tabular-nums'},{label:'Transaction type'},{label:'Units', align:'right', cls:'tabular-nums'}],
+      rows: f.txns.map(t=>[t.d, t.a, t.nav, chip(t.t), t.u])
+    })}
+  </div>`;
+}
+
+/* ============================ FORM PRIMITIVES ============================ */
+const inputCls = 'mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-navy placeholder:text-slate-400 transition focus:border-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-navy/20';
+const labelCls = 'block text-sm font-medium text-slate-600';
+
+function field(label, control){
+  return `<div><label class="${labelCls}">${label}</label>${control}</div>`;
+}
+function selectF(label, options, value){
+  return field(label, `<div class="relative">
+      <select class="${inputCls} appearance-none pr-10">${options.map(o=>`<option ${o===value?'selected':''}>${o}</option>`).join('')}</select>
+      <span class="pointer-events-none absolute right-4 top-1/2 mt-1 -translate-y-1/2 text-navy-400">
+        <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span></div>`);
+}
+function textF(label, placeholder, value, prefix){
+  const pad = prefix ? 'pl-8' : '';
+  return field(label, `<div class="relative">
+      ${prefix?`<span class="pointer-events-none absolute left-4 top-1/2 mt-1 -translate-y-1/2 text-sm text-slate-400">₹</span>`:''}
+      <input type="text" placeholder="${placeholder}" value="${value||''}" class="${inputCls} ${pad} tabular-nums">
+    </div>`);
+}
+function dateF(label, value){
+  return field(label, `<div class="relative">
+      <input type="text" placeholder="DD/MM/YYYY" value="${value||''}" class="${inputCls} pr-10 tabular-nums">
+      <span class="pointer-events-none absolute right-4 top-1/2 mt-1 -translate-y-1/2 text-navy-400">${ico.cal}</span>
+    </div>`);
+}
+function sliderF(label, value, max){
+  return `<div>
+      <div class="flex items-baseline justify-between">
+        <label class="${labelCls}">${label}</label>
+        <span class="text-sm font-semibold tabular-nums text-navy">${value}</span>
+      </div>
+      <input type="range" min="0" max="${max}" step="0.05" value="${value}" class="mt-4 h-1.5 w-full cursor-pointer appearance-none rounded-full bg-navy-100 accent-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-navy/30"
+        oninput="this.previousElementSibling.querySelector('span').textContent=this.value">
+      <div class="mt-2 flex justify-between text-xs tabular-nums text-slate-400"><span>0</span><span>${max}</span></div>
+    </div>`;
+}
+function pillsF(label, options, active){
+  return `<div>
+      <label class="${labelCls}">${label}</label>
+      <div class="mt-2 flex flex-wrap gap-2">
+        ${options.map(o=>`<button type="button" onclick="pickPill(this)" class="rounded-full border px-4 py-2 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-navy/30 ${o===active?'border-navy bg-navy text-white':'border-slate-200 bg-white text-slate-600 hover:border-navy-200 hover:text-navy'}">${o}</button>`).join('')}
+      </div>
+    </div>`;
+}
+function radioF(label, name, options, active){
+  return `<div>
+      <label class="${labelCls}">${label}</label>
+      <div class="mt-2 grid gap-2 sm:grid-cols-2">
+        ${options.map(o=>`<label class="flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 text-sm transition ${o===active?'border-navy bg-navy-50 font-medium text-navy':'border-slate-200 text-slate-600 hover:border-navy-200'}">
+          <input type="radio" name="${name}" ${o===active?'checked':''} class="h-4 w-4 accent-navy">${o}</label>`).join('')}
+      </div>
+    </div>`;
+}
+function pickPill(el){
+  [...el.parentElement.children].forEach(b=>b.className = b.className
+    .replace('border-navy bg-navy text-white','border-slate-200 bg-white text-slate-600 hover:border-navy-200 hover:text-navy'));
+  el.className = el.className.replace('border-slate-200 bg-white text-slate-600 hover:border-navy-200 hover:text-navy','border-navy bg-navy text-white');
+}
+
+function formShell(title, sub, fields, action){
+  return `<div class="mx-auto max-w-4xl overflow-hidden rounded-3xl bg-white ring-1 ring-slate-200">
+      <div class="border-b border-slate-100 px-6 py-6 sm:px-10">
+        <h1 class="text-xl font-semibold text-navy">${title}</h1>
+        <p class="mt-1 text-sm text-slate-500">${sub}</p>
+      </div>
+      <div class="grid gap-6 px-6 py-8 sm:grid-cols-2 sm:px-10">${fields}</div>
+      <div class="flex justify-end gap-3 border-t border-slate-100 bg-slate-50/70 px-6 py-5 sm:px-10">
+        <button onclick="showPortfolio()" class="${btnOutline}">Cancel</button>
+        <button class="${btnPrimary} px-8">${action}</button>
+      </div>
+    </div>`;
+}
+
+const FORMS = {
+  aif: () => formShell('Add your unlisted / AIF equity', 'Enter the details of the holding you want to track.', `
+    ${selectF('Equity name', ['Select…','AIF','Unlisted equity'], 'Select…')}
+    ${selectF('Who is this investment for', ['Self','Family','Khushboo','Kundan Kolhe'], 'Self')}
+    ${dateF('Purchase date','')}
+    ${textF('No. of shares','Enter no. of shares')}
+    ${textF('Avg buy price','Enter avg buy price','',true)}
+    ${textF('Invested value','0','',true)}
+    ${textF('Current price','Enter current price','',true)}
+    ${textF('Current value','0','',true)}
+  `, 'Save'),
+
+  fd: () => formShell('Edit your FD &amp; bonds', 'Update the details of this fixed deposit.', `
+    ${selectF('Type of asset', ['Fixed Deposit','Bond','Gratuity','Recurring Deposit'], 'Fixed Deposit')}
+    ${selectF('Who is this investment for', ['Kundan Kolhe','Self','Khushboo','Family'], 'Kundan Kolhe')}
+    <div class="sm:col-span-2">${selectF('Bank / institute name', ['Abu Dhabi Commercial Bank','Ahmedabad Mercantile Cooperative Bank','HDFC Bank'], 'Abu Dhabi Commercial Bank')}</div>
+    ${dateF('Purchase date','04/05/2026')}
+    ${textF('Purchase amount','','2,000',true)}
+    ${sliderF('Interest rate (%)','7.1','20')}
+    ${selectF('Payout type', ['Cumulative','Monthly','Quarterly','Yearly'], 'Cumulative')}
+    ${dateF('Maturity date','01/06/2026')}
+    ${textF('Maturity amount','','2,011',true)}
+  `, 'Update'),
+
+  govt: () => formShell('Edit your government scheme assets', 'Update the details of this government scheme.', `
+    ${selectF('Type of asset', ['Select…','PPF','NSC','Sukanya Samriddhi Yojana','Post Office Schemes'], 'Select…')}
+    ${selectF('Bank / institute name', ['Select…','Post Office','State Bank of India','HDFC Bank'], 'Select…')}
+    ${selectF('Who is this investment for', ['Select…','Self','Family','Khushboo'], 'Select…')}
+    ${textF('Account balance today','0','',true)}
+    ${textF('Investment amount (per frequency)','0','',true)}
+    ${pillsF('Frequency', ['Monthly','Quarterly','Semi annually','Annually'], 'Monthly')}
+    ${sliderF('Expected rate of return','0','20')}
+    ${dateF('Maturity date','')}
+    ${textF('Maturity amount','0','',true)}
+  `, 'Update'),
+
+  realestate: () => formShell('Edit your real estate', 'Update the details of this property.', `
+    ${selectF('Type of property', ['Select…','Flat','Agriculture Land','Plot','Commercial'], 'Select…')}
+    ${selectF('Who is this investment for', ['Family','Self','Andeep Singh','Khushboo'], 'Family')}
+    <div class="sm:col-span-2">${textF('Name of property','Enter name of property')}</div>
+    ${dateF('Purchase date','')}
+    ${textF('Purchase value','Enter purchase value','',true)}
+    ${textF('Current value','Enter current value','',true)}
+    ${textF('Pincode','Enter pincode')}
+    ${radioF('Residential type','restype',['Self-Occupied','Rented'],'Self-Occupied')}
+    ${radioF('Mortgage or freehold','mortgage',['Free Hold','Mortgage'],'Free Hold')}
+  `, 'Update'),
+
+  us: () => formShell('Edit your US equity', 'Update the details of this holding.', `
+    ${textF('Stock / ETF name','Enter stock or ETF name','DIREXION DAILY AAPL BEAR 1X')}
+    ${selectF('Who is this investment for', ['Self','Family','Khushboo'], 'Self')}
+    ${dateF('Purchase date','')}
+    ${textF('No. of shares','','100')}
+    ${textF('Invested value','','1,100.00',true)}
+    ${textF('Current value','','1,685.00',true)}
+  `, 'Update')
+};
+
+/* ============================ ROUTING ============================ */
+let activeAsset = 'mf';
+
+function renderRail(){
+  document.getElementById('assetRail').innerHTML = ASSETS.map(a=>{
+    const on = a.id === activeAsset;
+    return `<button onclick="selectAsset('${a.id}')" class="inline-flex shrink-0 items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-navy/30 ${on?'border-navy bg-navy text-white shadow-sm':'border-transparent bg-slate-50 text-slate-600 hover:border-navy-200 hover:bg-navy-50 hover:text-navy'}">${a.icon}${a.label}</button>`;
+  }).join('');
+}
+function assetInsight(id){
+  const insights = {
+    mf: ['Portfolio overlap detected','Three ELSS funds share similar large-cap exposure. Reviewing overlap may make your portfolio easier to manage.','Compare overlap'],
+    stocks: ['Single-stock concentration','Your direct equity allocation depends on one stock. Consider whether this matches your intended risk level.','Review risk'],
+    us: ['International exposure is low','US equity adds diversification, but it remains a very small part of your overall portfolio.','Explore allocation'],
+    unlisted: ['Illiquidity is elevated','Unlisted and AIF holdings may take longer to exit. Keep near-term goals funded elsewhere.','Check goal coverage'],
+    fd: ['Maturity reminder','One fixed deposit matures soon. Plan whether to reinvest or redirect it to a goal.','View maturity plan'],
+    govt: ['Long-duration allocation','Government schemes add stability, though several holdings have long lock-in periods.','Review timeline'],
+    realestate: ['High property concentration','Real estate is your largest asset bucket and reduces portfolio liquidity.','See diversification plan']
+  };
+  const i = insights[id];
+  if(!i) return '';
+  return `<div class="mb-4 flex flex-col gap-3 rounded-2xl border border-indigo-100 bg-indigo-50/70 px-5 py-4 sm:flex-row sm:items-center">
+    <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-600 text-white">✦</span>
+    <div class="min-w-0 flex-1"><p class="text-sm font-semibold text-navy"><span class="mr-2 text-xs uppercase tracking-wider text-indigo-600">AI note</span>${i[0]}</p><p class="mt-0.5 text-xs leading-relaxed text-slate-600">${i[1]}</p></div>
+    <button class="shrink-0 text-left text-xs font-semibold text-indigo-700 sm:text-right">${i[2]} →</button>
+  </div>`;
+}
+function assetPanelMarkup(id){
+  return compactCurrencyMarkup(assetInsight(id) + PANELS[id]());
+}
+function selectAsset(id){
+  activeAsset = id;
+  renderRail();
+  const panel = document.getElementById('assetPanel');
+  panel.innerHTML = assetPanelMarkup(id);
+  panel.classList.remove('animate-riseIn');
+  void panel.offsetWidth;
+  panel.classList.add('animate-riseIn');
+  showPortfolio(true);
+}
+function setView(id){
+  ['view-portfolio','view-fund','view-form'].forEach(v=>document.getElementById(v).classList.toggle('hidden', v!==id));
+}
+function showPortfolio(keepScroll){
+  setView('view-portfolio');
+  if(!keepScroll) window.scrollTo({top:0, behavior:'smooth'});
+}
+function openFund(i){
+  document.getElementById('fundDetail').innerHTML = compactCurrencyMarkup(fundDetail(FUNDS[i]));
+  setView('view-fund');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function openForm(key){
+  document.getElementById('formHost').innerHTML = (FORMS[key] || FORMS.aif)();
+  setView('view-form');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+renderRail();
+document.getElementById('assetPanel').innerHTML = assetPanelMarkup(activeAsset);
+</script>
+</body>
+</html>

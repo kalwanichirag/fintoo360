@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Personal Financial Planning — Fintoo</title>
+<meta name="description" content="Build a personalised financial roadmap around your goals, investments and lifestyle. SEBI-registered advisory. Book a complimentary 15-minute consultation." />
+
+<link rel="preconnect" href="https://fonts.cdnfonts.com" />
+<link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.css" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: '#042b62',
+          'navy-deep': '#021227',
+          orange: '#dd7300',
+          paper: '#f5f6f8',
+          rule: '#dde4ed',
+        },
+        fontFamily: {
+          sans: ['"Google Sans"', '"Product Sans"', 'system-ui', 'sans-serif'],
+        },
+        keyframes: {
+          marquee: {
+            '0%': { transform: 'translateX(0)' },
+            '100%': { transform: 'translateX(-50%)' },
+          },
+          sweep: {
+            '0%': { transform: 'translateX(-100%)' },
+            '100%': { transform: 'translateX(100%)' },
+          },
+          pulse2: {
+            '0%': { transform: 'scale(1)', opacity: '.55' },
+            '100%': { transform: 'scale(2.6)', opacity: '0' },
+          },
+          caret: {
+            '0%, 49%': { opacity: '1' },
+            '50%, 100%': { opacity: '0' },
+          },
+        },
+        animation: {
+          marquee: 'marquee 24s linear infinite',
+          sweep: 'sweep 3.2s ease-in-out infinite',
+          pulse2: 'pulse2 2.6s ease-out infinite',
+          caret: 'caret 0.8s steps(1) infinite',
+        },
+      },
+    },
+  };
+</script>
+</head>
+
+<body class="overflow-x-hidden bg-paper font-sans text-navy antialiased selection:bg-orange selection:text-white">
+
+<!-- scroll progress -->
+<div class="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left scale-x-0 bg-orange" id="progress"></div>
+
+<!-- film grain -->
+<svg class="pointer-events-none fixed inset-0 z-50 h-full w-full opacity-[0.045] mix-blend-multiply" aria-hidden="true">
+  <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" /></filter>
+  <rect width="100%" height="100%" filter="url(#grain)" />
+</svg>
+
+<!-- ── Hero ───────────────────────────────────────────────── -->
+<section id="top" class="relative overflow-hidden lg:h-svh">
+
+  <!-- ambient field -->
+  <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+    <div data-orb class="absolute -right-32 -top-40 h-[34rem] w-[34rem] rounded-full bg-orange/15 blur-3xl"></div>
+    <div data-orb class="absolute -left-40 top-1/3 h-[28rem] w-[28rem] rounded-full bg-navy/10 blur-3xl"></div>
+    <svg class="absolute inset-0 h-full w-full text-navy/[0.07]" aria-hidden="true">
+      <defs>
+        <pattern id="mesh" width="56" height="56" patternUnits="userSpaceOnUse">
+          <path d="M56 0 L0 0 0 56" fill="none" stroke="currentColor" stroke-width="1" />
+        </pattern>
+        <radialGradient id="meshfade" cx="35%" cy="30%" r="75%">
+          <stop offset="0%" stop-color="white" stop-opacity="1" />
+          <stop offset="100%" stop-color="white" stop-opacity="0" />
+        </radialGradient>
+        <mask id="meshmask"><rect width="100%" height="100%" fill="url(#meshfade)" /></mask>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#mesh)" mask="url(#meshmask)" />
+    </svg>
+  </div>
+
+  <div class="mx-auto flex h-full max-w-7xl flex-col px-6 pb-10 pt-8 lg:px-10 lg:py-6">
+    <div class="grid min-h-0 flex-1 items-center gap-10 lg:grid-cols-12">
+
+      <!-- Copy -->
+      <div class="lg:col-span-6">
+        <img
+          src="https://www.fintoo.in/static/media/wp/Fintoologo_.svg"
+          alt="Fintoo"
+          class="mb-6 h-10 w-auto sm:h-12"
+        />
+        <p data-hero-chip class="mb-5 inline-flex items-center gap-2 rounded-full border border-rule bg-white/80 px-3.5 py-1.5 text-sm backdrop-blur">
+          <span class="relative flex h-1.5 w-1.5">
+            <span class="absolute inline-flex h-full w-full animate-pulse2 rounded-full bg-orange motion-reduce:hidden"></span>
+            <span class="relative inline-flex h-1.5 w-1.5 rounded-full bg-orange"></span>
+          </span>
+          Personal financial planning
+        </p>
+
+        <h1 class="text-[1.75rem] font-bold leading-[1.15] tracking-tight sm:text-4xl lg:text-[2.75rem] xl:text-[3.2rem]">
+          <span class="block overflow-hidden py-0.5"><span data-hero-line class="block">One Clear Financial Plan</span></span>
+          <span data-hero-line class="mt-1 flex items-start overflow-hidden py-0.5 leading-[1.15] text-orange">
+            <span class="shrink-0 leading-[1.15]">for Your&nbsp;</span>
+            <span class="inline-flex min-w-[8ch] items-center whitespace-nowrap leading-[1.15]">
+              <span data-typewriter>Money.</span>
+              <span class="ml-1 inline-block h-[0.9em] w-[3px] bg-orange animate-caret motion-reduce:hidden" aria-hidden="true"></span>
+            </span>
+          </span>
+        </h1>
+
+        <p data-hero-fade class="mt-5 max-w-xl text-lg leading-relaxed text-navy/70">
+          Build a personalised financial roadmap designed around your goals, investments, lifestyle and future — then get expert guidance to make smarter decisions and stay on track towards the life you want.
+        </p>
+
+        <div data-hero-fade class="mt-7">
+          <a href="#book" data-magnetic class="inline-flex items-center justify-center rounded-full bg-orange px-6 py-3.5 text-base font-medium text-white shadow-lg shadow-orange/25 transition-colors hover:bg-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy focus-visible:ring-offset-2 focus-visible:ring-offset-paper">
+            Book your complimentary 15-minute consultation
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Booking -->
+      <div id="book" data-hero-panel class="scroll-mt-20 lg:col-span-6">
+        <div class="overflow-hidden rounded-3xl border border-rule bg-white shadow-2xl shadow-navy/10">
+          <div class="hidden items-center justify-between gap-4 border-b border-rule px-6 py-4 lg:flex">
+            <div>
+              <p class="text-base font-medium">Pick a time that suits you</p>
+              <p class="text-sm text-navy/50">15 minutes with a SEBI-registered advisor</p>
+            </div>
+            <span class="relative hidden overflow-hidden rounded-full border border-rule px-3 py-1 text-sm text-navy/60 sm:inline-flex">
+              <span class="absolute inset-0 animate-sweep bg-orange/10 motion-reduce:hidden"></span>
+              <span class="relative">Slots open this week</span>
+            </span>
+          </div>
+
+          <div class="calendly-inline-widget h-[43rem] w-full min-w-0 lg:h-[clamp(20rem,calc(100svh-24rem),32rem)]"
+               data-url="https://calendly.com/fintoo/15min?hide_gdpr_banner=1&amp;hide_landing_page_details=1&amp;primary_color=dd7300&amp;text_color=042b62&amp;background_color=ffffff"></div>
+
+          <div class="hidden grid-cols-3 border-t border-rule lg:grid">
+            <div class="border-r border-rule px-3 py-3.5 sm:px-5 sm:py-4">
+              <p class="text-xs text-navy/50 sm:text-sm">Duration</p>
+              <p class="mt-1 text-base font-medium tabular-nums sm:text-base">15 min</p>
+            </div>
+            <div class="border-r border-rule px-3 py-3.5 sm:px-5 sm:py-4">
+              <p class="text-xs text-navy/50 sm:text-sm">Format</p>
+              <p class="mt-1 text-base font-medium sm:text-base">Video or call</p>
+            </div>
+            <div class="px-3 py-3.5 sm:px-5 sm:py-4">
+              <p class="text-xs text-navy/50 sm:text-sm">Fee</p>
+              <p class="mt-1 text-base font-medium text-orange sm:text-base">Complimentary</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Credentials: mobile marquee, static desktop row -->
+    <div data-hero-fade class="mt-5 shrink-0 border-t border-rule pt-4 lg:mt-3">
+      <div class="-mx-6 overflow-hidden px-6 lg:mx-0 lg:overflow-visible lg:px-0">
+      <div id="credentialsTrack" class="flex w-max animate-marquee motion-reduce:animate-none lg:w-auto lg:animate-none">
+      <ul class="flex shrink-0 gap-2 pr-2 lg:grid lg:w-full lg:grid-cols-4 lg:pr-0">
+        <li class="flex w-[17rem] shrink-0 items-center gap-2.5 rounded-2xl border border-rule bg-white/90 px-4 py-2.5 lg:w-auto">
+          <svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-orange" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6.5v5c0 4.5 3.2 8.4 8 9.5 4.8-1.1 8-5 8-9.5v-5L12 3Z"/><path d="m9 12.2 2 2 4.2-4.2"/></svg>
+          <span class="min-w-0 text-sm"><strong class="block truncate font-medium">SEBI-registered Adviser</strong><span class="block truncate text-navy/50">INA000020031</span></span>
+        </li>
+        <li class="flex w-[17rem] shrink-0 items-center gap-2.5 rounded-2xl border border-rule bg-white/90 px-4 py-2.5 lg:w-auto">
+          <svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-orange" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span class="text-sm"><strong class="block font-medium">500+</strong><span class="text-navy/50">Happy Families</span></span>
+        </li>
+        <li class="flex w-[17rem] shrink-0 items-center gap-2.5 rounded-2xl border border-rule bg-white/90 px-4 py-2.5 lg:w-auto">
+          <svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-orange" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>
+          <span class="text-sm"><strong class="block font-medium">₹5,000 Cr+</strong><span class="text-navy/50">Assets Under Tracking</span></span>
+        </li>
+        <li class="flex w-[17rem] shrink-0 items-center gap-2.5 rounded-2xl border border-rule bg-white/90 px-4 py-2.5 lg:w-auto">
+          <svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-orange" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <span class="text-sm"><strong class="block font-medium">10 years</strong><span class="text-navy/50">of financial planning</span></span>
+        </li>
+      </ul>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── One plan ───────────────────────────────────────────── -->
+<section id="plan" class="border-t border-rule bg-white">
+  <div class="mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-24">
+
+    <div class="max-w-2xl">
+      <h2 class="text-2xl font-bold leading-tight tracking-tight sm:text-3xl">
+        <span class="block overflow-hidden py-0.5"><span data-line class="block">One plan for your complete</span></span>
+        <span class="block overflow-hidden py-0.5"><span data-line class="block">financial journey</span></span>
+      </h2>
+      <p data-fade class="mt-4 leading-relaxed text-navy/70">
+        Four parts of your financial life, planned together rather than in isolation — so a decision in one place never quietly undoes another.
+      </p>
+    </div>
+
+    <div class="mt-8 grid overflow-hidden rounded-3xl border border-rule sm:mt-10 sm:grid-cols-2 lg:grid-cols-4">
+
+      <div data-card class="group border-b border-rule p-6 sm:border-r lg:border-b-0 lg:p-7 xl:p-9">
+        <svg viewBox="0 0 32 32" class="h-9 w-9 text-orange" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <circle data-ring cx="16" cy="16" r="12" class="stroke-navy/20" />
+          <circle data-ring cx="16" cy="16" r="7.5" class="stroke-navy/40" />
+          <circle data-ring cx="16" cy="16" r="3.4" class="stroke-orange" />
+          <circle data-dot cx="16" cy="16" r="1.9" fill="currentColor" stroke="none" />
+        </svg>
+        <h3 class="mt-5 text-lg font-medium">Goal planning</h3>
+        <p class="mt-2.5 max-w-sm text-base leading-relaxed text-navy/65">
+          Plan for the things that matter most — from buying a home to building long-term wealth — with a number and a date attached to each one.
+        </p>
+      </div>
+
+      <div data-card class="group border-b border-rule p-6 lg:border-b-0 lg:border-r lg:p-7 xl:p-9">
+        <svg viewBox="0 0 32 32" class="h-9 w-9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <line data-bar x1="6" y1="26" x2="6" y2="19" class="stroke-navy/25" />
+          <line data-bar x1="13" y1="26" x2="13" y2="14" class="stroke-navy/45" />
+          <line data-bar x1="20" y1="26" x2="20" y2="9" class="stroke-navy/70" />
+          <line data-bar x1="27" y1="26" x2="27" y2="5" class="stroke-orange" stroke-width="2.6" />
+        </svg>
+        <h3 class="mt-5 text-lg font-medium">Investment planning</h3>
+        <p class="mt-2.5 max-w-sm text-base leading-relaxed text-navy/65">
+          Create an investment strategy built on your goals, your risk profile and the time you actually have — not on last year's best performers.
+        </p>
+      </div>
+
+      <div data-card class="group border-b border-rule p-6 sm:border-b-0 sm:border-r lg:p-7 xl:p-9">
+        <svg viewBox="0 0 32 32" class="h-9 w-9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <line x1="3" y1="27.5" x2="29" y2="27.5" class="stroke-navy/20" />
+          <path data-draw d="M3 24 C 10 24, 12 8, 20 8 C 26 8, 28 14, 29 20" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" class="stroke-navy/50" />
+          <circle data-dot cx="20" cy="8" r="2.8" class="fill-orange" stroke="none" />
+        </svg>
+        <h3 class="mt-5 text-lg font-medium">Retirement planning</h3>
+        <p class="mt-2.5 max-w-sm text-base leading-relaxed text-navy/65">
+          Know how much you need to retire on your terms, and how much to invest today so inflation doesn't decide it for you.
+        </p>
+      </div>
+
+      <div data-card class="group p-6 lg:p-7 xl:p-9">
+        <svg viewBox="0 0 32 32" class="h-9 w-9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path data-draw d="M7 4 h13 l5 5 v19 h-18 Z" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1" class="stroke-navy/35" />
+          <line data-bar x1="11" y1="14" x2="21" y2="14" class="stroke-navy/35" />
+          <line data-bar x1="11" y1="19" x2="17" y2="19" class="stroke-navy/35" />
+          <line data-bar x1="18" y1="24" x2="22" y2="24" class="stroke-orange" stroke-width="2.8" />
+        </svg>
+        <h3 class="mt-5 text-lg font-medium">Tax saving</h3>
+        <p class="mt-2.5 max-w-sm text-base leading-relaxed text-navy/65">
+          Identify tax-saving opportunities that fit the plan, instead of rushed decisions made in the last week of March.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Why Fintoo ─────────────────────────────────────────── -->
+<section id="why" class="relative overflow-hidden bg-navy text-white">
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div data-orb class="absolute -right-40 -top-48 h-[36rem] w-[36rem] rounded-full bg-orange/25 blur-3xl"></div>
+    <div data-orb class="absolute -bottom-56 -left-40 h-[30rem] w-[30rem] rounded-full bg-white/10 blur-3xl"></div>
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-6 py-12 lg:px-10 lg:py-24">
+
+    <div class="grid gap-10 lg:grid-cols-12 lg:gap-14">
+      <div class="lg:col-span-4">
+        <h2 class="text-2xl font-bold leading-tight tracking-tight sm:text-3xl">
+          <span class="block overflow-hidden py-0.5"><span data-line class="block">Why Fintoo</span></span>
+        </h2>
+        <p data-fade class="mt-4 max-w-sm text-base leading-relaxed text-white/65">
+          Advice that starts with your situation, stays accountable to your goals, and is regulated by SEBI.
+        </p>
+        <a href="#book" data-fade data-magnetic class="mt-7 inline-flex rounded-full border border-white/25 px-6 py-3 text-base font-medium transition-colors hover:border-orange hover:bg-orange focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-navy">
+          Talk to an advisor
+        </a>
+      </div>
+
+      <div class="grid gap-x-12 gap-y-8 sm:grid-cols-2 lg:col-span-8">
+        <div data-item class="relative pt-5">
+          <span data-item-rule class="absolute inset-x-0 top-0 h-px origin-left bg-white/25"></span>
+          <h3 class="text-base font-medium">Personalised planning</h3>
+          <p class="mt-2.5 text-base leading-relaxed text-white/60">A financial plan designed around your unique situation and goals — not a model portfolio handed to everyone.</p>
+        </div>
+        <div data-item class="relative pt-5">
+          <span data-item-rule class="absolute inset-x-0 top-0 h-px origin-left bg-white/25"></span>
+          <h3 class="text-base font-medium">Goal-based approach</h3>
+          <p class="mt-2.5 text-base leading-relaxed text-white/60">Every investment is tied to a goal you can name, so you always know what a rupee is working towards.</p>
+        </div>
+        <div data-item class="relative pt-5">
+          <span data-item-rule class="absolute inset-x-0 top-0 h-px origin-left bg-white/25"></span>
+          <h3 class="text-base font-medium">Expert guidance</h3>
+          <p class="mt-2.5 text-base leading-relaxed text-white/60">Professional guidance when markets move and when life changes, so decisions are made with context.</p>
+        </div>
+        <div data-item class="relative pt-5">
+          <span data-item-rule class="absolute inset-x-0 top-0 h-px origin-left bg-white/25"></span>
+          <h3 class="text-base font-medium">Complete financial picture</h3>
+          <p class="mt-2.5 text-base leading-relaxed text-white/60">Income, expenses, investments, goals and future requirements reviewed together, in one view.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Closing ────────────────────────────────────────────── -->
+<section class="relative overflow-hidden bg-navy-deep text-white">
+  <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+    <div data-orb class="absolute -bottom-40 left-1/3 h-[30rem] w-[30rem] rounded-full bg-orange/25 blur-3xl"></div>
+  </div>
+  <div class="relative mx-auto max-w-3xl px-6 py-16 text-center lg:px-10 lg:py-28">
+    <div data-fade class="mx-auto mb-6 grid h-14 w-14 place-items-center rounded-2xl border border-white/15 bg-white/10 text-orange shadow-lg shadow-black/15 backdrop-blur-sm">
+      <svg viewBox="0 0 24 24" class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="16" rx="3" />
+        <path d="M8 3v4M16 3v4M3 10h18" />
+        <path d="m8.5 15 2 2 5-5" />
+      </svg>
+    </div>
+    <h2 class="text-3xl font-bold leading-tight tracking-tight sm:text-4xl">
+      <span class="block overflow-hidden py-0.5"><span data-line class="block">Fifteen minutes now,</span></span>
+      <span class="block overflow-hidden py-0.5"><span data-line class="block">or another year of guessing.</span></span>
+    </h2>
+    <p data-fade class="mx-auto mt-5 max-w-md leading-relaxed text-white/65">
+      Book a slot, talk to a SEBI-registered advisor, and walk away with your next two or three steps written down.
+    </p>
+    <a href="#book" data-fade data-magnetic class="mt-8 inline-flex rounded-full bg-orange px-7 py-4 text-base font-medium text-white shadow-lg shadow-orange/25 transition-colors hover:bg-white hover:text-navy focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 focus-visible:ring-offset-navy-deep">
+      Book your complimentary consultation
+    </a>
+    <p data-fade class="mt-4 text-sm text-white/45">No cost. No obligation. No product pitch.</p>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer class="bg-navy-deep text-white">
+  <div class="mx-auto max-w-7xl space-y-4 px-6 pb-10 pt-4 text-xs leading-relaxed text-white/45 lg:px-10 lg:pb-12">
+    <p>
+      Fintoo Wealth Private Limited (Brand Name - Fintoo.in, Fintoo app, Fintoo) makes no warranties or representations, express or implied, on products and services offered through the platform. It accepts no liability for any damages or losses, however, caused in connection with the use of, or on the reliance of its advisory or related services. Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs. Performance and returns of any investment portfolio can neither be predicted nor guaranteed. Investments made on advisory are subject to market risks, read all scheme related documents carefully.
+    </p>
+    <p>
+      © Fintoo Wealth Private Limited [SEBI RIA Registration No: INA000020031] [BASL Membership ID: 2252] [Type of Registration: Non-Individual] [Validity of registration: March 26,2025-Perpetual] [Address: Fintoo Wealth Private Limited, B/309, Dynasty Business park, Opp Sangam Cinema, Andheri (East), J B Nagar, Mumbai, Maharashtra 400059] [CIN - U66301MH2023PTC414206] [GST No : 27AAFCF7114E1ZV] [Principal Officer details : Mr. Mihir Shah (mihir.shah@fintoo.in)] [Compliance Officer details : Mrs. Nisha Harchekar (nisha.harchekar@fintoo.in)] [Corresponding SEBI regional/local office: Plot No. C 4-A , G Block, Near Bank of India, Bandra Kurla Complex,Bandra East, Mumbai, Maharashtra 400051]
+    </p>
+    <p class="border-t border-white/10 pt-4 font-medium text-white/65">
+      Copyright © 2026 Fintoo. All rights reserved
+    </p>
+  </div>
+</footer>
+
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+<script>
+/* Duplicate the credential set once for a seamless mobile-only marquee. */
+(function () {
+  var track = document.getElementById('credentialsTrack');
+  if (!track || !track.firstElementChild) return;
+  var duplicate = track.firstElementChild.cloneNode(true);
+  duplicate.setAttribute('aria-hidden', 'true');
+  duplicate.classList.add('lg:hidden');
+  track.appendChild(duplicate);
+})();
+
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!window.gsap || reduced) return;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---- smooth scroll ---------------------------------------------------- */
+  if (window.Lenis) {
+    var lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+    gsap.ticker.lagSmoothing(0);
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var el = document.querySelector(a.getAttribute('href'));
+        if (el) { e.preventDefault(); lenis.scrollTo(el, { offset: -80 }); }
+      });
+    });
+  }
+
+  var ease = 'power3.out';
+
+  /* ---- scroll progress -------------------------------------------------- */
+  gsap.to('#progress', {
+    scaleX: 1, ease: 'none',
+    scrollTrigger: { trigger: document.body, start: 'top top', end: 'bottom bottom', scrub: 0.3 }
+  });
+
+  /* ---- hero entrance ---------------------------------------------------- */
+  var intro = gsap.timeline({ defaults: { ease: ease } });
+  intro.from('[data-hero-chip]', { y: '0.6rem', opacity: 0, duration: 0.3 }, 0)
+       .from('[data-hero-line]', { yPercent: 105, duration: 0.45, stagger: 0.04 }, 0)
+       .from('[data-hero-fade]', { y: '0.75rem', opacity: 0, duration: 0.4, stagger: 0.04 }, 0.18)
+       .from('[data-hero-panel]', { y: '1.25rem', opacity: 0, scale: 0.99, duration: 0.55 }, 0.08);
+
+  /* ---- typewriter headline --------------------------------------------- */
+  var typewriter = document.querySelector('[data-typewriter]');
+  if (typewriter) {
+    var typeWords = ['Money.', 'Goals.', 'Family.', 'Future.', 'Freedom.'];
+    var typeIndex = 0;
+
+    function eraseWord() {
+      var current = typewriter.textContent;
+      if (current.length) {
+        typewriter.textContent = current.slice(0, -1);
+        window.setTimeout(eraseWord, 55);
+      } else {
+        typeIndex = (typeIndex + 1) % typeWords.length;
+        window.setTimeout(function () { typeWord(typeWords[typeIndex], 0); }, 180);
+      }
+    }
+
+    function typeWord(word, letterIndex) {
+      typewriter.textContent = word.slice(0, letterIndex + 1);
+      if (letterIndex + 1 < word.length) {
+        window.setTimeout(function () { typeWord(word, letterIndex + 1); }, 95);
+      } else {
+        window.setTimeout(eraseWord, 1800);
+      }
+    }
+
+    window.setTimeout(eraseWord, 2200);
+  }
+
+  /* ---- ambient orbs ----------------------------------------------------- */
+  gsap.utils.toArray('[data-orb]').forEach(function (orb, i) {
+    gsap.to(orb, {
+      xPercent: i % 2 ? -12 : 14,
+      yPercent: i % 2 ? 16 : -10,
+      duration: 14 + i * 4,
+      repeat: -1, yoyo: true, ease: 'sine.inOut'
+    });
+  });
+
+  /* ---- panel parallax --------------------------------------------------- */
+  if (window.innerWidth >= 1024) {
+    gsap.to('[data-hero-panel]', {
+      yPercent: -6, ease: 'none',
+      scrollTrigger: { trigger: '#top', start: 'top top', end: 'bottom top', scrub: 1 }
+    });
+  }
+
+  /* ---- generic reveals -------------------------------------------------- */
+  gsap.utils.toArray('[data-line]').forEach(function (el) {
+    gsap.from(el, {
+      yPercent: 115, duration: 1, ease: ease,
+      scrollTrigger: { trigger: el, start: 'top 88%' }
+    });
+  });
+
+  gsap.utils.toArray('[data-fade]').forEach(function (el) {
+    if (el.closest('#top')) return;
+    gsap.from(el, {
+      y: '1.2rem', opacity: 0, duration: 0.9, ease: ease,
+      scrollTrigger: { trigger: el, start: 'top 90%' }
+    });
+  });
+
+  /* ---- service icons (Lottie-style SVG timelines) ----------------------- */
+  gsap.utils.toArray('[data-card]').forEach(function (card, i) {
+    var rings = card.querySelectorAll('[data-ring]');
+    var bars  = card.querySelectorAll('[data-bar]');
+    var draws = card.querySelectorAll('[data-draw]');
+    var dots  = card.querySelectorAll('[data-dot]');
+
+    function build() {
+      var tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+      if (rings.length) tl.from(rings, { scale: 0, opacity: 0, duration: 0.55, stagger: 0.08, transformOrigin: '50% 50%' }, 0);
+      if (bars.length)  tl.from(bars,  { scaleY: 0, opacity: 0, duration: 0.5, stagger: 0.07, transformOrigin: '50% 100%' }, 0.05);
+      if (draws.length) tl.to(draws,   { strokeDashoffset: 0, duration: 0.9 }, 0);
+      if (dots.length)  tl.from(dots,  { scale: 0, duration: 0.45, ease: 'back.out(2.4)', transformOrigin: '50% 50%' }, 0.4);
+      return tl;
+    }
+
+    gsap.set(draws, { strokeDashoffset: 1 });
+
+    ScrollTrigger.create({
+      trigger: card, start: 'top 85%', once: true,
+      onEnter: function () {
+        gsap.from(card, { y: '1.5rem', opacity: 0, duration: 0.8, ease: ease, delay: i * 0.07 });
+        build().delay(i * 0.07);
+      }
+    });
+
+    card.addEventListener('mouseenter', function () { build(); });
+  });
+
+  /* ---- stat counters ---------------------------------------------------- */
+  gsap.utils.toArray('[data-count]').forEach(function (el) {
+    var to = parseFloat(el.getAttribute('data-to'));
+    var suffix = el.getAttribute('data-suffix') || '';
+    var o = { v: 0 };
+    ScrollTrigger.create({
+      trigger: el, start: 'top 88%', once: true,
+      onEnter: function () {
+        gsap.to(o, {
+          v: to, duration: 2, ease: 'power2.out',
+          onUpdate: function () {
+            el.textContent = Math.round(o.v).toLocaleString('en-IN') + suffix;
+          }
+        });
+      }
+    });
+  });
+
+  /* ---- hairline rules --------------------------------------------------- */
+  gsap.utils.toArray('[data-item]').forEach(function (item, i) {
+    var tl = gsap.timeline({ scrollTrigger: { trigger: item, start: 'top 88%', once: true } });
+    tl.from(item.querySelector('[data-item-rule]'), { scaleX: 0, duration: 0.8, ease: 'power3.inOut' })
+      .from(item.querySelectorAll('h3, p'), { y: '0.9rem', opacity: 0, duration: 0.7, stagger: 0.08, ease: ease }, '-=0.5');
+  });
+
+  /* ---- magnetic buttons ------------------------------------------------- */
+  if (window.matchMedia('(pointer: fine)').matches) {
+    document.querySelectorAll('[data-magnetic]').forEach(function (btn) {
+      var strength = 0.28;
+      btn.addEventListener('mousemove', function (e) {
+        var r = btn.getBoundingClientRect();
+        gsap.to(btn, {
+          x: (e.clientX - (r.left + r.width / 2)) * strength,
+          y: (e.clientY - (r.top + r.height / 2)) * strength,
+          duration: 0.4, ease: 'power3.out'
+        });
+      });
+      btn.addEventListener('mouseleave', function () {
+        gsap.to(btn, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.4)' });
+      });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
