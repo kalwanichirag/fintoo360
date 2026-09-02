@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,16 +14,39 @@
     tailwind.config = { theme: { extend: { fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'] } } } };
   </script>
   <style>
-    html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
-    .page-card[hidden] { display: none; }
-    #filters { scrollbar-width: none; }
-    #filters::-webkit-scrollbar { display: none; }
-    .filter-btn { flex: none; }
-    @media (min-width: 1079.999px) { html { font-size: 0.9vw; } }
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    .page-card[hidden] {
+      display: none;
+    }
+
+    #filters {
+      scrollbar-width: none;
+    }
+
+    #filters::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-btn {
+      flex: none;
+    }
+
+    @media (min-width: 1079.999px) {
+      html {
+        font-size: 0.9vw;
+      }
+    }
   </style>
 </head>
 
-<body class="min-h-screen bg-slate-100 px-4 py-6 font-sans text-slate-950 antialiased sm:px-6 sm:py-10 md:px-8 md:py-14">
+<body
+  class="min-h-screen bg-slate-100 px-4 py-6 font-sans text-slate-950 antialiased sm:px-6 sm:py-10 md:px-8 md:py-14">
   <div aria-hidden="true" class="pointer-events-none fixed inset-0 overflow-hidden">
     <div class="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-orange-200 opacity-50 blur-3xl"></div>
     <div class="absolute -right-32 top-0 h-96 w-96 rounded-full bg-blue-200 opacity-50 blur-3xl"></div>
@@ -38,24 +62,44 @@
         <h1 class="max-w-3xl text-2xl font-semibold  tracking-tight lg:text-4xl">Fintoo Landing Page Library</h1>
       </div>
 
-      <div id="filters" class="flex w-full min-w-0 flex-nowrap gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0 md:w-auto" role="group" aria-label="Filter landing pages">
-        <button type="button" data-filter="all" aria-pressed="true" class="filter-btn rounded-full bg-slate-950 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition">All <span data-count="all"></span></button>
-        <button type="button" data-filter="financial" aria-pressed="false" class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">All FP <span data-count="financial"></span></button>
-        <button type="button" data-filter="ai" aria-pressed="false" class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">AI App <span data-count="ai"></span></button>
-        <button type="button" data-filter="calendly" aria-pressed="false" class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">FP with Calendly <span data-count="calendly"></span></button>
-        <button type="button" data-filter="otp" aria-pressed="false" class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">FP with OTP <span data-count="otp"></span></button>
-        <button type="button" data-filter="itr" aria-pressed="false" class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">ITR <span data-count="itr"></span></button>
-        <button type="button" data-filter="development" aria-pressed="false" class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">Under Development <span data-count="development"></span></button>
+      <div id="filters"
+        class="flex w-full min-w-0 flex-nowrap gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0 md:w-auto"
+        role="group" aria-label="Filter landing pages">
+        <button type="button" data-filter="all" aria-pressed="true"
+          class="filter-btn rounded-full bg-slate-950 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition">All
+          <span data-count="all"></span></button>
+        <button type="button" data-filter="financial" aria-pressed="false"
+          class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">All
+          FP <span data-count="financial"></span></button>
+        <button type="button" data-filter="ai" aria-pressed="false"
+          class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">AI
+          App <span data-count="ai"></span></button>
+        <button type="button" data-filter="calendly" aria-pressed="false"
+          class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">FP
+          with Calendly <span data-count="calendly"></span></button>
+        <button type="button" data-filter="otp" aria-pressed="false"
+          class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">FP
+          with OTP <span data-count="otp"></span></button>
+        <button type="button" data-filter="itr" aria-pressed="false"
+          class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">ITR
+          <span data-count="itr"></span></button>
+        <button type="button" data-filter="development" aria-pressed="false"
+          class="filter-btn rounded-full border border-slate-300 bg-white/80 px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-400">Under
+          Development <span data-count="development"></span></button>
       </div>
     </div>
 
     <div id="page-grid" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
-    <p id="empty-state" class="hidden rounded-2xl border border-slate-200 bg-white p-8 text-center text-sm text-slate-500">No pages match this filter.</p>
+    <p id="empty-state"
+      class="hidden rounded-2xl border border-slate-200 bg-white p-8 text-center text-sm text-slate-500">No pages match
+      this filter.</p>
   </main>
 
   <script>
     const pages = [
-                  { name: 'Financial Planning Services',  path: '/financial-planning-services', type: 'calendly' },
+            { name: 'Personal Financial Planning', url: 'https://fintoo360.vercel.app/personal-financial-planning.html', type: 'calendly', status: 'development', image: 'assets/financial-page-previews/personal-financial-roadmap.png' },
+
+      { name: 'Financial Planning Services', path: '/financial-planning-services', type: 'calendly' },
 
       { name: 'Private Wealth', path: '/private-wealth', type: 'otp' },
       { name: 'Executive Wealth', path: '/executive-wealth', type: 'otp' },
@@ -72,8 +116,7 @@
       { name: 'Retirement Planner', path: '/retirement-planner', type: 'calendly' },
       { name: 'Retirement Planning', path: '/retirement-planning', type: 'calendly' },
       { name: 'Wealth Management for Indians and NRIs', path: '/wealth-management-for-indians-and-nri', type: 'calendly' },
-             { name: 'Wealth Management Strategy for Indians and NRIs', path: '/wealth-management-strategy-for-indians-and-nri', type: 'otp' },
-
+      { name: 'Wealth Management Strategy for Indians and NRIs', path: '/wealth-management-strategy-for-indians-and-nri', type: 'otp' },
       { name: 'Financial Planning Strategy', path: '/financial-planning-strategy', type: 'otp' },
       { name: 'Financial Strategy', path: '/financial-strategy', type: 'otp' },
       { name: 'Investment Advice', path: '/investment-advice', type: 'otp' },
@@ -161,4 +204,5 @@
     }));
   </script>
 </body>
+
 </html>
