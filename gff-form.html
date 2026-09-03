@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI in Personal Finance — Fintoo at Global Fintech Fest 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Google Sans', 'Product Sans', 'Inter', 'system-ui', 'sans-serif']
+      },
+      colors: {
+        ink:   '#03060d',
+        navy:  { DEFAULT: '#042b62', deep: '#021a3f', lift: '#0a3d86' },
+        ember: { DEFAULT: '#dd7300', lift: '#ff9a3c' }
+      },
+      keyframes: {
+        rise:   { '0%': { opacity: '0', transform: 'translateY(1rem)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+        drift:  { '0%,100%': { transform: 'translate3d(0,0,0) scale(1)' }, '50%': { transform: 'translate3d(6%,-8%,0) scale(1.18)' } },
+        drift2: { '0%,100%': { transform: 'translate3d(0,0,0) scale(1.1)' }, '50%': { transform: 'translate3d(-7%,6%,0) scale(0.92)' } },
+        seam:   { '0%,100%': { opacity: '0.25' }, '50%': { opacity: '0.85' } },
+        stroke: { '0%': { 'stroke-dashoffset': '48' }, '100%': { 'stroke-dashoffset': '0' } },
+        halo:   { '0%': { transform: 'scale(0.7)', opacity: '0.7' }, '100%': { transform: 'scale(1.6)', opacity: '0' } }
+      },
+      animation: {
+        rise:    'rise .7s cubic-bezier(.16,1,.3,1) both',
+        'rise-1':'rise .7s .08s cubic-bezier(.16,1,.3,1) both',
+        'rise-2':'rise .7s .16s cubic-bezier(.16,1,.3,1) both',
+        'rise-3':'rise .7s .26s cubic-bezier(.16,1,.3,1) both',
+        'rise-4':'rise .7s .36s cubic-bezier(.16,1,.3,1) both',
+        drift:   'drift 22s ease-in-out infinite',
+        drift2:  'drift2 28s ease-in-out infinite',
+        seam:    'seam 6s ease-in-out infinite',
+        stroke:  'stroke .55s .2s ease-out both',
+        halo:    'halo 2.4s ease-out infinite'
+      }
+    }
+  }
+}
+</script>
+</head>
+
+<body class="h-full overflow-hidden overscroll-none bg-ink font-sans text-white antialiased selection:bg-ember/30">
+
+<main class="grid h-full w-full grid-cols-1 lg:grid-cols-[46%_54%]">
+
+  <!-- ══ Stage ══ -->
+  <section id="stage" class="relative isolate flex h-full min-h-0 flex-col justify-between overflow-hidden bg-navy-deep px-6 py-7 sm:px-10 lg:px-14 lg:py-14 xl:px-20">
+
+    <div class="pointer-events-none absolute -left-1/4 top-0 -z-10 aspect-square w-[36rem] rounded-full bg-navy-lift opacity-60 blur-3xl motion-safe:animate-drift"></div>
+    <div class="pointer-events-none absolute -bottom-1/4 right-0 -z-10 aspect-square w-[30rem] rounded-full bg-ember opacity-25 blur-3xl motion-safe:animate-drift2"></div>
+    <div class="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-navy-deep/10 via-transparent to-ink/70"></div>
+
+    <svg class="pointer-events-none absolute inset-0 -z-10 h-full w-full opacity-[0.14] mix-blend-soft-light" aria-hidden="true">
+      <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter>
+      <rect width="100%" height="100%" filter="url(#grain)"/>
+    </svg>
+
+    <div class="flex items-center gap-3 motion-safe:animate-rise">
+<img src="https://www.fintoo.in/assets/fintoo-ai-white.svg" alt="logo" class="h-6 w-auto sm:h-7">
+      <span class="hidden h-4 w-px bg-white/20 sm:block"></span>
+      <span class="hidden text-sm text-white/50 sm:block">SEBI-registered investment adviser</span>
+    </div>
+
+    <div class="max-w-xl">
+      <p class="text-xs font-medium text-ember-lift sm:text-sm motion-safe:animate-rise-1">Fintoo at Global Fintech Fest 2026</p>
+
+      <h1 class="mt-3 text-[2.6rem] font-bold leading-[0.95] tracking-tighter sm:text-6xl xl:text-7xl motion-safe:animate-rise-2">
+        AI in<br>Personal Finance
+      </h1>
+
+      <p class="mt-4 max-w-md text-sm leading-relaxed text-white/65 sm:mt-6 sm:text-lg motion-safe:animate-rise-3">
+        We are pleased to connect with you. Please fill out this short form so we can reach out to you
+        and schedule a meeting after Global Fintech Fest 2026.
+      </p>
+    </div>
+
+    <div class="motion-safe:animate-rise-4">
+      <dl class="grid max-w-lg grid-cols-2 gap-x-6 gap-y-3 border-t border-white/10 pt-5 text-xs sm:gap-y-5 sm:pt-6 sm:text-sm lg:grid-cols-3">
+        <div>
+          <dt class="text-white/40">Dates</dt>
+          <dd class="mt-1 font-medium">6–8 October 2026</dd>
+        </div>
+        <div>
+          <dt class="text-white/40">Venue</dt>
+          <dd class="mt-1 font-medium">Jio World Centre, Mumbai</dd>
+        </div>
+        <div class="col-span-2 lg:col-span-1">
+          <dt class="text-white/40">Find us at</dt>
+          <dd class="mt-1 font-medium">Stand H2-214, Hall 2</dd>
+        </div>
+      </dl>
+
+      <!-- mobile-only CTA: the flow panel is a separate screen below lg -->
+      <button type="button" data-go="s2"
+        class="mt-6 w-full rounded-2xl bg-ember px-8 py-4 text-base font-medium text-white transition hover:bg-ember-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-ember-lift focus-visible:ring-offset-2 focus-visible:ring-offset-navy-deep active:scale-[0.99] lg:hidden">
+        Share your details
+      </button>
+    </div>
+
+    <div class="pointer-events-none absolute inset-y-0 right-0 hidden w-px bg-gradient-to-b from-transparent via-ember to-transparent motion-safe:animate-seam lg:block"></div>
+  </section>
+
+  <!-- ══ Flow ══ -->
+  <section id="flow" class="relative flex h-full min-h-0 flex-col justify-center overflow-y-auto px-6 py-7 sm:px-10 lg:px-14 lg:py-14 xl:px-20">
+
+    <!-- ── Step 1 (desktop only) ── -->
+    <div id="s1" class="mx-auto hidden w-full max-w-lg lg:block">
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Let's carry the conversation forward</h2>
+      <p class="mt-4 text-base leading-relaxed text-white/60">
+        The fest floor is loud and the coffee queue is long. Leave your details and we'll set up a
+        proper conversation in the week that follows — at a time that suits you.
+      </p>
+
+      <ul class="mt-8 space-y-4 text-sm text-white/70">
+        <li class="flex gap-3">
+          <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ember"></span>
+          A 30-minute call with a Fintoo adviser, not a sales script
+        </li>
+        <li class="flex gap-3">
+          <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ember"></span>
+          A walkthrough of how our AI reads a real portfolio and spending pattern
+        </li>
+        <li class="flex gap-3">
+          <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-ember"></span>
+          Partnership and integration questions welcome
+        </li>
+      </ul>
+
+      <button type="button" data-go="s2"
+        class="mt-10 rounded-2xl bg-ember px-8 py-4 text-base font-medium text-white transition hover:bg-ember-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-ember-lift focus-visible:ring-offset-2 focus-visible:ring-offset-ink active:scale-[0.99]">
+        Share your details
+      </button>
+
+      <p class="mt-4 text-sm text-white/35">Seven fields. Under a minute.</p>
+    </div>
+
+    <!-- ── Step 2 ── -->
+    <div id="s2" class="mx-auto hidden w-full max-w-xl">
+      <div class="mb-5 flex items-baseline justify-between lg:mb-7">
+        <div>
+          <h2 class="text-2xl font-bold tracking-tight sm:text-3xl">About you</h2>
+          <p class="mt-1 text-xs text-white/50 sm:text-sm">We'll use this only to arrange the meeting.</p>
+        </div>
+        <button type="button" data-go="s1" class="shrink-0 text-sm text-white/45 underline-offset-4 transition hover:text-white hover:underline">
+          Back
+        </button>
+      </div>
+
+      <form id="lead" novalidate class="grid grid-cols-2 gap-x-4 gap-y-3 sm:gap-x-5 sm:gap-y-4">
+        <label class="col-span-2 block">
+          <span class="text-xs font-medium text-white/50">Full name</span>
+          <input name="name" type="text" required autocomplete="name" placeholder="Aarav Mehta"
+            class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-white/25 outline-none transition focus:border-ember focus:bg-white/[0.07] focus:ring-2 focus:ring-ember/25 sm:py-3">
+        </label>
+
+        <label class="col-span-2 block">
+          <span class="text-xs font-medium text-white/50">Work email</span>
+          <input name="email" type="email" required autocomplete="email" placeholder="aarav@company.com"
+            class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-white/25 outline-none transition focus:border-ember focus:bg-white/[0.07] focus:ring-2 focus:ring-ember/25 sm:py-3">
+        </label>
+
+        <label class="block">
+          <span class="text-xs font-medium text-white/50">Mobile number</span>
+          <input name="phone" type="tel" required inputmode="numeric" maxlength="10" autocomplete="tel" placeholder="98XXXXXXXX"
+            class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-white/25 outline-none transition focus:border-ember focus:bg-white/[0.07] focus:ring-2 focus:ring-ember/25 sm:py-3">
+        </label>
+
+        <label class="block">
+          <span class="text-xs font-medium text-white/50">City <span class="text-white/25">optional</span></span>
+          <input name="city" type="text" autocomplete="address-level2" placeholder="Mumbai"
+            class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-white/25 outline-none transition focus:border-ember focus:bg-white/[0.07] focus:ring-2 focus:ring-ember/25 sm:py-3">
+        </label>
+
+        <label class="block">
+          <span class="text-xs font-medium text-white/50">Company</span>
+          <input name="company" type="text" required autocomplete="organization" placeholder="Northbridge Capital"
+            class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-white/25 outline-none transition focus:border-ember focus:bg-white/[0.07] focus:ring-2 focus:ring-ember/25 sm:py-3">
+        </label>
+
+        <label class="block">
+          <span class="text-xs font-medium text-white/50">Designation</span>
+          <input name="designation" type="text" required autocomplete="organization-title" placeholder="Head of Products"
+            class="mt-1 w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-white/25 outline-none transition focus:border-ember focus:bg-white/[0.07] focus:ring-2 focus:ring-ember/25 sm:py-3">
+        </label>
+
+        <label class="col-span-2 block">
+          <span class="text-xs font-medium text-white/50">Anything we should know <span class="text-white/25">optional</span></span>
+          <textarea name="remarks" rows="2" placeholder="What you'd like to discuss when we meet"
+            class="mt-1 w-full resize-none rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder-white/25 outline-none transition focus:border-ember focus:bg-white/[0.07] focus:ring-2 focus:ring-ember/25 sm:py-3"></textarea>
+        </label>
+
+        <p id="err" class="col-span-2 hidden text-sm text-ember-lift"></p>
+
+        <button type="submit"
+          class="col-span-2 mt-1 w-full rounded-2xl bg-ember px-8 py-3.5 text-base font-medium text-white transition hover:bg-ember-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-ember-lift focus-visible:ring-offset-2 focus-visible:ring-offset-ink active:scale-[0.99] lg:w-auto lg:justify-self-start">
+          Request a meeting
+        </button>
+      </form>
+    </div>
+
+    <!-- ── Step 3 ── -->
+    <div id="s3" class="mx-auto hidden w-full max-w-lg">
+      <div class="relative inline-flex h-16 w-16 items-center justify-center rounded-full bg-ember/15">
+        <span class="absolute inset-0 rounded-full border border-ember/40 motion-safe:animate-halo"></span>
+        <svg viewBox="0 0 24 24" fill="none" class="h-8 w-8">
+          <path d="M5 12.5l4.5 4.5L19 7.5" stroke="#ff9a3c" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" stroke-dasharray="48" class="motion-safe:animate-stroke"/>
+        </svg>
+      </div>
+
+      <h2 id="thanks" class="mt-7 text-3xl font-bold tracking-tight sm:text-4xl">Thank you.</h2>
+      <p class="mt-4 text-base leading-relaxed text-white/60">
+        Your details are with our team. Someone from Fintoo will write to you within two working days
+        of the fest closing to fix a time that works for you.
+      </p>
+
+      <dl class="mt-7 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-white/10 pt-6 text-sm">
+        <div>
+          <dt class="text-white/40">We'll email</dt>
+          <dd id="c-email" class="mt-1 break-all font-medium">—</dd>
+        </div>
+        <div>
+          <dt class="text-white/40">Expect a call from</dt>
+          <dd class="mt-1 font-medium">+91 22 6249 4949</dd>
+        </div>
+      </dl>
+
+      <p class="mt-7 text-sm text-white/45">
+        Meanwhile, come say hello at Stand H2-214 —
+        <button type="button" data-go="s1" class="font-medium text-ember-lift underline-offset-4 transition hover:underline">
+          add another person
+        </button>
+      </p>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(function () {
+  var steps  = ['s1', 's2', 's3'];
+  var panels = {};
+  steps.forEach(function (id) { panels[id] = document.getElementById(id); });
+
+  var stage = document.getElementById('stage');
+  var flow  = document.getElementById('flow');
+  var desktop = window.matchMedia('(min-width: 1024px)');
+
+  function layout(id) {
+    // below lg, stage and flow are two separate full screens — never stacked
+    var mobileHero = !desktop.matches && id === 's1';
+    stage.classList.toggle('hidden', !desktop.matches && !mobileHero);
+    flow.classList.toggle('hidden', mobileHero);
+  }
+
+  var current = 's1';
+
+  function show(id) {
+    current = id;
+    steps.forEach(function (s) { panels[s].classList.toggle('hidden', s !== id); });
+    if (id === 's1') panels.s1.classList.add('lg:block');
+    layout(id);
+
+    var el = panels[id];
+    el.classList.remove('motion-safe:animate-rise');
+    void el.offsetWidth;
+    el.classList.add('motion-safe:animate-rise');
+
+    if (id === 's2') {
+      var first = el.querySelector('input');
+      if (first && desktop.matches) first.focus({ preventScroll: true });
+    }
+  }
+
+  desktop.addEventListener('change', function () { layout(current); });
+  layout('s1');
+
+  document.querySelectorAll('[data-go]').forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.go); });
+  });
+
+  var form = document.getElementById('lead');
+  var err  = document.getElementById('err');
+
+  form.addEventListener('input', function (e) {
+    if (e.target.name === 'phone') e.target.value = e.target.value.replace(/\D/g, '').slice(0, 10);
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var d = Object.fromEntries(new FormData(form).entries());
+    var problem = '';
+
+    if (!d.name.trim()) problem = 'Add your name so we know who to write to.';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.email.trim())) problem = 'That email address looks incomplete.';
+    else if (d.phone.length !== 10) problem = 'Enter a 10-digit mobile number.';
+    else if (!d.company.trim()) problem = 'Add your company name.';
+    else if (!d.designation.trim()) problem = 'Add your designation.';
+
+    if (problem) {
+      err.textContent = problem;
+      err.classList.remove('hidden');
+      return;
+    }
+
+    err.classList.add('hidden');
+    document.getElementById('thanks').textContent = 'Thank you, ' + d.name.trim().split(' ')[0] + '.';
+    document.getElementById('c-email').textContent = d.email.trim();
+    show('s3');
+    form.reset();
+  });
+})();
+</script>
+</body>
+</html>
