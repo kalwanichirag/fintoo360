@@ -86,7 +86,7 @@ tailwind.config = {
       <dl class="grid max-w-lg grid-cols-2 gap-x-6 gap-y-3 border-t border-white/10 pt-5 text-xs sm:gap-y-5 sm:pt-6 sm:text-sm lg:grid-cols-3">
         <div>
           <dt class="text-white/40">Dates</dt>
-          <dd class="mt-1 font-medium">6–8 October 2026</dd>
+          <dd class="mt-1 font-medium">9–11 September 2026</dd>
         </div>
         <div>
           <dt class="text-white/40">Venue</dt>
@@ -233,7 +233,15 @@ tailwind.config = {
         </div>
       </dl>
 
-      <p class="mt-7 text-sm text-white/45">
+      <div class="mt-6 flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-5">
+        <p class="text-sm text-white/60">Our brochure is downloading now.</p>
+        <button id="dl" type="button"
+          class="shrink-0 text-left text-sm font-medium text-ember-lift underline-offset-4 transition hover:underline sm:text-right">
+          Didn't start? Download it here
+        </button>
+      </div>
+
+      <p class="mt-6 text-sm text-white/45">
         Meanwhile, come say hello at Stand H2-214 —
         <button type="button" data-go="s1" class="font-medium text-ember-lift underline-offset-4 transition hover:underline">
           add another person
@@ -266,7 +274,9 @@ tailwind.config = {
   function show(id) {
     current = id;
     steps.forEach(function (s) { panels[s].classList.toggle('hidden', s !== id); });
-    if (id === 's1') panels.s1.classList.add('lg:block');
+    // `lg:block` overrides the non-responsive `hidden` utility on desktop, so
+    // it must be removed when another step becomes active.
+    panels.s1.classList.toggle('lg:block', id === 's1');
     layout(id);
 
     var el = panels[id];
@@ -286,6 +296,89 @@ tailwind.config = {
   document.querySelectorAll('[data-go]').forEach(function (b) {
     b.addEventListener('click', function () { show(b.dataset.go); });
   });
+
+  /* ── sample brochure, generated in-page so there is no external asset ── */
+  var brochureUrl = null;
+
+  function buildBrochure() {
+    var esc = function (s) { return String(s).replace(/([()\\])/g, '\\$1'); };
+    var txt = function (font, size, x, y, s) {
+      return 'BT /' + font + ' ' + size + ' Tf ' + x + ' ' + y + ' Td (' + esc(s) + ') Tj ET';
+    };
+
+    var body = [
+      'Fintoo is a SEBI-registered investment adviser building an AI layer over',
+      'personal finance. The same engine that reads a portfolio also reads the',
+      'spending behind it, then works out what to change and by how much.'
+    ];
+    var points = [
+      'Portfolio analysis - what is working, what is quietly dragging returns',
+      'Spending analysis - where money leaks and what it costs you long term',
+      'Goal-based SIP planning - the fund and the amount for your timeline'
+    ];
+
+    var s = [
+      '0.008 0.102 0.247 rg', '0 0 595 842 re f',
+      '0.867 0.451 0.000 rg', '0 826 595 16 re f',
+      '1 1 1 rg', txt('F1', 26, 56, 748, 'fintoo.'),
+      '0.706 0.784 0.902 rg', txt('F2', 12, 56, 722, 'Global Fintech Fest 2026'),
+      '1 1 1 rg',
+      txt('F1', 40, 56, 640, 'AI in'),
+      txt('F1', 40, 56, 592, 'Personal Finance'),
+      '0.867 0.451 0.000 rg', '56 562 72 3 re f',
+      '0.827 0.867 0.918 rg',
+      txt('F2', 12, 56, 520, body[0]),
+      txt('F2', 12, 56, 502, body[1]),
+      txt('F2', 12, 56, 484, body[2]),
+      '1 1 1 rg', txt('F1', 15, 56, 430, 'What we will cover when we meet'),
+      '0.827 0.867 0.918 rg',
+      txt('F2', 12, 56, 400, points[0]),
+      txt('F2', 12, 56, 380, points[1]),
+      txt('F2', 12, 56, 360, points[2]),
+      '0.145 0.235 0.396 rg', '56 300 483 1 re f',
+      '0.706 0.784 0.902 rg',
+      txt('F2', 11, 56, 272, 'Stand H2-214, Hall 2'),
+      txt('F2', 11, 56, 254, '9-11 September 2026, Jio World Centre, Mumbai'),
+      txt('F2', 11, 56, 236, 'wealth@fintoo.in   |   +91 22 6249 4949'),
+      '0.427 0.529 0.694 rg',
+      txt('F2', 9, 56, 80, 'Sample brochure. Mutual fund investments are subject to market risks.'),
+      txt('F2', 9, 56, 66, 'Read all scheme related documents carefully.')
+    ].join('\n');
+
+    var objs = [];
+    objs[1] = '<< /Type /Catalog /Pages 2 0 R >>';
+    objs[2] = '<< /Type /Pages /Kids [3 0 R] /Count 1 >>';
+    objs[3] = '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] ' +
+              '/Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> /Contents 4 0 R >>';
+    objs[4] = '<< /Length ' + s.length + ' >>\nstream\n' + s + '\nendstream';
+    objs[5] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>';
+    objs[6] = '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>';
+
+    var head = '%PDF-1.4\n', out = '', off = [], i;
+    for (i = 1; i <= 6; i++) {
+      off[i] = head.length + out.length;
+      out += i + ' 0 obj\n' + objs[i] + '\nendobj\n';
+    }
+    var start = head.length + out.length;
+    var xref = 'xref\n0 7\n0000000000 65535 f \n';
+    for (i = 1; i <= 6; i++) xref += ('0000000000' + off[i]).slice(-10) + ' 00000 n \n';
+
+    var pdf = head + out + xref + 'trailer\n<< /Size 7 /Root 1 0 R >>\nstartxref\n' + start + '\n%%EOF';
+    return new Blob([pdf], { type: 'application/pdf' });
+  }
+
+  function downloadBrochure() {
+    if (!brochureUrl) brochureUrl = URL.createObjectURL(buildBrochure());
+    var a = document.createElement('a');
+    a.href = brochureUrl;
+    a.download = 'Fintoo-AI-in-Personal-Finance.pdf';
+    a.rel = 'noopener';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  document.getElementById('dl').addEventListener('click', downloadBrochure);
 
   var form = document.getElementById('lead');
   var err  = document.getElementById('err');
@@ -316,6 +409,7 @@ tailwind.config = {
     document.getElementById('c-email').textContent = d.email.trim();
     show('s3');
     form.reset();
+    setTimeout(downloadBrochure, 600);
   });
 })();
 </script>
