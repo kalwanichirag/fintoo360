@@ -48,6 +48,64 @@
   body { background: radial-gradient(circle at 82% 0%, #e4efff 0, transparent 28rem), #f5f7fb; }
   .portfolio-donut { background: conic-gradient(#4f8cff 0 36%, #19b394 36% 61%, #f4b740 61% 80%, #a477ff 80% 93%, #dbe5f3 93% 100%); }
   .soft-grid { background-image: linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px); background-size: 28px 28px; }
+  .asset-navigation { margin-top: 1rem; overflow: hidden; background: #fff; border: 1px solid #e2e8f0; border-radius: 1rem; box-shadow: 0 3px 12px #042b6203; }
+  #assetInsight:empty { display: none; }
+  .asset-navigation-header { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding: 1.4rem 1.5rem .6rem; }
+  .asset-navigation-heading h2 { color: #042b62; font-size: 1rem; font-weight: 600; }
+  .asset-navigation-heading p { margin-top: .25rem; color: #64748b; font-size: .75rem; }
+  .asset-tabs { display: flex; flex-wrap: wrap; gap: 0 1.4rem; padding: 0 1.5rem; border-bottom: 1px solid #e5ebf3; }
+  .asset-tab { position: relative; display: inline-flex; align-items: center; justify-content: center; min-height: 3.1rem; margin-bottom: -1px; padding: .8rem 0; border-bottom: 3px solid transparent; color: #475569; font-size: .875rem; font-weight: 500; transition: color .15s, border-color .15s; }
+  .asset-tab:hover { color: #042b62; border-bottom-color: #bdd2ef; }
+  .asset-tab[aria-selected="true"] { color: #042b62; border-bottom-color: #1769d2; font-weight: 700; }
+  .asset-tab:focus-visible { outline: 2px solid #6399e6; outline-offset: -2px; border-radius: .2rem; }
+  .asset-performance-strip { padding: 1rem 1.5rem .85rem; background: #fff; }
+  .performance-overview { display: grid; grid-template-columns: repeat(4, minmax(0, 11.5rem)); gap: 1.5rem; align-items: start; }
+  .performance-primary { border-right: 1px solid #e5ebf3; padding-right: 1.5rem; }
+  .performance-label { color: #64748b; font-size: .75rem; font-weight: 500; }
+  .performance-value { display: flex; align-items: center; min-height: 1.6rem; margin-top: .25rem; font-size: 1.125rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.025em; white-space: nowrap; }
+  .performance-primary .performance-value { color: #042b62; font-size: 1.125rem; }
+  .performance-invested, .performance-context { margin-top: .25rem; font-size: .75rem; color: #64748b; }
+  .performance-invested span { margin-left: .4rem; font-weight: 500; color: #475569; }
+  .performance-context-row { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1.25rem; margin-bottom: .85rem; padding: .5rem .75rem; border-radius: .6rem; background: #f2f6fb; color: #64748b; font-size: .75rem; }
+  .performance-context-row > span { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+  .performance-context-row strong, .sip-amount b { color: #042b62; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .performance-context-row .sip-summary { gap: 1rem; }
+  .sip-amount { display: inline-flex; gap: .5rem; align-items: baseline; }
+  #assetActions:empty { display: none; }
+  #assetActions { flex-shrink: 0; }
+  #assetActions .text-right { display: flex; align-items: center; gap: .9rem; }
+  #assetActions .text-right p { order: -1; margin: 0; font-size: .75rem; }
+  #assetActions button { background: #fff; color: #042b62; border: 1px solid #c6d8ec; padding: .5rem .8rem; font-size: .75rem; box-shadow: none; }
+  #assetActions button:hover { background: #f2f6fb; }
+  @media (max-width: 1199px) { .performance-overview { grid-template-columns: repeat(2, minmax(0, 11.5rem)); gap: 1rem; } }
+  @media (max-width: 639px) {
+    .asset-navigation-header { padding: 1rem 1.25rem .5rem; align-items: flex-start; flex-wrap: wrap; gap: .75rem; }
+    .asset-tabs { padding: 0 1.25rem; gap: 0 1rem; }
+    .asset-tab { font-size: .875rem; min-height: 2.75rem; }
+    .asset-performance-strip { padding: .85rem 1.25rem; }
+    .performance-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .performance-primary { border-right: 0; padding-right: 0; }
+    .performance-value { font-size: 1rem; min-height: 1.6rem; }
+    .performance-context-row { align-items: flex-start; flex-direction: column; }
+    .performance-context-row .sip-summary { border-left: 0; padding-left: 0; }
+    #assetActions .text-right { flex-direction: row-reverse; }
+  }
+  .asset-navigation, #assetPanel > div {
+    background: #fff; border: 1px solid #e2e8f0; border-radius: 1rem; box-shadow: none;
+  }
+  #assetPanel > div { margin-top: 0; }
+  .asset-navigation-header, #assetPanel .holdings-heading { padding: 1.25rem 1.5rem; }
+  .asset-navigation-heading h2, #assetPanel .holdings-heading h2 {
+    margin: 0; font-size: max(1.125rem, 18px); line-height: 1.5; font-weight: 600; color: #042b62;
+  }
+  .asset-navigation-heading p, #assetPanel .holdings-heading p {
+    margin-top: .25rem; font-size: max(.875rem, 14px); line-height: 1.5; font-weight: 400; color: #64748b;
+  }
+  #assetPanel .holdings-heading { border-bottom-color: #f1f5f9; }
+  @media (max-width: 639px) {
+    .asset-navigation-header, #assetPanel .holdings-heading { padding: 1rem 1.25rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .asset-tab { transition: none; } #assetPanel { animation: none; } }
   @media (min-width: 1079.999px) {
   html {
     font-size: 0.9vw;
@@ -213,14 +271,17 @@
 
       <!-- AI briefing -->
     
-      <!-- Asset class navigator -->
-      <div class="mt-5 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-        <div class="flex items-center justify-between border-b border-slate-100 px-5 py-4 sm:px-6"><div><h2 class="text-base font-semibold text-navy">Explore by asset class</h2><p class="mt-0.5 text-xs text-slate-500">Select a category to review holdings and performance</p></div><span class="hidden rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-500 sm:block">11 categories</span></div>
-        <div id="assetRail" class="flex gap-2 overflow-x-auto px-4 py-3 sm:px-6 [scrollbar-width:none]"></div>
-      </div>
+      <div id="assetInsight" class="mt-6 mb-4" aria-live="polite"></div>
+
+      <!-- Asset classes and selected performance -->
+      <section class="asset-navigation" aria-labelledby="assetNavigationTitle">
+        <div class="asset-navigation-header"><div class="asset-navigation-heading"><h2 id="assetNavigationTitle">Asset classes</h2><p>Select an asset class to view your holdings</p></div><div id="assetActions"></div></div>
+        <div id="assetRail" class="asset-tabs" role="tablist" aria-label="Asset classes"></div>
+        <div id="assetPerformance" role="region" aria-label="Selected asset performance"></div>
+      </section>
 
       <!-- Asset panel -->
-      <div id="assetPanel" class="mt-6"></div>
+      <div id="assetPanel" class="mt-6" role="tabpanel" aria-labelledby="asset-choice-mf" tabindex="0"></div>
     </section>
 
     <!-- ───────── VIEW: FUND DETAIL ───────── -->
@@ -448,11 +509,18 @@ function stat(s){
     </div>`;
 }
 function statStrip(stats, right){
-  return `<div class="flex flex-col gap-4 rounded-2xl bg-white p-1.5 ring-1 ring-slate-200 xl:flex-row xl:items-center xl:justify-between">
-      <div class="grid flex-1 grid-cols-2 divide-slate-100 sm:grid-cols-3 sm:divide-x lg:grid-cols-4 xl:grid-cols-none xl:auto-cols-max xl:grid-flow-col xl:justify-between">
-        ${stats.map(stat).join('')}
+  const primary = stats.find(s => /^(Current value|Total fund value|Maturity value)$/.test(s.label));
+  const invested = stats.find(s => /^(Invested|Invested value|Purchased value)$/.test(s.label));
+  const counts = stats.filter(s => /^(Total (?!fund value)|No\. of|Active SIP)/.test(s.label));
+  const performance = stats.filter(s => s !== primary && s !== invested && !counts.includes(s));
+  return `<div class="asset-performance-strip">
+      ${counts.filter(s => s.label === 'Active SIP').map(s => `<div class="performance-context-row"><span class="sip-summary"><strong>${s.value} active SIPs</strong><span class="sip-amount">SIP amount <b>${s.sub}</b></span></span></div>`).join('')}
+      <div class="performance-overview">
+        ${primary ? `<div class="performance-primary"><p class="performance-label">${primary.label === 'Total fund value' ? 'Current value' : primary.label}</p><p class="performance-value">${primary.value}</p>${invested ? `<p class="performance-invested">${invested.label} <span>${invested.value}</span></p>` : ''}</div>` : ''}
+        ${performance.map(s => `<div class="performance-detail"><p class="performance-label">${s.label}</p><p class="performance-value ${s.tone || 'text-navy'}">${s.value}</p>${s.sub ? `<p class="performance-context">${s.sub}</p>` : ''}</div>`).join('')}
       </div>
-      ${right ? `<div class="flex items-center justify-end gap-3 px-4 pb-3 xl:pb-0">${right}</div>` : ''}
+
+      ${right ? `<div class="asset-performance-actions">${right}</div>` : ''}
     </div>`;
 }
 function delta(value, pct, neg){
@@ -469,7 +537,7 @@ function initials(name){
   return name.replace(/[^A-Za-z ]/g,'').split(' ').filter(Boolean).slice(0,2).map(w=>w[0]).join('').toUpperCase();
 }
 function sectionHead(title, sub, right){
-  return `<div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 px-5 py-4 sm:px-6">
+  return `<div class="holdings-heading flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 px-5 py-4 sm:px-6">
       <div>
         <h2 class="text-base font-semibold text-navy">${title}</h2>
         ${sub?`<p class="mt-0.5 text-xs text-slate-500">${sub}</p>`:''}
@@ -954,11 +1022,21 @@ const FORMS = {
 let activeAsset = 'mf';
 
 function renderRail(){
-  document.getElementById('assetRail').innerHTML = ASSETS.map(a=>{
+  document.getElementById('assetRail').innerHTML = ASSETS.map(a => {
     const on = a.id === activeAsset;
-    return `<button onclick="selectAsset('${a.id}')" class="inline-flex shrink-0 items-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition focus:outline-none focus-visible:ring-2 focus-visible:ring-navy/30 ${on?'border-navy bg-navy text-white shadow-sm':'border-transparent bg-slate-50 text-slate-600 hover:border-navy-200 hover:bg-navy-50 hover:text-navy'}">${a.icon}${a.label}</button>`;
+    return `<button type="button" role="tab" id="asset-choice-${a.id}" onclick="selectAsset('${a.id}')" class="asset-tab" aria-selected="${on}" tabindex="${on ? 0 : -1}" aria-controls="assetPanel">${a.label}</button>`;
   }).join('');
+  document.getElementById('assetPanel').setAttribute('aria-labelledby', `asset-choice-${activeAsset}`);
 }
+document.getElementById('assetRail').addEventListener('keydown', event => {
+  const index = ASSETS.findIndex(a => a.id === activeAsset);
+  let next;
+  if (event.key === 'ArrowRight') next = (index + 1) % ASSETS.length;
+  if (event.key === 'ArrowLeft') next = (index - 1 + ASSETS.length) % ASSETS.length;
+  if (event.key === 'Home') next = 0;
+  if (event.key === 'End') next = ASSETS.length - 1;
+  if (next !== undefined) { event.preventDefault(); selectAsset(ASSETS[next].id); }
+});
 function assetInsight(id){
   const insights = {
     mf: ['Portfolio overlap detected','Three ELSS funds share similar large-cap exposure. Reviewing overlap may make your portfolio easier to manage.','Compare overlap'],
@@ -971,24 +1049,41 @@ function assetInsight(id){
   };
   const i = insights[id];
   if(!i) return '';
-  return `<div class="mb-4 flex flex-col gap-3 rounded-2xl border border-indigo-100 bg-indigo-50/70 px-5 py-4 sm:flex-row sm:items-center">
+  return `<div class="flex flex-col gap-3 rounded-2xl border border-indigo-100 bg-indigo-50/70 px-5 py-4 sm:px-6 sm:flex-row sm:items-center">
     <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-600 text-white">✦</span>
     <div class="min-w-0 flex-1"><p class="text-sm font-semibold text-navy"><span class="mr-2 text-xs uppercase tracking-wider text-indigo-600">AI note</span>${i[0]}</p><p class="mt-0.5 text-xs leading-relaxed text-slate-600">${i[1]}</p></div>
     
   </div>`;
 }
 function assetPanelMarkup(id){
-  return compactCurrencyMarkup(assetInsight(id) + PANELS[id]());
+  return compactCurrencyMarkup(PANELS[id]());
+}
+function renderAssetPanel(id){
+  document.getElementById('assetInsight').innerHTML = assetInsight(id);
+  const template = document.createElement('template');
+  template.innerHTML = assetPanelMarkup(id);
+  const performance = template.content.querySelector('.asset-performance-strip');
+  const performanceHost = document.getElementById('assetPerformance');
+  performanceHost.replaceChildren();
+  const actionsHost = document.getElementById('assetActions');
+  actionsHost.replaceChildren();
+  if (performance) {
+    const actions = performance.querySelector('.asset-performance-actions');
+    if (actions) actionsHost.append(actions);
+    performanceHost.append(performance);
+  }
+  document.getElementById('assetPanel').replaceChildren(template.content);
 }
 function selectAsset(id){
   activeAsset = id;
   renderRail();
   const panel = document.getElementById('assetPanel');
-  panel.innerHTML = assetPanelMarkup(id);
+  renderAssetPanel(id);
   panel.classList.remove('animate-riseIn');
   void panel.offsetWidth;
   panel.classList.add('animate-riseIn');
   showPortfolio(true);
+  document.getElementById(`asset-choice-${id}`).focus({preventScroll: true});
 }
 function setView(id){
   ['view-portfolio','view-fund','view-form'].forEach(v=>document.getElementById(v).classList.toggle('hidden', v!==id));
@@ -1009,7 +1104,7 @@ function openForm(key){
 }
 
 renderRail();
-document.getElementById('assetPanel').innerHTML = assetPanelMarkup(activeAsset);
+renderAssetPanel(activeAsset);
 </script>
 </body>
 </html>
