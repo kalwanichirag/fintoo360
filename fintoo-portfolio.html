@@ -212,16 +212,7 @@
       </div>
 
       <!-- AI briefing -->
-      <div class="mt-5 grid gap-3 xl:grid-cols-[1.1fr_1fr_1fr]">
-        <div class="rounded-2xl bg-gradient-to-br from-indigo-600 to-navy p-5 text-white shadow-sm">
-          <div class="flex items-center gap-2"><span class="flex h-8 w-8 items-center justify-center rounded-xl bg-white/15">✦</span><div><p class="text-sm font-semibold">Fintoo AI briefing</p><p class="text-[0.68rem] text-indigo-200">3 insights from your portfolio</p></div></div>
-          <p class="mt-4 text-sm leading-relaxed text-indigo-50">You’re growing steadily, but liquidity is lower than ideal for your family profile.</p>
-          <button class="mt-4 text-xs font-semibold text-white">Review full analysis →</button>
-        </div>
-        <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div class="flex items-start gap-3"><span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-600">!</span><div><p class="text-xs font-semibold uppercase tracking-wider text-amber-600">Needs attention</p><p class="mt-1 text-sm font-semibold text-navy">Build a larger liquidity buffer</p><p class="mt-1 text-xs leading-relaxed text-slate-500">Liquid assets are only 7%; your target range is 10–15%.</p></div></div><button class="mt-4 text-xs font-semibold text-navy">See suggested move →</button></div>
-        <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div class="flex items-start gap-3"><span class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600">↗</span><div><p class="text-xs font-semibold uppercase tracking-wider text-emerald-600">Opportunity</p><p class="mt-1 text-sm font-semibold text-navy">Three ELSS funds overlap</p><p class="mt-1 text-xs leading-relaxed text-slate-500">Consolidating could simplify tracking without changing your equity exposure.</p></div></div><button class="mt-4 text-xs font-semibold text-navy">Compare funds →</button></div>
-      </div>
-
+    
       <!-- Asset class navigator -->
       <div class="mt-5 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
         <div class="flex items-center justify-between border-b border-slate-100 px-5 py-4 sm:px-6"><div><h2 class="text-base font-semibold text-navy">Explore by asset class</h2><p class="mt-0.5 text-xs text-slate-500">Select a category to review holdings and performance</p></div><span class="hidden rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-500 sm:block">11 categories</span></div>
@@ -983,7 +974,7 @@ function assetInsight(id){
   return `<div class="mb-4 flex flex-col gap-3 rounded-2xl border border-indigo-100 bg-indigo-50/70 px-5 py-4 sm:flex-row sm:items-center">
     <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-600 text-white">✦</span>
     <div class="min-w-0 flex-1"><p class="text-sm font-semibold text-navy"><span class="mr-2 text-xs uppercase tracking-wider text-indigo-600">AI note</span>${i[0]}</p><p class="mt-0.5 text-xs leading-relaxed text-slate-600">${i[1]}</p></div>
-    <button class="shrink-0 text-left text-xs font-semibold text-indigo-700 sm:text-right">${i[2]} →</button>
+    
   </div>`;
 }
 function assetPanelMarkup(id){
