@@ -49,18 +49,23 @@
   .portfolio-donut { background: conic-gradient(#4f8cff 0 36%, #19b394 36% 61%, #f4b740 61% 80%, #a477ff 80% 93%, #dbe5f3 93% 100%); }
   .soft-grid { background-image: linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px); background-size: 28px 28px; }
   .asset-navigation { margin-top: 1rem; overflow: hidden; background: #fff; border: 1px solid #e2e8f0; border-radius: 1rem; box-shadow: 0 3px 12px #042b6203; }
-  #assetInsight:empty { display: none; }
   .asset-navigation-header { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding: 1.4rem 1.5rem .6rem; }
   .asset-navigation-heading h2 { color: #042b62; font-size: 1rem; font-weight: 600; }
   .asset-navigation-heading p { margin-top: .25rem; color: #64748b; font-size: .75rem; }
-  .asset-tabs { display: flex; flex-wrap: wrap; gap: 0 1.4rem; padding: 0 1.5rem; border-bottom: 1px solid #e5ebf3; }
-  .asset-tab { position: relative; display: inline-flex; align-items: center; justify-content: center; min-height: 3.1rem; margin-bottom: -1px; padding: .8rem 0; border-bottom: 3px solid transparent; color: #475569; font-size: .875rem; font-weight: 500; transition: color .15s, border-color .15s; }
-  .asset-tab:hover { color: #042b62; border-bottom-color: #bdd2ef; }
-  .asset-tab[aria-selected="true"] { color: #042b62; border-bottom-color: #1769d2; font-weight: 700; }
-  .asset-tab:focus-visible { outline: 2px solid #6399e6; outline-offset: -2px; border-radius: .2rem; }
+  .asset-tabs { display: flex; width: 100%; max-width: 100%; min-width: 0; flex-wrap: nowrap; gap: .55rem; overflow-x: auto; overflow-y: hidden; padding-bottom: .45rem; scrollbar-width: thin; scrollbar-color: rgba(147,197,253,.35) transparent; }
+  .asset-tabs::-webkit-scrollbar { height: 4px; }
+  .asset-tabs::-webkit-scrollbar-track { background: transparent; }
+  .asset-tabs::-webkit-scrollbar-thumb { border-radius: 999px; background: rgba(147,197,253,.35); }
+  .asset-tab { display: inline-flex; flex: 0 0 auto; align-items: center; min-height: 2.35rem; padding: .55rem .85rem; border: 1px solid rgba(255,255,255,.12); border-radius: .7rem; background: rgba(255,255,255,.07); color: #bfdbfe; font-size: .75rem; font-weight: 500; white-space: nowrap; transition: background .15s, border-color .15s, color .15s; }
+  .asset-tab:hover { border-color: rgba(147,197,253,.5); background: rgba(255,255,255,.12); color: #fff; }
+  .asset-tab[aria-selected="true"] { border-color: #60a5fa; background: #fff; color: #042b62; font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,.12); }
+  .asset-tab:focus-visible { outline: 2px solid #93c5fd; outline-offset: 2px; }
   .asset-performance-strip { padding: 1rem 1.5rem .85rem; background: #fff; }
-  .performance-overview { display: grid; grid-template-columns: repeat(4, minmax(0, 11.5rem)); gap: 1.5rem; align-items: start; }
-  .performance-primary { border-right: 1px solid #e5ebf3; padding-right: 1.5rem; }
+  .performance-overview { display: grid; grid-template-columns: repeat(var(--overview-count), minmax(0, 1fr)); align-items: stretch; }
+  .performance-primary, .performance-detail { min-width: 0; padding: 0 1.5rem; }
+  .performance-primary { padding-left: 0; }
+  .performance-overview > div:not(:last-child) { border-right: 1px solid #e5ebf3; }
+  .performance-overview > div:last-child { padding-right: 0; }
   .performance-label { color: #64748b; font-size: .75rem; font-weight: 500; }
   .performance-value { display: flex; align-items: center; min-height: 1.6rem; margin-top: .25rem; font-size: 1.125rem; font-weight: 600; font-variant-numeric: tabular-nums; letter-spacing: -.025em; white-space: nowrap; }
   .performance-primary .performance-value { color: #042b62; font-size: 1.125rem; }
@@ -77,14 +82,17 @@
   #assetActions .text-right p { order: -1; margin: 0; font-size: .75rem; }
   #assetActions button { background: #fff; color: #042b62; border: 1px solid #c6d8ec; padding: .5rem .8rem; font-size: .75rem; box-shadow: none; }
   #assetActions button:hover { background: #f2f6fb; }
-  @media (max-width: 1199px) { .performance-overview { grid-template-columns: repeat(2, minmax(0, 11.5rem)); gap: 1rem; } }
+  @media (max-width: 1199px) { .performance-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 0; } }
   @media (max-width: 639px) {
     .asset-navigation-header { padding: 1rem 1.25rem .5rem; align-items: flex-start; flex-wrap: wrap; gap: .75rem; }
-    .asset-tabs { padding: 0 1.25rem; gap: 0 1rem; }
-    .asset-tab { font-size: .875rem; min-height: 2.75rem; }
+    .asset-tabs { gap: .45rem; }
+    .asset-tab { font-size: .75rem; min-height: 2.25rem; }
     .asset-performance-strip { padding: .85rem 1.25rem; }
     .performance-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-    .performance-primary { border-right: 0; padding-right: 0; }
+    .performance-primary, .performance-detail { padding: 0 .75rem; }
+    .performance-primary { padding-left: 0; }
+    .performance-overview > div:nth-child(even) { border-right: 0; padding-right: 0; }
+    .performance-overview > div:nth-child(odd) { padding-left: 0; }
     .performance-value { font-size: 1rem; min-height: 1.6rem; }
     .performance-context-row { align-items: flex-start; flex-direction: column; }
     .performance-context-row .sip-summary { border-left: 0; padding-left: 0; }
@@ -211,19 +219,12 @@
     <div class="mb-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
       <div>
         <div class="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-navy-400">
-          Wealth command centre <span class="h-1 w-1 rounded-full bg-navy-300"></span> Updated just now
+          Your Portfolio
         </div>
         <h1 class="mt-1 text-2xl font-semibold tracking-tight text-navy sm:text-3xl">Good evening, Khushboo</h1>
         <p class="mt-1 text-sm text-slate-500">Here’s what changed across your family portfolio.</p>
       </div>
-      <div class="flex flex-wrap items-center gap-2">
-        <button class="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-semibold text-navy shadow-sm sm:px-4">
-          <span class="flex h-6 w-6 items-center justify-center rounded-full bg-navy text-[0.65rem] text-white">KF</span>
-          Family portfolio
-          <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-        </button>
-        <button class="inline-flex items-center gap-2 rounded-xl bg-navy px-3 py-2.5 text-sm font-semibold text-white shadow-sm sm:px-4">+ Add investment</button>
-      </div>
+
     </div>
 
     <!-- ───────── VIEW: PORTFOLIO ───────── -->
@@ -232,22 +233,18 @@
       <!-- Wealth snapshot -->
       <div class="soft-grid overflow-hidden rounded-[2rem] bg-[#071d3f] text-white shadow-[0_18px_55px_-30px_rgba(4,43,98,.65)]">
         <div class="grid lg:grid-cols-[1.45fr_.75fr]">
-          <div class="p-6 sm:p-8 lg:p-10">
+          <div class="min-w-0 overflow-hidden p-6 sm:p-8 lg:p-10">
             <div class="flex items-center gap-2 text-sm text-blue-200">
               Total net worth
               <span class="rounded-full border border-white/10 bg-white/10 px-2 py-0.5 text-[0.65rem] font-semibold uppercase tracking-wider">Family</span>
             </div>
             <div class="mt-3 flex flex-wrap items-end gap-x-4 gap-y-2">
               <span class="whitespace-nowrap text-4xl font-semibold tracking-[-0.04em] tabular-nums sm:text-6xl">₹&nbsp;13.89 CR</span>
-              <span class="mb-1 inline-flex items-center gap-1 rounded-full bg-emerald-400/15 px-2.5 py-1 text-sm font-semibold text-emerald-300">↑ 8.4% <span class="font-normal text-blue-200">1Y</span></span>
             </div>
-            <p class="mt-3 max-w-xl text-sm leading-relaxed text-blue-100/80">Your wealth grew by <span class="font-semibold text-white">₹ 1.08 CR</span> in the last 12 months. Real estate and government schemes contributed most.</p>
 
-            <div class="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-              <div class="rounded-2xl border border-white/10 bg-white/[0.07] p-4"><p class="text-xs text-blue-200">Invested</p><p class="mt-1 text-lg font-semibold tabular-nums">₹ 8.91 CR</p></div>
-              <div class="rounded-2xl border border-white/10 bg-white/[0.07] p-4"><p class="text-xs text-blue-200">Total gain</p><p class="mt-1 text-lg font-semibold tabular-nums text-emerald-300">₹ 4.98 CR</p></div>
-              <div class="rounded-2xl border border-white/10 bg-white/[0.07] p-4"><p class="text-xs text-blue-200">Day change</p><p class="mt-1 text-lg font-semibold tabular-nums text-emerald-300">+₹ 42.6 K</p></div>
-              <div class="rounded-2xl border border-white/10 bg-white/[0.07] p-4"><p class="text-xs text-blue-200">Overall XIRR</p><p class="mt-1 text-lg font-semibold tabular-nums">12.8%</p></div>
+            <div class="mt-6 border-t border-white/10 pt-5">
+              <p class="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-blue-200/70">Explore Your Portfolio</p>
+              <div id="assetRail" class="asset-tabs" role="tablist" aria-label="Asset classes"></div>
             </div>
           </div>
 
@@ -269,14 +266,9 @@
         </div>
       </div>
 
-      <!-- AI briefing -->
-    
-      <div id="assetInsight" class="mt-6 mb-4" aria-live="polite"></div>
-
-      <!-- Asset classes and selected performance -->
+      <!-- Selected asset performance -->
       <section class="asset-navigation" aria-labelledby="assetNavigationTitle">
-        <div class="asset-navigation-header"><div class="asset-navigation-heading"><h2 id="assetNavigationTitle">Asset classes</h2><p>Select an asset class to view your holdings</p></div><div id="assetActions"></div></div>
-        <div id="assetRail" class="asset-tabs" role="tablist" aria-label="Asset classes"></div>
+        <div class="asset-navigation-header"><div class="asset-navigation-heading"><h2 id="assetNavigationTitle">Mutual Fund overview</h2><p>Performance summary for the selected asset class</p></div><div id="assetActions"></div></div>
         <div id="assetPerformance" role="region" aria-label="Selected asset performance"></div>
       </section>
 
@@ -512,11 +504,12 @@ function statStrip(stats, right){
   const primary = stats.find(s => /^(Current value|Total fund value|Maturity value)$/.test(s.label));
   const invested = stats.find(s => /^(Invested|Invested value|Purchased value)$/.test(s.label));
   const counts = stats.filter(s => /^(Total (?!fund value)|No\. of|Active SIP)/.test(s.label));
-  const performance = stats.filter(s => s !== primary && s !== invested && !counts.includes(s));
+  const performance = stats.filter(s => s !== primary && !counts.includes(s));
+  const overviewCount = (primary ? 1 : 0) + performance.length;
   return `<div class="asset-performance-strip">
       ${counts.filter(s => s.label === 'Active SIP').map(s => `<div class="performance-context-row"><span class="sip-summary"><strong>${s.value} active SIPs</strong><span class="sip-amount">SIP amount <b>${s.sub}</b></span></span></div>`).join('')}
-      <div class="performance-overview">
-        ${primary ? `<div class="performance-primary"><p class="performance-label">${primary.label === 'Total fund value' ? 'Current value' : primary.label}</p><p class="performance-value">${primary.value}</p>${invested ? `<p class="performance-invested">${invested.label} <span>${invested.value}</span></p>` : ''}</div>` : ''}
+      <div class="performance-overview" style="--overview-count:${overviewCount}">
+        ${primary ? `<div class="performance-primary"><p class="performance-label">${primary.label === 'Total fund value' ? 'Current value' : primary.label}</p><p class="performance-value">${primary.value}</p></div>` : ''}
         ${performance.map(s => `<div class="performance-detail"><p class="performance-label">${s.label}</p><p class="performance-value ${s.tone || 'text-navy'}">${s.value}</p>${s.sub ? `<p class="performance-context">${s.sub}</p>` : ''}</div>`).join('')}
       </div>
 
@@ -1027,6 +1020,7 @@ function renderRail(){
     return `<button type="button" role="tab" id="asset-choice-${a.id}" onclick="selectAsset('${a.id}')" class="asset-tab" aria-selected="${on}" tabindex="${on ? 0 : -1}" aria-controls="assetPanel">${a.label}</button>`;
   }).join('');
   document.getElementById('assetPanel').setAttribute('aria-labelledby', `asset-choice-${activeAsset}`);
+  document.getElementById('assetNavigationTitle').textContent = `${ASSETS.find(a => a.id === activeAsset).label} overview`;
 }
 document.getElementById('assetRail').addEventListener('keydown', event => {
   const index = ASSETS.findIndex(a => a.id === activeAsset);
@@ -1037,29 +1031,10 @@ document.getElementById('assetRail').addEventListener('keydown', event => {
   if (event.key === 'End') next = ASSETS.length - 1;
   if (next !== undefined) { event.preventDefault(); selectAsset(ASSETS[next].id); }
 });
-function assetInsight(id){
-  const insights = {
-    mf: ['Portfolio overlap detected','Three ELSS funds share similar large-cap exposure. Reviewing overlap may make your portfolio easier to manage.','Compare overlap'],
-    stocks: ['Single-stock concentration','Your direct equity allocation depends on one stock. Consider whether this matches your intended risk level.','Review risk'],
-    us: ['International exposure is low','US equity adds diversification, but it remains a very small part of your overall portfolio.','Explore allocation'],
-    unlisted: ['Illiquidity is elevated','Unlisted and AIF holdings may take longer to exit. Keep near-term goals funded elsewhere.','Check goal coverage'],
-    fd: ['Maturity reminder','One fixed deposit matures soon. Plan whether to reinvest or redirect it to a goal.','View maturity plan'],
-    govt: ['Long-duration allocation','Government schemes add stability, though several holdings have long lock-in periods.','Review timeline'],
-    realestate: ['High property concentration','Real estate is your largest asset bucket and reduces portfolio liquidity.','See diversification plan']
-  };
-  const i = insights[id];
-  if(!i) return '';
-  return `<div class="flex flex-col gap-3 rounded-2xl border border-indigo-100 bg-indigo-50/70 px-5 py-4 sm:px-6 sm:flex-row sm:items-center">
-    <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-600 text-white">✦</span>
-    <div class="min-w-0 flex-1"><p class="text-sm font-semibold text-navy"><span class="mr-2 text-xs uppercase tracking-wider text-indigo-600">AI note</span>${i[0]}</p><p class="mt-0.5 text-xs leading-relaxed text-slate-600">${i[1]}</p></div>
-    
-  </div>`;
-}
 function assetPanelMarkup(id){
   return compactCurrencyMarkup(PANELS[id]());
 }
 function renderAssetPanel(id){
-  document.getElementById('assetInsight').innerHTML = assetInsight(id);
   const template = document.createElement('template');
   template.innerHTML = assetPanelMarkup(id);
   const performance = template.content.querySelector('.asset-performance-strip');

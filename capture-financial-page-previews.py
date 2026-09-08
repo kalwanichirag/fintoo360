@@ -5,6 +5,7 @@ import requests, websocket
 from PIL import Image, ImageStat
 
 PAGES = [
+ "financial-advisor-mumbai", "financial-planning-consultation", "independent-financial-advisor",
  "financial-advice", "financial-planning", "financial-planning-services", "investment-planning",
  "investmentplanning", "investment-strategy", "personal-financial-planning",
  "portfolio-management-services", "retirement-planner", "retirement-planning",
