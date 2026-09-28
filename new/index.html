@@ -108,90 +108,69 @@ tailwind.config = {
 <a href="#main" class="sr-only z-[110] rounded-full bg-navy px-5 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
 
 <!-- HEADER -->
-<header id="site-header" data-scrolled="false" class="fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] transition-all duration-500">
-  <div class="mx-auto mt-3 flex h-16 max-w-7xl items-center gap-8 px-5 sm:px-8">
-    <div id="header-shell" class="flex h-full w-full items-center gap-8 rounded-2xl px-2 transition-all duration-500 [[data-scrolled=true]_&]:bg-white/85 [[data-scrolled=true]_&]:px-5 [[data-scrolled=true]_&]:shadow-[0_0.5rem_2rem_-0.75rem_rgba(15,23,42,0.18)] [[data-scrolled=true]_&]:ring-1 [[data-scrolled=true]_&]:ring-slate-200/80 [[data-scrolled=true]_&]:backdrop-blur-xl">
-      <a href="/" class="shrink-0 text-lg font-bold tracking-[0.2em] text-navy transition-colors [[data-scrolled=false]_&]:text-white" aria-label="Fintoo home">FINTOO</a>
-      <nav aria-label="Primary" class="hidden lg:block">
-        <ul class="flex items-center gap-1 text-[0.9375rem] font-medium text-slate-600 [[data-scrolled=false]_&]:text-slate-200">
-          <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-slate-900 [[data-scrolled=false]_&]:hover:bg-white/10 [[data-scrolled=false]_&]:hover:text-white" href="/advisory">Advisory</a></li>
-          <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-slate-900 [[data-scrolled=false]_&]:hover:bg-white/10 [[data-scrolled=false]_&]:hover:text-white" href="/invest">Invest</a></li>
-          <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-slate-900 [[data-scrolled=false]_&]:hover:bg-white/10 [[data-scrolled=false]_&]:hover:text-white" href="/tax">Tax</a></li>
-          <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-slate-900 [[data-scrolled=false]_&]:hover:bg-white/10 [[data-scrolled=false]_&]:hover:text-white" href="/knowledge">Knowledge</a></li>
-          <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-slate-900 [[data-scrolled=false]_&]:hover:bg-white/10 [[data-scrolled=false]_&]:hover:text-white" href="/about">About Fintoo</a></li>
-        </ul>
-      </nav>
-      <div class="ml-auto flex items-center gap-2 sm:gap-3">
-        <a href="/fintoo-ai" class="hidden items-center gap-2 rounded-full py-2 pl-3 pr-3.5 text-[0.9375rem] font-medium text-slate-700 transition-colors hover:bg-slate-100 [[data-scrolled=false]_&]:text-slate-200 [[data-scrolled=false]_&]:hover:bg-white/10 xl:inline-flex">
-          <span class="relative flex size-2"><span class="absolute inset-0 rounded-full bg-orange motion-safe:animate-breathe"></span><span class="relative size-2 rounded-full bg-orange"></span></span>Fintoo AI
-        </a>
-        <a href="/login" class="hidden rounded-full px-3.5 py-2 text-[0.9375rem] font-medium text-slate-700 transition-colors hover:bg-slate-100 [[data-scrolled=false]_&]:text-slate-200 [[data-scrolled=false]_&]:hover:bg-white/10 sm:inline-flex">Login</a>
-        <a href="/contact" data-magnetic class="group hidden h-11 items-center gap-2 rounded-full bg-navy pl-5 pr-1.5 text-sm font-medium text-white shadow-[0_0.5rem_1.25rem_-0.5rem_rgba(4,43,98,0.6)] transition-colors hover:bg-navy-deep [[data-scrolled=false]_&]:bg-white [[data-scrolled=false]_&]:text-navy [[data-scrolled=false]_&]:hover:bg-slate-100 sm:inline-flex">
-          Talk to an Advisor
-          <span class="grid size-8 place-items-center rounded-full bg-orange transition-transform duration-300 group-hover:translate-x-0.5"><svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-        </a>
-        <button id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu" class="group grid size-11 place-items-center rounded-full lg:hidden">
-          <span class="relative block h-3 w-5">
-            <span class="absolute inset-x-0 top-0 h-[0.125rem] rounded-full bg-slate-900 transition-transform duration-300 [[data-scrolled=false]_&]:bg-white group-aria-expanded:translate-y-[0.3125rem] group-aria-expanded:rotate-45"></span>
-            <span class="absolute inset-x-0 bottom-0 h-[0.125rem] rounded-full bg-slate-900 transition-transform duration-300 [[data-scrolled=false]_&]:bg-white group-aria-expanded:-translate-y-[0.3125rem] group-aria-expanded:-rotate-45"></span>
-          </span>
-        </button>
-      </div>
+<header id="site-header" data-scrolled="true" class="fixed inset-x-0 top-0 z-50 border-b border-slate-200 bg-white/90 pt-[env(safe-area-inset-top)] backdrop-blur-xl">
+  <div class="mx-auto flex h-16 max-w-7xl items-center gap-8 px-5 sm:px-8 lg:h-20">
+    <a href="index.html" class="shrink-0" aria-label="Fintoo home"><img src="assets/fintoo-logo.svg" alt="Fintoo" class="h-9 w-auto sm:h-10"></a>
+    <nav aria-label="Primary" class="hidden lg:block">
+      <ul class="flex items-center gap-1 text-[0.9375rem] font-medium text-slate-600">
+        <li class="group relative">
+          <button type="button" class="inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" aria-haspopup="true">Financial planning <svg viewBox="0 0 16 16" class="size-3 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="invisible absolute left-0 top-full w-64 translate-y-2 pt-3 opacity-0 transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+            <div class="rounded-2xl bg-white p-2 shadow-xl ring-1 ring-slate-200">
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="financial-planning.html">Financial Planning</a>
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="retirement-planning.html">Retirement Planning</a>
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="investment-planning.html">Investment Planning</a>
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="tax-planning.html">Tax Planning</a>
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="insurance-planning.html">Insurance Planning</a>
+            </div>
+          </div>
+        </li>
+        <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" href="investment-planning.html">Invest</a></li>
+        <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" href="tax-planning.html">Tax</a></li>
+        <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" href="/knowledge">Knowledge</a></li>
+        <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" href="/about">About Fintoo</a></li>
+      </ul>
+    </nav>
+    <div class="ml-auto flex items-center gap-2 sm:gap-3">
+      <a href="/login" class="hidden rounded-full px-3.5 py-2 text-[0.9375rem] font-medium text-slate-700 transition-colors hover:bg-slate-100 sm:inline-flex">Login</a>
+      <a href="#register-interest" class="group hidden h-11 items-center gap-2 rounded-full bg-navy pl-5 pr-1.5 text-sm font-medium text-white transition-colors hover:bg-navy-deep sm:inline-flex">Talk to an advisor <span class="grid size-8 place-items-center rounded-full bg-orange transition-transform duration-300 group-hover:translate-x-0.5">↗</span></a>
+      <button id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu" class="group grid size-11 place-items-center rounded-full lg:hidden"><span class="relative block h-3 w-5"><span class="absolute inset-x-0 top-0 h-0.5 rounded-full bg-slate-900 transition-transform group-aria-expanded:translate-y-[0.3125rem] group-aria-expanded:rotate-45"></span><span class="absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-slate-900 transition-transform group-aria-expanded:-translate-y-[0.3125rem] group-aria-expanded:-rotate-45"></span></span></button>
     </div>
   </div>
 </header>
-
-<div id="mobile-nav" class="fixed inset-0 z-40 hidden overflow-y-auto bg-white pb-[env(safe-area-inset-bottom)] pt-[calc(6rem+env(safe-area-inset-top))] lg:hidden">
+<div id="mobile-nav" class="fixed inset-0 z-40 hidden overflow-y-auto bg-white pb-[env(safe-area-inset-bottom)] pt-[calc(5rem+env(safe-area-inset-top))] lg:hidden">
   <nav aria-label="Mobile" class="flex min-h-full flex-col px-6">
-    <ul class="divide-y divide-slate-100 text-2xl font-semibold tracking-tight">
-      <li><a class="flex items-center justify-between py-4" href="/advisory">Advisory<span class="text-slate-400">›</span></a></li>
-      <li><a class="flex items-center justify-between py-4" href="/invest">Invest<span class="text-slate-400">›</span></a></li>
-      <li><a class="flex items-center justify-between py-4" href="/tax">Tax<span class="text-slate-400">›</span></a></li>
-      <li><a class="flex items-center justify-between py-4" href="/knowledge">Knowledge<span class="text-slate-400">›</span></a></li>
-      <li><a class="flex items-center justify-between py-4" href="/about">About Fintoo<span class="text-slate-400">›</span></a></li>
+    <p class="pb-2 pt-4 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Planning services</p>
+    <ul class="divide-y divide-slate-100 text-xl font-semibold tracking-tight">
+      <li><a class="block py-3.5" href="financial-planning.html">Financial Planning</a></li>
+      <li><a class="block py-3.5" href="retirement-planning.html">Retirement Planning</a></li>
+      <li><a class="block py-3.5" href="investment-planning.html">Investment Planning</a></li>
+      <li><a class="block py-3.5" href="tax-planning.html">Tax Planning</a></li>
+      <li><a class="block py-3.5" href="insurance-planning.html">Insurance Planning</a></li>
     </ul>
-    <ul class="mt-6 grid grid-cols-3 gap-2 text-sm font-medium">
-      <li><a class="flex h-12 items-center justify-center gap-1.5 rounded-xl bg-slate-50" href="/fintoo-ai"><span class="size-1.5 rounded-full bg-orange"></span>Fintoo AI</a></li>
-      <li><a class="flex h-12 items-center justify-center rounded-xl bg-slate-50" href="/nri">NRI</a></li>
-      <li><a class="flex h-12 items-center justify-center rounded-xl bg-slate-50" href="/calculators">Calculators</a></li>
-    </ul>
-    <div class="mt-auto space-y-3 pb-8 pt-10">
-      <a href="/contact" class="flex h-14 items-center justify-center rounded-full bg-navy text-base font-medium text-white">Talk to an Advisor</a>
-      <a href="/login" class="flex h-14 items-center justify-center rounded-full ring-1 ring-slate-200 text-base font-medium">Login</a>
-    </div>
+    <div class="mt-auto space-y-3 pb-8 pt-10"><a href="#register-interest" class="flex h-14 items-center justify-center rounded-full bg-navy text-base font-medium text-white">Talk to an advisor</a><a href="/login" class="flex h-14 items-center justify-center rounded-full text-base font-medium ring-1 ring-slate-200">Login</a></div>
   </nav>
 </div>
 
 <main id="main">
 
-<!-- HERO: Advisory-led consolidated financial plan -->
+<!-- HERO: Animated Fintoo financial journey -->
 <section id="hero" class="hero" aria-labelledby="hero-title"><div class="hero-background" aria-hidden="true"><div class="hero-background-grid"></div><div class="hero-glow hero-glow-blue"></div><div class="hero-glow hero-glow-orange"></div></div><div class="hero-inner">
-<div class="copy"><div class="eyebrow">Scattered finances. Shared ambitions.</div><h1 id="hero-title">Your finances.<br>Your goals.<br><span>One clear path.</span></h1><p class="description">Funds here. Stocks there. Goals somewhere ahead. Your Fintoo advisor brings it all together, with a financial plan built to help you get where you want to be.</p><div class="actions"><a class="primary" href="/contact?type=portfolio-review">Get your portfolio reviewed <span aria-hidden="true">↗</span></a><a class="secondary" href="/contact">Talk to an advisor</a></div><div class="trust"><div><strong>Since 2015</strong><small>A decade of perspective</small></div><div><strong>SEBI registered</strong><small>Investment adviser</small></div><div><strong>You, first.</strong><small>Advice around your goals</small></div></div></div>
-<figure class="plan-visual" aria-label="A personalised financial plan created by a Fintoo advisor around a client's priorities.">
-<div class="plan-stage">
-<div class="plan-orbit" aria-hidden="true"></div>
-<div class="floating-note note-life"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20v-9l8-6 8 6v9M9 20v-6h6v6"/></svg><b>Your priorities</b><span>Life first. Numbers second.</span></div>
-<article class="plan-sheet">
-<div class="plan-topline"><div><div class="plan-kicker">Fintoo consolidated wealth report</div><h2 class="plan-title">Your financial world. One view.</h2><div class="report-meta"><span>Illustrative household</span><span>As of Sep 2026</span><span>INR</span></div></div><div class="plan-mark">F.</div></div>
-<div class="net-worth-row"><div class="worth-card primary-worth"><small>Estimated net worth</small><b>₹4.82 Cr</b><em>↑ 8.4% this year</em></div><div class="worth-card"><small>Total assets</small><b>₹5.46 Cr</b><em>8 accounts linked</em></div><div class="worth-card"><small>Liabilities</small><b>₹64 L</b><em>Home loan</em></div></div>
-<div class="report-grid">
-<section class="report-section"><div class="section-head"><b>Asset overview</b><span>₹5.46 Cr</span></div><table class="asset-table"><tbody>
-<tr><td><span class="asset-name"><i class="asset-dot" style="--asset:#397fbd"></i>Stocks</span></td><td>16%</td><td>₹88 L</td></tr>
-<tr><td><span class="asset-name"><i class="asset-dot" style="--asset:#6bb8e8"></i>Mutual funds</span></td><td>23%</td><td>₹1.24 Cr</td></tr>
-<tr><td><span class="asset-name"><i class="asset-dot" style="--asset:#dfa940"></i>Gold</span></td><td>7%</td><td>₹38 L</td></tr>
-<tr><td><span class="asset-name"><i class="asset-dot" style="--asset:#8f79c3"></i>Fixed deposits</span></td><td>9%</td><td>₹49 L</td></tr>
-<tr><td><span class="asset-name"><i class="asset-dot" style="--asset:#62aa91"></i>Land</span></td><td>15%</td><td>₹82 L</td></tr>
-<tr><td><span class="asset-name"><i class="asset-dot" style="--asset:#dd7300"></i>House property</span></td><td>30%</td><td>₹1.65 Cr</td></tr>
-</tbody></table><div class="mix-bar" aria-hidden="true"><i style="width:16%;--bar:#397fbd"></i><i style="width:23%;--bar:#6bb8e8"></i><i style="width:7%;--bar:#dfa940"></i><i style="width:9%;--bar:#8f79c3"></i><i style="width:15%;--bar:#62aa91"></i><i style="width:30%;--bar:#dd7300"></i></div></section>
-<div class="report-side"><section class="report-section income-card"><div class="section-head"><b>Rental income</b><span>Cash flow</span></div><div class="income-line"><b>₹62,000</b><span>per month</span></div></section>
-<section class="report-section"><div class="section-head"><b>Goals funded</b><span>Overall 68%</span></div><div class="goal-list"><div class="goal-row"><b>Child's education</b><span>74%</span><div class="mini-track"><i style="--done:74%;--goal:#397fbd"></i></div></div><div class="goal-row"><b>Retirement</b><span>61%</span><div class="mini-track"><i style="--done:61%;--goal:#dd7300"></i></div></div><div class="goal-row"><b>Second home</b><span>43%</span><div class="mini-track"><i style="--done:43%;--goal:#62aa91"></i></div></div></div></section></div>
-</div>
-<div class="recommendation"><div class="recommendation-mark">↗</div><div><b>Advisor action plan</b><span>Reduce property concentration · Consolidate overlapping funds · Increase goal-linked SIPs</span></div></div>
-<div class="report-foot"><div class="advisor-signoff"><div class="advisor-avatar">F</div><div><b>Reviewed with your Fintoo advisor</b><span>Personalised recommendations. Clear next steps.</span></div></div><span>Private &amp; confidential</span></div>
-</article>
-<div class="floating-note note-sync"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5M20 12a8 8 0 0 1-14 5M18 3v4h-4M6 21v-4h4"/></svg><b>Kept in step</b><span>Reviewed as life changes.</span></div>
-</div>
-<figcaption class="plan-caption"><div><strong>A plan that is distinctly yours.</strong><span>Investments, protection and goals—working as one.</span></div><a href="/contact">Build my plan ↗</a></figcaption>
+<div class="copy"><div class="eyebrow">Scattered finances. Shared ambitions.</div><h1 id="hero-title">Your finances.<br>Your goals.<br><span>One clear path.</span></h1><p class="description">Funds here. Stocks there. Goals somewhere ahead. Your Fintoo advisor brings it all together, with a financial plan built to help you get where you want to be.</p><div class="actions"><a class="primary" href="#register-interest">Get your portfolio reviewed <span aria-hidden="true">↗</span></a><a class="secondary" href="#register-interest">Talk to an advisor</a></div><div class="trust"><div><strong>Since 2015</strong><small>A decade of perspective</small></div><div><strong>SEBI registered</strong><small>Investment adviser</small></div><div><strong>You, first.</strong><small>Advice around your goals</small></div></div></div>
+<figure class="visual journey" style="margin:0" aria-label="Scattered mutual funds, stocks, insurance, deposits and savings connect through a Fintoo advisor to a plan for a home, education and retirement.">
+<div class="journey-scene" id="journey">
+<svg class="connections" viewBox="0 0 560 540" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="flow"><stop stop-color="#5176a3"/><stop offset="1" stop-color="#dd7300"/></linearGradient></defs><g class="incoming"><path d="M75 80 C75 210 280 130 280 253"/><path d="M260 65 C260 140 280 160 280 253"/><path d="M467 88 C467 195 280 150 280 253"/><path d="M100 190 C140 245 230 200 280 253"/><path d="M454 193 C410 243 320 205 280 253"/></g><g class="outgoing"><path d="M280 288 C280 360 90 320 90 416"/><path d="M280 288 V416"/><path d="M280 288 C280 360 470 320 470 416"/></g><g class="flow-particles"><circle r="3"><animateMotion dur="3s" repeatCount="indefinite" path="M75 80 C75 210 280 130 280 253"/></circle><circle r="3"><animateMotion dur="3.7s" repeatCount="indefinite" path="M467 88 C467 195 280 150 280 253"/></circle><circle r="3"><animateMotion dur="3.4s" repeatCount="indefinite" path="M260 65 C260 140 280 160 280 253"/></circle><circle r="3"><animateMotion dur="3s" repeatCount="indefinite" path="M280 288 C280 360 90 320 90 416"/></circle><circle r="3"><animateMotion dur="3s" begin="1s" repeatCount="indefinite" path="M280 288 V416"/></circle><circle r="3"><animateMotion dur="3s" begin="2s" repeatCount="indefinite" path="M280 288 C280 360 470 320 470 416"/></circle></g></svg>
+<div class="asset mf"><span class="asset-symbol"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3a9 9 0 0 1 9 9h-9V3Z"/><path d="M10 5a9 9 0 1 0 9 11h-9V5Z"/></svg></span><div><b>Mutual funds</b><small>Too many overlaps</small></div></div>
+<div class="asset stocks"><span class="asset-symbol"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v20h21M7 15V7m-2 3h4v3H5m9 5V9m-2 3h4v4h-4m9-7V2m-2 2h4v3h-4"/></svg></span><div><b>Stocks</b><small>Unbalanced risk</small></div></div>
+<div class="asset insurance"><span class="asset-symbol"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m13 2 9 4v7c0 6-9 11-9 11S4 19 4 13V6l9-4Z"/><path d="M10 9h6v3h3v4h-3v3h-6v-3H7v-4h3V9Z"/></svg></span><div><b>Insurance</b><small>Is it enough?</small></div></div>
+<div class="asset deposits"><span class="asset-symbol"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 8 8-5 8 5H3ZM5 11v7m5-7v7M3 21h9M17 15h6l2 7H15l2-7ZM17 15l2 3h5"/></svg></span><div><b>FDs & gold</b><small>Without a direction</small></div></div>
+<div class="asset savings"><span class="asset-symbol"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h17a2 2 0 0 1 2 2v12H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h14v3M23 13h-7v5h7"/><circle cx="19" cy="15.5" r=".7"/><path d="M6 2h8M6 11h5"/></svg></span><div><b>Idle savings</b><small>Waiting for a plan</small></div></div>
+<div class="advisor-orbit"></div><div class="advisor-hub"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="10" r="5"/><path d="M6 27v-3c0-6 4-9 10-9s10 3 10 9v3"/></svg><img class="advisor-logo" src="assets/fintoo-logo-white.svg" alt="Fintoo"><b>Your advisor</b></div>
+<div class="advisor-note">Understands you. Connects the dots.</div>
+<div class="goal home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m4 15 12-10 12 10M7 13v15h18V13M13 28V18h6v10"/></svg><small>A place of your own</small><b>Your dream home</b><div class="goal-track"><i></i></div><span>A plan to get there</span></div>
+<div class="goal education"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="m2 12 14-7 14 7-14 7zM7 15v8c5 5 13 5 18 0v-8M29 13v10"/></svg><small>Their next chapter</small><b>Your child’s future</b><div class="goal-track"><i></i></div><span>Prepared with purpose</span></div>
+<div class="goal retirement"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 28h22M12 28l5-16M7 13c0-10 15-13 20-3-8-2-10 2-10 2s-6-4-10 1ZM17 12c6-2 10 2 10 5-5-2-8-2-10-5"/></svg><small>Freedom on your terms</small><b>Your retirement</b><div class="goal-track"><i></i></div><span>Your future, considered</span></div>
+</div><figcaption class="journey-caption"><span id="story-line">Your finances, connected to what matters.</span><button type="button" id="motion-toggle">Ⅱ Pause</button></figcaption><p class="journey-disclaimer">Illustrative financial journey. Goal achievement depends on contributions, time and market performance.</p>
 </figure>
 </div></section>
 
@@ -338,7 +317,7 @@ tailwind.config = {
             <p class="mt-2 text-lg text-slate-900">Build a financial roadmap around what matters most.</p>
             <p class="mt-3 leading-relaxed text-slate-600">We map income, spending, assets, liabilities and goals into one plan, then decide what each rupee should be doing.</p>
             <ul class="mt-5 space-y-2.5 text-sm text-slate-700"><li class="flex gap-2.5"><svg viewBox="0 0 16 16" class="mt-0.5 size-4 shrink-0 text-navy" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Cash flow and surplus</li><li class="flex gap-2.5"><svg viewBox="0 0 16 16" class="mt-0.5 size-4 shrink-0 text-navy" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Goals with dates and costs</li><li class="flex gap-2.5"><svg viewBox="0 0 16 16" class="mt-0.5 size-4 shrink-0 text-navy" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Asset allocation across the family</li></ul>
-            <a href="/financial-planning" class="group mt-7 inline-flex items-center gap-2 font-medium text-navy">Explore Financial Planning<svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            <a href="financial-planning.html" class="group mt-7 inline-flex items-center gap-2 font-medium text-navy">Explore Financial Planning<svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
           </div>
           <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200/70" aria-hidden="true">
             <div class="flex justify-between text-xs text-slate-500"><span>Your plan, 2026 to 2046</span><span>Sample</span></div>
@@ -366,7 +345,7 @@ tailwind.config = {
             <p class="mt-2 text-lg text-slate-900">Align your investments with your goals, risk and time horizon.</p>
             <p class="mt-3 leading-relaxed text-slate-600">Every investment gets a job: a goal it serves, a horizon it fits and a level of risk you can live with.</p>
             <ul class="mt-5 space-y-2.5 text-sm text-slate-700"><li class="flex gap-2.5"><svg viewBox="0 0 16 16" class="mt-0.5 size-4 shrink-0 text-navy" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Risk profiling</li><li class="flex gap-2.5"><svg viewBox="0 0 16 16" class="mt-0.5 size-4 shrink-0 text-navy" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Goal-linked allocation</li><li class="flex gap-2.5"><svg viewBox="0 0 16 16" class="mt-0.5 size-4 shrink-0 text-navy" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Fund and security selection</li></ul>
-            <a href="/investment-planning" class="group mt-7 inline-flex items-center gap-2 font-medium text-navy">Explore Investment Planning<svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            <a href="investment-planning.html" class="group mt-7 inline-flex items-center gap-2 font-medium text-navy">Explore Investment Planning<svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
           </div>
           <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200/70" aria-hidden="true">
             <p class="text-xs text-slate-500">Risk profile</p>
@@ -389,7 +368,7 @@ tailwind.config = {
             <p class="mt-2 text-lg text-slate-900">Know how much you need, when you need it and how to get there.</p>
             <p class="mt-3 leading-relaxed text-slate-600">We estimate the corpus, test it against inflation and longevity, and plan how you'll draw on it.</p>
             <ul class="mt-5 space-y-2.5 text-sm text-slate-700"><li class="flex gap-2.5"><svg viewBox="0 0 16 16" class="mt-0.5 size-4 shrink-0 text-navy" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Corpus estimate</li><li class="flex gap-2.5"><svg viewBox="0 0 16 16" class="mt-0.5 size-4 shrink-0 text-navy" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Accumulation strategy</li><li class="flex gap-2.5"><svg viewBox="0 0 16 16" class="mt-0.5 size-4 shrink-0 text-navy" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Withdrawal and income plan</li></ul>
-            <a href="/retirement-planning" class="group mt-7 inline-flex items-center gap-2 font-medium text-navy">Explore Retirement Planning<svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            <a href="retirement-planning.html" class="group mt-7 inline-flex items-center gap-2 font-medium text-navy">Explore Retirement Planning<svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
           </div>
           <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200/70" aria-hidden="true">
             <div class="flex items-start justify-between"><div><p class="text-xs text-slate-500">Projected corpus at 55</p><p class="mt-1 text-2xl font-semibold tabular-nums">₹11.6 Cr</p></div><span class="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700">On track</span></div>
@@ -410,7 +389,7 @@ tailwind.config = {
             <p class="mt-2 text-lg text-slate-900">Make smarter tax decisions without losing sight of the bigger picture.</p>
             <p class="mt-3 leading-relaxed text-slate-600">Regime choice, deductions, capital gains and the tax impact of every investment decision, planned before the year ends.</p>
             <ul class="mt-5 space-y-2.5 text-sm text-slate-700"><li class="flex gap-2.5"><svg viewBox="0 0 16 16" class="mt-0.5 size-4 shrink-0 text-navy" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Old vs. new regime</li><li class="flex gap-2.5"><svg viewBox="0 0 16 16" class="mt-0.5 size-4 shrink-0 text-navy" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Capital gains planning</li><li class="flex gap-2.5"><svg viewBox="0 0 16 16" class="mt-0.5 size-4 shrink-0 text-navy" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Tax-efficient investing</li></ul>
-            <a href="/tax-planning" class="group mt-7 inline-flex items-center gap-2 font-medium text-navy">Explore Tax Planning<svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            <a href="tax-planning.html" class="group mt-7 inline-flex items-center gap-2 font-medium text-navy">Explore Tax Planning<svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
           </div>
           <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200/70" aria-hidden="true">
             <p class="text-xs text-slate-500">Estimated tax, FY 2026–27</p>
@@ -450,7 +429,7 @@ tailwind.config = {
             <p class="mt-2 text-lg text-slate-900">Protect the wealth you've worked hard to build.</p>
             <p class="mt-3 leading-relaxed text-slate-600">We check whether your life, health and liability cover matches what your family would actually need.</p>
             <ul class="mt-5 space-y-2.5 text-sm text-slate-700"><li class="flex gap-2.5"><svg viewBox="0 0 16 16" class="mt-0.5 size-4 shrink-0 text-navy" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Life cover adequacy</li><li class="flex gap-2.5"><svg viewBox="0 0 16 16" class="mt-0.5 size-4 shrink-0 text-navy" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Health and critical illness</li><li class="flex gap-2.5"><svg viewBox="0 0 16 16" class="mt-0.5 size-4 shrink-0 text-navy" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>Existing policy review</li></ul>
-            <a href="/risk-management" class="group mt-7 inline-flex items-center gap-2 font-medium text-navy">Explore Risk Planning<svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            <a href="insurance-planning.html" class="group mt-7 inline-flex items-center gap-2 font-medium text-navy">Explore Risk Planning<svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
           </div>
           <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200/70" aria-hidden="true">
             <p class="text-xs text-slate-500">Cover review</p>
@@ -868,7 +847,7 @@ tailwind.config = {
       <div class="relative">
         <h3 class="text-3xl font-semibold tracking-tight sm:text-4xl">Meet us in person.</h3>
         <p class="mt-4 max-w-md leading-relaxed text-slate-300">Sit down with your advisor at our offices, or meet over video from anywhere in the world.</p>
-        <a href="/contact?type=meeting" class="group mt-8 inline-flex h-12 items-center gap-3 rounded-full bg-white pl-6 pr-1.5 font-medium text-navy transition hover:bg-slate-100">Book a meeting<span class="grid size-9 place-items-center rounded-full bg-orange text-white transition-transform group-hover:translate-x-0.5"><svg viewBox="0 0 16 16" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
+        <a href="#register-interest" class="group mt-8 inline-flex h-12 items-center gap-3 rounded-full bg-white pl-6 pr-1.5 font-medium text-navy transition hover:bg-slate-100">Book a meeting<span class="grid size-9 place-items-center rounded-full bg-orange text-white transition-transform group-hover:translate-x-0.5"><svg viewBox="0 0 16 16" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
       </div>
       <ul class="relative mt-10 flex flex-wrap gap-2 lg:mt-0 lg:justify-end">
         <li class="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-navy"><span class="size-2 rounded-full bg-orange"></span>[Head office city]</li>
@@ -1000,20 +979,70 @@ tailwind.config = {
 </section>
 
 
-<!-- FINAL CTA -->
-<section id="contact-cta" class="px-5 pb-24 sm:px-8 lg:pb-32">
-  <div class="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] bg-navy px-6 py-20 text-center text-white sm:px-12 lg:py-28">
-    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(40rem_24rem_at_50%_0%,rgba(30,91,184,0.6),transparent_70%),radial-gradient(24rem_14rem_at_85%_100%,rgba(221,115,0,0.18),transparent_70%)]"></div>
-    <svg class="pointer-events-none absolute inset-0 size-full [mask-image:radial-gradient(ellipse_at_50%_30%,black_10%,transparent_70%)]" aria-hidden="true"><rect width="100%" height="100%" fill="url(#dgrid)"/></svg>
-    <div class="relative mx-auto max-w-3xl">
-      <h2 data-reveal class="text-3xl font-semibold leading-tight tracking-tight [.js_&]:translate-y-3 [.js_&]:opacity-0 sm:text-5xl lg:text-6xl">Your wealth is too important to manage in pieces.</h2>
-      <p data-reveal class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-slate-300 [.js_&]:translate-y-3 [.js_&]:opacity-0">Start with a conversation about where you are and where you want to be. We'll build the picture from there.</p>
-      <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <a href="/contact?type=portfolio-review" data-magnetic class="group inline-flex h-14 w-full items-center justify-between gap-4 rounded-full bg-white pl-7 pr-2 text-base font-medium text-navy transition hover:bg-slate-100 sm:w-auto sm:justify-start">
-          Get your portfolio reviewed
-          <span class="grid size-10 place-items-center rounded-full bg-orange text-white transition-transform duration-300 group-hover:translate-x-1"><svg viewBox="0 0 16 16" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-        </a>
-        <a href="/fintoo-ai" class="inline-flex h-14 w-full items-center justify-center rounded-full px-7 text-base font-medium ring-1 ring-white/25 transition hover:ring-white/50 sm:w-auto">Explore Fintoo AI</a>
+<!-- INTEREST REGISTRATION -->
+<section id="register-interest" class="scroll-mt-24 px-5 pb-24 sm:px-8 lg:pb-32" aria-labelledby="interest-title">
+  <div class="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] bg-navy text-white">
+    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(40rem_28rem_at_10%_0%,rgba(30,91,184,0.65),transparent_70%),radial-gradient(30rem_20rem_at_100%_100%,rgba(221,115,0,0.2),transparent_70%)]"></div>
+    <div class="relative grid gap-12 px-6 py-12 sm:px-10 sm:py-16 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16 lg:px-16 lg:py-20">
+      <div class="self-center">
+        <p class="text-sm font-medium text-orange">Start a conversation</p>
+        <h2 id="interest-title" class="mt-3 text-3xl font-semibold leading-tight tracking-tight sm:text-5xl">Tell us where you are. We’ll help plan what comes next.</h2>
+        <p class="mt-5 max-w-lg text-lg leading-relaxed text-slate-300">Share a few details and a Fintoo advisor can contact you to understand your priorities and discuss the right next step.</p>
+        <ul class="mt-8 space-y-3 text-sm text-slate-300">
+          <li class="flex items-center gap-3"><span class="grid size-6 place-items-center rounded-full bg-white/10 text-orange">✓</span>No-obligation introductory conversation</li>
+          <li class="flex items-center gap-3"><span class="grid size-6 place-items-center rounded-full bg-white/10 text-orange">✓</span>Your information stays private</li>
+          <li class="flex items-center gap-3"><span class="grid size-6 place-items-center rounded-full bg-white/10 text-orange">✓</span>Advice shaped around your goals</li>
+        </ul>
+      </div>
+      <div class="rounded-3xl bg-white p-6 text-slate-900 shadow-2xl sm:p-8">
+        <form id="interest-form" class="grid gap-5 sm:grid-cols-2">
+          <div class="sm:col-span-2">
+            <label for="interest-name" class="text-sm font-medium text-slate-700">Full name</label>
+            <input id="interest-name" name="name" type="text" autocomplete="name" required placeholder="Your full name" class="mt-2 h-12 w-full rounded-xl border-0 bg-slate-50 px-4 text-base outline-none ring-1 ring-slate-200 transition placeholder:text-slate-400 focus:ring-2 focus:ring-navy">
+          </div>
+          <div>
+            <label for="interest-email" class="text-sm font-medium text-slate-700">Email address</label>
+            <input id="interest-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com" class="mt-2 h-12 w-full rounded-xl border-0 bg-slate-50 px-4 text-base outline-none ring-1 ring-slate-200 transition placeholder:text-slate-400 focus:ring-2 focus:ring-navy">
+          </div>
+          <div>
+            <label for="interest-phone" class="text-sm font-medium text-slate-700">Phone number</label>
+            <input id="interest-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required pattern="[0-9+() -]{8,18}" placeholder="+91 98765 43210" class="mt-2 h-12 w-full rounded-xl border-0 bg-slate-50 px-4 text-base outline-none ring-1 ring-slate-200 transition placeholder:text-slate-400 focus:ring-2 focus:ring-navy">
+          </div>
+          <div>
+            <label for="interest-income" class="text-sm font-medium text-slate-700">Annual income slab</label>
+            <select id="interest-income" name="income_slab" required class="mt-2 h-12 w-full rounded-xl border-0 bg-slate-50 px-4 text-base outline-none ring-1 ring-slate-200 transition focus:ring-2 focus:ring-navy">
+              <option value="" selected disabled>Select income range</option>
+              <option>Below ₹10 lakh</option>
+              <option>₹10–25 lakh</option>
+              <option>₹25–50 lakh</option>
+              <option>₹50 lakh–₹1 crore</option>
+              <option>Above ₹1 crore</option>
+            </select>
+          </div>
+          <div>
+            <label for="interest-city" class="text-sm font-medium text-slate-700">City</label>
+            <input id="interest-city" name="city" type="text" autocomplete="address-level2" required placeholder="Your city" class="mt-2 h-12 w-full rounded-xl border-0 bg-slate-50 px-4 text-base outline-none ring-1 ring-slate-200 transition placeholder:text-slate-400 focus:ring-2 focus:ring-navy">
+          </div>
+          <label class="flex items-start gap-3 text-sm leading-relaxed text-slate-600 sm:col-span-2">
+            <input name="consent" type="checkbox" required class="mt-1 size-4 shrink-0 accent-[#042B62]">
+            <span>I agree to be contacted by Fintoo about financial planning and advisory services.</span>
+          </label>
+          <div class="sm:col-span-2">
+            <button type="submit" class="group inline-flex h-14 w-full items-center justify-between rounded-full bg-navy pl-6 pr-2 font-medium text-white transition hover:bg-navy-deep">
+              Register my interest
+              <span class="grid size-10 place-items-center rounded-full bg-orange transition-transform group-hover:translate-x-1">↗</span>
+            </button>
+            <p class="mt-3 text-center text-xs leading-relaxed text-slate-500">By submitting, you confirm the details are accurate. No payment is required.</p>
+          </div>
+        </form>
+        <div id="interest-success" class="hidden min-h-[28rem] place-items-center text-center" role="status" aria-live="polite">
+          <div>
+            <span class="mx-auto grid size-14 place-items-center rounded-full bg-emerald-50 text-2xl text-emerald-600">✓</span>
+            <h3 class="mt-5 text-2xl font-semibold text-navy">Thank you for your interest.</h3>
+            <p class="mx-auto mt-3 max-w-sm leading-relaxed text-slate-600">Your details have been captured. A Fintoo advisor will get in touch with you shortly.</p>
+            <button id="interest-again" type="button" class="mt-6 text-sm font-medium text-navy underline decoration-slate-300 underline-offset-4">Submit another response</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1026,7 +1055,7 @@ tailwind.config = {
   <div class="mx-auto max-w-7xl px-5 pb-10 pt-20 sm:px-8">
     <div class="grid gap-12 lg:grid-cols-12">
       <div class="lg:col-span-4">
-        <a href="/" class="text-lg font-bold tracking-[0.2em]" aria-label="Fintoo home">FINTOO</a>
+<a href="index.html" class="inline-block" aria-label="Fintoo home"><img src="assets/fintoo-logo-white.svg" alt="Fintoo" class="h-10 w-auto"></a>
         <p class="mt-5 max-w-xs text-sm leading-relaxed text-slate-300">Financial planning, wealth and tax advisory for Indian families, business owners and NRIs.</p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href="#" class="inline-flex h-11 items-center gap-2 rounded-xl bg-white/10 px-4 text-sm ring-1 ring-white/10 transition hover:bg-white/15"><svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.9-3-.8-1.6 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.2.8 1.1 1.7 2.3 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.2.9-1.3 1.3-2.5 1.3-2.6 0 0-2.5-1-2.5-3.8zM14.1 5.8c.6-.8 1.1-1.8 1-2.8-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.7-1 2.7 1 .1 2-.5 2.7-1.3z"/></svg>App Store</a>
@@ -1324,6 +1353,56 @@ tailwind.config = {
   } else if (G) {
     gs.set('[data-reveal],[data-hero-in]', { opacity: 1, y: 0 });
   }
+})();
+</script>
+
+<script>
+/* Interest registration form: front-end confirmation, ready for CRM/API integration. */
+(() => {
+  const form = document.getElementById('interest-form');
+  const success = document.getElementById('interest-success');
+  const again = document.getElementById('interest-again');
+  if (!form || !success) return;
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+    form.classList.add('hidden');
+    success.classList.remove('hidden');
+    success.classList.add('grid');
+  });
+
+  again?.addEventListener('click', () => {
+    form.reset();
+    success.classList.add('hidden');
+    success.classList.remove('grid');
+    form.classList.remove('hidden');
+    form.querySelector('input')?.focus();
+  });
+})();
+</script>
+
+<script>
+/* Homepage financial-journey hero */
+(()=>{
+ const scene=document.getElementById('journey'),button=document.getElementById('motion-toggle'),mq=matchMedia('(prefers-reduced-motion: reduce)'),svg=scene.querySelector('svg'),caption=document.getElementById('story-line');
+ let paused=mq.matches,visible=true,animations=[],raf=null,start=null,elapsed=0;
+ const duration=12000;
+ const animate=(element,frames)=>{const a=element.animate(frames,{duration,iterations:Infinity,easing:'ease-in-out'});animations.push(a)};
+ if(!mq.matches)build();
+ function build(){
+  if(animations.length)return;
+  scene.querySelectorAll('.asset').forEach((el,i)=>{
+   const rotations=[-9,5,9,-4,5],dx=[18,0,-18,14,-14],dy=[16,25,16,6,6];
+   animate(el,[{offset:0,transform:`translate(0,0) rotate(${rotations[i]}deg)`},{offset:.12,transform:`translate(0,-12px) rotate(${rotations[i]+3}deg)`},{offset:.34,transform:`translate(${dx[i]}px,${dy[i]}px) rotate(0deg)`,boxShadow:'0 0 25px #9dccff50'},{offset:.76,transform:`translate(${dx[i]}px,${dy[i]}px) rotate(0deg)`},{offset:1,transform:`translate(0,0) rotate(${rotations[i]}deg)`}]);
+  });
+  animate(scene.querySelector('.advisor-hub'),[{offset:0,transform:'translate(-50%,-50%) scale(1)'},{offset:.25,transform:'translate(-50%,-50%) scale(1)'},{offset:.38,transform:'translate(-50%,-50%) scale(1.13)'},{offset:.5,transform:'translate(-50%,-50%) scale(1)'},{offset:1,transform:'translate(-50%,-50%) scale(1)'}]);
+  scene.querySelectorAll('.outgoing path').forEach((el,i)=>{el.setAttribute('pathLength','1');el.style.strokeDasharray='1';animate(el,[{offset:0,strokeDashoffset:1,opacity:.15},{offset:.10+i*.02,strokeDashoffset:1,opacity:.15},{offset:.22+i*.02,strokeDashoffset:0,opacity:1},{offset:.87,strokeDashoffset:0,opacity:1},{offset:1,strokeDashoffset:1,opacity:.15}])});
+  scene.querySelectorAll('.goal').forEach((el,i)=>{animate(el,[{offset:0,opacity:.25,transform:'translateY(16px) scale(.94)'},{offset:.12+i*.015,opacity:.25,transform:'translateY(16px) scale(.94)'},{offset:.23+i*.015,opacity:1,transform:'translateY(0) scale(1)'},{offset:.88,opacity:1,transform:'translateY(0) scale(1)'},{offset:1,opacity:.25,transform:'translateY(16px) scale(.94)'}]);animate(el.querySelector('.goal-track i'),[{offset:0,transform:'scaleX(0)'},{offset:.20+i*.015,transform:'scaleX(0)'},{offset:.37+i*.015,transform:'scaleX(1)'},{offset:.9,transform:'scaleX(1)'},{offset:1,transform:'scaleX(0)'}])});
+ }
+ function tick(now){raf=null;if(paused||!visible||document.hidden){start=null;return}if(start!==null)elapsed+=now-start;start=now;const t=elapsed%duration;caption.textContent=t<1200?'01 / Scattered finances. Untapped potential.':t<2800?'02 / Your advisor brings everything together.':'03 / A clear plan for the life you want.';raf=requestAnimationFrame(tick)}
+ function update(){const stopped=paused||!visible||document.hidden;scene.classList.toggle('paused',stopped);animations.forEach(a=>stopped?a.pause():a.play());stopped?svg.pauseAnimations():svg.unpauseAnimations();button.textContent=paused?'▷ Play':'Ⅱ Pause';button.setAttribute('aria-label',paused?'Play financial journey animation':'Pause financial journey animation');start=null;if(!stopped&&!raf)raf=requestAnimationFrame(tick)}
+ button.onclick=()=>{paused=!paused;if(!paused)build();update()};mq.addEventListener('change',()=>{paused=mq.matches;if(paused){animations.forEach(a=>a.cancel());animations=[];caption.textContent='Your finances, connected to what matters.'}else build();update()});document.addEventListener('visibilitychange',update);new IntersectionObserver(([e])=>{visible=e.isIntersecting;update()},{threshold:.1}).observe(scene);update();
 })();
 </script>
 </body>

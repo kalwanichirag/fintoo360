@@ -361,47 +361,47 @@ tailwind.config = {
 
 <a href="#main" class="sr-only z-[110] rounded-full bg-navy px-5 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
 <!-- HEADER -->
-<header id="site-header" data-scrolled="false" class="fixed inset-x-0 top-0 z-50 border-b border-transparent bg-white/0 pt-[env(safe-area-inset-top)] transition-colors duration-300 data-[scrolled=true]:border-slate-200 data-[scrolled=true]:bg-white/90 data-[scrolled=true]:backdrop-blur-xl">
+<header id="site-header" data-scrolled="true" class="fixed inset-x-0 top-0 z-50 border-b border-slate-200 bg-white/90 pt-[env(safe-area-inset-top)] backdrop-blur-xl">
   <div class="mx-auto flex h-16 max-w-7xl items-center gap-8 px-5 sm:px-8 lg:h-20">
-    <a href="/" class="shrink-0 text-lg font-bold tracking-[0.2em] text-navy" aria-label="Fintoo home">FINTOO</a>
+    <a href="index.html" class="shrink-0" aria-label="Fintoo home"><img src="assets/fintoo-logo.svg" alt="Fintoo" class="h-9 w-auto sm:h-10"></a>
     <nav aria-label="Primary" class="hidden lg:block">
       <ul class="flex items-center gap-1 text-[0.9375rem] font-medium text-slate-600">
-        <li><a class="rounded-full px-3.5 py-2 text-navy transition-colors hover:bg-slate-100" href="/advisory" aria-current="true">Advisory</a></li>
-        <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-slate-900" href="/invest">Invest</a></li>
-        <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-slate-900" href="/tax">Tax</a></li>
-        <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-slate-900" href="/pricing">Pricing</a></li>
-        <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-slate-900" href="/knowledge-base">Knowledge Base</a></li>
+        <li class="group relative">
+          <button type="button" class="inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" aria-haspopup="true">Financial planning <svg viewBox="0 0 16 16" class="size-3 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="invisible absolute left-0 top-full w-64 translate-y-2 pt-3 opacity-0 transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+            <div class="rounded-2xl bg-white p-2 shadow-xl ring-1 ring-slate-200">
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="financial-planning.html">Financial Planning</a>
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="retirement-planning.html">Retirement Planning</a>
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="investment-planning.html">Investment Planning</a>
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="tax-planning.html">Tax Planning</a>
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="insurance-planning.html">Insurance Planning</a>
+            </div>
+          </div>
+        </li>
+        <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" href="investment-planning.html">Invest</a></li>
+        <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" href="tax-planning.html">Tax</a></li>
+        <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" href="/knowledge">Knowledge</a></li>
+        <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" href="/about">About Fintoo</a></li>
       </ul>
     </nav>
     <div class="ml-auto flex items-center gap-2 sm:gap-3">
       <a href="/login" class="hidden rounded-full px-3.5 py-2 text-[0.9375rem] font-medium text-slate-700 transition-colors hover:bg-slate-100 sm:inline-flex">Login</a>
-      <a href="#consult" class="group hidden h-11 items-center gap-2 rounded-full bg-navy pl-5 pr-1.5 text-sm font-medium text-white transition-colors hover:bg-navy-deep sm:inline-flex">
-        Talk to an advisor
-        <span class="grid size-8 place-items-center rounded-full bg-orange transition-transform duration-300 group-hover:translate-x-0.5"><svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-      </a>
-      <button id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu" class="group grid size-11 place-items-center rounded-full lg:hidden">
-        <span class="relative block h-3 w-5">
-          <span class="absolute inset-x-0 top-0 h-[0.125rem] rounded-full bg-slate-900 transition-transform duration-300 group-aria-expanded:translate-y-[0.3125rem] group-aria-expanded:rotate-45"></span>
-          <span class="absolute inset-x-0 bottom-0 h-[0.125rem] rounded-full bg-slate-900 transition-transform duration-300 group-aria-expanded:-translate-y-[0.3125rem] group-aria-expanded:-rotate-45"></span>
-        </span>
-      </button>
+      <a href="/contact" class="group hidden h-11 items-center gap-2 rounded-full bg-navy pl-5 pr-1.5 text-sm font-medium text-white transition-colors hover:bg-navy-deep sm:inline-flex">Talk to an advisor <span class="grid size-8 place-items-center rounded-full bg-orange transition-transform duration-300 group-hover:translate-x-0.5">↗</span></a>
+      <button id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu" class="group grid size-11 place-items-center rounded-full lg:hidden"><span class="relative block h-3 w-5"><span class="absolute inset-x-0 top-0 h-0.5 rounded-full bg-slate-900 transition-transform group-aria-expanded:translate-y-[0.3125rem] group-aria-expanded:rotate-45"></span><span class="absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-slate-900 transition-transform group-aria-expanded:-translate-y-[0.3125rem] group-aria-expanded:-rotate-45"></span></span></button>
     </div>
   </div>
 </header>
-
 <div id="mobile-nav" class="fixed inset-0 z-40 hidden overflow-y-auto bg-white pb-[env(safe-area-inset-bottom)] pt-[calc(5rem+env(safe-area-inset-top))] lg:hidden">
   <nav aria-label="Mobile" class="flex min-h-full flex-col px-6">
-    <ul class="divide-y divide-slate-100 text-2xl font-semibold tracking-tight">
-      <li><a class="block py-4" href="/advisory">Advisory</a></li>
-      <li><a class="block py-4" href="/invest">Invest</a></li>
-      <li><a class="block py-4" href="/tax">Tax</a></li>
-      <li><a class="block py-4" href="/pricing">Pricing</a></li>
-      <li><a class="block py-4" href="/knowledge-base">Knowledge Base</a></li>
+    <p class="pb-2 pt-4 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Planning services</p>
+    <ul class="divide-y divide-slate-100 text-xl font-semibold tracking-tight">
+      <li><a class="block py-3.5" href="financial-planning.html">Financial Planning</a></li>
+      <li><a class="block py-3.5" href="retirement-planning.html">Retirement Planning</a></li>
+      <li><a class="block py-3.5" href="investment-planning.html">Investment Planning</a></li>
+      <li><a class="block py-3.5" href="tax-planning.html">Tax Planning</a></li>
+      <li><a class="block py-3.5" href="insurance-planning.html">Insurance Planning</a></li>
     </ul>
-    <div class="mt-auto space-y-3 pb-8 pt-10">
-      <a href="#consult" class="flex h-14 items-center justify-center rounded-full bg-navy text-base font-medium text-white">Talk to an advisor</a>
-      <a href="/login" class="flex h-14 items-center justify-center rounded-full text-base font-medium ring-1 ring-slate-200">Login</a>
-    </div>
+    <div class="mt-auto space-y-3 pb-8 pt-10"><a href="/contact" class="flex h-14 items-center justify-center rounded-full bg-navy text-base font-medium text-white">Talk to an advisor</a><a href="/login" class="flex h-14 items-center justify-center rounded-full text-base font-medium ring-1 ring-slate-200">Login</a></div>
   </nav>
 </div>
 
@@ -1112,7 +1112,7 @@ tailwind.config = {
   <div class="mx-auto max-w-7xl px-5 pb-10 pt-16 sm:px-8">
     <div class="grid gap-12 lg:grid-cols-12">
       <div class="lg:col-span-4">
-        <a href="/" class="text-lg font-bold tracking-[0.2em]" aria-label="Fintoo home">FINTOO</a>
+<a href="index.html" class="inline-block" aria-label="Fintoo home"><img src="assets/fintoo-logo-white.svg" alt="Fintoo" class="h-10 w-auto"></a>
         <p class="mt-4 max-w-xs text-sm leading-relaxed text-slate-300">Financial planning, wealth and tax advisory for Indian families, business owners and NRIs.</p>
         <p class="mt-6 text-sm text-slate-300"><a class="hover:text-white" href="tel:+919699800600">+91-9699 800 600</a><br><a class="hover:text-white" href="mailto:online@fintoo.in">online@fintoo.in</a></p>
       </div>
