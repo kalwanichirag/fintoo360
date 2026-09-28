@@ -16,6 +16,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;650;700&display=swap">
+<link rel="stylesheet" href="fintoo-hero-advisory.css">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
 /* FINTOO DESIGN SYSTEM v2
@@ -162,37 +164,36 @@ tailwind.config = {
 
 <main id="main">
 
-<!-- HERO: "The Fintoo Core". Five glass rings, one per layer of a plan (protection, investments, tax,
-     retirement, legacy), rise into a stack while a warm core of light climbs through them. three.js, lazy, pauses off-screen. -->
-<section id="hero" class="relative isolate overflow-hidden bg-[#030D20] text-white">
-  <div class="absolute inset-0 -z-20 bg-[radial-gradient(40rem_32rem_at_72%_50%,rgba(30,91,184,0.22),transparent_70%)]"></div>
-
-  <div id="hero-media" class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 mx-auto aspect-square w-[min(40rem,120vw)] [mask-image:radial-gradient(closest-side,black_80%,transparent)] lg:inset-y-0 lg:left-auto lg:right-[-4%] lg:my-auto lg:w-[min(52rem,58vw)]" aria-hidden="true">
-    <div class="absolute inset-[22%] rounded-full bg-[radial-gradient(closest-side,rgba(127,167,224,0.22),transparent)] blur-2xl"></div>
-    <div class="absolute inset-[44%] rounded-full bg-[radial-gradient(closest-side,rgba(221,115,0,0.35),transparent)] blur-xl motion-safe:animate-breathe"></div>
-    <canvas id="hero-core" class="absolute inset-0 size-full opacity-0 transition-opacity duration-1000"></canvas>
-  </div>
-
-  <div class="mx-auto flex max-w-7xl flex-col px-5 pb-[min(34rem,105vw)] pt-32 sm:px-8 lg:min-h-[100svh] lg:justify-center lg:pb-24 lg:pt-28">
-    <div class="max-w-2xl">
-      <p data-hero-in class="inline-flex items-center gap-2 rounded-full bg-white/5 px-3.5 py-1.5 text-sm text-slate-300 ring-1 ring-white/10 [.js_&]:translate-y-3 [.js_&]:opacity-0"><span class="size-2 rounded-full bg-orange"></span>SEBI-registered. Zero-commission advice since 2015.</p>
-      <h1 data-hero-in class="mt-7 text-[2.75rem] font-semibold leading-[1.02] tracking-tight [.js_&]:translate-y-3 [.js_&]:opacity-0 sm:text-6xl xl:text-7xl">Your wealth deserves a bigger picture.</h1>
-      <p data-hero-in class="mt-6 max-w-lg text-lg leading-relaxed text-slate-300 [.js_&]:translate-y-3 [.js_&]:opacity-0">A dedicated Fintoo advisor plans your investments, tax, retirement, protection and succession as one, and builds on it year after year.</p>
-      <div data-hero-in class="mt-10 flex flex-col gap-3 [.js_&]:translate-y-3 [.js_&]:opacity-0 sm:flex-row sm:items-center">
-        <a href="/contact?type=portfolio-review" data-magnetic class="group inline-flex h-14 items-center justify-between gap-4 rounded-full bg-orange pl-7 pr-2 text-base font-semibold text-navy-deep shadow-[0_1rem_2.5rem_-0.75rem_rgba(221,115,0,0.55)] transition-colors hover:bg-[#EE8410] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#030D20] sm:justify-start">
-          Get your portfolio reviewed
-          <span class="grid size-10 place-items-center rounded-full bg-navy-deep text-white transition-transform duration-300 group-hover:translate-x-1"><svg viewBox="0 0 16 16" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span>
-        </a>
-        <a href="/contact" class="inline-flex h-14 items-center justify-center rounded-full bg-white/10 px-7 text-base font-medium text-white ring-1 ring-white/15 transition hover:bg-white/15">Talk to an advisor</a>
-      </div>
-      <ul data-hero-in class="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-400 [.js_&]:translate-y-3 [.js_&]:opacity-0 lg:gap-x-8">
-        <li class="flex items-center gap-2"><span class="size-1.5 rounded-full bg-slate-500"></span>SEBI RIA INA000020031</li>
-        <li class="flex items-center gap-2"><span class="size-1.5 rounded-full bg-slate-500"></span>Advising since 2015</li>
-        <li class="flex items-center gap-2"><span class="size-1.5 rounded-full bg-slate-500"></span>50+ advisors and technologists</li>
-      </ul>
-    </div>
-  </div>
-</section>
+<!-- HERO: Advisory-led consolidated financial plan -->
+<section id="hero" class="hero" aria-labelledby="hero-title"><div class="hero-background" aria-hidden="true"><div class="hero-background-grid"></div><div class="hero-glow hero-glow-blue"></div><div class="hero-glow hero-glow-orange"></div></div><div class="hero-inner">
+<div class="copy"><div class="eyebrow">Scattered finances. Shared ambitions.</div><h1 id="hero-title">Your finances.<br>Your goals.<br><span>One clear path.</span></h1><p class="description">Funds here. Stocks there. Goals somewhere ahead. Your Fintoo advisor brings it all together, with a financial plan built to help you get where you want to be.</p><div class="actions"><a class="primary" href="/contact?type=portfolio-review">Get your portfolio reviewed <span aria-hidden="true">↗</span></a><a class="secondary" href="/contact">Talk to an advisor</a></div><div class="trust"><div><strong>Since 2015</strong><small>A decade of perspective</small></div><div><strong>SEBI registered</strong><small>Investment adviser</small></div><div><strong>You, first.</strong><small>Advice around your goals</small></div></div></div>
+<figure class="plan-visual" aria-label="A personalised financial plan created by a Fintoo advisor around a client's priorities.">
+<div class="plan-stage">
+<div class="plan-orbit" aria-hidden="true"></div>
+<div class="floating-note note-life"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20v-9l8-6 8 6v9M9 20v-6h6v6"/></svg><b>Your priorities</b><span>Life first. Numbers second.</span></div>
+<article class="plan-sheet">
+<div class="plan-topline"><div><div class="plan-kicker">Fintoo consolidated wealth report</div><h2 class="plan-title">Your financial world. One view.</h2><div class="report-meta"><span>Illustrative household</span><span>As of Sep 2026</span><span>INR</span></div></div><div class="plan-mark">F.</div></div>
+<div class="net-worth-row"><div class="worth-card primary-worth"><small>Estimated net worth</small><b>₹4.82 Cr</b><em>↑ 8.4% this year</em></div><div class="worth-card"><small>Total assets</small><b>₹5.46 Cr</b><em>8 accounts linked</em></div><div class="worth-card"><small>Liabilities</small><b>₹64 L</b><em>Home loan</em></div></div>
+<div class="report-grid">
+<section class="report-section"><div class="section-head"><b>Asset overview</b><span>₹5.46 Cr</span></div><table class="asset-table"><tbody>
+<tr><td><span class="asset-name"><i class="asset-dot" style="--asset:#397fbd"></i>Stocks</span></td><td>16%</td><td>₹88 L</td></tr>
+<tr><td><span class="asset-name"><i class="asset-dot" style="--asset:#6bb8e8"></i>Mutual funds</span></td><td>23%</td><td>₹1.24 Cr</td></tr>
+<tr><td><span class="asset-name"><i class="asset-dot" style="--asset:#dfa940"></i>Gold</span></td><td>7%</td><td>₹38 L</td></tr>
+<tr><td><span class="asset-name"><i class="asset-dot" style="--asset:#8f79c3"></i>Fixed deposits</span></td><td>9%</td><td>₹49 L</td></tr>
+<tr><td><span class="asset-name"><i class="asset-dot" style="--asset:#62aa91"></i>Land</span></td><td>15%</td><td>₹82 L</td></tr>
+<tr><td><span class="asset-name"><i class="asset-dot" style="--asset:#dd7300"></i>House property</span></td><td>30%</td><td>₹1.65 Cr</td></tr>
+</tbody></table><div class="mix-bar" aria-hidden="true"><i style="width:16%;--bar:#397fbd"></i><i style="width:23%;--bar:#6bb8e8"></i><i style="width:7%;--bar:#dfa940"></i><i style="width:9%;--bar:#8f79c3"></i><i style="width:15%;--bar:#62aa91"></i><i style="width:30%;--bar:#dd7300"></i></div></section>
+<div class="report-side"><section class="report-section income-card"><div class="section-head"><b>Rental income</b><span>Cash flow</span></div><div class="income-line"><b>₹62,000</b><span>per month</span></div></section>
+<section class="report-section"><div class="section-head"><b>Goals funded</b><span>Overall 68%</span></div><div class="goal-list"><div class="goal-row"><b>Child's education</b><span>74%</span><div class="mini-track"><i style="--done:74%;--goal:#397fbd"></i></div></div><div class="goal-row"><b>Retirement</b><span>61%</span><div class="mini-track"><i style="--done:61%;--goal:#dd7300"></i></div></div><div class="goal-row"><b>Second home</b><span>43%</span><div class="mini-track"><i style="--done:43%;--goal:#62aa91"></i></div></div></div></section></div>
+</div>
+<div class="recommendation"><div class="recommendation-mark">↗</div><div><b>Advisor action plan</b><span>Reduce property concentration · Consolidate overlapping funds · Increase goal-linked SIPs</span></div></div>
+<div class="report-foot"><div class="advisor-signoff"><div class="advisor-avatar">F</div><div><b>Reviewed with your Fintoo advisor</b><span>Personalised recommendations. Clear next steps.</span></div></div><span>Private &amp; confidential</span></div>
+</article>
+<div class="floating-note note-sync"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 0 1 14-5M20 12a8 8 0 0 1-14 5M18 3v4h-4M6 21v-4h4"/></svg><b>Kept in step</b><span>Reviewed as life changes.</span></div>
+</div>
+<figcaption class="plan-caption"><div><strong>A plan that is distinctly yours.</strong><span>Investments, protection and goals—working as one.</span></div><a href="/contact">Build my plan ↗</a></figcaption>
+</figure>
+</div></section>
 
 <!-- CLIENT STORIES: social proof straight after the hero -->
 <section id="stories" class="relative border-t border-slate-100">
@@ -1066,7 +1067,6 @@ tailwind.config = {
   <button type="button" id="app-chip-close" class="grid size-7 place-items-center self-start rounded-full text-slate-400 hover:bg-slate-100 hover:text-slate-700" aria-label="Dismiss"><svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
 </aside>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
