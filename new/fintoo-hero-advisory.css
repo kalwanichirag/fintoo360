@@ -50,3 +50,93 @@
 #hero.hero a{color:inherit;text-decoration:none}#hero.hero button{font:inherit}#hero.hero a,#hero.hero button{-webkit-tap-highlight-color:transparent}
 #hero.hero a:focus-visible,#hero.hero button:focus-visible{outline:3px solid #dd7300;outline-offset:5px}
 
+
+/* Advisory service showcase: compact index + decisive card CTA */
+#services { --svc-navy: #042b62; --svc-orange: #dd7300; }
+@media (min-width: 64rem) and (min-height: 43rem) {
+  #services.svc-pinned > div > div:nth-child(2) { grid-template-columns: minmax(17.5rem, 20rem) minmax(0, 1fr); gap: clamp(2rem, 4vw, 4.5rem); }
+  #services [aria-label="Fintoo services"] { counter-reset: service; display: grid; gap: .3rem; padding: .45rem; border: 1px solid #e2e8f0; border-radius: 1.35rem; background: #f8fafc; box-shadow: 0 1rem 3rem -2.5rem rgba(15,23,42,.38); }
+  #services [aria-label="Fintoo services"] li { counter-increment: service; }
+  #services [data-svc] { position: relative; min-height: 3rem; gap: .75rem; padding: .45rem .75rem .45rem .55rem; border: 1px solid transparent; border-radius: .95rem; color: #64748b; }
+  #services [data-svc]::after { content: counter(service, decimal-leading-zero); margin-left: auto; font-size: .68rem; font-weight: 600; letter-spacing: .08em; color: #94a3b8; }
+  #services [data-svc] > span:first-child { width: 2rem; height: 2rem; border-radius: .7rem; background: transparent; box-shadow: none; }
+  #services [data-svc]:hover { background: #fff; border-color: #e2e8f0; color: #0f172a; }
+  #services [data-svc][aria-pressed="true"] { color: #fff; background: var(--svc-navy); border-color: var(--svc-navy); box-shadow: 0 .8rem 1.8rem -.9rem rgba(4,43,98,.6); }
+  #services [data-svc][aria-pressed="true"]::after { color: #f7bd7d; }
+  #services [data-svc][aria-pressed="true"] > span:first-child { background: rgba(255,255,255,.12); color: #fff; box-shadow: none; --tw-ring-color: transparent; }
+  #services [aria-label="Fintoo services"] + p { margin-top: .8rem; padding: 0 .6rem; text-align: right; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
+  #services .relative.hidden > div[aria-hidden="true"] { display: none; }
+  #svc-panels { overflow: hidden; border-radius: 1.75rem !important; background: #fff !important; padding: 0 !important; box-shadow: 0 1.75rem 4.5rem -2.5rem rgba(4,43,98,.38); --tw-ring-color: #dbe4ef !important; }
+  #svc-panels [data-panel] { min-height: 23.5rem; padding: clamp(1.75rem,3vw,3rem) !important; border-radius: 1.75rem; --tw-ring-color: transparent; }
+}
+#svc-panels [data-panel] > div:first-child { display: flex; flex-direction: column; align-items: flex-start; }
+#svc-panels [data-panel] > div:first-child > a { display: inline-flex; min-height: 3.25rem; align-items: center; justify-content: center; gap: .75rem; margin-top: 1.65rem; padding: .8rem 1rem .8rem 1.25rem; border-radius: 999px; background: var(--svc-orange); color: #fff; font-weight: 600; box-shadow: 0 .9rem 1.8rem -.9rem rgba(221,115,0,.7); transition: transform .2s ease,background-color .2s ease,box-shadow .2s ease; }
+#svc-panels [data-panel] > div:first-child > a svg { box-sizing: content-box; width: 1rem; height: 1rem; padding: .45rem; border-radius: 999px; background: rgba(255,255,255,.18); color: #fff; }
+#svc-panels [data-panel] > div:first-child > a:hover { transform: translateY(-2px); background: #c96600; box-shadow: 0 1.1rem 2rem -1rem rgba(221,115,0,.85); }
+#svc-panels [data-panel] > div:nth-child(2) { border-color: transparent; background: linear-gradient(145deg,#f8fafc 0%,#f1f5f9 100%); box-shadow: inset 0 0 0 1px rgba(203,213,225,.7); }
+@media (max-width: 63.99rem) { #svc-panels [data-panel] { box-shadow: 0 1.25rem 3rem -2.25rem rgba(4,43,98,.35); } }
+
+/* Page-wide brand colour system: orange eyebrows, consistent headings, two-tone icons */
+main section:not(#hero):not(#fintoo-ai):not(#investments):not(#register-interest) h2 { color: #0f172a; }
+#fintoo-ai h2, #investments h2, #register-interest h2 { color: #fff; }
+main section > div > div > p.text-orange, main section p.text-orange { color: #dd7300; }
+#services [data-svc] > span:first-child { background: linear-gradient(135deg,#eef4fb 0 68%,#fff0df 68%) !important; color: #042b62 !important; border: 1px solid #dbe5f1; }
+#services [data-svc][aria-pressed="true"] > span:first-child { background: linear-gradient(135deg,rgba(255,255,255,.16) 0 68%,rgba(221,115,0,.7) 68%) !important; color: #fff !important; border-color: rgba(255,255,255,.16); }
+#investments li > a > span:first-child { background: linear-gradient(135deg,rgba(30,91,184,.38) 0 68%,rgba(221,115,0,.34) 68%) !important; color: #fff !important; border: 1px solid rgba(255,255,255,.12); }
+#investments li > a:hover > span:first-child { background: linear-gradient(135deg,#eaf1fa 0 68%,#fff0df 68%) !important; color: #042b62 !important; border-color: #dbe5f1; }
+#insights [aria-label="Financial calculators"] a > span:first-child { background: linear-gradient(135deg,#eef4fb 0 68%,#fff0df 68%) !important; color: #042b62 !important; border: 1px solid #dbe5f1; }
+#security li > span:first-child { background: linear-gradient(135deg,#042b62 0 68%,#dd7300 68%) !important; color: #fff !important; }
+#difference article span[class*="place-items-center"] { background: linear-gradient(135deg,#eef4fb 0 68%,#fff0df 68%) !important; color: #042b62 !important; }
+
+/* Correct two-colour icon system: solid tile, navy drawing, orange detail */
+#services [data-svc] > span:first-child,
+#insights [aria-label="Financial calculators"] a > span:first-child,
+#difference article span[class*="place-items-center"] {
+  position: relative;
+  overflow: visible;
+  background: #fff8ef !important;
+  color: #042b62 !important;
+  border: 1px solid #f3d6b5 !important;
+}
+#services [data-svc] > span:first-child::after,
+#insights [aria-label="Financial calculators"] a > span:first-child::after,
+#difference article span[class*="place-items-center"]::after {
+  content: "";
+  position: absolute;
+  right: .28rem;
+  bottom: .28rem;
+  width: .34rem;
+  height: .34rem;
+  border-radius: 999px;
+  background: #dd7300;
+  box-shadow: 0 0 0 2px #fff8ef;
+}
+#services [data-svc] > span:first-child svg > *,
+#insights [aria-label="Financial calculators"] a > span:first-child svg > *,
+#difference article span[class*="place-items-center"] svg > * { stroke: #042b62; }
+#services [data-svc] > span:first-child svg > *:last-child,
+#insights [aria-label="Financial calculators"] a > span:first-child svg > *:last-child,
+#difference article span[class*="place-items-center"] svg > *:last-child { stroke: #dd7300; }
+#services [data-svc][aria-pressed="true"] > span:first-child { background: rgba(255,255,255,.12) !important; border-color: rgba(255,255,255,.2) !important; }
+#services [data-svc][aria-pressed="true"] > span:first-child svg > * { stroke: #fff; }
+#services [data-svc][aria-pressed="true"] > span:first-child svg > *:last-child { stroke: #f59a3a; }
+#services [data-svc][aria-pressed="true"] > span:first-child::after { box-shadow: 0 0 0 2px #173f73; }
+#investments li > a > span:first-child {
+  position: relative;
+  overflow: visible;
+  background: rgba(255,255,255,.08) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,255,255,.16) !important;
+}
+#investments li > a > span:first-child::after { content: ""; position: absolute; right: .3rem; bottom: .3rem; width: .36rem; height: .36rem; border-radius: 999px; background: #dd7300; box-shadow: 0 0 0 2px #1a385f; }
+#investments li > a > span:first-child svg > * { stroke: #fff; }
+#investments li > a > span:first-child svg > *:last-child { stroke: #f59a3a; }
+#investments li > a:hover > span:first-child { background: #fff8ef !important; color: #042b62 !important; border-color: #f3d6b5 !important; }
+#investments li > a:hover > span:first-child svg > * { stroke: #042b62; }
+#investments li > a:hover > span:first-child svg > *:last-child { stroke: #dd7300; }
+#investments li > a:hover > span:first-child::after { box-shadow: 0 0 0 2px #fff8ef; }
+#security li > span:first-child { position: relative; background: #eef4fb !important; color: #042b62 !important; border: 1px solid #d6e2f0; }
+#security li > span:first-child::after { content: ""; position: absolute; right: .3rem; bottom: .3rem; width: .36rem; height: .36rem; border-radius: 999px; background: #dd7300; box-shadow: 0 0 0 2px #eef4fb; }
+#security li > span:first-child svg > * { stroke: #042b62; }
+#security li > span:first-child svg > *:last-child { stroke: #dd7300; }
+
