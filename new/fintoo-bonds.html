@@ -344,7 +344,8 @@ tailwind.config = {
           </div>
         </li>
         <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" href="tax-planning.html">Tax</a></li>
-        <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" href="#">Blogs</a></li>
+        <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" href="pricing.html">Pricing</a></li>
+       <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" href="blog.html">Blogs</a></li>
         <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" href="about.html">About Fintoo</a></li>
       </ul>
     </nav>
@@ -437,7 +438,7 @@ tailwind.config = {
 
         <div class="relative mt-10 rounded-[1.5rem] bg-white p-5 shadow-[0_2.5rem_5rem_-2rem_rgba(4,43,98,0.4)] ring-1 ring-slate-200 sm:mt-16 sm:w-[92%] sm:-rotate-1 sm:p-6">
           <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-            <span class="text-xs font-bold tracking-[0.2em] text-navy">FINTOO</span>
+            
             <span class="rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-800 ring-1 ring-amber-200">Sample bond ladder</span>
           </div>
           <div class="mt-4 flex items-end justify-between gap-4">
@@ -853,7 +854,6 @@ tailwind.config = {
     <div class="lg:col-span-4">
       <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Bond FAQs</h2>
       <p class="mt-4 text-slate-600">Clear answers to the questions investors ask before buying their first bond.</p>
-      <p class="mt-6 text-sm text-slate-500">Last reviewed 1 October 2026 by <span class="font-medium text-slate-700">Mihir Shah, AVP, Financial Planning</span>, Fintoo.</p>
     </div>
     <div class="space-y-3 lg:col-span-8">
       <details class="group rounded-2xl bg-mist px-6 ring-1 ring-slate-200/70 open:bg-white open:shadow-sm" open>
@@ -937,25 +937,39 @@ tailwind.config = {
 
 <!-- FOOTER -->
 <footer class="bg-navy-deep text-white">
-  <div class="mx-auto max-w-7xl px-5 pb-10 pt-16 sm:px-8">
+  <div class="mx-auto max-w-7xl px-5 pb-10 pt-14 sm:px-8">
     <div class="grid gap-12 lg:grid-cols-12">
       <div class="lg:col-span-4">
-        <a href="/" class="text-lg font-bold tracking-[0.2em]" aria-label="Fintoo home">FINTOO</a>
-        <p class="mt-4 max-w-xs text-sm leading-relaxed text-slate-300">Financial planning, wealth and tax advisory for Indian families, business owners and NRIs.</p>
-        <p class="mt-6 text-sm text-slate-300"><a class="hover:text-white" href="tel:+919699800600">+91-9699 800 600</a><br><a class="hover:text-white" href="mailto:online@fintoo.in">online@fintoo.in</a></p>
+<a href="index.html" class="inline-block" aria-label="Fintoo home"><img src="assets/fintoo-logo-white.svg" alt="Fintoo" class="h-10 w-auto"></a>
+        <p class="mt-5 max-w-xs text-sm leading-relaxed text-slate-300">Financial planning, wealth and tax advisory for Indian families, business owners and NRIs.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#" class="inline-flex h-11 items-center gap-2 rounded-xl bg-white/10 px-4 text-sm ring-1 ring-white/10 transition hover:bg-white/15"><svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.9-3-.8-1.6 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.2.8 1.1 1.7 2.3 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.2.9-1.3 1.3-2.5 1.3-2.6 0 0-2.5-1-2.5-3.8zM14.1 5.8c.6-.8 1.1-1.8 1-2.8-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.7-1 2.7 1 .1 2-.5 2.7-1.3z"/></svg>App Store</a>
+          <a href="#" class="inline-flex h-11 items-center gap-2 rounded-xl bg-white/10 px-4 text-sm ring-1 ring-white/10 transition hover:bg-white/15"><svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true"><path d="M4 3.5v17l9.5-8.5L4 3.5zm10.9 7.2L6.6 2.4l10.6 6-2.3 2.3zm0 2.6l2.3 2.3-10.6 6 8.3-8.3zm3.6-3.5l2.4 1.4c.8.5.8 1.2 0 1.7l-2.4 1.4-2.6-2.3 2.6-2.2z"/></svg>Google Play</a>
+        </div>
+        <div class="mt-8 flex gap-2">
+          <a href="#" aria-label="Fintoo on LinkedIn" class="grid size-10 place-items-center rounded-full bg-white/10 transition hover:bg-white/20"><svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true"><path d="M5 9h3v10H5zM6.5 4a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5zM10 9h2.9v1.4c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.7 2 3.7 4.7V19h-3v-4.8c0-1.2 0-2.6-1.6-2.6s-1.9 1.2-1.9 2.5V19H10z"/></svg></a>
+          <a href="#" aria-label="Fintoo on Instagram" class="grid size-10 place-items-center rounded-full bg-white/10 transition hover:bg-white/20"><svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.5"/><circle cx="16.8" cy="7.2" r=".6" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Fintoo on X" class="grid size-10 place-items-center rounded-full bg-white/10 transition hover:bg-white/20"><svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true"><path d="M17.5 4h2.8l-6.1 7 7.2 9h-5.6l-4.4-5.6L6.3 20H3.5l6.5-7.5L3.1 4h5.7l4 5.2L17.5 4zm-1 14.4h1.5L7.6 5.5H6z"/></svg></a>
+          <a href="#" aria-label="Fintoo on YouTube" class="grid size-10 place-items-center rounded-full bg-white/10 transition hover:bg-white/20"><svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3L10 15z"/></svg></a>
+        </div>
       </div>
-      <nav aria-label="Footer" class="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:col-span-8">
-        <div><p class="text-sm font-semibold">Advisory</p><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li><a class="hover:text-white" href="/financial-planning">Financial Planning</a></li><li><a class="hover:text-white" href="/retirement-planning">Retirement Planning</a></li><li><a class="hover:text-white" href="/investment-planning">Investment Planning</a></li><li><a class="hover:text-white" href="/tax-planning">Tax Planning</a></li><li><a class="hover:text-white" href="/risk-management">Risk Management</a></li></ul></div>
-        <div><p class="text-sm font-semibold">Invest</p><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li><a class="hover:text-white" href="/mutual-funds">Mutual Fund</a></li><li><a class="hover:text-white" href="/bonds" aria-current="page">Bond</a></li><li><a class="hover:text-white" href="/domestic-equity">Domestic Equity</a></li><li><a class="hover:text-white" href="/international-equity">International Equity</a></li><li><a class="hover:text-white" href="/ipo">IPO</a></li></ul></div>
-        <div><p class="text-sm font-semibold">About</p><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li><a class="hover:text-white" href="/nri-taxation">NRI Taxation</a></li><li><a class="hover:text-white" href="/notices">Notices</a></li><li><a class="hover:text-white" href="/safety-shield">Safety Shield</a></li><li><a class="hover:text-white" href="/about-us">About Us</a></li><li><a class="hover:text-white" href="/contact-us">Contact Us</a></li></ul></div>
-        <div><p class="text-sm font-semibold">Others</p><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li><a class="hover:text-white" href="/calculators">Tools &amp; Calculators</a></li><li><a class="hover:text-white" href="/privacy-policy">Privacy Policy</a></li><li><a class="hover:text-white" href="/terms">Terms and Conditions</a></li><li><a class="hover:text-white" href="/grievance-mechanism">Grievance Mechanism</a></li><li><a class="hover:text-white" href="/complaints-status">Complaints Status</a></li><li><a class="hover:text-white" href="https://smartodr.in/">ODR Portal</a></li><li><a class="hover:text-white" href="/investor-charter">Investor Charter</a></li><li><a class="hover:text-white" href="/compliance-audit-status">Compliance Audit Status</a></li></ul></div>
+      <nav aria-label="Footer" class="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:col-span-8 lg:grid-cols-4">
+        <div><h2 class="text-sm font-semibold">Advisory</h2><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li><a class="hover:text-white" href="/financial-planning">Financial Planning</a></li><li><a class="hover:text-white" href="/investment-planning">Investment Planning</a></li><li><a class="hover:text-white" href="/retirement-planning">Retirement Planning</a></li><li><a class="hover:text-white" href="/risk-management">Risk Planning</a></li><li><a class="hover:text-white" href="/portfolio-management">Portfolio Management</a></li><li><a class="hover:text-white" href="/nri">NRI Planning</a></li><li><a class="hover:text-white" href="/estate-planning">Estate Planning</a></li></ul></div>
+        <div><h2 class="text-sm font-semibold">Invest</h2><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li><a class="hover:text-white" href="/mutual-funds">Mutual Funds</a></li><li><a class="hover:text-white" href="/bonds">Bonds</a></li><li><a class="hover:text-white" href="/stocks">Stocks</a></li><li><a class="hover:text-white" href="/ipo">IPO</a></li><li><a class="hover:text-white" href="/international-equity">International Equity</a></li><li><a class="hover:text-white" href="/pms">PMS</a></li></ul></div>
+        <div><h2 class="text-sm font-semibold">Tax</h2><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li><a class="hover:text-white" href="/tax-planning">Tax Planning</a></li><li><a class="hover:text-white" href="/itr-filing">ITR Filing</a></li><li><a class="hover:text-white" href="/nri-tax">NRI Taxation</a></li><li><a class="hover:text-white" href="/calculators/income-tax">Income Tax Calculator</a></li></ul></div>
+        <div><h2 class="text-sm font-semibold">Knowledge</h2><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li><a class="hover:text-white" href="/knowledge">Blog</a></li><li><a class="hover:text-white" href="/knowledge/guides">Guides</a></li><li><a class="hover:text-white" href="/calculators">Calculators</a></li><li><a class="hover:text-white" href="/fintoo-ai">Fintoo AI</a></li></ul></div>
+        <div><h2 class="text-sm font-semibold">About Fintoo</h2><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li><a class="hover:text-white" href="about.html">About us</a></li><li><a class="hover:text-white" href="/about/team">Our advisors</a></li><li><a class="hover:text-white" href="/careers">Careers</a></li><li><a class="hover:text-white" href="/press">Press</a></li></ul></div>
+        <div><h2 class="text-sm font-semibold">Resources</h2><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li><a class="hover:text-white" href="/pricing">Pricing</a></li><li><a class="hover:text-white" href="/faq">FAQs</a></li><li><a class="hover:text-white" href="/login">Client login</a></li></ul></div>
+        <div><h2 class="text-sm font-semibold">Legal</h2><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li><a class="hover:text-white" href="/privacy-policy">Privacy policy</a></li><li><a class="hover:text-white" href="/terms">Terms of use</a></li><li><a class="hover:text-white" href="/disclosures">Disclosures</a></li><li><a class="hover:text-white" href="/investor-charter">Investor charter</a></li><li><a class="hover:text-white" href="/grievance-redressal">Grievance redressal</a></li></ul></div>
+        <div><h2 class="text-sm font-semibold">Contact</h2><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li>[Support email]</li><li>[Phone number]</li><li>[Registered office address]</li></ul></div>
       </nav>
     </div>
-    <div class="mt-14 space-y-4 border-t border-white/10 pt-8 text-xs leading-relaxed text-slate-400">
-      <p>Fintoo Wealth Private Limited (Brand Name - Fintoo.in, Fintoo app, Fintoo) makes no warranties or representations, express or implied, on products and services offered through the platform. It accepts no liability for any damages or losses, however caused, in connection with the use of, or on the reliance of its advisory or related services. Past performance is not indicative of future returns. Please consider your specific investment requirements, risk tolerance, goal, time frame, risk and reward balance and the cost associated with the investment before choosing a fund, or designing a portfolio that suits your needs. Performance and returns of any investment portfolio can neither be predicted nor guaranteed. Investments made on advisory are subject to market risks, read all scheme related documents carefully.</p>
-      <p>Figures and examples on this page are illustrative and are not a recommendation. Investments in debt securities are subject to risks including credit, interest rate and liquidity risk. Read all offer documents carefully. Tax and regulatory information is current as of October 2026 and may change. Calculator results are illustrative.</p>
-      <p>© Fintoo Wealth Private Limited [SEBI RIA Registration No: INA000020031] [BASL Membership ID: 2252] [Type of Registration: Non-Individual] [Validity of registration: March 26, 2025 - Perpetual] [Address: Fintoo Wealth Private Limited, B/309, Dynasty Business Park, Opp Sangam Cinema, Andheri (East), J B Nagar, Mumbai, Maharashtra 400059] [CIN - U66301MH2023PTC414206] [GST No: 27AAFCF7114E1ZV] [Principal Officer details: Mr. Mihir Shah (mihir.shah@fintoo.in)] [Compliance Officer details: Mrs. Nisha Harchekar (nisha.harchekar@fintoo.in)] [Corresponding SEBI regional/local office: Plot No. C 4-A, G Block, Near Bank of India, Bandra Kurla Complex, Bandra East, Mumbai, Maharashtra 400051]</p>
-      <p>Copyright © 2026 Fintoo. All rights reserved.</p>
+    <div class="mt-10 border-t border-white/10 pt-8">
+      <div class="grid gap-4 text-xs leading-relaxed text-slate-400 lg:grid-cols-2 lg:gap-10">
+        <p>Fintoo is registered with the Securities and Exchange Board of India as an investment adviser, registration no. INA000020031. [Legal entity name, registered address, BASL membership no. and principal officer details as required.]</p>
+        <p>Investments in the securities market are subject to market risks. Read all related documents carefully before investing. Registration granted by SEBI, membership of BASL and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors.</p>
+      </div>
+      <p class="mt-8 text-xs text-slate-400">&copy; 2026 Fintoo. All rights reserved.</p>
     </div>
   </div>
 </footer>

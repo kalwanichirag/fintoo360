@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Data: WordPress REST API (wp-json/wp/v2). See the DATA LAYER comment in the script for endpoints and fields. -->
+<title>Fintoo Blog: Personal Finance, Tax &amp; Investing Guides</title>
+<meta name="description" content="Plain-language guides on mutual funds, tax, insurance, retirement and NRI money matters from Fintoo.">
+<link rel="canonical" href="https://www.fintoo.in/blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Fintoo Blog: Personal Finance, Tax &amp; Investing Guides">
+<meta property="og:description" content="Plain-language guides on mutual funds, tax, insurance, retirement and NRI money matters from Fintoo.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: { navy: { DEFAULT: '#042B62', deep: '#021A3D', mid: '#1E5BB8', soft: '#7FA7E0' }, orange: { DEFAULT: '#DD7300', ink: '#9A5000' }, mist: '#F5F8FC' },
+    fontFamily: { sans: ['"Google Sans"', '"Google Sans Flex"', 'ui-sans-serif', 'system-ui', '-apple-system', '"Segoe UI"', 'sans-serif'] }
+  } }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "Organization",
+        "FinancialService"
+      ],
+      "@id": "https://www.fintoo.in/#org",
+      "name": "Fintoo",
+      "url": "https://www.fintoo.in/"
+    },
+    {
+      "@type": "Blog",
+      "name": "Fintoo Blog",
+      "url": "https://www.fintoo.in/blog",
+      "inLanguage": "en-IN",
+      "publisher": {
+        "@id": "https://www.fintoo.in/#org"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.fintoo.in/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://www.fintoo.in/blog"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body class="overflow-x-clip bg-white pb-[env(safe-area-inset-bottom)] font-sans text-slate-900 antialiased selection:bg-orange/20">
+<a href="#main" class="sr-only z-[110] rounded-full bg-navy px-5 py-3 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4">Skip to content</a>
+<!-- HEADER -->
+<header id="site-header" data-scrolled="true" class="fixed inset-x-0 top-0 z-50 border-b border-slate-200 bg-white/90 pt-[env(safe-area-inset-top)] backdrop-blur-xl">
+  <div class="mx-auto flex h-16 max-w-7xl items-center gap-8 px-5 sm:px-8 lg:h-20">
+    <a href="index.html" class="shrink-0" aria-label="Fintoo home"><img src="assets/fintoo-logo.svg" alt="Fintoo" class="h-9 w-auto sm:h-10"></a>
+    <nav aria-label="Primary" class="hidden lg:block">
+      <ul class="flex items-center gap-1 text-[0.9375rem] font-medium text-slate-600">
+        <li class="group relative">
+          <button type="button" class="inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" aria-haspopup="true">Services <svg viewBox="0 0 16 16" class="size-3 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="invisible absolute left-0 top-full w-64 translate-y-2 pt-3 opacity-0 transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+            <div class="rounded-2xl bg-white p-2 shadow-xl ring-1 ring-slate-200">
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="financial-planning.html">Financial Planning</a>
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="retirement-planning.html">Retirement Planning</a>
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="investment-planning.html">Investment Planning</a>
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="tax-planning.html">Tax Planning</a>
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="insurance-planning.html">Insurance Planning</a>
+            </div>
+          </div>
+        </li>
+        <li class="group relative">
+          <button type="button" class="inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" aria-haspopup="true">Invest <svg viewBox="0 0 16 16" class="size-3 transition-transform group-hover:rotate-180 group-focus-within:rotate-180" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button>
+          <div class="invisible absolute left-0 top-full w-56 translate-y-2 pt-3 opacity-0 transition duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+            <div class="rounded-2xl bg-white p-2 shadow-xl ring-1 ring-slate-200">
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="mutual-funds.html">Mutual Funds</a>
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="fintoo-domestic-equity.html">Domestic Equity</a>
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="fintoo-international-equity.html">International Equity</a>
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="fintoo-bonds.html">Bonds</a>
+              <a class="block rounded-xl px-4 py-3 hover:bg-slate-50 hover:text-navy" href="fintoo-ipo.html">IPO</a>
+            </div>
+          </div>
+        </li>
+        <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" href="tax-planning.html">Tax</a></li>
+        <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" href="pricing.html">Pricing</a></li>
+       <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy" href="blog.html">Blogs</a></li>
+        <li><a class="rounded-full px-3.5 py-2 transition-colors hover:bg-slate-100 hover:text-navy"href="about.html">About Fintoo</a></li>
+      </ul>
+    </nav>
+    <div class="ml-auto flex items-center gap-2 sm:gap-3">
+      <a href="/login" class="hidden rounded-full px-3.5 py-2 text-[0.9375rem] font-medium text-slate-700 transition-colors hover:bg-slate-100 sm:inline-flex">Login</a>
+      <a href="/contact" class="group hidden h-11 items-center gap-2 rounded-full bg-navy pl-5 pr-1.5 text-sm font-medium text-white transition-colors hover:bg-navy-deep sm:inline-flex">Talk to an advisor <span class="grid size-8 place-items-center rounded-full bg-orange transition-transform duration-300 group-hover:translate-x-0.5">↗</span></a>
+      <button id="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-nav" aria-label="Menu" class="group grid size-11 place-items-center rounded-full lg:hidden"><span class="relative block h-3 w-5"><span class="absolute inset-x-0 top-0 h-0.5 rounded-full bg-slate-900 transition-transform group-aria-expanded:translate-y-[0.3125rem] group-aria-expanded:rotate-45"></span><span class="absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-slate-900 transition-transform group-aria-expanded:-translate-y-[0.3125rem] group-aria-expanded:-rotate-45"></span></span></button>
+    </div>
+  </div>
+</header>
+
+<div id="mobile-nav" class="fixed inset-0 z-40 hidden overflow-y-auto bg-white pb-[env(safe-area-inset-bottom)] pt-[calc(5rem+env(safe-area-inset-top))] lg:hidden">
+  <nav aria-label="Mobile" class="flex min-h-full flex-col px-6">
+    <ul class="divide-y divide-slate-100 text-2xl font-semibold tracking-tight">
+      <li><a class="block py-4" href="/advisory">Advisory</a></li>
+      <li><a class="block py-4" href="/invest">Invest</a></li>
+      <li><a class="block py-4" href="/tax">Tax</a></li>
+      <li><a class="block py-4" href="/pricing">Pricing</a></li>
+      <li><a class="block py-4" href="/knowledge-base" aria-current="page">Knowledge Base</a></li>
+    </ul>
+    <div class="mt-auto space-y-3 pb-8 pt-10">
+      <a href="/contact" class="flex h-14 items-center justify-center rounded-full bg-navy text-base font-medium text-white">Talk to an advisor</a>
+      <a href="/login" class="flex h-14 items-center justify-center rounded-full text-base font-medium ring-1 ring-slate-200">Login</a>
+    </div>
+  </nav>
+</div>
+
+<main id="main">
+<!-- MASTHEAD -->
+<section class="relative isolate overflow-hidden bg-white">
+  <div class="absolute -right-40 -top-40 -z-10 size-[42rem] rounded-full bg-[radial-gradient(circle,rgba(221,115,0,0.12),transparent_65%)]" aria-hidden="true"></div>
+  <div class="mx-auto max-w-7xl px-5 pt-28 sm:px-8 lg:pt-36">
+    <nav aria-label="Breadcrumb"><ol class="flex items-center gap-2 text-sm text-slate-500"><li><a class="hover:text-navy" href="/">Home</a></li><li aria-hidden="true">/</li><li class="font-medium text-navy" aria-current="page">Blog</li></ol></nav>
+    <div class="mt-6 flex flex-col gap-10 border-b border-slate-200 pb-10 lg:flex-row lg:items-end lg:justify-between">
+      <div>
+        <h1 class="text-[4.5rem] font-semibold leading-[0.85] tracking-[-0.05em] text-navy-deep sm:text-[8rem] lg:text-[10rem]">Blog<span class="text-orange">.</span></h1>
+        <p id="stats" class="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500">
+          <span class="h-4 w-56 animate-pulse rounded bg-slate-100"></span>
+        </p>
+      </div>
+      <form id="search" role="search" class="w-full lg:max-w-md">
+        <label for="q" class="text-sm font-medium text-slate-600">Search the blog</label>
+        <div class="mt-3 flex items-center gap-3 border-b-2 border-navy-deep pb-3 focus-within:border-orange">
+          <svg viewBox="0 0 20 20" class="size-6 shrink-0 text-navy-deep" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="M14 14l4 4"/></svg>
+          <input id="q" type="search" autocomplete="off" placeholder="SIP, tax regime, term cover…" class="min-w-0 flex-1 bg-transparent text-xl text-navy-deep placeholder:text-slate-400 focus:outline-none">
+          <button class="grid size-11 shrink-0 place-items-center rounded-full bg-navy-deep text-white transition hover:bg-orange" aria-label="Search"><svg viewBox="0 0 16 16" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD STORY + LATEST -->
+<section id="top" class="bg-white">
+  <div class="mx-auto grid max-w-7xl gap-10 px-5 py-12 sm:px-8 lg:grid-cols-12 lg:gap-12 lg:py-16">
+    <div id="lead" class="lg:col-span-8">
+      <div class="aspect-[4/5] animate-pulse rounded-[2rem] bg-slate-100 sm:aspect-[16/10]"></div>
+    </div>
+    <div class="lg:col-span-4">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-4"><h2 class="text-sm font-bold uppercase tracking-[0.18em] text-navy-deep">Just in</h2><span class="flex items-center gap-2 text-xs text-slate-500"><span class="relative flex size-2"><span class="absolute inline-flex size-full animate-ping rounded-full bg-orange/70"></span><span class="relative inline-flex size-2 rounded-full bg-orange"></span></span>Updated live</span></div>
+      <ol id="latest" class="divide-y divide-slate-100">
+        <li class="h-28 animate-pulse py-5"><div class="h-full rounded-xl bg-slate-100"></div></li><li class="h-28 animate-pulse py-5"><div class="h-full rounded-xl bg-slate-100"></div></li><li class="h-28 animate-pulse py-5"><div class="h-full rounded-xl bg-slate-100"></div></li><li class="h-28 animate-pulse py-5"><div class="h-full rounded-xl bg-slate-100"></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- TOPIC RAIL -->
+<div id="rail-wrap" class="sticky top-16 z-30 border-y border-slate-200 bg-white/90 backdrop-blur-xl lg:top-20">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <div id="rail" role="group" aria-label="Filter by topic" class="-mx-5 flex gap-1 overflow-x-auto px-5 py-3 [scrollbar-width:none] sm:mx-0 sm:px-0"></div>
+  </div>
+</div>
+
+<!-- ARTICLES -->
+<section id="articles" class="scroll-mt-32 bg-white">
+  <div class="mx-auto max-w-7xl px-5 pb-24 pt-14 sm:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <h2 id="grid-title" class="text-3xl font-semibold tracking-tight text-navy-deep sm:text-5xl">All articles</h2>
+      <p id="grid-count" class="text-sm text-slate-500" aria-live="polite"></p>
+    </div>
+    <p id="grid-desc" class="mt-3 hidden max-w-2xl text-lg text-slate-600"></p>
+    <div id="grid" class="mt-12 grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3"></div>
+    <div id="empty" class="hidden rounded-[2rem] bg-mist px-6 py-16 text-center">
+      <p class="text-2xl font-semibold text-navy-deep">Nothing found</p>
+      <p class="mt-2 text-slate-600">Try a different word, or browse all articles.</p>
+      <button type="button" id="reset" class="mt-6 h-12 rounded-full bg-navy-deep px-6 text-sm font-medium text-white hover:bg-navy">Show all articles</button>
+    </div>
+    <div class="mt-16 flex flex-col items-center gap-4">
+      <div class="h-1 w-48 overflow-hidden rounded-full bg-slate-100"><svg viewBox="0 0 100 1" preserveAspectRatio="none" class="block h-full w-full" aria-hidden="true"><rect id="shown-bar" width="0" height="1" fill="#DD7300"/></svg></div>
+      <p id="shown" class="text-sm text-slate-500"></p>
+      <button type="button" id="more" class="group hidden h-14 items-center gap-3 rounded-full bg-navy-deep pl-7 pr-2 font-medium text-white transition hover:bg-navy">Load more articles<span class="grid size-10 place-items-center rounded-full bg-orange transition-transform group-hover:translate-y-0.5"><svg viewBox="0 0 16 16" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4"/></svg></span></button>
+    </div>
+  </div>
+</section>
+
+<!-- TOPIC SPOTLIGHT -->
+<section id="spotlight" class="hidden overflow-hidden bg-navy-deep text-white">
+  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+    <div class="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+      <div class="max-w-2xl">
+        <p class="text-sm font-bold uppercase tracking-[0.18em] text-[#F3B066]">Topic spotlight</p>
+        <h2 id="spot-title" class="mt-3 text-4xl font-semibold tracking-tight sm:text-6xl"></h2>
+        <p id="spot-desc" class="mt-4 text-lg text-slate-300"></p>
+      </div>
+      <div class="flex items-center gap-3">
+        <button type="button" data-scroll="-1" class="grid size-12 place-items-center rounded-full ring-1 ring-white/25 transition hover:bg-white/10" aria-label="Scroll left"><svg viewBox="0 0 16 16" class="size-4 rotate-180" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+        <button type="button" data-scroll="1" class="grid size-12 place-items-center rounded-full ring-1 ring-white/25 transition hover:bg-white/10" aria-label="Scroll right"><svg viewBox="0 0 16 16" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
+        <a id="spot-link" href="#" class="ml-2 inline-flex h-12 items-center gap-2 rounded-full bg-white px-6 text-sm font-medium text-navy-deep transition hover:bg-mist"></a>
+      </div>
+    </div>
+    <div id="spot-track" class="-mx-5 mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-5 pb-4 [scrollbar-width:none] sm:-mx-8 sm:px-8"></div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-navy-deep text-white">
+  <div class="mx-auto max-w-7xl px-5 pb-10 pt-14 sm:px-8">
+    <div class="grid gap-12 lg:grid-cols-12">
+      <div class="lg:col-span-4">
+<a href="index.html" class="inline-block" aria-label="Fintoo home"><img src="assets/fintoo-logo-white.svg" alt="Fintoo" class="h-10 w-auto"></a>
+        <p class="mt-5 max-w-xs text-sm leading-relaxed text-slate-300">Financial planning, wealth and tax advisory for Indian families, business owners and NRIs.</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#" class="inline-flex h-11 items-center gap-2 rounded-xl bg-white/10 px-4 text-sm ring-1 ring-white/10 transition hover:bg-white/15"><svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.9-3-.8-1.6 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.2.8 1.1 1.7 2.3 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.2.9-1.3 1.3-2.5 1.3-2.6 0 0-2.5-1-2.5-3.8zM14.1 5.8c.6-.8 1.1-1.8 1-2.8-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.7-1 2.7 1 .1 2-.5 2.7-1.3z"/></svg>App Store</a>
+          <a href="#" class="inline-flex h-11 items-center gap-2 rounded-xl bg-white/10 px-4 text-sm ring-1 ring-white/10 transition hover:bg-white/15"><svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true"><path d="M4 3.5v17l9.5-8.5L4 3.5zm10.9 7.2L6.6 2.4l10.6 6-2.3 2.3zm0 2.6l2.3 2.3-10.6 6 8.3-8.3zm3.6-3.5l2.4 1.4c.8.5.8 1.2 0 1.7l-2.4 1.4-2.6-2.3 2.6-2.2z"/></svg>Google Play</a>
+        </div>
+        <div class="mt-8 flex gap-2">
+          <a href="#" aria-label="Fintoo on LinkedIn" class="grid size-10 place-items-center rounded-full bg-white/10 transition hover:bg-white/20"><svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true"><path d="M5 9h3v10H5zM6.5 4a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5zM10 9h2.9v1.4c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.7 2 3.7 4.7V19h-3v-4.8c0-1.2 0-2.6-1.6-2.6s-1.9 1.2-1.9 2.5V19H10z"/></svg></a>
+          <a href="#" aria-label="Fintoo on Instagram" class="grid size-10 place-items-center rounded-full bg-white/10 transition hover:bg-white/20"><svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.5"/><circle cx="16.8" cy="7.2" r=".6" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Fintoo on X" class="grid size-10 place-items-center rounded-full bg-white/10 transition hover:bg-white/20"><svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true"><path d="M17.5 4h2.8l-6.1 7 7.2 9h-5.6l-4.4-5.6L6.3 20H3.5l6.5-7.5L3.1 4h5.7l4 5.2L17.5 4zm-1 14.4h1.5L7.6 5.5H6z"/></svg></a>
+          <a href="#" aria-label="Fintoo on YouTube" class="grid size-10 place-items-center rounded-full bg-white/10 transition hover:bg-white/20"><svg viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3L10 15z"/></svg></a>
+        </div>
+      </div>
+      <nav aria-label="Footer" class="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:col-span-8 lg:grid-cols-4">
+        <div><h2 class="text-sm font-semibold">Advisory</h2><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li><a class="hover:text-white" href="/financial-planning">Financial Planning</a></li><li><a class="hover:text-white" href="/investment-planning">Investment Planning</a></li><li><a class="hover:text-white" href="/retirement-planning">Retirement Planning</a></li><li><a class="hover:text-white" href="/risk-management">Risk Planning</a></li><li><a class="hover:text-white" href="/portfolio-management">Portfolio Management</a></li><li><a class="hover:text-white" href="/nri">NRI Planning</a></li><li><a class="hover:text-white" href="/estate-planning">Estate Planning</a></li></ul></div>
+        <div><h2 class="text-sm font-semibold">Invest</h2><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li><a class="hover:text-white" href="/mutual-funds">Mutual Funds</a></li><li><a class="hover:text-white" href="/bonds">Bonds</a></li><li><a class="hover:text-white" href="/stocks">Stocks</a></li><li><a class="hover:text-white" href="/ipo">IPO</a></li><li><a class="hover:text-white" href="/international-equity">International Equity</a></li><li><a class="hover:text-white" href="/pms">PMS</a></li></ul></div>
+        <div><h2 class="text-sm font-semibold">Tax</h2><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li><a class="hover:text-white" href="/tax-planning">Tax Planning</a></li><li><a class="hover:text-white" href="/itr-filing">ITR Filing</a></li><li><a class="hover:text-white" href="/nri-tax">NRI Taxation</a></li><li><a class="hover:text-white" href="/calculators/income-tax">Income Tax Calculator</a></li></ul></div>
+        <div><h2 class="text-sm font-semibold">Knowledge</h2><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li><a class="hover:text-white" href="/knowledge">Blog</a></li><li><a class="hover:text-white" href="/knowledge/guides">Guides</a></li><li><a class="hover:text-white" href="/calculators">Calculators</a></li><li><a class="hover:text-white" href="/fintoo-ai">Fintoo AI</a></li></ul></div>
+        <div><h2 class="text-sm font-semibold">About Fintoo</h2><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li><a class="hover:text-white" href="about.html">About us</a></li><li><a class="hover:text-white" href="/about/team">Our advisors</a></li><li><a class="hover:text-white" href="/careers">Careers</a></li><li><a class="hover:text-white" href="/press">Press</a></li></ul></div>
+        <div><h2 class="text-sm font-semibold">Resources</h2><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li><a class="hover:text-white" href="/pricing">Pricing</a></li><li><a class="hover:text-white" href="/faq">FAQs</a></li><li><a class="hover:text-white" href="/login">Client login</a></li></ul></div>
+        <div><h2 class="text-sm font-semibold">Legal</h2><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li><a class="hover:text-white" href="/privacy-policy">Privacy policy</a></li><li><a class="hover:text-white" href="/terms">Terms of use</a></li><li><a class="hover:text-white" href="/disclosures">Disclosures</a></li><li><a class="hover:text-white" href="/investor-charter">Investor charter</a></li><li><a class="hover:text-white" href="/grievance-redressal">Grievance redressal</a></li></ul></div>
+        <div><h2 class="text-sm font-semibold">Contact</h2><ul class="mt-4 space-y-2.5 text-sm text-slate-300"><li>[Support email]</li><li>[Phone number]</li><li>[Registered office address]</li></ul></div>
+      </nav>
+    </div>
+    <div class="mt-10 border-t border-white/10 pt-8">
+      <div class="grid gap-4 text-xs leading-relaxed text-slate-400 lg:grid-cols-2 lg:gap-10">
+        <p>Fintoo is registered with the Securities and Exchange Board of India as an investment adviser, registration no. INA000020031. [Legal entity name, registered address, BASL membership no. and principal officer details as required.]</p>
+        <p>Investments in the securities market are subject to market risks. Read all related documents carefully before investing. Registration granted by SEBI, membership of BASL and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors.</p>
+      </div>
+      <p class="mt-8 text-xs text-slate-400">&copy; 2026 Fintoo. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+<script>
+(() => {
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (tag, a, p, txt) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (txt !== undefined) e.textContent = txt; p.appendChild(e); return e; };
+
+  /* header */
+  const header = $('#site-header'), menuBtn = $('#menu-btn'), menu = $('#mobile-nav');
+  const onScroll = () => { header.dataset.scrolled = (scrollY > 16 || menuBtn.getAttribute('aria-expanded') === 'true') ? 'true' : 'false'; };
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  const setMenu = open => { menuBtn.setAttribute('aria-expanded', open); menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Menu'); menu.classList.toggle('hidden', !open); document.documentElement.classList.toggle('overflow-hidden', open); onScroll(); };
+  menuBtn.addEventListener('click', () => setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'));
+  menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+  addEventListener('keydown', e => { if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') { setMenu(false); menuBtn.focus(); } });
+
+  /* =====================================================================
+     DATA LAYER: WordPress REST API (wp-json/wp/v2)
+     ---------------------------------------------------------------------
+     Endpoints used (all with _embed so author, featured image and terms
+     arrive in one request):
+       GET /posts?_embed&per_page=&page=&search=&categories=&exclude=
+       GET /posts?_embed&sticky=true&per_page=1          (lead story)
+       GET /posts?_embed&slug=<slug>                      (article)
+       GET /posts?_embed&before=<date>&per_page=1         (previous post)
+       GET /posts?_embed&after=<date>&order=asc&per_page=1 (next post)
+       GET /categories?orderby=count&order=desc&hide_empty=true
+     Fields read:
+       post: id, slug, link, date, modified, sticky, title.rendered,
+             excerpt.rendered, content.rendered, categories
+       _embedded.author[0]: name, link, description, avatar_urls['96']
+       _embedded['wp:featuredmedia'][0]: source_url, alt_text, caption.rendered
+       _embedded['wp:term'][0] categories / [1] tags: id, name, slug, link
+       category: id, name, slug, count, description, link
+       headers: X-WP-Total, X-WP-TotalPages
+     If the API cannot be reached (for example in this preview), the page
+     falls back to MOCK data shaped exactly like the API response.
+     ===================================================================== */
+  const CONFIG = { api: 'https://www.fintoo.in/blog/wp-json/wp/v2', perPage: 9, useMock: false };
+
+  /* ---------- mock data (same shape as wp-json) ---------- */
+  const ART = {
+    funds: '<path d="M10 70l30-28 22 16 46-46"/><path d="M88 12h20v20"/><path d="M10 86h100" stroke-opacity=".45"/>',
+    tax: '<path d="M30 6h60v84l-12-8-9 8-9-8-9 8-9-8-12 8z"/><path d="M45 30h30M45 46h22"/>',
+    retire: '<circle cx="60" cy="38" r="16"/><path d="M8 90c14-20 32-30 52-30s38 10 52 30"/><path d="M60 10V4M34 20l-4-4M86 20l4-4"/>',
+    shield: '<path d="M60 4l40 15v27c0 25-17 40-40 48-23-8-40-23-40-48V19z"/><path d="M42 48l12 12 24-24"/>',
+    target: '<circle cx="60" cy="50" r="38"/><circle cx="60" cy="50" r="22"/><circle cx="60" cy="50" r="5"/><path d="M60 50l40-36M92 10h10v10"/>',
+    globe: '<circle cx="60" cy="50" r="40"/><path d="M20 50h80M60 10c13 12 19 26 19 40s-6 28-19 40c-13-12-19-26-19-40s6-28 19-40z"/>',
+    stocks: '<path d="M20 20v60M15 34h10v30H15zM50 12v70M45 24h10v40H45zM80 26v56M75 36h10v28H75zM108 10v60M103 22h10v24h-10z"/>',
+  };
+  const svgURI = s => 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s);
+  const mockCover = (a, b, ink, key) => svgURI(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient><pattern id="p" width="56" height="56" patternUnits="userSpaceOnUse"><path d="M56 0H0V56" fill="none" stroke="#fff" stroke-opacity=".07"/></pattern></defs><rect width="1600" height="1000" fill="url(#g)"/><rect width="1600" height="1000" fill="url(#p)"/><circle cx="1380" cy="120" r="460" fill="#fff" fill-opacity=".07"/><circle cx="160" cy="980" r="380" fill="#000" fill-opacity=".12"/><g transform="translate(860 230) scale(5.4)" fill="none" stroke="${ink}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">${ART[key]}</g></svg>`);
+  const avatar = (t, bg) => svgURI(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><rect width="96" height="96" fill="${bg}"/><text x="48" y="58" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#fff" text-anchor="middle">${t}</text></svg>`);
+
+  const AUTHORS = {
+    1: { id: 1, name: 'Fintoo Research Team', link: '/blog/author/research', description: 'Our analysts and SEBI-registered advisors write and review every guide so it stays accurate, current and easy to follow.', avatar_urls: { 96: avatar('FR', '#042B62') } },
+    2: { id: 2, name: 'Fintoo Tax Desk', link: '/blog/author/tax-desk', description: 'Chartered accountants and tax specialists who help Fintoo clients plan, file and respond to notices.', avatar_urls: { 96: avatar('TD', '#DD7300') } },
+  };
+  const CATS = [
+    { id: 11, name: 'Mutual Funds', slug: 'mutual-funds', count: 42, description: 'How funds work, how to choose them, and how to keep costs and taxes low.', c: ['#1E5BB8', '#021A3D', '#FFFFFF', 'funds'] },
+    { id: 12, name: 'Tax', slug: 'tax', count: 38, description: 'Regimes, deductions, capital gains and notices, explained without jargon.', c: ['#DD7300', '#9A5000', '#FFFFFF', 'tax'] },
+    { id: 13, name: 'Retirement', slug: 'retirement', count: 21, description: 'Sizing your corpus and turning savings into a lifelong income.', c: ['#0E7C66', '#064E3B', '#FFFFFF', 'retire'] },
+    { id: 14, name: 'Insurance', slug: 'insurance', count: 17, description: 'Term, health and everything in between.', c: ['#042B62', '#010D1F', '#7FA7E0', 'shield'] },
+    { id: 15, name: 'Financial Planning', slug: 'financial-planning', count: 29, description: 'Goals, budgets and the habits that hold a plan together.', c: ['#021A3D', '#1E5BB8', '#F3B066', 'target'] },
+    { id: 16, name: 'NRI', slug: 'nri', count: 14, description: 'Residency, accounts and tax for Indians abroad and returning home.', c: ['#0B5D8C', '#042B62', '#F3B066', 'globe'] },
+    { id: 17, name: 'Stocks', slug: 'stocks', count: 19, description: 'Direct equity, IPOs and building a sensible stock portfolio.', c: ['#5B3FA6', '#2E1F5E', '#FFFFFF', 'stocks'] },
+  ].map(c => ({ ...c, link: `/blog/category/${c.slug}`, taxonomy: 'category' }));
+  const catById = Object.fromEntries(CATS.map(c => [c.id, c]));
+
+  const LONG = `<p>If you invest in mutual funds, there is a good chance you have never looked closely at one word in your statement: <strong>Direct</strong> or <strong>Regular</strong>. It sits quietly after the fund's name, and it decides how much of your return you actually keep.</p>
+<p>This guide explains what the difference is, puts a number on it, and shows how to check and fix your own portfolio without creating an unnecessary tax bill.</p>
+<h2>What is the difference between direct and regular plans?</h2>
+<p>Every mutual fund scheme in India comes in two versions. <strong>Both invest in exactly the same stocks or bonds, run by the same fund manager.</strong> The only difference is how you buy them, and what that costs you every year.</p>
+<ul><li><strong>Regular plan:</strong> bought through a distributor, agent or bank. The fund pays the distributor a commission, which is built into the plan's expense ratio.</li><li><strong>Direct plan:</strong> bought directly from the fund house or a platform offering direct plans. No commission is built in, so the expense ratio is lower.</li></ul>
+<figure class="wp-block-table"><table><thead><tr><th></th><th>Direct</th><th>Regular</th></tr></thead><tbody><tr><td>Portfolio and manager</td><td>Same</td><td>Same</td></tr><tr><td>Distributor commission</td><td>None</td><td>Included every year</td></tr><tr><td>Expense ratio</td><td>Lower</td><td>Higher</td></tr></tbody></table></figure>
+<h2>How much does a 1% difference really cost?</h2>
+<p>A 1% gap sounds tiny. But it is charged on your whole investment, every year, and it compounds. Take a ₹25,000 monthly SIP for 20 years: at 12% a year it grows to about ₹2.50 crore; at 11% it grows to about ₹2.18 crore.</p>
+<blockquote class="wp-block-quote"><p>That 1% yearly gap costs roughly ₹31 lakh, more than half of the ₹60 lakh you invested.</p></blockquote>
+<p>The gap is small at five years and large at twenty. Costs hurt most in the later years, when your corpus is biggest and you can least afford to lose returns.</p>
+<figure class="wp-block-image"><img src="${mockCover('#021A3D', '#1E5BB8', '#F3B066', 'funds')}" alt="Illustration of a growing investment"/><figcaption>Illustrative only. Returns are not guaranteed.</figcaption></figure>
+<h2>Should you switch from regular to direct?</h2>
+<p>Usually yes, over time. But a switch is treated as <strong>selling one plan and buying another</strong>, so plan it:</p>
+<ol><li><strong>Start new money in direct plans.</strong> Stop fresh SIPs in regular plans and start them in the direct plan. This costs nothing.</li><li><strong>Check exit loads.</strong> Many equity funds charge about 1% if you redeem within a year.</li><li><strong>Mind capital gains tax.</strong> Spread switches across financial years to use the ₹1.25 lakh yearly exemption on long-term equity gains.</li></ol>
+<h2>How do you check which plan you own?</h2>
+<p>Download your Consolidated Account Statement from CAMS, KFintech, NSDL or CDSL. Each scheme name ends in <em>Direct Plan</em> or <em>Regular Plan</em>. For each regular plan, compare its expense ratio with the direct plan on the fund house's website.</p>
+<hr/>
+<p><em>This article is for education only and is not investment advice. Mutual fund investments are subject to market risks; read all scheme-related documents carefully.</em></p>`;
+
+  const filler = (ex, n) => `<p>${ex}</p>` + Array.from({ length: n }, (_, i) => `<h2>${['Why this matters', 'How it works in practice', 'What to do next', 'Common mistakes'][i % 4]}</h2><p>${ex} ${'Planning ahead, keeping costs low and reviewing regularly makes the biggest difference over time. '.repeat(6)}</p><p>${'A clear plan turns a vague worry into a simple next step you can act on this week. '.repeat(5)}</p>`).join('');
+
+  const RAW = [
+    [101, 'direct-vs-regular-mutual-funds', 'Direct vs regular mutual funds: what the 1% difference really costs you', 'Same fund, same manager, different bill. Here is how a small yearly cost compounds into lakhs over 20 years.', '2026-09-28T09:00:00', 11, [1, 3], 1, true],
+    [102, 'old-vs-new-tax-regime', 'Old or new tax regime: a simple way to decide this year', 'Add up your deductions, compare one number, and pick the regime that leaves more in your pocket.', '2026-09-25T09:00:00', 12, [2], 2],
+    [103, 'how-much-to-retire-india', 'How much money do you really need to retire in India?', 'A step-by-step way to size your retirement corpus, with inflation and longer lives built in.', '2026-09-22T09:00:00', 13, [4], 1],
+    [104, 'term-insurance-cover', 'How much term insurance cover is enough for your family?', 'Why "10 times your salary" is a starting point, not an answer, and what to add on top.', '2026-09-19T09:00:00', 14, [5], 1],
+    [105, 'emergency-fund', 'Your emergency fund: how much, and where to keep it', 'Six months of expenses is the rule of thumb. Here is when you need more, and where to park it.', '2026-09-16T09:00:00', 15, [6], 1],
+    [106, 'tax-loss-harvesting', 'Tax-loss harvesting: cut the tax on your gains, legally', 'How booking losses at the right time can reduce the tax on your capital gains each year.', '2026-09-13T09:00:00', 12, [2, 3], 2],
+    [107, 'nri-returning-india', 'Moving back to India? A money checklist for returning NRIs', 'Residency status, account conversions, foreign assets and tax: what to sort out, and when.', '2026-09-10T09:00:00', 16, [2, 7], 2],
+    [108, 'stock-concentration', 'Too many eggs in one stock? How to spot concentration risk', 'Simple limits on single stocks and sectors that protect a portfolio from one bad surprise.', '2026-09-07T09:00:00', 17, [8], 1],
+    [109, 'step-up-sip', 'Step-up SIP: the small habit that can transform your corpus', 'Raising your SIP a little every year keeps pace with your income, and changes the end result a lot.', '2026-09-04T09:00:00', 11, [1], 1],
+    [110, 'will-writing', 'Why every Indian family needs a will, even a simple one', 'Nominees are not heirs. Here is what a will does that a nomination cannot.', '2026-09-01T09:00:00', 15, [6], 1],
+    [111, 'index-funds-vs-active', 'Index funds or active funds? How to decide for your portfolio', 'When paying for a fund manager makes sense, and when a low-cost index fund does the job better.', '2026-08-28T09:00:00', 11, [1, 3], 1],
+    [112, 'health-insurance-parents', 'Health insurance for parents: what to look for before you buy', 'Waiting periods, co-pay and room rent limits: the fine print that decides your claim.', '2026-08-25T09:00:00', 14, [5], 1],
+    [113, 'capital-gains-property', 'Selling property? How capital gains tax works now', 'Holding periods, rates and the ways to reinvest to save tax on a property sale.', '2026-08-22T09:00:00', 12, [3], 2],
+    [114, 'nre-nro-accounts', 'NRE vs NRO accounts: which one should you use?', 'Repatriation, tax and joint holding rules compared, with the cases where you need both.', '2026-08-19T09:00:00', 16, [7], 2],
+  ];
+  const TAGS = { 1: 'SIP', 2: 'ITR', 3: 'Capital gains', 4: 'Corpus', 5: 'Term insurance', 6: 'Estate planning', 7: 'NRI', 8: 'Portfolio' };
+  const MOCK = RAW.map(([id, slug, title, ex, date, cat, tags, au, sticky], i) => {
+    const c = catById[cat];
+    return {
+      id, slug, date, modified: i === 0 ? '2026-09-30T10:00:00' : date, sticky: !!sticky, link: `/blog/${slug}`, categories: [cat], tags,
+      title: { rendered: title }, excerpt: { rendered: `<p>${ex} [&hellip;]</p>` }, content: { rendered: i === 0 ? LONG : filler(ex, 3 + (i % 3)) },
+      _embedded: {
+        author: [AUTHORS[au]],
+        'wp:featuredmedia': [{ source_url: mockCover(...c.c), alt_text: title, caption: { rendered: '' } }],
+        'wp:term': [[{ id: c.id, name: c.name, slug: c.slug, link: c.link, taxonomy: 'category' }], tags.map(t => ({ id: t, name: TAGS[t], slug: TAGS[t].toLowerCase().replace(/\s+/g, '-'), link: `/blog/tag/${TAGS[t].toLowerCase().replace(/\s+/g, '-')}`, taxonomy: 'post_tag' }))],
+      },
+    };
+  });
+
+  CATS.forEach(c => { c.count = MOCK.filter(p => p.categories.includes(c.id)).length; });
+
+  const mockApi = path => {
+    const [ep, qs = ''] = path.split('?'), q = new URLSearchParams(qs);
+    if (ep === '/categories') { const c = [...CATS].sort((a, b) => b.count - a.count); return { data: c.slice(0, +q.get('per_page') || 10), total: c.length, pages: 1 }; }
+    let p = [...MOCK];
+    if (q.get('slug')) p = p.filter(x => x.slug === q.get('slug'));
+    if (q.get('sticky') === 'true') p = p.filter(x => x.sticky);
+    if (q.get('categories')) p = p.filter(x => x.categories.includes(+q.get('categories')));
+    if (q.get('exclude')) { const ex = q.get('exclude').split(',').map(Number); p = p.filter(x => !ex.includes(x.id)); }
+    if (q.get('search')) { const s = q.get('search').toLowerCase(); p = p.filter(x => (x.title.rendered + x.excerpt.rendered).toLowerCase().includes(s)); }
+    if (q.get('before')) p = p.filter(x => x.date < q.get('before'));
+    if (q.get('after')) p = p.filter(x => x.date > q.get('after'));
+    p.sort((a, b) => q.get('order') === 'asc' ? a.date.localeCompare(b.date) : b.date.localeCompare(a.date));
+    const per = +q.get('per_page') || 10, page = +q.get('page') || 1;
+    return { data: p.slice((page - 1) * per, page * per), total: p.length, pages: Math.max(1, Math.ceil(p.length / per)) };
+  };
+
+  const get = async path => {
+    if (!CONFIG.useMock) {
+      const ctrl = new AbortController(), t = setTimeout(() => ctrl.abort(), 4000);
+      try {
+        const r = await fetch(CONFIG.api + path, { signal: ctrl.signal });
+        if (!r.ok) throw new Error(r.status);
+        return { data: await r.json(), total: +r.headers.get('X-WP-Total') || 0, pages: +r.headers.get('X-WP-TotalPages') || 1 };
+      } catch (e) { CONFIG.useMock = true; } finally { clearTimeout(t); }
+    }
+    await new Promise(r => setTimeout(r, 350));
+    return mockApi(path);
+  };
+
+  /* ---------- helpers ---------- */
+  const strip = h => { const d = document.createElement('template'); d.innerHTML = h || ''; return d.content.textContent.replace(/\[…\]|\[&hellip;\]/g, '').replace(/\s+/g, ' ').trim(); };
+  const media = p => p._embedded?.['wp:featuredmedia']?.[0];
+  const cat = p => p._embedded?.['wp:term']?.[0]?.[0];
+  const tagsOf = p => p._embedded?.['wp:term']?.[1] || [];
+  const auth = p => p._embedded?.author?.[0] || {};
+  const mins = p => Math.max(1, Math.round(strip(p.content?.rendered).split(' ').length / 200));
+  const fmt = d => new Date(d).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const img = (p, cls) => { const m = media(p); return m ? `<img src="${m.source_url}" alt="${esc(m.alt_text || strip(p.title.rendered))}" loading="lazy" class="${cls}">` : `<div class="${cls} bg-[linear-gradient(135deg,#042B62,#1E5BB8)]"></div>`; };
+  const CLOCK = '<svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M8 4.5V8l2.5 1.5"/></svg>';
+  const ARROW = '<svg viewBox="0 0 16 16" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>';
+  const UL = 'bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_0.0625rem] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 group-hover:bg-[length:100%_0.0625rem]';
+
+  /* ---------- shared card ---------- */
+  const card = (p, wide = false) => {
+    const c = cat(p), a = auth(p);
+    return `<article class="group ${wide ? 'md:col-span-2 lg:col-span-3' : ''}">
+      <a href="blog-article.html" class="${wide ? 'grid gap-6 md:grid-cols-2 md:items-center md:gap-10' : 'block'}">
+        <div class="relative overflow-hidden rounded-[1.75rem] bg-mist">
+          ${img(p, `${wide ? 'aspect-[16/10]' : 'aspect-[4/3]'} w-full object-cover transition duration-700 ease-out group-hover:scale-105`)}
+          ${c ? `<span class="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-navy shadow-sm">${esc(c.name)}</span>` : ''}
+          <span class="absolute bottom-4 right-4 inline-flex items-center gap-1 rounded-full bg-navy-deep/80 px-2.5 py-1 text-xs font-medium text-white backdrop-blur">${CLOCK}${mins(p)} min</span>
+        </div>
+        <div class="${wide ? '' : 'mt-5'}">
+          ${wide ? '<p class="text-xs font-bold uppercase tracking-[0.18em] text-orange-ink">Latest</p>' : ''}
+          <h3 class="${wide ? 'mt-3 text-3xl sm:text-4xl' : 'text-xl'} font-semibold leading-tight tracking-tight text-navy-deep [text-wrap:balance]"><span class="${UL}">${p.title.rendered}</span></h3>
+          <p class="mt-3 ${wide ? 'text-lg line-clamp-3' : 'line-clamp-2'} text-slate-600">${esc(strip(p.excerpt.rendered))}</p>
+          <div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-500">
+            ${a.avatar_urls ? `<img src="${a.avatar_urls[96]}" alt="" class="size-7 rounded-full">` : ''}<span class="font-medium text-slate-700">${esc(a.name || '')}</span><span aria-hidden="true">·</span><time datetime="${p.date}">${fmt(p.date)}</time>
+          </div>
+        </div>
+      </a>
+    </article>`;
+  };
+  const skelCard = () => `<div class="animate-pulse"><div class="aspect-[4/3] rounded-[1.75rem] bg-slate-100"></div><div class="mt-5 h-5 w-4/5 rounded bg-slate-100"></div><div class="mt-3 h-4 w-full rounded bg-slate-100"></div><div class="mt-2 h-4 w-2/3 rounded bg-slate-100"></div></div>`;
+
+  /* ================= BLOG HOME ================= */
+  const state = { page: 1, pages: 1, total: 0, shown: 0, cat: null, search: '', exclude: [], allTotal: 0, cats: [] };
+
+  const leadTpl = p => {
+    const c = cat(p), a = auth(p);
+    return `<a href="blog-article.html" class="group relative block overflow-hidden rounded-[2rem] bg-navy-deep text-white shadow-[0_2.5rem_5rem_-2rem_rgba(4,43,98,0.55)]">
+      ${img(p, 'aspect-[4/5] w-full object-cover transition duration-1000 ease-out group-hover:scale-105 sm:aspect-[16/10]')}
+      <div class="absolute inset-0 bg-[linear-gradient(to_top,rgba(2,26,61,0.96)_10%,rgba(2,26,61,0.55)_45%,transparent_75%)]"></div>
+      <div class="absolute inset-x-0 bottom-0 p-6 sm:p-10">
+        <div class="flex flex-wrap items-center gap-2 text-xs font-semibold">
+          ${p.sticky ? '<span class="rounded-full bg-orange px-3 py-1">Featured</span>' : ''}
+          ${c ? `<span class="rounded-full bg-white/15 px-3 py-1 backdrop-blur">${esc(c.name)}</span>` : ''}
+        </div>
+        <h2 class="mt-4 max-w-3xl text-[1.75rem] font-semibold leading-[1.1] tracking-tight [text-wrap:balance] sm:text-5xl"><span class="${UL}">${p.title.rendered}</span></h2>
+        <p class="mt-4 hidden max-w-2xl text-lg text-slate-200 sm:line-clamp-2">${esc(strip(p.excerpt.rendered))}</p>
+        <div class="mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-slate-300">
+          ${a.avatar_urls ? `<img src="${a.avatar_urls[96]}" alt="" class="size-9 rounded-full ring-2 ring-white/30">` : ''}
+          <span class="font-medium text-white">${esc(a.name || '')}</span><span aria-hidden="true">·</span><time datetime="${p.date}">${fmt(p.date)}</time><span aria-hidden="true">·</span><span class="inline-flex items-center gap-1">${CLOCK}${mins(p)} min read</span>
+          <span class="ml-auto hidden size-12 place-items-center rounded-full bg-white text-navy-deep transition-transform duration-500 group-hover:-rotate-45 sm:grid">${ARROW}</span>
+        </div>
+      </div>
+    </a>`;
+  };
+
+  const latestTpl = (p, i) => {
+    const c = cat(p);
+    return `<li><a href="blog-article.html" class="group grid grid-cols-[2.75rem_minmax(0,1fr)_4.5rem] items-center gap-4 py-5">
+      <span class="text-4xl font-semibold tabular-nums text-transparent [-webkit-text-stroke:0.0625rem_#9AA9C0] transition-colors group-hover:text-orange group-hover:[-webkit-text-stroke:0.0625rem_#DD7300]">${String(i + 1).padStart(2, '0')}</span>
+      <span class="min-w-0">
+        <span class="block text-xs font-semibold text-orange-ink">${esc(c?.name || '')}</span>
+        <span class="mt-1 block font-semibold leading-snug text-navy-deep [text-wrap:balance]"><span class="${UL}">${p.title.rendered}</span></span>
+        <span class="mt-1.5 flex items-center gap-1 text-xs text-slate-500">${CLOCK}${mins(p)} min · ${fmt(p.date)}</span>
+      </span>
+      <span class="overflow-hidden rounded-xl">${img(p, 'aspect-square w-full object-cover transition duration-700 group-hover:scale-110')}</span>
+    </a></li>`;
+  };
+
+  const chip = (id, name, count, on) => `<button type="button" data-cat="${id ?? ''}" aria-pressed="${on}" class="group inline-flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition aria-pressed:bg-navy-deep aria-pressed:text-white aria-[pressed=false]:text-slate-600 aria-[pressed=false]:hover:bg-slate-100">${esc(name)}<span class="rounded-full px-1.5 text-xs tabular-nums group-aria-pressed:bg-white/15 group-aria-pressed:text-white group-aria-[pressed=false]:bg-slate-100 group-aria-[pressed=false]:text-slate-500">${count}</span></button>`;
+
+  const spotTpl = p => `<a href="blog-article.html" class="group w-[78%] shrink-0 snap-start sm:w-[22rem]">
+      <div class="overflow-hidden rounded-[1.5rem]">${img(p, 'aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-105')}</div>
+      <h3 class="mt-5 text-xl font-semibold leading-tight [text-wrap:balance]"><span class="${UL}">${p.title.rendered}</span></h3>
+      <p class="mt-2 flex items-center gap-1 text-sm text-slate-400">${CLOCK}${mins(p)} min · ${fmt(p.date)}</p>
+    </a>`;
+
+  const grid = $('#grid');
+  const loadGrid = async (reset) => {
+    if (reset) { state.page = 1; state.shown = 0; grid.innerHTML = Array.from({ length: 6 }, skelCard).join(''); }
+    else grid.insertAdjacentHTML('beforeend', Array.from({ length: 3 }, () => `<div data-skel>${skelCard()}</div>`).join(''));
+    $('#more').classList.add('hidden'); $('#more').classList.remove('inline-flex');
+    const filtered = state.cat || state.search;
+    const qs = new URLSearchParams({ _embed: '', per_page: CONFIG.perPage, page: state.page });
+    if (state.cat) qs.set('categories', state.cat.id);
+    if (state.search) qs.set('search', state.search);
+    if (!filtered && state.exclude.length) qs.set('exclude', state.exclude.join(','));
+    const r = await get('/posts?' + qs.toString().replace('_embed=', '_embed'));
+    if (reset) grid.innerHTML = ''; else $$('[data-skel]').forEach(n => n.remove());
+    state.pages = r.pages; state.total = r.total; state.shown += r.data.length;
+    grid.insertAdjacentHTML('beforeend', r.data.map((p, i) => card(p, reset && !filtered && i === 0 && r.data.length > 3)).join(''));
+    $('#empty').classList.toggle('hidden', r.total > 0);
+    const total = filtered ? r.total : r.total + state.exclude.length, shown = filtered ? state.shown : state.shown + state.exclude.length;
+    $('#grid-count').textContent = `${total} article${total === 1 ? '' : 's'}`;
+    $('#shown').textContent = r.total ? `Showing ${shown} of ${total}` : '';
+    $('#shown-bar').setAttribute('width', total ? (shown / total * 100).toFixed(1) : 0);
+    const more = state.page < state.pages; $('#more').classList.toggle('hidden', !more); $('#more').classList.toggle('inline-flex', more);
+  };
+
+  const setFilter = (c, search = '') => {
+    state.cat = c; state.search = search;
+    $$('#rail [data-cat]').forEach(b => b.setAttribute('aria-pressed', (c ? String(c.id) : '') === b.dataset.cat && !search));
+    $('#grid-title').textContent = search ? `Results for “${search}”` : c ? c.name : 'All articles';
+    $('#grid-desc').textContent = c?.description || ''; $('#grid-desc').classList.toggle('hidden', !c?.description);
+    history.replaceState(null, '', c ? `#${c.slug}` : search ? `#search=${encodeURIComponent(search)}` : location.pathname + location.search);
+    loadGrid(true);
+  };
+
+  (async () => {
+    const [sticky, recent, cats] = await Promise.all([get('/posts?_embed&sticky=true&per_page=1'), get('/posts?_embed&per_page=5'), get('/categories?orderby=count&order=desc&hide_empty=true&per_page=8')]);
+    const lead = sticky.data[0] || recent.data[0];
+    const latest = recent.data.filter(p => p.id !== lead.id).slice(0, 4);
+    state.exclude = [lead.id, ...latest.map(p => p.id)];
+    state.allTotal = recent.total; state.cats = cats.data;
+    $('#lead').innerHTML = leadTpl(lead);
+    $('#latest').innerHTML = latest.map(latestTpl).join('');
+    $('#stats').innerHTML = `<span class="font-semibold text-navy-deep">${recent.total} articles</span><span aria-hidden="true" class="size-1 rounded-full bg-slate-300"></span><span>${cats.total} topics</span><span aria-hidden="true" class="size-1 rounded-full bg-slate-300"></span><span>Last updated ${fmt(recent.data[0].modified || recent.data[0].date)}</span>`;
+    $('#rail').innerHTML = chip(null, 'All', recent.total, true) + cats.data.map(c => chip(c.id, c.name, c.count, false)).join('');
+    $$('#rail [data-cat]').forEach(b => b.addEventListener('click', () => { setFilter(cats.data.find(c => String(c.id) === b.dataset.cat) || null); $('#articles').scrollIntoView({ behavior: 'smooth' }); }));
+
+    const fromHash = cats.data.find(c => '#' + c.slug === location.hash);
+    fromHash ? setFilter(fromHash) : loadGrid(true);
+
+    const top = cats.data[0];
+    if (top) {
+      const sp = await get(`/posts?_embed&per_page=6&categories=${top.id}`);
+      if (sp.data.length) {
+        $('#spot-title').textContent = top.name; $('#spot-desc').textContent = top.description || '';
+        $('#spot-link').innerHTML = `All ${top.count} articles ${ARROW}`; $('#spot-link').href = top.link;
+        $('#spot-track').innerHTML = sp.data.map(spotTpl).join('');
+        $('#spotlight').classList.remove('hidden');
+      }
+    }
+  })();
+
+  $('#more').addEventListener('click', () => { state.page++; loadGrid(false); });
+  $('#reset').addEventListener('click', () => { $('#q').value = ''; setFilter(null); });
+  $('#search').addEventListener('submit', e => { e.preventDefault(); const v = $('#q').value.trim(); setFilter(null, v); $('#articles').scrollIntoView({ behavior: 'smooth' }); });
+  let deb; $('#q').addEventListener('input', () => { clearTimeout(deb); deb = setTimeout(() => { const v = $('#q').value.trim(); if (v.length > 2 || !v) setFilter(null, v); }, 450); });
+  $$('[data-scroll]').forEach(b => b.addEventListener('click', () => { const t = $('#spot-track'); t.scrollBy({ left: +b.dataset.scroll * t.clientWidth * 0.8, behavior: 'smooth' }); }));
+})();
+</script>
+</body>
+</html>
