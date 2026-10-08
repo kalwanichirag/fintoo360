@@ -460,7 +460,7 @@ tailwind.config = {
     class="fixed inset-0 z-40 hidden overflow-y-auto bg-white pb-[env(safe-area-inset-bottom)] pt-[calc(5rem+env(safe-area-inset-top))] lg:hidden">
     <nav aria-label="Mobile" class="flex min-h-full flex-col px-6">
       <p class="pb-2 pt-4 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Planning services</p>
-      <ul class="divide-y divide-slate-100 text-xl font-semibold tracking-tight">
+      <ul class="divide-y divide-slate-100 text-lg font-semibold tracking-tight sm:text-xl">
         <li><a class="block py-3.5" href="financial-planning.html">Financial Planning</a></li>
         <li><a class="block py-3.5" href="retirement-planning.html">Retirement Planning</a></li>
         <li><a class="block py-3.5" href="investment-planning.html">Investment Planning</a></li>
@@ -469,7 +469,7 @@ tailwind.config = {
         <li><a class="block py-3.5" href="about.html">About Fintoo</a></li>
       </ul>
       <p class="pb-2 pt-7 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">Invest</p>
-      <ul class="divide-y divide-slate-100 text-xl font-semibold tracking-tight">
+      <ul class="divide-y divide-slate-100 text-lg font-semibold tracking-tight sm:text-xl">
         <li><a class="block py-3.5" href="mutual-funds.html">Mutual Funds</a></li>
         <li><a class="block py-3.5" href="fintoo-domestic-equity.html">Domestic Equity</a></li>
         <li><a class="block py-3.5" href="fintoo-international-equity.html">International Equity</a></li>
@@ -491,7 +491,7 @@ tailwind.config = {
   <div class="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(4,43,98,0.06)_0.0625rem,transparent_0.0625rem),linear-gradient(to_bottom,rgba(4,43,98,0.06)_0.0625rem,transparent_0.0625rem)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_at_65%_40%,black_25%,transparent_75%)]"></div>
   <div class="absolute inset-0 -z-20 bg-[radial-gradient(46rem_30rem_at_78%_45%,#FFFFFF,transparent_70%)]"></div>
 
-  <div class="mx-auto max-w-7xl px-5 pb-20 pt-28 sm:px-8 lg:pb-24 lg:pt-32">
+  <div class="mx-auto max-w-7xl px-5 pb-10 pt-24 sm:px-8 lg:pb-14 lg:pt-32">
     <nav aria-label="Breadcrumb">
       <ol class="flex flex-wrap items-center gap-2 text-sm text-slate-500">
         <li><a class="hover:text-navy" href="/">Home</a></li>
@@ -504,8 +504,8 @@ tailwind.config = {
 
     <div class="mt-8 grid items-center gap-14 lg:grid-cols-2 lg:gap-12">
       <div>
-        <h1 class="text-[2.5rem] font-semibold leading-[1.05] tracking-tight text-navy-deep sm:text-6xl xl:text-[4rem]">Financial planning for HNIs and families in India</h1>
-        <p class="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">One written plan for everything you own and everything you want: goals, investments, tax, insurance, debt, retirement and what you leave behind. Built by a SEBI-registered Fintoo advisor, and reviewed as your life and the rules change.</p>
+        <h1 class="text-[2.125rem] font-semibold leading-[1.08] tracking-tight text-navy-deep sm:text-5xl lg:text-6xl xl:text-[4rem]">Financial planning for HNIs and families in India</h1>
+        <p class="mt-5 max-w-xl text-base leading-relaxed sm:text-lg text-slate-600">One written plan for everything you own and everything you want: goals, investments, tax, insurance, debt, retirement and what you leave behind. Built by a SEBI-registered Fintoo advisor, and reviewed as your life and the rules change.</p>
 
         <div class="mt-8 max-w-xl rounded-2xl bg-white p-5 ring-1 ring-slate-200">
           <p class="text-sm font-semibold text-navy">In short</p>
@@ -595,10 +595,10 @@ tailwind.config = {
 
 <!-- WHAT -->
 <section id="what" class="scroll-mt-32">
-  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-16">
     <div class="max-w-3xl">
-      <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">What is financial planning, and what does it cover?</h2>
-      <p class="mt-5 text-lg leading-relaxed text-slate-700">Financial planning is a structured way of managing your money to reach your goals. It starts with where you stand today, puts a cost and a date on each goal, and sets out what to invest, insure, repay and restructure. <strong class="font-semibold text-slate-900">A complete plan covers eight areas</strong>, because a decision in one, such as selling property, changes the others.</p>
+      <h2 class="text-2xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">What is financial planning, and what does it cover?</h2>
+      <p class="mt-4 text-base leading-relaxed sm:text-lg text-slate-700">Financial planning is a structured way of managing your money to reach your goals. It starts with where you stand today, puts a cost and a date on each goal, and sets out what to invest, insure, repay and restructure. <strong class="font-semibold text-slate-900">A complete plan covers eight areas</strong>, because a decision in one, such as selling property, changes the others.</p>
     </div>
     <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <li class="rounded-2xl bg-mist p-6 ring-1 ring-slate-200/70"><p class="text-sm font-semibold tabular-nums text-orange-ink">01</p><h3 class="mt-3 font-semibold text-navy-deep">Goal-based planning</h3><p class="mt-2 text-sm leading-relaxed text-slate-600">A cost, a date and a funding plan for each goal, from education abroad to a second home.</p></li>
@@ -615,11 +615,11 @@ tailwind.config = {
 
 <!-- WHO -->
 <section id="who" class="scroll-mt-32 bg-mist">
-  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-16">
     <div class="grid gap-10 lg:grid-cols-12">
       <div class="lg:col-span-5">
-        <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Who needs a financial planner in India?</h2>
-        <p class="mt-5 text-lg leading-relaxed text-slate-700">Anyone with more than one goal and more than one kind of asset benefits from a plan. It matters most when your wealth is large, concentrated or complicated: a business, stock options, property, money abroad, or a big one-off event. Those are the situations where unco-ordinated decisions cost the most.</p>
+        <h2 class="text-2xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Who needs a financial planner in India?</h2>
+        <p class="mt-4 text-base leading-relaxed sm:text-lg text-slate-700">Anyone with more than one goal and more than one kind of asset benefits from a plan. It matters most when your wealth is large, concentrated or complicated: a business, stock options, property, money abroad, or a big one-off event. Those are the situations where unco-ordinated decisions cost the most.</p>
       </div>
       <ul class="grid gap-4 sm:grid-cols-2 lg:col-span-7">
         <li class="rounded-2xl bg-white p-6 ring-1 ring-slate-200"><h3 class="font-semibold text-navy-deep">Business owners</h3><p class="mt-2 text-sm leading-relaxed text-slate-600">Most of your wealth sits in one company. A plan builds wealth outside it and prepares for a sale or succession.</p></li>
@@ -635,15 +635,15 @@ tailwind.config = {
 
 <!-- LIFE STAGES -->
 <section id="stages" class="scroll-mt-32">
-  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-16">
     <div class="max-w-3xl">
-      <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">How does financial planning change at each stage of life?</h2>
-      <p class="mt-5 text-lg leading-relaxed text-slate-700">The priorities shift as you move from building wealth to protecting it and then living off it. <strong class="font-semibold text-slate-900">In your 30s the plan is about saving rate and protection; by your 60s it is about income, tax and succession.</strong> A good plan is rewritten for each stage rather than simply extended.</p>
+      <h2 class="text-2xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">How does financial planning change at each stage of life?</h2>
+      <p class="mt-4 text-base leading-relaxed sm:text-lg text-slate-700">The priorities shift as you move from building wealth to protecting it and then living off it. <strong class="font-semibold text-slate-900">In your 30s the plan is about saving rate and protection; by your 60s it is about income, tax and succession.</strong> A good plan is rewritten for each stage rather than simply extended.</p>
     </div>
     <ol class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       <li class="relative rounded-2xl bg-mist p-6 ring-1 ring-slate-200/70">
         <p class="text-sm font-semibold text-orange-ink">Late 20s to 30s</p>
-        <h3 class="mt-2 text-xl font-semibold tracking-tight text-navy-deep">Build the base</h3>
+        <h3 class="mt-2 text-lg font-semibold tracking-tight sm:text-xl text-navy-deep">Build the base</h3>
         <ul class="mt-4 space-y-2 text-sm leading-relaxed text-slate-600">
           <li class="flex gap-2"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-navy"></span>Term and health cover before the first home loan</li>
           <li class="flex gap-2"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-navy"></span>A saving rate, stepped up with every raise</li>
@@ -653,7 +653,7 @@ tailwind.config = {
       </li>
       <li class="relative rounded-2xl bg-mist p-6 ring-1 ring-slate-200/70">
         <p class="text-sm font-semibold text-orange-ink">40s</p>
-        <h3 class="mt-2 text-xl font-semibold tracking-tight text-navy-deep">Peak earning years</h3>
+        <h3 class="mt-2 text-lg font-semibold tracking-tight sm:text-xl text-navy-deep">Peak earning years</h3>
         <ul class="mt-4 space-y-2 text-sm leading-relaxed text-slate-600">
           <li class="flex gap-2"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-navy"></span>Children's education, often abroad, gets funded</li>
           <li class="flex gap-2"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-navy"></span>Surcharge and capital gains start to matter</li>
@@ -663,7 +663,7 @@ tailwind.config = {
       </li>
       <li class="relative rounded-2xl bg-mist p-6 ring-1 ring-slate-200/70">
         <p class="text-sm font-semibold text-orange-ink">50s</p>
-        <h3 class="mt-2 text-xl font-semibold tracking-tight text-navy-deep">Prepare for independence</h3>
+        <h3 class="mt-2 text-lg font-semibold tracking-tight sm:text-xl text-navy-deep">Prepare for independence</h3>
         <ul class="mt-4 space-y-2 text-sm leading-relaxed text-slate-600">
           <li class="flex gap-2"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-navy"></span>A retirement corpus target and a date</li>
           <li class="flex gap-2"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-navy"></span>Gradual shift from growth to stability</li>
@@ -673,7 +673,7 @@ tailwind.config = {
       </li>
       <li class="relative rounded-2xl bg-mist p-6 ring-1 ring-slate-200/70">
         <p class="text-sm font-semibold text-orange-ink">60s and beyond</p>
-        <h3 class="mt-2 text-xl font-semibold tracking-tight text-navy-deep">Live off your wealth</h3>
+        <h3 class="mt-2 text-lg font-semibold tracking-tight sm:text-xl text-navy-deep">Live off your wealth</h3>
         <ul class="mt-4 space-y-2 text-sm leading-relaxed text-slate-600">
           <li class="flex gap-2"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-navy"></span>A tax-efficient monthly income from the portfolio</li>
           <li class="flex gap-2"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-navy"></span>Health cover that continues for life</li>
@@ -687,29 +687,29 @@ tailwind.config = {
 
 <!-- PROCESS -->
 <section id="process" class="scroll-mt-32 bg-navy-deep text-white">
-  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-16">
     <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
-      <h2 class="text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:col-span-7">The financial planning process, step by step</h2>
-      <p class="text-lg leading-relaxed text-slate-300 lg:col-span-5">Financial planning is not a one-time document. It follows six steps, and the last one repeats every year and at every major life event, because markets, tax rules and your family keep changing.</p>
+      <h2 class="text-2xl font-semibold leading-tight tracking-tight sm:text-4xl lg:col-span-7">The financial planning process, step by step</h2>
+      <p class="text-base leading-relaxed sm:text-lg text-slate-300 lg:col-span-5">Financial planning is not a one-time document. It follows six steps, and the last one repeats every year and at every major life event, because markets, tax rules and your family keep changing.</p>
     </div>
     <ol class="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-      <li class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8"><p class="text-sm font-semibold tabular-nums text-[#F3B066]">01</p><h3 class="mt-3 text-xl font-semibold">Define your goals</h3><p class="mt-2 text-sm leading-relaxed text-slate-300">What you want, when, and what it costs in today's money: education, homes, retirement, giving, a business.</p></li>
-      <li class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8"><p class="text-sm font-semibold tabular-nums text-[#F3B066]">02</p><h3 class="mt-3 text-xl font-semibold">Map where you stand</h3><p class="mt-2 text-sm leading-relaxed text-slate-300">Income, expenses, every asset and loan, insurance and past tax returns, pulled into one net worth and cash-flow view.</p></li>
-      <li class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8"><p class="text-sm font-semibold tabular-nums text-[#F3B066]">03</p><h3 class="mt-3 text-xl font-semibold">Find the gaps</h3><p class="mt-2 text-sm leading-relaxed text-slate-300">Which goals are short, where risk is concentrated, where cover is missing, and which gap to close first.</p></li>
-      <li class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8"><p class="text-sm font-semibold tabular-nums text-[#F3B066]">04</p><h3 class="mt-3 text-xl font-semibold">Write the plan</h3><p class="mt-2 text-sm leading-relaxed text-slate-300">An asset allocation, a savings and investment schedule, insurance, debt and tax actions, and a legacy checklist.</p></li>
-      <li class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8"><p class="text-sm font-semibold tabular-nums text-[#F3B066]">05</p><h3 class="mt-3 text-xl font-semibold">Put it into action</h3><p class="mt-2 text-sm leading-relaxed text-slate-300">Investments in direct plans, policies, nominations and documents, carried out with you step by step.</p></li>
-      <li class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8"><p class="text-sm font-semibold tabular-nums text-[#F3B066]">06</p><h3 class="mt-3 text-xl font-semibold">Review and revise</h3><p class="mt-2 text-sm leading-relaxed text-slate-300">At least once a year, and whenever something big happens: a marriage, a child, a sale, a move abroad.</p></li>
+      <li class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8"><p class="text-sm font-semibold tabular-nums text-[#F3B066]">01</p><h3 class="mt-3 text-lg font-semibold sm:text-xl">Define your goals</h3><p class="mt-2 text-sm leading-relaxed text-slate-300">What you want, when, and what it costs in today's money: education, homes, retirement, giving, a business.</p></li>
+      <li class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8"><p class="text-sm font-semibold tabular-nums text-[#F3B066]">02</p><h3 class="mt-3 text-lg font-semibold sm:text-xl">Map where you stand</h3><p class="mt-2 text-sm leading-relaxed text-slate-300">Income, expenses, every asset and loan, insurance and past tax returns, pulled into one net worth and cash-flow view.</p></li>
+      <li class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8"><p class="text-sm font-semibold tabular-nums text-[#F3B066]">03</p><h3 class="mt-3 text-lg font-semibold sm:text-xl">Find the gaps</h3><p class="mt-2 text-sm leading-relaxed text-slate-300">Which goals are short, where risk is concentrated, where cover is missing, and which gap to close first.</p></li>
+      <li class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8"><p class="text-sm font-semibold tabular-nums text-[#F3B066]">04</p><h3 class="mt-3 text-lg font-semibold sm:text-xl">Write the plan</h3><p class="mt-2 text-sm leading-relaxed text-slate-300">An asset allocation, a savings and investment schedule, insurance, debt and tax actions, and a legacy checklist.</p></li>
+      <li class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8"><p class="text-sm font-semibold tabular-nums text-[#F3B066]">05</p><h3 class="mt-3 text-lg font-semibold sm:text-xl">Put it into action</h3><p class="mt-2 text-sm leading-relaxed text-slate-300">Investments in direct plans, policies, nominations and documents, carried out with you step by step.</p></li>
+      <li class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8"><p class="text-sm font-semibold tabular-nums text-[#F3B066]">06</p><h3 class="mt-3 text-lg font-semibold sm:text-xl">Review and revise</h3><p class="mt-2 text-sm leading-relaxed text-slate-300">At least once a year, and whenever something big happens: a marriage, a child, a sale, a move abroad.</p></li>
     </ol>
   </div>
 </section>
 
 <!-- WHAT YOU RECEIVE -->
 <section id="contents" class="scroll-mt-32 bg-mist">
-  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-16">
     <div class="grid items-start gap-12 lg:grid-cols-12">
       <div class="lg:col-span-5">
-        <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">What is included in a financial plan?</h2>
-        <p class="mt-5 text-lg leading-relaxed text-slate-700">A written financial plan should let anyone in your family see where you stand, what each goal needs and what to do next. <strong class="font-semibold text-slate-900">A complete plan has ten parts</strong>, from a net worth statement to a dated action list, and ends with the date of its next review.</p>
+        <h2 class="text-2xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">What is included in a financial plan?</h2>
+        <p class="mt-4 text-base leading-relaxed sm:text-lg text-slate-700">A written financial plan should let anyone in your family see where you stand, what each goal needs and what to do next. <strong class="font-semibold text-slate-900">A complete plan has ten parts</strong>, from a net worth statement to a dated action list, and ends with the date of its next review.</p>
         <p class="mt-5 leading-relaxed text-slate-600">At the heart of it is an <strong class="font-semibold text-slate-900">investment policy statement</strong>: a short document that records your goals, risk profile, target allocation and rules for rebalancing. It keeps decisions consistent when markets are noisy.</p>
       </div>
       <div class="rounded-[1.5rem] bg-white p-6 shadow-[0_2rem_4rem_-2rem_rgba(4,43,98,0.3)] ring-1 ring-slate-200 sm:p-8 lg:col-span-7">
@@ -736,10 +736,10 @@ tailwind.config = {
 
 <!-- GOAL PLANNER -->
 <section id="goals" class="scroll-mt-32">
-  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-16">
     <div class="max-w-3xl">
-      <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">How much do you need to invest for your goals?</h2>
-      <p class="mt-5 text-lg leading-relaxed text-slate-700">Take each goal's cost in today's money, grow it by inflation to the year you need it, then subtract what your existing savings will grow to. <strong class="font-semibold text-slate-900">The gap is what you still have to invest</strong>, as a monthly SIP or a lump sum today. Try your own goals below.</p>
+      <h2 class="text-2xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">How much do you need to invest for your goals?</h2>
+      <p class="mt-4 text-base leading-relaxed sm:text-lg text-slate-700">Take each goal's cost in today's money, grow it by inflation to the year you need it, then subtract what your existing savings will grow to. <strong class="font-semibold text-slate-900">The gap is what you still have to invest</strong>, as a monthly SIP or a lump sum today. Try your own goals below.</p>
     </div>
 
     <form id="goal-form" class="mt-10 grid gap-6 lg:grid-cols-12" novalidate>
@@ -799,11 +799,11 @@ tailwind.config = {
 
 <!-- EXAMPLE -->
 <section id="example" class="scroll-mt-32 bg-mist">
-  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-16">
     <div class="max-w-3xl">
       <p class="text-sm font-semibold text-orange-ink">Illustrative example</p>
-      <h2 class="mt-2 text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">What does a financial plan change for an HNI family?</h2>
-      <p class="mt-5 text-lg leading-relaxed text-slate-700">Take a Mumbai business owner, 46, with a spouse and two children and about ₹15 crore of wealth. Most families at this level are not short of money; <strong class="font-semibold text-slate-900">they are short of structure</strong>. Here is the kind of before and after a plan typically produces. The family is hypothetical and no outcome is assured.</p>
+      <h2 class="mt-2 text-2xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">What does a financial plan change for an HNI family?</h2>
+      <p class="mt-4 text-base leading-relaxed sm:text-lg text-slate-700">Take a Mumbai business owner, 46, with a spouse and two children and about ₹15 crore of wealth. Most families at this level are not short of money; <strong class="font-semibold text-slate-900">they are short of structure</strong>. Here is the kind of before and after a plan typically produces. The family is hypothetical and no outcome is assured.</p>
     </div>
     <div class="mt-10 overflow-x-auto rounded-2xl bg-white ring-1 ring-slate-200">
       <table class="w-full md:min-w-[42rem] max-md:block max-md:min-w-0 max-md:[&_thead]:hidden max-md:[&_tbody]:block max-md:[&_tr]:block max-md:[&_tr]:px-5 max-md:[&_tr]:py-4 max-md:[&_th]:block max-md:[&_th]:p-0 max-md:[&_td]:block max-md:[&_td]:px-0 max-md:[&_td]:py-1.5 max-md:[&_td]:before:block max-md:[&_td]:before:text-xs max-md:[&_td]:before:font-medium max-md:[&_td]:before:text-slate-500 max-md:[&_td]:before:content-[attr(data-label)] text-left text-sm">
@@ -826,10 +826,10 @@ tailwind.config = {
 
 <!-- HEALTH CHECK -->
 <section id="checks" class="scroll-mt-32">
-  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-16">
     <div class="max-w-3xl">
-      <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Is your financial plan healthy? Eight checks</h2>
-      <p class="mt-5 text-lg leading-relaxed text-slate-700">A quick way to test any plan is against a few widely used rules of thumb. <strong class="font-semibold text-slate-900">If you fail two or more, the plan needs work</strong>. They are starting points rather than rules: your own plan sets numbers that fit your income, family and goals.</p>
+      <h2 class="text-2xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Is your financial plan healthy? Eight checks</h2>
+      <p class="mt-4 text-base leading-relaxed sm:text-lg text-slate-700">A quick way to test any plan is against a few widely used rules of thumb. <strong class="font-semibold text-slate-900">If you fail two or more, the plan needs work</strong>. They are starting points rather than rules: your own plan sets numbers that fit your income, family and goals.</p>
     </div>
     <div class="mt-10 overflow-x-auto rounded-2xl bg-white ring-1 ring-slate-200">
       <table class="w-full md:min-w-[40rem] max-md:block max-md:min-w-0 max-md:[&_thead]:hidden max-md:[&_tbody]:block max-md:[&_tr]:block max-md:[&_tr]:px-5 max-md:[&_tr]:py-4 max-md:[&_th]:block max-md:[&_th]:p-0 max-md:[&_td]:block max-md:[&_td]:px-0 max-md:[&_td]:py-1.5 max-md:[&_td]:before:block max-md:[&_td]:before:text-xs max-md:[&_td]:before:font-medium max-md:[&_td]:before:text-slate-500 max-md:[&_td]:before:content-[attr(data-label)] text-left text-sm">
@@ -852,10 +852,10 @@ tailwind.config = {
 
 <!-- INSTRUMENTS -->
 <section id="instruments" class="scroll-mt-32 bg-mist">
-  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-16">
     <div class="max-w-3xl">
-      <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Which investments go into an HNI financial plan?</h2>
-      <p class="mt-5 text-lg leading-relaxed text-slate-700">The plan decides the asset mix first and the products second. For most HNI families, <strong class="font-semibold text-slate-900">low-cost mutual funds form the core</strong>, with bonds, gold, REITs, global investments and, for larger portfolios, SIFs, PMS and AIFs as satellites. Each is chosen for its role, liquidity and tax treatment, not for the commission it pays.</p>
+      <h2 class="text-2xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Which investments go into an HNI financial plan?</h2>
+      <p class="mt-4 text-base leading-relaxed sm:text-lg text-slate-700">The plan decides the asset mix first and the products second. For most HNI families, <strong class="font-semibold text-slate-900">low-cost mutual funds form the core</strong>, with bonds, gold, REITs, global investments and, for larger portfolios, SIFs, PMS and AIFs as satellites. Each is chosen for its role, liquidity and tax treatment, not for the commission it pays.</p>
     </div>
     <div class="mt-10 overflow-x-auto rounded-2xl bg-white ring-1 ring-slate-200">
       <table class="w-full md:min-w-[52rem] max-md:block max-md:min-w-0 max-md:[&_thead]:hidden max-md:[&_tbody]:block max-md:[&_tr]:block max-md:[&_tr]:px-5 max-md:[&_tr]:py-4 max-md:[&_th]:block max-md:[&_th]:p-0 max-md:[&_td]:block max-md:[&_td]:px-0 max-md:[&_td]:py-1.5 max-md:[&_td]:before:block max-md:[&_td]:before:text-xs max-md:[&_td]:before:font-medium max-md:[&_td]:before:text-slate-500 max-md:[&_td]:before:content-[attr(data-label)] text-left text-sm">
@@ -881,11 +881,11 @@ tailwind.config = {
 
 <!-- BUSINESS OWNERS -->
 <section id="business" class="scroll-mt-32">
-  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-16">
     <div class="grid gap-10 lg:grid-cols-12">
       <div class="lg:col-span-5">
-        <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Financial planning for business owners and promoters</h2>
-        <p class="mt-5 text-lg leading-relaxed text-slate-700">For most business owners, the business is both the largest asset and the largest risk. <strong class="font-semibold text-slate-900">The plan's first job is to build wealth that does not depend on the company</strong>, so that a bad year, a partner dispute or a failed succession does not decide your family's future.</p>
+        <h2 class="text-2xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Financial planning for business owners and promoters</h2>
+        <p class="mt-4 text-base leading-relaxed sm:text-lg text-slate-700">For most business owners, the business is both the largest asset and the largest risk. <strong class="font-semibold text-slate-900">The plan's first job is to build wealth that does not depend on the company</strong>, so that a bad year, a partner dispute or a failed succession does not decide your family's future.</p>
       </div>
       <ul class="grid gap-4 sm:grid-cols-2 lg:col-span-7">
         <li class="rounded-2xl bg-mist p-6 ring-1 ring-slate-200/70"><h3 class="font-semibold text-navy-deep">Separate business and family money</h3><p class="mt-2 text-sm leading-relaxed text-slate-600">A regular, tax-efficient draw from the business, whether salary, dividend or profit share, invested outside it every year.</p></li>
@@ -901,11 +901,11 @@ tailwind.config = {
 
 <!-- NRI -->
 <section id="nri" class="scroll-mt-32 bg-mist">
-  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-16">
     <div class="grid gap-10 lg:grid-cols-12">
       <div class="lg:col-span-5">
-        <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Financial planning for NRIs and returning Indians</h2>
-        <p class="mt-5 text-lg leading-relaxed text-slate-700">NRIs plan across two countries, two currencies and two tax systems. <strong class="font-semibold text-slate-900">Your residential status decides what India taxes</strong>, and it depends on days spent in India and how much you earn here. The plan also has to respect FEMA rules on accounts, investments and moving money out.</p>
+        <h2 class="text-2xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Financial planning for NRIs and returning Indians</h2>
+        <p class="mt-4 text-base leading-relaxed sm:text-lg text-slate-700">NRIs plan across two countries, two currencies and two tax systems. <strong class="font-semibold text-slate-900">Your residential status decides what India taxes</strong>, and it depends on days spent in India and how much you earn here. The plan also has to respect FEMA rules on accounts, investments and moving money out.</p>
       </div>
       <div class="space-y-3 lg:col-span-7">
         <div class="rounded-2xl bg-white p-5 ring-1 ring-slate-200"><h3 class="font-semibold text-navy-deep">Residential status</h3><p class="mt-1 text-sm leading-relaxed text-slate-600">You are resident if you spend 182 days or more in India in a tax year, or 60 days plus 365 days over the previous four years. For Indian citizens visiting India, the 60 days becomes 120 if your Indian income exceeds ₹15 lakh. An Indian citizen with Indian income above ₹15 lakh who is not taxed anywhere else can be treated as resident.</p></div>
@@ -919,10 +919,10 @@ tailwind.config = {
 
 <!-- SUCCESSION -->
 <section id="legacy" class="scroll-mt-32">
-  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-16">
     <div class="max-w-3xl">
-      <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Estate and succession planning: will, nominees and trusts</h2>
-      <p class="mt-5 text-lg leading-relaxed text-slate-700">India has no inheritance tax, so succession planning is about making sure the right people receive your wealth quickly and without dispute. <strong class="font-semibold text-slate-900">A nominee is usually a custodian for your legal heirs, not the final owner</strong>, so a clear will matters even when every account has a nominee.</p>
+      <h2 class="text-2xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Estate and succession planning: will, nominees and trusts</h2>
+      <p class="mt-4 text-base leading-relaxed sm:text-lg text-slate-700">India has no inheritance tax, so succession planning is about making sure the right people receive your wealth quickly and without dispute. <strong class="font-semibold text-slate-900">A nominee is usually a custodian for your legal heirs, not the final owner</strong>, so a clear will matters even when every account has a nominee.</p>
     </div>
     <div class="mt-10 overflow-x-auto rounded-2xl ring-1 ring-slate-200">
       <table class="w-full md:min-w-[44rem] max-md:block max-md:min-w-0 max-md:[&_thead]:hidden max-md:[&_tbody]:block max-md:[&_tr]:block max-md:[&_tr]:px-5 max-md:[&_tr]:py-4 max-md:[&_th]:block max-md:[&_th]:p-0 max-md:[&_td]:block max-md:[&_td]:px-0 max-md:[&_td]:py-1.5 max-md:[&_td]:before:block max-md:[&_td]:before:text-xs max-md:[&_td]:before:font-medium max-md:[&_td]:before:text-slate-500 max-md:[&_td]:before:content-[attr(data-label)] text-left text-sm">
@@ -943,10 +943,10 @@ tailwind.config = {
 
 <!-- MISTAKES -->
 <section id="mistakes" class="scroll-mt-32 bg-navy-deep text-white">
-  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-16">
     <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
-      <h2 class="text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:col-span-7">Common financial planning mistakes HNIs make</h2>
-      <p class="text-lg leading-relaxed text-slate-300 lg:col-span-5">High earners rarely go wrong by saving too little. They go wrong by collecting products instead of following a plan, and by leaving tax, insurance and succession to chance.</p>
+      <h2 class="text-2xl font-semibold leading-tight tracking-tight sm:text-4xl lg:col-span-7">Common financial planning mistakes HNIs make</h2>
+      <p class="text-base leading-relaxed sm:text-lg text-slate-300 lg:col-span-5">High earners rarely go wrong by saving too little. They go wrong by collecting products instead of following a plan, and by leaving tax, insurance and succession to chance.</p>
     </div>
     <ol class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <li class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10"><p class="text-sm font-semibold tabular-nums text-[#F3B066]">01</p><h3 class="mt-3 font-semibold">Too many products</h3><p class="mt-2 text-sm leading-relaxed text-slate-300">Dozens of funds and policies bought from different sellers, overlapping each other.</p></li>
@@ -963,11 +963,11 @@ tailwind.config = {
 
 <!-- FEES -->
 <section id="fees" class="scroll-mt-32">
-  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-16">
     <div class="grid grid-cols-1 gap-10 lg:grid-cols-12">
       <div class="lg:col-span-5">
-        <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">How much does a financial planner cost in India?</h2>
-        <p class="mt-5 text-lg leading-relaxed text-slate-700">SEBI-registered investment advisers charge a fee you can see. For individual and HUF clients, SEBI caps it at the higher of <strong class="font-semibold text-slate-900">₹1.51 lakh per family a year or 2.5% of the assets advised on</strong>, with up to one year payable in advance. Accredited investors can agree fees freely. Distributors are paid commission instead, built into regular plans.</p>
+        <h2 class="text-2xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">How much does a financial planner cost in India?</h2>
+        <p class="mt-4 text-base leading-relaxed sm:text-lg text-slate-700">SEBI-registered investment advisers charge a fee you can see. For individual and HUF clients, SEBI caps it at the higher of <strong class="font-semibold text-slate-900">₹1.51 lakh per family a year or 2.5% of the assets advised on</strong>, with up to one year payable in advance. Accredited investors can agree fees freely. Distributors are paid commission instead, built into regular plans.</p>
         <div class="mt-8 rounded-2xl bg-mist p-6 ring-1 ring-slate-200">
           <p class="font-semibold text-navy-deep">Fintoo's approach</p>
           <p class="mt-2 text-sm leading-relaxed text-slate-600">Your first consultation is free. We charge for the plan, not the chat, and quote the fee before you commit. We earn no commission, so recommendations are in direct plans.</p>
@@ -996,11 +996,11 @@ tailwind.config = {
 
 <!-- CHANGES -->
 <section id="changes" class="scroll-mt-32 bg-mist">
-  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-16">
     <div class="grid gap-12 lg:grid-cols-12">
       <div class="lg:col-span-5">
-        <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">What changed in 2025 and 2026 that affects your plan?</h2>
-        <p class="mt-5 text-lg leading-relaxed text-slate-700">Several rule changes over the last two years affect how HNI families invest, pay tax and pass on wealth. A plan written before them is likely out of date, especially on nominations, tax and the investment products it uses.</p>
+        <h2 class="text-2xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">What changed in 2025 and 2026 that affects your plan?</h2>
+        <p class="mt-4 text-base leading-relaxed sm:text-lg text-slate-700">Several rule changes over the last two years affect how HNI families invest, pay tax and pass on wealth. A plan written before them is likely out of date, especially on nominations, tax and the investment products it uses.</p>
       </div>
       <ul class="space-y-3 lg:col-span-7">
         <li class="rounded-2xl bg-white p-5 ring-1 ring-slate-200"><h3 class="font-semibold text-navy-deep">Up to 10 nominees on demat and mutual funds</h3><p class="mt-1 text-sm leading-relaxed text-slate-600">SEBI's revised nomination rules, in force from 1 March 2025, allow up to 10 nominees per demat account or mutual fund folio, with shares you choose.</p></li>
@@ -1015,15 +1015,15 @@ tailwind.config = {
 
 <!-- WHY FINTOO -->
 <section id="fintoo" class="scroll-mt-32 bg-navy-deep text-white">
-  <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:py-16">
     <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
-      <h2 class="text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:col-span-7">Why plan with Fintoo?</h2>
-      <p class="text-lg leading-relaxed text-slate-300 lg:col-span-5">Technology to see your whole financial picture in one place; experienced advisors to make the judgement calls. Every recommendation is in writing, and every fee is disclosed.</p>
+      <h2 class="text-2xl font-semibold leading-tight tracking-tight sm:text-4xl lg:col-span-7">Why plan with Fintoo?</h2>
+      <p class="text-base leading-relaxed sm:text-lg text-slate-300 lg:col-span-5">Technology to see your whole financial picture in one place; experienced advisors to make the judgement calls. Every recommendation is in writing, and every fee is disclosed.</p>
     </div>
     <div class="mt-12 grid gap-4 md:grid-cols-3">
-      <article class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8"><h3 class="text-xl font-semibold">AI that does the groundwork</h3><p class="mt-3 text-sm leading-relaxed text-slate-300">Your accounts, portfolios and goals analysed together, so your advisor starts from the full picture and spots overlaps, gaps and risks quickly.</p></article>
-      <article class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8"><h3 class="text-xl font-semibold">Advisors who make the calls</h3><p class="mt-3 text-sm leading-relaxed text-slate-300">A SEBI-registered advisor turns the analysis into a plan for your family, explains it, and stays with you as it is carried out.</p></article>
-      <article class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8"><h3 class="text-xl font-semibold">Every area in one plan</h3><p class="mt-3 text-sm leading-relaxed text-slate-300">Goals, investments, tax, insurance, debt, retirement and legacy, with in-house tax experts, so no decision is made in isolation.</p></article>
+      <article class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8"><h3 class="text-lg font-semibold sm:text-xl">AI that does the groundwork</h3><p class="mt-3 text-sm leading-relaxed text-slate-300">Your accounts, portfolios and goals analysed together, so your advisor starts from the full picture and spots overlaps, gaps and risks quickly.</p></article>
+      <article class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8"><h3 class="text-lg font-semibold sm:text-xl">Advisors who make the calls</h3><p class="mt-3 text-sm leading-relaxed text-slate-300">A SEBI-registered advisor turns the analysis into a plan for your family, explains it, and stays with you as it is carried out.</p></article>
+      <article class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 sm:p-8"><h3 class="text-lg font-semibold sm:text-xl">Every area in one plan</h3><p class="mt-3 text-sm leading-relaxed text-slate-300">Goals, investments, tax, insurance, debt, retirement and legacy, with in-house tax experts, so no decision is made in isolation.</p></article>
     </div>
     <figure class="mt-6 flex flex-col gap-5 rounded-2xl bg-white p-6 text-slate-900 sm:flex-row sm:items-center sm:p-8">
       <span class="grid size-14 shrink-0 place-items-center rounded-full bg-navy text-lg font-semibold text-white" aria-hidden="true">MS</span>
@@ -1039,10 +1039,10 @@ tailwind.config = {
 
 <!-- CONSULT -->
 <section id="consult" class="scroll-mt-32 bg-mist">
-  <div class="mx-auto grid max-w-7xl gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:py-28">
+  <div class="mx-auto grid max-w-7xl gap-10 px-5 py-10 sm:px-8 lg:grid-cols-2 lg:gap-12 lg:py-16">
     <div>
-      <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Book a free consultation</h2>
-      <p class="mt-5 max-w-lg text-lg leading-relaxed text-slate-700">Share a few details and a SEBI-registered Fintoo advisor will call you to understand your goals and explain how we would build your plan. We only charge for the plan, not the chat.</p>
+      <h2 class="text-2xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Book a free consultation</h2>
+      <p class="mt-4 max-w-lg text-base leading-relaxed text-slate-700 sm:text-lg">Share a few details and a SEBI-registered Fintoo advisor will call you to understand your goals and explain how we would build your plan. We only charge for the plan, not the chat.</p>
       <ul class="mt-8 space-y-3 text-slate-700">
         <li class="flex gap-3"><svg viewBox="0 0 16 16" class="mt-1 size-4 shrink-0 text-navy" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>A review of where you stand today</li>
         <li class="flex gap-3"><svg viewBox="0 0 16 16" class="mt-1 size-4 shrink-0 text-navy" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3 3 7-7"/></svg>The gaps most worth closing first</li>
@@ -1073,9 +1073,9 @@ tailwind.config = {
 </section>
 <!-- FAQ -->
 <section id="faq" class="scroll-mt-32">
-  <div class="mx-auto grid max-w-7xl gap-10 px-5 py-20 sm:px-8 lg:grid-cols-12 lg:py-28">
+  <div class="mx-auto grid max-w-7xl gap-8 px-5 py-10 sm:px-8 lg:grid-cols-12 lg:gap-10 lg:py-16">
     <div class="lg:col-span-4">
-      <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Financial planning FAQs</h2>
+      <h2 class="text-2xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Financial planning FAQs</h2>
       <p class="mt-4 text-slate-600">Straight answers to the questions families ask us before they start a plan.</p>
     </div>
     <div class="space-y-3 lg:col-span-8">
@@ -1157,8 +1157,8 @@ tailwind.config = {
 
 <!-- RELATED -->
 <section class="border-t border-slate-200 bg-mist">
-  <div class="mx-auto max-w-7xl px-5 py-16 sm:px-8">
-    <h2 class="text-xl font-semibold tracking-tight text-navy-deep">Related planning and tools</h2>
+  <div class="mx-auto max-w-7xl px-5 py-10 sm:px-8">
+    <h2 class="text-lg font-semibold tracking-tight sm:text-xl text-navy-deep">Related planning and tools</h2>
     <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
       <li><a href="/retirement-planning" class="group flex h-full items-center justify-between rounded-2xl bg-white p-5 ring-1 ring-slate-200 transition hover:ring-navy/40"><span><span class="block font-semibold text-navy-deep">Retirement planning</span><span class="text-sm text-slate-500">A corpus that lasts</span></span><svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></li>
       <li><a href="/investment-planning" class="group flex h-full items-center justify-between rounded-2xl bg-white p-5 ring-1 ring-slate-200 transition hover:ring-navy/40"><span><span class="block font-semibold text-navy-deep">Investment planning</span><span class="text-sm text-slate-500">One allocation for everything</span></span><svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></li>
