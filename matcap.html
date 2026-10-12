@@ -1,0 +1,527 @@
+<title>MatCap Global</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,600&display=swap">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          tahoma: ['Tahoma', 'Verdana', 'Segoe UI', 'sans-serif'],
+          display: ['"Playfair Display"', 'Georgia', 'Times New Roman', 'serif']
+        },
+        colors: {
+          primary: { DEFAULT: '#DABE75', 50: '#FBF7EC', 100: '#F5EACB', 200: '#ECD9A3', 300: '#E3CB8C', 400: '#DABE75', 500: '#C9A85A', 600: '#A88A42', 700: '#7A6128', 800: '#5F4C22' },
+          secondary: { DEFAULT: '#492873', 50: '#F6F3FA', 100: '#E9E0F4', 200: '#CDBAE5', 300: '#A88BCF', 400: '#7D58AE', 500: '#5E3790', 600: '#492873', 700: '#3A1F5C', 800: '#2A1644', 900: '#1E0F33', 950: '#140A24' }
+        },
+        keyframes: {
+          float: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-0.5rem)' } },
+          pulsedot: { '0%, 100%': { opacity: '1' }, '50%': { opacity: '0.35' } },
+          shine: { '0%': { backgroundPosition: '0% 50%' }, '100%': { backgroundPosition: '200% 50%' } },
+          marker: { '0%': { transform: 'scaleX(0)' }, '100%': { transform: 'scaleX(1)' } },
+          rise: { '0%': { opacity: '0', transform: 'translateY(40%)' }, '100%': { opacity: '1', transform: 'translateY(0)' } }
+        },
+        animation: {
+          float: 'float 7s ease-in-out infinite',
+          'float-slow': 'float 9s ease-in-out infinite',
+          pulsedot: 'pulsedot 2.4s ease-in-out infinite',
+          shine: 'shine 4s linear infinite',
+          marker: 'marker 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s both',
+          rise: 'rise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.15s both'
+        }
+      }
+    }
+  };
+</script>
+<script>
+  document.documentElement.classList.add('bg-white', 'scroll-smooth');
+  document.body.classList.add('bg-white', 'font-tahoma', 'text-secondary-950', 'antialiased');
+</script>
+
+<div class="min-h-full bg-white font-tahoma text-secondary-950">
+
+  <!-- NAV + HERO -->
+  <div class="bg-primary-50 text-secondary-950">
+    <header class="sticky top-0 z-30 border-b border-primary-200/70 bg-primary-50/90 backdrop-blur">
+      <nav aria-label="Primary" class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
+        <a href="#top" class="flex items-center gap-2.5 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-600">
+          <span class="grid h-9 w-9 place-items-center rounded-xl bg-secondary-600 text-sm font-bold text-primary-300">M</span>
+          <span class="text-lg font-bold tracking-tight">MatCap<span class="text-primary-700"> Global</span></span>
+        </a>
+        <div class="hidden items-center gap-8 text-sm text-stone-600 md:flex">
+          <a href="#services" class="hover:text-secondary-600 focus:outline-none focus-visible:text-secondary-600">Services</a>
+          <a href="#why" class="hover:text-secondary-600 focus:outline-none focus-visible:text-secondary-600">Why MatCap</a>
+          <a href="#process" class="hover:text-secondary-600 focus:outline-none focus-visible:text-secondary-600">How it works</a>
+          <a href="#contact" class="hover:text-secondary-600 focus:outline-none focus-visible:text-secondary-600">Contact</a>
+        </div>
+        <a href="#contact" class="inline-flex min-h-11 items-center rounded-full bg-primary-400 px-5 text-sm font-bold text-secondary-950 transition hover:bg-primary-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-600">Book a consultation</a>
+      </nav>
+    </header>
+
+    <section id="top" class="mx-auto max-w-7xl px-4 pb-16 pt-14 sm:px-6 lg:pb-20 lg:pt-20">
+      <div class="grid items-center gap-12 lg:grid-cols-12">
+        <!-- Copy -->
+        <div class="flex min-w-0 flex-col gap-7 lg:col-span-7">
+          <span class="inline-flex w-fit items-center gap-2 rounded-full border border-primary-300 bg-white px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest text-primary-700">
+            <span class="h-1.5 w-1.5 rounded-full bg-primary-500 motion-safe:animate-pulsedot"></span>
+            SEBI-Registered Investment Adviser
+          </span>
+          <h1 class="text-balance text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+            Your wealth is
+            <span class="relative inline-block whitespace-nowrap px-1 motion-safe:animate-rise">
+              <span aria-hidden="true" class="absolute inset-x-0 bottom-1 h-2/5 origin-left -skew-x-6 rounded-sm bg-primary-200/80 motion-safe:animate-marker"></span>
+              <span class="relative bg-gradient-to-r from-secondary-600 via-primary-600 to-secondary-600 bg-[length:200%_auto] bg-clip-text pr-1 font-display font-semibold italic text-transparent motion-safe:animate-shine">global</span></span>.<br class="hidden sm:block">
+            <span class="text-secondary-600">Your advisory should be too.</span>
+          </h1>
+          <p class="max-w-xl text-lg leading-relaxed text-stone-600">Research-led global investment advisory for professionals and NRIs, bringing your equity, debt, ESOPs and cross-border assets under one strategy.</p>
+          <div class="flex flex-wrap gap-3">
+            <a href="#contact" class="inline-flex min-h-12 items-center gap-2 rounded-full bg-primary-400 px-7 font-bold text-secondary-950 shadow-lg shadow-primary-400/30 transition hover:bg-primary-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-600">
+              Book Your Consultation
+              <svg aria-hidden="true" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+            </a>
+            <a href="#services" class="inline-flex min-h-12 items-center rounded-full border border-secondary-200 bg-white px-7 font-bold text-secondary-950 transition hover:border-secondary-400 hover:bg-secondary-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-600">Explore Services</a>
+          </div>
+          <ul class="flex flex-wrap gap-x-6 gap-y-3 border-t border-primary-200 pt-6 text-sm text-stone-600">
+            <li class="flex items-center gap-2">
+              <svg aria-hidden="true" class="h-4 w-4 text-primary-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"></path><path d="M9 12l2 2 4-4"></path></svg>
+              SEBI-Registered Investment Adviser
+            </li>
+            <li class="flex items-center gap-2">
+              <svg aria-hidden="true" class="h-4 w-4 text-primary-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0116 0"></path></svg>
+              Fiduciary Advisory
+            </li>
+            <li class="flex items-center gap-2">
+              <svg aria-hidden="true" class="h-4 w-4 text-primary-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"></rect><path d="M8 10V7a4 4 0 018 0v3"></path></svg>
+              Direct Global Custody
+            </li>
+          </ul>
+        </div>
+
+        <!-- Product visual -->
+        <div class="relative min-w-0 lg:col-span-5">
+          <div class="rounded-3xl border border-stone-200 bg-white p-5 pb-12 shadow-2xl shadow-secondary-600/10 sm:p-6 sm:pb-12 motion-safe:animate-float">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-xs font-bold uppercase tracking-widest text-stone-500">Consolidation</p>
+                <p class="mt-1 text-lg font-bold">One global account</p>
+              </div>
+              <span class="rounded-full bg-primary-50 px-3 py-1 text-xs font-bold text-primary-700">Direct custody</span>
+            </div>
+            <ul class="mt-5 flex flex-col gap-2.5">
+              <li class="flex items-center justify-between gap-3 rounded-2xl bg-stone-50 px-4 py-3">
+                <span class="flex items-center gap-3"><span class="grid h-9 w-9 place-items-center rounded-xl bg-secondary-50 text-secondary-600"><svg aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"></circle><path d="M8.5 13.5L7 21l5-3 5 3-1.5-7.5"></path></svg></span><span class="text-sm">Vested ESOPs</span></span>
+                <svg aria-hidden="true" class="h-4 w-4 text-primary-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg>
+              </li>
+              <li class="flex items-center justify-between gap-3 rounded-2xl bg-stone-50 px-4 py-3">
+                <span class="flex items-center gap-3"><span class="grid h-9 w-9 place-items-center rounded-xl bg-secondary-50 text-secondary-600"><svg aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"></ellipse><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"></path><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path></svg></span><span class="text-sm">RSUs</span></span>
+                <svg aria-hidden="true" class="h-4 w-4 text-primary-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg>
+              </li>
+              <li class="flex items-center justify-between gap-3 rounded-2xl bg-stone-50 px-4 py-3">
+                <span class="flex items-center gap-3"><span class="grid h-9 w-9 place-items-center rounded-xl bg-secondary-50 text-secondary-600"><svg aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3a14 14 0 010 18"></path><path d="M12 3a14 14 0 000 18"></path></svg></span><span class="text-sm">Overseas holdings</span></span>
+                <svg aria-hidden="true" class="h-4 w-4 text-primary-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg>
+              </li>
+              <li class="flex items-center justify-between gap-3 rounded-2xl bg-stone-50 px-4 py-3">
+                <span class="flex items-center gap-3"><span class="grid h-9 w-9 place-items-center rounded-xl bg-secondary-50 text-secondary-600"><svg aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V11"></path><path d="M10 20V5"></path><path d="M16 20v-7"></path><path d="M21 20H3"></path></svg></span><span class="text-sm">Global equity &amp; debt</span></span>
+                <svg aria-hidden="true" class="h-4 w-4 text-primary-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg>
+              </li>
+            </ul>
+            <div class="mt-5 flex flex-wrap gap-2 border-t border-stone-200 pt-5 text-xs">
+              <span class="rounded-full border border-stone-200 px-3 py-1 text-stone-600">US</span>
+              <span class="rounded-full border border-stone-200 px-3 py-1 text-stone-600">Europe</span>
+              <span class="rounded-full border border-stone-200 px-3 py-1 text-stone-600">Asia</span>
+              <span class="rounded-full border border-stone-200 px-3 py-1 text-stone-600">Emerging markets</span>
+            </div>
+          </div>
+
+          <div class="relative -mt-6 ml-auto w-11/12 rounded-3xl border border-secondary-100 bg-white p-5 shadow-2xl shadow-secondary-600/15 sm:w-4/5 motion-safe:animate-float-slow">
+            <div class="flex items-center justify-between">
+              <p class="text-sm font-bold">Portfolio evaluation</p>
+              <span class="rounded-full bg-secondary-50 px-3 py-1 text-xs font-bold text-secondary-600">36 parameters</span>
+            </div>
+            <div class="mt-4 grid grid-cols-3 gap-2 text-center text-xs">
+              <div class="flex flex-col items-center gap-1.5 rounded-xl bg-stone-50 px-2 py-3">
+                <span class="grid h-8 w-8 place-items-center rounded-lg bg-primary-50 text-primary-700"><svg aria-hidden="true" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16a8 8 0 0116 0"></path><path d="M12 16l4-4"></path></svg></span>
+                <p class="font-bold">Sharpe</p><p class="text-secondary-600">Checked</p>
+              </div>
+              <div class="flex flex-col items-center gap-1.5 rounded-xl bg-stone-50 px-2 py-3">
+                <span class="grid h-8 w-8 place-items-center rounded-lg bg-primary-50 text-primary-700"><svg aria-hidden="true" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"></path><path d="M15 7h6v6"></path></svg></span>
+                <p class="font-bold">CAGR</p><p class="text-secondary-600">Checked</p>
+              </div>
+              <div class="flex flex-col items-center gap-1.5 rounded-xl bg-stone-50 px-2 py-3">
+                <span class="grid h-8 w-8 place-items-center rounded-lg bg-primary-50 text-primary-700"><svg aria-hidden="true" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l6 6 4-4 8 8"></path><path d="M15 17h6v-6"></path></svg></span>
+                <p class="font-bold">Drawdown</p><p class="text-secondary-600">Checked</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key numbers -->
+      <dl class="mt-16 grid gap-px overflow-hidden rounded-3xl border border-primary-200 bg-primary-200 sm:grid-cols-3">
+        <div class="flex flex-col gap-1 bg-white p-7">
+          <dt class="order-2 text-sm text-stone-600">Assets under advisory</dt>
+          <dd class="order-1 text-4xl font-bold tabular-nums tracking-tight sm:text-5xl">$100M<span class="text-primary-600">+</span></dd>
+        </div>
+        <div class="flex flex-col gap-1 bg-white p-7">
+          <dt class="order-2 text-sm text-stone-600">Countries with client presence</dt>
+          <dd class="order-1 text-4xl font-bold tabular-nums tracking-tight sm:text-5xl">9<span class="text-primary-600">+</span></dd>
+        </div>
+        <div class="flex flex-col gap-1 bg-white p-7">
+          <dt class="order-2 text-sm text-stone-600">Parameters behind every portfolio</dt>
+          <dd class="order-1 text-4xl font-bold tabular-nums tracking-tight sm:text-5xl">36</dd>
+        </div>
+      </dl>
+    </section>
+  </div>
+
+  <!-- AUDIENCE -->
+  <section aria-label="Who we advise" class="border-b border-stone-200 bg-white">
+    <div class="mx-auto flex max-w-7xl flex-wrap items-center gap-3 px-4 py-7 sm:px-6">
+      <span class="mr-2 text-xs font-bold uppercase tracking-widest text-stone-500">Trusted advisory for</span>
+      <span class="rounded-full bg-stone-100 px-4 py-2 text-sm font-bold text-secondary-900">HNIs &amp; UHNIs</span>
+      <span class="rounded-full bg-stone-100 px-4 py-2 text-sm font-bold text-secondary-900">Business owners</span>
+      <span class="rounded-full bg-stone-100 px-4 py-2 text-sm font-bold text-secondary-900">Family offices</span>
+      <span class="rounded-full bg-stone-100 px-4 py-2 text-sm font-bold text-secondary-900">Senior professionals</span>
+      <span class="rounded-full bg-stone-100 px-4 py-2 text-sm font-bold text-secondary-900">NRIs</span>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="scroll-mt-20 bg-white">
+    <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:py-24">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div class="max-w-2xl">
+          <p class="text-sm font-bold uppercase tracking-widest text-primary-700">Services</p>
+          <h2 class="mt-3 text-balance text-3xl font-bold tracking-tight text-secondary-950 sm:text-4xl">Everything you own, across every market, managed as one.</h2>
+        </div>
+        <a href="#contact" class="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-secondary-600 hover:text-secondary-800 focus:outline-none focus-visible:underline">
+          Talk to an advisor
+          <svg aria-hidden="true" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+        </a>
+      </div>
+
+      <div class="mt-12 grid gap-5 md:grid-cols-3">
+        <article class="group flex flex-col gap-4 rounded-3xl border border-stone-200 bg-white p-7 transition hover:-translate-y-1 hover:border-primary-300 hover:shadow-xl hover:shadow-secondary-600/10">
+          <span class="grid h-12 w-12 place-items-center rounded-2xl bg-secondary-50 text-secondary-600 transition group-hover:bg-secondary-600 group-hover:text-primary-300">
+            <svg aria-hidden="true" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"></path><path d="M3 13l9 5 9-5"></path><path d="M3 17.5l9 5 9-5"></path></svg>
+          </span>
+          <h3 class="text-xl font-bold text-secondary-950">ESOP &amp; RSU Management</h3>
+          <p class="leading-relaxed text-stone-600">Consolidate vested ESOPs, RSUs and overseas holdings into one global account and reduce single-stock risk.</p>
+        </article>
+
+        <article class="group flex flex-col gap-4 rounded-3xl border border-stone-200 bg-white p-7 transition hover:-translate-y-1 hover:border-primary-300 hover:shadow-xl hover:shadow-secondary-600/10">
+          <span class="grid h-12 w-12 place-items-center rounded-2xl bg-secondary-50 text-secondary-600 transition group-hover:bg-secondary-600 group-hover:text-primary-300">
+            <svg aria-hidden="true" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3a14 14 0 010 18"></path><path d="M12 3a14 14 0 000 18"></path></svg>
+          </span>
+          <h3 class="text-xl font-bold text-secondary-950">Global Equity &amp; Debt Investment</h3>
+          <p class="leading-relaxed text-stone-600">IC-backed model portfolios across the US, Europe, Asia and emerging markets.</p>
+        </article>
+
+        <article class="group flex flex-col gap-4 rounded-3xl border border-stone-200 bg-white p-7 transition hover:-translate-y-1 hover:border-primary-300 hover:shadow-xl hover:shadow-secondary-600/10">
+          <span class="grid h-12 w-12 place-items-center rounded-2xl bg-secondary-50 text-secondary-600 transition group-hover:bg-secondary-600 group-hover:text-primary-300">
+            <svg aria-hidden="true" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13"></path><path d="M14 5l3 3-3 3"></path><path d="M20 16H7"></path><path d="M10 13l-3 3 3 3"></path></svg>
+          </span>
+          <h3 class="text-xl font-bold text-secondary-950">NRI Wealth Management</h3>
+          <p class="leading-relaxed text-stone-600">Align Indian and international wealth, with guidance on LRS, repatriation and cross-border compliance.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY MATCAP -->
+  <section id="why" class="scroll-mt-20 bg-stone-50">
+    <div class="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:py-24">
+      <div class="flex min-w-0 flex-col gap-6">
+        <p class="text-sm font-bold uppercase tracking-widest text-primary-700">Why MatCap</p>
+        <h2 class="text-balance text-3xl font-bold tracking-tight text-secondary-950 sm:text-4xl">Advice built on research, aligned with you.</h2>
+        <div class="rounded-3xl border border-secondary-100 bg-secondary-50 p-7">
+          <div class="flex items-baseline justify-between gap-4">
+            <p class="text-sm text-stone-600">Every portfolio is screened on</p>
+            <p class="text-3xl font-bold tabular-nums text-secondary-600">36 <span class="text-base font-normal text-stone-600">parameters</span></p>
+          </div>
+          <ul class="mt-6 divide-y divide-secondary-100 border-y border-secondary-100 text-sm">
+            <li class="flex items-center justify-between py-3.5"><span>Sharpe ratio</span><span class="rounded-full bg-white px-2.5 py-0.5 text-xs font-bold text-primary-700">Included</span></li>
+            <li class="flex items-center justify-between py-3.5"><span>CAGR</span><span class="rounded-full bg-white px-2.5 py-0.5 text-xs font-bold text-primary-700">Included</span></li>
+            <li class="flex items-center justify-between py-3.5"><span>Maximum drawdown</span><span class="rounded-full bg-white px-2.5 py-0.5 text-xs font-bold text-primary-700">Included</span></li>
+          </ul>
+          <p class="mt-4 text-sm text-stone-600">Plus 33 more parameters on every portfolio.</p>
+        </div>
+      </div>
+
+      <div class="flex min-w-0 flex-col gap-4 lg:pt-14">
+        <div class="flex gap-5 rounded-3xl border border-stone-200 bg-white p-7">
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-secondary-50 text-secondary-600">
+            <svg aria-hidden="true" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 15l4-4 3 3 5-6"></path></svg>
+          </span>
+          <div>
+            <h3 class="text-lg font-bold text-secondary-950">Research-led</h3>
+            <p class="mt-1.5 leading-relaxed text-stone-600">Every portfolio is evaluated on 36 parameters including Sharpe ratio, CAGR and maximum drawdown.</p>
+          </div>
+        </div>
+        <div class="flex gap-5 rounded-3xl border border-stone-200 bg-white p-7">
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-primary-50 text-primary-700">
+            <svg aria-hidden="true" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"></path><path d="M9 12l2 2 4-4"></path></svg>
+          </span>
+          <div>
+            <h3 class="text-lg font-bold text-secondary-950">Fiduciary first</h3>
+            <p class="mt-1.5 leading-relaxed text-stone-600">SEBI-registered advice aligned with your interests.</p>
+          </div>
+        </div>
+        <div class="flex gap-5 rounded-3xl border border-stone-200 bg-white p-7">
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-secondary-50 text-secondary-600">
+            <svg aria-hidden="true" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 10h18"></path><path d="M9 20V10"></path></svg>
+          </span>
+          <div>
+            <h3 class="text-lg font-bold text-secondary-950">One view</h3>
+            <p class="mt-1.5 leading-relaxed text-stone-600">Global assets consolidated with direct custody and simple reporting.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="process" class="scroll-mt-20 bg-white">
+    <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
+      <div class="mx-auto max-w-2xl lg:text-center">
+        <p class="text-sm font-bold uppercase tracking-widest text-primary-700">How it works</p>
+        <h2 class="mt-3 text-balance text-3xl font-bold tracking-tight text-secondary-950 sm:text-4xl">From scattered holdings to one global portfolio.</h2>
+        <p class="mt-4 text-stone-600">Four steps, one advisor beside you the whole way.</p>
+      </div>
+
+      <ol class="mt-14 lg:mt-20">
+        <!-- Step 1 (card left on desktop) -->
+        <li class="js-step relative flex gap-5 lg:grid lg:grid-cols-9 lg:gap-0">
+          <div class="relative flex flex-col items-center lg:col-start-5 lg:row-start-1">
+            <span data-node data-idle="border-secondary-200 bg-white text-secondary-600" data-active="border-secondary-600 bg-secondary-600 text-primary-300 ring-8 ring-secondary-50" class="relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-full border-2 border-secondary-200 bg-white text-secondary-600 transition duration-500">
+              <span data-ping aria-hidden="true" class="absolute inset-0 hidden rounded-full bg-secondary-400/40 motion-safe:animate-ping"></span>
+              <svg aria-hidden="true" class="relative h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+            </span>
+            <span aria-hidden="true" class="relative w-0.5 flex-1 overflow-hidden rounded-full bg-secondary-100">
+              <span data-fill class="absolute inset-0 origin-top scale-y-0 bg-gradient-to-b from-secondary-600 to-secondary-400 transition-transform duration-1000 ease-out"></span>
+            </span>
+          </div>
+          <div data-card class="min-w-0 flex-1 pb-10 transition duration-700 ease-out lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:pb-16 lg:pr-12">
+            <article class="rounded-3xl border border-stone-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-secondary-200 hover:shadow-xl hover:shadow-secondary-600/10 lg:text-right">
+              <span class="inline-flex rounded-full bg-secondary-50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-secondary-600">Step 01</span>
+              <h3 class="mt-4 text-xl font-bold text-secondary-950">Discover</h3>
+              <p class="mt-2 leading-relaxed text-stone-600">Share your goals and holdings.</p>
+              <div class="mt-5 flex flex-wrap gap-2 border-t border-stone-100 pt-4 text-xs lg:justify-end">
+                <span class="rounded-full bg-stone-100 px-3 py-1 text-stone-600">Your goals</span>
+                <span class="rounded-full bg-stone-100 px-3 py-1 text-stone-600">Your holdings</span>
+              </div>
+            </article>
+          </div>
+        </li>
+
+        <!-- Step 2 (card right on desktop) -->
+        <li class="js-step relative flex gap-5 lg:grid lg:grid-cols-9 lg:gap-0">
+          <div class="relative flex flex-col items-center lg:col-start-5 lg:row-start-1">
+            <span data-node data-idle="border-secondary-200 bg-white text-secondary-600" data-active="border-secondary-600 bg-secondary-600 text-primary-300 ring-8 ring-secondary-50" class="relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-full border-2 border-secondary-200 bg-white text-secondary-600 transition duration-500">
+              <span data-ping aria-hidden="true" class="absolute inset-0 hidden rounded-full bg-secondary-400/40 motion-safe:animate-ping"></span>
+              <svg aria-hidden="true" class="relative h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v5a6 6 0 006 6 6 6 0 006-6V3"></path><path d="M12 14v7"></path><path d="M9 18l3 3 3-3"></path></svg>
+            </span>
+            <span aria-hidden="true" class="relative w-0.5 flex-1 overflow-hidden rounded-full bg-secondary-100">
+              <span data-fill class="absolute inset-0 origin-top scale-y-0 bg-gradient-to-b from-secondary-600 to-secondary-400 transition-transform duration-1000 ease-out"></span>
+            </span>
+          </div>
+          <div data-card class="min-w-0 flex-1 pb-10 transition duration-700 ease-out lg:col-span-4 lg:col-start-6 lg:row-start-1 lg:pb-16 lg:pl-12">
+            <article class="rounded-3xl border border-stone-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-secondary-200 hover:shadow-xl hover:shadow-secondary-600/10">
+              <span class="inline-flex rounded-full bg-secondary-50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-secondary-600">Step 02</span>
+              <h3 class="mt-4 text-xl font-bold text-secondary-950">Consolidate</h3>
+              <p class="mt-2 leading-relaxed text-stone-600">Bring assets into one global account.</p>
+              <div class="mt-5 flex flex-wrap gap-2 border-t border-stone-100 pt-4 text-xs">
+                <span class="rounded-full bg-stone-100 px-3 py-1 text-stone-600">ESOPs</span>
+                <span class="rounded-full bg-stone-100 px-3 py-1 text-stone-600">RSUs</span>
+                <span class="rounded-full bg-stone-100 px-3 py-1 text-stone-600">Overseas holdings</span>
+                <span class="rounded-full bg-primary-50 px-3 py-1 font-bold text-primary-700">Direct custody</span>
+              </div>
+            </article>
+          </div>
+        </li>
+
+        <!-- Step 3 (card left on desktop) -->
+        <li class="js-step relative flex gap-5 lg:grid lg:grid-cols-9 lg:gap-0">
+          <div class="relative flex flex-col items-center lg:col-start-5 lg:row-start-1">
+            <span data-node data-idle="border-secondary-200 bg-white text-secondary-600" data-active="border-secondary-600 bg-secondary-600 text-primary-300 ring-8 ring-secondary-50" class="relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-full border-2 border-secondary-200 bg-white text-secondary-600 transition duration-500">
+              <span data-ping aria-hidden="true" class="absolute inset-0 hidden rounded-full bg-secondary-400/40 motion-safe:animate-ping"></span>
+              <svg aria-hidden="true" class="relative h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12A9 9 0 1112 3v9h9z"></path><path d="M15 3.5A9 9 0 0120.5 9H15V3.5z"></path></svg>
+            </span>
+            <span aria-hidden="true" class="relative w-0.5 flex-1 overflow-hidden rounded-full bg-secondary-100">
+              <span data-fill class="absolute inset-0 origin-top scale-y-0 bg-gradient-to-b from-secondary-600 to-primary-400 transition-transform duration-1000 ease-out"></span>
+            </span>
+          </div>
+          <div data-card class="min-w-0 flex-1 pb-10 transition duration-700 ease-out lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:pb-16 lg:pr-12">
+            <article class="rounded-3xl border border-stone-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-secondary-200 hover:shadow-xl hover:shadow-secondary-600/10 lg:text-right">
+              <span class="inline-flex rounded-full bg-secondary-50 px-3 py-1 text-xs font-bold uppercase tracking-widest text-secondary-600">Step 03</span>
+              <h3 class="mt-4 text-xl font-bold text-secondary-950">Invest</h3>
+              <p class="mt-2 leading-relaxed text-stone-600">Get a portfolio built for you.</p>
+              <div class="mt-5 flex flex-wrap gap-2 border-t border-stone-100 pt-4 text-xs lg:justify-end">
+                <span class="rounded-full bg-stone-100 px-3 py-1 text-stone-600">IC-backed model portfolios</span>
+                <span class="rounded-full bg-stone-100 px-3 py-1 text-stone-600">36 parameters</span>
+              </div>
+            </article>
+          </div>
+        </li>
+
+        <!-- Step 4 (card right on desktop, gold finish) -->
+        <li class="js-step relative flex gap-5 lg:grid lg:grid-cols-9 lg:gap-0">
+          <div class="relative flex flex-col items-center lg:col-start-5 lg:row-start-1">
+            <span data-node data-idle="border-primary-300 bg-white text-primary-700" data-active="border-primary-400 bg-primary-400 text-secondary-950 ring-8 ring-primary-100" class="relative z-10 grid h-14 w-14 shrink-0 place-items-center rounded-full border-2 border-primary-300 bg-white text-primary-700 transition duration-500">
+              <span data-ping aria-hidden="true" class="absolute inset-0 hidden rounded-full bg-primary-400/50 motion-safe:animate-ping"></span>
+              <svg aria-hidden="true" class="relative h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"></path><path d="M15 7h6v6"></path></svg>
+            </span>
+          </div>
+          <div data-card class="min-w-0 flex-1 transition duration-700 ease-out lg:col-span-4 lg:col-start-6 lg:row-start-1 lg:pl-12">
+            <article class="rounded-3xl border border-primary-200 bg-primary-50 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-primary-400/20">
+              <span class="inline-flex rounded-full bg-white px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary-700">Step 04</span>
+              <h3 class="mt-4 text-xl font-bold text-secondary-950">Grow</h3>
+              <p class="mt-2 leading-relaxed text-stone-600">Ongoing guidance from your advisor.</p>
+              <a href="#contact" class="mt-5 inline-flex min-h-11 items-center gap-2 border-t border-primary-200 pt-4 text-sm font-bold text-secondary-600 hover:text-secondary-800 focus:outline-none focus-visible:underline">
+                Start with a consultation
+                <svg aria-hidden="true" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+              </a>
+            </article>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section id="contact" class="scroll-mt-20 bg-white px-4 pb-20 sm:px-6 lg:pb-24">
+    <div class="mx-auto max-w-7xl overflow-hidden rounded-3xl border border-primary-200 bg-primary-50">
+      <div class="grid gap-10 p-8 sm:p-12 lg:grid-cols-5 lg:p-16">
+        <div class="flex min-w-0 flex-col gap-6 lg:col-span-3">
+          <h2 class="text-balance text-3xl font-bold leading-tight tracking-tight text-secondary-950 sm:text-4xl lg:text-5xl">Managing wealth isn't about tools. <span class="text-secondary-600">It's about the right partner.</span></h2>
+          <a href="#contact" class="inline-flex min-h-12 w-fit items-center gap-2 rounded-full bg-primary-400 px-7 font-bold text-secondary-950 shadow-lg shadow-primary-400/30 transition hover:bg-primary-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-600">
+            Book Your Consultation
+            <svg aria-hidden="true" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+          </a>
+        </div>
+        <div class="flex min-w-0 flex-col gap-3 lg:col-span-2">
+          <div class="flex items-center gap-4 rounded-2xl bg-white p-5">
+            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-secondary-50 text-secondary-600">
+              <svg aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"></path></svg>
+            </span>
+            <div class="min-w-0">
+              <p class="text-xs uppercase tracking-widest text-stone-500">Call</p>
+              <a href="tel:+917304246364" class="select-all font-bold tabular-nums text-secondary-950 hover:text-secondary-600">+91 7304246364</a>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 rounded-2xl bg-white p-5">
+            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-secondary-50 text-secondary-600">
+              <svg aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>
+            </span>
+            <div class="min-w-0">
+              <p class="text-xs uppercase tracking-widest text-stone-500">Email</p>
+              <a href="mailto:support@matcap.global" class="select-all break-all font-bold text-secondary-950 hover:text-secondary-600">support@matcap.global</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-stone-200 bg-white">
+    <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 pb-32 pt-10 sm:px-6 md:pb-10 lg:flex-row lg:items-start lg:justify-between">
+      <div class="flex flex-col gap-2">
+        <span class="flex items-center gap-2.5">
+          <span class="grid h-8 w-8 place-items-center rounded-lg bg-secondary-600 text-xs font-bold text-primary-300">M</span>
+          <span class="font-bold text-secondary-950">MatCap<span class="text-primary-700"> Global</span></span>
+        </span>
+        <p class="text-sm font-bold text-stone-600">SEBI RIA Registration No: INA000021890</p>
+      </div>
+      <p class="max-w-2xl text-sm leading-relaxed text-stone-500">Investments are subject to market risks. Past performance is not indicative of future returns. Read all related documents carefully before investing.</p>
+    </div>
+  </footer>
+
+  <!-- MOBILE STICKY CTA (appears once the hero is off-screen) -->
+  <div id="mobile-cta" aria-hidden="true" inert class="fixed inset-x-0 bottom-0 z-40 translate-y-full border-t border-primary-200 bg-white/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 shadow-2xl shadow-secondary-950/20 backdrop-blur transition-transform duration-500 ease-out md:hidden">
+    <div class="flex items-center gap-3">
+      <div class="min-w-0 flex-1">
+        <p class="text-xs font-bold uppercase tracking-widest text-primary-700">SEBI-Registered</p>
+        <p class="truncate text-sm font-bold text-secondary-950">Speak to a global advisor</p>
+      </div>
+      <a href="tel:+917304246364" aria-label="Call MatCap on +91 7304246364" class="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-secondary-200 text-secondary-600 transition hover:bg-secondary-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-600">
+        <svg aria-hidden="true" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"></path></svg>
+      </a>
+      <a href="#contact" class="inline-flex min-h-11 shrink-0 items-center gap-1.5 rounded-full bg-primary-400 px-5 text-sm font-bold text-secondary-950 shadow-lg shadow-primary-400/30 transition hover:bg-primary-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-600">
+        Book now
+        <svg aria-hidden="true" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  (function () {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var hasIO = 'IntersectionObserver' in window;
+
+    /* ---- Timeline reveal ---- */
+    var steps = Array.prototype.slice.call(document.querySelectorAll('.js-step'));
+
+    function activate(step) {
+      var node = step.querySelector('[data-node]');
+      node.classList.remove.apply(node.classList, node.dataset.idle.split(' '));
+      node.classList.add.apply(node.classList, node.dataset.active.split(' '));
+      var ping = step.querySelector('[data-ping]');
+      if (ping && !reduce) {
+        ping.classList.remove('hidden');
+        setTimeout(function () { ping.classList.add('hidden'); }, 2000);
+      }
+      var card = step.querySelector('[data-card]');
+      card.classList.remove('opacity-0', 'translate-y-8');
+      var fill = step.querySelector('[data-fill]');
+      if (fill) {
+        setTimeout(function () { fill.classList.remove('scale-y-0'); fill.classList.add('scale-y-100'); }, reduce ? 0 : 350);
+      }
+    }
+
+    if (reduce || !hasIO) {
+      steps.forEach(activate);
+    } else {
+      steps.forEach(function (step) {
+        if (step.getBoundingClientRect().top > window.innerHeight * 0.85) {
+          step.querySelector('[data-card]').classList.add('opacity-0', 'translate-y-8');
+        } else {
+          activate(step);
+        }
+      });
+      var stepObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) { activate(entry.target); stepObserver.unobserve(entry.target); }
+        });
+      }, { rootMargin: '0% 0% -25% 0%', threshold: 0.15 });
+      steps.forEach(function (step) { stepObserver.observe(step); });
+    }
+
+    /* ---- Mobile sticky CTA ---- */
+    var bar = document.getElementById('mobile-cta');
+    var hero = document.getElementById('top');
+    var contact = document.getElementById('contact');
+    if (!bar || !hero || !hasIO) return;
+    var heroVisible = true, contactVisible = false;
+
+    function updateBar() {
+      var show = !heroVisible && !contactVisible;
+      bar.classList.toggle('translate-y-full', !show);
+      bar.classList.toggle('translate-y-0', show);
+      if (show) { bar.removeAttribute('inert'); bar.setAttribute('aria-hidden', 'false'); }
+      else { bar.setAttribute('inert', ''); bar.setAttribute('aria-hidden', 'true'); }
+    }
+
+    new IntersectionObserver(function (entries) {
+      heroVisible = entries[0].isIntersecting; updateBar();
+    }).observe(hero);
+    if (contact) {
+      new IntersectionObserver(function (entries) {
+        contactVisible = entries[0].isIntersecting; updateBar();
+      }, { threshold: 0.2 }).observe(contact);
+    }
+  })();
+</script>
