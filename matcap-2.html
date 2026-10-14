@@ -2,25 +2,27 @@
 <html>
 
 <head>
-    <title>MatCap Invest Globally</title>
+    <title>Fintoo Global Investment Advisory</title>
   <meta name="description"
     content="A SEBI-registered adviser for your global investments. US, European and Asian markets, plus your ESOPs and RSUs, in one portfolio held in your name.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&display=swap">
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Playfair+Display:ital,wght@1,500;1,600&amp;display=swap">
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            tahoma: ['Tahoma', 'Verdana', 'Segoe UI', 'sans-serif'],
+            sans: ['Manrope', 'Inter', 'Segoe UI', 'sans-serif'],
             display: ['"Playfair Display"', 'Georgia', 'Times New Roman', 'serif']
           },
           colors: {
-            primary: { DEFAULT: '#DABE75', 50: '#FBF7EC', 100: '#F5EACB', 200: '#ECD9A3', 300: '#E3CB8C', 400: '#DABE75', 500: '#C9A85A', 600: '#A88A42', 700: '#7A6128', 800: '#5F4C22' },
-            secondary: { DEFAULT: '#492873', 50: '#F6F3FA', 100: '#E9E0F4', 200: '#CDBAE5', 300: '#A88BCF', 400: '#7D58AE', 500: '#5E3790', 600: '#492873', 700: '#3A1F5C', 800: '#2A1644', 900: '#1E0F33', 950: '#140A24' }
+            'fintoo-blue': '#042b62',
+            'fintoo-orange': '#dd7300',
+            primary: { DEFAULT: '#dd7300', 50: '#FFF7ED', 100: '#FFE9D5', 200: '#FFD1A8', 300: '#E98A31', 400: '#dd7300', 500: '#dd7300', 600: '#C45F00', 700: '#9F4800', 800: '#7E3A06' },
+            secondary: { DEFAULT: '#042b62', 50: '#F1F5FA', 100: '#DDE7F1', 200: '#B9CDE1', 300: '#8CACCC', 400: '#5D86AE', 500: '#2E5D8D', 600: '#174777', 700: '#0D3763', 800: '#082E56', 900: '#042b62', 950: '#042b62' }
           },
           keyframes: {
             marker: { '0%': { transform: 'scaleX(0)' }, '100%': { transform: 'scaleX(1)' } },
@@ -38,7 +40,7 @@
   </script>
   <script>
     document.documentElement.classList.add('bg-white', 'motion-safe:scroll-smooth');
-    document.body.classList.add('bg-white', 'font-tahoma', 'text-secondary-950', 'antialiased');
+    document.body.classList.add('bg-white', 'font-sans', 'text-secondary-950', 'antialiased');
   </script>
   <meta charset=utf8>
   <meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -79,29 +81,29 @@
 <body>
 
 
-  <div class="min-h-full overflow-x-hidden bg-white font-tahoma text-secondary-950">
+  <div class="min-h-full overflow-x-hidden bg-white font-sans text-secondary-950">
 
     <!-- ================= HEADER ================= -->
-    <div class="bg-primary-50 text-secondary-950">
+    <div class="bg-secondary-950 text-white">
       <header
         class="sticky top-0 z-30 border-b border-white/10 bg-secondary-950/95 text-white shadow-lg shadow-secondary-950/10 backdrop-blur">
         <nav aria-label="Primary"
           class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-3.5 sm:px-6 lg:px-8">
           <a href="#top"
-            class="flex items-center gap-2.5 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-600 focus-visible:ring-offset-2">
-            <img src="https://matcap.global/images/brand/logo-h.png" alt="MatCap Global" class="h-8 w-auto sm:h-9">
+            class="flex items-center gap-2.5 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-300 focus-visible:ring-offset-2">
+            <img src="new/assets/fintoo-logo-white.svg" alt="Fintoo" class="h-8 w-auto sm:h-9">
 
           </a>
           <div class="hidden items-center gap-8 text-sm text-white/70  lg:flex">
             <a href="#markets"
-              class="rounded transition hover:text-secondary-600 focus:outline-none focus-visible:text-secondary-600 focus-visible:underline">Markets</a>
+              class="rounded transition hover:text-primary-300 focus:outline-none focus-visible:text-primary-300 focus-visible:underline">Markets</a>
             <a href="#services"
-              class="rounded transition hover:text-secondary-600 focus:outline-none focus-visible:text-secondary-600 focus-visible:underline">Services</a>
+              class="rounded transition hover:text-primary-300 focus:outline-none focus-visible:text-primary-300 focus-visible:underline">Services</a>
             <a href="#process"
-              class="rounded transition hover:text-secondary-600 focus:outline-none focus-visible:text-secondary-600 focus-visible:underline">How
+              class="rounded transition hover:text-primary-300 focus:outline-none focus-visible:text-primary-300 focus-visible:underline">How
               it works</a>
             <a href="#faq"
-              class="rounded transition hover:text-secondary-600 focus:outline-none focus-visible:text-secondary-600 focus-visible:underline">FAQ</a>
+              class="rounded transition hover:text-primary-300 focus:outline-none focus-visible:text-primary-300 focus-visible:underline">FAQ</a>
           </div>
           <a href="#book" data-book
             class="hidden min-h-11 items-center rounded-lg bg-primary-400 px-5 text-sm font-bold text-secondary-950 transition hover:bg-primary-300 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-600 focus-visible:ring-offset-2 sm:inline-flex">Book
@@ -114,19 +116,26 @@
 
       <!-- ================= 1 + 2. HERO WITH LEAD FORM ================= -->
       <section id="top" aria-labelledby="hero-title"
-        class="relative isolate overflow-hidden border-b border-primary-200/70 bg-primary-50/70">
-        <!-- Decorative hairline grid -->
+        class="relative isolate overflow-hidden border-b border-white/10 bg-[#02132c]">
+        <img src="assets/matcap/global-advisory-hero-fintoo.png" alt="" aria-hidden="true" width="2104" height="747"
+          class="absolute inset-0 -z-30 h-full w-full object-cover object-[72%_center] opacity-70 [mask-image:linear-gradient(to_right,transparent_0%,black_42%,black_100%)]">
         <div aria-hidden="true"
-          class="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgb(201_168_90/0.16)_0.0625rem,transparent_0.0625rem),linear-gradient(to_bottom,rgb(201_168_90/0.16)_0.0625rem,transparent_0.0625rem)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_at_top_right,black_10%,transparent_70%)]">
+          class="absolute inset-0 -z-20 bg-[linear-gradient(90deg,#02132c_0%,rgba(2,19,44,0.98)_38%,rgba(4,43,98,0.72)_68%,rgba(2,19,44,0.38)_100%)]">
+        </div>
+        <div aria-hidden="true"
+          class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_78%_24%,rgba(221,115,0,0.12),transparent_34%),linear-gradient(to_top,rgba(2,19,44,0.9),transparent_48%)]">
+        </div>
+        <div aria-hidden="true"
+          class="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(255,255,255,0.045)_0.0625rem,transparent_0.0625rem),linear-gradient(to_bottom,rgba(255,255,255,0.045)_0.0625rem,transparent_0.0625rem)] bg-[length:4.5rem_4.5rem] [-webkit-mask-image:radial-gradient(ellipse_at_30%_0%,black,transparent_72%)] [mask-image:radial-gradient(ellipse_at_30%_0%,black,transparent_72%)]">
         </div>
 
         <div
-          class="mx-auto grid max-w-7xl items-start gap-12 px-4 pb-16 pt-10 sm:px-6 sm:pt-14 lg:grid-cols-12 lg:gap-14 lg:px-8 lg:pb-24 lg:pt-20">
+          class="mx-auto grid max-w-7xl items-start gap-10 px-4 pb-12 pt-8 sm:px-6 sm:pt-10 lg:grid-cols-12 lg:gap-12 lg:px-8 lg:pb-16 lg:pt-14">
 
           <!-- Hero copy -->
           <div class="flex min-w-0 flex-col gap-7 lg:col-span-7 lg:pt-6 motion-safe:animate-fade-up">
             <p
-              class="inline-flex w-fit items-center gap-2.5 rounded-full border border-primary-300 bg-white px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest text-primary-700">
+              class="inline-flex w-fit items-center gap-2.5 rounded-full border border-primary-300/60 bg-secondary-950/50 px-3.5 py-1.5 text-xs font-bold uppercase tracking-widest text-primary-200 backdrop-blur">
               <svg aria-hidden="true" class="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"></path>
@@ -136,25 +145,25 @@
             </p>
 
             <h1 id="hero-title"
-              class="text-balance text-4xl font-bold leading-tight tracking-tight text-secondary-950 sm:text-5xl lg:text-6xl">
+              class="text-balance text-4xl font-extrabold leading-tight tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
               Invest
               <span class="relative inline-block whitespace-nowrap">
                 <span aria-hidden="true"
                   class="absolute inset-x-0 bottom-1 -z-10 h-2/5 origin-left -skew-x-6 rounded-sm bg-primary-200 motion-safe:animate-marker"></span>
-                <span class="font-display font-semibold italic tracking-normal text-secondary-600">beyond</span>
+                <span class="font-display font-semibold italic tracking-normal text-primary-300">beyond</span>
               </span>
               India,<br class="hidden sm:block">
-              <span class="text-secondary-600">with a plan built for you.</span>
+              <span class="text-primary-200">with a plan built for you.</span>
             </h1>
 
-            <p class="max-w-xl text-lg leading-relaxed text-stone-700">A SEBI-registered adviser for your global
+            <p class="max-w-xl text-lg font-medium leading-relaxed text-white/75">A SEBI-registered adviser for your global
               investments. US, European and Asian markets, plus your ESOPs and RSUs, in one portfolio held in your name.
             </p>
 
             <div class="flex flex-wrap items-center gap-3">
               <a href="#book" data-book
                 class="group inline-flex min-h-12 items-center gap-2.5 rounded-lg bg-primary-400 px-7 font-bold text-secondary-950 shadow-lg shadow-primary-500/25 transition hover:bg-primary-300 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-600 focus-visible:ring-offset-2">
-                Book Your Consultation
+                Book a 30-min complimentary session
                 <svg aria-hidden="true" class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
                   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"
                   stroke-linejoin="round">
@@ -163,7 +172,7 @@
                 </svg>
               </a>
               <a href="#invest-abroad"
-                class="group inline-flex min-h-12 items-center gap-2 rounded-lg border border-secondary-200 bg-white px-6 font-bold text-secondary-700 transition hover:border-secondary-400 hover:bg-secondary-50 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-600 focus-visible:ring-offset-2">
+                class="group inline-flex min-h-12 items-center gap-2 rounded-lg border border-white/30 bg-white/10 px-6 font-bold text-white backdrop-blur transition hover:border-primary-300 hover:bg-white/15 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-300 focus-visible:ring-offset-2">
                 How investing abroad works
                 <svg aria-hidden="true" class="h-4 w-4 transition-transform group-hover:translate-y-0.5"
                   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"
@@ -175,7 +184,7 @@
             </div>
 
             <ul
-              class="flex flex-col gap-3 border-t border-primary-200 pt-6 text-sm text-stone-700 sm:flex-row sm:flex-wrap sm:gap-x-7">
+              class="flex flex-col gap-3 border-t border-white/20 pt-6 text-sm text-white/70 sm:flex-row sm:flex-wrap sm:gap-x-7">
               <li class="flex items-center gap-2">
                 <svg aria-hidden="true" class="h-4 w-4 shrink-0 text-primary-600" viewBox="0 0 24 24" fill="none"
                   stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -343,7 +352,7 @@
       <!-- ================= 4. CAN INDIANS INVEST ABROAD? ================= -->
       <section id="invest-abroad" aria-labelledby="abroad-title"
         class="scroll-mt-24 border-t border-stone-200 bg-white">
-        <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
           <div data-reveal class="max-w-3xl">
             <p class="flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-primary-700">
               <span aria-hidden="true" class="h-px w-8 bg-primary-500"></span>
@@ -385,9 +394,10 @@
                 </svg>
               </span>
               <h3 class="text-xs font-bold uppercase tracking-widest text-primary-700">The tax:</h3>
-              <p class="text-3xl font-bold tabular-nums tracking-tight text-secondary-950 lg:text-4xl">₹10 lakh.</p>
-              <p class="leading-relaxed text-stone-700">No TCS up to ₹10 lakh a year. Above that, 20% TCS applies, which
-                you can claim back in your tax return.</p>
+              <p class="text-3xl font-bold tabular-nums tracking-tight text-secondary-950 lg:text-4xl">Up to ₹10 lakh.</p>
+              <p class="leading-relaxed text-stone-700">Invest up to ₹10 lakh overseas in a financial year without TCS.
+                A 20% TCS applies only to the amount exceeding ₹10 lakh and can be claimed as a tax credit when filing
+                your income tax return.</p>
             </article>
             <article class="flex flex-col gap-4 bg-primary-50 p-7 lg:p-9">
               <span aria-hidden="true" class="grid h-11 w-11 place-items-center rounded-lg bg-white text-primary-700">
@@ -422,7 +432,7 @@
       <!-- ================= 5. MARKETS ================= -->
       <section id="markets" aria-labelledby="markets-title" class="scroll-mt-24 border-y border-stone-200 bg-stone-50">
         <div
-          class="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8 lg:py-28">
+          class="mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-8 lg:py-20">
           <div data-reveal class="flex min-w-0 flex-col gap-5 lg:col-span-5">
             <p class="flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-primary-700">
               <span aria-hidden="true" class="h-px w-8 bg-primary-500"></span>
@@ -450,15 +460,15 @@
               <path d="M206 132 Q240 140 268 186" stroke="#C9A85A" stroke-width="1.5" stroke-dasharray="3 5"></path>
               <path d="M268 186 Q290 160 302 166" stroke="#C9A85A" stroke-width="1.5" stroke-dasharray="3 5"></path>
               <path d="M268 186 Q262 232 230 262" stroke="#C9A85A" stroke-width="1.5" stroke-dasharray="3 5"></path>
-              <circle cx="118" cy="158" r="12" fill="#DABE75" fill-opacity="0.35"
+              <circle cx="118" cy="158" r="12" fill="#dd7300" fill-opacity="0.35"
                 class="origin-center [transform-box:fill-box] motion-safe:animate-ping"></circle>
-              <circle cx="268" cy="186" r="12" fill="#DABE75" fill-opacity="0.35"
+              <circle cx="268" cy="186" r="12" fill="#dd7300" fill-opacity="0.35"
                 class="origin-center [transform-box:fill-box] motion-safe:animate-ping motion-safe:[animation-delay:900ms]">
               </circle>
-              <circle cx="118" cy="158" r="5.5" fill="#492873" stroke="#FFFFFF" stroke-width="2"></circle>
-              <circle cx="206" cy="132" r="5.5" fill="#492873" stroke="#FFFFFF" stroke-width="2"></circle>
-              <circle cx="302" cy="166" r="5.5" fill="#492873" stroke="#FFFFFF" stroke-width="2"></circle>
-              <circle cx="268" cy="186" r="5.5" fill="#492873" stroke="#FFFFFF" stroke-width="2"></circle>
+              <circle cx="118" cy="158" r="5.5" fill="#042b62" stroke="#FFFFFF" stroke-width="2"></circle>
+              <circle cx="206" cy="132" r="5.5" fill="#042b62" stroke="#FFFFFF" stroke-width="2"></circle>
+              <circle cx="302" cy="166" r="5.5" fill="#042b62" stroke="#FFFFFF" stroke-width="2"></circle>
+              <circle cx="268" cy="186" r="5.5" fill="#042b62" stroke="#FFFFFF" stroke-width="2"></circle>
               <circle cx="230" cy="262" r="5.5" fill="#C9A85A" stroke="#FFFFFF" stroke-width="2"></circle>
             </svg>
           </div>
@@ -551,7 +561,7 @@
 
       <!-- ================= 6. SERVICES ================= -->
       <section id="services" aria-labelledby="services-title" class="scroll-mt-24 bg-white">
-        <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
           <div data-reveal class="max-w-3xl">
             <p class="flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-primary-700">
               <span aria-hidden="true" class="h-px w-8 bg-primary-500"></span>
@@ -612,146 +622,38 @@
         </div>
       </section>
 
-      <!-- ================= 7. APPS VS MATCAP ================= -->
-      <section aria-labelledby="compare-title" class="border-y border-primary-200/70 bg-primary-50/60">
-        <div class="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8 lg:py-28">
-          <div data-reveal class="flex min-w-0 flex-col gap-5 lg:col-span-5">
+      <!-- ================= 7. BOOK A CONSULTATION ================= -->
+      <section id="schedule" aria-labelledby="schedule-title"
+        class="scroll-mt-24 border-y border-primary-200/70 bg-primary-50/60">
+        <div class="mx-auto grid max-w-7xl items-start gap-10 px-4 py-14 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-8 lg:py-20">
+          <div data-reveal class="flex min-w-0 flex-col gap-5 lg:col-span-4 lg:sticky lg:top-28">
             <p class="flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-primary-700">
               <span aria-hidden="true" class="h-px w-8 bg-primary-500"></span>
-              Apps vs MatCap
+              Book a consultation
             </p>
-            <h2 id="compare-title"
-              class="text-balance text-3xl font-bold tracking-tight text-secondary-950 sm:text-4xl lg:text-5xl">Apps
-              give you access. We give you a strategy.</h2>
-            <p class="max-w-md text-lg leading-relaxed text-stone-700">Investing apps let you buy US stocks yourself.
-              MatCap builds and manages a global portfolio around your goals.</p>
+            <h2 id="schedule-title"
+              class="text-balance text-3xl font-bold tracking-tight text-secondary-950 sm:text-4xl lg:text-5xl">
+              Choose a time that works for you.</h2>
+            <p class="max-w-md text-lg leading-relaxed text-stone-700">Schedule a complimentary conversation with an
+              advisor about your global investments, ESOPs or RSUs.</p>
+            <ul class="flex flex-col gap-3 text-sm text-stone-700">
+              <li class="flex items-center gap-2"><span aria-hidden="true" class="text-primary-700">✓</span> Pick an available slot instantly</li>
+              <li class="flex items-center gap-2"><span aria-hidden="true" class="text-primary-700">✓</span> Receive a calendar confirmation</li>
+              <li class="flex items-center gap-2"><span aria-hidden="true" class="text-primary-700">✓</span> No obligation to proceed</li>
+            </ul>
           </div>
-
-          <div data-reveal class="min-w-0 lg:col-span-7">
-            <!-- Desktop / tablet table -->
-            <div
-              class="hidden overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-xl shadow-secondary-900/5 md:block">
-              <table class="w-full table-fixed text-left">
-                <thead>
-                  <tr class="border-b border-stone-200">
-                    <td class="w-2/5 px-6 py-5"></td>
-                    <th scope="col" class="px-6 py-5 text-sm font-bold uppercase tracking-widest text-stone-500">
-                      Investing apps</th>
-                    <th scope="col"
-                      class="border-t-4 border-primary-400 bg-secondary-50 px-6 py-5 text-sm font-bold uppercase tracking-widest text-secondary-600">
-                      MatCap</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-stone-100">
-                  <tr>
-                    <th scope="row" class="px-6 py-5 font-bold text-secondary-950">Who builds the portfolio</th>
-                    <td class="px-6 py-5 text-stone-600">You</td>
-                    <td class="bg-secondary-50 px-6 py-5 font-bold text-secondary-950">A SEBI-registered adviser</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="px-6 py-5 font-bold text-secondary-950">Markets</th>
-                    <td class="px-6 py-5 text-stone-600">Mostly US</td>
-                    <td class="bg-secondary-50 px-6 py-5 font-bold text-secondary-950">US, Europe, Asia, emerging
-                      markets</td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="px-6 py-5 font-bold text-secondary-950">ESOP &amp; RSU planning</th>
-                    <td class="px-6 py-5"><span class="inline-flex items-center gap-2 text-stone-600"><svg
-                          aria-hidden="true" class="h-4 w-4 shrink-0 text-stone-400" viewBox="0 0 24 24" fill="none"
-                          stroke="currentColor" stroke-width="2.25" stroke-linecap="round">
-                          <path d="M6 6l12 12"></path>
-                          <path d="M18 6L6 18"></path>
-                        </svg>No</span></td>
-                    <td class="bg-secondary-50 px-6 py-5"><span
-                        class="inline-flex items-center gap-2 font-bold text-secondary-950"><svg aria-hidden="true"
-                          class="h-4 w-4 shrink-0 text-primary-600" viewBox="0 0 24 24" fill="none"
-                          stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M5 12l5 5L20 7"></path>
-                        </svg>Yes</span></td>
-                  </tr>
-                  <tr>
-                    <th scope="row" class="px-6 py-5 font-bold text-secondary-950">Ongoing advice</th>
-                    <td class="px-6 py-5"><span class="inline-flex items-center gap-2 text-stone-600"><svg
-                          aria-hidden="true" class="h-4 w-4 shrink-0 text-stone-400" viewBox="0 0 24 24" fill="none"
-                          stroke="currentColor" stroke-width="2.25" stroke-linecap="round">
-                          <path d="M6 6l12 12"></path>
-                          <path d="M18 6L6 18"></path>
-                        </svg>No</span></td>
-                    <td class="bg-secondary-50 px-6 py-5"><span
-                        class="inline-flex items-center gap-2 font-bold text-secondary-950"><svg aria-hidden="true"
-                          class="h-4 w-4 shrink-0 text-primary-600" viewBox="0 0 24 24" fill="none"
-                          stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M5 12l5 5L20 7"></path>
-                        </svg>Yes, a dedicated advisor</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <!-- Mobile stacked comparison -->
-            <div class="flex flex-col gap-3 md:hidden">
-              <div class="overflow-hidden rounded-xl border border-stone-200 bg-white">
-                <h3 class="border-b border-stone-200 px-5 py-3.5 font-bold text-secondary-950">Who builds the portfolio
-                </h3>
-                <dl class="grid grid-cols-2">
-                  <div class="border-r border-stone-200 p-4">
-                    <dt class="text-xs font-bold uppercase tracking-widest text-stone-500">Investing apps</dt>
-                    <dd class="mt-1.5 text-stone-700">You</dd>
-                  </div>
-                  <div class="bg-secondary-50 p-4">
-                    <dt class="text-xs font-bold uppercase tracking-widest text-secondary-600">MatCap</dt>
-                    <dd class="mt-1.5 font-bold text-secondary-950">A SEBI-registered adviser</dd>
-                  </div>
-                </dl>
-              </div>
-              <div class="overflow-hidden rounded-xl border border-stone-200 bg-white">
-                <h3 class="border-b border-stone-200 px-5 py-3.5 font-bold text-secondary-950">Markets</h3>
-                <dl class="grid grid-cols-2">
-                  <div class="border-r border-stone-200 p-4">
-                    <dt class="text-xs font-bold uppercase tracking-widest text-stone-500">Investing apps</dt>
-                    <dd class="mt-1.5 text-stone-700">Mostly US</dd>
-                  </div>
-                  <div class="bg-secondary-50 p-4">
-                    <dt class="text-xs font-bold uppercase tracking-widest text-secondary-600">MatCap</dt>
-                    <dd class="mt-1.5 font-bold text-secondary-950">US, Europe, Asia, emerging markets</dd>
-                  </div>
-                </dl>
-              </div>
-              <div class="overflow-hidden rounded-xl border border-stone-200 bg-white">
-                <h3 class="border-b border-stone-200 px-5 py-3.5 font-bold text-secondary-950">ESOP &amp; RSU planning
-                </h3>
-                <dl class="grid grid-cols-2">
-                  <div class="border-r border-stone-200 p-4">
-                    <dt class="text-xs font-bold uppercase tracking-widest text-stone-500">Investing apps</dt>
-                    <dd class="mt-1.5 text-stone-700">No</dd>
-                  </div>
-                  <div class="bg-secondary-50 p-4">
-                    <dt class="text-xs font-bold uppercase tracking-widest text-secondary-600">MatCap</dt>
-                    <dd class="mt-1.5 font-bold text-secondary-950">Yes</dd>
-                  </div>
-                </dl>
-              </div>
-              <div class="overflow-hidden rounded-xl border border-stone-200 bg-white">
-                <h3 class="border-b border-stone-200 px-5 py-3.5 font-bold text-secondary-950">Ongoing advice</h3>
-                <dl class="grid grid-cols-2">
-                  <div class="border-r border-stone-200 p-4">
-                    <dt class="text-xs font-bold uppercase tracking-widest text-stone-500">Investing apps</dt>
-                    <dd class="mt-1.5 text-stone-700">No</dd>
-                  </div>
-                  <div class="bg-secondary-50 p-4">
-                    <dt class="text-xs font-bold uppercase tracking-widest text-secondary-600">MatCap</dt>
-                    <dd class="mt-1.5 font-bold text-secondary-950">Yes, a dedicated advisor</dd>
-                  </div>
-                </dl>
-              </div>
-            </div>
+          <div data-reveal class="min-w-0 overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-xl shadow-secondary-900/10 lg:col-span-8">
+            <iframe
+              src="https://calendly.com/fintoo-advisory/complimentary-consultation?hide_gdpr_banner=1&amp;hide_landing_page_details=1&amp;primary_color=dabe75&amp;text_color=140a24"
+              title="Book a complimentary MatCap consultation" loading="lazy"
+              class="block h-[43rem] w-full border-0 sm:h-[46rem]"></iframe>
           </div>
         </div>
       </section>
 
       <!-- ================= 8. HOW IT WORKS ================= -->
       <section id="process" aria-labelledby="process-title" class="scroll-mt-24 bg-white">
-        <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
           <div data-reveal class="max-w-3xl">
             <p class="flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-primary-700">
               <span aria-hidden="true" class="h-px w-8 bg-primary-500"></span>
@@ -835,7 +737,7 @@
 
       <!-- ================= 9. FAQ ================= -->
       <section id="faq" aria-labelledby="faq-title" class="scroll-mt-24 border-t border-stone-200 bg-stone-50">
-        <div class="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8 lg:py-28">
+        <div class="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-12 lg:gap-12 lg:px-8 lg:py-20">
           <div data-reveal class="flex min-w-0 flex-col gap-4 lg:col-span-4">
             <p class="flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-primary-700">
               <span aria-hidden="true" class="h-px w-8 bg-primary-500"></span>
@@ -949,7 +851,7 @@
 
       <!-- ================= 10. FINAL CTA ================= -->
       <section id="contact" aria-labelledby="final-title"
-        class="scroll-mt-24 bg-white px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+        class="scroll-mt-24 bg-white px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
         <div data-reveal
           class="relative isolate mx-auto max-w-7xl overflow-hidden rounded-3xl border border-primary-200 bg-primary-50">
           <svg aria-hidden="true"
@@ -971,7 +873,7 @@
                   together.</span></h2>
               <a href="#book" data-book
                 class="group inline-flex min-h-12 w-fit items-center gap-2.5 rounded-lg bg-primary-400 px-7 font-bold text-secondary-950 shadow-lg shadow-primary-500/25 transition hover:bg-primary-300 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-600 focus-visible:ring-offset-2">
-                Book Your Consultation
+                Book a 30-min complimentary session
                 <svg aria-hidden="true" class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
                   viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"
                   stroke-linejoin="round">
@@ -1018,9 +920,7 @@
       <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 pb-32 pt-12 sm:px-6 md:pb-12 lg:px-8">
         <a href="#top"
           class="flex w-fit items-center gap-2.5 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary-600 focus-visible:ring-offset-2">
-          <span aria-hidden="true"
-            class="grid h-8 w-8 place-items-center rounded-lg bg-secondary-600 text-xs font-bold text-primary-300">M</span>
-          <span class="font-bold">MatCap<span class="font-normal text-primary-700"> Global</span></span>
+          <img src="new/assets/fintoo-logo.svg" alt="Fintoo" class="h-10 w-auto">
         </a>
         <p class="text-sm font-bold leading-relaxed text-secondary-950">MatCap Wealth Advisors Pvt. Ltd. · SEBI RIA
           Registration No: INA000021890 · BSE Enlistment No. 2442 · Andheri (East), Mumbai 400059</p>
