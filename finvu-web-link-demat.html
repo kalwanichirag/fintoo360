@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Link your demat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { DEFAULT: '#042b62', 50: '#eef3fa', 100: '#d9e3f2', 700: '#03224e', 900: '#02152f' },
+            saffron: { DEFAULT: '#dd7300', 50: '#fdf4ea', 100: '#fbe3c8' }
+          },
+          fontFamily: {
+            sans: ['"Google Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif']
+          },
+          keyframes: {
+            shake: {
+              '0%, 100%': { transform: 'translateX(0)' },
+              '20%, 60%': { transform: 'translateX(-0.375rem)' },
+              '40%, 80%': { transform: 'translateX(0.375rem)' }
+            },
+            rise: {
+              '0%': { opacity: '0', transform: 'translateY(0.5rem)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            }
+          },
+          animation: {
+            shake: 'shake 0.4s ease-in-out',
+            rise: 'rise 0.3s ease-out both'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen bg-slate-200 font-sans text-slate-900 antialiased">
+
+  <!-- Dev-only preview controls: remove in production -->
+  <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 pt-6 text-sm">
+    <p class="text-slate-600"><span class="font-medium text-slate-800">Prototype</span> · dev controls, remove before shipping</p>
+    <div class="flex rounded-full bg-white p-1 shadow-sm" role="group" aria-label="User type">
+      <button type="button" data-user="new" class="user-toggle rounded-full px-4 py-1.5 font-medium">First-time user</button>
+      <button type="button" data-user="returning" class="user-toggle rounded-full px-4 py-1.5 font-medium">Returning user</button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="flex min-h-[calc(100vh-4rem)] items-center justify-center p-4">
+    <section role="dialog" aria-modal="true" aria-labelledby="modalTitle" class="w-full max-w-5xl overflow-hidden rounded-3xl bg-white shadow-2xl">
+
+      <!-- Modal header -->
+      <header class="relative flex items-center justify-center bg-navy px-6 py-5">
+        <h1 id="modalTitle" class="text-xl font-medium text-white">Link your demat</h1>
+        <button type="button" aria-label="Close" class="absolute right-4 grid h-10 w-10 place-items-center rounded-full text-white/80 hover:bg-white/10 hover:text-white">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </header>
+
+      <!-- Mobile progress -->
+      <div class="flex items-center gap-3 border-b border-slate-100 px-5 py-3 md:hidden">
+        <span id="mStepLabel" class="text-xs font-medium text-navy">Step 1 of 6</span>
+        <div class="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-100">
+          <div id="mStepBar" class="h-full w-1/6 rounded-full bg-navy transition-all"></div>
+        </div>
+      </div>
+
+      <div class="flex min-h-[36rem]">
+
+        <!-- Left rail: stepper -->
+        <aside class="hidden w-80 shrink-0 flex-col justify-between border-r border-slate-100 bg-slate-50/70 px-8 py-10 md:flex">
+          <ol id="stepper" class="flex flex-col"></ol>
+
+          <div class="mt-10 rounded-2xl border border-slate-200 bg-white p-4">
+            <p class="text-xs text-slate-500">Powered by</p>
+            <div class="mt-1 flex items-center gap-2">
+              <span class="flex items-center gap-1 text-lg font-bold tracking-tight text-[#2E3A8C]">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4l-8 8 8 8"/><path d="M20 4l-8 8 8 8"/></svg>
+                finvu
+              </span>
+            </div>
+            <p class="mt-1 flex items-center gap-1.5 text-xs font-medium text-emerald-700">
+              <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5l8-3zm-1.2 13.6l5.6-5.6-1.4-1.4-4.2 4.2-2-2-1.4 1.4 3.4 3.4z"/></svg>
+              RBI Regulated NBFC-AA
+            </p>
+          </div>
+        </aside>
+
+        <!-- Right: content -->
+        <div class="flex min-w-0 flex-1 flex-col">
+
+          <!-- AA strip: shown on Finvu-handled steps -->
+          <div id="aaStrip" class="hidden items-center gap-2 border-b border-slate-100 bg-[#2E3A8C]/5 px-8 py-2.5 text-xs text-slate-600">
+            <svg class="h-4 w-4 text-[#2E3A8C]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>
+            You're on a secure step handled by <span class="font-medium text-[#2E3A8C]">Finvu</span>, an RBI Regulated NBFC-AA. Fintoo never sees your PIN or passkey.
+          </div>
+
+          <!-- ============ STEP 1: Basic details ============ -->
+          <div data-step="1" class="step flex flex-1 flex-col px-6 py-8 sm:px-10">
+            <div class="animate-rise">
+              <h2 class="text-2xl font-medium">Your basic details</h2>
+              <p class="mt-1 text-sm text-slate-600">We use these to find your demat accounts at CDSL and NSDL.</p>
+
+              <div class="mt-8 grid gap-5">
+                <div>
+                  <label for="f-name" class="text-sm font-medium text-slate-700">Name</label>
+                  <select id="f-name" class="mt-1.5 h-12 w-full rounded-xl border border-slate-300 bg-white px-4 text-sm focus:border-navy focus:outline-none focus:ring-4 focus:ring-navy/10">
+                    <option>Chirag K. Kalwani</option>
+                  </select>
+                </div>
+                <div class="grid gap-5 sm:grid-cols-2">
+                  <div>
+                    <label for="f-pan" class="text-sm font-medium text-slate-700">PAN</label>
+                    <input id="f-pan" value="ABCDE1234F" class="mt-1.5 h-12 w-full rounded-xl border border-slate-300 px-4 text-sm uppercase tracking-wider focus:border-navy focus:outline-none focus:ring-4 focus:ring-navy/10">
+                  </div>
+                  <div>
+                    <label for="f-mobile" class="text-sm font-medium text-slate-700">Mobile number</label>
+                    <div class="mt-1.5 flex h-12 overflow-hidden rounded-xl border border-slate-300 focus-within:border-navy focus-within:ring-4 focus-within:ring-navy/10">
+                      <span class="grid place-items-center border-r border-slate-200 bg-slate-50 px-3 text-sm text-slate-500">+91</span>
+                      <input id="f-mobile" inputmode="numeric" value="9876543210" class="w-full px-4 text-sm focus:outline-none">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-6 flex gap-3 rounded-2xl bg-saffron-50 p-4 text-sm text-slate-700">
+                <svg class="mt-0.5 h-5 w-5 shrink-0 text-saffron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+                <div>
+                  <p class="font-medium text-slate-900">Use the number linked to your demat account</p>
+                  <p class="mt-0.5 text-slate-600">You'll get an OTP from Finvu on this number, then verify with a passkey or PIN. Keep your phone nearby.</p>
+                </div>
+              </div>
+            </div>
+            <div class="mt-auto flex justify-end gap-3 pt-10">
+              <button type="button" class="h-12 rounded-full border border-slate-300 px-7 text-sm font-medium text-slate-700 hover:bg-slate-50">Cancel</button>
+              <button type="button" data-next="2" class="h-12 rounded-full bg-navy px-8 text-sm font-medium text-white hover:bg-navy-700 focus:outline-none focus-visible:ring-4 focus-visible:ring-navy/30">Send OTP</button>
+            </div>
+          </div>
+
+          <!-- ============ STEP 2: OTP ============ -->
+          <div data-step="2" class="step hidden flex-1 flex-col px-6 py-8 sm:px-10">
+            <div class="animate-rise">
+              <h2 class="text-2xl font-medium">Enter the OTP from Finvu</h2>
+              <p class="mt-1 text-sm text-slate-600">Sent to <span class="font-medium text-slate-900">+91 98XXXXXX10</span> · <button type="button" data-next="1" class="font-medium text-navy hover:underline">Change</button></p>
+
+              <div id="otpBoxes" class="mt-8 flex gap-2 sm:gap-3"></div>
+              <p id="otpError" class="mt-3 min-h-[1.25rem] text-sm text-red-600" role="alert"></p>
+              <p class="text-sm text-slate-500">Didn't get it? <span id="otpTimer" class="font-medium text-slate-700">Resend in 0:30</span></p>
+
+              <p class="mt-8 flex items-start gap-2 text-xs text-slate-500">
+                <svg class="mt-0.5 h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L2.4 17.5A2 2 0 004.1 20.5h15.8a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg>
+                Never share this OTP. Fintoo or Finvu will never call you to ask for it.
+              </p>
+            </div>
+            <div class="mt-auto flex flex-col-reverse items-stretch justify-between gap-4 pt-10 sm:flex-row sm:items-center">
+              <p class="text-xs text-slate-500">By continuing you agree to Finvu's <a href="#terms" class="font-medium text-navy hover:underline">Terms &amp; Conditions</a></p>
+              <div class="flex justify-end gap-3">
+                <button type="button" data-next="1" class="h-12 rounded-full border border-slate-300 px-7 text-sm font-medium text-slate-700 hover:bg-slate-50">Back</button>
+                <button type="button" id="otpSubmit" class="h-12 rounded-full bg-navy px-8 text-sm font-medium text-white hover:bg-navy-700 disabled:cursor-not-allowed disabled:bg-slate-300" disabled>Verify OTP</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============ STEP 3: Second factor ============ -->
+          <div data-step="3" class="step hidden flex-1 flex-col px-6 py-8 sm:px-10">
+
+            <!-- 3A: choose method (first-time) -->
+            <div data-sub="choose" class="sub flex flex-1 flex-col">
+              <div class="animate-rise">
+                <h2 class="text-2xl font-medium">Add a second layer of security</h2>
+                <p class="mt-1 text-sm text-slate-600">Account Aggregator rules now need two checks to log in. Pick how you'll confirm it's you next time.</p>
+
+                <div id="passkeyFailed" class="mt-6 hidden gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm" role="alert">
+                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-amber-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L2.4 17.5A2 2 0 004.1 20.5h15.8a2 2 0 001.7-3L13.7 3.9a2 2 0 00-3.4 0z"/></svg>
+                  <div>
+                    <p class="font-medium text-amber-900">Passkey wasn't set up</p>
+                    <p class="mt-0.5 text-amber-800">This browser or device may not support it, or the prompt was closed. Set a PIN instead, or try again.</p>
+                  </div>
+                </div>
+
+                <fieldset class="mt-8 grid gap-4 lg:grid-cols-2">
+                  <legend class="sr-only">Verification method</legend>
+
+                  <label class="method group relative cursor-pointer rounded-2xl border-2 border-slate-200 p-5 transition hover:border-slate-300 has-[:checked]:border-navy has-[:checked]:bg-navy-50/50">
+                    <input type="radio" name="method" value="passkey" class="peer sr-only" checked>
+                    <span class="absolute right-4 top-4 rounded-full bg-saffron px-2.5 py-0.5 text-[0.6875rem] font-medium text-white">Recommended</span>
+                    <span class="grid h-12 w-12 place-items-center rounded-xl bg-navy text-white">
+                      <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M6.5 9.5a6 6 0 0111 0"/><path d="M8 13a4 4 0 018 0v2"/><path d="M12 13v5"/><path d="M5 13.5c0 3 .5 5 1.5 6.5"/><path d="M19 14c0 2-.3 3.6-1 5"/><path d="M10 15.5c0 1.6-.2 3-.8 4.2"/></svg>
+                    </span>
+                    <span class="mt-4 block text-base font-medium">Passkey</span>
+                    <span class="mt-1 block text-sm text-slate-600">Use your fingerprint, face or device screen lock. Nothing to remember.</span>
+                    <span class="mt-4 flex flex-wrap gap-2 text-xs text-slate-600">
+                      <span class="rounded-full bg-slate-100 px-2.5 py-1">Touch ID</span>
+                      <span class="rounded-full bg-slate-100 px-2.5 py-1">Windows Hello</span>
+                      <span class="rounded-full bg-slate-100 px-2.5 py-1">Phone screen lock</span>
+                    </span>
+                    <span class="pointer-events-none absolute bottom-4 right-4 grid h-6 w-6 place-items-center rounded-full border-2 border-slate-300 text-white peer-checked:border-navy peer-checked:bg-navy">
+                      <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+                    </span>
+                  </label>
+
+                  <label class="method group relative cursor-pointer rounded-2xl border-2 border-slate-200 p-5 transition hover:border-slate-300 has-[:checked]:border-navy has-[:checked]:bg-navy-50/50">
+                    <input type="radio" name="method" value="pin" class="peer sr-only">
+                    <span class="grid h-12 w-12 place-items-center rounded-xl bg-slate-100 text-navy">
+                      <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="8" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="16" cy="12" r="1" fill="currentColor"/></svg>
+                    </span>
+                    <span class="mt-4 block text-base font-medium">4-digit PIN</span>
+                    <span class="mt-1 block text-sm text-slate-600">Works on any browser or device. You'll enter it after the OTP each time.</span>
+                    <span class="mt-4 flex flex-wrap gap-2 text-xs text-slate-600">
+                      <span class="rounded-full bg-slate-100 px-2.5 py-1">Any device</span>
+                      <span class="rounded-full bg-slate-100 px-2.5 py-1">Office laptops</span>
+                    </span>
+                    <span class="pointer-events-none absolute bottom-4 right-4 grid h-6 w-6 place-items-center rounded-full border-2 border-slate-300 text-white peer-checked:border-navy peer-checked:bg-navy">
+                      <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+                    </span>
+                  </label>
+                </fieldset>
+              </div>
+              <div class="mt-auto flex justify-end gap-3 pt-10">
+                <button type="button" data-next="2" class="h-12 rounded-full border border-slate-300 px-7 text-sm font-medium text-slate-700 hover:bg-slate-50">Back</button>
+                <button type="button" id="methodContinue" class="h-12 rounded-full bg-navy px-8 text-sm font-medium text-white hover:bg-navy-700">Set up passkey</button>
+              </div>
+            </div>
+
+            <!-- 3B: PIN create / confirm / enter -->
+            <div data-sub="pin" class="sub hidden flex-1 flex-col">
+              <div class="animate-rise">
+                <h2 id="pinTitle" class="text-2xl font-medium">Create your Finvu PIN</h2>
+                <p id="pinSub" class="mt-1 text-sm text-slate-600">Choose 4 digits. Avoid 1234 or repeated numbers.</p>
+                <div id="pinBoxes" class="mt-8 flex gap-3"></div>
+                <p id="pinError" class="mt-3 min-h-[1.25rem] text-sm text-red-600" role="alert"></p>
+                <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                  <button type="button" id="pinShow" class="font-medium text-navy hover:underline">Show PIN</button>
+                  <a href="#forgot" id="pinForgot" class="hidden font-medium text-navy hover:underline">Forgot PIN?</a>
+                  <button type="button" id="pinToPasskey" class="hidden font-medium text-navy hover:underline">Use passkey instead</button>
+                </div>
+              </div>
+              <div class="mt-auto flex justify-end gap-3 pt-10">
+                <button type="button" id="pinBack" class="h-12 rounded-full border border-slate-300 px-7 text-sm font-medium text-slate-700 hover:bg-slate-50">Back</button>
+                <button type="button" id="pinSubmit" class="h-12 rounded-full bg-navy px-8 text-sm font-medium text-white hover:bg-navy-700 disabled:cursor-not-allowed disabled:bg-slate-300" disabled>Continue</button>
+              </div>
+            </div>
+
+            <!-- 3C: returning user -->
+            <div data-sub="returning" class="sub hidden flex-1 flex-col">
+              <div class="animate-rise flex flex-col items-center py-6 text-center">
+                <div class="relative grid h-24 w-24 place-items-center rounded-full bg-navy-50 text-navy">
+                  <span class="absolute inset-0 animate-ping rounded-full bg-navy/10" aria-hidden="true"></span>
+                  <svg class="relative h-12 w-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M6.5 9.5a6 6 0 0111 0"/><path d="M8 13a4 4 0 018 0v2"/><path d="M12 13v5"/><path d="M5 13.5c0 3 .5 5 1.5 6.5"/><path d="M19 14c0 2-.3 3.6-1 5"/><path d="M10 15.5c0 1.6-.2 3-.8 4.2"/></svg>
+                </div>
+                <h2 class="mt-6 text-2xl font-medium">Verify it's you</h2>
+                <p class="mt-1 max-w-sm text-sm text-slate-600">Confirm with your passkey to continue as <span class="font-medium text-slate-900">98XXXXXX10@finvu</span>.</p>
+                <button type="button" id="returnPasskey" class="mt-8 flex h-12 items-center gap-2 rounded-full bg-navy px-8 text-sm font-medium text-white hover:bg-navy-700">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2L20 3M17 6l3 3M15 8l2 2"/></svg>
+                  Use passkey
+                </button>
+                <button type="button" id="returnPin" class="mt-3 h-11 rounded-full px-6 text-sm font-medium text-navy hover:bg-navy-50">Use PIN instead</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============ STEP 4: Accounts ============ -->
+          <div data-step="4" class="step hidden flex-1 flex-col px-6 py-8 sm:px-10">
+            <div class="animate-rise">
+              <h2 class="text-2xl font-medium">We found your demat account</h2>
+              <p class="mt-1 text-sm text-slate-600">Select the accounts you want to share. Only accounts with holdings in the past year are shown.</p>
+
+              <div class="mt-8 overflow-hidden rounded-2xl border border-slate-200">
+                <div class="flex items-center justify-between bg-slate-50 px-5 py-3">
+                  <p class="text-sm font-medium">Central Depository Services Ltd (CDSL)</p>
+                  <span class="text-xs text-slate-500">1 account</span>
+                </div>
+                <label class="flex cursor-pointer items-center gap-4 px-5 py-4 hover:bg-slate-50">
+                  <input type="checkbox" id="acc1" class="h-5 w-5 rounded border-slate-300 accent-[#042b62]">
+                  <span class="flex-1">
+                    <span class="block text-sm font-medium">Demat account ····7556</span>
+                    <span class="block text-xs text-slate-500">Equities</span>
+                  </span>
+                  <span class="flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700">
+                    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+                    Already linked
+                  </span>
+                </label>
+              </div>
+              <p class="mt-3 text-xs text-slate-500">Linking only saves the account in your Finvu profile. No data is shared until you approve the consent on the next step.</p>
+            </div>
+            <div class="mt-auto flex justify-end gap-3 pt-10">
+              <button type="button" class="h-12 rounded-full border border-slate-300 px-7 text-sm font-medium text-slate-700 hover:bg-slate-50" data-next="3">Back</button>
+              <button type="button" id="accContinue" data-next="5" class="h-12 rounded-full bg-navy px-8 text-sm font-medium text-white hover:bg-navy-700 disabled:cursor-not-allowed disabled:bg-slate-300" disabled>Review consent</button>
+            </div>
+          </div>
+
+          <!-- ============ STEP 5: Consent ============ -->
+          <!-- Sample values: bind every field to the consent request returned by Finvu's API -->
+          <div data-step="5" class="step hidden flex-1 flex-col px-6 py-8 sm:px-10">
+            <div class="animate-rise">
+              <h2 class="text-2xl font-medium">Review and approve consent</h2>
+              <p class="mt-1 text-sm text-slate-600"><span class="font-medium text-slate-900">Fintoo</span> [legal entity name] is asking to access your demat data through Finvu.</p>
+
+              <div class="mt-6 rounded-2xl bg-navy p-5 text-white">
+                <p class="text-xs uppercase tracking-wider text-white/60">Purpose</p>
+                <p class="mt-1 text-lg font-medium">Track your stock portfolio and give financial advice</p>
+                <p class="mt-1 text-sm text-white/70">Your data will be used only for this purpose.</p>
+              </div>
+
+              <dl class="mt-4 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 text-sm lg:grid-cols-3">
+                <div class="bg-white p-4"><dt class="text-xs text-slate-500">Data shared</dt><dd class="mt-1 font-medium">Holdings &amp; transactions</dd></div>
+                <div class="bg-white p-4"><dt class="text-xs text-slate-500">From account</dt><dd class="mt-1 font-medium">CDSL demat ····7556</dd></div>
+                <div class="bg-white p-4"><dt class="text-xs text-slate-500">Data period</dt><dd class="mt-1 font-medium">Last 12 months</dd></div>
+                <div class="bg-white p-4"><dt class="text-xs text-slate-500">How often</dt><dd class="mt-1 font-medium">Once a day</dd></div>
+                <div class="bg-white p-4"><dt class="text-xs text-slate-500">Consent valid till</dt><dd class="mt-1 font-medium">16 Oct 2027</dd></div>
+                <div class="bg-white p-4"><dt class="text-xs text-slate-500">Fintoo keeps data for</dt><dd class="mt-1 font-medium">1 year</dd></div>
+              </dl>
+
+              <details class="group mt-3 rounded-2xl border border-slate-200 px-4 py-3 text-sm">
+                <summary class="flex cursor-pointer list-none items-center justify-between font-medium text-navy">
+                  See all consent details
+                  <svg class="h-4 w-4 transition group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+                </summary>
+                <dl class="mt-3 grid gap-2 text-slate-600 sm:grid-cols-2">
+                  <div><dt class="inline text-slate-500">Data type:</dt> <dd class="inline">Equities (SEBI regulated)</dd></div>
+                  <div><dt class="inline text-slate-500">Consent mode:</dt> <dd class="inline">Store</dd></div>
+                  <div><dt class="inline text-slate-500">Information:</dt> <dd class="inline">Profile, summary, transactions</dd></div>
+                  <div><dt class="inline text-slate-500">Fetch type:</dt> <dd class="inline">Periodic</dd></div>
+                  <div><dt class="inline text-slate-500">Requested on:</dt> <dd class="inline">16 Oct 2026</dd></div>
+                  <div><dt class="inline text-slate-500">Consent ID:</dt> <dd class="inline">[from API]</dd></div>
+                </dl>
+              </details>
+
+              <ul class="mt-5 grid gap-2 text-sm text-slate-600">
+                <li class="flex gap-2"><svg class="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>Fintoo can only read your data. It can't buy, sell or move anything.</li>
+                <li class="flex gap-2"><svg class="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>You can revoke this consent anytime from the Finvu app or website.</li>
+              </ul>
+            </div>
+            <div class="mt-auto flex flex-col-reverse justify-end gap-3 pt-8 sm:flex-row">
+              <button type="button" id="consentReject" class="h-12 rounded-full border border-slate-300 px-7 text-sm font-medium text-slate-700 hover:bg-slate-50">Reject</button>
+              <button type="button" id="consentApprove" class="h-12 rounded-full bg-navy px-8 text-sm font-medium text-white hover:bg-navy-700">Approve</button>
+            </div>
+          </div>
+
+          <!-- ============ STEP 6: Result ============ -->
+          <div data-step="6" class="step hidden flex-1 flex-col items-center justify-center px-6 py-10 text-center sm:px-10">
+            <div id="resultOk" class="animate-rise flex flex-col items-center">
+              <div class="grid h-20 w-20 place-items-center rounded-full bg-emerald-50 text-emerald-600">
+                <svg class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>
+              </div>
+              <h2 class="mt-6 text-2xl font-medium">Your demat is linked</h2>
+              <p class="mt-2 max-w-md text-sm text-slate-600">We're fetching your holdings now. Your portfolio will update on the dashboard in a few minutes.</p>
+              <button type="button" class="mt-8 h-12 rounded-full bg-navy px-8 text-sm font-medium text-white hover:bg-navy-700">Go to dashboard</button>
+              <p class="mt-4 text-xs text-slate-500">Changed your mind? <a href="#revoke" class="font-medium text-navy hover:underline">Manage or revoke consent on Finvu</a></p>
+            </div>
+            <div id="resultRejected" class="hidden animate-rise flex-col items-center">
+              <div class="grid h-20 w-20 place-items-center rounded-full bg-slate-100 text-slate-500">
+                <svg class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+              </div>
+              <h2 class="mt-6 text-2xl font-medium">No data was shared</h2>
+              <p class="mt-2 max-w-md text-sm text-slate-600">You rejected the consent, so Fintoo can't see your demat holdings. You can still add your stocks manually.</p>
+              <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+                <button type="button" class="h-12 rounded-full border border-slate-300 px-7 text-sm font-medium text-slate-700 hover:bg-slate-50">Add stocks manually</button>
+                <button type="button" data-next="5" class="h-12 rounded-full bg-navy px-8 text-sm font-medium text-white hover:bg-navy-700">Review consent again</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Browser / OS passkey prompt simulation (not built by Fintoo) -->
+  <div id="sheet" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/50 p-4" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div class="w-full max-w-sm animate-rise rounded-2xl bg-white p-6 shadow-2xl ring-1 ring-slate-200">
+      <div class="flex items-center gap-3">
+        <div class="grid h-10 w-10 place-items-center rounded-full bg-blue-50 text-blue-600">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2L20 3M17 6l3 3M15 8l2 2"/></svg>
+        </div>
+        <div>
+          <h3 id="sheetTitle" class="text-base font-medium">Create a passkey for finvu.in</h3>
+          <p class="text-xs text-slate-500">98XXXXXX10@finvu</p>
+        </div>
+      </div>
+      <p id="sheetText" class="mt-4 text-sm text-slate-600">Use your fingerprint, face or screen lock to save a passkey on this device.</p>
+      <div class="mt-6 flex justify-end gap-2">
+        <button type="button" id="sheetCancel" class="h-10 rounded-full px-5 text-sm font-medium text-blue-600 hover:bg-blue-50">Cancel</button>
+        <button type="button" id="sheetOk" class="h-10 rounded-full bg-blue-600 px-5 text-sm font-medium text-white hover:bg-blue-700">Continue</button>
+      </div>
+      <p class="mt-4 border-t border-slate-100 pt-3 text-center text-[0.6875rem] text-slate-400">Simulated. The real prompt is shown by Chrome / Safari / Windows.</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var steps = [
+        { n: 1, title: 'Basic details', sub: 'Name, PAN and mobile' },
+        { n: 2, title: 'OTP verification', sub: 'Code from Finvu' },
+        { n: 3, title: 'Secure your login', sub: 'Passkey or PIN' },
+        { n: 4, title: 'Select accounts', sub: 'Your demat accounts' },
+        { n: 5, title: 'Review consent', sub: 'What you share and why' },
+        { n: 6, title: 'Done', sub: 'Portfolio updating' }
+      ];
+      var state = { step: 1, user: 'new', pinMode: 'create', firstPin: '', showPin: false };
+
+      // ---------- Stepper ----------
+      var stepper = document.getElementById('stepper');
+      function renderStepper() {
+        stepper.innerHTML = '';
+        steps.forEach(function (s, i) {
+          var done = s.n < state.step;
+          var current = s.n === state.step;
+          var li = document.createElement('li');
+          li.className = 'relative flex gap-4 pb-8 last:pb-0';
+          if (current) li.setAttribute('aria-current', 'step');
+          var line = i < steps.length - 1
+            ? '<span class="absolute left-5 top-11 h-[calc(100%-2.75rem)] w-0.5 ' + (done ? 'bg-navy' : 'bg-slate-200') + '" aria-hidden="true"></span>'
+            : '';
+          var dot = done
+            ? '<span class="relative z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full bg-navy text-white"><svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg></span>'
+            : current
+              ? '<span class="relative z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full bg-navy text-sm font-medium text-white ring-4 ring-navy/15">' + s.n + '</span>'
+              : '<span class="relative z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 border-slate-200 bg-white text-sm font-medium text-slate-400">' + s.n + '</span>';
+          var text = '<span class="pt-1"><span class="block text-sm font-medium ' + (current ? 'text-navy' : done ? 'text-slate-900' : 'text-slate-400') + '">' + s.title + '</span>' +
+            '<span class="block text-xs ' + (current || done ? 'text-slate-500' : 'text-slate-400') + '">' + s.sub + '</span></span>';
+          li.innerHTML = line + dot + text;
+          stepper.appendChild(li);
+        });
+        document.getElementById('mStepLabel').textContent = 'Step ' + state.step + ' of 6 · ' + steps[state.step - 1].title;
+        var widths = ['w-1/6', 'w-2/6', 'w-3/6', 'w-4/6', 'w-5/6', 'w-full'];
+        var bar = document.getElementById('mStepBar');
+        widths.forEach(function (w) { bar.classList.remove(w); });
+        bar.classList.add(widths[state.step - 1]);
+      }
+
+      // ---------- Navigation ----------
+      function goStep(n) {
+        state.step = n;
+        document.querySelectorAll('.step').forEach(function (el) {
+          var on = Number(el.getAttribute('data-step')) === n;
+          el.classList.toggle('hidden', !on);
+          el.classList.toggle('flex', on);
+        });
+        var strip = document.getElementById('aaStrip');
+        var aa = n >= 2 && n <= 5;
+        strip.classList.toggle('hidden', !aa);
+        strip.classList.toggle('flex', aa);
+        if (n === 2) startOtp();
+        if (n === 3) enterStep3();
+        renderStepper();
+      }
+
+      function showSub(name) {
+        document.querySelectorAll('[data-step="3"] .sub').forEach(function (el) {
+          var on = el.getAttribute('data-sub') === name;
+          el.classList.toggle('hidden', !on);
+          el.classList.toggle('flex', on);
+        });
+      }
+
+      function enterStep3() {
+        document.getElementById('passkeyFailed').classList.add('hidden');
+        document.getElementById('passkeyFailed').classList.remove('flex');
+        if (state.user === 'returning') showSub('returning');
+        else showSub('choose');
+      }
+
+      document.addEventListener('click', function (e) {
+        var t = e.target.closest('[data-next]');
+        if (t && !t.disabled) goStep(Number(t.getAttribute('data-next')));
+      });
+
+      // ---------- Code boxes (OTP + PIN) ----------
+      function makeBoxes(container, count, onChange, opts) {
+        container.innerHTML = '';
+        var inputs = [];
+        for (var i = 0; i < count; i++) {
+          var inp = document.createElement('input');
+          inp.type = opts.secret ? 'password' : 'text';
+          inp.inputMode = 'numeric';
+          inp.maxLength = 1;
+          inp.autocomplete = i === 0 && !opts.secret ? 'one-time-code' : 'off';
+          inp.setAttribute('aria-label', (opts.label || 'Digit') + ' ' + (i + 1) + ' of ' + count);
+          inp.className = 'h-14 w-12 rounded-xl border-2 border-slate-200 bg-slate-50 text-center text-2xl font-medium caret-navy transition focus:border-navy focus:bg-white focus:outline-none focus:ring-4 focus:ring-navy/10 sm:h-16 sm:w-14';
+          (function (idx) {
+            inp.addEventListener('input', function () {
+              this.value = this.value.replace(/\D/g, '').slice(-1);
+              if (this.value && idx < count - 1) inputs[idx + 1].focus();
+              onChange(inputs.map(function (x) { return x.value; }).join(''));
+            });
+            inp.addEventListener('keydown', function (e) {
+              if (e.key === 'Backspace' && !this.value && idx > 0) { inputs[idx - 1].focus(); inputs[idx - 1].value = ''; onChange(inputs.map(function (x) { return x.value; }).join('')); }
+              if (e.key === 'Enter' && opts.onEnter) opts.onEnter();
+            });
+            inp.addEventListener('paste', function (e) {
+              var digits = (e.clipboardData.getData('text') || '').replace(/\D/g, '').slice(0, count);
+              if (!digits) return;
+              e.preventDefault();
+              digits.split('').forEach(function (d, j) { inputs[j].value = d; });
+              inputs[Math.min(digits.length, count - 1)].focus();
+              onChange(inputs.map(function (x) { return x.value; }).join(''));
+            });
+          })(i);
+          inputs.push(inp);
+          container.appendChild(inp);
+        }
+        return {
+          inputs: inputs,
+          clear: function () { inputs.forEach(function (x) { x.value = ''; }); inputs[0].focus(); onChange(''); },
+          setSecret: function (s) { inputs.forEach(function (x) { x.type = s ? 'password' : 'text'; }); },
+          focus: function () { inputs[0].focus(); }
+        };
+      }
+
+      function shake(el, errEl, msg) {
+        errEl.textContent = msg;
+        el.classList.remove('animate-shake');
+        void el.offsetWidth;
+        el.classList.add('animate-shake');
+      }
+
+      // ---------- OTP ----------
+      var otpValue = '';
+      var otpSubmit = document.getElementById('otpSubmit');
+      var otp = makeBoxes(document.getElementById('otpBoxes'), 6, function (v) {
+        otpValue = v;
+        otpSubmit.disabled = v.length !== 6;
+        document.getElementById('otpError').textContent = '';
+      }, { label: 'OTP digit', onEnter: function () { if (!otpSubmit.disabled) otpSubmit.click(); } });
+
+      var timerId;
+      function startOtp() {
+        otp.clear();
+        var left = 30;
+        var el = document.getElementById('otpTimer');
+        clearInterval(timerId);
+        el.textContent = 'Resend in 0:30';
+        timerId = setInterval(function () {
+          left--;
+          if (left <= 0) {
+            clearInterval(timerId);
+            el.innerHTML = '<button type="button" class="font-medium text-navy hover:underline">Resend OTP</button>';
+            el.querySelector('button').addEventListener('click', startOtp);
+            return;
+          }
+          el.textContent = 'Resend in 0:' + (left < 10 ? '0' : '') + left;
+        }, 1000);
+      }
+      otpSubmit.addEventListener('click', function () {
+        if (otpValue === '000000') { shake(document.getElementById('otpBoxes'), document.getElementById('otpError'), 'Incorrect OTP. 2 attempts left.'); otp.clear(); return; }
+        clearInterval(timerId);
+        goStep(3);
+      });
+
+      // ---------- Step 3: method choice ----------
+      var methodBtn = document.getElementById('methodContinue');
+      document.querySelectorAll('input[name="method"]').forEach(function (r) {
+        r.addEventListener('change', function () {
+          methodBtn.textContent = this.value === 'passkey' ? 'Set up passkey' : 'Create PIN';
+        });
+      });
+      methodBtn.addEventListener('click', function () {
+        var m = document.querySelector('input[name="method"]:checked').value;
+        if (m === 'passkey') openSheet('create');
+        else startPin('create');
+      });
+
+      // ---------- Passkey prompt ----------
+      var sheet = document.getElementById('sheet');
+      var sheetMode = 'create';
+      function openSheet(mode) {
+        sheetMode = mode;
+        document.getElementById('sheetTitle').textContent = mode === 'create' ? 'Create a passkey for finvu.in' : 'Sign in to finvu.in';
+        document.getElementById('sheetText').textContent = mode === 'create'
+          ? 'Use your fingerprint, face or screen lock to save a passkey on this device.'
+          : 'Use your fingerprint, face or screen lock to confirm it’s you.';
+        sheet.classList.remove('hidden');
+        sheet.classList.add('flex');
+        document.getElementById('sheetOk').focus();
+      }
+      function closeSheet() { sheet.classList.add('hidden'); sheet.classList.remove('flex'); }
+      document.getElementById('sheetOk').addEventListener('click', function () { closeSheet(); goStep(4); });
+      document.getElementById('sheetCancel').addEventListener('click', function () {
+        closeSheet();
+        if (sheetMode === 'create') {
+          var f = document.getElementById('passkeyFailed');
+          f.classList.remove('hidden'); f.classList.add('flex');
+          document.querySelector('input[name="method"][value="pin"]').checked = true;
+          methodBtn.textContent = 'Create PIN';
+        }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && sheet.classList.contains('flex')) document.getElementById('sheetCancel').click();
+      });
+
+      // ---------- PIN ----------
+      var pinValue = '';
+      var pinSubmit = document.getElementById('pinSubmit');
+      var pinError = document.getElementById('pinError');
+      var pinBoxesEl = document.getElementById('pinBoxes');
+      var pin = makeBoxes(pinBoxesEl, 4, function (v) {
+        pinValue = v;
+        pinSubmit.disabled = v.length !== 4;
+        if (v.length) pinError.textContent = '';
+      }, { secret: true, label: 'PIN digit', onEnter: function () { if (!pinSubmit.disabled) pinSubmit.click(); } });
+
+      var pinCopy = {
+        create: ['Create your Finvu PIN', 'Choose 4 digits. Avoid 1234 or repeated numbers.', 'Continue'],
+        confirm: ['Confirm your PIN', 'Enter the same 4 digits again.', 'Save PIN'],
+        enter: ['Enter your Finvu PIN', 'The 4-digit PIN you set up with Finvu.', 'Verify']
+      };
+      function startPin(mode) {
+        state.pinMode = mode;
+        document.getElementById('pinTitle').textContent = pinCopy[mode][0];
+        document.getElementById('pinSub').textContent = pinCopy[mode][1];
+        pinSubmit.textContent = pinCopy[mode][2];
+        document.getElementById('pinForgot').classList.toggle('hidden', mode !== 'enter');
+        document.getElementById('pinToPasskey').classList.toggle('hidden', mode !== 'enter');
+        if (mode === 'create') state.firstPin = '';
+        showSub('pin');
+        pin.clear();
+      }
+      document.getElementById('pinShow').addEventListener('click', function () {
+        state.showPin = !state.showPin;
+        pin.setSecret(!state.showPin);
+        this.textContent = state.showPin ? 'Hide PIN' : 'Show PIN';
+      });
+      document.getElementById('pinBack').addEventListener('click', function () {
+        if (state.pinMode === 'confirm') startPin('create');
+        else enterStep3();
+      });
+      document.getElementById('pinToPasskey').addEventListener('click', function () { openSheet('verify'); });
+      pinSubmit.addEventListener('click', function () {
+        if (state.pinMode === 'create') {
+          if (/^(\d)\1{3}$/.test(pinValue) || ['1234', '4321', '0123'].indexOf(pinValue) !== -1) {
+            shake(pinBoxesEl, pinError, 'That PIN is too easy to guess. Try another.'); pin.clear(); return;
+          }
+          state.firstPin = pinValue; startPin('confirm'); return;
+        }
+        if (state.pinMode === 'confirm') {
+          if (pinValue !== state.firstPin) { shake(pinBoxesEl, pinError, 'PINs don’t match. Try again.'); pin.clear(); return; }
+          goStep(4); return;
+        }
+        if (pinValue === '0000') { shake(pinBoxesEl, pinError, 'Wrong PIN. 2 attempts left.'); pin.clear(); return; }
+        goStep(4);
+      });
+
+      // ---------- Returning ----------
+      document.getElementById('returnPasskey').addEventListener('click', function () { openSheet('verify'); });
+      document.getElementById('returnPin').addEventListener('click', function () { startPin('enter'); });
+
+      // ---------- Accounts ----------
+      document.getElementById('acc1').addEventListener('change', function () {
+        document.getElementById('accContinue').disabled = !this.checked;
+      });
+
+      // ---------- Consent ----------
+      function result(ok) {
+        document.getElementById('resultOk').classList.toggle('hidden', !ok);
+        document.getElementById('resultOk').classList.toggle('flex', ok);
+        document.getElementById('resultRejected').classList.toggle('hidden', ok);
+        document.getElementById('resultRejected').classList.toggle('flex', !ok);
+        goStep(6);
+      }
+      document.getElementById('consentApprove').addEventListener('click', function () { result(true); });
+      document.getElementById('consentReject').addEventListener('click', function () { result(false); });
+
+      // ---------- Dev: user toggle ----------
+      function setUser(u) {
+        state.user = u;
+        document.querySelectorAll('.user-toggle').forEach(function (b) {
+          var on = b.getAttribute('data-user') === u;
+          b.classList.toggle('bg-navy', on);
+          b.classList.toggle('text-white', on);
+          b.classList.toggle('text-slate-600', !on);
+        });
+        goStep(1);
+      }
+      document.querySelectorAll('.user-toggle').forEach(function (b) {
+        b.addEventListener('click', function () { setUser(this.getAttribute('data-user')); });
+      });
+
+      setUser('new');
+    })();
+  </script>
+</body>
+</html>
