@@ -20,6 +20,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
+    @media (min-width: 768px) {
+      main > div:first-child h1 { font-size:clamp(2.5rem,3.25vw,3.5rem) !important; line-height:1.06; }
+      main > div:first-child p.text-xl { font-size:1.1rem !important; line-height:1.5; }
+      main > div:first-child ul { font-size:.95rem !important; line-height:1.5; }
+    }
     .trust-marquee { overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent); }
     .trust-track { display:flex;width:max-content;animation:trust-scroll 32s linear infinite; }
     .trust-marquee:hover .trust-track,.trust-marquee:focus-within .trust-track { animation-play-state:paused; }
@@ -27,7 +32,35 @@
     .trust-item { display:block;white-space:nowrap;padding:8px 34px;border-right:1px solid #e1e8f1; }
     @keyframes trust-scroll { to { transform:translateX(-50%); } }
     @media(prefers-reduced-motion:reduce) { .trust-track { animation:none; } }
-    @media (min-width: 1079.999px) {
+    @media (max-width: 767px) {
+      html { font-size:16px; }
+      body { font-size:15px; line-height:1.6; }
+      header > div { min-height:56px; padding-left:16px; padding-right:16px; }
+      header img { width:96px; }
+      header a { padding:9px 12px; font-size:12px; }
+      main > div:first-child { padding-top:30px; padding-bottom:30px; }
+      main > div:first-child > div { gap:24px; padding-left:16px; padding-right:16px; }
+      main > div:first-child h1 { font-size:clamp(2rem,9vw,2.7rem); line-height:1.08; letter-spacing:-.025em; }
+      main > div:first-child p.text-xl { font-size:16px; line-height:1.55; }
+      main > div:first-child ul { font-size:14px; line-height:1.5; }
+      #book { padding:20px; }
+      #book h2 { font-size:21px; }
+      .trust-item { padding:6px 22px; }
+      .trust-item b { font-size:16px; }
+      .trust-item span { font-size:12px; }
+      section { padding-top:38px !important; padding-bottom:38px !important; }
+      section > div { padding-left:16px; padding-right:16px; }
+      section h2 { font-size:clamp(1.65rem,7vw,2.1rem); line-height:1.15; margin-bottom:14px; }
+      section h3 { font-size:19px; line-height:1.25; }
+      section p, section li { font-size:14px; line-height:1.55; }
+      #routes .mb-10 { margin-bottom:24px; }
+      #routes article { padding-top:22px; padding-bottom:22px; }
+      #tcs input, #tcs select { font-size:16px; }
+      #faq details summary { padding:14px 16px; font-size:14px; line-height:1.4; }
+      #faq details > div { padding-left:16px; padding-right:16px; }
+      footer { padding-bottom:88px; }
+    }
+        @media (min-width: 1079.999px) {
       html {
         font-size: 0.9vw;
       }
@@ -70,12 +103,13 @@
   </div>
   <div class="relative mx-auto grid max-w-7xl gap-9 px-5 md:grid-cols-2 md:items-start md:gap-14">
     <div>
-      <h1 class="mb-5 text-4xl font-extrabold leading-tight text-white md:text-5xl xl:text-6xl">Invest in US stocks from India, without the guesswork</h1>
-      <p class="mb-4 max-w-2xl text-xl text-blue-100">Nasdaq, S&amp;P 500, global ETFs and stocks. Understand LRS, TCS and tax before you send a rupee, then build a global portfolio with a SEBI-registered, fiduciary adviser.</p>
+      <h1 class="mb-5 text-4xl font-extrabold leading-tight text-white md:text-5xl xl:text-6xl">Invest in US Stocks from India—with Clarity and Confidence</h1>
+      <p class="mb-4 max-w-2xl text-xl text-blue-100">
+Access the Nasdaq, S&P 500, global ETFs, and international equities. Understand LRS, TCS, and tax implications before investing, then build a diversified global portfolio with a SEBI-registered fiduciary adviser.      </p>
       <ul class="mt-6 grid list-disc gap-3 pl-5 marker:text-[#dd7300]">
-        <li>Clear answer on which route fits you: direct investing or international funds</li>
-        <li>A plan for your LRS limit, TCS and foreign-asset reporting</li>
-        <li>Research-led model portfolios across the US, Europe, Asia and emerging markets</li>
+        <li>Choose the right investment route: Direct global investing or international funds, tailored to your needs.</li>
+        <li>Navigate cross-border regulations: Understand LRS limits, TCS implications, and foreign-asset reporting requirements.</li>
+        <li>Invest with a global perspective: Research-led model portfolios spanning the US, Europe, Asia, and emerging markets.</li>
       </ul>
     </div>
     <div class="rounded-2xl bg-white/95 p-7 text-slate-800 shadow-2xl ring-1 ring-white/30 backdrop-blur-xl" id="book">
