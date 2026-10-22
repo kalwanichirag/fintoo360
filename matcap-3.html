@@ -20,6 +20,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
+    .trust-marquee { overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent); }
+    .trust-track { display:flex;width:max-content;animation:trust-scroll 32s linear infinite; }
+    .trust-marquee:hover .trust-track,.trust-marquee:focus-within .trust-track { animation-play-state:paused; }
+    .trust-group { display:flex;align-items:center; }
+    .trust-item { display:block;white-space:nowrap;padding:8px 34px;border-right:1px solid #e1e8f1; }
+    @keyframes trust-scroll { to { transform:translateX(-50%); } }
+    @media(prefers-reduced-motion:reduce) { .trust-track { animation:none; } }
     @media (min-width: 1079.999px) {
       html {
         font-size: 0.9vw;
@@ -80,13 +87,12 @@
 </div>
 
 <!-- TRUST -->
-<div class="border-b border-slate-200 bg-white py-6">
-  <div class="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-5 px-5 md:grid-cols-5">
-    <div><b class="block text-xl font-bold text-[#042b62]">SEBI-RIA</b><span>Registered Investment Adviser</span></div>
-    <div><b class="block text-xl font-bold text-[#042b62]">Fiduciary</b><span>Advice aligned with your interests</span></div>
-    <div><b class="block text-xl font-bold text-[#042b62]">Direct custody</b><span>Global assets in your name</span></div>
-    <div><b class="block text-xl font-bold text-[#042b62]">$100M+</b><span>Assets under advisory</span></div>
-    <div><b class="block text-xl font-bold text-[#042b62]">9+ countries</b><span>Where our clients are based</span></div>
+<div class="border-b border-slate-200 bg-white py-4" aria-label="Advisory credentials">
+  <div class="trust-marquee" tabindex="0">
+    <div class="trust-track">
+      <div class="trust-group"><div class="trust-item"><b class="block text-xl font-bold text-[#042b62]">SEBI-RIA</b><span class="text-sm text-slate-500">Registered Investment Adviser</span></div><div class="trust-item"><b class="block text-xl font-bold text-[#042b62]">Fiduciary</b><span class="text-sm text-slate-500">Advice aligned with your interests</span></div><div class="trust-item"><b class="block text-xl font-bold text-[#042b62]">Direct custody</b><span class="text-sm text-slate-500">Global assets in your name</span></div><div class="trust-item"><b class="block text-xl font-bold text-[#042b62]">$100M+</b><span class="text-sm text-slate-500">Assets under advisory</span></div><div class="trust-item"><b class="block text-xl font-bold text-[#042b62]">9+ countries</b><span class="text-sm text-slate-500">Where our clients are based</span></div></div>
+      <div class="trust-group" aria-hidden="true"><div class="trust-item"><b class="block text-xl font-bold text-[#042b62]">SEBI-RIA</b><span class="text-sm text-slate-500">Registered Investment Adviser</span></div><div class="trust-item"><b class="block text-xl font-bold text-[#042b62]">Fiduciary</b><span class="text-sm text-slate-500">Advice aligned with your interests</span></div><div class="trust-item"><b class="block text-xl font-bold text-[#042b62]">Direct custody</b><span class="text-sm text-slate-500">Global assets in your name</span></div><div class="trust-item"><b class="block text-xl font-bold text-[#042b62]">$100M+</b><span class="text-sm text-slate-500">Assets under advisory</span></div><div class="trust-item"><b class="block text-xl font-bold text-[#042b62]">9+ countries</b><span class="text-sm text-slate-500">Where our clients are based</span></div></div>
+    </div>
   </div>
 </div>
 
