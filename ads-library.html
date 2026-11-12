@@ -97,6 +97,18 @@
 
   <script>
     const pages = [
+      { name: 'Wealth Management & Investment Planning', path: '/wealth-management-investment-planning', type: 'calendly' },
+      { name: 'SEBI Registered Financial Advisor', path: '/sebi-registered-financial-advisor', type: 'calendly' },
+      { name: 'Global Investment Advisory', path: '/global-investment-advisory', type: 'calendly' },
+      { name: 'Global Advisory', path: '/global-advisory', type: 'calendly' },
+      { name: 'Invest in US Stocks from India', path: '/invest-in-us-stocks-from-india', type: 'calendly' },
+      { name: 'Global Portfolio Advisory', path: '/global-portfolio-advisory', type: 'calendly' },
+      { name: 'Portfolio Review', path: '/portfolio-review', type: 'calendly' },
+      { name: 'SEBI Registered Investment Advisor', path: '/sebi-registered-investment-advisor', type: 'calendly' },
+      { name: 'Financial Advisor Free Call', path: '/financial-advisor-free-call', type: 'calendly' },
+      { name: 'Financial Advisor Near Me', path: '/financial-advisor-near-me', type: 'calendly' },
+      { name: 'Financial Planning Free Call', path: '/financial-planning-free-call', type: 'calendly' },
+      { name: 'Wealth Planning for Corporate Leaders', path: '/wealth-planning-for-corporate-leaders', type: 'calendly' },
        { name: 'Financial Advisor Mumbai', path: '/financial-advisor', type: 'calendly' },
       { name: 'Financial Planning Consultation', path: '/financial-planning-consultation', type: 'calendly' },
       { name: 'Independent Financial Advisor', path: '/independent-financial-advisor', type: 'calendly' },
@@ -137,7 +149,24 @@
       { name: 'Answers to Your Money', path: '/answers-to-your-money', category: 'ai', image: 'previews/answers-to-your-money.png' },
       { name: 'Waiting List', path: '/waiting-list', category: 'ai', image: 'previews/waiting-list.png' },
       { name: 'Financial Clarity Score', path: '/financial-clarity-score', category: 'ai', image: 'previews/financial-clarity-score.png' },
-      { name: 'Waitlist', path: '/waitlist', category: 'ai', image: 'previews/waitlist.png' }
+      { name: 'Waitlist', path: '/waitlist', category: 'ai', image: 'previews/waitlist.png' },
+      // Routes supplied for the library; verify the live page and capture a preview before using in ads.
+      { name: 'Thank You Page', path: '/thankyou-page', status: 'development' },
+      { name: 'Global Advisory Thank You', path: '/global-advisory-thank-you', status: 'development' },
+      { name: 'Waitlist Thank You', path: '/waitlist-thank-you', category: 'ai', status: 'development' },
+      { name: 'ITR Filing Thank You', path: '/itr-filing-thankyou-page', type: 'itr', status: 'development' },
+      { name: 'Review', path: '/review', status: 'development' },
+      { name: 'Meet & Greet Pune', path: '/meet-greet-pune', status: 'development' },
+      { name: 'Womoneya', path: '/womoneya', status: 'development' },
+      { name: 'Womoneya Choice', path: '/womoneya-choice', status: 'development' },
+      { name: 'India AI Hedge Webinar', path: '/india-ai-hedge-webinar', category: 'ai', status: 'development' },
+      { name: 'Tools', path: '/tools', status: 'development' },
+      { name: 'Tokens', path: '/tokens', category: 'ai', status: 'development' },
+      { name: 'Download App', path: '/download-app', category: 'ai', status: 'development' },
+      { name: 'Answers', path: '/answers', category: 'ai', status: 'development' },
+      { name: 'App', path: '/app', category: 'ai', status: 'development' },
+      { name: 'Fintoo AI Answers', path: '/fintoo-ai-answers', category: 'ai', status: 'development' },
+      { name: 'AI Advisory', path: '/ai-advisory', category: 'ai', status: 'development' },
     ].map(page => ({ category: 'financial', status: 'live', ...page }));
 
     const badgeStyles = {
@@ -161,14 +190,16 @@
       card.className = 'page-card group relative flex flex-col overflow-hidden rounded-2xl border border-slate-900/10 bg-white shadow-xl transition duration-300 hover:-translate-y-1.5 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2';
       card.innerHTML = `
         <span class="relative block aspect-[16/10] overflow-hidden border-b border-slate-200 bg-slate-200">
-          <img src="${screenshot}" alt="Screenshot of ${page.name}" loading="lazy" class="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.03]">
+          ${page.status === 'development'
+            ? `<span class="flex h-full items-center justify-center px-6 text-center text-sm font-medium text-slate-500">Preview pending</span>`
+            : `<img src="${screenshot}" alt="Screenshot of ${page.name}" loading="lazy" class="h-full w-full object-cover object-top transition duration-500 group-hover:scale-[1.03]">`}
           <span aria-hidden="true" class="absolute inset-0 bg-gradient-to-t from-slate-950/20 to-transparent opacity-0 transition group-hover:opacity-100"></span>
         </span>
         <span class="relative flex flex-1 flex-col p-5">
           <span class="mb-4 flex flex-wrap gap-1.5 text-[10px] font-semibold uppercase tracking-wide">
-            <span class="rounded-full ${page.status === 'development' ? 'bg-amber-400 text-amber-950' : 'bg-emerald-500 text-white'} px-2 py-1 shadow-sm">${page.status === 'development' ? 'Development' : 'Live'}</span>
+            <span class="rounded-full ${page.status === 'development' ? 'bg-amber-400 text-amber-950' : 'bg-emerald-500 text-white'} px-2 py-1 shadow-sm">${page.status === 'development' ? 'Needs review' : 'Live'}</span>
             ${page.status === 'live' ? '<span class="rounded-full bg-slate-100 px-2 py-1 text-slate-700 shadow-sm">Ready for ads</span>' : ''}
-            <span class="rounded-full px-2 py-1 ${badgeStyles[badgeType]}">${badgeLabels[badgeType]}</span>
+            ${badgeType ? `<span class="rounded-full px-2 py-1 ${badgeStyles[badgeType]}">${badgeLabels[badgeType]}</span>` : ''}
           </span>
           <span class="mt-auto">
             <span class="block text-xl font-semibold leading-snug text-slate-950">${page.name}</span>
