@@ -13,15 +13,16 @@
   Answer blocks:     every H2 is a question or task, opened by a 40 to 60 word direct answer; goal table + bond income calculator
   Schema:            WebPage, BreadcrumbList, Service (with OfferCatalog), FinancialService (Organization), FAQPage
   Compliance:        no "best"/"high returns" claims; bond buying must go through a SEBI-registered OBPP/stock broker, separate from advice
-  Facts current as of October 2026 (10Y G-sec ~7.15%, repo 5.25%). Re-check yields, tax and SEBI bond rules quarterly.
+  Content updated 16 November 2026. Market-rate snapshots omitted; check RBI for current rates.
 -->
-<title>Bonds in India: Types, Yields, Taxation &amp; How to Invest | Fintoo</title>
-<meta name="description" content="Understand bonds in India: how they work, types, yields, credit ratings, bonds vs FDs, and taxation. Then build a well-rated bond portfolio for regular income with a SEBI-registered Fintoo advisor.">
+<title>Bonds in India: Types, Yields, Tax &amp; How to Invest | Fintoo</title>
+<meta name="description" content="Learn how bonds work in India: types, yields, ratings, tax and bonds vs FDs. Get a well-rated bond portfolio with a SEBI-registered advisor.">
 <link rel="canonical" href="https://www.fintoo.in/bonds">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Bonds, explained. Steady income, built the right way. | Fintoo">
+<meta property="og:title" content="Bonds in India, explained: steady income, built the right way | Fintoo">
 <meta property="og:description" content="Types, yields, ratings and taxes of bonds in plain language, plus a bond income calculator that compares with FDs.">
 <meta property="og:url" content="https://www.fintoo.in/bonds">
+<script>if (location.hostname.endsWith(".vercel.app")) { const meta = document.createElement("meta"); meta.name = "robots"; meta.content = "noindex, nofollow"; document.head.appendChild(meta); }</script>
 <meta name="theme-color" content="#FFFFFF">
 <script>document.documentElement.classList.add('js')</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,9 +78,9 @@ tailwind.config = {
       "@type": "WebPage",
       "@id": "https://www.fintoo.in/bonds#page",
       "url": "https://www.fintoo.in/bonds",
-      "name": "Bonds in India: Types, Yields, Taxation and How to Invest",
+      "name": "Bonds in India: Types, Yields, Tax & How to Invest",
       "inLanguage": "en-IN",
-      "dateModified": "2026-09-28",
+      "dateModified": "2026-11-16",
       "about": {
         "@id": "https://www.fintoo.in/bonds#service"
       },
@@ -88,6 +89,9 @@ tailwind.config = {
       },
       "breadcrumb": {
         "@id": "https://www.fintoo.in/bonds#crumbs"
+      },
+      "author": {
+        "@id": "https://www.fintoo.in/#org"
       }
     },
     {
@@ -185,22 +189,6 @@ tailwind.config = {
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What is a bond?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A bond is a loan you give to a government, public-sector body or company. In return, the issuer pays you interest, called the coupon, at fixed intervals and repays the face value on a set maturity date. Bonds are used for predictable income and to protect capital."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What are the different types of bonds in India?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The main types are government securities and treasury bills, state development loans, PSU and bank bonds, corporate bonds and NCDs, tax-free bonds, 54EC capital gains bonds, RBI floating rate savings bonds, zero-coupon bonds and municipal bonds. They differ mainly in who borrows, how safe they are and how they are taxed."
-          }
-        },
-        {
-          "@type": "Question",
           "name": "Are bonds safe investments?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -209,34 +197,10 @@ tailwind.config = {
         },
         {
           "@type": "Question",
-          "name": "What is the coupon rate of a bond?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The coupon rate is the yearly interest the issuer pays, as a percentage of the bond's face value. A ₹10,000 bond with an 8% coupon pays ₹800 a year, either in one payment or split monthly, quarterly or half-yearly."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is yield to maturity (YTM)?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yield to maturity is your actual yearly return if you buy a bond at today's market price and hold it until it matures, assuming every payment is made. It differs from the coupon when you buy above or below face value, which is why YTM is the better number for comparing bonds."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Why do bond prices fall when interest rates rise?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "When rates rise, new bonds pay more, so existing bonds with lower coupons become less attractive and their prices drop until their yields match the market. When rates fall, existing bond prices rise. Longer-maturity bonds react the most."
-          }
-        },
-        {
-          "@type": "Question",
           "name": "Are bonds better than fixed deposits?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Not always. Good-quality bonds often yield more than FDs and let you lock a rate for longer, and listed bonds held over a year can get lower capital gains tax. FDs are simpler, have no market price movement and are insured up to ₹5 lakh per bank. Many investors hold both."
+            "text": "Not always. Good-quality bonds often yield more than FDs and let you lock a rate for longer, and listed bonds held over a year can get lower capital gains tax. FDs are simpler, have no market price movement and are insured up to ₹5 lakh per depositor, per bank. Many investors hold both."
           }
         },
         {
@@ -273,14 +237,6 @@ tailwind.config = {
         },
         {
           "@type": "Question",
-          "name": "How is bond interest taxed in India?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Bond interest is added to your income and taxed at your slab rate. Listed bonds sold after 12 months attract 12.5% tax on the gain, and within 12 months, your slab rate. Unlisted bonds are taxed at slab rate whatever the holding period. TDS of 10% applies to listed bond interest above ₹10,000 a year."
-          }
-        },
-        {
-          "@type": "Question",
           "name": "What are tax-free bonds?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -297,10 +253,34 @@ tailwind.config = {
         },
         {
           "@type": "Question",
-          "name": "What is a bond index?",
+          "name": "Can NRIs invest in bonds in India?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "A bond index tracks the prices and returns of a defined group of bonds, such as government securities of a certain maturity or AAA corporate bonds. It is used to measure how a part of the bond market is performing and as the benchmark for bond funds and target maturity funds."
+            "text": "Yes, in eligible bonds subject to FEMA rules, issuer terms and the investment route. Confirm funding, repatriation, TDS and overseas tax treatment; eligibility varies by instrument."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is an NCD?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A non-convertible debenture is a debt instrument issued by a company that does not convert into equity. Check whether it is secured, its credit rating, repayment terms and liquidity."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which bonds pay monthly interest?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Some corporate bonds and NCDs offer monthly coupons. Check the issue’s payout schedule; an annual coupon quoted as a monthly equivalent does not mean monthly cash payments."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is TDS on bond interest refundable?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If tax deducted exceeds your final tax liability, you can claim the excess as a refund through your income tax return. Reconcile the deduction with your tax records before filing."
           }
         }
       ]
@@ -397,7 +377,7 @@ tailwind.config = {
       <div class="ml-auto flex items-center gap-2 sm:gap-3">
         <a href="/login"
           class="hidden rounded-full px-3.5 py-2 text-[0.9375rem] font-medium text-slate-700 transition-colors hover:bg-slate-100 sm:inline-flex">Login</a>
-        <a href="#register-interest"
+        <a href="#consult"
           class="group hidden h-11 items-center gap-2 rounded-full bg-navy pl-5 pr-1.5 text-sm font-medium text-white transition-colors hover:bg-navy-deep sm:inline-flex">Talk
           to an advisor <span
             class="grid size-8 place-items-center rounded-full bg-orange transition-transform duration-300 group-hover:translate-x-0.5">↗</span></a>
@@ -429,7 +409,7 @@ tailwind.config = {
         <li><a class="block py-3.5" href="fintoo-bonds.html">Bonds</a></li>
         <li><a class="block py-3.5" href="fintoo-ipo.html">IPO</a></li>
       </ul>
-      <div class="mt-auto space-y-3 pb-8 pt-10"><a href="#register-interest"
+      <div class="mt-auto space-y-3 pb-8 pt-10"><a href="#consult"
           class="flex h-14 items-center justify-center rounded-full bg-navy text-base font-medium text-white">Talk to an
           advisor</a><a href="/login"
           class="flex h-14 items-center justify-center rounded-full text-base font-medium ring-1 ring-slate-200">Login</a>
@@ -457,12 +437,12 @@ tailwind.config = {
 
     <div class="mt-8 grid items-center gap-14 lg:grid-cols-2 lg:gap-12">
       <div>
-        <h1 class="text-[2.5rem] font-semibold leading-[1.05] tracking-tight text-navy-deep sm:text-6xl xl:text-[4rem]">Bonds, explained. Steady income, built the right way.</h1>
-        <p class="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">Learn how bonds work, what makes one safer than another, how they are taxed and how they compare with fixed deposits and debt funds. When you are ready, a SEBI-registered Fintoo advisor helps you choose the right bonds for your income needs and goals.</p>
+        <h1 class="text-[2.5rem] font-semibold leading-[1.05] tracking-tight text-navy-deep sm:text-6xl xl:text-[4rem]">Bonds in India, explained: steady income, built the right way</h1>
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-slate-600">Learn how bonds work, what makes one safer than another, how they are taxed and how they compare with fixed deposits and debt funds. When you are ready, a SEBI-registered Fintoo advisor helps you choose the right bonds for your income needs and goals.</p><p class="mt-4 text-sm leading-relaxed text-slate-600">For retirees, HNIs and NRIs seeking regular income.</p><p class="mt-3 text-sm text-slate-500">By the Fintoo advisory team · <a href="about.html#team" class="text-navy underline underline-offset-4">Meet our advisors</a> · Last updated <time datetime="2026-11-16">16 November 2026</time></p>
 
         <div class="mt-8 max-w-xl rounded-2xl bg-white p-5 ring-1 ring-slate-200">
           <p class="text-sm font-semibold text-navy">In short</p>
-          <p class="mt-2 leading-relaxed text-slate-700">A bond is <strong class="font-semibold text-slate-900">a loan you give to a government or company</strong>. In return, it pays you interest, called the coupon, at fixed intervals and repays your money on a set maturity date. Bonds are used for regular income and to protect capital. Most corporate bonds in India can now be bought from ₹10,000.</p>
+          <p class="mt-2 leading-relaxed text-slate-700">A bond is <strong class="font-semibold text-slate-900">a loan you give to a government or company</strong>. In return, it pays you interest, called the coupon, at fixed intervals and repays your money on a set maturity date. Bonds are used for regular income and to protect capital. Many listed corporate bonds in India can now be bought from ₹10,000.</p>
         </div>
 
         <div class="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -481,27 +461,15 @@ tailwind.config = {
       </div>
 
       <!-- a bond ladder, as a client sees it -->
-      <div class="relative mx-auto w-full max-w-xl lg:max-w-none" role="img" aria-label="A sample Fintoo bond ladder worth ₹1.5 crore spread across government, PSU and AAA corporate bonds maturing each year from 2027 to 2031, paying about ₹92,000 a month in interest before tax, with a payout calendar behind it.">
-        <div class="absolute -right-2 -top-4 hidden w-[68%] rotate-[4deg] rounded-2xl bg-white p-5 shadow-[0_1.5rem_3rem_-1.5rem_rgba(4,43,98,0.35)] ring-1 ring-slate-200 sm:block" aria-hidden="true">
-          <p class="text-xs font-medium text-slate-500">Section 2</p>
-          <p class="text-sm font-semibold text-navy-deep">Upcoming interest payouts</p>
-          <table class="mt-3 w-full text-left text-[0.6875rem] tabular-nums text-slate-600">
-            <tbody class="divide-y divide-slate-100">
-              <tr><td class="py-1">15 Oct</td><td>PSU bond</td><td class="text-right">₹53,750</td></tr>
-              <tr><td class="py-1">01 Nov</td><td>G-sec</td><td class="text-right">₹1,07,000</td></tr>
-              <tr><td class="py-1">20 Nov</td><td>AAA corporate</td><td class="text-right">₹92,500</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="relative mt-10 rounded-[1.5rem] bg-white p-5 shadow-[0_2.5rem_5rem_-2rem_rgba(4,43,98,0.4)] ring-1 ring-slate-200 sm:mt-16 sm:w-[92%] sm:-rotate-1 sm:p-6">
+      <div class="relative mx-auto w-full max-w-xl lg:max-w-none" role="img" aria-label="Illustrative bond ladder, not an offer: ₹1.5 crore spread across maturities from 2027 to 2031. Hypothetical interest depends on the assumed coupon and is not guaranteed.">
+<div class="relative mt-10 rounded-[1.5rem] bg-white p-5 shadow-[0_2.5rem_5rem_-2rem_rgba(4,43,98,0.4)] ring-1 ring-slate-200 sm:mt-16 sm:w-[92%] sm:-rotate-1 sm:p-6">
           <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-            
-            <span class="rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-800 ring-1 ring-amber-200">Sample bond ladder</span>
+
+            <span class="rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-800 ring-1 ring-amber-200">Illustrative example, not an offer</span>
           </div>
           <div class="mt-4 flex items-end justify-between gap-4">
             <div><p class="text-xs text-slate-500">Invested</p><p class="mt-1 text-2xl font-semibold tabular-nums text-navy-deep">₹1.5 Cr</p></div>
-            <div class="text-right"><p class="text-xs text-slate-500">Interest, about</p><p class="whitespace-nowrap text-2xl font-semibold tabular-nums text-orange-ink">₹92K/mo</p></div>
+            <div class="text-right"><p class="text-xs text-slate-500">Monthly equivalent, before tax</p><p class="whitespace-nowrap text-2xl font-semibold tabular-nums text-orange-ink">₹92,500</p></div>
           </div>
           <p class="mt-5 text-xs font-medium text-slate-500">Maturing each year, so money comes back in stages</p>
           <ul class="mt-3 space-y-2 text-xs">
@@ -511,8 +479,8 @@ tailwind.config = {
             <li class="grid grid-cols-[3rem_1fr_auto] items-center gap-3"><span class="font-semibold tabular-nums text-navy-deep">2030</span><span class="block h-3 w-[85%] rounded-full bg-navy"></span><span class="text-slate-500">Corporate · AA+</span></li>
             <li class="grid grid-cols-[3rem_1fr_auto] items-center gap-3"><span class="font-semibold tabular-nums text-navy-deep">2031</span><span class="block h-3 w-full rounded-full bg-orange"></span><span class="text-slate-500">SDL</span></li>
           </ul>
-          <div class="mt-5 grid grid-cols-3 gap-2 rounded-xl bg-mist p-3 text-center text-xs">
-            <div><p class="text-slate-500">Avg yield</p><p class="font-semibold tabular-nums text-navy-deep">7.4%</p></div>
+          <p class="mt-4 text-xs leading-relaxed text-slate-500">At an assumed 7.4% annual coupon, ₹1.5 crore gives ₹11.1 lakh a year before tax. A smaller ₹25 lakh ladder gives ₹1.85 lakh a year, or about ₹15,417 a month equivalent. Actual payout dates vary. These are hypothetical calculations, not projected or guaranteed returns.</p><div class="mt-5 grid grid-cols-3 gap-2 rounded-xl bg-mist p-3 text-center text-xs">
+            <div><p class="text-slate-500">Assumed coupon</p><p class="font-semibold tabular-nums text-navy-deep">7.4%</p></div>
             <div><p class="text-slate-500">AAA share</p><p class="font-semibold tabular-nums text-navy-deep">78%</p></div>
             <div><p class="text-slate-500">Issuers</p><p class="font-semibold tabular-nums text-navy-deep">9</p></div>
           </div>
@@ -542,6 +510,10 @@ tailwind.config = {
     <li><a class="block whitespace-nowrap rounded-full px-3.5 py-2 transition hover:bg-slate-100 aria-[current=true]:bg-navy aria-[current=true]:text-white" href="#mistakes">Mistakes to avoid</a></li>
     <li><a class="block whitespace-nowrap rounded-full px-3.5 py-2 transition hover:bg-slate-100 aria-[current=true]:bg-navy aria-[current=true]:text-white" href="#invest">Invest with Fintoo</a></li>
     <li><a class="block whitespace-nowrap rounded-full px-3.5 py-2 transition hover:bg-slate-100 aria-[current=true]:bg-navy aria-[current=true]:text-white" href="#faq">FAQs</a></li>
+<li><a class="block whitespace-nowrap rounded-full px-3.5 py-2 transition hover:bg-slate-100 aria-[current=true]:bg-navy aria-[current=true]:text-white" href="#how-to-buy">How to buy</a></li>
+<li><a class="block whitespace-nowrap rounded-full px-3.5 py-2 transition hover:bg-slate-100 aria-[current=true]:bg-navy aria-[current=true]:text-white" href="#nri-bonds">Bonds for NRIs</a></li>
+<li><a class="block whitespace-nowrap rounded-full px-3.5 py-2 transition hover:bg-slate-100 aria-[current=true]:bg-navy aria-[current=true]:text-white" href="#sgb">Gold bonds</a></li>
+<li><a class="block whitespace-nowrap rounded-full px-3.5 py-2 transition hover:bg-slate-100 aria-[current=true]:bg-navy aria-[current=true]:text-white" href="#bond-funds">Bond funds</a></li>
   </ul>
 </nav>
 
@@ -593,17 +565,17 @@ tailwind.config = {
       <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Why invest in bonds, and what are the risks?</h2>
       <p class="mt-5 text-lg leading-relaxed text-slate-700">Bonds give you predictable income and help protect your capital. <strong class="font-semibold text-slate-900">But a bond is only as safe as the borrower behind it.</strong> Here is the good and the not-so-good, at a glance.</p>
     </div>
-    <p class="mt-12 flex items-center gap-2 text-sm font-semibold text-emerald-700"><span class="grid size-6 place-items-center rounded-full bg-emerald-100">+</span>Why people invest</p>
+    <p class="mt-12 flex items-center gap-2 text-sm font-semibold text-emerald-700">Why people invest</p>
     <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       <li class="rounded-2xl bg-white p-6 ring-1 ring-slate-200"><span class="grid size-12 place-items-center rounded-2xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"><svg viewBox="0 0 24 24" class="size-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><h3 class="mt-5 text-lg font-semibold text-navy-deep">Predictable income</h3><p class="mt-1 text-sm text-slate-600">Interest arrives on fixed dates you know in advance.</p></li>
-      <li class="rounded-2xl bg-white p-6 ring-1 ring-slate-200"><span class="grid size-12 place-items-center rounded-2xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"><svg viewBox="0 0 24 24" class="size-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg></span><h3 class="mt-5 text-lg font-semibold text-navy-deep">Capital protection</h3><p class="mt-1 text-sm text-slate-600">High-quality bonds return your money at maturity.</p></li>
+      <li class="rounded-2xl bg-white p-6 ring-1 ring-slate-200"><span class="grid size-12 place-items-center rounded-2xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"><svg viewBox="0 0 24 24" class="size-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg></span><h3 class="mt-5 text-lg font-semibold text-navy-deep">Capital preservation if held to maturity</h3><p class="mt-1 text-sm text-slate-600">Repayment at maturity depends on the issuer meeting its obligations; capital is not guaranteed.</p></li>
       <li class="rounded-2xl bg-white p-6 ring-1 ring-slate-200"><span class="grid size-12 place-items-center rounded-2xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"><svg viewBox="0 0 24 24" class="size-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l5-5 4 4 8-8"/><path d="M15 8h5v5"/></svg></span><h3 class="mt-5 text-lg font-semibold text-navy-deep">Often more than FDs</h3><p class="mt-1 text-sm text-slate-600">Good-quality corporate bonds usually yield more than bank deposits.</p></li>
-      <li class="rounded-2xl bg-white p-6 ring-1 ring-slate-200"><span class="grid size-12 place-items-center rounded-2xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"><svg viewBox="0 0 24 24" class="size-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6.4 6.4M12 12H3"/></svg></span><h3 class="mt-5 text-lg font-semibold text-navy-deep">Balances equity</h3><p class="mt-1 text-sm text-slate-600">Bonds steady a portfolio when share prices fall.</p></li>
+      <li class="rounded-2xl bg-white p-6 ring-1 ring-slate-200"><span class="grid size-12 place-items-center rounded-2xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"><svg viewBox="0 0 24 24" class="size-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6.4 6.4M12 12H3"/></svg></span><h3 class="mt-5 text-lg font-semibold text-navy-deep">Balances equity</h3><p class="mt-1 text-sm text-slate-600">Bonds can diversify equity exposure, but bond and share prices can fall together.</p></li>
       <li class="rounded-2xl bg-white p-6 ring-1 ring-slate-200"><span class="grid size-12 place-items-center rounded-2xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"><svg viewBox="0 0 24 24" class="size-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h8l4 4v14H6V3z"/><path d="M9 12h6M9 16h6"/></svg></span><h3 class="mt-5 text-lg font-semibold text-navy-deep">Lock in today's rate</h3><p class="mt-1 text-sm text-slate-600">Your coupon stays fixed even if interest rates fall later.</p></li>
       <li class="rounded-2xl bg-white p-6 ring-1 ring-slate-200"><span class="grid size-12 place-items-center rounded-2xl bg-emerald-50 text-emerald-700 ring-1 ring-emerald-100"><svg viewBox="0 0 24 24" class="size-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg></span><h3 class="mt-5 text-lg font-semibold text-navy-deep">Start from ₹10,000</h3><p class="mt-1 text-sm text-slate-600">Many corporate bonds now come in ₹10,000 units.</p></li>
     </ul>
     <div class="mt-6 rounded-[1.75rem] bg-navy-deep p-6 text-white sm:p-8">
-      <p class="flex items-center gap-2 text-sm font-semibold text-[#F3B066]"><span class="grid size-6 place-items-center rounded-full bg-[#F3B066]/15">!</span>Risks to keep in mind</p>
+      <p class="flex items-center gap-2 text-sm font-semibold text-[#F3B066]">Risks to keep in mind</p>
       <ul class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <li class="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10"><span class="block font-semibold">The borrower may not pay</span><span class="text-sm text-slate-300">Lower-rated issuers can delay or default. That is credit risk.</span></li>
         <li class="rounded-2xl bg-white/5 p-5 ring-1 ring-white/10"><span class="block font-semibold">Prices move with rates</span><span class="text-sm text-slate-300">If rates rise, your bond's price falls before maturity.</span></li>
@@ -648,6 +620,9 @@ tailwind.config = {
 </section>
 
 <!-- PRICES AND RATES -->
+<section id="nri-bonds" class="scroll-mt-32 bg-mist"><div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28"><h2 class="text-3xl font-semibold tracking-tight text-navy-deep sm:text-4xl">Bonds for NRIs</h2><p class="mt-5 max-w-3xl leading-relaxed text-slate-700">NRIs can invest in eligible Indian bonds, subject to FEMA rules, the issue terms and the investment route. RBI Retail Direct is available to non-resident retail investors eligible to invest in government securities under FEMA. Check repatriation conditions, NRE or NRO funding, TDS and your country-of-residence tax treatment before buying.</p><p class="mt-5 max-w-3xl leading-relaxed text-slate-700"><a class="text-navy underline" href="nri-taxation.html">Read about NRI taxation</a> · <a class="text-navy underline" href="https://www.rbi.org.in/Scripts/FAQView.aspx?Id=145">RBI eligibility guidance</a></p></div></section>
+<section id="sgb" class="scroll-mt-32 bg-mist"><div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28"><h2 class="text-3xl font-semibold tracking-tight text-navy-deep sm:text-4xl">Sovereign Gold Bonds: current status</h2><p class="mt-5 max-w-3xl leading-relaxed text-slate-700">Do not assume a new Sovereign Gold Bond subscription window is open. Check RBI’s current announcements for any new issue. Existing listed SGBs may be available through a broker; check the market price, remaining maturity, eligibility and liquidity. Their value follows gold, so they serve a different purpose from a regular-income bond ladder.</p><p class="mt-5 max-w-3xl leading-relaxed text-slate-700"><a class="text-navy underline" href="https://www.rbi.org.in/Scripts/BS_SwarnaBharat.aspx">Check RBI’s Sovereign Gold Bond announcements</a></p></div></section>
+<section id="bond-funds" class="scroll-mt-32 bg-mist"><div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28"><h2 class="text-3xl font-semibold tracking-tight text-navy-deep sm:text-4xl">Bond ETFs and target maturity funds</h2><p class="mt-5 max-w-3xl leading-relaxed text-slate-700">Bond ETFs and target maturity funds hold a portfolio of debt securities. ETFs trade on an exchange; index fund units are bought and redeemed through the fund. A target maturity fund follows an index with a defined maturity year. Diversification can reduce exposure to one issuer, but returns are not guaranteed: interest-rate risk, credit risk, expenses and tracking differences still matter.</p><p class="mt-5 max-w-3xl leading-relaxed text-slate-700"><a class="text-navy underline" href="mutual-funds.html">Explore debt mutual funds</a></p></div></section>
 <section id="rates" class="scroll-mt-32 bg-navy-deep text-white">
   <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
     <div class="grid items-center gap-12 lg:grid-cols-12">
@@ -656,7 +631,6 @@ tailwind.config = {
         <p class="mt-5 text-lg leading-relaxed text-slate-300">Because new bonds start paying the higher rate, so older bonds with lower coupons become less attractive and their price drops until their yield matches the market. <strong class="font-semibold text-white">The reverse happens when rates fall.</strong> If you hold to maturity, these swings do not matter: you still get every coupon and your full face value.</p>
         <ul class="mt-8 space-y-3 text-sm">
           <li class="flex gap-3"><span class="mt-1.5 size-2 shrink-0 rounded-full bg-[#F3B066]"></span><span class="text-slate-300"><span class="font-semibold text-white">Longer bonds move more.</span> A 10-year bond's price swings far more than a 1-year bond's for the same change in rates.</span></li>
-          <li class="flex gap-3"><span class="mt-1.5 size-2 shrink-0 rounded-full bg-[#F3B066]"></span><span class="text-slate-300"><span class="font-semibold text-white">Where rates stand now.</span> India's 10-year government bond yield was about 7.15% at the end of September 2026, with the RBI's repo rate at 5.25%.</span></li>
         </ul>
       </div>
       <div class="rounded-[1.75rem] bg-white/5 p-6 ring-1 ring-white/10 sm:p-8 lg:col-span-6">
@@ -733,7 +707,7 @@ tailwind.config = {
   <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
     <div class="max-w-3xl">
       <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">How much income will a bond give you?</h2>
-      <p class="mt-5 text-lg leading-relaxed text-slate-700">Multiply the amount you invest by the coupon rate to get the yearly interest, then <strong class="font-semibold text-slate-900">take off tax at your slab rate</strong>, because bond interest is taxed as income. Try your own numbers, and compare the result with a fixed deposit.</p>
+      <p class="mt-5 text-lg leading-relaxed text-slate-700">Multiply the amount you invest by the coupon rate to get the yearly interest, then <strong class="font-semibold text-slate-900">take off tax at your slab rate</strong>, because bond interest is taxed as income. Try your own numbers, and compare the result with a fixed deposit.</p><p class="mt-4"><a href="bond-income-calculator.html" class="text-sm font-medium text-navy underline underline-offset-4">Open the bond income calculator on its own page</a></p>
     </div>
     <form id="bondcalc" class="mt-10 grid gap-6 lg:grid-cols-12" novalidate>
       <fieldset class="grid content-start gap-6 rounded-2xl bg-mist p-6 ring-1 ring-slate-200 sm:p-8 lg:col-span-5">
@@ -764,7 +738,7 @@ tailwind.config = {
       <div class="rounded-2xl bg-navy-deep p-6 text-white sm:p-8 lg:col-span-7" aria-live="polite">
         <p id="b-label" class="text-sm text-slate-300"></p>
         <p id="b-payout" class="mt-1 text-4xl font-semibold tabular-nums tracking-tight text-[#F3B066] sm:text-5xl"></p>
-        <p id="b-post" class="mt-2 text-sm text-slate-300"></p>
+        <p id="b-post" class="mt-2 text-sm text-slate-300"></p><p class="mt-2 text-xs text-slate-300">Includes 4% cess on income tax; surcharge excluded.</p>
         <dl class="mt-8 grid gap-4 sm:grid-cols-3">
           <div class="rounded-xl bg-white/5 p-4 ring-1 ring-white/10"><dt class="text-xs text-slate-300">Interest a year</dt><dd id="b-year" class="mt-1 text-xl font-semibold tabular-nums"></dd></div>
           <div class="rounded-xl bg-white/5 p-4 ring-1 ring-white/10"><dt class="text-xs text-slate-300">Total interest, after tax</dt><dd id="b-total" class="mt-1 text-xl font-semibold tabular-nums"></dd></div>
@@ -775,7 +749,7 @@ tailwind.config = {
           <div><div class="flex justify-between"><span>Fixed deposit, after tax</span><span id="b-fd" class="font-semibold tabular-nums"></span></div><svg viewBox="0 0 100 4" preserveAspectRatio="none" class="mt-2 block h-3 w-full" aria-hidden="true"><rect width="100" height="4" rx="2" fill="#FFFFFF" fill-opacity=".08"/><rect id="b-bar-f" width="0" height="4" rx="2" fill="#7FA7E0"/></svg></div>
         </div>
         <p id="b-note" class="mt-6 border-t border-white/10 pt-5 text-sm leading-relaxed text-slate-300"></p>
-        <p class="mt-3 text-xs leading-relaxed text-slate-400">Illustrative only. Assumes the bond is bought at face value, held to maturity and the issuer pays in full. Excludes surcharge and cess. Coupons and FD rates are your inputs, not offers.</p>
+        <p class="mt-3 text-xs leading-relaxed text-slate-400">Illustrative only. Assumes the bond is bought at face value, held to maturity and the issuer pays in full. Includes 4% health and education cess on tax; excludes surcharge. Coupons and FD rates are your inputs, not offers.</p>
       </div>
     </form>
   </div>
@@ -786,7 +760,7 @@ tailwind.config = {
   <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
     <div class="max-w-3xl">
       <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">Bonds vs fixed deposits vs debt mutual funds: which is better?</h2>
-      <p class="mt-5 text-lg leading-relaxed text-slate-700">Each suits a different need. <strong class="font-semibold text-slate-900">FDs are simplest and insured up to ₹5 lakh per bank. Bonds let you lock a specific rate and maturity. Debt funds give instant diversification and easy exit</strong>, but no fixed maturity value. Many investors use all three.</p>
+      <p class="mt-5 text-lg leading-relaxed text-slate-700">Each suits a different need. <strong class="font-semibold text-slate-900">FDs are simplest and insured up to ₹5 lakh per depositor, per bank. Bonds let you lock a specific rate and maturity. Debt funds give instant diversification and easy exit</strong>, but no fixed maturity value. Many investors use all three.</p>
     </div>
     <div class="mt-10 overflow-x-auto rounded-2xl bg-white ring-1 ring-slate-200">
       <table class="w-full md:min-w-[46rem] text-left text-sm max-md:block max-md:[&_caption]:block max-md:[&_thead]:hidden max-md:[&_tbody]:block max-md:[&_tr]:block max-md:[&_tr]:px-5 max-md:[&_tr]:py-4 max-md:[&_th]:block max-md:[&_th]:p-0 max-md:[&_td]:block max-md:[&_td]:px-0 max-md:[&_td]:py-1.5 max-md:[&_td]:before:block max-md:[&_td]:before:text-xs max-md:[&_td]:before:font-medium max-md:[&_td]:before:text-slate-500 max-md:[&_td]:before:content-[attr(data-label)]">
@@ -794,7 +768,7 @@ tailwind.config = {
         <thead class="bg-slate-50 text-slate-500"><tr><th scope="col" class="px-5 py-3 font-medium"><span class="sr-only">Feature</span></th><th scope="col" class="px-5 py-3 font-medium text-navy-deep">Bonds</th><th scope="col" class="px-5 py-3 font-medium">Fixed deposits</th><th scope="col" class="px-5 py-3 font-medium">Debt mutual funds</th></tr></thead>
         <tbody class="divide-y divide-slate-100 align-top text-slate-700">
           <tr><th scope="row" class="px-5 py-3.5 font-medium text-slate-500">Return</th><td data-label="Bonds" class="px-5 py-3.5">Fixed coupon; known yield if held to maturity</td><td data-label="Fixed deposits" class="px-5 py-3.5">Fixed interest rate</td><td data-label="Debt mutual funds" class="px-5 py-3.5">Varies with the market</td></tr>
-          <tr><th scope="row" class="px-5 py-3.5 font-medium text-slate-500">Safety</th><td data-label="Bonds" class="px-5 py-3.5">Depends on the issuer's rating</td><td data-label="Fixed deposits" class="px-5 py-3.5">Insured up to ₹5 lakh per bank</td><td data-label="Debt mutual funds" class="px-5 py-3.5">Spread across many issuers</td></tr>
+          <tr><th scope="row" class="px-5 py-3.5 font-medium text-slate-500">Safety</th><td data-label="Bonds" class="px-5 py-3.5">Depends on the issuer's rating</td><td data-label="Fixed deposits" class="px-5 py-3.5">Insured up to ₹5 lakh per depositor, per bank</td><td data-label="Debt mutual funds" class="px-5 py-3.5">Spread across many issuers</td></tr>
           <tr><th scope="row" class="px-5 py-3.5 font-medium text-slate-500">Exit before maturity</th><td data-label="Bonds" class="px-5 py-3.5">Sell on the exchange; can be slow</td><td data-label="Fixed deposits" class="px-5 py-3.5">Break with a penalty</td><td data-label="Debt mutual funds" class="px-5 py-3.5">Redeem in one to three days</td></tr>
           <tr><th scope="row" class="px-5 py-3.5 font-medium text-slate-500">Minimum</th><td data-label="Bonds" class="px-5 py-3.5">Often ₹10,000</td><td data-label="Fixed deposits" class="px-5 py-3.5">From ₹1,000</td><td data-label="Debt mutual funds" class="px-5 py-3.5">From ₹500</td></tr>
           <tr><th scope="row" class="px-5 py-3.5 font-medium text-slate-500">Tax on interest or gains</th><td data-label="Bonds" class="px-5 py-3.5">Interest at slab; listed bonds held over 12 months: 12.5% on gains</td><td data-label="Fixed deposits" class="px-5 py-3.5">Interest at slab, every year</td><td data-label="Debt mutual funds" class="px-5 py-3.5">Gains at slab, only when you sell</td></tr>
@@ -809,7 +783,7 @@ tailwind.config = {
 <section id="tax" class="scroll-mt-32">
   <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
     <div class="max-w-3xl">
-      <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">How are bonds taxed in India?</h2>
+      <h2 class="text-3xl font-semibold leading-tight tracking-tight text-navy-deep sm:text-4xl">How are bonds taxed in India?</h2><p class="mt-3 text-sm text-slate-500">Tax Year 2026-27 · Content updated <time datetime="2026-11-16">16 November 2026</time></p>
       <p class="mt-5 text-lg leading-relaxed text-slate-700">There are two parts. <strong class="font-semibold text-slate-900">Interest is added to your income and taxed at your slab rate</strong> every year. If you sell before maturity, the gain is a capital gain, taxed by how long you held the bond and whether it is listed.</p>
     </div>
     <div class="mt-10 overflow-x-auto rounded-2xl ring-1 ring-slate-200">
@@ -826,7 +800,7 @@ tailwind.config = {
         </tbody>
       </table>
     </div>
-    <p class="mt-4 text-sm text-slate-500">Rates exclude surcharge and 4% cess. In high tax brackets, tax-free bonds or debt funds may leave you with more after tax. See our <a class="font-medium text-navy underline" href="/tax-planning">tax planning guide</a>.</p>
+    <p class="mt-4 text-sm text-slate-500">Rates exclude surcharge and 4% cess. In high tax brackets, tax-free bonds or debt funds may leave you with more after tax. See our <a class="font-medium text-navy underline" href="tax-planning.html">tax planning guide</a>.</p>
   </div>
 </section>
 
@@ -843,18 +817,19 @@ tailwind.config = {
       <li class="flex gap-5 rounded-2xl bg-white p-6 ring-1 ring-slate-200"><span class="grid size-10 shrink-0 place-items-center rounded-full bg-mist text-sm font-semibold text-orange-ink ring-1 ring-slate-200">03</span><div><h3 class="font-semibold text-navy-deep">Ignoring the fine print</h3><p class="mt-1 text-sm leading-relaxed text-slate-600"><span class="font-medium text-slate-800">Instead:</span> check whether the bond is secured, subordinated, perpetual or callable before you buy.</p></div></li>
       <li class="flex gap-5 rounded-2xl bg-white p-6 ring-1 ring-slate-200"><span class="grid size-10 shrink-0 place-items-center rounded-full bg-mist text-sm font-semibold text-orange-ink ring-1 ring-slate-200">04</span><div><h3 class="font-semibold text-navy-deep">Buying long bonds for short goals</h3><p class="mt-1 text-sm leading-relaxed text-slate-600"><span class="font-medium text-slate-800">Instead:</span> match maturity to when you need the money, so you never have to sell early at a loss.</p></div></li>
       <li class="flex gap-5 rounded-2xl bg-white p-6 ring-1 ring-slate-200"><span class="grid size-10 shrink-0 place-items-center rounded-full bg-mist text-sm font-semibold text-orange-ink ring-1 ring-slate-200">05</span><div><h3 class="font-semibold text-navy-deep">Comparing coupons, not yields</h3><p class="mt-1 text-sm leading-relaxed text-slate-600"><span class="font-medium text-slate-800">Instead:</span> compare yield to maturity, which accounts for the price you actually pay.</p></div></li>
-      <li class="flex gap-5 rounded-2xl bg-white p-6 ring-1 ring-slate-200"><span class="grid size-10 shrink-0 place-items-center rounded-full bg-mist text-sm font-semibold text-orange-ink ring-1 ring-slate-200">06</span><div><h3 class="font-semibold text-navy-deep">Forgetting the tax</h3><p class="mt-1 text-sm leading-relaxed text-slate-600"><span class="font-medium text-slate-800">Instead:</span> compare returns after tax. At 30%, a 9% coupon nets about 6.3%.</p></div></li>
+      <li class="flex gap-5 rounded-2xl bg-white p-6 ring-1 ring-slate-200"><span class="grid size-10 shrink-0 place-items-center rounded-full bg-mist text-sm font-semibold text-orange-ink ring-1 ring-slate-200">06</span><div><h3 class="font-semibold text-navy-deep">Forgetting the tax</h3><p class="mt-1 text-sm leading-relaxed text-slate-600"><span class="font-medium text-slate-800">Instead:</span> compare returns after tax. At a 30% slab rate plus 4% cess, a 9% coupon nets about 6.2%, excluding surcharge.</p></div></li>
     </ul>
   </div>
 </section>
 
 <!-- INVEST WITH FINTOO -->
+<section id="how-to-buy" class="scroll-mt-32 bg-mist"><div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28"><h2 class="text-3xl font-semibold tracking-tight text-navy-deep sm:text-4xl">How to buy bonds in India</h2><p class="mt-5 max-w-3xl leading-relaxed text-slate-700">You can buy government securities through RBI Retail Direct, and listed corporate bonds through a SEBI-registered broker or online bond platform. New issues are available during their subscription window. Fintoo helps you assess suitability; your chosen provider handles the purchase.</p><ol class="mt-8 grid gap-6 sm:grid-cols-2"><li><h3 class="text-lg font-semibold text-navy-deep">1. Pick the route</h3><p class="mt-5 max-w-3xl leading-relaxed text-slate-700">Use RBI Retail Direct for eligible government securities, or check the SEBI registration of your broker or online bond platform.</p></li><li><h3 class="text-lg font-semibold text-navy-deep">2. Complete KYC</h3><p class="mt-5 max-w-3xl leading-relaxed text-slate-700">Prepare your PAN, identity documents and bank details. Corporate bond purchases generally require a demat account; RBI Retail Direct uses a gilt account.</p></li><li><h3 class="text-lg font-semibold text-navy-deep">3. Check the bond</h3><p class="mt-5 max-w-3xl leading-relaxed text-slate-700">Read the offer document and compare the issuer, credit rating, security, yield to maturity, accrued interest, liquidity and charges.</p></li><li><h3 class="text-lg font-semibold text-navy-deep">4. Place and track your order</h3><p class="mt-5 max-w-3xl leading-relaxed text-slate-700">Apply for a new issue or buy in the secondary market. Confirm settlement, payout dates and maturity, and review rating changes.</p></li></ol><p class="mt-5 max-w-3xl leading-relaxed text-slate-700"><a class="text-navy underline" href="https://www.rbi.org.in/Scripts/FAQView.aspx?Id=145">RBI Retail Direct guidance</a> · <a class="text-navy underline" href="https://www.sebi.gov.in/intermediaries.html">Check SEBI intermediaries</a></p></div></section>
 <section id="invest" class="scroll-mt-32 bg-navy-deep text-white">
   <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 lg:py-28">
     <div class="grid gap-10 lg:grid-cols-12 lg:items-end">
       <div class="lg:col-span-7">
         <p class="text-sm font-semibold text-[#F3B066]">Ready to invest?</p>
-        <h2 class="mt-2 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">How to invest in bonds with Fintoo</h2>
+        <h2 class="mt-2 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">How to invest in bonds with Fintoo</h2><p class="mt-4 text-sm leading-relaxed text-slate-300">Fintoo provides investment advice; purchases take place through your chosen SEBI-registered platform or broker. Advisory fees and the charging basis are agreed before you proceed. <a href="pricing.html" class="text-white underline underline-offset-4">See plans and pricing</a>. Ask your execution provider about separate transaction, custody and other charges.</p>
       </div>
       <p class="text-lg leading-relaxed text-slate-300 lg:col-span-5">If bonds suit your goals, a SEBI-registered Fintoo advisor helps you choose well-rated bonds, build a ladder that pays when you need it, and keep watch on every issuer you hold.</p>
     </div>
@@ -865,8 +840,8 @@ tailwind.config = {
       <li class="rounded-2xl bg-white/5 p-6 ring-1 ring-white/10"><p class="text-sm font-semibold tabular-nums text-[#F3B066]">04</p><h3 class="mt-3 text-xl font-semibold">Track and review</h3><p class="mt-2 text-sm leading-relaxed text-slate-300">Payout calendar, rating changes and reinvestment ideas, in one place.</p></li>
     </ol>
     <div class="mt-6 grid gap-4 md:grid-cols-2">
-      <div class="rounded-2xl bg-white p-6 text-slate-900"><h3 class="font-semibold text-navy-deep">Researched, reliable listings</h3><p class="mt-1 text-sm leading-relaxed text-slate-600">1,300+ bonds rated AAA to AA, each checked for credit quality, security and liquidity before it reaches your shortlist.</p></div>
-      <div class="rounded-2xl bg-white p-6 text-slate-900"><h3 class="font-semibold text-navy-deep">Clear comparison tools</h3><p class="mt-1 text-sm leading-relaxed text-slate-600">Compare yield to maturity, rating, payout dates and post-tax returns side by side, so the choice fits your goal.</p></div>
+      <div class="rounded-2xl bg-white p-6 text-slate-900"><h3 class="font-semibold text-navy-deep">Independent bond research</h3><p class="mt-1 text-sm leading-relaxed text-slate-600">Your advisor checks each shortlisted bond’s rating, security and the issuer’s finances. You buy through a SEBI-registered platform or broker of your choice.</p></div>
+      <div class="rounded-2xl bg-white p-6 text-slate-900"><h3 class="font-semibold text-navy-deep">Compare with your advisor</h3><p class="mt-1 text-sm leading-relaxed text-slate-600">Compare yield to maturity, rating, payout dates and post-tax returns side by side, so the choice fits your goal.</p></div>
     </div>
   </div>
 </section>
@@ -891,15 +866,14 @@ tailwind.config = {
         <label class="block sm:col-span-2"><span class="text-sm font-medium text-slate-700">Full name <span class="text-orange-ink">*</span></span><input name="name" required autocomplete="name" class="mt-2 w-full rounded-xl border-0 bg-mist px-4 py-3 ring-1 ring-slate-200 focus:ring-2 focus:ring-navy"></label>
         <label class="block"><span class="text-sm font-medium text-slate-700">Mobile number <span class="text-orange-ink">*</span></span><input name="mobile" required type="tel" inputmode="tel" autocomplete="tel" pattern="[0-9+ ]{10,15}" class="mt-2 w-full rounded-xl border-0 bg-mist px-4 py-3 ring-1 ring-slate-200 focus:ring-2 focus:ring-navy"></label>
         <label class="block"><span class="text-sm font-medium text-slate-700">Email <span class="text-orange-ink">*</span></span><input name="email" required type="email" autocomplete="email" class="mt-2 w-full rounded-xl border-0 bg-mist px-4 py-3 ring-1 ring-slate-200 focus:ring-2 focus:ring-navy"></label>
-        <label class="block"><span class="text-sm font-medium text-slate-700">Date of birth</span><input name="dob" type="date" autocomplete="bday" class="mt-2 w-full rounded-xl border-0 bg-mist px-4 py-3 ring-1 ring-slate-200 focus:ring-2 focus:ring-navy"></label>
         <label class="block"><span class="text-sm font-medium text-slate-700">Investable assets</span>
           <select name="assets" class="mt-2 w-full rounded-xl border-0 bg-mist px-4 py-3 ring-1 ring-slate-200 focus:ring-2 focus:ring-navy">
             <option value="">Select</option><option>Below ₹1 crore</option><option>₹1 to 5 crore</option><option>₹5 to 25 crore</option><option>Above ₹25 crore</option>
           </select>
         </label>
       </div>
-      <label class="mt-6 flex gap-3 text-sm text-slate-600"><input name="terms" required type="checkbox" class="mt-0.5 size-4 shrink-0 rounded border-slate-300 accent-navy">I agree to the <a class="text-navy underline underline-offset-2" href="/terms">Terms &amp; Conditions</a> and <a class="text-navy underline underline-offset-2" href="/privacy-policy">Privacy Policy</a></label>
-      <label class="mt-3 flex gap-3 text-sm text-slate-600"><input name="updates" type="checkbox" class="mt-0.5 size-4 shrink-0 rounded border-slate-300 accent-navy">Send me new bond issues and updates</label>
+      <label class="mt-6 flex gap-3 text-sm text-slate-600"><input name="terms" required type="checkbox" class="mt-0.5 size-4 shrink-0 rounded border-slate-300 accent-navy">I agree to the <a class="text-navy underline underline-offset-2" href="terms-and-conditions.html">Terms &amp; Conditions</a> and <a class="text-navy underline underline-offset-2" href="privacy-policy.html">Privacy Policy</a></label>
+      <label class="mt-3 flex gap-3 text-sm text-slate-600"><input name="updates" type="checkbox" class="mt-0.5 size-4 shrink-0 rounded border-slate-300 accent-navy">Send me bond research and educational updates</label>
       <p id="lead-error" class="mt-4 hidden text-sm text-red-700" role="alert"></p>
       <button type="submit" class="mt-6 flex h-14 w-full items-center justify-center gap-3 rounded-full bg-navy text-base font-medium text-white transition hover:bg-navy-deep">Request a call<svg viewBox="0 0 16 16" class="size-4 text-orange" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></button>
       <p id="lead-ok" class="mt-4 hidden rounded-xl bg-emerald-50 p-4 text-sm text-emerald-800 ring-1 ring-emerald-200" role="status">Thank you. A Fintoo advisor will call you within one working day.</p>
@@ -914,33 +888,18 @@ tailwind.config = {
       <p class="mt-4 text-slate-600">Clear answers to the questions investors ask before buying their first bond.</p>
     </div>
     <div class="space-y-3 lg:col-span-8">
-      <details class="group rounded-2xl bg-mist px-6 ring-1 ring-slate-200/70 open:bg-white open:shadow-sm" open>
-        <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden"><h3 class="text-lg font-semibold text-navy-deep">What is a bond?</h3><span class="grid size-8 shrink-0 place-items-center rounded-full bg-white ring-1 ring-slate-200 transition-transform duration-300 group-open:rotate-45" aria-hidden="true"><svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span></summary>
-        <p class="max-w-2xl pb-6 leading-relaxed text-slate-700">A bond is a loan you give to a government, public-sector body or company. In return, the issuer pays you interest, called the coupon, at fixed intervals and repays the face value on a set maturity date. Bonds are used for predictable income and to protect capital.</p>
-      </details>
-      <details class="group rounded-2xl bg-mist px-6 ring-1 ring-slate-200/70 open:bg-white open:shadow-sm">
-        <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden"><h3 class="text-lg font-semibold text-navy-deep">What are the different types of bonds in India?</h3><span class="grid size-8 shrink-0 place-items-center rounded-full bg-white ring-1 ring-slate-200 transition-transform duration-300 group-open:rotate-45" aria-hidden="true"><svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span></summary>
-        <p class="max-w-2xl pb-6 leading-relaxed text-slate-700">The main types are government securities and treasury bills, state development loans, PSU and bank bonds, corporate bonds and NCDs, tax-free bonds, 54EC capital gains bonds, RBI floating rate savings bonds, zero-coupon bonds and municipal bonds. They differ mainly in who borrows, how safe they are and how they are taxed.</p>
-      </details>
+
+
       <details class="group rounded-2xl bg-mist px-6 ring-1 ring-slate-200/70 open:bg-white open:shadow-sm">
         <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden"><h3 class="text-lg font-semibold text-navy-deep">Are bonds safe investments?</h3><span class="grid size-8 shrink-0 place-items-center rounded-full bg-white ring-1 ring-slate-200 transition-transform duration-300 group-open:rotate-45" aria-hidden="true"><svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span></summary>
         <p class="max-w-2xl pb-6 leading-relaxed text-slate-700">Bonds issued by the Government of India carry the lowest credit risk. Corporate bonds are only as safe as the company behind them, which is why credit ratings matter. Bonds are not insured like bank deposits, and their market price can fall if interest rates rise, though this does not matter if you hold to maturity.</p>
       </details>
-      <details class="group rounded-2xl bg-mist px-6 ring-1 ring-slate-200/70 open:bg-white open:shadow-sm">
-        <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden"><h3 class="text-lg font-semibold text-navy-deep">What is the coupon rate of a bond?</h3><span class="grid size-8 shrink-0 place-items-center rounded-full bg-white ring-1 ring-slate-200 transition-transform duration-300 group-open:rotate-45" aria-hidden="true"><svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span></summary>
-        <p class="max-w-2xl pb-6 leading-relaxed text-slate-700">The coupon rate is the yearly interest the issuer pays, as a percentage of the bond&#x27;s face value. A ₹10,000 bond with an 8% coupon pays ₹800 a year, either in one payment or split monthly, quarterly or half-yearly.</p>
-      </details>
-      <details class="group rounded-2xl bg-mist px-6 ring-1 ring-slate-200/70 open:bg-white open:shadow-sm">
-        <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden"><h3 class="text-lg font-semibold text-navy-deep">What is yield to maturity (YTM)?</h3><span class="grid size-8 shrink-0 place-items-center rounded-full bg-white ring-1 ring-slate-200 transition-transform duration-300 group-open:rotate-45" aria-hidden="true"><svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span></summary>
-        <p class="max-w-2xl pb-6 leading-relaxed text-slate-700">Yield to maturity is your actual yearly return if you buy a bond at today&#x27;s market price and hold it until it matures, assuming every payment is made. It differs from the coupon when you buy above or below face value, which is why YTM is the better number for comparing bonds.</p>
-      </details>
-      <details class="group rounded-2xl bg-mist px-6 ring-1 ring-slate-200/70 open:bg-white open:shadow-sm">
-        <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden"><h3 class="text-lg font-semibold text-navy-deep">Why do bond prices fall when interest rates rise?</h3><span class="grid size-8 shrink-0 place-items-center rounded-full bg-white ring-1 ring-slate-200 transition-transform duration-300 group-open:rotate-45" aria-hidden="true"><svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span></summary>
-        <p class="max-w-2xl pb-6 leading-relaxed text-slate-700">When rates rise, new bonds pay more, so existing bonds with lower coupons become less attractive and their prices drop until their yields match the market. When rates fall, existing bond prices rise. Longer-maturity bonds react the most.</p>
-      </details>
+
+
+
       <details class="group rounded-2xl bg-mist px-6 ring-1 ring-slate-200/70 open:bg-white open:shadow-sm">
         <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden"><h3 class="text-lg font-semibold text-navy-deep">Are bonds better than fixed deposits?</h3><span class="grid size-8 shrink-0 place-items-center rounded-full bg-white ring-1 ring-slate-200 transition-transform duration-300 group-open:rotate-45" aria-hidden="true"><svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span></summary>
-        <p class="max-w-2xl pb-6 leading-relaxed text-slate-700">Not always. Good-quality bonds often yield more than FDs and let you lock a rate for longer, and listed bonds held over a year can get lower capital gains tax. FDs are simpler, have no market price movement and are insured up to ₹5 lakh per bank. Many investors hold both.</p>
+        <p class="max-w-2xl pb-6 leading-relaxed text-slate-700">Not always. Good-quality bonds often yield more than FDs and let you lock a rate for longer, and listed bonds held over a year can get lower capital gains tax. FDs are simpler, have no market price movement and are insured up to ₹5 lakh per depositor, per bank. Many investors hold both.</p>
       </details>
       <details class="group rounded-2xl bg-mist px-6 ring-1 ring-slate-200/70 open:bg-white open:shadow-sm">
         <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden"><h3 class="text-lg font-semibold text-navy-deep">How can I buy bonds in India?</h3><span class="grid size-8 shrink-0 place-items-center rounded-full bg-white ring-1 ring-slate-200 transition-transform duration-300 group-open:rotate-45" aria-hidden="true"><svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span></summary>
@@ -958,10 +917,7 @@ tailwind.config = {
         <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden"><h3 class="text-lg font-semibold text-navy-deep">What is the difference between fixed-rate and floating-rate bonds?</h3><span class="grid size-8 shrink-0 place-items-center rounded-full bg-white ring-1 ring-slate-200 transition-transform duration-300 group-open:rotate-45" aria-hidden="true"><svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span></summary>
         <p class="max-w-2xl pb-6 leading-relaxed text-slate-700">A fixed-rate bond pays the same coupon for its whole life. A floating-rate bond resets its coupon periodically to a benchmark, such as a government bond yield or the NSC rate, so your income rises when rates rise and falls when they fall.</p>
       </details>
-      <details class="group rounded-2xl bg-mist px-6 ring-1 ring-slate-200/70 open:bg-white open:shadow-sm">
-        <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden"><h3 class="text-lg font-semibold text-navy-deep">How is bond interest taxed in India?</h3><span class="grid size-8 shrink-0 place-items-center rounded-full bg-white ring-1 ring-slate-200 transition-transform duration-300 group-open:rotate-45" aria-hidden="true"><svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span></summary>
-        <p class="max-w-2xl pb-6 leading-relaxed text-slate-700">Bond interest is added to your income and taxed at your slab rate. Listed bonds sold after 12 months attract 12.5% tax on the gain, and within 12 months, your slab rate. Unlisted bonds are taxed at slab rate whatever the holding period. TDS of 10% applies to listed bond interest above ₹10,000 a year.</p>
-      </details>
+
       <details class="group rounded-2xl bg-mist px-6 ring-1 ring-slate-200/70 open:bg-white open:shadow-sm">
         <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden"><h3 class="text-lg font-semibold text-navy-deep">What are tax-free bonds?</h3><span class="grid size-8 shrink-0 place-items-center rounded-full bg-white ring-1 ring-slate-200 transition-transform duration-300 group-open:rotate-45" aria-hidden="true"><svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span></summary>
         <p class="max-w-2xl pb-6 leading-relaxed text-slate-700">Tax-free bonds were issued by government-backed bodies such as NHAI, REC, PFC and IRFC, and their interest is fully exempt from income tax. There have been no new issues for several years, but existing bonds can be bought on the stock exchange. They suit investors in high tax brackets.</p>
@@ -970,10 +926,11 @@ tailwind.config = {
         <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden"><h3 class="text-lg font-semibold text-navy-deep">What are 54EC bonds?</h3><span class="grid size-8 shrink-0 place-items-center rounded-full bg-white ring-1 ring-slate-200 transition-transform duration-300 group-open:rotate-45" aria-hidden="true"><svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span></summary>
         <p class="max-w-2xl pb-6 leading-relaxed text-slate-700">54EC bonds let you save capital gains tax on the sale of land or a building by investing the long-term gain, up to ₹50 lakh, within six months of the sale. They are issued by bodies such as REC, PFC and IRFC, carry a five-year lock-in and pay taxable interest.</p>
       </details>
-      <details class="group rounded-2xl bg-mist px-6 ring-1 ring-slate-200/70 open:bg-white open:shadow-sm">
-        <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden"><h3 class="text-lg font-semibold text-navy-deep">What is a bond index?</h3><span class="grid size-8 shrink-0 place-items-center rounded-full bg-white ring-1 ring-slate-200 transition-transform duration-300 group-open:rotate-45" aria-hidden="true"><svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3v10M3 8h10"/></svg></span></summary>
-        <p class="max-w-2xl pb-6 leading-relaxed text-slate-700">A bond index tracks the prices and returns of a defined group of bonds, such as government securities of a certain maturity or AAA corporate bonds. It is used to measure how a part of the bond market is performing and as the benchmark for bond funds and target maturity funds.</p>
-      </details>
+
+<details class="group rounded-2xl bg-mist px-6 ring-1 ring-slate-200/70 open:bg-white"><summary class="cursor-pointer py-5 text-lg font-semibold text-navy-deep">Can NRIs invest in bonds in India?</summary><p class="max-w-2xl pb-6 leading-relaxed text-slate-700">Yes, in eligible bonds subject to FEMA rules, issuer terms and the investment route. Confirm funding, repatriation, TDS and overseas tax treatment; eligibility varies by instrument.</p></details>
+<details class="group rounded-2xl bg-mist px-6 ring-1 ring-slate-200/70 open:bg-white"><summary class="cursor-pointer py-5 text-lg font-semibold text-navy-deep">What is an NCD?</summary><p class="max-w-2xl pb-6 leading-relaxed text-slate-700">A non-convertible debenture is a debt instrument issued by a company that does not convert into equity. Check whether it is secured, its credit rating, repayment terms and liquidity.</p></details>
+<details class="group rounded-2xl bg-mist px-6 ring-1 ring-slate-200/70 open:bg-white"><summary class="cursor-pointer py-5 text-lg font-semibold text-navy-deep">Which bonds pay monthly interest?</summary><p class="max-w-2xl pb-6 leading-relaxed text-slate-700">Some corporate bonds and NCDs offer monthly coupons. Check the issue’s payout schedule; an annual coupon quoted as a monthly equivalent does not mean monthly cash payments.</p></details>
+<details class="group rounded-2xl bg-mist px-6 ring-1 ring-slate-200/70 open:bg-white"><summary class="cursor-pointer py-5 text-lg font-semibold text-navy-deep">Is TDS on bond interest refundable?</summary><p class="max-w-2xl pb-6 leading-relaxed text-slate-700">If tax deducted exceeds your final tax liability, you can claim the excess as a refund through your income tax return. Reconcile the deduction with your tax records before filing.</p></details>
     </div>
   </div>
 </section>
@@ -981,17 +938,18 @@ tailwind.config = {
 <!-- RELATED -->
 <section class="border-t border-slate-200 bg-mist">
   <div class="mx-auto max-w-7xl px-5 py-16 sm:px-8">
-    <h2 class="text-xl font-semibold tracking-tight text-navy-deep">Related planning and tools</h2>
+    <h2 class="text-xl font-semibold tracking-tight text-navy-deep">Related planning and tools</h2><p class="mt-4 text-sm text-slate-600">Looking beyond India? <a class="text-navy underline underline-offset-4" href="fintoo-international-equity.html">Explore international investing</a>. <a class="text-navy underline underline-offset-4" href="bond-index.html">Understand bond indices</a>.</p>
     <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-      <li><a href="/mutual-funds" class="group flex h-full items-center justify-between rounded-2xl bg-white p-5 ring-1 ring-slate-200 transition hover:ring-navy/40"><span><span class="block font-semibold text-navy-deep">Mutual funds</span><span class="text-sm text-slate-500">Debt funds and more</span></span><svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></li>
-      <li><a href="/retirement-planning" class="group flex h-full items-center justify-between rounded-2xl bg-white p-5 ring-1 ring-slate-200 transition hover:ring-navy/40"><span><span class="block font-semibold text-navy-deep">Retirement planning</span><span class="text-sm text-slate-500">Income that lasts</span></span><svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></li>
-      <li><a href="/tax-planning" class="group flex h-full items-center justify-between rounded-2xl bg-white p-5 ring-1 ring-slate-200 transition hover:ring-navy/40"><span><span class="block font-semibold text-navy-deep">Tax planning</span><span class="text-sm text-slate-500">54EC and tax on interest</span></span><svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></li>
-      <li><a href="/investment-planning" class="group flex h-full items-center justify-between rounded-2xl bg-white p-5 ring-1 ring-slate-200 transition hover:ring-navy/40"><span><span class="block font-semibold text-navy-deep">Investment planning</span><span class="text-sm text-slate-500">Your full allocation</span></span><svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></li>
+      <li><a href="mutual-funds.html" class="group flex h-full items-center justify-between rounded-2xl bg-white p-5 ring-1 ring-slate-200 transition hover:ring-navy/40"><span><span class="block font-semibold text-navy-deep">Mutual funds</span><span class="text-sm text-slate-500">Debt funds and more</span></span><svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></li>
+      <li><a href="retirement-planning.html" class="group flex h-full items-center justify-between rounded-2xl bg-white p-5 ring-1 ring-slate-200 transition hover:ring-navy/40"><span><span class="block font-semibold text-navy-deep">Retirement planning</span><span class="text-sm text-slate-500">Income that lasts</span></span><svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></li>
+      <li><a href="tax-planning.html" class="group flex h-full items-center justify-between rounded-2xl bg-white p-5 ring-1 ring-slate-200 transition hover:ring-navy/40"><span><span class="block font-semibold text-navy-deep">Tax planning</span><span class="text-sm text-slate-500">54EC and tax on interest</span></span><svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></li>
+      <li><a href="investment-planning.html" class="group flex h-full items-center justify-between rounded-2xl bg-white p-5 ring-1 ring-slate-200 transition hover:ring-navy/40"><span><span class="block font-semibold text-navy-deep">Investment planning</span><span class="text-sm text-slate-500">Your full allocation</span></span><svg viewBox="0 0 16 16" class="size-4 text-orange transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></li>
     </ul>
   </div>
 </section>
 
 </main>
+<a href="#consult" class="fixed bottom-4 right-4 z-40 rounded-full bg-navy px-5 py-3 text-sm font-medium text-white shadow-lg ring-1 ring-white/30 lg:hidden">Talk to a bond advisor</a>
 
 <!-- FOOTER -->
   <footer class="bg-navy-deep text-white">
@@ -1003,13 +961,13 @@ tailwind.config = {
           <p class="mt-5 max-w-xs text-sm leading-relaxed text-slate-300">Financial planning, wealth and tax advisory
             for Indian families, business owners and NRIs.</p>
           <div class="mt-8 flex flex-wrap gap-3">
-            <a href="#"
+            <a href="https://apps.apple.com/in/app/fintoo/id1339092462"
               class="inline-flex h-11 items-center gap-2 rounded-xl bg-white/10 px-4 text-sm ring-1 ring-white/10 transition hover:bg-white/15"><svg
                 viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true">
                 <path
                   d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.9-3-.8-1.6 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.2.8 1.1 1.7 2.3 2.9 2.3 1.2 0 1.6-.7 3-.7s1.8.7 3 .7c1.3 0 2.1-1.1 2.8-2.2.9-1.3 1.3-2.5 1.3-2.6 0 0-2.5-1-2.5-3.8zM14.1 5.8c.6-.8 1.1-1.8 1-2.8-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.7-1 2.7 1 .1 2-.5 2.7-1.3z" />
               </svg>App Store</a>
-            <a href="#"
+            <a href="https://play.google.com/store/apps/details?id=com.financialhospital.admin.finh"
               class="inline-flex h-11 items-center gap-2 rounded-xl bg-white/10 px-4 text-sm ring-1 ring-white/10 transition hover:bg-white/15"><svg
                 viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true">
                 <path
@@ -1017,13 +975,13 @@ tailwind.config = {
               </svg>Google Play</a>
           </div>
           <div class="mt-8 flex gap-2">
-            <a href="#" aria-label="Fintoo on LinkedIn"
+            <a href="https://www.linkedin.com/company/1769616/" aria-label="Fintoo on LinkedIn"
               class="grid size-10 place-items-center rounded-full bg-white/10 transition hover:bg-white/20"><svg
                 viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true">
                 <path
                   d="M5 9h3v10H5zM6.5 4a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5zM10 9h2.9v1.4c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.7 2 3.7 4.7V19h-3v-4.8c0-1.2 0-2.6-1.6-2.6s-1.9 1.2-1.9 2.5V19H10z" />
               </svg></a>
-            <a href="#" aria-label="Fintoo on Instagram"
+            <a href="https://www.instagram.com/fintoo.app/" aria-label="Fintoo on Instagram"
               class="grid size-10 place-items-center rounded-full bg-white/10 transition hover:bg-white/20"><svg
                 viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="1.6"
                 aria-hidden="true">
@@ -1031,13 +989,7 @@ tailwind.config = {
                 <circle cx="12" cy="12" r="3.5" />
                 <circle cx="16.8" cy="7.2" r=".6" fill="currentColor" />
               </svg></a>
-            <a href="#" aria-label="Fintoo on X"
-              class="grid size-10 place-items-center rounded-full bg-white/10 transition hover:bg-white/20"><svg
-                viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true">
-                <path
-                  d="M17.5 4h2.8l-6.1 7 7.2 9h-5.6l-4.4-5.6L6.3 20H3.5l6.5-7.5L3.1 4h5.7l4 5.2L17.5 4zm-1 14.4h1.5L7.6 5.5H6z" />
-              </svg></a>
-            <a href="#" aria-label="Fintoo on YouTube"
+            <a href="https://www.youtube.com/channel/UC00AMcwwfUKrV-XD5n6hWyQ/videos" aria-label="Fintoo on YouTube"
               class="grid size-10 place-items-center rounded-full bg-white/10 transition hover:bg-white/20"><svg
                 viewBox="0 0 24 24" class="size-4" fill="currentColor" aria-hidden="true">
                 <path
@@ -1118,9 +1070,7 @@ tailwind.config = {
       </div>
       <div class="mt-10 border-t border-white/10 pt-8">
         <div class="grid gap-4 text-xs leading-relaxed text-slate-400 lg:grid-cols-2 lg:gap-10">
-          <p>Fintoo is registered with the Securities and Exchange Board of India as an investment adviser, registration
-            no. INA000020031. [Legal entity name, registered address, BASL membership no. and principal officer details
-            as required.]</p>
+          <p>Fintoo Wealth Private Limited · CIN U66301MH2023PTC414206 · SEBI investment adviser registration INA000020031 · BASL membership 2252. Registered office: B/309, Dynasty Business Park, Opp. Sangam Cinema, Andheri (East), J. B. Nagar, Mumbai – 400059, Maharashtra, India. Principal Officer: Mihir Shah (mihir.shah@fintoo.in). Compliance Officer: Nisha Harchekar (nisha.harchekar@fintoo.in).</p>
           <p>Investments in the securities market are subject to market risks. Read all related documents carefully
             before investing. Registration granted by SEBI, membership of BASL and certification from NISM in no way
             guarantee performance of the intermediary or provide any assurance of returns to investors.</p>
@@ -1176,7 +1126,7 @@ tailwind.config = {
     const FQ = { 12: ['Monthly payout', 'a month'], 4: ['Quarterly payout', 'a quarter'], 2: ['Half-yearly payout', 'every six months'], 1: ['Yearly payout', 'a year'] };
     const runB = () => {
       const v = n => +bf.elements[n].value, pick = n => +(bf.querySelector(`[name=${n}]:checked`) || { value: 0 }).value;
-      const amt = v('amt'), cpn = v('cpn') / 100, yrs = v('yrs'), fd = v('fd') / 100, f = pick('freq') || 12, tax = pick('slab') / 100;
+      const amt = v('amt'), cpn = v('cpn') / 100, yrs = v('yrs'), fd = v('fd') / 100, f = pick('freq') || 12, tax = pick('slab') / 100 * 1.04;
       bf.querySelector('[data-for=amt]').textContent = inr(amt);
       bf.querySelector('[data-for=cpn]').textContent = `${v('cpn').toFixed(2)}%`;
       bf.querySelector('[data-for=yrs]').textContent = `${yrs} year${yrs > 1 ? 's' : ''}`;
@@ -1186,7 +1136,7 @@ tailwind.config = {
       const fdPost = amt * fd * yrs * (1 - tax);
       $('#b-label').textContent = FQ[f][0] + ', before tax';
       $('#b-payout').textContent = inr(per);
-      $('#b-post').textContent = `About ${inr(post)} ${FQ[f][1]} after tax at ${pick('slab')}%`;
+      $('#b-post').textContent = `About ${inr(post)} ${FQ[f][1]} after tax at ${pick('slab')}% plus 4% cess (surcharge excluded)`;
       $('#b-year').textContent = inr(year); $('#b-total').textContent = inr(totalPost); $('#b-back').textContent = inr(amt);
       $('#b-bond').textContent = inr(totalPost); $('#b-fd').textContent = inr(fdPost);
       const mx = Math.max(totalPost, fdPost, 1);
@@ -1196,7 +1146,7 @@ tailwind.config = {
         ? `Both give about the same income after tax.`
         : diff > 0
           ? `Over ${yrs} years the bond earns about ${inr(diff)} more after tax than the FD. Your post-tax yield is ${ny}%. Check the issuer's rating before chasing the higher coupon.`
-          : `Here the FD earns about ${inr(-diff)} more after tax, and is insured up to ₹5 lakh per bank. Your post-tax bond yield is ${ny}%.`;
+          : `Here the FD earns about ${inr(-diff)} more after tax, and is insured up to ₹5 lakh per depositor, per bank. Your post-tax bond yield is ${ny}%.`;
     };
     bf.addEventListener('input', runB); bf.addEventListener('change', runB); bf.addEventListener('submit', e => e.preventDefault()); runB();
   }

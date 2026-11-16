@@ -21,7 +21,6 @@
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;650;700&display=swap">
-  <link rel="stylesheet" href="fintoo-hero-advisory.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     /* FINTOO DESIGN SYSTEM v2
@@ -37,7 +36,8 @@
         extend: {
           colors: {
             navy: { DEFAULT: '#042B62', deep: '#021A3D', mid: '#1E5BB8', soft: '#7FA7E0' },
-            orange: { DEFAULT: '#DD7300' }
+            orange: { DEFAULT: '#DD7300', ink: '#9A5000' },
+            ink: '#09090B', mist: '#F5F8FC', gold: { DEFAULT: '#F2B54A', soft: '#FFD98E', deep: '#A8701A' }
           },
           fontFamily: {
             sans: ['"Google Sans"', '"Google Sans Flex"', 'ui-sans-serif', 'system-ui', '-apple-system', '"Segoe UI"', 'sans-serif']
@@ -244,146 +244,78 @@
   <main id="main">
 
     <!-- HERO: Animated Fintoo financial journey -->
-    <section id="hero" class="hero" aria-labelledby="hero-title">
-      <div class="hero-background" aria-hidden="true">
-        <div class="hero-background-grid"></div>
-        <div class="hero-glow hero-glow-blue"></div>
-        <div class="hero-glow hero-glow-orange"></div>
+    <section id="hero" data-paused="false" aria-labelledby="hero-title" class="group/hero relative isolate overflow-hidden bg-ink text-white [color-scheme:dark]">
+  <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+    <div class="absolute -top-[35%] left-1/2 size-[64rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(4,43,98,0.95),transparent)] lg:left-[72%]"></div>
+    <div class="absolute -bottom-[45%] -left-[20%] size-[56rem] rounded-full bg-[radial-gradient(closest-side,rgba(4,43,98,0.7),transparent)]"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.07)_0.06rem,transparent_0.075rem)] bg-[length:1.75rem_1.75rem] [mask-image:radial-gradient(ellipse_70%_60%_at_65%_45%,#000,transparent)]"></div>
+  </div>
+  <div id="hero-stage" class="mx-auto grid min-h-[100svh] w-full max-w-7xl gap-x-10 px-5 pb-10 pt-24 sm:px-8 lg:grid-cols-12 lg:grid-rows-[auto_auto] lg:content-center lg:pb-14 lg:pt-28">
+    <div class="relative z-20 self-end lg:col-span-6 lg:row-start-1">
+      <h1 id="hero-title" class="hero-in text-balance text-[2.75rem] font-semibold leading-[1] tracking-[-0.035em] sm:text-7xl lg:text-[5.5rem] lg:leading-[0.95]"><span class="text-white/55">Reach your goals</span> sooner.</h1>
+      <p class="hero-in mt-5 max-w-xl text-pretty text-[1.0625rem] leading-relaxed text-white/75 sm:mt-6 sm:text-lg">Fintoo is a SEBI-registered, fee-only financial advisor. One advisor plans your family’s mutual funds, stocks, gold, IPOs, tax and insurance, with zero commission.</p>
+      <div class="hero-in mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center">
+        <a href="#register-interest" class="group inline-flex h-14 items-center justify-between gap-4 rounded-full bg-white pl-7 pr-2 text-base font-semibold text-ink transition-[background-color,transform] hover:bg-[#F2F2F4] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink">Book a Free Consultation<span class="grid size-10 place-items-center rounded-full bg-navy text-white transition-transform duration-300 group-hover:translate-x-1"><svg viewBox="0 0 16 16" class="size-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></span></a>
+        <a href="#services" class="inline-flex h-14 items-center justify-center rounded-full px-6 text-base font-medium text-white ring-1 ring-inset ring-white/25 transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink">See How It Works</a>
       </div>
-      <div class="hero-inner">
-        <div class="copy">
-          <div class="eyebrow">SEBI-registered financial advisor in India</div>
-          <h1
-            class="mt-8 text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.035em] sm:text-7xl lg:text-6xl xl:text-[4.5rem]">
-            Your whole financial life.
-            <span
-              class="block bg-[linear-gradient(90deg,#F3B066,#DD7300_60%,#F3B066)] bg-clip-text text-transparent">One
-              plan. One advisor.</span>
-          </h1>
-          <p class="description">Funds here. Stocks there. Goals somewhere ahead. Your Fintoo personal financial
-            advisor brings it all together in one written plan. Fee-only advice. No commissions. Serving Indians and
-            NRIs online.</p>
-          <div class="actions"><a class="primary" href="#register-interest">Book complimentary advisor session today
-              <span aria-hidden="true">↗</span></a>
-          </div>
-          <div class="trust">
-            <div><strong>Since 2015</strong><small>A decade of perspective</small></div>
-            <div><strong>SEBI registered</strong><small>Investment adviser INA000020031</small></div>
-            <div><strong>Fee-only</strong><small>No commission</small></div>
-          </div>
-        </div>
-        <figure class="visual journey" style="margin:0"
-          aria-label="Scattered mutual funds, stocks, insurance, deposits and savings connect through a Fintoo advisor to a plan for a home, education and retirement.">
-          <div class="journey-scene" id="journey">
-            <svg class="connections" viewBox="0 0 560 540" preserveAspectRatio="none" aria-hidden="true">
-              <defs>
-                <linearGradient id="flow">
-                  <stop stop-color="#5176a3" />
-                  <stop offset="1" stop-color="#dd7300" />
-                </linearGradient>
-              </defs>
-              <g class="incoming">
-                <path d="M75 80 C75 210 280 130 280 253" />
-                <path d="M260 65 C260 140 280 160 280 253" />
-                <path d="M467 88 C467 195 280 150 280 253" />
-                <path d="M100 190 C140 245 230 200 280 253" />
-                <path d="M454 193 C410 243 320 205 280 253" />
-              </g>
-              <g class="outgoing">
-                <path d="M280 288 C280 360 90 320 90 416" />
-                <path d="M280 288 V416" />
-                <path d="M280 288 C280 360 470 320 470 416" />
-              </g>
-              <g class="flow-particles">
-                <circle r="3">
-                  <animateMotion dur="3s" repeatCount="indefinite" path="M75 80 C75 210 280 130 280 253" />
-                </circle>
-                <circle r="3">
-                  <animateMotion dur="3.7s" repeatCount="indefinite" path="M467 88 C467 195 280 150 280 253" />
-                </circle>
-                <circle r="3">
-                  <animateMotion dur="3.4s" repeatCount="indefinite" path="M260 65 C260 140 280 160 280 253" />
-                </circle>
-                <circle r="3">
-                  <animateMotion dur="3s" repeatCount="indefinite" path="M280 288 C280 360 90 320 90 416" />
-                </circle>
-                <circle r="3">
-                  <animateMotion dur="3s" begin="1s" repeatCount="indefinite" path="M280 288 V416" />
-                </circle>
-                <circle r="3">
-                  <animateMotion dur="3s" begin="2s" repeatCount="indefinite"
-                    path="M280 288 C280 360 470 320 470 416" />
-                </circle>
-              </g>
-            </svg>
-            <div class="asset mf"><span class="asset-symbol"><svg viewBox="0 0 28 28" fill="none" stroke="currentColor"
-                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M14 3a9 9 0 0 1 9 9h-9V3Z" />
-                  <path d="M10 5a9 9 0 1 0 9 11h-9V5Z" />
-                </svg></span>
-              <div><b>Mutual funds</b><small>Too many overlaps</small></div>
-            </div>
-            <div class="asset stocks"><span class="asset-symbol"><svg viewBox="0 0 28 28" fill="none"
-                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                  aria-hidden="true">
-                  <path d="M3 3v20h21M7 15V7m-2 3h4v3H5m9 5V9m-2 3h4v4h-4m9-7V2m-2 2h4v3h-4" />
-                </svg></span>
-              <div><b>Stocks</b><small>Unbalanced risk</small></div>
-            </div>
-            <div class="asset insurance"><span class="asset-symbol"><svg viewBox="0 0 28 28" fill="none"
-                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                  aria-hidden="true">
-                  <path d="m13 2 9 4v7c0 6-9 11-9 11S4 19 4 13V6l9-4Z" />
-                  <path d="M10 9h6v3h3v4h-3v3h-6v-3H7v-4h3V9Z" />
-                </svg></span>
-              <div><b>Insurance</b><small>Is it enough?</small></div>
-            </div>
-            <div class="asset deposits"><span class="asset-symbol"><svg viewBox="0 0 28 28" fill="none"
-                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                  aria-hidden="true">
-                  <path d="m3 8 8-5 8 5H3ZM5 11v7m5-7v7M3 21h9M17 15h6l2 7H15l2-7ZM17 15l2 3h5" />
-                </svg></span>
-              <div><b>FDs & gold</b><small>Without a direction</small></div>
-            </div>
-            <div class="asset savings"><span class="asset-symbol"><svg viewBox="0 0 28 28" fill="none"
-                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                  aria-hidden="true">
-                  <path d="M4 8h17a2 2 0 0 1 2 2v12H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h14v3M23 13h-7v5h7" />
-                  <circle cx="19" cy="15.5" r=".7" />
-                  <path d="M6 2h8M6 11h5" />
-                </svg></span>
-              <div><b>Idle savings</b><small>Waiting for a plan</small></div>
-            </div>
-            <div class="advisor-orbit"></div>
-            <div class="advisor-hub"><svg viewBox="0 0 32 32" aria-hidden="true">
-                <circle cx="16" cy="10" r="5" />
-                <path d="M6 27v-3c0-6 4-9 10-9s10 3 10 9v3" />
-              </svg><img class="advisor-logo" src="assets/fintoo-logo-white.svg" alt="Fintoo"><b>Your advisor</b></div>
-            <div class="advisor-note">Understands you. Connects the dots.</div>
-            <div class="goal home"><svg viewBox="0 0 32 32" aria-hidden="true">
-                <path d="m4 15 12-10 12 10M7 13v15h18V13M13 28V18h6v10" />
-              </svg><small>A place of your own</small><b>Your dream home</b>
-              <div class="goal-track"><i></i></div><span>A plan to get there</span>
-            </div>
-            <div class="goal education"><svg viewBox="0 0 32 32" aria-hidden="true">
-                <path d="m2 12 14-7 14 7-14 7zM7 15v8c5 5 13 5 18 0v-8M29 13v10" />
-              </svg><small>Their next chapter</small><b>Your child’s future</b>
-              <div class="goal-track"><i></i></div><span>Prepared with purpose</span>
-            </div>
-            <div class="goal retirement"><svg viewBox="0 0 32 32" aria-hidden="true">
-                <path
-                  d="M5 28h22M12 28l5-16M7 13c0-10 15-13 20-3-8-2-10 2-10 2s-6-4-10 1ZM17 12c6-2 10 2 10 5-5-2-8-2-10-5" />
-              </svg><small>Freedom on your terms</small><b>Your retirement</b>
-              <div class="goal-track"><i></i></div><span>Your future, considered</span>
-            </div>
-          </div>
-          <figcaption class="journey-caption"><span id="story-line">Your finances, connected to what
-              matters.</span><button type="button" id="motion-toggle">Ⅱ Pause</button></figcaption>
-          <p class="journey-disclaimer">Illustrative financial journey. Goal achievement depends on contributions, time
-            and market performance.</p>
-        </figure>
+    </div>
+    <div class="relative mt-10 lg:col-span-6 lg:col-start-7 lg:row-span-2 lg:row-start-1 lg:mt-0 lg:self-center">
+      <div id="vis" class="relative mx-auto aspect-square w-full max-w-[22rem] sm:max-w-[30rem] lg:max-w-[38rem]" role="img" aria-label="Gold, silver, rupee savings, US stocks, mutual funds, an IPO, stocks and fixed deposits moving into one goal: two crore rupees to retire at 55.">
+        <svg viewBox="0 0 600 600" class="absolute inset-0 size-full" fill="none" aria-hidden="true">
+      <defs><linearGradient id="gline" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.3"/><stop offset="1" stop-color="#ffffff" stop-opacity="0.06"/></linearGradient></defs>
+      <g class="origin-center animate-[spin_90s_linear_infinite] [transform-box:fill-box] motion-reduce:animate-none group-data-[paused=true]/hero:[animation-play-state:paused]"><circle cx="300" cy="300" r="286" stroke="url(#gline)" stroke-width="1.2" stroke-dasharray="2 10"/></g>
+      <g class="origin-center animate-[spin_60s_linear_infinite_reverse] [transform-box:fill-box] motion-reduce:animate-none group-data-[paused=true]/hero:[animation-play-state:paused]"><circle cx="300" cy="300" r="222" stroke="#ffffff" stroke-opacity="0.09" stroke-width="1"/><circle cx="300" cy="78" r="5" fill="#ffffff"/><circle cx="522" cy="300" r="3.5" fill="#ffffff" fill-opacity="0.6"/></g>
+      <g class="origin-center animate-[spin_120s_linear_infinite] [transform-box:fill-box] motion-reduce:animate-none group-data-[paused=true]/hero:[animation-play-state:paused]"><rect x="140" y="140" width="320" height="320" rx="28" stroke="url(#gline)" stroke-width="1.2" transform="rotate(45 300 300)"/></g>
+      <path d="M300 40 L330 92 L270 92 Z" stroke="#ffffff" stroke-opacity="0.22"/><path d="M548 452 l14 0 M555 445 l0 14 M60 150 l12 0 M66 144 l0 12 M500 120 l10 0 M505 115 l0 10" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1.5"/>
+      <circle cx="96" cy="520" r="22" stroke="#ffffff" stroke-opacity="0.2" stroke-dasharray="3 5"/>
+    </svg>
+        <div class="absolute left-1/2 top-1/2 z-20 size-[42%] -translate-x-1/2 -translate-y-1/2">
+      <div class="absolute -inset-[30%] animate-[spin_30s_linear_infinite] rounded-full bg-[conic-gradient(from_90deg,transparent,rgba(4,43,98,0.95),rgba(4,43,98,0.4),transparent_70%)] blur-3xl motion-reduce:animate-none group-data-[paused=true]/hero:[animation-play-state:paused]" aria-hidden="true"></div>
+      <div id="g-burst" class="absolute inset-0 rounded-full ring-2 ring-white/60 opacity-0" aria-hidden="true"></div>
+      <div class="absolute inset-0 rounded-full bg-[#111113] ring-1 ring-white/10"></div>
+      <div id="g-fill" class="absolute inset-[3%] scale-50 rounded-full bg-[#042B62] opacity-0" aria-hidden="true"></div>
+      <svg viewBox="0 0 100 100" class="absolute inset-0 size-full -rotate-90" aria-hidden="true"><circle cx="50" cy="50" r="46" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2.5"/><circle id="garc-p" cx="50" cy="50" r="46" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="0.7"/></svg>
+      <div id="g-main" class="absolute inset-0 grid place-content-center text-center">
+        <p class="text-xs font-medium text-white/60 sm:text-sm">Your goal</p>
+        <p class="mt-1 text-[2rem] font-semibold leading-none tracking-tight text-white tabular-nums sm:text-5xl">₹2&nbsp;Cr</p>
+        <p class="mt-1.5 text-xs text-white/60 sm:text-sm">Retire at 55</p>
+        <p class="mt-2 text-xs font-semibold text-white sm:mt-3 sm:text-sm"><span id="g-pct" class="tabular-nums">30</span><span id="g-txt">% of the way</span></p>
       </div>
-    </section>
+      <div id="g-done" class="absolute inset-0 grid place-content-center justify-items-center text-center opacity-0">
+        <span class="grid size-9 place-items-center rounded-full bg-white text-[#042B62] sm:size-11"><svg viewBox="0 0 24 24" class="size-5 sm:size-6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+        <p class="mt-2 text-lg font-semibold leading-tight text-white sm:mt-3 sm:text-2xl">Goal reached</p>
+        <p class="mt-1 text-xs text-white/75 sm:text-sm">Retire at 51, <span class="font-semibold text-white">4 years sooner</span></p>
+      </div>
+    </div>
+        <div class="tw absolute left-[50.0%] top-[9.0%] z-10 size-0"><div class="par absolute left-0 top-0" data-depth="0.8"><div class="-translate-x-1/2 -translate-y-1/2 max-sm:scale-[0.62] sm:max-lg:scale-[0.85]"><div class="tok"><div class="h-[6.5rem] w-[11rem] rounded-2xl p-3.5 shadow-[0_1.25rem_2.5rem_-0.75rem_rgba(0,0,0,0.75)] bg-[#141416] text-white ring-1 ring-white/10"><div class="flex items-center justify-between gap-2"><span class="text-sm font-semibold">Mutual funds</span><span class="rounded-full px-2 py-0.5 text-[0.6875rem] font-semibold text-white bg-[#042B62]">SIP</span></div>
+      <div class="mt-2.5 flex items-center gap-3"><svg viewBox="0 0 36 36" class="size-11 shrink-0 -rotate-90" aria-hidden="true"><circle cx="18" cy="18" r="14" fill="none" stroke="#ffffff" stroke-width="7" pathLength="100" stroke-dasharray="60 40"/><circle cx="18" cy="18" r="14" fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="7" pathLength="100" stroke-dasharray="25 75" stroke-dashoffset="-60"/><circle cx="18" cy="18" r="14" fill="none" stroke="#ffffff" stroke-opacity="0.2" stroke-width="7" pathLength="100" stroke-dasharray="15 85" stroke-dashoffset="-85"/></svg>
+      <div><p class="text-base font-semibold tabular-nums">₹25,000</p><p class="text-xs text-white/60">every month</p></div></div></div></div></div></div></div><div class="tw absolute left-[76.9%] top-[21.0%] z-10 size-0"><div class="par absolute left-0 top-0" data-depth="1.2"><div class="-translate-x-1/2 -translate-y-1/2 max-sm:scale-[0.62] sm:max-lg:scale-[0.85]"><div class="tok"><div class="flex w-[7.5rem] flex-col items-center gap-2"><svg viewBox="0 0 160 92" class="h-20 w-[7.5rem] drop-shadow-[0_1rem_1.25rem_rgba(0,0,0,0.6)]" aria-hidden="true">
+      <defs><linearGradient id="t-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF1C4"/><stop offset="1" stop-color="#E9B451"/></linearGradient><linearGradient id="f-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B57A22"/><stop offset="1" stop-color="#7A5313"/></linearGradient></defs>
+      <path d="M30 8h100l22 30H8z" fill="url(#t-gold)"/><path d="M8 38h144l-8 46H16z" fill="url(#f-gold)"/><path d="M8 38h144" stroke="#FFF1C4" stroke-opacity="0.7" stroke-width="1.5"/>
+      <text x="80" y="66" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="1.5" fill="#5A3B0B" font-family="Google Sans, sans-serif">24K · 999.9</text></svg><span class="text-xs font-medium text-white/60 max-sm:hidden">Gold</span></div></div></div></div></div><div class="tw absolute left-[88.0%] top-[50.0%] z-10 size-0"><div class="par absolute left-0 top-0" data-depth="0.9"><div class="-translate-x-1/2 -translate-y-1/2 max-sm:scale-[0.62] sm:max-lg:scale-[0.85]"><div class="tok"><div class="relative h-[6.5rem] w-[11rem] rounded-2xl p-3.5 shadow-[0_1.25rem_2.5rem_-0.75rem_rgba(0,0,0,0.75)] bg-[#F6F4EF] text-[#18181B]">
+      <span class="absolute -left-2 top-1/2 size-4 -translate-y-1/2 rounded-full bg-ink"></span><span class="absolute -right-2 top-1/2 size-4 -translate-y-1/2 rounded-full bg-ink"></span>
+      <div class="flex items-center justify-between gap-2"><span class="text-sm font-semibold">IPO</span><span class="rounded-full px-2 py-0.5 text-[0.6875rem] font-semibold text-white bg-[#042B62]">Allotted</span></div>
+      <div class="mt-2.5 flex items-center gap-3 border-t border-dashed border-[#18181B]/20 pt-2.5"><svg viewBox="0 0 24 24" class="size-6 text-[#042B62]" fill="currentColor" aria-hidden="true"><path d="M12 2a1 1 0 0 1 1 1v1.07A7 7 0 0 1 19 11v4l2 3H3l2-3v-4a7 7 0 0 1 6-6.93V3a1 1 0 0 1 1-1zm-2.5 18h5a2.5 2.5 0 0 1-5 0z"/></svg><div><p class="text-base font-semibold">2 lots</p><p class="text-xs text-[#18181B]/60">listing day</p></div></div></div></div></div></div></div><div class="tw absolute left-[76.9%] top-[79.0%] z-10 size-0"><div class="par absolute left-0 top-0" data-depth="1.4"><div class="-translate-x-1/2 -translate-y-1/2 max-sm:scale-[0.62] sm:max-lg:scale-[0.85]"><div class="tok"><div class="flex w-[7.5rem] flex-col items-center gap-2"><div class="relative grid size-20 place-items-center rounded-full bg-[radial-gradient(circle_at_32%_26%,#FFF6D8_0%,#F6CF72_28%,#D49A35_62%,#7A5313_100%)] ring-1 ring-[#FFE6A3]/70 shadow-[0_1.25rem_2.5rem_-0.75rem_rgba(0,0,0,0.75)]"><span class="absolute inset-[12%] rounded-full ring-2 ring-white/30"></span><span class="text-[2.25rem] font-bold text-[#6B4510]">₹</span></div><span class="text-xs font-medium text-white/60 max-sm:hidden">Rupee savings</span></div></div></div></div></div><div class="tw absolute left-[50.0%] top-[91.0%] z-10 size-0"><div class="par absolute left-0 top-0" data-depth="0.7"><div class="-translate-x-1/2 -translate-y-1/2 max-sm:scale-[0.62] sm:max-lg:scale-[0.85]"><div class="tok"><div class="h-[6.5rem] w-[11rem] rounded-2xl p-3.5 shadow-[0_1.25rem_2.5rem_-0.75rem_rgba(0,0,0,0.75)] bg-[#141416] text-white ring-1 ring-white/10"><div class="flex items-center justify-between gap-2"><span class="text-sm font-semibold">Stocks</span><span class="rounded-full px-2 py-0.5 text-[0.6875rem] font-semibold text-white bg-[#042B62]">12 held</span></div>
+      <svg viewBox="0 0 120 40" class="mt-3 h-11 w-full" aria-hidden="true"><defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity="0.25"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs><path d="M0 34 L14 30 L26 32 L40 22 L52 25 L66 16 L80 19 L94 9 L108 12 L120 4 V40 H0Z" fill="url(#sg)"/><path d="M0 34 L14 30 L26 32 L40 22 L52 25 L66 16 L80 19 L94 9 L108 12 L120 4" fill="none" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/></svg></div></div></div></div></div><div class="tw absolute left-[23.1%] top-[79.0%] z-10 size-0"><div class="par absolute left-0 top-0" data-depth="1.3"><div class="-translate-x-1/2 -translate-y-1/2 max-sm:scale-[0.62] sm:max-lg:scale-[0.85]"><div class="tok"><div class="flex w-[7.5rem] flex-col items-center gap-2"><svg viewBox="0 0 160 92" class="h-20 w-[7.5rem] drop-shadow-[0_1rem_1.25rem_rgba(0,0,0,0.6)]" aria-hidden="true">
+      <defs><linearGradient id="t-silver" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#D5DAE2"/></linearGradient><linearGradient id="f-silver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9AA3B1"/><stop offset="1" stop-color="#5B6372"/></linearGradient></defs>
+      <path d="M30 8h100l22 30H8z" fill="url(#t-silver)"/><path d="M8 38h144l-8 46H16z" fill="url(#f-silver)"/><path d="M8 38h144" stroke="#FFFFFF" stroke-opacity="0.7" stroke-width="1.5"/>
+      <text x="80" y="66" text-anchor="middle" font-size="13" font-weight="700" letter-spacing="1.5" fill="#3A414D" font-family="Google Sans, sans-serif">SILVER · 999</text></svg><span class="text-xs font-medium text-white/60 max-sm:hidden">Silver</span></div></div></div></div></div><div class="tw absolute left-[12.0%] top-[50.0%] z-10 size-0"><div class="par absolute left-0 top-0" data-depth="1.0"><div class="-translate-x-1/2 -translate-y-1/2 max-sm:scale-[0.62] sm:max-lg:scale-[0.85]"><div class="tok"><div class="flex w-[7.5rem] flex-col items-center gap-2"><div class="relative grid size-20 place-items-center rounded-full bg-[radial-gradient(circle_at_32%_26%,#FFFFFF_0%,#E3E7EE_30%,#A3ACBA_66%,#545C6B_100%)] ring-1 ring-white/70 shadow-[0_1.25rem_2.5rem_-0.75rem_rgba(0,0,0,0.75)]"><span class="absolute inset-[12%] rounded-full ring-2 ring-white/30"></span><span class="text-[2.25rem] font-bold text-[#38404D]">$</span></div><span class="text-xs font-medium text-white/60 max-sm:hidden">US stocks</span></div></div></div></div></div><div class="tw absolute left-[23.1%] top-[21.0%] z-10 size-0"><div class="par absolute left-0 top-0" data-depth="1.1"><div class="-translate-x-1/2 -translate-y-1/2 max-sm:scale-[0.62] sm:max-lg:scale-[0.85]"><div class="tok"><div class="flex w-[7.5rem] flex-col items-center gap-2"><div class="grid h-20 w-[7.5rem] place-items-center"><div class="h-[4.25rem] w-[7.5rem] -rotate-6 rounded-lg bg-[linear-gradient(135deg,#F1EEE6,#CFCBBF)] p-1.5 shadow-[0_1.25rem_2.5rem_-0.75rem_rgba(0,0,0,0.75)]"><div class="flex h-full items-center justify-between rounded-md px-3 ring-1 ring-[#5C574A]/40"><span class="text-3xl font-bold text-[#4A463C]">₹</span><span class="grid size-8 place-items-center rounded-full bg-[#5C574A]/15 text-[0.625rem] font-bold text-[#4A463C]">FD</span></div></div></div><span class="text-xs font-medium text-white/60 max-sm:hidden">Fixed deposits</span></div></div></div></div></div>
+      </div>
+      <div class="relative z-20 mx-auto mt-2 flex max-w-[38rem] items-center justify-between gap-4">
+        <p class="min-h-[2.5rem] text-sm text-white/70" aria-live="polite"><span class="cap">Today: your money sits in eight different places.</span><span class="cap hidden">One plan puts every rupee to work for the goal.</span><span class="cap hidden">Goal reached early: one plan, four years sooner.</span></p>
+        <button id="motion" type="button" aria-label="Pause background animation" class="grid size-11 shrink-0 place-items-center rounded-full bg-white/10 text-white/80 transition-colors hover:bg-white/20 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-ink"><svg viewBox="0 0 16 16" class="size-4" fill="currentColor" aria-hidden="true"><g class="ic-pause"><rect x="4" y="3" width="2.6" height="10" rx="0.8"/><rect x="9.4" y="3" width="2.6" height="10" rx="0.8"/></g><path class="ic-play hidden" d="M5 3.2v9.6a.6.6 0 0 0 .9.5l7.6-4.8a.6.6 0 0 0 0-1L5.9 2.7a.6.6 0 0 0-.9.5z"/></svg></button>
+      </div>
+    </div>
+    <dl class="hero-in mt-10 grid grid-cols-2 gap-x-6 gap-y-5 self-start rounded-2xl bg-white/[0.04] p-5 sm:grid-cols-4 lg:col-span-6 lg:row-start-2 lg:mt-12 lg:bg-transparent lg:p-0">
+      <div><dt class="text-xs text-white/60">SEBI registration</dt><dd class="mt-1 text-[0.9375rem] font-semibold tabular-nums" translate="no">INA000020031</dd></div>
+      <div><dt class="text-xs text-white/60">Assets under tracking</dt><dd class="mt-1 text-[0.9375rem] font-semibold tabular-nums">₹5,000&nbsp;Cr+</dd></div>
+      <div><dt class="text-xs text-white/60">Advising since</dt><dd class="mt-1 text-[0.9375rem] font-semibold tabular-nums">10+&nbsp;years</dd></div>
+      <div><dt class="text-xs text-white/60">Commission</dt><dd class="mt-1 text-[0.9375rem] font-semibold">Zero</dd></div>
+    </dl>
+  </div>
+</section>
+
+
 
     <!-- CLIENT STORIES: social proof straight after the hero -->
     <section id="stories" class="relative border-t border-slate-100">
@@ -1212,6 +1144,25 @@
     </section>
 
     <!-- FINTOO VS PRODUCT-LED PLATFORMS: stacked cards -->
+    <section id="jobs" aria-labelledby="jobs-title" class="relative bg-mist lg:h-[300vh]">
+  <div id="jobs-pin" class="mx-auto flex max-w-7xl flex-col justify-center px-5 py-20 sm:px-8 lg:sticky lg:top-0 lg:h-[100svh] lg:py-0">
+    <div class="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
+      <div class="lg:col-span-4" data-rise>
+        <h2 id="jobs-title" class="text-balance text-[2.5rem] font-semibold leading-[1] tracking-[-0.035em] text-slate-950 sm:text-6xl">Every rupee gets a&nbsp;job.</h2>
+        <ol class="mt-8 space-y-2"><li data-step="0" class="step -mx-4 rounded-2xl p-4 transition-[opacity,background-color] duration-500 on bg-white max-lg:hidden max-lg:[&.on]:block [&.on]:bg-white"><p class="text-xl font-semibold text-slate-950 sm:text-2xl">List every goal</p><p class="mt-1.5 text-pretty text-base leading-relaxed text-slate-700 sm:text-[1.0625rem]">Your advisor writes down what you are saving for and the year you need it.</p></li><li data-step="1" class="step -mx-4 rounded-2xl p-4 transition-[opacity,background-color] duration-500 opacity-40 max-lg:hidden max-lg:[&.on]:block [&.on]:bg-white"><p class="text-xl font-semibold text-slate-950 sm:text-2xl">Give every rupee a job</p><p class="mt-1.5 text-pretty text-base leading-relaxed text-slate-700 sm:text-[1.0625rem]">Each investment is matched to the goal it serves, so nothing sits idle or forgotten.</p></li><li data-step="2" class="step -mx-4 rounded-2xl p-4 transition-[opacity,background-color] duration-500 opacity-40 max-lg:hidden max-lg:[&.on]:block [&.on]:bg-white"><p class="text-xl font-semibold text-slate-950 sm:text-2xl">Match risk to time</p><p class="mt-1.5 text-pretty text-base leading-relaxed text-slate-700 sm:text-[1.0625rem]">Money you need soon stays safe. Money for goals far away is free to grow.</p></li></ol>
+      </div>
+      <figure class="lg:col-span-8" data-rise>
+        <div id="map" data-step="0" class="group/map relative grid grid-cols-2 gap-x-10 rounded-[1.75rem] bg-white/60 p-2.5 sm:gap-x-24 sm:p-6 lg:gap-x-36">
+          <svg id="map-svg" class="pointer-events-none absolute inset-0 size-full overflow-visible" aria-hidden="true"></svg>
+          <div class="relative"><p class="mb-3 px-1 text-sm font-semibold text-slate-600">What you own</p><ul class="space-y-2"><li><button type="button" data-node="mf" data-kind="a" class="flex min-h-11 w-full items-center gap-2 rounded-2xl bg-white p-1 pr-2 text-left sm:gap-3 sm:p-2 sm:pr-4  transition-[opacity,box-shadow] duration-500 hover:ring-2 hover:ring-navy/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy group-data-[step=0]/map:opacity-40"><span class="grid size-8 shrink-0 place-items-center rounded-xl sm:size-10 bg-mist text-navy"><svg viewBox="0 0 24 24" class="size-[1.1rem] sm:size-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5V12h8.5"/></svg></span><span class="min-w-0 text-[0.8125rem] font-semibold leading-tight text-slate-900 sm:text-base">Mutual funds</span></button></li><li><button type="button" data-node="st" data-kind="a" class="flex min-h-11 w-full items-center gap-2 rounded-2xl bg-white p-1 pr-2 text-left sm:gap-3 sm:p-2 sm:pr-4  transition-[opacity,box-shadow] duration-500 hover:ring-2 hover:ring-navy/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy group-data-[step=0]/map:opacity-40"><span class="grid size-8 shrink-0 place-items-center rounded-xl sm:size-10 bg-mist text-navy"><svg viewBox="0 0 24 24" class="size-[1.1rem] sm:size-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 16.5l5.5-5.5 4 4 7.5-7.5"/><path d="M15 7.5h5.5V13"/></svg></span><span class="min-w-0 text-[0.8125rem] font-semibold leading-tight text-slate-900 sm:text-base">Stocks</span></button></li><li><button type="button" data-node="gs" data-kind="a" class="flex min-h-11 w-full items-center gap-2 rounded-2xl bg-white p-1 pr-2 text-left sm:gap-3 sm:p-2 sm:pr-4  transition-[opacity,box-shadow] duration-500 hover:ring-2 hover:ring-navy/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy group-data-[step=0]/map:opacity-40"><span class="grid size-8 shrink-0 place-items-center rounded-xl sm:size-10 bg-mist text-navy"><svg viewBox="0 0 24 24" class="size-[1.1rem] sm:size-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 19h17"/><path d="M5.5 19l1.8-4.5h9.4l1.8 4.5"/><path d="M8.6 14.5L10 10h4l1.4 4.5"/></svg></span><span class="min-w-0 text-[0.8125rem] font-semibold leading-tight text-slate-900 sm:text-base">Gold & silver</span></button></li><li><button type="button" data-node="us" data-kind="a" class="flex min-h-11 w-full items-center gap-2 rounded-2xl bg-white p-1 pr-2 text-left sm:gap-3 sm:p-2 sm:pr-4  transition-[opacity,box-shadow] duration-500 hover:ring-2 hover:ring-navy/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy group-data-[step=0]/map:opacity-40"><span class="grid size-8 shrink-0 place-items-center rounded-xl sm:size-10 bg-mist text-navy"><svg viewBox="0 0 24 24" class="size-[1.1rem] sm:size-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M14.8 9.4c-.5-.9-1.5-1.4-2.8-1.4-1.6 0-2.8.8-2.8 1.9s1.2 1.7 2.8 1.9 2.8.8 2.8 2-1.2 2-2.8 2c-1.3 0-2.4-.5-2.9-1.4M12 6.3v11.4"/></svg></span><span class="min-w-0 text-[0.8125rem] font-semibold leading-tight text-slate-900 sm:text-base">US stocks</span></button></li><li><button type="button" data-node="ipo" data-kind="a" class="flex min-h-11 w-full items-center gap-2 rounded-2xl bg-white p-1 pr-2 text-left sm:gap-3 sm:p-2 sm:pr-4  transition-[opacity,box-shadow] duration-500 hover:ring-2 hover:ring-navy/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy group-data-[step=0]/map:opacity-40"><span class="grid size-8 shrink-0 place-items-center rounded-xl sm:size-10 bg-mist text-navy"><svg viewBox="0 0 24 24" class="size-[1.1rem] sm:size-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16v-4.5a6 6 0 0 1 12 0V16l1.5 2h-15z"/><path d="M10 20.5h4"/></svg></span><span class="min-w-0 text-[0.8125rem] font-semibold leading-tight text-slate-900 sm:text-base">IPOs</span></button></li><li><button type="button" data-node="fd" data-kind="a" class="flex min-h-11 w-full items-center gap-2 rounded-2xl bg-white p-1 pr-2 text-left sm:gap-3 sm:p-2 sm:pr-4  transition-[opacity,box-shadow] duration-500 hover:ring-2 hover:ring-navy/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy group-data-[step=0]/map:opacity-40"><span class="grid size-8 shrink-0 place-items-center rounded-xl sm:size-10 bg-mist text-navy"><svg viewBox="0 0 24 24" class="size-[1.1rem] sm:size-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9L12 4.5 20.5 9"/><path d="M5.5 9.5v8M10 9.5v8M14 9.5v8M18.5 9.5v8M3.5 19.5h17"/></svg></span><span class="min-w-0 text-[0.8125rem] font-semibold leading-tight text-slate-900 sm:text-base">FDs & bonds</span></button></li></ul></div>
+          <div class="relative self-center"><p class="mb-3 px-1 text-sm font-semibold text-slate-600">What it’s for</p><ul class="space-y-2.5 sm:space-y-3"><li><button type="button" data-node="edu" data-kind="g" class="flex min-h-11 w-full items-center gap-2 rounded-2xl bg-white p-1 pr-2 text-left sm:gap-3 sm:p-2 sm:pr-4  transition-[opacity,box-shadow] duration-500 hover:ring-2 hover:ring-navy/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy sm:py-2.5"><span class="grid size-8 shrink-0 place-items-center rounded-xl sm:size-10 bg-[#E6EFFC] text-[#2D5FA8]"><svg viewBox="0 0 24 24" class="size-[1.1rem] sm:size-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 9L12 5l9.5 4L12 13z"/><path d="M6.5 11v4.5c1.5 1.3 3.4 2 5.5 2s4-.7 5.5-2V11"/></svg></span><span class="min-w-0"><span class="block text-[0.8125rem] font-semibold leading-tight text-slate-950 sm:text-base">Child’s education</span><span class="mt-0.5 flex flex-wrap items-center gap-x-2 text-xs tabular-nums text-slate-600 sm:text-sm">2036<span class="hidden rounded-full bg-mist px-2 py-0.5 text-[0.6875rem] font-semibold text-slate-700 group-data-[step=2]/map:inline-flex sm:text-xs">Free to grow</span></span></span></button></li><li><button type="button" data-node="home" data-kind="g" class="flex min-h-11 w-full items-center gap-2 rounded-2xl bg-white p-1 pr-2 text-left sm:gap-3 sm:p-2 sm:pr-4  transition-[opacity,box-shadow] duration-500 hover:ring-2 hover:ring-navy/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy sm:py-2.5"><span class="grid size-8 shrink-0 place-items-center rounded-xl sm:size-10 bg-[#FCEBDF] text-[#A85A26]"><svg viewBox="0 0 24 24" class="size-[1.1rem] sm:size-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-6.5 8 6.5"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/></svg></span><span class="min-w-0"><span class="block text-[0.8125rem] font-semibold leading-tight text-slate-950 sm:text-base">First home</span><span class="mt-0.5 flex flex-wrap items-center gap-x-2 text-xs tabular-nums text-slate-600 sm:text-sm">2030<span class="hidden rounded-full bg-mist px-2 py-0.5 text-[0.6875rem] font-semibold text-slate-700 group-data-[step=2]/map:inline-flex sm:text-xs">Kept safe</span></span></span></button></li><li><button type="button" data-node="ret" data-kind="g" class="flex min-h-11 w-full items-center gap-2 rounded-2xl bg-white p-1 pr-2 text-left sm:gap-3 sm:p-2 sm:pr-4  transition-[opacity,box-shadow] duration-500 hover:ring-2 hover:ring-navy/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy sm:py-2.5"><span class="grid size-8 shrink-0 place-items-center rounded-xl sm:size-10 bg-[#E3F4EB] text-[#2B7A54]"><svg viewBox="0 0 24 24" class="size-[1.1rem] sm:size-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 17.5h17"/><path d="M7 17.5a5 5 0 0 1 10 0"/><path d="M12 7.5V5M6.2 9.7L4.8 8.3M17.8 9.7l1.4-1.4"/></svg></span><span class="min-w-0"><span class="block text-[0.8125rem] font-semibold leading-tight text-slate-950 sm:text-base">Retirement</span><span class="mt-0.5 flex flex-wrap items-center gap-x-2 text-xs tabular-nums text-slate-600 sm:text-sm">2050<span class="hidden rounded-full bg-mist px-2 py-0.5 text-[0.6875rem] font-semibold text-slate-700 group-data-[step=2]/map:inline-flex sm:text-xs">Free to grow</span></span></span></button></li><li><button type="button" data-node="safe" data-kind="g" class="flex min-h-11 w-full items-center gap-2 rounded-2xl bg-white p-1 pr-2 text-left sm:gap-3 sm:p-2 sm:pr-4  transition-[opacity,box-shadow] duration-500 hover:ring-2 hover:ring-navy/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-navy sm:py-2.5"><span class="grid size-8 shrink-0 place-items-center rounded-xl sm:size-10 bg-[#FBE8EE] text-[#A8455F]"><svg viewBox="0 0 24 24" class="size-[1.1rem] sm:size-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5l7.5 3v5c0 4.6-3.2 8.1-7.5 9.3-4.3-1.2-7.5-4.7-7.5-9.3v-5z"/><path d="M8.8 12l2.3 2.3 4.2-4.3"/></svg></span><span class="min-w-0"><span class="block text-[0.8125rem] font-semibold leading-tight text-slate-950 sm:text-base">Safety net</span><span class="mt-0.5 flex flex-wrap items-center gap-x-2 text-xs tabular-nums text-slate-600 sm:text-sm">Now<span class="hidden rounded-full bg-mist px-2 py-0.5 text-[0.6875rem] font-semibold text-slate-700 group-data-[step=2]/map:inline-flex sm:text-xs">Kept safe</span></span></span></button></li></ul></div>
+        </div>
+        <figcaption class="mt-4 text-sm text-slate-600">A sample family’s plan. Tap any item to see its links. Your advisor maps your own goals and holdings.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
     <section id="difference" class="relative">
       <div class="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-12 lg:py-20">
         <div class="lg:col-span-4">
@@ -1396,89 +1347,11 @@
               5</span>
           </div>
 
-          <div
-            class="relative w-[18rem] rotate-[3deg] rounded-[2.8rem] bg-black p-2.5 shadow-[0_3rem_6rem_-1.5rem_rgba(0,0,0,.65)] ring-1 ring-white/20 sm:w-[20rem]">
-            <div class="relative aspect-[9/19.5] overflow-hidden rounded-[2.25rem] bg-[#f4f7fb] text-slate-900">
-              <div class="absolute left-1/2 top-2 z-20 h-6 w-24 -translate-x-1/2 rounded-full bg-black"></div>
-              <div class="flex h-full flex-col px-4 pb-4 pt-11">
-                <div class="flex items-center justify-between">
-                  <div>
-                    <p class="text-[.62rem] text-slate-500">Good morning</p>
-                    <p class="text-sm font-semibold text-navy">Your financial overview</p>
-                  </div><span
-                    class="grid size-8 place-items-center rounded-full bg-navy text-[.62rem] font-semibold text-white">MH</span>
-                </div>
+          <img src="assets/fintoo-ai-preview/net-worth-tracker.png"
+            alt="Fintoo AI mobile app showing the net-worth tracker"
+            width="1030" height="1920" loading="lazy" decoding="async"
+            class="relative w-[18rem] max-w-full rotate-[3deg] object-contain drop-shadow-[0_3rem_3rem_rgba(0,0,0,0.4)] sm:w-[20rem]">
 
-                <div class="mt-4 rounded-2xl bg-navy p-4 text-white shadow-lg">
-                  <div class="flex items-start justify-between">
-                    <div>
-                      <p class="text-[.62rem] text-slate-300">Fintoo Score</p>
-                      <p class="mt-1 text-3xl font-semibold">82<span class="text-sm text-slate-400">/100</span></p>
-                    </div><span
-                      class="rounded-full bg-emerald-400/15 px-2 py-1 text-[.58rem] font-medium text-emerald-300">Very
-                      good</span>
-                  </div>
-                  <div class="mt-3 h-1.5 overflow-hidden rounded-full bg-white/15">
-                    <div class="h-full w-[82%] rounded-full bg-orange"></div>
-                  </div>
-                  <p class="mt-2 text-[.58rem] text-slate-300">Your investments and protection are on track.</p>
-                </div>
-
-                <div class="mt-3 grid grid-cols-2 gap-2">
-                  <div class="rounded-xl bg-white p-3 shadow-sm ring-1 ring-slate-200">
-                    <p class="text-[.58rem] text-slate-500">Net worth</p>
-                    <p class="mt-1 text-sm font-semibold text-navy">&#8377;2.84 Cr</p>
-                    <p class="mt-1 text-[.55rem] text-emerald-600">+8.4% this year</p>
-                  </div>
-                  <div class="rounded-xl bg-white p-3 shadow-sm ring-1 ring-slate-200">
-                    <p class="text-[.58rem] text-slate-500">Monthly investing</p>
-                    <p class="mt-1 text-sm font-semibold text-navy">&#8377;1.25 L</p>
-                    <p class="mt-1 text-[.55rem] text-slate-500">Across 6 goals</p>
-                  </div>
-                </div>
-
-                <div class="mt-3 rounded-xl bg-white p-3 shadow-sm ring-1 ring-slate-200">
-                  <div class="flex items-center justify-between">
-                    <p class="text-xs font-semibold text-navy">Your goals</p><span
-                      class="text-[.58rem] font-medium text-orange">View all</span>
-                  </div>
-                  <div class="mt-3 space-y-3">
-                    <div>
-                      <div class="flex justify-between text-[.58rem]"><span>Retirement</span><span
-                          class="font-medium">74%</span></div>
-                      <div class="mt-1 h-1.5 rounded-full bg-slate-100">
-                        <div class="h-full w-[74%] rounded-full bg-navy"></div>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="flex justify-between text-[.58rem]"><span>Child&rsquo;s education</span><span
-                          class="font-medium">61%</span></div>
-                      <div class="mt-1 h-1.5 rounded-full bg-slate-100">
-                        <div class="h-full w-[61%] rounded-full bg-orange"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="mt-3 rounded-xl bg-[#fff7ed] p-3 ring-1 ring-orange/15">
-                  <div class="flex gap-2"><span
-                      class="grid size-7 shrink-0 place-items-center rounded-lg bg-[linear-gradient(135deg,#042b62_0_68%,#dd7300_68%)] text-[.6rem] font-bold text-white">AI</span>
-                    <div>
-                      <p class="text-[.62rem] font-semibold text-navy">One thing needs attention</p>
-                      <p class="mt-1 text-[.56rem] leading-relaxed text-slate-600">Your emergency fund covers 4 of the
-                        recommended 6 months.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  class="mt-auto flex items-center justify-around border-t border-slate-200 pt-3 text-[.5rem] text-slate-400">
-                  <span class="font-medium text-navy">Overview</span><span>Investments</span><span>Goals</span><span>Ask
-                    AI</span>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -2028,15 +1901,12 @@
                   <path d="M8 3v10M3 8h10" />
                 </svg></span></summary>
             <p class="max-w-2xl pb-6 leading-relaxed text-slate-600">Fintoo is a SEBI-registered investment adviser
-              (INA000020031) and fee-only financial advisor based in [City, verify]. It helps individuals and families
+              (INA000020031) and fee-only financial advisor based in Mumbai. It helps individuals and families
               plan, manage and grow their complete financial life, through financial planning, investment advice,
-              retirement, tax, insurance, NRI and estate planning, supported by the Fintoo AI app..</p>
+              retirement, tax, insurance, NRI and estate planning, supported by the Fintoo AI app.</p>
           </details>
           <details class="group rounded-2xl bg-slate-50 px-6 ring-1 ring-slate-200/70 open:bg-white open:shadow-sm">
-            <summaryFintoo is a SEBI-registered investment adviser (INA000020031) and fee-only financial advisor. It
-              helps individuals and families plan, manage and grow their complete financial life, through financial
-              planning, investment advice, retirement, tax, insurance, NRI and estate planning, supported by the Fintoo
-              AI app
+            <summary
               class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-lg font-semibold [&::-webkit-details-marker]:hidden">
               How do I choose the best financial advisor in India?<span
                 class="grid size-8 shrink-0 place-items-center rounded-full bg-white ring-1 ring-slate-200 transition-transform duration-300 group-open:rotate-45"><svg
@@ -2044,7 +1914,7 @@
                   stroke-linecap="round" aria-hidden="true">
                   <path d="M8 3v10M3 8h10" />
                 </svg></span></summary>
-              <p class="max-w-2xl pb-6 leading-relaxed text-slate-600">Check four things. First, SEBI registration as an Investment Adviser, which you can verify on SEBI's website. Second, how they are paid: a fee-only advisor is paid by you, while a distributor earns commission on what you buy. Third, whether they plan your whole financial life or only sell products. Fourth, how often they review your plan. Fintoo is SEBI-registered (INA000020031), fee-only and reviews every plan at least once a year</p>
+              <p class="max-w-2xl pb-6 leading-relaxed text-slate-600">Check four things. First, SEBI registration as an Investment Adviser, which you can verify on SEBI's website. Second, how they are paid: a fee-only advisor is paid by you, while a distributor earns commission on what you buy. Third, whether they plan your whole financial life or only sell products. Fourth, how often they review your plan. Fintoo is SEBI-registered (INA000020031), fee-only and reviews every plan at least once a year.</p>
           </details>
           <details class="group rounded-2xl bg-slate-50 px-6 ring-1 ring-slate-200/70 open:bg-white open:shadow-sm">
             <summary
@@ -2700,29 +2570,8 @@
     })();
   </script>
 
-  <script>
-    /* Homepage financial-journey hero */
-    (() => {
-      const scene = document.getElementById('journey'), button = document.getElementById('motion-toggle'), mq = matchMedia('(prefers-reduced-motion: reduce)'), svg = scene.querySelector('svg'), caption = document.getElementById('story-line');
-      let paused = mq.matches, visible = true, animations = [], raf = null, start = null, elapsed = 0;
-      const duration = 12000;
-      const animate = (element, frames) => { const a = element.animate(frames, { duration, iterations: Infinity, easing: 'ease-in-out' }); animations.push(a) };
-      if (!mq.matches) build();
-      function build() {
-        if (animations.length) return;
-        scene.querySelectorAll('.asset').forEach((el, i) => {
-          const rotations = [-9, 5, 9, -4, 5], dx = [18, 0, -18, 14, -14], dy = [16, 25, 16, 6, 6];
-          animate(el, [{ offset: 0, transform: `translate(0,0) rotate(${rotations[i]}deg)` }, { offset: .12, transform: `translate(0,-12px) rotate(${rotations[i] + 3}deg)` }, { offset: .34, transform: `translate(${dx[i]}px,${dy[i]}px) rotate(0deg)`, boxShadow: '0 0 25px #9dccff50' }, { offset: .76, transform: `translate(${dx[i]}px,${dy[i]}px) rotate(0deg)` }, { offset: 1, transform: `translate(0,0) rotate(${rotations[i]}deg)` }]);
-        });
-        animate(scene.querySelector('.advisor-hub'), [{ offset: 0, transform: 'translate(-50%,-50%) scale(1)' }, { offset: .25, transform: 'translate(-50%,-50%) scale(1)' }, { offset: .38, transform: 'translate(-50%,-50%) scale(1.13)' }, { offset: .5, transform: 'translate(-50%,-50%) scale(1)' }, { offset: 1, transform: 'translate(-50%,-50%) scale(1)' }]);
-        scene.querySelectorAll('.outgoing path').forEach((el, i) => { el.setAttribute('pathLength', '1'); el.style.strokeDasharray = '1'; animate(el, [{ offset: 0, strokeDashoffset: 1, opacity: .15 }, { offset: .10 + i * .02, strokeDashoffset: 1, opacity: .15 }, { offset: .22 + i * .02, strokeDashoffset: 0, opacity: 1 }, { offset: .87, strokeDashoffset: 0, opacity: 1 }, { offset: 1, strokeDashoffset: 1, opacity: .15 }]) });
-        scene.querySelectorAll('.goal').forEach((el, i) => { animate(el, [{ offset: 0, opacity: .25, transform: 'translateY(16px) scale(.94)' }, { offset: .12 + i * .015, opacity: .25, transform: 'translateY(16px) scale(.94)' }, { offset: .23 + i * .015, opacity: 1, transform: 'translateY(0) scale(1)' }, { offset: .88, opacity: 1, transform: 'translateY(0) scale(1)' }, { offset: 1, opacity: .25, transform: 'translateY(16px) scale(.94)' }]); animate(el.querySelector('.goal-track i'), [{ offset: 0, transform: 'scaleX(0)' }, { offset: .20 + i * .015, transform: 'scaleX(0)' }, { offset: .37 + i * .015, transform: 'scaleX(1)' }, { offset: .9, transform: 'scaleX(1)' }, { offset: 1, transform: 'scaleX(0)' }]) });
-      }
-      function tick(now) { raf = null; if (paused || !visible || document.hidden) { start = null; return } if (start !== null) elapsed += now - start; start = now; const t = elapsed % duration; caption.textContent = t < 1200 ? '01 / Scattered finances. Untapped potential.' : t < 2800 ? '02 / Your advisor brings everything together.' : '03 / A clear plan for the life you want.'; raf = requestAnimationFrame(tick) }
-      function update() { const stopped = paused || !visible || document.hidden; scene.classList.toggle('paused', stopped); animations.forEach(a => stopped ? a.pause() : a.play()); stopped ? svg.pauseAnimations() : svg.unpauseAnimations(); button.textContent = paused ? '▷ Play' : 'Ⅱ Pause'; button.setAttribute('aria-label', paused ? 'Play financial journey animation' : 'Pause financial journey animation'); start = null; if (!stopped && !raf) raf = requestAnimationFrame(tick) }
-      button.onclick = () => { paused = !paused; if (!paused) build(); update() }; mq.addEventListener('change', () => { paused = mq.matches; if (paused) { animations.forEach(a => a.cancel()); animations = []; caption.textContent = 'Your finances, connected to what matters.' } else build(); update() }); document.addEventListener('visibilitychange', update); new IntersectionObserver(([e]) => { visible = e.isIntersecting; update() }, { threshold: .1 }).observe(scene); update();
-    })();
-  </script>
+
+  <script src="homepage-goals.js"></script>
 </body>
 
 </html>
