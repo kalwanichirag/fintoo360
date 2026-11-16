@@ -14,7 +14,12 @@ PAGES = [
  "personal-financial-strategy", "retirement-strategy",
  "wealth-management-strategy-for-indians-and-nri", "itr-filing-corporate",
  "private-wealth", "executive-wealth", "gff",
- "itr-filing-partnerships", "itr-file-retail", "itr-filing-retail", "itr-filing-retail-plans"
+ "itr-filing-partnerships", "itr-file-retail", "itr-filing-retail", "itr-filing-retail-plans",
+ "wealth-management-investment-planning", "sebi-registered-financial-advisor",
+ "global-investment-advisory", "global-advisory", "invest-in-us-stocks-from-india",
+ "global-portfolio-advisory", "portfolio-review", "sebi-registered-investment-advisor",
+ "financial-advisor-free-call", "financial-advisor-near-me",
+ "financial-planning-free-call", "wealth-planning-for-corporate-leaders"
 ]
 
 class Browser:
@@ -72,9 +77,14 @@ def capture(page, output):
   deadline = time.time() + 45; text_length = 0
   while time.time() < deadline:
    time.sleep(1)
-   result = browser.command("Runtime.evaluate", {"expression":"document.body?.innerText.trim().length || 0","returnByValue":True})
-   text_length = result.get("result", {}).get("value", 0)
+   result = browser.command("Runtime.evaluate", {"expression":"({length: document.body?.innerText.trim().length || 0, path: location.pathname, title: document.title})","returnByValue":True})
+   page_state = result.get("result", {}).get("value", {})
+   text_length = page_state.get("length", 0)
    if text_length > 100:
+    if page_state.get("path", "").rstrip("/") != f"/{page}":
+     raise RuntimeError(f"redirected to {page_state.get('path')}")
+    if "404" in page_state.get("title", "").lower() or "not found" in page_state.get("title", "").lower():
+     raise RuntimeError(f"error page: {page_state.get('title')}")
     time.sleep(5)  # Let visible images, webfonts, and animations finish after content appears.
     break
   if text_length <= 100: raise RuntimeError("visible page content never appeared")
